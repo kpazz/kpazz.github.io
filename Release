@@ -1,0 +1,13 @@
+Origin: K-Pers
+Label: K-Pers
+Suite: stable
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
+Components: main
+Description: K-Pers Repo • Kho lưu trữ các tinh chỉnh (tweak) dành cho iOS đã jailbreak
+MD5Sum:
+ 3ceea1c3771eee60b2f4fac288f36952 4504 Packages   
+ dcf95de0f81cbeae7c72e89ce2bffc4d 2237 Packages.bz2
+
+ 

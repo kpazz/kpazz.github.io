@@ -1,0 +1,209 @@
+{
+"minVersion":"0.1",
+"headerImage":"https://jtisvn.github.io/coverimage/jtisvnrepo.png",
+"tintColor":"#5777B8",
+"tabs":[
+{
+"tabname":"Giới thiệu",
+"views":[
+{
+"class":"DepictionScreenshotsView",
+"screenshots":[
+{
+"url":"https://jtisvn.github.io/infodeb/AfhookApp/Screenshots/1.png",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://jtisvn.github.io/infodeb/AfhookApp/Screenshots/2.png",
+"accessibilityText":"Screenshot"
+}
+],
+"itemCornerRadius":8,
+"itemSize":"{185,400}"
+},
+{
+"markdown":"### AfhookApp\n\n- Là một công cụ mạnh mẽ dành cho các thiết bị đã Jailbreak, cho phép người dùng can thiệp sâu và tùy biến thông tin của từng ứng dụng riêng lẻ. Từ việc thay đổi diện mạo bên ngoài cho đến việc \"đánh lừa\" hệ thống về thông tin phần cứng.\n- AfhookApp mang lại khả năng cá nhân hóa vô hạn và hỗ trợ đắc lực cho việc \"nuôi\" tài khoản hoặc sử dụng nhiều danh tính trên cùng một thiết bị.\n\n- **Chức năng chính:**\n- Đổi tên ứng dụng: Thay đổi tên hiển thị của bất kỳ ứng dụng nào trên màn hình chính theo ý thích.\n- Thay đổi biểu tượng: Tùy chỉnh Icon ứng dụng bằng cách chọn ảnh từ thư viện cá nhân hoặc sử dụng kho biểu tượng có sẵn.\n- Giả lập dòng máy: Tính năng cực kỳ hữu ích giúp bạn \"fake\" thông tin thiết bị đang sử dụng (ví dụ: biến iPhone đời cũ thành iPhone 15 Pro Max) để vượt qua các rào cản kiểm tra phần cứng của ứng dụng.\n- Quản lý Badge (Thông báo): Cho phép xóa nhanh các con số thông báo đỏ trên icon ứng dụng để màn hình trông gọn gàng hơn.\n\n*Lưu ý: Một số tính năng thay đổi dòng máy chuyên sâu có thể gây văng ứng dụng nếu cấu hình không phù hợp. Hãy sử dụng cẩn thận với mã máy tùy chỉnh!*",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 20,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionSeparatorView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Thông tin chi tiết",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": true,
+"useMargins": true,
+"margins": "{10,0,8,0}"
+},
+{
+"class": "DepictionStackView",
+"orientation": "landscape",
+"views": [
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Tác giả",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "小哥哥",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Thể loại",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Tweaks",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Ngày cập nhật",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "01/05/2026",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+}
+]
+},
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Phiên bản",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "3.7.0",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Kích thước",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "2,7 MB",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Tương thích iOS",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "15.0 - 16.7.10",
+"fontWeight": "semibold",
+"fontSize": 17,
+"usePadding": false
+}
+]
+}
+]
+},
+{
+"spacing": 25,
+"class": "DepictionSpacerView"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class":"DepictionStackView"
+},
+{
+"tabname":"Nhật ký thay đổi",
+"views":[
+{
+"class":"DepictionMarkdownView",
+"markdown":"### Phiên bản 3.7.0\n\n- Thêm ngôn ngữ Tiếng Việt."
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class":"DepictionStackView"
+},
+{
+"tabname":"Liên Hệ Hỗ Trợ",
+"views":[
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Paypal",
+"action": "https://paypal.me/HiuKitsudo"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi một ly cà phê",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Nhóm Telegram",
+"action": "https://t.me/jailbreaktrolliossupport"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Nhóm Facebook",
+"action": "https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class":"DepictionStackView"
+}
+],
+"class":"DepictionTabView"
+}

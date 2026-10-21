@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>Tắt trình giám sát Giảm tần số CPU và giảm độ sáng tự động do thiết bị quá nóng.</b></p><br/> <p>⚠️ Cảnh báo: Tự chịu rủi ro khi sử dụng. Đừng cài đặt nếu bạn không hiểu rõ mục đích của nó!</p>",
+"useSpacing": true,
+"useRawFormat": true
+},
+{
+"class": "DepictionSubheaderView",
+"useMargins": true,
+"title": "Tương thích đối với iOS 14.0 - 17.0"
+}
+],
+"xPadding": 10
+},
+{
+"class": "DepictionStackView",
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionSubheaderView",
+"title": "Phiên bản 0.1.0"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "- Không giảm xung nhịp (bóp hiệu năng) khi pin yếu.\n\n- Trong Cài đặt - Pin: Không hiển thị được thông tin dung lượng pin.\n\n- Có thể sẽ còn một số tác dụng phụ (lỗi vặt) khác chờ anh em test và khám phá thêm."
+}
+]
+}
+],
+"tintColor": "red",
+"headerImage": "https://jtisvn.github.io/coverimage/jtisvnrepo.png"
+}

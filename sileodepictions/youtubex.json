@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>Tinh chỉnh chặn quảng cáo và phát lại mền cho ứng dụng YouTube.</b></p><br/> <p>Hỗ trợ đếm phiên bản mới nhất!</p>",
+"useSpacing": true,
+"useRawFormat": true
+},
+{
+"class": "DepictionSubheaderView",
+"useMargins": true,
+"title": "Tương thích đối với iOS 12.0 - 17.7.10"
+}
+],
+"xPadding": 10
+},
+{
+"class": "DepictionStackView",
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionSubheaderView",
+"title": "Phiên bản 1.7.22"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "- Chặn thêm các loại quảng cáo video mới trên các phiên bản YouTube gần đây."
+}
+]
+}
+],
+"tintColor": "red",
+"headerImage": "https://jtisvn.github.io/coverimage/Ytx.png"
+}

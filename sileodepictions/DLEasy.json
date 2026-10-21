@@ -1,0 +1,240 @@
+{
+"minVersion":"0.1",
+"headerImage":"https://media.havoc.app/6209ec535f40df2a411f445e",
+"tintColor":"#006666",
+"tabs":[
+{
+"tabname":"Giới thiệu",
+"views":[
+{
+"class":"DepictionScreenshotsView",
+"screenshots":[
+{
+"url":"https://media.havoc.app/62040a16cc1cde4bfe9aba47",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a17cc1cde4bfe9aba49",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a17cc1cde4bfe9aba4b",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a18cc1cde4bfe9aba4d",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a19cc1cde4bfe9aba4f",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1acc1cde4bfe9aba51",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1bcc1cde4bfe9aba53",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1ccc1cde4bfe9aba55",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1ccc1cde4bfe9aba57",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1dcc1cde4bfe9aba59",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1ecc1cde4bfe9aba5b",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://media.havoc.app/62040a1fcc1cde4bfe9aba5d",
+"accessibilityText":"Screenshot"
+}
+],
+"itemCornerRadius":8,
+"itemSize":"{185,400}"
+},
+{
+"markdown":"### DLEasy\n\n- Cho phép tải xuống hình ảnh và video từ các nền tảng mạng xã hội phổ biến một cách dễ dàng (chỉ cần nhấn giữ vào nội dung).\n\n- **Hỗ trợ các ứng dụng:** Facebook, Instagram, Messenger, Reddit, TikTok, Tumblr, Tweetbot, Twitter (X), VK, WhatsApp, YouTube.\n\n- **Tính năng nổi bật:**\n\n+ Tải xuống video và hình ảnh chất lượng cao.\n\n+ Nhập video và âm thanh từ YouTube trực tiếp vào ứng dụng Nhạc (Music.app).\n\n+ Tự động lưu phương tiện vào album riêng \"DLEasy\" trong thư viện ảnh.\n\n+ Hỗ trợ tải xuống trong nền và thu nhỏ giao diện tải.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 20,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionSeparatorView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Thông tin chi tiết",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": true,
+"useMargins": true,
+"margins": "{10,0,8,0}"
+},
+{
+"class": "DepictionStackView",
+"orientation": "landscape",
+"views": [
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Tác giả",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "AhmedBafkir",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Thể loại",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Tweaks",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Ngày cập nhật",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "6/3/2026",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+}
+]
+},
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Phiên bản",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "2.14.9",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Kích thước",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "8 MB",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Tương thích iOS",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "12.0 - 16.6.1",
+"fontWeight": "semibold",
+"fontSize": 17,
+"usePadding": false
+}
+]
+}
+]
+},
+{
+"spacing": 25,
+"class": "DepictionSpacerView"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class": "DepictionStackView"
+},
+{
+"tabname":"Nhật ký thay đổi",
+"views":[
+{
+"class":"DepictionMarkdownView",
+"markdown":"### Phiên bản 2.14.8\n\n- Sửa lỗi văng ứng dụng khi tải xuống.\n\n- Cập nhật danh sách các phiên bản ứng dụng mới tương thích hơn.\n\n- Hỗ trợ Rootfull, Rootless & Roothide Jailbreak."
+}
+],
+"class":"DepictionStackView"
+},
+{
+"tabname":"Liên Hệ Hỗ Trợ",
+"views":[
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Kênh Telegram",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Nhóm Facebook",
+"action": "https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"title": "Paypal",
+"action": "https://paypal.me/HiuKitsudo"
+},
+{
+"class":"DepictionTableButtonView",
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class":"DepictionStackView"
+}
+],
+"class":"DepictionTabView"
+}

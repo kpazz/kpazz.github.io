@@ -1,0 +1,455 @@
+{
+"minVersion": "0.3",
+"headerImage": "https://jtisvn.github.io/coverimage/Cylinder-reborn.png",
+"tintColor": "#0EA5E9",
+"tabs": [
+{
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Tiếng Việt",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Tham gia nhóm K37•JTISVN",
+"action": "https://t.me/jtisvietnamrepo",
+"openExternal": true
+},
+{
+"class": "DepictionSpacerView",
+"spacing": 10
+},
+{
+"markdown": "### Cylinder Reborn\n\nTạo hiệu ứng chuyển động mượt mà và sinh động khi vuốt chuyển trang trên màn hình chính.\n\nTinh chỉnh huyền thoại mang phong cách Barrel kinh điển được làm lại hoàn toàn, giúp hô biến màn hình chính trở nên độc đáo và ấn tượng hơn mỗi khi chuyển trang ứng dụng.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"class": "DepictionScreenshotsView",
+"screenshots": [
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/1.png",
+"accessibilityText": "Screenshot 1"
+},
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/2.png",
+"accessibilityText": "Screenshot 2"
+},
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/3.png",
+"accessibilityText": "Screenshot 3"
+}
+],
+"itemCornerRadius": 8,
+"itemSize": "{185,400}"
+},
+{
+"markdown": "- **Tính năng nổi bật:**\n\n- **Kho hiệu ứng phong phú:** Hơn 50 hiệu ứng chuyển động icon chuyển trang độc đáo và ấn tượng.\n- **Kết hợp hiệu ứng tự do:** Khả năng kết hợp nhiều hiệu ứng cùng lúc để tạo ra phong cách riêng hoàn toàn mới lạ.\n- **Ngôn ngữ Script Lua:** Tích hợp bộ công cụ Lua script cho phép người dùng tự sáng tạo hiệu ứng theo ý thích.\n- **Tối ưu hóa mượt mà:** Khả năng xử lý đồ họa cực kỳ mượt mà, hạn chế tối đa tình trạng giật lag hay hao pin.\n- **Tương thích rộng rãi:** Hỗ trợ đầy đủ cho các môi trường Rootless, RootHide và tương thích tốt từ iOS 11.0 đến iOS 17.0.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 20,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionSeparatorView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Thông tin chi tiết",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": true,
+"useMargins": true,
+"margins": "{10,0,8,0}"
+},
+{
+"class": "DepictionStackView",
+"orientation": "landscape",
+"views": [
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Tác giả",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Ryan Nair",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Thể loại",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Tweaks",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Ngày cập nhật",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "21/10/2026",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+}
+]
+},
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Phiên bản",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "1.2.0",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Kích thước",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "250 KB",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Tương thích iOS",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "11.0 - 17.x",
+"fontWeight": "semibold",
+"fontSize": 17,
+"usePadding": false
+}
+]
+}
+]
+},
+{
+"spacing": 25,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Copyright © 2025 - 2030 by JTISVN",
+"textColor": "#999999",
+"fontSize": "10.0",
+"alignment": 1
+}
+]
+},
+{
+"class": "DepictionStackView",
+"tabname": "English",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Join K37•JTISVN Group",
+"action": "https://t.me/jtisvietnamrepo",
+"openExternal": true
+},
+{
+"class": "DepictionSpacerView",
+"spacing": 10
+},
+{
+"markdown": "### Cylinder Reborn\n\nCreate beautiful and smooth animations when paging through your home screen.\n\nA complete rewrite of the iconic Barrel/Cylinder tweak, giving your home screen a unique and personal look whenever you swipe between pages.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"class": "DepictionScreenshotsView",
+"screenshots": [
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/1.png",
+"accessibilityText": "Screenshot 1"
+},
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/2.png",
+"accessibilityText": "Screenshot 2"
+},
+{
+"url": "https://jtisvn.github.io/infodeb/Cylinder-reborn/Screenshots/3.png",
+"accessibilityText": "Screenshot 3"
+}
+],
+"itemCornerRadius": 8,
+"itemSize": "{185,400}"
+},
+{
+"markdown": "- **Key Features:**\n\n- **Extensive Effect Library:** Over 50 unique animations for home screen icon paging.\n- **Combine Multiple Effects:** Mix and match several effects at once to build your own custom style.\n- **Lua Script Support:** Integrated Lua scripting engine allows developers to write custom animations.\n- **Smooth Performance:** Highly optimized graphics processing with minimal impact on battery and responsiveness.\n- **Broad Compatibility:** Full support for Rootless, RootHide, and iOS 11.0 through 17.0 environments.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 20,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionSeparatorView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Information",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": true,
+"useMargins": true,
+"margins": "{10,0,8,0}"
+},
+{
+"class": "DepictionStackView",
+"orientation": "landscape",
+"views": [
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Developer",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Ryan Nair",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Category",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Tweaks",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Updated",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "October 21, 2026",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+}
+]
+},
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Version",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "1.2.0",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Size",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "250 KB",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Compatibility",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "iOS 11.0 - 17.x",
+"fontWeight": "semibold",
+"fontSize": 17,
+"usePadding": false
+}
+]
+}
+]
+},
+{
+"spacing": 25,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Copyright © 2025 - 2030 by JTISVN",
+"textColor": "#999999",
+"fontSize": "10.0",
+"alignment": 1
+}
+]
+}
+]
+}
+],
+"class": "DepictionStackView"
+},
+{
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Tiếng Việt",
+"views": [
+{
+"markdown": "### Phiên bản 1.2.0\n- Hỗ trợ đầy đủ môi trường RootHide và các jailbreak Rootless.\n- Cải thiện hiệu năng hoạt động mượt mà hơn.\n- Sửa lỗi biểu tượng của ứng dụng vừa đóng không chạy hiệu ứng động.\n- Khắc phục nhiều hiệu ứng bị lỗi ở các phiên bản trước.\n- Sửa lỗi hiệu ứng không hoạt động khi biểu tượng hiển thị xuất hiện.\n- Cập nhật ngôn ngữ Lua lên phiên bản 5.5.\n- Hỗ trợ Script truy cập thông tin hàng/cột của từng icon và hàm icon:center().",
+"useSpacing": true,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 15,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Copyright © 2025 - 2030 by JTISVN",
+"textColor": "#999999",
+"fontSize": "10.0",
+"alignment": 1
+}
+]
+},
+{
+"class": "DepictionStackView",
+"tabname": "English",
+"views": [
+{
+"markdown": "### Version 1.2.0\n- Full support for the RootHide environment and Rootless jailbreaks.\n- Improved performance for smoother operation.\n- Fixed the icon of a just-closed app not playing its animation.\n- Fixed many effects that were broken in earlier versions.\n- Fixed effects not working when icons appear on screen.\n- Updated the Lua language to version 5.5.\n- Scripts can now access each icon's row/column information and the icon:center() function.",
+"useSpacing": true,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 15,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Copyright © 2025 - 2030 by JTISVN",
+"textColor": "#999999",
+"fontSize": "10.0",
+"alignment": 1
+}
+]
+}
+]
+}
+],
+"class": "DepictionStackView"
+},
+{
+"tabname": "Liên Kết Hỗ Trợ",
+"views": [
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Liên hệ tôi ở Telegram",
+"action": "https://t.me/Kitsudo"
+},
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Theo dõi tôi trên X (Twitter)",
+"action": "https://x.com/hiukitsudo?s=11"
+},
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Nhóm Facebook",
+"action": "https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Paypal",
+"action": "https://paypal.me/HiuKitsudo"
+},
+{
+"class": "DepictionTableButtonView",
+"openExternal": true,
+"title": "Ủng hộ tôi một ly cà phê",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionLabelView",
+"text": "Copyright © 2025 - 2030 by JTISVN",
+"textColor": "#999999",
+"fontSize": "10.0",
+"alignment": 1
+}
+],
+"class": "DepictionStackView"
+}
+],
+"class": "DepictionTabView"
+}

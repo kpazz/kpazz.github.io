@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatteryPercentiOS16 - JTISVN Repo</title>
+    <style>
+        :root {
+            /* Màu Tint từ JSON */
+            --tint-color: #5777B8; 
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --secondary-text: #777777;
+            --separator-color: #e5e5ea;
+            --radius: 12px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --text-color: #ffffff;
+                --secondary-text: #98989d;
+                --separator-color: #38383a;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 1. HEADER IMAGE */
+        .banner {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 2. TABS NAVIGATION */
+        .tab-nav {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: 1px solid var(--separator-color);
+            background-color: var(--bg-color); 
+            padding: 10px 0;
+            margin-bottom: 0; 
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--secondary-text);
+            padding: 8px 5px;
+            cursor: pointer;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: var(--tint-color);
+            position: relative;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -11px;
+            height: 2px;
+            background-color: var(--tint-color);
+        }
+
+        /* 3. CONTENT CONTAINER */
+        .content-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* TEXT STYLES */
+        ul { padding-left: 20px; margin-top: 5px;}
+        li { margin-bottom: 8px; line-height: 1.5; }
+        p { line-height: 1.5; margin-bottom: 10px; }
+
+        /* INFO GRID */
+        .info-header {
+            font-size: 17px;
+            font-weight: 700;
+            margin: 25px 0 15px 0;
+        }
+
+        .info-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .info-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: var(--secondary-text);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* BUTTONS */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(87, 119, 184, 0.1); /* Màu Tint nhạt */
+            color: var(--tint-color);
+            padding: 15px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            margin-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        .separator {
+            height: 1px;
+            background-color: var(--separator-color);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://jtisvn.github.io/coverimage/BatteryPercent.png" alt="BatteryPercent Banner" class="banner">
+
+    <nav class="tab-nav">
+        <button class="tab-btn active" onclick="openTab(event, 'info')">Giới thiệu</button>
+        <button class="tab-btn" onclick="openTab(event, 'changelog')">Nhật ký thay đổi</button>
+        <button class="tab-btn" onclick="openTab(event, 'contact')">Liên hệ Hỗ trợ</button>
+    </nav>
+
+    <div class="content-container">
+        
+        <div id="info" class="tab-content active">
+            
+            <div>
+                <h3 style="margin-top: 0;">BatteryPercentiOS16</h3>
+                <ul>
+                    <li>Hiển thị % pin giống iOS 16 cho thiết bị iOS 15 trở xuống.</li>
+                </ul>
+                <p style="color: #ff3b30; font-weight: bold; background: rgba(255, 59, 48, 0.1); padding: 10px; border-radius: 8px;">
+                    ⚠️ Lưu ý: Đối với thiết bị iPhone XS trở lên vui lòng cài tweak Odabi để tránh tình trạng treo máy sau khi cài đặt.
+                </p>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="info-header">Thông tin chi tiết</div>
+            <div class="info-grid">
+                <div class="info-column">
+                    <div class="info-item">
+                        <span class="info-label">Nhà phát triển</span>
+                        <span class="info-value">NQT</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Thể loại</span>
+                        <span class="info-value">Tweaks</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ngày tải lên</span>
+                        <span class="info-value">7/5/2025</span>
+                    </div>
+                </div>
+                <div class="info-column">
+                    <div class="info-item">
+                        <span class="info-label">Phiên bản</span>
+                        <span class="info-value">1.1.2</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dung lượng</span>
+                        <span class="info-value">8 KB</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Tương thích iOS</span>
+                        <span class="info-value">14.0 - 16.5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+        </div>
+
+        <div id="changelog" class="tab-content">
+            <h3 style="margin-top: 10px;">Phiên bản 1.1.2</h3>
+            <ul>
+                <li>Hỗ trợ Rootfull, Rootless & Roothide Jailbreak.</li>
+            </ul>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <div style="margin-top: 10px;">
+                <a href="https://jtisvn.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
+                    Liên hệ Hỗ trợ / Donate <span>&#8594;</span>
+                </a>
+                <a href="https://t.me/jailbreaktrolliossupport" class="action-btn" target="_blank">
+                    Nhóm Telegram <span>&#8594;</span>
+                </a>
+                <a href="https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP" class="action-btn" target="_blank">
+                    Nhóm Facebook <span>&#8594;</span>
+                </a>
+            </div>
+            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+        </div>
+
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>

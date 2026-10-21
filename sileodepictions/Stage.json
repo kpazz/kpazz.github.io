@@ -1,0 +1,206 @@
+{
+"minVersion":"0.1",
+"headerImage":"https://jtisvn.github.io/coverimage/jtisvnrepo.png",
+"tintColor":"#5777B8",
+"tabs":[
+{
+"tabname":"Giới thiệu",
+"views":[
+{
+"class":"DepictionScreenshotsView",
+"screenshots":[
+{
+"url":"https://jtisvn.github.io/infodeb/Stage/Screenshots/1.png",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://jtisvn.github.io/infodeb/Stage/Screenshots/2.png",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://jtisvn.github.io/infodeb/Stage/Screenshots/3.png",
+"accessibilityText":"Screenshot"
+},
+{
+"url":"https://jtisvn.github.io/infodeb/Stage/Screenshots/4.png",
+"accessibilityText":"Screenshot"
+}
+],
+"itemCornerRadius":0,
+"itemSize":"{185,400}"
+},
+{
+"markdown":" Dynamic Stage\n\n- Quán Lý Đa Nhiệm Nâng Cao Cho IPhone\n\n- Dynamic Stage là bản nâng cấp của Stage Manager, tích hợp với Dynamic Island để mang lại trải nghiệm đa nhiệm mượt mà trên iPhone.\n\n- Tính Năng\n\n-  Đa nhiệm dễ dàng: Chuyển đổi ứng dụng không cần thoát.\n\n- Split View: Dùng hai ứng dụng cùng lúc.\n\n- Lớp phủ (Overlay): Xem nhanh ứng dụng khác.\n\n- Truy cập: Vuốt lên từ góc dưới bên phải màn hình.\n\n- Giữ ứng dụng mở: Ứng dụng trong Stage vẫn hoạt động dù bạn thu nhỏ Stage.\n\n- Đóng ứng dụng: Vuốt lên từ góc dưới bên phải khi đang trong Stage.\n\n- Tùy Chỉnh & Hạn Chế\n\n- Chế độ iPad: Tùy chỉnh ứng dụng chạy ở chế độ iPad để thay đổi kích thước linh hoạt (nếu được hỗ trợ).\n\n- Giới hạn: Một số ứng dụng (đặc biệt là game) có thể không tối ưu do hạn chế kích thước. Có thể vô hiệu hóa ứng dụng không tương thích khỏi danh sách.",
+"useSpacing": false,
+"class": "DepictionMarkdownView"
+},
+{
+"spacing": 20,
+"class": "DepictionSpacerView"
+},
+{
+"class": "DepictionSeparatorView"
+},
+{
+"class": "DepictionLabelView",
+"text": "Thông tin chi tiết",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": true,
+"useMargins": true,
+"margins": "{10,0,8,0}"
+},
+{
+"class": "DepictionStackView",
+"orientation": "landscape",
+"views": [
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Tác giả",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "TontOOO",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Thể loại",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "Tweaks",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Ngày cập nhật",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "23/7/2025",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+}
+]
+},
+{
+"class": "DepictionStackView",
+"views": [
+{
+"class": "DepictionLabelView",
+"text": "Phiên bản",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "1.2.1",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Kích thước",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "9 MB",
+"fontWeight": "semibold",
+"fontSize": 16,
+"usePadding": false
+},
+{
+"class": "DepictionLabelView",
+"text": "Tương thích iOS",
+"textColor": "#777",
+"margins": "{16,0,8,0}"
+},
+{
+"class": "DepictionLabelView",
+"text": "14.0 - 16.7.11",
+"fontWeight": "semibold",
+"fontSize": 17,
+"usePadding": false
+}
+]
+}
+]
+},
+{
+"spacing": 25,
+"class": "DepictionSpacerView"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class": "DepictionStackView"
+},
+{
+"tabname":"Nhật ký thay đổi",
+"views":[
+{
+"class":"DepictionMarkdownView",
+"markdown":"### Phiên bản 1.2.1\n\n- Mở nhanh ứng dụng! Giờ đây bạn có thể nhấn giữ trên thanh công cụ của Stage để bật ứng dụng đang hoạt động (iOS 15 trở lên)\n\n- Sửa lỗi race condition có thể gây treo khi mở Stage\n\n- Sửa lỗi danh sách Ứng dụng gần đây kkông cập nhật sau 4 ứng dụng\n\n- Tối ưu hoá nhỏ việc thay đổi kích thước ứng dụng\n\n- Sửa một số lỗi hiển thị nhỏ\n\n- Gỡ bỏ hệ thống DRM & máy chủ cấp phép\n\n- Thêm thông báo kết thúc hỗ trợ (EOL Notice\n\n- Hỗ trợ Roothide Jailbreak"
+}
+],
+"class":"DepictionStackView"
+},
+{
+"tabname":"Liên hệ Hỗ trợ",
+"views":[
+{
+"class":"DepictionTableButtonView",
+"title": "Paypal",
+"action": "https://www.paypal.com/myaccount/transfer/homepage/preview/"
+},
+{
+"class":"DepictionTableButtonView",
+"title":"Ủng hộ tôi một ly cà phê",
+"action":"https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class":"DepictionTableButtonView",
+"title": "Nhóm Telegram",
+"action": "https://t.me/jailbreaktrolliossupport"
+},
+{
+"class":"DepictionTableButtonView",
+"title": "Nhóm Facebook",
+"action": "https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionLabelView",
+"text":"Copyright © 2025 - 2030 by JTISVN",
+"textColor":"#999999",
+"fontSize":"10.0",
+"alignment":1
+}
+],
+"class":"DepictionStackView"
+}
+],
+"class":"DepictionTabView"
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Symbols - JTISVN Repo</title>
+    <style>
+        :root {
+            /* Màu Tint từ JSON */
+            --tint-color: #B5B5B5; 
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --secondary-text: #888888;
+            --separator-color: #e5e5ea;
+            --radius: 12px;
+            --btn-bg: rgba(181, 181, 181, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #000000;
+                --text-color: #ffffff;
+                --secondary-text: #98989d;
+                --separator-color: #38383a;
+                --btn-bg: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER IMAGE */
+        .banner {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* CONTENT CONTAINER */
+        .content-container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SCREENSHOTS */
+        .screenshots-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 12px;
+            padding-bottom: 20px;
+            scrollbar-width: none; 
+            justify-content: center; /* Căn giữa vì chỉ có 1 ảnh */
+        }
+        .screenshots-scroll::-webkit-scrollbar { display: none; }
+
+        .screenshot-img {
+            width: 185px; /* Kích thước từ JSON */
+            height: auto;
+            border-radius: 8px; /* itemCornerRadius từ JSON */
+            border: 1px solid var(--separator-color); 
+            cursor: pointer;
+        }
+
+        /* MARKDOWN TEXT */
+        .markdown-view h1 { font-size: 22px; margin-top: 0; }
+        .markdown-view p { line-height: 1.5; margin-bottom: 10px; }
+        .symbol-box {
+            background-color: var(--btn-bg);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            word-wrap: break-word;
+            margin: 10px 0;
+        }
+
+        /* SEPARATOR */
+        .separator {
+            height: 1px;
+            background-color: var(--separator-color);
+            margin: 15px 0;
+        }
+
+        /* HEADERS */
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 10px 0 15px 0;
+        }
+
+        /* TABLE TEXT VIEW (Dạng danh sách) */
+        .table-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--separator-color);
+        }
+        .table-row:last-child { border-bottom: none; }
+        
+        .row-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .row-value {
+            font-size: 15px;
+            color: var(--secondary-text);
+            text-align: right;
+        }
+
+        /* TABLE BUTTON VIEW */
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--tint-color);
+            padding: 15px 0;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            border-bottom: 1px solid var(--separator-color);
+            transition: opacity 0.2s;
+        }
+        .action-btn:last-of-type { border-bottom: none; }
+        .action-btn:hover { opacity: 0.7; }
+        .arrow { font-size: 18px; color: var(--secondary-text); opacity: 0.5; }
+
+        /* FOOTER IMAGE & TEXT */
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            gap: 12px; /* spacing: 12 từ JSON */
+        }
+        .footer-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+        .footer-text {
+            text-align: center; 
+            color: #888; 
+            font-size: 11px;
+        }
+
+        /* LIGHTBOX */
+        .modal {
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0;
+            width: 100%; height: 100%; overflow: auto; 
+            background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            margin: auto; display: block; width: 80%; max-width: 700px;
+            animation: zoom 0.3s;
+        }
+        @keyframes zoom { from {transform:scale(0)} to {transform:scale(1)} }
+        .close {
+            position: absolute; top: 15px; right: 35px; color: #fff;
+            font-size: 40px; font-weight: bold; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://jtisvn.github.io/coverimage/Fonts.png" class="banner">
+
+    <div class="content-container">
+        
+        <div class="screenshots-scroll">
+            <img src="https://dobabaophuc1706.github.io/repo/package/Fonts/AppleSymbols/1.png" class="screenshot-img" onclick="openImage(this)">
+        </div>
+
+        <div class="markdown-view">
+            <h1>Biểu tượng Apple cho iOS 14-16</h1>
+            <p><strong>Hướng dẫn:</strong><br>Sử dụng phông chữ qua tinh chỉnh Snowboard.</p>
+            <p><strong>Xem trước ký tự:</strong></p>
+            <div class="symbol-box">
+                ⠁ ⠂ ⠃ ⠄ ⠅ ⠆ ⠇ ⠈ ⠉ ⠊ ⠋ ⠌ ⠍ ⠎ ⠏ ⠐ ⠑ ⠒ ⠓ ⠔ ⠕ ⠖ ⠗ ⠜ ⠝ ⠟ ⠠ ⠡ ⠢ ⠣ ⠤ ⠥ ⠦ ⠧ ⠨ ⠩ ⠪ ⠫ ⠬ ⠭ ⠮ ⠯ ⠰ ⠱ ⠲ ⠳ ⠴ ⠶ ⠷ ⠸ ⠹ ⠺ ⠻ ⠼ ⠽ ⠾ ⠿ ⡀ ⡁ ⡂ ⡃ ⡄ ⡅ ⡆ ⡇ ⡈ ⡉ ⡊ ⡋ ⡎ ⡓ ⡔ ⡕ ⡖ ⡗ ⡙ ⡚ ⡛ ⡜ ⡞ ⡟ ⡠ ⡡ ⡢ ⡣ ⡤ ⡥ ⡦ ⡧ ⡩ ⡪ ⡫ ⡬ ⡭ ⡮ ⡯ ⡰ ⡱ ⡲ ⡳ ⡴ ⡵ ⡶ ⡷ ⡸ ⡹ ⡺ ⡻ ⡼ ⡽ ⡾ ⡿ ⢀ ⢁ ⢂ ⢃ ⢄ ⢅ ⢆ ⢇ ⢈ ⢋ ⢌ ⢍ ⢎ ⢑ ⢒ ⢓ ⢔ ⢕ ⢖ ⢗ ⢘ ⢙ ⢚ ⢛ ⢜ ⢝ ⢞ ⢢ ⢣ ⢤ ⢥ ⢨ ⢭ ⢲ ⢵ ⢶ ⢷ ⢹ ⢺ ⢻ ⢼ ⢽ ⢾ ⣀ ⣁ ⣂ ⣄ ⣅ ⣆ ⣇ ⣈ ⣉ ⣊ ⣋ ⣌ ⣍ ⣎ ⣏ ⣐ ⣑ ⣒ ⣓ ⣔ ⣕ ⣖ ⣨ ⣩ ⣪ ⣫ ⣬ ⣮ ⣱ ⣲ ⣳ ⣴ ⣵ ⣶ ⣷ ⣸ ⣹
+            </div>
+            <p>Sao chép ký tự -> Ứng dụng ghi chú -> Áp dụng & Respring.</p>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="section-header">Thông tin</div>
+
+        <div class="table-row">
+            <span class="row-title">Nhà phát triển</span>
+            <span class="row-value">YangJiii</span>
+        </div>
+        <div class="table-row">
+            <span class="row-title">Phiên bản</span>
+            <span class="row-value">1.0</span>
+        </div>
+        <div class="table-row">
+            <span class="row-title">Thể loại</span>
+            <span class="row-value">Fonts</span>
+        </div>
+        <div class="table-row">
+            <span class="row-title">Tương thích iOS</span>
+            <span class="row-value">14.0 - 16.5</span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="section-header">Liên kết & Hỗ trợ</div>
+
+        <a href="https://raw.githubusercontent.com/dobabaophuc1706/Font-Clock/main/applesymbols.txt" class="action-btn" target="_blank">
+            Nhận tệp văn bản biểu tượng <span class="arrow">&#8250;</span>
+        </a>
+        <a href="https://t.me/jtisvn" class="action-btn" target="_blank">
+             Kênh Telegram <span class="arrow">&#8250;</span>
+        </a>
+        <a href="https://jtisvn.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
+            Ủng hộ tôi <span class="arrow">&#8250;</span>
+        </a>
+
+        <div class="separator"></div>
+
+        <div class="footer-container">
+            <img src="https://jtisvn.github.io/CydiaIcon.png" class="footer-icon">
+            <div class="footer-text">Created with by JTISVN Repo</div>
+            <div style="height: 20px;"></div>
+        </div>
+
+    </div>
+
+    <div id="myImageModal" class="modal" onclick="this.style.display='none'">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        function openImage(element) {
+            var modal = document.getElementById("myImageModal");
+            var modalImg = document.getElementById("img01");
+            modal.style.display = "block";
+            modalImg.src = element.src; 
+        }
+    </script>
+
+</body>
+</html>

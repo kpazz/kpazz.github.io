@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>Tinh chỉnh giúp bảo vệ thiết bị của bạn khỏi các cuộc tấn công của DarkSword/Coruna..</b></p><br/> <p>⚠️ Khuyến nghị người dùng jailbreak nên cài đặt gói này!</p>",
+"useSpacing": true,
+"useRawFormat": true
+},
+{
+"class": "DepictionSubheaderView",
+"useMargins": true,
+"title": "Tương thích đối với iOS 15.0 - 17.0"
+}
+],
+"xPadding": 10
+},
+{
+"class": "DepictionStackView",
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionSubheaderView",
+"title": "Phiên bản 1.0.1"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "- Hỗ trợ Rootless & Roothide Jailbreak."
+}
+]
+}
+],
+"tintColor": "red",
+"headerImage": "https://jtisvn.github.io/coverimage/jtisvnrepo.png"
+}

@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>Một tweak giúp giảm thiểu rủi ro từ các lỗ hổng tấn công Coruna và DarkSword. Đây là một công cụ bảo mật nhẹ dành cho các thiết bị iOS đã jailbreak (từ iOS 15 trở lên), được thiết kế để thay thế cho Chế độ phong tỏa (Lockdown Mode) mặc định của hệ thống.</b></p><br/> <p>Tweak này giúp hạn chế nguy cơ bị khai thác (exploit) (như Coruna và DarkSword) bằng cách vô hiệu hoá tính năng biên dịch JavaScript JIT của WebKit, từ đó tăng cường độ bảo mật tổng thể cho các trình duyệt và ứng dụng.</p>",
+          "useSpacing": true,
+          "useRawFormat": true
+        },
+        {
+          "class": "DepictionSubheaderView",
+          "useMargins": true,
+          "title": "Tương thích đối với iOS 15.0 - 17.0"
+        }
+      ],
+      "xPadding": 10
+    },
+    {
+      "class": "DepictionStackView",
+      "tabname": "Nhật ký thay đổi",
+      "views": [
+        {
+          "class": "DepictionSubheaderView",
+          "title": "Phiên bản 1.0.1"
+        },
+        {
+          "class": "DepictionMarkdownView",
+          "markdown": "- Hỗ trợ Rootless & Roothide Jailbreak."
+        }
+      ]
+    }
+  ],
+  "tintColor": "red",
+  "headerImage": "https://jtisvn.github.io/coverimage/jtisvnrepo.png"
+}

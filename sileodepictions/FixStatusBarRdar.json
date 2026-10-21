@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>Khắc phục lỗi rdar đỏ trên thanh trạng thái.</b></p><br/> <p>Hỗ trợ một số thiết bị giả lập cử chỉ iPhone X!</p>",
+"useSpacing": true,
+"useRawFormat": true
+},
+{
+"class": "DepictionSubheaderView",
+"useMargins": true,
+"title": "Tương thích đối với iOS 14.0 - 16.7.x"
+}
+],
+"xPadding": 10
+},
+{
+"class": "DepictionStackView",
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionSubheaderView",
+"title": "Phiên bản 1.0.0"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "- Phát hành lần đầu."
+}
+]
+}
+],
+"tintColor": "red",
+"headerImage": "https://jtisvn.github.io/coverimage/FixStatusBarRdar.png"
+}

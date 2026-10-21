@@ -1,0 +1,57 @@
+{
+"minVersion": "0.4",
+"class": "DepictionTabView",
+"tabs": [
+{
+"class": "DepictionStackView",
+"tabname": "Giới thiệu",
+"views": [
+{
+"class": "DepictionButtonView",
+"text": "Kênh thông báo",
+"action": "https://t.me/jtisvn"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title":"Nhóm Facebook",
+"action":"https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP"
+},
+{
+"class":"DepictionTableButtonView",
+"openExternal": 1,
+"title": "Ủng hộ tôi",
+"action": "https://jtisvn.github.io/homepage/donate/donate.html"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "<p><b>DynamicNotLand là một tweak mạnh mẽ giúp đem giao diện tương tác thông minh (Dynamic Island) từ các dòng iPhone đời mới lên các thiết bị đời cũ hơn hoặc các thiết bị có thiết kế \"tai thỏ\" (notch). Không chỉ dừng lại ở việc hiển thị, tweak này còn tối ưu hóa không gian màn hình và tăng cường trải nghiệm đa nhiệm của bạn.</b></p><br/> <p>Hỗ trợ các thiết bị đã Jailbreak (Dopamine, Palera1n, Rootless/Rootful).</p>",
+"useSpacing": true,
+"useRawFormat": true
+},
+{
+"class": "DepictionSubheaderView",
+"useMargins": true,
+"title": "Tương thích đối với iOS 16.0 - 17.0"
+}
+],
+"xPadding": 10
+},
+{
+"class": "DepictionStackView",
+"tabname": "Nhật ký thay đổi",
+"views": [
+{
+"class": "DepictionSubheaderView",
+"title": "Phiên bản 1.0.1"
+},
+{
+"class": "DepictionMarkdownView",
+"markdown": "- Hỗ trợ Rootless & Roothide Jailbreak."
+}
+]
+}
+],
+"tintColor": "#cc3399",
+"headerImage": "https://jtisvn.github.io/coverimage/DynamicNotLand.png"
+}
