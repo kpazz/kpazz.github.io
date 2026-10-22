@@ -33,8 +33,8 @@ Description: Mở bất kỳ ứng dụng nào trên màn xe Carplay!
 Name: Omnicar
 Author: OmniCar <omnicartweak@gmail.com>
 Icon: https://kpazz.github.io/icons/Omnicar.png
-Depiction: https://kpazz.github.io/detail-html/Omnicar.html
-SileoDepiction: https://kpazz.github.io/detail-Sileo/Omnicar.json
+Depiction: https://kpazz.github.io/infohtml/Omnicar.html
+SileoDepiction: https://kpazz.github.io/infosileo/Omnicar.json
 
 Package: com.leftyfl1p.carbridge13
 Architecture: iphoneos-arm64
@@ -54,6 +54,6 @@ Description: Mở bất kỳ ứng dụng nào trong CarPlay!
 Name: CarBridge (Rootless)
 Author: leftyfl1p <carbridge@havoc.app>
 Icon: https://kpazz.github.io/icons/CarBridge.png
-Depiction: https://kpazz.github.io/detail-html/CarBridge.html
-SileoDepiction: https://kpazz.github.io/detail-Sileo/Omnicar.json
+Depiction: https://kpazz.github.io/infohtml/CarBridge.html
+SileoDepiction: https://kpazz.github.io/infosileo/CarBridge.json
 
