@@ -1,3 +1,19 @@
+architecture: iphoneos-arm64
+author: Tim Apple
+description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
+icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
+maintainer: kpazz Repo
+name: Terminal (Rootless)
+package: com.jtis.terminal
+section: Applications
+status: install ok installed
+version: 1.11.2
+Filename: ./debs/com.jtis.terminal_1.11.2_iphoneos-arm64.deb
+MD5sum: d144e0d31968e535dfa55fe448a6418f
+SHA1: f8c634a8b1798beb0f7f849942b8bb981d264acb
+SHA256: 395da2f5538250728351fd799ed74762a0897b4ed59522bdd1d34f93e71b537f
+SHA512: b9e9df602203145b2426993937901ba8ffd660a03fbc32078329f6bcf040f648cab2b652c468388598286968b0b52357c09c612df0c440be8fad48ed90e3ebf7
+
 Package: com.anlai.omnicar
 Architecture: iphoneos-arm64
 Version: 1.0.3
@@ -16,9 +32,9 @@ SHA512: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 Description: Mở bất kỳ ứng dụng nào trên màn xe Carplay!
 Name: Omnicar
 Author: OmniCar <omnicartweak@gmail.com>
-Icon: https://kpazz.github.io/sectionIcons/Omnicar.png
-Depiction: https://kpazz.github.io/depictions/Omnicar.html
-SileoDepiction: https://kpazz.github.io/depictions/Omnicar.html
+Icon: https://kpazz.github.io/icons/Omnicar.png
+Depiction: https://kpazz.github.io/detail-html/Omnicar.html
+SileoDepiction: https://kpazz.github.io/detail-Sileo/Omnicar.json
 
 Package: com.leftyfl1p.carbridge13
 Architecture: iphoneos-arm64
@@ -37,93 +53,7 @@ SHA512: e4a002da525f41d62ab2d956f06e11fdaa3efbf6a1aa144657363d51144ff7890340c36a
 Description: Mở bất kỳ ứng dụng nào trong CarPlay!
 Name: CarBridge (Rootless)
 Author: leftyfl1p <carbridge@havoc.app>
-Icon: https://kpazz.github.io/sectionIcons/CarBridge.png
-Depiction: https://kpazz.github.io/depictions/CarBridge.html
-SileoDepiction: https://kpazz.github.io/sileodepictions/CarBridge.json
-
-Package: oldabi
-Architecture: iphoneos-arm64e
-Version: 2.0.1
-Section: Tweaks
-Maintainer: Nightwind
-Installed-Size: 68
-Depends: ellekit (>= 0.4), cy+cpu.arm64e, firmware (>= 15.0)
-Filename: ./debs/Legacy arm64e Support-2.0.1-iphoneos-arm64e.deb
-Size: 3206
-MD5sum: 3ef2a47b7ef7183aa6357da76870b9da
-SHA1: b465040912110338f51dbc149b15b7cbf8f1f7ca
-SHA256: f0c69f940ec74d1fd141e809878b13cb38eae4ef95d75b5000c14125861ddf7c
-SHA512: 1e5de6aeb2fe97bd9b6e9730778aa97e73f54ca81d16caf61fd2b7c3550ed3200af926950a40000798f6cb64b40404b45bae5e8cf6b47c43c025ff856b395441
-Description: Support for legacy arm64e ABI in iOS 15.0+
-Name: Legacy arm64e Support
-Author: Nightwind
-
-Package: com.jtis.terminal
-Architecture: iphoneos-arm64
-Version: 1.11.2
-Section: Applications
-Maintainer: JTISVN Repo
-Filename: ./debs/com.jtis.terminal_1.11.2_iphoneos-arm64.deb
-Size: 18277192
-MD5sum: d144e0d31968e535dfa55fe448a6418f
-SHA1: f8c634a8b1798beb0f7f849942b8bb981d264acb
-SHA256: 395da2f5538250728351fd799ed74762a0897b4ed59522bdd1d34f93e71b537f
-SHA512: b9e9df602203145b2426993937901ba8ffd660a03fbc32078329f6bcf040f648cab2b652c468388598286968b0b52357c09c612df0c440be8fad48ed90e3ebf7
-Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
-Name: Terminal (Rootless)
-Author: Tim Apple
-Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
-
-Package: com.jtis.onyx
-Architecture: all
-Version: 1.6
-Section: Themes
-Maintainer: JTISVN Repo
-Filename: ./debs/Onyx_1.6_all.deb
-Size: 24403996
-MD5sum: 49de36bbb71ccf57b41d0d49be2a9383
-SHA1: 850dd125a30b3a5bc75521eb795a20eda1961a75
-SHA256: 82baada469a6547e2a4943e70eaa34ea07c4969635333ae6f668773af6180a62
-SHA512: 82a84b3bc4c7f688fbcea5a4d73400c7b9865cc4205a9eeb1a7312574756e08c6075277995f3840e3119a23166c0ac714e8ff49324e6b67d35097336088af0c6
-Description: Chủ đề Onyx.
-Name: Onyx
-Author: theprestigext
-SileoDepiction: https://jtisvn.github.io/sileodepictions/Onyx.json
-Depiction: https://jtisvn.github.io/depictions/Onyx.html
-Icon: https://jtisvn.github.io/sectionIcons/Onyx.png
-
-Package: com.rullinoiz.ipa2deb
-Architecture: iphoneos-arm64
-Version: 1.0.4
-Section: Development
-Maintainer: rullinoiz
-Depends: dpkg
-Filename: ./debs/com.rullinoiz.ipa2deb_1.0.4_iphoneos-arm64.deb
-Size: 3444
-MD5sum: f6d4d53d9efee6d089bea1128d03420e
-SHA1: e0e913559d1a00923f803e3837402057f42ac16e
-SHA256: 881842918593f666a66f69d3b11f9b810f3da01896268b61e01ed6de809d5ee4
-SHA512: 4d14e67ca78fad4690bcd2edc0d5b16424a126a24c729fd6644c3b77fcc0ead1c713009f7ee2cd4332b80de2d6db8ecf0e796177b6db065033e606282652ef54
-Description: Convert IPA to DEB
-Name: ipa2deb
-Author: rullinoiz
-Depiction: https://repoiz.github.io/repoiz/depictions/?p=com.rullinoiz.ipa2deb
-
-Package: com.evynw.fontdubai14
-Architecture: iphoneos-arm64
-Version: 1.1
-Section: Fonts
-Maintainer: Evelyn (ev_ynw) <ev.ynam.w@gmail.com>
-Filename: ./debs/com.evynw.fontdubai14_1.1_iphoneos-arm64.deb
-Size: 5230892
-MD5sum: d31a8c6e7c44f8b6a9c6fcb1845a3699
-SHA1: de0051f01593e62cd53a04a4ba9a310920920230
-SHA256: b89b77f5344e57591d0ae5acaac197a7516045a451278b2c3ed7882f8cf538b4
-SHA512: 9b24df09fa8abb375d0d66f8dd639c74cb6a4e1917b2a3ad01cc6887dcbcce092a01d6d2b1cccb7f417d44d915057376cd8c8070af472c71b7326da9ed19179a
-Description: Well-known Microsoft font. 100% size. For iOS14-16.
-Name: Dubai (iOS14-16)
-Depiction: https://evynw.github.io/depictions/?p=com.evynw.fontdubai14
-SileoDepiction: https://evynw.github.io/sileo/fontdubai14.json
-Icon: https://jtisvn.github.io/sectionIcons/Fonts.png
-
+Icon: https://kpazz.github.io/icons/CarBridge.png
+Depiction: https://kpazz.github.io/detail-html/CarBridge.html
+SileoDepiction: https://kpazz.github.io/detail-Sileo/Omnicar.json
 

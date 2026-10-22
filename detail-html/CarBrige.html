@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CallBlocker - JTISVN Repo</title>
+    <title>CarBridge - KPazz</title>
     <style>
         :root {
-            /* Màu Tint từ JSON */
-            --tint-color: #339999; 
+            --tint-color: #5777B8;
             --bg-color: #ffffff;
             --text-color: #000000;
             --secondary-text: #777777;
             --separator-color: #e5e5ea;
             --radius: 12px;
-            /* Màu cho thông báo check iOS */
-            --success-color: #34c759;
-            --error-color: #ff3b30;
-            --text-on-tint: #339999;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -25,7 +20,6 @@
                 --text-color: #ffffff;
                 --secondary-text: #98989d;
                 --separator-color: #38383a;
-                --text-on-tint: #339999;
             }
         }
 
@@ -47,7 +41,7 @@
             display: block;
         }
 
-        /* 2. TABS NAVIGATION */
+        /* 2. TABS NAVIGATION (Cố định, không trôi) */
         .tab-nav {
             display: flex;
             justify-content: space-around;
@@ -70,7 +64,7 @@
         }
 
         .tab-btn.active {
-            color: var(--text-on-tint);
+            color: var(--tint-color);
             position: relative;
         }
         
@@ -105,7 +99,7 @@
             to { opacity: 1; }
         }
 
-        /* SCREENSHOTS */
+        /* SCREENSHOTS (Thêm cursor pointer để biết là bấm được) */
         .screenshots-scroll {
             display: flex;
             overflow-x: auto;
@@ -113,8 +107,6 @@
             padding-bottom: 20px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; 
-            /* CÓ 1 ẢNH -> GIỮ CĂN GIỮA */
-            justify-content: center; 
         }
         .screenshots-scroll::-webkit-scrollbar {
             display: none; 
@@ -125,7 +117,7 @@
             height: auto;
             border-radius: var(--radius);
             border: 1px solid var(--separator-color); 
-            cursor: pointer;
+            cursor: pointer; /* Báo hiệu bấm được */
             transition: transform 0.1s;
         }
         
@@ -133,18 +125,19 @@
             transform: scale(0.95);
         }
 
-        /* --- LIGHTBOX (ZOOM ẢNH) --- */
+        /* --- LIGHTBOX (PHÓNG TO ẢNH) STYLES --- */
         .modal {
             display: none; 
             position: fixed; 
-            z-index: 9999; 
+            z-index: 9999; /* Luôn nằm trên cùng */
             padding-top: 50px; 
             left: 0;
             top: 0;
             width: 100%; 
             height: 100%; 
             overflow: auto; 
-            background-color: rgba(0,0,0,0.9); 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.9); /* Màu nền đen mờ */
             backdrop-filter: blur(5px);
         }
 
@@ -155,6 +148,10 @@
             max-width: 700px;
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        /* Hiệu ứng zoom khi mở ảnh */
+        .modal-content {  
             animation-name: zoom;
             animation-duration: 0.3s;
         }
@@ -164,6 +161,7 @@
             to {transform:scale(1)}
         }
 
+        /* Nút đóng (X) */
         .close {
             position: absolute;
             top: 15px;
@@ -175,6 +173,14 @@
             cursor: pointer;
             z-index: 10000;
         }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* --- END LIGHTBOX STYLES --- */
 
         /* TEXT STYLES */
         ul { padding-left: 20px; margin-top: 5px;}
@@ -224,7 +230,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(51, 153, 153, 0.1); /* Màu Tint nhạt */
+            background-color: rgba(87, 119, 184, 0.1);
             color: var(--tint-color);
             padding: 15px;
             border-radius: var(--radius);
@@ -247,24 +253,11 @@
             background-color: var(--separator-color);
             margin: 20px 0;
         }
-
-        /* --- CSS CHO THÔNG BÁO CHECK IOS --- */
-        #pt {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: var(--radius);
-            font-size: 14px;
-            display: none; 
-        }
     </style>
 </head>
 <body>
 
-    <div id="prerequisite" data-min-ios="11.0" data-max-ios="15.9" style="display:none;"></div>
-
-    <img src="https://jtisvn.github.io/coverimage/jtisvnrepo.png" alt="CallBlocker Banner" class="banner">
+    <img src="https://kpazz.github.io/icons/coverimage/CarBridge.png" alt="CarBridge Banner" class="banner">
 
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="openTab(event, 'info')">Giới thiệu</button>
@@ -276,21 +269,27 @@
         
         <div id="info" class="tab-content active">
             
-            <div id="pt"></div>
-
             <div class="screenshots-scroll">
-                <img src="https://files.catbox.moe/6gsjr2.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/1.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/2.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/3.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/4.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/5.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/CarBridge/Screenshots/6.png" class="screenshot-img" onclick="openImage(this)">
             </div>
 
             <div>
-                <p><strong>CallBlocker</strong></p>
                 <ul>
-                    <li>Chặn cuộc gọi nâng cao cho phép chặn số lạ theo ý muốn.</li>
-                    <li><strong>Tính năng:</strong></li>
-                    <ul>
-                        <li>Chặn số chưa lưu trong danh bạ.</li>
-                        <li>Hiển thị nhật ký cuộc gọi bị chặn.</li>
-                    </ul>
+                    <li><strong>Đây là CarBridge</strong></li>
+                    <li>Mang các tính năng lên xe ô tô của bạn với CarBridge!</li>
+                    <li>Sử dụng ứng dụng nào từ điện thoại và sử dụng trên ô tô có hỗ trợ CarPlay!</li>
+                </ul>
+                <p><strong>Các tính năng nổi bật:</strong></p>
+                <ul>
+                    
+                    <li>Giữ nguyên giao diện: Ứng dụng hiển thị trên xe với giao diện y hệt của iOS, trải nghiệm tốt không gian màn hình trên ôtô.</li>
+                    <li>Điều khiển trực tiếp: Xem và thao tác điện thoại ngay trên màn hình cảm ứng của ô tô mà không cần cầm điện thoại lên.</li>
+                    
                 </ul>
             </div>
 
@@ -301,58 +300,59 @@
                 <div class="info-column">
                     <div class="info-item">
                         <span class="info-label">Tác giả</span>
-                        <span class="info-value">P2KDev</span>
+                        <span class="info-value">leftyfl1p</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Thể loại</span>
                         <span class="info-value">Tweaks</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label">Ngày tải lên</span>
-                        <span class="info-value">30/11/2025</span>
+                        <span class="info-label">Ngày cập nhật</span>
+                        <span class="info-value">27/11/2025</span>
                     </div>
                 </div>
                 <div class="info-column">
                     <div class="info-item">
                         <span class="info-label">Phiên bản</span>
-                        <span class="info-value">2.0.4</span>
+                        <span class="info-value">2.0.15</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label">Dung lượng</span>
-                        <span class="info-value">490 KB</span>
+                        <span class="info-label">Kích thước</span>
+                        <span class="info-value">431.81 KB</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Tương thích iOS</span>
-                        <span class="info-value">11.0 - 15.9</span>
+                        <span class="info-value">13.0 - 16.7.12</span>
                     </div>
                 </div>
             </div>
-            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+            <div class="footer">Copyright © 2027 - 2030 by KPazz</div>
         </div>
 
         <div id="changelog" class="tab-content">
-            <h3 style="margin-top: 10px;">Phiên bản 2.0.4</h3>
+            <h3 style="margin-top: 10px;">Phiên bản 2.0.15</h3>
             <ul>
-                <li>Hỗ trợ Rootfull, Rootless & Roothide Jailbreak</li>
+                <li>Sửa lỗi</li>
+                <li>Hỗ trợ Rootfull, Rootless & Roothide Jailbreak.</li>
             </ul>
         </div>
 
         <div id="contact" class="tab-content">
             <div style="margin-top: 10px;">
-                <a href="https://paypal.me/HiuKitsudo" class="action-btn" target="_blank">
+                <a href="https://paypal.me/kpazz" class="action-btn" target="_blank">
                     Paypal <span>&#8594;</span>
                 </a>
-                <a href="https://jtisvn.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
+                <a href="https://kpazz.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
                     Ủng hộ tôi một ly cà phê <span>&#8594;</span>
                 </a>
-                <a href="https://t.me/jailbreaktrolliossupport" class="action-btn" target="_blank">
+                <a href="https://t.me/" class="action-btn" target="_blank">
                     Nhóm Telegram <span>&#8594;</span>
                 </a>
-                <a href="https://www.facebook.com/share/g/16wCy2KW8K/?mibextid=K35XfP" class="action-btn" target="_blank">
+                <a href="https://www.facebook.com/" class="action-btn" target="_blank">
                     Nhóm Facebook <span>&#8594;</span>
                 </a>
             </div>
-            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+            <div class="footer">Copyright © 2027 - 2030 by KPazz</div>
         </div>
 
     </div>
@@ -363,7 +363,7 @@
     </div>
 
     <script>
-        // Logic Tab & Modal ảnh
+        // Xử lý Tabs
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tab-content");
@@ -382,104 +382,18 @@
             evt.currentTarget.className += " active";
         }
 
+        // Xử lý Zoom ảnh (Lightbox)
         function openImage(element) {
             var modal = document.getElementById("myImageModal");
             var modalImg = document.getElementById("img01");
             modal.style.display = "block";
-            modalImg.src = element.src; 
+            modalImg.src = element.src; // Lấy link ảnh vừa bấm gán vào modal
         }
 
         function closeImage() {
             var modal = document.getElementById("myImageModal");
             modal.style.display = "none";
         }
-    </script>
-
-    <script>
-        const VERSION_CHECK_SUPPORTED = "✅ Phiên bản iOS của bạn được hỗ trợ! &#x1f60a;";
-        /* Đã thay đổi icon mặt cười thành mặt buồn cho hợp ngữ cảnh */
-        const VERSION_CHECK_UNCONFIRMED = "❌ Rất tiếc, phiên bản iOS hiện tại không hỗ trợ! %s &#x1f61e;"; 
-
-        (function (document) {
-            "use strict";
-
-            if (navigator.userAgent.indexOf("Dark") != -1) {
-                document.body.setAttribute("data-theme", "dark");
-            }
-
-            function setMessage(m, isSupported) {
-                var pt = document.getElementById("pt");
-                pt.style.display = "block"; 
-                pt.innerHTML = m;
-                
-                if (isSupported) {
-                    pt.style.backgroundColor = "rgba(52, 199, 89, 0.15)";
-                    pt.style.color = "#34c759";
-                    pt.style.border = "1px solid rgba(52, 199, 89, 0.3)";
-                } else {
-                    pt.style.backgroundColor = "rgba(255, 59, 48, 0.15)";
-                    pt.style.color = "#ff3b30";
-                    pt.style.border = "1px solid rgba(255, 59, 48, 0.3)";
-                }
-            }
-
-            function toNum(bits) {
-                return (10000 * parseInt(bits[0])) + parseInt((100 * (bits[1] ? bits[1] : 0))) + parseInt(bits[2] ? bits[2] : 0);
-            }
-
-            function parseVersionString(version) {
-                var bits = version.split(".");
-                return toNum(bits);
-            }
-
-            function compareVersions(one, two) {
-                var two_ = toNum(two);
-                return one != two_ ? (one > two_ ? 1 : -1) : 0;
-            }
-
-            var prerequisite = document.getElementById("prerequisite");
-            
-            var version = navigator.appVersion.match(/CPU( iPhone)? OS (\d+)_(\d+)(_(\d+))? like/i);
-
-            if (!prerequisite) {
-                return;
-            }
-
-            if (!version && navigator.maxTouchPoints > 0 && navigator.appVersion.indexOf("(Macintosh; Intel Mac OS X 10_15") !== -1) {
-                version = navigator.appVersion.match(/(Version)\/(\d+)\.(\d+)(\.(\d+))?/i);
-            }
-
-            var minString = prerequisite.dataset.minIos;
-            var maxString = prerequisite.dataset.maxIos;
-
-            var minVersion = parseVersionString(minString);
-            var maxVersion = maxString ? parseVersionString(maxString) : null;
-            var message = null;
-            var isSupported = false;
-
-            if (version) {
-                var osVersion = [version[2], version[3], version[4] ? version[5] : 0];
-                var osString = osVersion[0] + "." + osVersion[1] + (osVersion[2] && osVersion[2] != 0 ? "." + osVersion[2] : "");
-                
-                message = VERSION_CHECK_SUPPORTED;
-                isSupported = true;
-
-                if (compareVersions(minVersion, osVersion) == 1) {
-                    message = VERSION_CHECK_UNCONFIRMED.replace("%s", "(Quá thấp: " + osString + ")");
-                    isSupported = false;
-                } else if (maxVersion && compareVersions(maxVersion, osVersion) == -1) {
-                    if ("unsupported" in prerequisite.dataset) {
-                        message = null;
-                    } else {
-                        message = VERSION_CHECK_UNCONFIRMED.replace("%s", "(Quá cao: " + osString + ")");
-                        isSupported = false;
-                    }
-                }
-                
-                if (message)
-                    setMessage(message, isSupported);
-            }
-        })(document);
     </script>
 
 </body>

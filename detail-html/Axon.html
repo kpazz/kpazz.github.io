@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airaw - JTISVN Repo</title>
+    <title>Axon - kpazz Repo</title>
     <style>
         :root {
             /* Màu Tint từ JSON */
-            --tint-color: #FF6633; 
+            --tint-color: #5777B8; 
             --bg-color: #ffffff;
             --text-color: #000000;
             --secondary-text: #777777;
             --separator-color: #e5e5ea;
             --radius: 12px;
+            /* Màu cho thông báo check iOS */
+            --success-color: #34c759;
+            --error-color: #ff3b30;
+            --text-on-tint: #5777B8;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -21,6 +25,7 @@
                 --text-color: #ffffff;
                 --secondary-text: #98989d;
                 --separator-color: #38383a;
+                --text-on-tint: #5777B8;
             }
         }
 
@@ -65,7 +70,7 @@
         }
 
         .tab-btn.active {
-            color: var(--tint-color);
+            color: var(--text-on-tint);
             position: relative;
         }
         
@@ -108,8 +113,8 @@
             padding-bottom: 20px;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none; 
-            /* Căn giữa cho đẹp */
-            justify-content: center; 
+            /* CÓ 3 ẢNH -> BỎ CĂN GIỮA ĐỂ KHÔNG BỊ CHE ẢNH TRÁI */
+            /* justify-content: center; */
         }
         .screenshots-scroll::-webkit-scrollbar {
             display: none; 
@@ -175,15 +180,6 @@
         ul { padding-left: 20px; margin-top: 5px;}
         li { margin-bottom: 8px; line-height: 1.5; }
         p { line-height: 1.5; margin-bottom: 10px; }
-        
-        /* Chỉnh màu cho tiêu đề nhỏ trong mô tả */
-        .feature-group {
-            font-weight: 600;
-            color: var(--tint-color);
-            margin-top: 15px;
-            margin-bottom: 5px;
-            display: block;
-        }
 
         /* INFO GRID */
         .info-header {
@@ -228,7 +224,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(255, 102, 51, 0.1); /* Màu Tint nhạt */
+            background-color: rgba(87, 119, 184, 0.1); /* Màu Tint nhạt */
             color: var(--tint-color);
             padding: 15px;
             border-radius: var(--radius);
@@ -251,11 +247,24 @@
             background-color: var(--separator-color);
             margin: 20px 0;
         }
+
+        /* CSS CHO THÔNG BÁO CHECK IOS */
+        #pt {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            display: none; 
+        }
     </style>
 </head>
 <body>
 
-    <img src="https://jtisvn.github.io/coverimage/Araw.png" alt="Airaw Banner" class="banner">
+    <div id="prerequisite" data-min-ios="12.0" data-max-ios="16.7.10" style="display:none;"></div>
+
+    <img src="https://kpazz.github.io/icons/coverimage/kpazzrepo.png" alt="Axon Banner" class="banner">
 
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="openTab(event, 'info')">Giới thiệu</button>
@@ -267,53 +276,24 @@
         
         <div id="info" class="tab-content active">
             
+            <div id="pt"></div>
+
             <div class="screenshots-scroll">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/1.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/2.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/3.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/4.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/5.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/6.png" class="screenshot-img" onclick="openImage(this)">
-                <img src="https://jtisvn.github.io/infodeb/Airaw/Screenshots/7.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/Axon/Screenshots/1.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/Axon/Screenshots/2.png" class="screenshot-img" onclick="openImage(this)">
+                <img src="https://kpazz.github.io/infodeb/Axon/Screenshots/3.png" class="screenshot-img" onclick="openImage(this)">
             </div>
 
             <div>
-                <p><strong>Airaw</strong> là tweak mạnh mẽ giúp bạn làm chủ giao diện và mở rộng chức năng cho Apple CarPlay, vượt qua giới hạn mặc định.</p>
-                
-                <span class="feature-group">🎨 Bố cục Icon & Giao diện:</span>
+                <p><strong>Axon</strong></p>
                 <ul>
-                    <li>Tùy chỉnh lưới ứng dụng: Tăng số hàng (2-4) và số cột (4-6) để hiển thị nhiều app hơn.</li>
-                    <li>Thay đổi kích thước, vị trí, tạo icon trong suốt (kết hợp với CarBridge).</li>
-                    <li>Đổi màu chữ, cỡ chữ, ẩn tên ứng dụng hoặc ẩn nền mờ của tên.</li>
-                    <li>Tùy chỉnh màu sắc thông báo (badge) trên icon.</li>
+                    <li>Xem và gom nhóm thông báo trên màn hình khoá.</li>
                 </ul>
-
-                <span class="feature-group">🖼️ Hình nền (Wallpaper):</span>
+                <p><strong>Chức năng:</strong></p>
                 <ul>
-                    <li>Cài đặt hình nền tùy chỉnh từ thư viện ảnh (Hỗ trợ cả ảnh động GIF).</li>
-                    <li>Chế độ Slideshow (trình chiếu) tự động thay đổi nhiều hình nền.</li>
-                </ul>
-
-                <span class="feature-group">📊 Thanh trạng thái (Status Bar):</span>
-                <ul>
-                    <li>Tự do dời thanh trạng thái sang Trái/Phải/Trên/Dưới.</li>
-                    <li>Hiển thị thêm Thời tiết, Nhiệt độ, Ngày giờ (kèm giây).</li>
-                    <li>Tùy chỉnh màu nền, màu icon (Pin, Wifi, Sóng...).</li>
-                    <li>Ẩn icon pin, thay đổi icon nút Home.</li>
-                </ul>
-
-                <span class="feature-group">📦 Widget (Tiện ích):</span>
-                <ul>
-                    <li>Thêm, di chuyển và thay đổi kích thước Widget trên màn hình chính.</li>
-                    <li>Hỗ trợ Widget HTML trên iOS 16.</li>
-                </ul>
-
-                <span class="feature-group">🛠️ Các tiện ích khác:</span>
-                <ul>
-                    <li>Hỗ trợ hiển thị full màn hình cho CarBridge và các thiết bị có tai thỏ (Notch).</li>
-                    <li>Loại bỏ các góc bo đen thừa thãi của CarPlay.</li>
-                    <li>Cho phép sử dụng bàn phím số (Keypad) không bị chặn khi lái xe.</li>
-                    <li>Bật chế độ tối (Dark mode) cho Apple Maps.</li>
+                    <li><strong>Gom thông báo:</strong> Tự động nhóm tất cả thông báo trên màn hình khoá theo từng biểu tượng ứng dụng.</li>
+                    <li><strong>Tương tác nhanh:</strong> Chạm vào biểu tượng để xem thông báo, chạm lần nữa để thu gọn. Nhấn giữ để xoá nhanh.</li>
+                    <li><strong>Tuỳ chỉnh:</strong> Điều chỉnh vị trí và giao diện biểu tượng theo sở thích.</li>
                 </ul>
             </div>
 
@@ -324,7 +304,7 @@
                 <div class="info-column">
                     <div class="info-item">
                         <span class="info-label">Tác giả</span>
-                        <span class="info-value">Dcsyhi</span>
+                        <span class="info-value">Nepeta & Baw Appie</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Thể loại</span>
@@ -332,50 +312,43 @@
                     </div>
                     <div class="info-item">
                         <span class="info-label">Ngày cập nhật</span>
-                        <span class="info-value">28/11/2025</span>
+                        <span class="info-value">4/9/2025</span>
                     </div>
                 </div>
                 <div class="info-column">
                     <div class="info-item">
                         <span class="info-label">Phiên bản</span>
-                        <span class="info-value">1.6.7</span>
+                        <span class="info-value">1.5.5</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Kích thước</span>
-                        <span class="info-value">12.8 MB</span>
+                        <span class="info-value">65 KB</span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Tương thích iOS</span>
-                        <span class="info-value">14.0 - 18.0</span>
+                        <span class="info-value">12.0 - 16.7.10</span>
                     </div>
                 </div>
             </div>
-            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+            <div class="footer">Copyright © 2025 - 2030 by kpazz</div>
         </div>
 
         <div id="changelog" class="tab-content">
-            <h3 style="margin-top: 10px;">Phiên bản 1.6.7</h3>
+            <h3 style="margin-top: 10px;">Phiên bản 1.5.5</h3>
             <ul>
-                <li>Hỗ trợ tiện ích HTML iOS 16.</li>
-                <li>Xóa đường viền góc màu đen của CarPlay.</li>
-                <li>Bật cài đặt 3D Touch cho từng ứng dụng.</li>
-                <li>Hiển thị thời gian bao gồm cả giây.</li>
-                <li>Tùy chỉnh màu huy hiệu biểu tượng.</li>
-                <li>Đã bật chế độ hiển thị ứng dụng toàn màn hình ở chế độ khởi chạy CarBridge.</li>
-                <li>Thay đổi kích thước phông chữ của nhãn biểu tượng.</li>
-                <li>Cho phép thay đổi nút trang chủ của CarPlay bằng cách chọn biểu tượng từ thư mục ảnh.</li>
-                <li>Có thể gọi các phương pháp cập nhật tiện ích được cải tiến bằng cách sử dụng Airaw API.</li>
-                <li>Thêm mô-đun trung tâm điều khiển.</li>
-                <li>Hỗ trợ Rootless & Roothide Jailbreak.</li>
+                <li>Sửa lỗi và tối ưu hoá thông báo</li>
+                <li>Thêm ngôn ngữ Tiếng Việt</li>
+                <li>Hỗ trợ Rootfull, Rootless & Roothide Jailbreak</li>
             </ul>
+            <div class="footer">Copyright © 2025 by kpazz</div>
         </div>
 
         <div id="contact" class="tab-content">
             <div style="margin-top: 10px;">
-                <a href="https://paypal.me/HiuKitsudo" class="action-btn" target="_blank">
+                <a href="https://paypal.me/HiuKpazz" class="action-btn" target="_blank">
                     Paypal <span>&#8594;</span>
                 </a>
-                <a href="https://jtisvn.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
+                <a href="https://kpazz.github.io/homepage/donate/donate.html" class="action-btn" target="_blank">
                     Ủng hộ tôi một ly cà phê <span>&#8594;</span>
                 </a>
                 <a href="https://t.me/jailbreaktrolliossupport" class="action-btn" target="_blank">
@@ -385,7 +358,7 @@
                     Nhóm Facebook <span>&#8594;</span>
                 </a>
             </div>
-            <div class="footer">Copyright © 2025 - 2030 by JTISVN</div>
+            <div class="footer">Copyright © 2025 by kpazz</div>
         </div>
 
     </div>
@@ -425,6 +398,93 @@
             var modal = document.getElementById("myImageModal");
             modal.style.display = "none";
         }
+    </script>
+
+    <script>
+        const VERSION_CHECK_SUPPORTED = "✅ Phiên bản iOS của bạn được hỗ trợ! &#x1f60a;";
+        /* Đã thay đổi icon mặt cười thành mặt buồn cho hợp ngữ cảnh */
+        const VERSION_CHECK_UNCONFIRMED = "❌ Rất tiếc, phiên bản iOS hiện tại không hỗ trợ! %s &#x1f61e;"; 
+
+        (function (document) {
+            "use strict";
+
+            if (navigator.userAgent.indexOf("Dark") != -1) {
+                document.body.setAttribute("data-theme", "dark");
+            }
+
+            function setMessage(m, isSupported) {
+                var pt = document.getElementById("pt");
+                pt.style.display = "block"; 
+                pt.innerHTML = m;
+                
+                if (isSupported) {
+                    pt.style.backgroundColor = "rgba(52, 199, 89, 0.15)";
+                    pt.style.color = "#34c759";
+                    pt.style.border = "1px solid rgba(52, 199, 89, 0.3)";
+                } else {
+                    pt.style.backgroundColor = "rgba(255, 59, 48, 0.15)";
+                    pt.style.color = "#ff3b30";
+                    pt.style.border = "1px solid rgba(255, 59, 48, 0.3)";
+                }
+            }
+
+            function toNum(bits) {
+                return (10000 * parseInt(bits[0])) + parseInt((100 * (bits[1] ? bits[1] : 0))) + parseInt(bits[2] ? bits[2] : 0);
+            }
+
+            function parseVersionString(version) {
+                var bits = version.split(".");
+                return toNum(bits);
+            }
+
+            function compareVersions(one, two) {
+                var two_ = toNum(two);
+                return one != two_ ? (one > two_ ? 1 : -1) : 0;
+            }
+
+            var prerequisite = document.getElementById("prerequisite");
+            
+            var version = navigator.appVersion.match(/CPU( iPhone)? OS (\d+)_(\d+)(_(\d+))? like/i);
+
+            if (!prerequisite) {
+                return;
+            }
+
+            if (!version && navigator.maxTouchPoints > 0 && navigator.appVersion.indexOf("(Macintosh; Intel Mac OS X 10_15") !== -1) {
+                version = navigator.appVersion.match(/(Version)\/(\d+)\.(\d+)(\.(\d+))?/i);
+            }
+
+            var minString = prerequisite.dataset.minIos;
+            var maxString = prerequisite.dataset.maxIos;
+
+            var minVersion = parseVersionString(minString);
+            var maxVersion = maxString ? parseVersionString(maxString) : null;
+            var message = null;
+            var isSupported = false;
+
+            if (version) {
+                var osVersion = [version[2], version[3], version[4] ? version[5] : 0];
+                var osString = osVersion[0] + "." + osVersion[1] + (osVersion[2] && osVersion[2] != 0 ? "." + osVersion[2] : "");
+                
+                message = VERSION_CHECK_SUPPORTED;
+                isSupported = true;
+
+                if (compareVersions(minVersion, osVersion) == 1) {
+                    message = VERSION_CHECK_UNCONFIRMED.replace("%s", "(Quá thấp: " + osString + ")");
+                    isSupported = false;
+                } else if (maxVersion && compareVersions(maxVersion, osVersion) == -1) {
+                    if ("unsupported" in prerequisite.dataset) {
+                        message = null;
+                    } else {
+                        message = VERSION_CHECK_UNCONFIRMED.replace("%s", "(Quá cao: " + osString + ")");
+                        isSupported = false;
+                    }
+                }
+                
+                if (message)
+                    setMessage(message, isSupported);
+            }
+        })(document);
     </script>
 
 </body>
