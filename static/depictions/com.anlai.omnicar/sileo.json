@@ -15,13 +15,13 @@
         {
           "class": "DepictionMarkdownView",
           "useSpacing": true,
-          "markdown": "chia CarPlay thành 2–3 apps, đưa youtube lên màn xe hoặc app hỗ trợ lên iOS 16."
+          "markdown": "Split CarPlay into 2–3 apps, put iPhone apps like YouTube on the car screen, add a speed bubble and your own startup video. One rootless tweak for iOS 16."
         },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionMarkdownView",
           "useSpacing": true,
-          "markdown": "**chia màn hình**\n- 2 hoặc 3 CarPlay apps side by side, each with its real CarPlay interface\n- 2 panes, 3 panes or 1 large + 2; drag the divider, swap panes, floating window\n- Three favourite layouts; the last split reopens on connect\n- Siri and Shortcuts through `omnicar://`\n\n**App Bridge**\n- iPhone apps without CarPlay (YouTube, TikTok…) on the car screen\n- In a Split Screen pane or full screen, resized live – no CarBridge needed\n\n**Speed Bubble**\n- Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn\n- On the car screen, or on the iPhone without a car; 9 styles, warnings with sound\n\n**Startup Screen**\n- Your own video every time CarPlay connects, or a Weather / Briefing card\n- Clips from Photos or Files, Fill or Fit, sound through the car speakers\n\n**Built for support**\n- Rescue mode turns off a feature that crashes CarPlay\n- Send log in one tap, conflict warnings, Lite mode, English and Vietnamese"
+          "markdown": "**Split Screen**\n- Two or three CarPlay apps side by side, each with its real CarPlay interface\n- 2 panes, 3 panes or 1 large + 2; drag the divider, swap panes, floating window\n- Three favourite layouts; the last split reopens on connect\n- Siri and Shortcuts through `omnicar://`\n\n**App Bridge**\n- iPhone apps without CarPlay (YouTube, TikTok…) on the car screen\n- In a Split Screen pane or full screen, resized live – no CarBridge needed\n\n**Speed Bubble**\n- Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn\n- On the car screen, or on the iPhone without a car; 9 styles, warnings with sound\n\n**Startup Screen**\n- Your own video every time CarPlay connects, or a Weather / Briefing card\n- Clips from Photos or Files, Fill or Fit, sound through the car speakers\n\n**Built for support**\n- Rescue mode turns off a feature that crashes CarPlay\n- Send log in one tap, conflict warnings, Lite mode, English and Vietnamese"
         },
         { "class": "DepictionSeparatorView" },
         {
@@ -33,7 +33,7 @@
         { "class": "DepictionTableTextView", "title": "Version", "text": "__VERSION__" },
         { "class": "DepictionTableTextView", "title": "Compatibility", "text": "iOS 16, rootless" },
         { "class": "DepictionTableTextView", "title": "Developer", "text": "OmniCar" },
-        { "class": "DepictionTableTextView", "title": "Price", "text": "Freex" },
+        { "class": "DepictionTableTextView", "title": "Price", "text": "Free" },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionTableButtonView",
