@@ -54,6 +54,60 @@ MD5sum: 33596181382bba271d4298ae297f8cf2
 SHA1: 306688ee4e4ec4500a13226e4675606a0a102048
 SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 
+Package: com.bvn.ytlite
+Name: Youtube Plus (Rootless)
+Depends: mobilesubstrate
+Description: Lightweight YouTube Enhancer
+Section: Tweaks
+SileoDepiction: https://bvnrepo999.github.io/sileodepictions/YTLite.json
+Icon: https://bvnrepo.xyz/icon/tinhchinh.png
+Architecture: iphoneos-arm64
+Version: 6.0~b2K
+Installed-Size: 39628
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.bvn.ytlite_6.0~b2K_iphoneos-arm64.deb
+Size: 13834544
+MD5sum: 7a37ff0681ed6338888516b8e185d70c
+SHA1: 4994efc275e95fec772db5757220fbc0e7cb5e97
+SHA256: 49511c7fb395928ad5cd0184f88b6c6c2dd43115b1bd6f3f978acf90cab4388f
+
+Package: com.jtis.terminal
+Name: Terminal (Rootless)
+Version: 1.11.2
+Section: Applications
+Architecture: iphoneos-arm64
+Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
+Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.jtis.terminal_1.11.2_iphoneos-arm64.deb
+Size: 18277192
+MD5sum: d144e0d31968e535dfa55fe448a6418f
+SHA1: f8c634a8b1798beb0f7f849942b8bb981d264acb
+SHA256: 395da2f5538250728351fd799ed74762a0897b4ed59522bdd1d34f93e71b537f
+
+Package: com.jtisvn.evocenter
+Name: Evo Center (Rootless)
+Description: Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
+Section: Tweaks
+Depends: mobilesubstrate, com.opa334.ccsupport, preferenceloader, com.kitsudo.transalt
+SileoDepiction: https://jtisvn.github.io/sileodepictions/EvoCenter.json
+Depiction: https://jtisvn.github.io/depictions/EvoCenter.html
+Icon: https://eleveny123.github.io/EvoCenter/assets/icon.png
+Conflicts: com.jaysuen.ccflex16
+Replaces: com.jaysuen.ccflex16
+Architecture: iphoneos-arm64
+Version: 4.0.0-beta.3
+Installed-Size: 27220
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.jtisvn.evocenter_4.0.0-beta.3_iphoneos-arm64.deb
+Size: 1390128
+MD5sum: 0dccbd9bb98e2b3e8c1a1573749c6a0d
+SHA1: 225aecee0cabae9cdcf22604cc8ae1db44323e24
+SHA256: ebf45bbd603df9acd40d550f63bdf99b9d2a2e08eee9c9e8ff6f3cfcbfc5b334
+
 Package: com.teslaman3092.16player
 Name: 16Player (Rootless)
 Section: Tweaks
@@ -72,3 +126,40 @@ Size: 378844
 MD5sum: 2b3f4e99c92592c11aafdf3d0d8bf2c3
 SHA1: 841f2f9b6668b33845084aaac12e5d0de9943b4a
 SHA256: 497c99f698860dc158e1f5cb794153bb1d79113108bb1472b3036b01d2dcc5c7
+
+Package: com.yves.crescendo
+Name: Crescendo
+Description: Brings back the Lock Screen volume slider
+ Adds the volume slider back to the Lock Screen and the Dynamic Island.
+Homepage: https://github.com/Yves000/Crescendo
+Section: Tweaks
+Depends: ellekit | mobilesubstrate (>= 0.9.5000), firmware (>= 16.0), preferenceloader
+Architecture: iphoneos-arm64
+Version: 1.1.1
+Installed-Size: 672
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.yves.crescendo_1.1.1_iphoneos-arm64.deb
+Size: 118412
+MD5sum: 188c406dcb29b854903fb66f16b3112f
+SHA1: 50c0dc60b2c1fa222aaec366f1b718648c304695
+SHA256: 8a632f3266b6cb7215ed023ce2be19dfcdde81edd17e1c382029d291703792a4
+
+Package: com.yves.nextup3
+Name: NextUp 3
+Description: See and skip the upcoming track right from the now-playing UI
+ Works with Apple Music, Apple Podcasts, YouTube, YouTube Music, Spotify and SoundCloud on
+ iOS 14.2 - 26, in the Lock Screen, Control Center and Dynamic Island.
+Homepage: https://github.com/Yves000/NextUp3
+Section: Tweaks
+Depends: ellekit | mobilesubstrate (>= 0.9.5000), firmware (>= 14.2), com.opa334.libsandy, preferenceloader
+Architecture: iphoneos-arm64
+Version: 1.2
+Installed-Size: 1260
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.yves.nextup3_1.2_iphoneos-arm64.deb
+Size: 251056
+MD5sum: 993d00b0ac6a62a1c51b45b034778895
+SHA1: 43c534490e8f1256272763202a0e7e0c35e2053d
+SHA256: f06e89b1f6dc292a707a37d4f45be229fd3cab996629415b2b246f9c6d367163
