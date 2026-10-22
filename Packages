@@ -53,3 +53,22 @@ Size: 1311144
 MD5sum: 33596181382bba271d4298ae297f8cf2
 SHA1: 306688ee4e4ec4500a13226e4675606a0a102048
 SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
+
+Package: com.teslaman3092.16player
+Name: 16Player (Rootless)
+Section: Tweaks
+Installed-Size: 1420
+Architecture: iphoneos-arm64
+Version: 1.0.5
+Depends: mobilesubstrate (>= 0.9.5000), com.mrgcgamer.libgcuniversal, firmware (>= 14), firmware (<< 16), preferenceloader
+Conflicts: ch.mdaus.utils, com.johnzaro.perfectmusic13, com.p2kdev.tinywidget, com.laughingquoll.quart, com.tako3s.printemps, com.teslaman3092.16player, xyz.cypwn.16player
+Description: 16Player - tinh chỉnh tốt nhất để đưa trình phát nhạc màn hình khóa iOS 16 lên iPhone hoặc iPad chạy iOS 14 hoặc iOS 15 của bạn.
+SileoDepiction: https://jtisvn.github.io/sileodepictions/16Player.json
+Icon: https://jtisvn.github.io/sectionIcons/16Player.png
+Author: kpazz
+Maintainer: kpazz
+Filename: pool/com.teslaman3092.16player_1.0.5_iphoneos-arm64.deb
+Size: 378844
+MD5sum: 2b3f4e99c92592c11aafdf3d0d8bf2c3
+SHA1: 841f2f9b6668b33845084aaac12e5d0de9943b4a
+SHA256: 497c99f698860dc158e1f5cb794153bb1d79113108bb1472b3036b01d2dcc5c7
