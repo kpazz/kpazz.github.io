@@ -18,7 +18,7 @@ Name: Omnicar
 Author: OmniCar <omnicartweak@gmail.com>
 Icon: https://kpazz.github.io/sectionIcons/Omnicar.png
 Depiction: https://kpazz.github.io/depictions/Omnicar.html
-SileoDepiction: https://kpazz.github.io/sileodepictions/Omnicar.json
+SileoDepiction: https://kpazz.github.io/depictions/Omnicar.html
 
 Package: com.leftyfl1p.carbridge13
 Architecture: iphoneos-arm64

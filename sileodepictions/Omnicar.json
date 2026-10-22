@@ -12,12 +12,12 @@
 },
 {
 "class": "DepictionButtonView",
-"text": "Hỗ trợ ios 13.0 - 16.7.12",
+"text": "Hỗ trợ ios 16.x",
 "action": "https://t.me/",
 "openExternal": true
 },
 {
-"markdown": "- Mang các tính năng lên xe ô tô của bạn với CarBridge!\n\n- Hỗ trợ bất kỳ ứng dụng nào từ điện thoại và sử dụng trên ô tô có hỗ trợ CarPlay!",
+"markdown": "Mang các tính năng lên xe ô tô của bạn với Omnicar",
 "useSpacing": false,
 "class": "DepictionMarkdownView"
 },
@@ -53,7 +53,7 @@
 "itemSize": "{185,400}"
 },
 {
-"markdown": "- Mở mọi ứng dụng iOS trên CarPlay (ngoại trừ các ứng dụng phát video trực tuyến có bảo vệ bản quyền DRM).\n\n- Giữ nguyên giao diện: Ứng dụng hiển thị trên xe với giao diện y hệt của iOS, trải nghiệm tốt không gian màn hình trên ôtô.\n\n- Điều khiển trực tiếp: Xem và thao tác điện thoại ngay trên màn hình cảm ứng của ô tô mà không cần cầm điện thoại lên.",
+"markdown": "APP BRIDGE - Hiển thị các ứng dụng iPhone không hỗ trợ CarPlay (như YouTube hoặc TikTok) lên màn hình ô tô - Hỗ trợ chế độ chia màn hình (Split Screen) hoặc toàn màn hình, có thể thay đổi kích thước trực tiếp - Tích hợp sẵn: không cần cài thêm CarBridge . \n\nSPEED BUBBLE (Bong bóng tốc độ) - Hiển thị tốc độ hiện tại và giới hạn tốc độ từ Vietmap Live, GOFA, Waze hoặc Wyn - Hiển thị trên màn hình CarPlay hoặc trên iPhone khi không kết nối với ô tô - 9 kiểu hiển thị; có thể kéo thả, chụm ngón tay để thay đổi kích thước, chạm để mở lại ứng dụng - Cảnh báo quá tốc độ bằng hiệu ứng ánh sáng và âm thanh . \n\nSTARTUP SCREEN (Màn hình khởi động) - Phát video tùy chọn mỗi khi kết nối với CarPlay - Hỗ trợ video từ ứng dụng Ảnh (Photos) hoặc Tệp (Files); tùy chỉnh thời lượng, chế độ hiển thị (lấp đầy hoặc vừa khung hình) - Âm thanh phát qua loa ô tô; có thể chạm để bỏ qua video . \n\nSPLIT SCREEN (Chia màn hình) - Hiển thị hai hoặc ba ứng dụng CarPlay cạnh nhau, giữ nguyên giao diện gốc của từng ứng dụng - Các bố cục: chia 2 phần, chia 3 phần, hoặc 1 phần lớn kèm 2 phần nhỏ - Kéo đường phân cách để thay đổi kích thước, hoán đổi vị trí các phần, hỗ trợ cửa sổ nổi - Lưu 3 bố cục yêu thích; tự động khôi phục bố cục gần nhất khi kết nối - Hỗ trợ Siri và Phím tắt (Shortcuts) thông qua giao thức URL `omnicar://` . \n\nSETTINGS (Cài đặt) - Mỗi tính năng đều có công tắc bật/tắt và trang tùy chỉnh riêng trong mục Settings > OmniCar - Các thay đổi sẽ có hiệu lực vào lần kết nối CarPlay tiếp theo - Cần thực hiện "respring" (khởi động lại giao diện hệ thống) một lần sau khi cài đặt . \n\nCOMPATIBILITY (Khả năng tương thích) - Hỗ trợ iOS 16 - Đang thử nghiệm trên iOS 15, 17 và 18 - \n\nHỗ trợ các phương pháp jailbreak không cần can thiệp vào phân vùng hệ thống (rootless): Dopamine, palera1n",
 "useSpacing": false,
 "class": "DepictionMarkdownView"
 },
@@ -88,7 +88,7 @@
 },
 {
 "class": "DepictionLabelView",
-"text": "leftyfl1p",
+"text": "Omnicar",
 "fontWeight": "semibold",
 "fontSize": 16,
 "usePadding": false
@@ -114,7 +114,7 @@
 },
 {
 "class": "DepictionLabelView",
-"text": "27/11/2025",
+"text": "22/10/2026",
 "fontWeight": "semibold",
 "fontSize": 16,
 "usePadding": false
@@ -132,7 +132,7 @@
 },
 {
 "class": "DepictionLabelView",
-"text": "2.0.15",
+"text": "1.0.3",
 "fontWeight": "semibold",
 "fontSize": 16,
 "usePadding": false
@@ -145,7 +145,7 @@
 },
 {
 "class": "DepictionLabelView",
-"text": "431.81 KB",
+"text": "1311144 Bytes",
 "fontWeight": "semibold",
 "fontSize": 16,
 "usePadding": false
@@ -158,7 +158,7 @@
 },
 {
 "class": "DepictionLabelView",
-"text": "13.0 - 16.7.12",
+"text": "16.x",
 "fontWeight": "semibold",
 "fontSize": 17,
 "usePadding": false
