@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>kpazz</title>
+<link rel="icon" href="CydiaIcon.png">
+<link rel="apple-touch-icon" href="CydiaIcon.png">
+<style>
+  :root { --bg:#F4F3FA; --card:rgba(255,255,255,.72); --ink:#1C1C2E; --sub:#5E6285; --line:rgba(255,255,255,.9);
+          --btn:linear-gradient(90deg,#9B87F8,#5DB4F6); }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0E0E16; --card:rgba(26,26,38,.8); --ink:#F2F2F7; --sub:#A4A6C2; --line:rgba(255,255,255,.12); }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; color:var(--ink); font:16px/1.5 -apple-system, system-ui, sans-serif;
+         background:var(--bg) radial-gradient(120% 80% at 0% 0%, #C9BAFC66, transparent 60%),
+                    radial-gradient(120% 80% at 100% 0%, #A6DDFD66, transparent 60%),
+                    radial-gradient(120% 80% at 0% 100%, #FEC4D866, transparent 60%),
+                    radial-gradient(120% 80% at 100% 100%, #A0F1D966, transparent 60%); }
+  .wrap { max-width:560px; margin:0 auto; padding:40px 16px; text-align:center; }
+  .icon { width:112px; height:112px; border-radius:26px; box-shadow:0 12px 32px #6B5BD640; }
+  h1 { margin:16px 0 4px; font-size:28px; }
+  p { color:var(--sub); margin:0 0 24px; }
+  .url { display:inline-block; font:14px ui-monospace, Menlo, monospace; padding:8px 14px; border-radius:12px;
+         background:var(--card); border:1px solid var(--line); word-break:break-all; }
+  .btns { display:grid; gap:10px; margin:24px 0; }
+  a.btn { display:block; padding:14px; border-radius:999px; color:#fff; text-decoration:none; font-weight:600;
+          background:var(--btn); }
+  a.btn.alt { background:var(--card); color:var(--ink); border:1px solid var(--line); }
+  a.more { color:var(--sub); font-size:15px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <img class="icon" src="CydiaIcon.png" alt="">
+  <h1>kpazz</h1>
+  <p>The power of CarPlay.</p>
+  <div class="url">__BASE__</div>
+  <div class="btns">
+    <a class="btn" href="sileo://source/__BASE__">Add to Sileo</a>
+    <a class="btn alt" href="zbra://sources/add/__BASE__">Add to Zebra</a>
+  </div>
+  <a class="more" href="depictions/com.anlai.omnicar/">Features &amp; changelog</a>
+</div>
+</body>
+</html>

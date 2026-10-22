@@ -1,0 +1,13 @@
+{
+  "class": "FeaturedBannersView",
+  "itemSize": "{263, 148}",
+  "itemCornerRadius": 12,
+  "banners": [
+    {
+      "url": "__BASE__depictions/com.anlai.omnicar/banner.png",
+      "title": "OmniCar",
+      "package": "com.anlai.omnicar",
+      "hideShadow": false
+    }
+  ]
+}
