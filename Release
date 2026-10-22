@@ -1,0 +1,33 @@
+Origin: kpazz
+Label: kpazz
+Suite: stable
+Version: 1.0
+Codename: ios
+Date: Thu, 22 Oct 2026 18:26:57 UTC
+Architectures: iphoneos-arm64 iphoneos-arm64e
+Components: main
+Description: The power of CarPlay
+MD5Sum:
+ 86ee9aa1238af7f71f315f8f71cf5947             2352 Packages
+ 6e8b5bd93c69abae4293efc1fbe6365b             1211 Packages.gz
+ c6d8f1d900a3c4e660f031f28cae88fa             1314 Packages.bz2
+ 5af30bcebed65e27e7cc9b1c398b5e17             1300 Packages.xz
+ 445c471b9cf1f976b22e4c57cc38aae6             1225 Packages.zst
+SHA1:
+ c35952c0955e8a4c78cf784cb31b3f45ef731b71             2352 Packages
+ c5128318d9e75edaa9db9041c670dc1247790436             1211 Packages.gz
+ 78237fb747dbb3d9c5217ed82047964faae1e05b             1314 Packages.bz2
+ 1b8967a2ec90a11970b14b9b94315cbec04ce382             1300 Packages.xz
+ 7e7de5371bfc51c9de752460efbd884d89a19a0b             1225 Packages.zst
+SHA256:
+ 7f0f4e5c3802e799d862cea6958ec83d95843e89180e86015bde809932dce489             2352 Packages
+ a3258c71fd717740371c88a929fc660cec694f048bb8af76d3e2d361b407700a             1211 Packages.gz
+ 3cb1d170014f4ab8c606727df1b5016c9be82b733befb29f782c9d28a0a12341             1314 Packages.bz2
+ 8e7719e7f61938ab3cd4eb067790128e2595e881c8d2a52e3f0a8765e21dfc12             1300 Packages.xz
+ 4f766fc614f66192c12e87dfb93d0a5ae1dcf61d595e4ef47da614140de42be1             1225 Packages.zst
+SHA512:
+ cabbcbf0f1decbb571ce410514f1beedf17a0e7c126d11d94008e041e4ea1297683a145e9a7185bcf3393f45e92600df694e27c8e42f4613eb7c9c9aa414cc74             2352 Packages
+ d0ac8b18dedd570f30a5ddb6f911c940aa6cc3008f3a1046e0cd6915812eaac72a7c94a26f00b81e360b45d2e3dfc267fb2077acf2794a17b7b5dde4e9532cb0             1211 Packages.gz
+ 75488cc92524ede5f648546913fbcad0f1098126682d610ae98b97846001b3691914393ccddd8eb737101f5b9136737b78688e979060c299c7c4c73251668f48             1314 Packages.bz2
+ 0e886032760200f2867b55e8051fef6ddd80c3611e008d779dd7e71f616b4433b283d6721b05070e0d5127a1f2731def0ce03c4f195bb5234bc0556c61fdccc0             1300 Packages.xz
+ af5e4fbf1fbe6a929c61aab1c412930a1db33879781e604826a1eb4ed95bd397d8aec741d3d6bfd711b946bcbab8415989f11945ffd8a9a8680b8a473ae11fcd             1225 Packages.zst
