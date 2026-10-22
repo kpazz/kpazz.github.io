@@ -100,7 +100,7 @@ SHA512: e4a002da525f41d62ab2d956f06e11fdaa3efbf6a1aa144657363d51144ff7890340c36a
 Description: Mở bất kỳ ứng dụng nào trong CarPlay!
 Name: CarBridge (Rootless)
 Author: leftyfl1p <carbridge@havoc.app>
-Icon: https://k-pers.github.io/sectionIcons/CarBridge.png
-Depiction: https://k-pers.github.io/depictions/CarBridge.html
-SileoDepiction: https://k-pers.github.io/sileodepictions/CarBridge.json
+Icon: https://kpazz.github.io/sectionIcons/CarBridge.png
+Depiction: https://kpazz.github.io/depictions/CarBridge.html
+SileoDepiction: https://kpazz.github.io/sileodepictions/CarBridge.json
 

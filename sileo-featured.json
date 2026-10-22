@@ -4,69 +4,15 @@
     "itemCornerRadius": 10,
     "banners": [
         {
-            "title": "VIETNAM NUMBER 1",
-            "package": "com.kitsudo.vietnam37",
-            "url": "https://jtisvn.github.io/coverimage/vietnam37.png"},
-{
-            "title": "NexusBoard",
-            "package": "com.kitsudo.nexusboard",
-            "url": "https://jtisvn.github.io/coverimage/NexusBoard.png"},
-{
            "title": "CarBridge",
             "package": "com.leftyfl1p.carbridge13",
-            "url": "https://jtisvn.github.io/coverimage/CarBridge2.png"},
-{
-           "title": "Liquid Glass",
-            "package": "com.jtisvn.lg26",
-            "url": "https://jtisvn.github.io/coverimage/LiquidGlass.png"},
-{
-           "title": "Designer",
-            "package": "com.jtis.designer",
-            "url": "https://jtisvn.github.io/coverimage/Designer.png"},
-{
-           "title": "Fiona",
-            "package": "com.jtis.fiona",
-            "url": "https://jtisvn.github.io/coverimage/Fiona.png"},
-{
-           "title": "Gravitation",
-            "package": "com.jtis.gravitation",
-            "url": "https://jtisvn.github.io/coverimage/Gravitation.png"},
-{
-           "title": "GifIsland",
-            "package": "com.jtis.Gifisland",
-            "url": "https://jtisvn.github.io/coverimage/Gifisland.png"},
-{
-           "title": "Immortalizer",
-            "package": "com.jtis.immortalizer",
-            "url": "https://jtisvn.github.io/coverimage/Immortalizer.png"},
-{
-           "title": "Solstice",
-            "package": "com.jtis.Solstice",
-            "url": "https://jtisvn.github.io/coverimage/Solstice.png"},
-{
-           "title": "SnowBoard",
-            "package": "com.spark.snowboard",
-            "url": "https://jtisvn.github.io/coverimage/SnowBoard.png"},
-{
-           "title": "Safari X",
-            "package": "com.0xkuj.safarix",
-            "url": "https://jtisvn.github.io/coverimage/SafariX.png"},
-{
-           "title": "Snapper 3",
-            "package": "com.jtis.snapper3",
-            "url": "https://jtisvn.github.io/coverimage/Snapper3.png"},
-{
-           "title": "Shuffle",
-            "package": "com.jtis.shuffle",
-            "url": "https://jtisvn.github.io/coverimage/Shuffle.png"},
-{
-           "title": "VisibleIsland",
-            "package": "com.jtis.visibleisland",
-            "url": "https://jtisvn.github.io/coverimage/VisibleIsland.png"},
+            "url": "https://kpazz.github.io/coverimage/CarBridge2.png"},
+
 {
            "title": "Youtube Plus",
             "package": "com.dvntm.ytlite",
-            "url": "https://jtisvn.github.io/coverimage/YTLite.png"
-        }
+            "url": "https://kpazz.github.io/coverimage/YTLite.png"},
+
+
     ]
 }
