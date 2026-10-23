@@ -111,36 +111,23 @@ def main():
         shutil.copyfile(deb, OUT / target)
         blob = deb.read_bytes()
 
-        # --- TỰ ĐỘNG XỬ LÝ DEPENDS & FIRMWARE ---
-        default_depends = "firmware (>= 14.0), mobilesubstrate"
-        has_depends = False
-        depends_val = ""
-        for f in fields:
-            if f[0] == "Depends":
-                has_depends = True
-                depends_val = f[1]
-                if "firmware" not in f[1].lower():
-                    f[1] = f"{f[1]}, firmware (>= 14.0)"
-                    depends_val = f[1]
-        
-        if not has_depends:
-            fields.append(["Depends", default_depends])
-            depends_val = default_depends
+        # --- TỰ ĐỘNG ĐỌC TRỰC TIẾP TỪ DEPENDS CỦA TỆP DEB ---
+        depends_val = info.get("Depends", "")
 
-        # Trích xuất toán tử và số phiên bản firmware từ chuỗi Depends (VD: bắt được ">=" hoặc "=" và "15.0")
+        # Trích xuất chính xác phiên bản firmware và toán tử có sẵn trong deb
         fw_match = re.search(r"firmware\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)", depends_val, re.IGNORECASE)
         if fw_match:
             op = fw_match.group(1) or ""
             fw_ver = fw_match.group(2)
-            # Nếu là lớn hơn hoặc bằng (>=), tự động kèm chữ "trở lên"
+            # Nếu có dấu >= hoặc không ghi rõ toán tử, tự động gắn thêm chữ "trở lên"
             if ">=" in op or op == "":
-                pkg_firmware[pkg] = f"{fw_ver} Trở lên"
+                pkg_firmware[pkg] = f"{fw_ver} trở lên"
             else:
-                # Nếu là dấu bằng (=) hoặc các dấu khác, giữ nguyên số phiên bản
                 pkg_firmware[pkg] = fw_ver
         else:
-            pkg_firmware[pkg] = "14.0 Trở lên"
-        # ----------------------------------------
+            # Nếu tệp deb hoàn toàn không khai báo firmware trong Depends
+            pkg_firmware[pkg] = "Không giới hạn"
+        # ----------------------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
             if conf.get(key):
@@ -181,7 +168,7 @@ def main():
         if len(rel) >= 3 and rel[0] == "depictions":
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
-            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "14.0 trở lên"))
+            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "15.0 trở lên"))
             log = OUT / "depictions" / pkg / "changelog.md"
             if "__CHANGELOG__" in text:
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
