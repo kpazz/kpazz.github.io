@@ -20,10 +20,10 @@
      
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "1.2" },
-        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.2 trở lên" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "__DEPENDS__ trở lên" },
         { "class": "DepictionTableTextView", "title": "Môi Trường JB", "text": "rootless" },
         { "class": "DepictionTableTextView", "title": "Tác giả", "text": "Yves" },
-        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "23/10/2026" },
+        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "24/10/2026" },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionTableButtonView",
@@ -40,7 +40,7 @@
         {
           "class": "DepictionMarkdownView",
           "useSpacing": true,
-          "markdown": "**1.2**\n- Thêm hỗ trợ Soundcloud\n- sửa lỗi apple music không hiện next\n\n**1.1.2**\n- controlcenter: nút back trên ios 18 và không hiện trên airplay"
+          "markdown": "**1.2**\n- Thêm hỗ trợ Soundcloud\n- sửa lỗi apple music không hiện next\n\n**1.1.2**\n- controlcenter: khắc phục nút back không hiện trên ios 18 và không hiện trên airplay"
         }
       ]
     }
