@@ -20,7 +20,8 @@
      
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "__VERSION__" },
-        { "class": "DepictionTableTextView", "title": "Hỗ trợ", "text": "iOS 14.2 trở lên, rootless" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.2 trở lên" },
+        { "class": "DepictionTableTextView", "title": "Môi Trường JB", "text": "rootless" },
         { "class": "DepictionTableTextView", "title": "Tác giả", "text": "Yves" },
         { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "23/10/2026" },
         { "class": "DepictionSeparatorView" },

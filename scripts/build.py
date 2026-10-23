@@ -112,6 +112,23 @@ def main():
         shutil.copyfile(deb, OUT / target)
         blob = deb.read_bytes()
 
+        # --- TỰ ĐỘNG XỬ LÝ DEPENDS & FIRMWARE ---
+        # Thiết lập các dependency mặc định bạn muốn tự động thêm vào nếu gói chưa có
+        default_depends = "firmware (>= 14.0), mobilesubstrate" # Bạn có thể đổi phiên bản iOS tại đây
+        
+        has_depends = False
+        for f in fields:
+            if f[0] == "Depends":
+                has_depends = True
+                # Nếu trong Depends chưa có khai báo firmware, tự động gộp thêm vào
+                if "firmware" not in f[1].lower():
+                    f[1] = f"{f[1]}, firmware (>= 14.0)"
+        
+        if not has_depends:
+            # Nếu file deb hoàn toàn không có trường Depends, tự động tạo mới
+            fields.append(["Depends", default_depends])
+        # ----------------------------------------
+
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
             if conf.get(key):
                 fields = [f for f in fields if f[0] != field] + [[field, conf[key]]]
@@ -119,8 +136,6 @@ def main():
         dep = ROOT / "static" / "depictions" / pkg
         desc = dep / f"description-{ver}.txt"
         if desc.exists():
-            # Whole Description of that one version: line 1 = the summary Sileo lists, then the long text
-            # ("." = empty line). Every line gets the one leading space of a control continuation line.
             text = desc.read_text(encoding="utf-8").strip("\n").split("\n")
             for f in fields:
                 if f[0] == "Description":
@@ -128,7 +143,7 @@ def main():
         if dep.is_dir():
             drop = {"Depiction", "SileoDepiction", "Header"}
             if (dep / "icon.png").exists():
-                drop.add("Icon")  # control has file:///var/jb/... which only works once installed
+                drop.add("Icon")
             fields = [f for f in fields if f[0] not in drop]
             fields.append(["Depiction", f"{base}depictions/{pkg}/"])
             if (dep / "sileo.json").exists():
@@ -158,7 +173,7 @@ def main():
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
                 text = text.replace('"__CHANGELOG__"', json.dumps(md, ensure_ascii=False))
         if f.suffix == ".json":
-            json.loads(text)  # fail the build on a broken depiction
+            json.loads(text)
         f.write_text(text, encoding="utf-8", newline="\n")
 
     packages = ("\n\n".join(stanzas) + "\n").encode() if stanzas else b""
@@ -198,4 +213,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+main()
