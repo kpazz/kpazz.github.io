@@ -9,19 +9,31 @@ jobs:
   count:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # Cấp quyền cho bot được phép push code lên repo
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Tải toàn bộ lịch sử để có thể thao tác giữa các nhánh
 
-      - name: Count .deb files
-        run: |
-          COUNT=$(find debs -name "*.deb" | wc -l)
-          echo "{\"count\": $COUNT}" > deb-count.json
-
-      - name: Commit and push changes
+      - name: Configure Git Identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Switch to gh-pages branch and count files
+        run: |
+          # Chuyển sang nhánh gh-pages để cập nhật file JSON trực tiếp trên nhánh phát hành web
+          git checkout gh-pages || git checkout -b gh-pages
+          
+          # Đếm số lượng file .deb trong thư mục debs và ghi ra file deb-count.json
+          COUNT=$(find debs -name "*.deb" | wc -l)
+          echo "{\"count\": $COUNT}" > deb-count.json
+          
+          # Đưa file vào git
           git add deb-count.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb file count [skip ci]" && git push)
+
+      - name: Commit and push changes to gh-pages
+        run: |
+          # Kiểm tra xem có thay đổi gì không, nếu có thì tiến hành commit và push lên gh-pages
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb count to $COUNT [skip ci]" && git push origin gh-pages)
