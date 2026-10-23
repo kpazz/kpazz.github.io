@@ -94,6 +94,38 @@ def version_key(v):
     return [(0, int(p)) if p.isdigit() else (1, p.replace("~", "\x00")) for p in parts if p]
 
 
+def auto_translate_to_vietnamese(text):
+    """Tự động dịch các thuật ngữ/câu mô tả tiếng Anh thông dụng sang tiếng Việt."""
+    if not text:
+        return text
+    
+    # Từ điển dịch các cụm từ/câu phổ biến trong Tweak iOS
+    dictionary = {
+        "new Debian package": "Gói Debian mới",
+        "takes CarPlay beyond what Apple allows": "đưa CarPlay vượt ra ngoài giới hạn của Apple",
+        "more freedom, more features and everything you need on the road": "tự do hơn, nhiều tính năng hơn và mọi thứ bạn cần trên đường đi",
+        "in one package": "trong một gói duy nhất",
+        "iPhone apps without CarPlay": "Ứng dụng iPhone không hỗ trợ CarPlay",
+        "such as YouTube or TikTok": "như YouTube hoặc TikTok",
+        "on the car screen": "trên màn hình ô tô",
+        "Built in": "Tích hợp sẵn",
+        "no CarBridge needed": "không cần dùng CarBridge",
+        "Current speed and the posted limit": "Tốc độ hiện tại và giới hạn tốc độ",
+        "On the CarPlay screen": "Trên màn hình CarPlay",
+        "Over-speed warning with light effects and sound": "Cảnh báo quá tốc độ kèm hiệu ứng ánh sáng và âm thanh",
+        "Your own video every time CarPlay connects": "Video cá nhân của bạn mỗi khi kết nối CarPlay",
+        "Sound through the car speakers": "Phát âm thanh qua loa ô tô",
+        "tap to skip": "chạm để bỏ qua"
+    }
+
+    translated = text
+    for en, vi in dictionary.items():
+        # Không phân biệt hoa thường khi tìm kiếm từ khóa
+        translated = re.sub(re.escape(en), vi, translated, flags=re.IGNORECASE)
+    
+    return translated
+
+
 def main():
     conf = read_conf()
     base = conf["BASE_URL"]
@@ -138,10 +170,12 @@ def main():
             edition_label = "[Quốc Tế]"
         pkg_edition[pkg] = edition_text
 
-        # Tự động chèn nhãn vào dòng đầu tiên của Description trong control/Packages
+        # --- TỰ ĐỘNG DỊCH VÀ CHÈN NHÃN VÀO DESCRIPTION ---
         for f in fields:
             if f[0] == "Description":
-                desc_lines = f[1].splitlines()
+                # Dịch nội dung mô tả sang tiếng Việt tự động
+                translated_desc = auto_translate_to_vietnamese(f[1])
+                desc_lines = translated_desc.splitlines()
                 if desc_lines and not desc_lines[0].startswith("["):
                     desc_lines[0] = f"{edition_label} {desc_lines[0]}"
                 f[1] = "\n".join(desc_lines)
