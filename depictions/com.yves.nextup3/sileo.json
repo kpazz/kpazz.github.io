@@ -21,7 +21,7 @@
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "1.2" },
         { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.2 trở lên" },
-        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "05:59, 23/10/2026" },
+        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "06:10, 23/10/2026" },
         { "class": "DepictionTableTextView", "title": "Ngôn ngữ", "text": "Quốc Tế" },
         { "class": "DepictionTableTextView", "title": "Tác Giả", "text": "Yves" },
         { "class": "DepictionSeparatorView" },

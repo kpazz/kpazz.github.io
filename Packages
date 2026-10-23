@@ -1,40 +1,6 @@
 Package: com.anlai.omnicar
 Name: OmniCar
-Description: [Việt Hóa] The power of CarPlay.
- OmniCar takes CarPlay beyond what Apple allows: more freedom, more features and everything you need on the road, in one package.
- .
- APP BRIDGE
-  - iPhone apps without CarPlay, such as YouTube or TikTok, on the car screen
-  - In a Split Screen pane or full screen, resized live
-  - Built in: no CarBridge needed
- .
- SPEED BUBBLE
-  - Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn
-  - On the CarPlay screen, or on the iPhone when no car is connected
-  - 9 styles; drag, pinch to resize, tap to reopen the app
-  - Over-speed warning with light effects and sound
- .
- STARTUP SCREEN
-  - Your own video every time CarPlay connects
-  - Clips from Photos or Files, duration, Fill or Fit
-  - Sound through the car speakers, tap to skip
- .
- SPLIT SCREEN
-  - Two or three CarPlay apps side by side, each with its real interface
-  - Layouts: 2 panes, 3 panes or 1 large + 2
-  - Drag the divider to resize, swap panes, floating window
-  - Three favorite layouts; the last split reopens on connect
-  - Siri and Shortcuts through the omnicar:// URL scheme
- .
- SETTINGS
-  - Every feature has its own switch and page under Settings > OmniCar
-  - Changes apply the next time CarPlay connects
-  - Respring once after installing
- .
- COMPATIBILITY
-  - iOS 16 supported
-  - iOS 15, 17 and 18 under testing
-  - Rootless jailbreaks: Dopamine, palera1n
+Description: [Việt Hóa] Sức mạnh của CarPlay vn.
 Maintainer: OmniCar <omnicartweak@gmail.com>
 Author: OmniCar <omnicartweak@gmail.com>
 Section: Tweaks
@@ -49,10 +15,10 @@ SileoDepiction: https://kpazz.github.io/depictions/com.anlai.omnicar/sileo.json
 Icon: https://kpazz.github.io/depictions/com.anlai.omnicar/icon.png
 Header: https://kpazz.github.io/depictions/com.anlai.omnicar/header.png
 Filename: pool/com.anlai.omnicar_1.0.3_iphoneos-arm64.deb
-Size: 1311144
-MD5sum: 33596181382bba271d4298ae297f8cf2
-SHA1: 306688ee4e4ec4500a13226e4675606a0a102048
-SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
+Size: 1308736
+MD5sum: d0e1e26542208e2f9a98dd7235f1cc81
+SHA1: 1442235067c2441d82c415618d01e5e3e6c25676
+SHA256: 411225720213bdcd32acb1284b8f570b18e6847079a7581f4596bd83e669bad0
 
 Package: com.kpazz.aimpro
 Name: AIM Pro (Rootless)
