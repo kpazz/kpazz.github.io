@@ -113,9 +113,8 @@ def main():
 
         # --- TỰ ĐỘNG ĐỌC TRỰC TIẾP TỪ DEPENDS CỦA TỆP DEB ---
         depends_val = info.get("Depends", "")
-
-        # Sửa lại regex để đọc chính xác cấu trúc firmware (>= 15.0) bên trong deb
-        fw_match = re.search(r"firmware\s*\(\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)", depends_val, re.IGNORECASE)
+        
+        fw_match = re.search(r"firmware\s*\(\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)\s*\)", depends_val, re.IGNORECASE)
         if fw_match:
             op = fw_match.group(1) or ""
             fw_ver = fw_match.group(2)
@@ -124,7 +123,11 @@ def main():
             else:
                 pkg_firmware[pkg] = fw_ver
         else:
-            pkg_firmware[pkg] = "Không giới hạn"
+            loose_match = re.search(r"([0-9]+\.[0-9]+)", depends_val)
+            if loose_match and ("ios" in depends_val.lower() or "firmware" in depends_val.lower()):
+                pkg_firmware[pkg] = f"{loose_match.group(1)} trở lên"
+            else:
+                pkg_firmware[pkg] = "Không giới hạn"
         # ----------------------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):

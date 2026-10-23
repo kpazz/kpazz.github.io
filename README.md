@@ -1,3 +1,3 @@
 # KPazz Repo
 
-- kho lưu trữ tinh chỉnh ios
+- kho lưu trữ tinh chỉnh ios jailbreak
