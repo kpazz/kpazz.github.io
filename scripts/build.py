@@ -119,13 +119,13 @@ def main():
             op = fw_match.group(1) or ""
             fw_ver = fw_match.group(2)
             if ">=" in op or op == "":
-                pkg_firmware[pkg] = f"{fw_ver} trở lên"
+                pkg_firmware[pkg] = f"{fw_ver} Trở lên"
             else:
                 pkg_firmware[pkg] = fw_ver
         else:
             loose_match = re.search(r"([0-9]+\.[0-9]+)", depends_val)
             if loose_match and ("ios" in depends_val.lower() or "firmware" in depends_val.lower()):
-                pkg_firmware[pkg] = f"{loose_match.group(1)} trở lên"
+                pkg_firmware[pkg] = f"{loose_match.group(1)} Trở lên"
             else:
                 pkg_firmware[pkg] = "Không giới hạn"
         # ----------------------------------------------------
@@ -162,6 +162,10 @@ def main():
             newest[pkg] = ver
         print(f"  {pkg} {ver}  <- {deb.name}")
 
+    # Lấy thời gian hiện tại theo định dạng chuẩn ngày/tháng/năm và giờ:phút
+    current_date = datetime.now().strftime("%d/%m/%Y")
+    current_time = datetime.now().strftime("%H:%M")
+
     # Templates
     for f in list(OUT.rglob("*.html")) + list(OUT.rglob("*.json")):
         text = f.read_text(encoding="utf-8").replace("__BASE__", base)
@@ -170,6 +174,8 @@ def main():
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
             text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
+            text = text.replace("__DATE__", current_date)
+            text = text.replace("__TIME__", current_time)
             log = OUT / "depictions" / pkg / "changelog.md"
             if "__CHANGELOG__" in text:
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
