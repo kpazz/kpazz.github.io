@@ -10,12 +10,12 @@
       "views": [
         {
           "class": "DepictionHeaderView",
-          "title": "Tính năng cho trình phát ios"
+          "title": "Có gi mới trong bản __VERSION__ này?"
         },
         {
           "class": "DepictionMarkdownView",
-          "useSpacing": true,
-          "markdown": "Xem và bỏ qua bản nhạc sắp tới ngay từ giao diện người dùng hiện đang phát Hoạt động với Apple Music, Apple Podcasts, YouTube, YouTube Music, Spotify và SoundCloud trên iOS 14.2 - 26, trong Màn hình khóa, Trung tâm điều khiển và Dynamic Island."
+    "useSpacing": true,
+   "markdown": "__DESCRIPTION__"
         },
      
         { "class": "DepictionSeparatorView" },
