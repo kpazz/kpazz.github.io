@@ -35,6 +35,8 @@ Description: The power of CarPlay.
   - iOS 16 supported
   - iOS 15, 17 and 18 under testing
   - Rootless jailbreaks: Dopamine, palera1n
+Maintainer: OmniCar <omnicartweak@gmail.com>
+Author: OmniCar <omnicartweak@gmail.com>
 Section: Tweaks
 Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)
 Conflicts: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay
@@ -42,8 +44,6 @@ Replaces: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo
 Architecture: iphoneos-arm64
 Version: 1.0.3
 Installed-Size: 6208
-Author: kpazz
-Maintainer: kpazz
 Depiction: https://kpazz.github.io/depictions/com.anlai.omnicar/
 SileoDepiction: https://kpazz.github.io/depictions/com.anlai.omnicar/sileo.json
 Icon: https://kpazz.github.io/depictions/com.anlai.omnicar/icon.png
@@ -54,64 +54,81 @@ MD5sum: 33596181382bba271d4298ae297f8cf2
 SHA1: 306688ee4e4ec4500a13226e4675606a0a102048
 SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 
-Package: com.bvn.ytlite
-Name: Youtube Plus (Rootless)
-Depends: mobilesubstrate
-Description: Lightweight YouTube Enhancer
+Package: com.kpazz.aimpro
+Name: AIM Pro (Rootless)
+Description: Màn hình khóa ngày và giờ phong cách iOS 16
+Maintainer: alimaulana
+Author: alimaulana
 Section: Tweaks
-SileoDepiction: https://bvnrepo999.github.io/sileodepictions/YTLite.json
-Icon: https://bvnrepo.xyz/icon/tinhchinh.png
+Depends: mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker
+Conflicts: com.laughingquoll.watermelon, com.laughingquoll.watermelon.beta, moe.absolucy.lucient, moe.absolucy.lucient.trial, org.coolstar.ventana-modern, xyz.royalapps.jellyfish, hi.my.name.is.ubik.kalm, love.litten.diary, com.eliofegh.tulipe, com.ali.aim, com.icraze.nexus
+Icon: https://kpazz.github.io/CydiaIcon.png
 Architecture: iphoneos-arm64
-Version: 6.0~b2K
-Installed-Size: 39628
-Author: kpazz
-Maintainer: kpazz
-Filename: pool/com.bvn.ytlite_6.0~b2K_iphoneos-arm64.deb
-Size: 13834544
-MD5sum: 7a37ff0681ed6338888516b8e185d70c
-SHA1: 4994efc275e95fec772db5757220fbc0e7cb5e97
-SHA256: 49511c7fb395928ad5cd0184f88b6c6c2dd43115b1bd6f3f978acf90cab4388f
+Version: 1.1.3
+Installed-Size: 5160
+Filename: pool/com.kpazz.aimpro_1.1.3_iphoneos-arm64.deb
+Size: 2355864
+MD5sum: bdf32e45b1a828e771477ebebf2180e8
+SHA1: 82999e5b383ca0e620ed1898829d79b7c812c9a7
+SHA256: 92e0172d3912c93dd341cbfbc732f10dac63665600d190d5a8628777abbfe5ce
 
-Package: com.jtis.terminal
-Name: Terminal (Rootless)
-Version: 1.11.2
-Section: Applications
-Architecture: iphoneos-arm64
-Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
-Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
-Author: kpazz
-Maintainer: kpazz
-Filename: pool/com.jtis.terminal_1.11.2_iphoneos-arm64.deb
-Size: 18277192
-MD5sum: d144e0d31968e535dfa55fe448a6418f
-SHA1: f8c634a8b1798beb0f7f849942b8bb981d264acb
-SHA256: 395da2f5538250728351fd799ed74762a0897b4ed59522bdd1d34f93e71b537f
-
-Package: com.jtisvn.evocenter
+Package: com.kpazz.evocenter
 Name: Evo Center (Rootless)
 Description: Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
+Maintainer: chatgpt5.6sol, chatgpt6.1sol, JaySuen
+Author: chatgpt5.6sol, chatgpt6.1sol, JaySuen
 Section: Tweaks
 Depends: mobilesubstrate, com.opa334.ccsupport, preferenceloader, com.kitsudo.transalt
-SileoDepiction: https://jtisvn.github.io/sileodepictions/EvoCenter.json
-Depiction: https://jtisvn.github.io/depictions/EvoCenter.html
+Depiction: Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
 Icon: https://eleveny123.github.io/EvoCenter/assets/icon.png
 Conflicts: com.jaysuen.ccflex16
 Replaces: com.jaysuen.ccflex16
 Architecture: iphoneos-arm64
 Version: 4.0.0-beta.3
 Installed-Size: 27220
-Author: kpazz
-Maintainer: kpazz
-Filename: pool/com.jtisvn.evocenter_4.0.0-beta.3_iphoneos-arm64.deb
-Size: 1390128
-MD5sum: 0dccbd9bb98e2b3e8c1a1573749c6a0d
-SHA1: 225aecee0cabae9cdcf22604cc8ae1db44323e24
-SHA256: ebf45bbd603df9acd40d550f63bdf99b9d2a2e08eee9c9e8ff6f3cfcbfc5b334
+Filename: pool/com.kpazz.evocenter_4.0.0-beta.3_iphoneos-arm64.deb
+Size: 1444748
+MD5sum: 0192b0b3f280b9fb2b20e0cd79fffa92
+SHA1: 21a204196ea0030a041cb580f1d2e7d684492b1e
+SHA256: d695162e0d9a774990f055109a1fcb3f0f6fbd83dcf392b7570d4fba38cd1aaf
+
+Package: com.kpazz.terminal
+Name: Terminal (Rootless)
+Version: 1.11.2
+Section: Applications
+Architecture: iphoneos-arm64
+Maintainer: KPazz Repo
+Author: Tim Apple
+Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
+Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
+Filename: pool/com.kpazz.terminal_1.11.2_iphoneos-arm64.deb
+Size: 18277644
+MD5sum: 3dd24da6eb6e91e4e0a925c47e07d72f
+SHA1: d180fd51d8146ea7ec0838b555846ce2751598ca
+SHA256: 67681bbefbad1bfd81a9438dcf5a791c36d418447f54dec5c9c7fd8e7ab3e7b4
+
+Package: com.kpazz.ytlite
+Name: Youtube Plus (Rootless)
+Depends: mobilesubstrate
+Description: Tính năng nâng cao cho youtube
+Maintainer: dvntm
+Author: dvntm
+Section: Tweaks
+Icon: https://kpazz.github.io/CydiaIcon.png
+Architecture: iphoneos-arm64
+Version: 6.0~b2K
+Installed-Size: 39628
+Filename: pool/com.kpazz.ytlite_6.0~b2K_iphoneos-arm64.deb
+Size: 13863228
+MD5sum: f39d9e5d65845f336095d2ef0f4dd456
+SHA1: ed65d2ec3122d7601b3cca854e89e1d262c1047a
+SHA256: aca77e25cb43852d2bba3e7aca845d109f9fb3704171e8a72c9c1c488480079b
 
 Package: com.teslaman3092.16player
 Name: 16Player (Rootless)
 Section: Tweaks
 Installed-Size: 1420
+Maintainer: JTISVN Repo
 Architecture: iphoneos-arm64
 Version: 1.0.5
 Depends: mobilesubstrate (>= 0.9.5000), com.mrgcgamer.libgcuniversal, firmware (>= 14), firmware (<< 16), preferenceloader
@@ -119,8 +136,7 @@ Conflicts: ch.mdaus.utils, com.johnzaro.perfectmusic13, com.p2kdev.tinywidget, c
 Description: 16Player - tinh chỉnh tốt nhất để đưa trình phát nhạc màn hình khóa iOS 16 lên iPhone hoặc iPad chạy iOS 14 hoặc iOS 15 của bạn.
 SileoDepiction: https://jtisvn.github.io/sileodepictions/16Player.json
 Icon: https://jtisvn.github.io/sectionIcons/16Player.png
-Author: kpazz
-Maintainer: kpazz
+Author: tesla_man, Bibi Fire <computerman939+16playersupport@gmail.com>
 Filename: pool/com.teslaman3092.16player_1.0.5_iphoneos-arm64.deb
 Size: 378844
 MD5sum: 2b3f4e99c92592c11aafdf3d0d8bf2c3
@@ -131,14 +147,14 @@ Package: com.yves.crescendo
 Name: Crescendo
 Description: Brings back the Lock Screen volume slider
  Adds the volume slider back to the Lock Screen and the Dynamic Island.
+Maintainer: Yves <85767885+Yves000@users.noreply.github.com>
+Author: Yves <85767885+Yves000@users.noreply.github.com>
 Homepage: https://github.com/Yves000/Crescendo
 Section: Tweaks
 Depends: ellekit | mobilesubstrate (>= 0.9.5000), firmware (>= 16.0), preferenceloader
 Architecture: iphoneos-arm64
 Version: 1.1.1
 Installed-Size: 672
-Author: kpazz
-Maintainer: kpazz
 Filename: pool/com.yves.crescendo_1.1.1_iphoneos-arm64.deb
 Size: 118412
 MD5sum: 188c406dcb29b854903fb66f16b3112f
@@ -150,14 +166,14 @@ Name: NextUp 3
 Description: See and skip the upcoming track right from the now-playing UI
  Works with Apple Music, Apple Podcasts, YouTube, YouTube Music, Spotify and SoundCloud on
  iOS 14.2 - 26, in the Lock Screen, Control Center and Dynamic Island.
+Maintainer: Yves <85767885+Yves000@users.noreply.github.com>
+Author: Yves <85767885+Yves000@users.noreply.github.com>
 Homepage: https://github.com/Yves000/NextUp3
 Section: Tweaks
 Depends: ellekit | mobilesubstrate (>= 0.9.5000), firmware (>= 14.2), com.opa334.libsandy, preferenceloader
 Architecture: iphoneos-arm64
 Version: 1.2
 Installed-Size: 1260
-Author: kpazz
-Maintainer: kpazz
 Filename: pool/com.yves.nextup3_1.2_iphoneos-arm64.deb
 Size: 251056
 MD5sum: 993d00b0ac6a62a1c51b45b034778895
