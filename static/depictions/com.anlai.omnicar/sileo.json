@@ -10,7 +10,7 @@
       "views": [
         {
           "class": "DepictionHeaderView",
-          "title": "Bản __VERSION__ này có gì?"
+          "title": "Bản cập nhật hiện tại __VERSION__"
         },
         {
           "class": "DepictionMarkdownView",

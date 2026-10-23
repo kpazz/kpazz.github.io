@@ -1,7 +1,7 @@
 {
   "minVersion": "0.1",
   "class": "DepictionTabView",
-  "headerImage": "__BASE__depictions/com.kpazz.icon/header.png",
+  "headerImage": "__BASE__depictions/kpazz.icon/header.png",
   "tintColor": "#7B6CF6",
   "tabs": [
     {
@@ -10,7 +10,7 @@
       "views": [
         {
           "class": "DepictionHeaderView",
-          "title": "Có gi mới trong bản __VERSION__ này?"
+          "title": "Bản cập nhật hiện tại __VERSION__"
         },
         {
           "class": "DepictionMarkdownView",
