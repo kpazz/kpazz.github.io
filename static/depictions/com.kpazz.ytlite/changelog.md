@@ -1,2 +1,2 @@
-__VERSION__
+6.0-b2k
 - Bug & fix
