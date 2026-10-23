@@ -1,7 +1,7 @@
 {
   "minVersion": "0.1",
   "class": "DepictionTabView",
-  "headerImage": "__BASE__depictions/com.anlai.omnicar/header.png",
+  "headerImage": "__BASE__depictions/com.kpazz.icon/header.png",
   "tintColor": "#7B6CF6",
   "tabs": [
     {
@@ -10,35 +10,24 @@
       "views": [
         {
           "class": "DepictionHeaderView",
-          "title": "The power of CarPlay"
+          "title": "Bổ sung thêm tính năng cho trình phát ios"
         },
         {
           "class": "DepictionMarkdownView",
           "useSpacing": true,
-          "markdown": "Split CarPlay into 2–3 apps, put iPhone apps like YouTube on the car screen, add a speed bubble and your own startup video. One rootless tweak for iOS 16."
+          "markdown": "Xem và bỏ qua bản nhạc sắp tới ngay từ giao diện người dùng hiện đang phát Hoạt động với Apple Music, Apple Podcasts, YouTube, YouTube Music, Spotify và SoundCloud trên iOS 14.2 - 26, trong Màn hình khóa, Trung tâm điều khiển và Dynamic Island."
         },
-        { "class": "DepictionSeparatorView" },
-        {
-          "class": "DepictionMarkdownView",
-          "useSpacing": true,
-          "markdown": "**Split Screen**\n- Two or three CarPlay apps side by side, each with its real CarPlay interface\n- 2 panes, 3 panes or 1 large + 2; drag the divider, swap panes, floating window\n- Three favourite layouts; the last split reopens on connect\n- Siri and Shortcuts through `omnicar://`\n\n**App Bridge**\n- iPhone apps without CarPlay (YouTube, TikTok…) on the car screen\n- In a Split Screen pane or full screen, resized live – no CarBridge needed\n\n**Speed Bubble**\n- Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn\n- On the car screen, or on the iPhone without a car; 9 styles, warnings with sound\n\n**Startup Screen**\n- Your own video every time CarPlay connects, or a Weather / Briefing card\n- Clips from Photos or Files, Fill or Fit, sound through the car speakers\n\n**Built for support**\n- Rescue mode turns off a feature that crashes CarPlay\n- Send log in one tap, conflict warnings, Lite mode, English and Vietnamese"
-        },
-        { "class": "DepictionSeparatorView" },
-        {
-          "class": "DepictionMarkdownView",
-          "useSpacing": true,
-          "markdown": "**Requirements**\n- iOS 16 (15,17,18 not tested yet)\n- Rootless jailbreak: Dopamine or palera1n rootless\n- A car or head unit with CarPlay, wired or wireless\n- Do not use with CarBridge or other tweaks that change CarPlay\n- Respring once after installing; settings apply on the next CarPlay connection\n\n*Watching video while driving may be illegal where you live. Use video apps only when parked.*"
-        },
+     
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Version", "text": "__VERSION__" },
-        { "class": "DepictionTableTextView", "title": "Compatibility", "text": "iOS 16, rootless" },
-        { "class": "DepictionTableTextView", "title": "Developer", "text": "OmniCar" },
+        { "class": "DepictionTableTextView", "title": "Compatibility", "text": "iOS 14.2, rootless" },
+        { "class": "DepictionTableTextView", "title": "Developer", "text": "Yves" },
         { "class": "DepictionTableTextView", "title": "Price", "text": "Free" },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionTableButtonView",
           "title": "Contact the developer",
-          "action": "mailto:omnicartweak@gmail.com?subject=OmniCar",
+          "action": "/",
           "openExternal": true
         }
       ]
