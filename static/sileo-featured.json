@@ -5,7 +5,7 @@
   "banners": [
     
     {
-      "url": "__BASE__depictions/com.kpazz.icon/banner.png",
+      "url": "__BASE__depictions/kpazz.icon/banner.png",
       "title": "Kpazz",
       "package": "com.kpazz.icon",
       "hideShadow": false
