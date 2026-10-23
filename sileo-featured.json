@@ -3,11 +3,19 @@
   "itemSize": "{263, 148}",
   "itemCornerRadius": 12,
   "banners": [
+    
+    {
+      "url": "https://kpazz.github.io/depictions/com.kpazz.icon/banner.png",
+      "title": "Kpazz",
+      "package": "com.kpazz.icon",
+      "hideShadow": false
+    },
     {
       "url": "https://kpazz.github.io/depictions/com.anlai.omnicar/banner.png",
       "title": "OmniCar",
       "package": "com.anlai.omnicar",
       "hideShadow": false
     }
+
   ]
 }

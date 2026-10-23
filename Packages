@@ -78,7 +78,7 @@ Description: Mang trải nghiệm Trung tâm điều khiển hiện đại kiể
 Maintainer: chatgpt5.6sol, chatgpt6.1sol, JaySuen
 Author: chatgpt5.6sol, chatgpt6.1sol, JaySuen
 Section: Tweaks
-Depends: mobilesubstrate, com.opa334.ccsupport, preferenceloader, com.kitsudo.transalt
+Depends: mobilesubstrate, com.opa334.ccsupport, preferenceloader, com.kitsudo.transalt, firmware (>= 14.0)
 Depiction: Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
 Icon: https://eleveny123.github.io/EvoCenter/assets/icon.png
 Conflicts: com.jaysuen.ccflex16
@@ -101,6 +101,7 @@ Maintainer: KPazz Repo
 Author: Tim Apple
 Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
 Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
+Depends: firmware (>= 14.0), mobilesubstrate
 Filename: pool/com.kpazz.terminal_1.11.2_iphoneos-arm64.deb
 Size: 18277644
 MD5sum: 3dd24da6eb6e91e4e0a925c47e07d72f
@@ -109,7 +110,7 @@ SHA256: 67681bbefbad1bfd81a9438dcf5a791c36d418447f54dec5c9c7fd8e7ab3e7b4
 
 Package: com.kpazz.ytlite
 Name: Youtube Plus (Rootless)
-Depends: mobilesubstrate
+Depends: mobilesubstrate, firmware (>= 14.0)
 Description: Tính năng nâng cao cho youtube
 Maintainer: dvntm
 Author: dvntm
