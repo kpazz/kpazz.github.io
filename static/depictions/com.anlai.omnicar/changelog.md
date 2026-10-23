@@ -1,20 +1,33 @@
 **1.0.3**
-- Speed Bubble: new source Wyn (speed from GPS; the limit when Wyn shows it, experimental).
-- Speed Bubble: Waze now shows the posted speed limit.
-- Settings: version next to the name at the top; cleaner page without the footer card.
-- Clearer package description and contact address.
+
+- Bong bóng tốc độ: nguồn mới Wyn (tốc độ từ GPS; giới hạn khi Wyn hiển thị nó, thử nghiệm).
+
+- Bong bóng tốc độ: Waze hiện hiển thị giới hạn tốc độ được đăng.
+
+- Cài đặt: phiên bản bên cạnh tên ở trên cùng; trang dọn dẹp không có thẻ chân trang.
+
+- Mô tả gói hàng và địa chỉ liên hệ rõ ràng hơn.
 
 **1.0.2**
-- Split Screen: any app can go to the floating window; every panel closes when you tap anywhere else, like an iOS popup.
-- Split Screen dock button matches the Home button (black by day, white by night).
-- Speed Bubble: hold for a quick menu (resize, warning, quit); 4 warning effects with tone or voice sound; always km/h.
-- Startup Screen: the Weather and Briefing styles now get real weather.
-- CarPlay home screen page with a Reset button; iOS 15 fixes for App Bridge.
+
+- Chia màn hình: bất kỳ ứng dụng nào cũng có thể chuyển đến cửa sổ nổi; mọi bảng điều khiển đều đóng lại khi bạn nhấn vào bất kỳ nơi nào khác, chẳng hạn như cửa sổ bật lên iOS.
+
+- Nút dock Split Screen khớp với nút Home (màu đen vào ban ngày, màu trắng vào ban đêm).
+
+- Bong bóng tốc độ: giữ cho một menu nhanh (thay đổi kích thước, cảnh báo, thoát); 4 hiệu ứng cảnh báo với âm hoặc âm thanh giọng nói; luôn luôn km/h.
+
+- Màn hình khởi động: các phong cách Thời tiết và Tóm tắt hiện có thời tiết thực tế.
+
+- Trang màn hình chính CarPlay với nút Đặt lại; iOS 15 sửa lỗi cho App Bridge.
 
 **1.0.1**
-- New look: car-screen panels on the logo's 4-colour background, rainbow selection, labelled ••• bar.
-- Floating car keyboard, frosted panels, Liquid startup style, Speed Bubble in white glass.
-- App Bridge panes: drag ••• to swap, picture-in-picture.
 
-**1.0.0**
-- First release: Startup Screen, Speed Bubble, Split Screen and App Bridge in one package.
+- Giao diện mới: bảng điều khiển màn hình ô tô trên nền 4 màu của logo, lựa chọn cầu vồng, được dán nhãn ••• thanh.
+
+- Bàn phím ô tô nổi, bảng điều khiển mờ, kiểu khởi động Liquid, Speed Bubble trong kính trắng.
+
+- Các ngăn App Bridge: kéo ••• để hoán đổi, hình ảnh trong hình ảnh.
+
+**1,0.0**
+
+- Bản phát hành đầu tiên: Màn hình khởi động, Bong bóng tốc độ, Chia màn hình và Cầu ứng dụng trong một gói.
