@@ -174,6 +174,10 @@ Depends: ellekit | mobilesubstrate (>= 0.9.5000), firmware (>= 14.2), com.opa334
 Architecture: iphoneos-arm64
 Version: 1.2
 Installed-Size: 1260
+Depiction: https://kpazz.github.io/depictions/com.yves.nextup3/
+SileoDepiction: https://kpazz.github.io/depictions/com.yves.nextup3/sileo.json
+Icon: https://kpazz.github.io/depictions/com.yves.nextup3/icon.png
+Header: https://kpazz.github.io/depictions/com.yves.nextup3/header.png
 Filename: pool/com.yves.nextup3_1.2_iphoneos-arm64.deb
 Size: 251056
 MD5sum: 993d00b0ac6a62a1c51b45b034778895

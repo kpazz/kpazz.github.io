@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OmniCar</title>
+<style>
+  :root { --bg:#F4F3FA; --card:#FFFFFF; --ink:#1C1C2E; --sub:#6B6F8F; --line:#E4E2F0; --tint:#7B6CF6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0E0E16; --card:#1A1A26; --ink:#F2F2F7; --sub:#9A9CB8; --line:#2A2A3A; --tint:#A89BFF; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width:640px; margin:0 auto; padding:16px; }
+  .hero { border-radius:20px; overflow:hidden; aspect-ratio:3/1;
+          background:url(header.png) center/cover; }
+  h1 { font-size:24px; margin:16px 0 2px; }
+  .tag { color:var(--sub); margin:0 0 12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:20px; padding:16px; margin:12px 0; }
+  .card h2 { font-size:16px; margin:0 0 6px; }
+  ul { margin:0; padding-left:20px; }
+  .meta { display:grid; grid-template-columns:auto 1fr; gap:6px 16px; }
+  .meta span:nth-child(odd) { color:var(--sub); }
+  a { color:var(--tint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero" role="img" aria-label="OmniCar"></div>
+  <h1>OmniCar</h1>
+  <p class="tag">The power of CarPlay.</p>
+
+  <div class="card"><h2>Split Screen</h2><ul>
+    <li>Two or three CarPlay apps side by side, each with its real CarPlay interface</li>
+    <li>2 panes, 3 panes or 1 large + 2; drag the divider, swap panes, floating window</li>
+    <li>Three favourite layouts; Siri and Shortcuts through <code>omnicar://</code></li></ul></div>
+  <div class="card"><h2>App Bridge</h2><ul>
+    <li>iPhone apps without CarPlay (YouTube, TikTok…) on the car screen, no CarBridge needed</li></ul></div>
+  <div class="card"><h2>Speed Bubble</h2><ul>
+    <li>Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn, 9 styles, warnings with sound</li></ul></div>
+  <div class="card"><h2>Startup Screen</h2><ul>
+    <li>Your own video every time CarPlay connects, or a Weather / Briefing card</li></ul></div>
+
+  <div class="card meta">
+    <span>Version</span><span>1.2</span>
+    <span>Compatibility</span><span>iOS 16, rootless (Dopamine, palera1n)</span>
+    <span>Conflicts</span><span>CarBridge and other tweaks that change CarPlay</span>
+    <span>Contact</span><span><a href="mailto:omnicartweak@gmail.com?subject=OmniCar">omnicartweak@gmail.com</a></span>
+  </div>
+</div>
+</body>
+</html>
