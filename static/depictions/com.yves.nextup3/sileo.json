@@ -5,7 +5,7 @@
   "tintColor": "#7B6CF6",
   "tabs": [
     {
-      "tabname": "Thông Tin",
+      "tabname": "Thông Tin __NAME__",
       "class": "DepictionStackView",
       "views": [
         {
@@ -21,9 +21,8 @@
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "__VERSION__" },
         { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "__DEPENDS__" },
-        { "class": "DepictionTableTextView", "title": "Môi Trường JB", "text": "rootless" },
-        { "class": "DepictionTableTextView", "title": "Tác giả", "text": "Yves" },
         { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "__DATE__" },
+        { "class": "DepictionTableTextView", "title": "Tác Giả", "text": "__AUTHOR__" },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionTableButtonView",

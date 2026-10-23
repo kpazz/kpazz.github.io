@@ -102,7 +102,7 @@ def main():
     shutil.copytree(ROOT / "static", OUT)
     (OUT / "pool").mkdir()
 
-    stanzas, newest, pkg_firmware = [], {}, {}
+    stanzas, newest, pkg_firmware, pkg_author, pkg_name = [], {}, {}, {}, {}
     for deb in sorted((ROOT / "debs").glob("*.deb")):
         fields = parse_control(read_control(deb))
         info = dict(fields)
@@ -111,23 +111,31 @@ def main():
         shutil.copyfile(deb, OUT / target)
         blob = deb.read_bytes()
 
-        # --- TỰ ĐỘNG ĐỌC TRỰC TIẾP TỪ DEPENDS CỦA TỆP DEB ---
+        # --- TỰ ĐỘNG ĐỌC DEPENDS & FIRMWARE ---
         depends_val = info.get("Depends", "")
-        
         fw_match = re.search(r"firmware\s*\(\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)\s*\)", depends_val, re.IGNORECASE)
         if fw_match:
             op = fw_match.group(1) or ""
             fw_ver = fw_match.group(2)
             if ">=" in op or op == "":
-                pkg_firmware[pkg] = f"{fw_ver} Trở lên"
+                pkg_firmware[pkg] = f"{fw_ver} trở lên"
             else:
                 pkg_firmware[pkg] = fw_ver
         else:
             loose_match = re.search(r"([0-9]+\.[0-9]+)", depends_val)
             if loose_match and ("ios" in depends_val.lower() or "firmware" in depends_val.lower()):
-                pkg_firmware[pkg] = f"{loose_match.group(1)} Trở lên"
+                pkg_firmware[pkg] = f"{loose_match.group(1)} trở lên"
             else:
                 pkg_firmware[pkg] = "Không giới hạn"
+
+        # --- TỰ ĐỘNG ĐỌC TÊN TÁC GIẢ (Author / Maintainer) ---
+        author_val = info.get("Author") or info.get("Maintainer") or "Unknown"
+        clean_author = re.sub(r"<.*?>", "", author_val).strip()
+        pkg_author[pkg] = clean_author if clean_author else author_val
+
+        # --- TỰ ĐỘNG ĐỌC TÊN TWEAK (Name) ---
+        # Nếu deb có trường Name, lấy Name; nếu không, lấy mã Package làm dự phòng
+        pkg_name[pkg] = info.get("Name", pkg)
         # ----------------------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
@@ -162,7 +170,6 @@ def main():
             newest[pkg] = ver
         print(f"  {pkg} {ver}  <- {deb.name}")
 
-    # Lấy thời gian hiện tại theo định dạng chuẩn ngày/tháng/năm và giờ:phút
     current_date = datetime.now().strftime("%d/%m/%Y")
     current_time = datetime.now().strftime("%H:%M")
 
@@ -174,6 +181,8 @@ def main():
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
             text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
+            text = text.replace("__AUTHOR__", pkg_author.get(pkg, "Unknown"))
+            text = text.replace("__NAME__", pkg_name.get(pkg, pkg))
             text = text.replace("__DATE__", current_date)
             text = text.replace("__TIME__", current_time)
             log = OUT / "depictions" / pkg / "changelog.md"
@@ -198,7 +207,7 @@ def main():
         f"Origin: {conf['ORIGIN']}", f"Label: {conf['LABEL']}", f"Suite: {conf['SUITE']}",
         "Version: 1.0", f"Codename: {conf['CODENAME']}",
         f"Date: {datetime.now(timezone.utc).strftime('%a, %d %b %Y %H:%M:%S UTC')}",
-        f"Architectures: {conf['ARCHITECTURES']}", f"Components: {conf['COMPONENTS']}",
+        f"Architectures: {conf['Architectures'] if 'Architectures' in conf else conf['ARCHITECTURES']}", f"Components: {conf['COMPONENTS']}",
         f"Description: {conf['DESCRIPTION']}",
     ]
     for algo, title in (("md5", "MD5Sum"), ("sha1", "SHA1"), ("sha256", "SHA256"), ("sha512", "SHA512")):
