@@ -114,18 +114,16 @@ def main():
         # --- TỰ ĐỘNG ĐỌC TRỰC TIẾP TỪ DEPENDS CỦA TỆP DEB ---
         depends_val = info.get("Depends", "")
 
-        # Trích xuất chính xác phiên bản firmware và toán tử có sẵn trong deb
-        fw_match = re.search(r"firmware\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)", depends_val, re.IGNORECASE)
+        # Sửa lại regex để đọc chính xác cấu trúc firmware (>= 15.0) bên trong deb
+        fw_match = re.search(r"firmware\s*\(\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)", depends_val, re.IGNORECASE)
         if fw_match:
             op = fw_match.group(1) or ""
             fw_ver = fw_match.group(2)
-            # Nếu có dấu >= hoặc không ghi rõ toán tử, tự động gắn thêm chữ "trở lên"
             if ">=" in op or op == "":
                 pkg_firmware[pkg] = f"{fw_ver} trở lên"
             else:
                 pkg_firmware[pkg] = fw_ver
         else:
-            # Nếu tệp deb hoàn toàn không khai báo firmware trong Depends
             pkg_firmware[pkg] = "Không giới hạn"
         # ----------------------------------------------------
 
@@ -168,7 +166,7 @@ def main():
         if len(rel) >= 3 and rel[0] == "depictions":
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
-            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "15.0 trở lên"))
+            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
             log = OUT / "depictions" / pkg / "changelog.md"
             if "__CHANGELOG__" in text:
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
