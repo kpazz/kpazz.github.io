@@ -3,31 +3,31 @@ Label: KPazz
 Suite: stable
 Version: 1.0
 Codename: ios
-Date: Fri, 23 Oct 2026 02:22:26 UTC
+Date: Fri, 23 Oct 2026 02:39:22 UTC
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: The power of CarPlay
 MD5Sum:
- 71cc27520592787950266b1df537417a             8261 Packages
- 5b0ae81bb4bea73e5719e23b6fe32b71             3438 Packages.gz
- 4aecaa804698618e759a14f04efaea76             3564 Packages.bz2
- 43daec6af8f64f59c8c8b1f4871c0603             3352 Packages.xz
- b2bfea2d0212c4cf718ea0b15c1be246             3404 Packages.zst
+ 534a86734d45d66ffb19112388fc6534             8040 Packages
+ 6e322f4c71839ff88851d1682219c040             3392 Packages.gz
+ daee9d918697775cf601d97d74a507bd             3522 Packages.bz2
+ 2b93e62f6d0aaf1de9aff62b09ef03b3             3308 Packages.xz
+ e66155b0d4b443b9399ee88c52e158d1             3361 Packages.zst
 SHA1:
- 687f460d5b5454b7a6aaf1397f25e1353b64e1bf             8261 Packages
- e055732cfc751f2db17e0c6effac4b949ed17a56             3438 Packages.gz
- bebc8055395eed75d3e1d968911795c51468f497             3564 Packages.bz2
- a691f045fc5bb2100d7c0f77a0c436a634323985             3352 Packages.xz
- 3b3e07954db3a7c12c8736e18c102302701b8c1c             3404 Packages.zst
+ 730b9a62139e31d19ae054b474ab99b7751c3671             8040 Packages
+ e27d99fceddc2d53f6e4d758f4626761b803767d             3392 Packages.gz
+ 0664532154be9bc45d3d2e358424ace8f94ff2c3             3522 Packages.bz2
+ e6c65724907213e138d90612ff907acd135d9acd             3308 Packages.xz
+ 3f737d4172ddf86007f757f548552d8ea5d5915e             3361 Packages.zst
 SHA256:
- 9ebb15ab3d1f0f702f79c2735d8f70c64343046dbee1ad5a02594f1622ec11ea             8261 Packages
- 094051b2780dc0b86d6f8264b44f28a162190e58948758261d3488febdb47ec1             3438 Packages.gz
- 363740826a074e143ce4ca1541c7e50bde9a955292ab20e7767ef08d142895d7             3564 Packages.bz2
- 01f66697050ddf5d2289cd78381b67f2ca00e09458997b415a5531e8ef043a78             3352 Packages.xz
- 183870dd5a035321938b8602bd5916c870ce5cd73638843fd4cb57cd869a10d8             3404 Packages.zst
+ 33090bb7dd32b1074fa99dfa1df1d8d756769020f53588b80a48595ca4b13f57             8040 Packages
+ f46d04ddcc6149c31f108e20c45803f1c604deb0363f4f5c71b16ad6231e26b2             3392 Packages.gz
+ 47edd6f7fc4c07ac70e3eea11499f71f19b0c6f1b410d70ea57e1b52773e6a66             3522 Packages.bz2
+ 1121c90f4fdd4863fc499b7f47d9685a0cb96eb550580b0e6482cfebc4dcc142             3308 Packages.xz
+ 04e79bc56a37f33f4690daf7ee0b993908d7b968c5fdb9d915244a1114e7ac5f             3361 Packages.zst
 SHA512:
- ffd45e9a6bbd0daeb9a55d604e4dc9ecfa68e927f108e4405d4fd34d7ca66d277b39e2f2678d6c1ea1aa82f12c09bf5f70f39e751e37913ae599a4fb70398baf             8261 Packages
- 1dd7dd6395bec6972abdd9e4aa38fa4c43fc81ac7a9c17965c359b1b6935eaaf6cda8af28c47a61b2171ce897caf6e95af712bc52196a33f76219fc38e6cc019             3438 Packages.gz
- efdb7022fbd1b428df9f4f8cb94f0f307eac6543af621ddfc71f0cbe971bf584db556821a32dfc33e11673da1238d6c68a44de10511f3a9235d7340c7ba63479             3564 Packages.bz2
- bebe4c09c02052ce5a770aba3eb885a19161c5b67bafc4a0c844723a7c3e173b0a94245d668f30c1d3381095a7c6e25324c08bf474ed5344f926283249f8b91e             3352 Packages.xz
- 49337436482044d4eaa87ab832b62895fd5dd8e1286f86fb820161e59f495c7b2ded93357a8f23f228204142c2ba16d2347781e9f7e3516b08f5ab5a1f98537e             3404 Packages.zst
+ 92f164b11f1c9c6970916e1e4bef01ad304982627a9d85fc9801cd331469a0f1e78deecac3119ab5669b48601d9900d000d28448fe92a27feb5c97aa0e795caa             8040 Packages
+ e1d7865c3857e3c06b3cded2fc15de19aa8a8cfe8a30eee991331b2d4a794eecf98b79af05002e9aa1f4ae34e448ddcb095eaebc44ae57f28992b5fc88b76afd             3392 Packages.gz
+ db5dd2293c7ec769687cb66a8c6178c8647bef55083dd151fc57f5bcc2356b3e86c62779e5ef8621cfa118d3b340501bcd2b05db0af2be98b445421e2194019a             3522 Packages.bz2
+ 84b40402f45457c10140df173074c63579016bffe53fbb24e18c9362fc55a8d1d9afb1b68a77054c1babc1acd4242f07ae054284ab7fb1eb4edfdf3287b92b8d             3308 Packages.xz
+ 6064e93dc98d54c2ca591bd94bf8bb3dfde7e42ad80c959dc0da62a3fb4293c1a254cb3898be2d46d5eba3f8c93f6fe73e1593bab86e3ae43fb212778f8a7a72             3361 Packages.zst

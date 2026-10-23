@@ -128,20 +128,19 @@ Package: com.teslaman3092.16player
 Name: 16Player (Rootless)
 Section: Tweaks
 Installed-Size: 1420
-Maintainer: JTISVN Repo
+Maintainer: teslaman3092
 Architecture: iphoneos-arm64
 Version: 1.0.5
 Depends: mobilesubstrate (>= 0.9.5000), com.mrgcgamer.libgcuniversal, firmware (>= 14), firmware (<< 16), preferenceloader
 Conflicts: ch.mdaus.utils, com.johnzaro.perfectmusic13, com.p2kdev.tinywidget, com.laughingquoll.quart, com.tako3s.printemps, com.teslaman3092.16player, xyz.cypwn.16player
 Description: 16Player - tinh chỉnh tốt nhất để đưa trình phát nhạc màn hình khóa iOS 16 lên iPhone hoặc iPad chạy iOS 14 hoặc iOS 15 của bạn.
-SileoDepiction: https://jtisvn.github.io/sileodepictions/16Player.json
-Icon: https://jtisvn.github.io/sectionIcons/16Player.png
+Icon: https://kpazz.github.io/CydiaIcon.png
 Author: tesla_man, Bibi Fire <computerman939+16playersupport@gmail.com>
 Filename: pool/com.teslaman3092.16player_1.0.5_iphoneos-arm64.deb
-Size: 378844
-MD5sum: 2b3f4e99c92592c11aafdf3d0d8bf2c3
-SHA1: 841f2f9b6668b33845084aaac12e5d0de9943b4a
-SHA256: 497c99f698860dc158e1f5cb794153bb1d79113108bb1472b3036b01d2dcc5c7
+Size: 378980
+MD5sum: b38f3ed7a92b577511a049531c12cb0a
+SHA1: ad3bab196cab38940884f868578e3e888a5e627a
+SHA256: c3396f6bd858885e490f75c6ddba23490beed3d593015e9140580d8e54db72f8
 
 Package: com.yves.crescendo
 Name: Crescendo
@@ -176,8 +175,6 @@ Version: 1.2
 Installed-Size: 1260
 Depiction: https://kpazz.github.io/depictions/com.yves.nextup3/
 SileoDepiction: https://kpazz.github.io/depictions/com.yves.nextup3/sileo.json
-Icon: https://kpazz.github.io/depictions/com.yves.nextup3/icon.png
-Header: https://kpazz.github.io/depictions/com.yves.nextup3/header.png
 Filename: pool/com.yves.nextup3_1.2_iphoneos-arm64.deb
 Size: 251056
 MD5sum: 993d00b0ac6a62a1c51b45b034778895
