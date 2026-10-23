@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Tải toàn bộ lịch sử để có thể thao tác giữa các nhánh
+          fetch-depth: 0 # Tải toàn bộ lịch sử để thao tác giữa các nhánh
 
       - name: Configure Git Identity
         run: |
@@ -23,17 +23,20 @@ jobs:
 
       - name: Switch to gh-pages branch and count files
         run: |
-          # Chuyển sang nhánh gh-pages để cập nhật file JSON trực tiếp trên nhánh phát hành web
+          # Chuyển sang nhánh gh-pages
           git checkout gh-pages || git checkout -b gh-pages
           
-          # Đếm số lượng file .deb trong thư mục debs và ghi ra file deb-count.json
+          # Đếm số lượng file .deb trong thư mục debs
           COUNT=$(find debs -name "*.deb" | wc -l)
-          echo "{\"count\": $COUNT}" > deb-count.json
+          
+          # Tạo thư mục static nếu chưa có, sau đó ghi file deb-count.json vào đúng thư mục static/
+          mkdir -p static
+          echo "{\"count\": $COUNT}" > static/deb-count.json
           
           # Đưa file vào git
-          git add deb-count.json
+          git add static/deb-count.json
 
       - name: Commit and push changes to gh-pages
         run: |
-          # Kiểm tra xem có thay đổi gì không, nếu có thì tiến hành commit và push lên gh-pages
+          # Kiểm tra thay đổi và push lên nhánh gh-pages
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb count to $COUNT [skip ci]" && git push origin gh-pages)

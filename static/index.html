@@ -46,13 +46,12 @@
 
 <script>
     // Lấy dữ liệu từ file JSON do GitHub Actions tạo tự động
-    fetch('./deb-count.json?v=' + new Date().getTime()) // Thêm ?v= để tránh bị cache trình duyệt
+    fetch('./deb-count.json?v=' + new Date().getTime())
     .then(response => {
         if (!response.ok) throw new Error('HTTP error! status: ' + response.status);
         return response.json();
     })
     .then(data => {
-        console.log("Số lượng deb lấy được:", data.count);
         document.getElementById('deb-count').innerText = data.count;
     })
     .catch(error => {
