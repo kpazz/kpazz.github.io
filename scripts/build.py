@@ -94,77 +94,6 @@ def version_key(v):
     return [(0, int(p)) if p.isdigit() else (1, p.replace("~", "\x00")) for p in parts if p]
 
 
-def auto_translate_to_vietnamese(text):
-    """Tự động dịch toàn bộ thuật ngữ, câu mô tả tóm tắt tiếng Anh sang tiếng Việt."""
-    if not text:
-        return text
-    
-    dictionary = {
-        # --- NextUp 3 ---
-        "See and skip the upcoming track right from the Lock Screen or Control Center": "Xem và chuyển bài hát tiếp theo ngay từ Màn hình khóa hoặc Trung tâm điều khiển",
-        "See and skip the upcoming track": "Xem và chuyển bài hát tiếp theo",
-        "right from the Lock Screen or Control Center": "ngay từ Màn hình khóa hoặc Trung tâm điều khiển",
-
-        # --- OmniCar & CarPlay ---
-        "The power of CarPlay": "Sức mạnh của CarPlay",
-        "takes CarPlay beyond what Apple allows": "đưa CarPlay vượt ra ngoài giới hạn của Apple",
-        "more freedom, more features and everything you need on the road": "tự do hơn, nhiều tính năng hơn và mọi thứ bạn cần trên đường đi",
-        "in one package": "trong một gói duy nhất",
-        "APP BRIDGE": "CẦU NỐI ỨNG DỤNG",
-        "iPhone apps without CarPlay": "Ứng dụng iPhone không hỗ trợ CarPlay",
-        "such as YouTube or TikTok": "như YouTube hoặc TikTok",
-        "on the car screen": "trên màn hình ô tô",
-        "In a Split Screen pane or full screen": "Hiển thị dạng chia đôi màn hình hoặc toàn màn hình",
-        "resized live": "có thể thay đổi kích thước trực tiếp",
-        "Built in": "Tích hợp sẵn",
-        "no CarBridge needed": "không cần dùng CarBridge",
-        "SPEED BUBBLE": "BONG BÓNG TỐC ĐỘ",
-        "Current speed and the posted limit": "Tốc độ hiện tại và giới hạn tốc độ",
-        "from Vietmap Live, GOFA, Waze or Wyn": "từ Vietmap Live, GOFA, Waze hoặc Wyn",
-        "On the CarPlay screen": "Trên màn hình CarPlay",
-        "or on the iPhone when no car is connected": "hoặc trên iPhone khi không kết nối với ô tô",
-        "Over-speed warning with light effects and sound": "Cảnh báo quá tốc độ kèm hiệu ứng ánh sáng và âm thanh",
-        "Your own video every time CarPlay connects": "Video cá nhân của bạn mỗi khi kết nối CarPlay",
-        "Sound through the car speakers": "Phát âm thanh qua loa ô tô",
-        "tap to skip": "chạm để bỏ qua",
-        "styles": "kiểu hiển thị",
-        "drag, pinch to resize": "kéo, chụm để thay đổi kích thước",
-        "reopen the app": "mở lại ứng dụng",
-
-        # --- Các Tweak khác ---
-        "Brings back the Lock Screen volume slider": "Mang thanh trượt âm lượng trở lại Màn hình khóa",
-        "Brings back the Lock Screen volume": "Mang âm lượng Màn hình khóa trở lại",
-        "Lock screen date and time style": "Phong cách ngày và giờ màn hình khóa",
-        "Advanced features for YouTube": "Tính năng nâng cao cho YouTube",
-        "new Debian package": "Gói Debian mới",
-
-        # --- Từ khóa bổ trợ ---
-        "Features": "Tính năng",
-        "Compatibility": "Tương thích",
-        "Requirements": "Yêu cầu",
-        "Support": "Hỗ trợ",
-        "Settings": "Cài đặt",
-        "Configuration": "Cấu hình",
-        "Enable": "Bật",
-        "Disable": "Tắt",
-        "Options": "Tùy chọn",
-        "Customization": "Tùy chỉnh",
-        "Performance": "Hiệu năng",
-        "Optimized": "Đã tối ưu hóa",
-        "Fixed issue": "Đã sửa lỗi",
-        "Bug fixes": "Sửa lỗi",
-        "Updates": "Cập nhật",
-        "Stable": "Ổn định",
-        "Beta": "Bản thử nghiệm"
-    }
-
-    translated = text
-    for en, vi in dictionary.items():
-        translated = re.sub(re.escape(en), vi, translated, flags=re.IGNORECASE)
-    
-    return translated
-
-
 def main():
     conf = read_conf()
     base = conf["BASE_URL"]
@@ -199,8 +128,9 @@ def main():
             else:
                 pkg_firmware[pkg] = "Không giới hạn"
 
-        # --- NHẬN DIỆN PHÂN LOẠI: VIỆT HÓA HOẶC QUỐC TẾ ---
-        combined_meta = (deb.name + " " + pkg + " " + info.get("Description", "")).lower()
+        # --- NHẬN DIỆN PHÂN LOẠI: VIỆT HÓA (DỰA VÀO TÊN DEB, PKG HOẶC DESCRIPTION) ---
+        raw_desc = info.get("Description", "")
+        combined_meta = (deb.name + " " + pkg + " " + raw_desc).lower()
         if "-vn" in combined_meta or "_vn" in combined_meta or "việt hóa" in combined_meta:
             edition_text = "Việt Hóa"
             edition_label = "[Việt Hóa]"
@@ -209,16 +139,13 @@ def main():
             edition_label = "[Quốc Tế]"
         pkg_edition[pkg] = edition_text
 
-        # --- TỰ ĐỘNG DỊCH VÀ CHÈN NHÃN VÀO DESCRIPTION ---
-        raw_desc = info.get("Description", "")
-        translated_desc = auto_translate_to_vietnamese(raw_desc)
-        pkg_description[pkg] = translated_desc
+        # --- LẤY NGUYÊN VĂN DESCRIPTION TỪ DEB VÀ GẮN NHÃN PHÂN LOẠI ---
+        pkg_description[pkg] = raw_desc
 
         for f in fields:
             if f[0] == "Description":
-                desc_lines = translated_desc.splitlines()
+                desc_lines = raw_desc.splitlines()
                 if desc_lines:
-                    # Đảm bảo dịch câu đầu tiên trước khi chèn nhãn [Việt Hóa] / [Quốc Tế]
                     first_line = desc_lines[0].strip()
                     if not first_line.startswith("["):
                         desc_lines[0] = f"{edition_label} {first_line}"
@@ -240,8 +167,7 @@ def main():
             text = desc.read_text(encoding="utf-8").strip("\n").split("\n")
             for f in fields:
                 if f[0] == "Description":
-                    translated_first = auto_translate_to_vietnamese(text[0])
-                    f[1] = "\n".join([f"{edition_label} {translated_first}"] + [" " + (l if l.strip() else ".") for l in text[1:]])
+                    f[1] = "\n".join([f"{edition_label} {text[0]}"] + [" " + (l if l.strip() else ".") for l in text[1:]])
         if dep.is_dir():
             drop = {"Depiction", "SileoDepiction", "Header"}
             if (dep / "icon.png").exists():
@@ -273,7 +199,6 @@ def main():
         rel = f.relative_to(OUT).parts
         if f.suffix == ".json":
             try:
-                # Parse file JSON thành Python Dictionary để xử lý an toàn
                 data = json.loads(f.read_text(encoding="utf-8"))
             except json.JSONDecodeError:
                 data = None
@@ -289,14 +214,12 @@ def main():
                 log_file = OUT / "depictions" / pkg / "changelog.md"
                 changelog_text = log_file.read_text(encoding="utf-8") if log_file.exists() else "No changes listed."
 
-                # Hàm đệ quy duyệt qua dictionary để thay thế các placeholder chuỗi
                 def replace_placeholders(node):
                     if isinstance(node, dict):
                         return {k: replace_placeholders(v) for k, v in node.items()}
                     elif isinstance(node, list):
                         return [replace_placeholders(item) for item in node]
                     elif isinstance(node, str):
-                        # Thay thế các biến template
                         val = node
                         val = val.replace("__BASE__", base)
                         val = val.replace("__VERSION__", version)
@@ -312,8 +235,6 @@ def main():
                     return node
 
                 updated_data = replace_placeholders(data)
-                
-                # Ghi lại file JSON thông qua json.dumps để tự động escape các ký tự xuống dòng / đặc biệt chuẩn xác
                 f.write_text(json.dumps(updated_data, ensure_ascii=False, indent=4), encoding="utf-8", newline="\n")
             else:
                 text = f.read_text(encoding="utf-8").replace("__BASE__", base)
