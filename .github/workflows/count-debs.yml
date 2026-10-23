@@ -2,10 +2,8 @@ name: Auto Count Debs
 
 on:
   push:
-    branches:
-      - gh-pages # Lắng nghe sự kiện khi bạn đẩy code trực tiếp lên nhánh gh-pages
     paths:
-      - 'debs/**'
+      - 'debs/**' # Lắng nghe bất cứ khi nào có thay đổi trong thư mục debs
 
 jobs:
   count:
@@ -15,8 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: gh-pages # Bắt buộc checkout thẳng vào nhánh gh-pages
 
       - name: Configure Git Identity
         run: |
@@ -25,16 +21,16 @@ jobs:
 
       - name: Count files and save to static/deb-count.json
         run: |
-          # Tạo thư mục static nếu chưa có
+          # Tạo thư mục static nếu chưa tồn tại
           mkdir -p static
           
-          # Đếm chính xác số lượng file .deb (hỗ trợ cả tìm kiếm trong thư mục con)
+          # Đếm chính xác số lượng file .deb (hỗ trợ cả thư mục con)
           COUNT=$(find debs -name "*.deb" | wc -l)
           
-          # Ghi kết quả ra file JSON
+          # Ghi số lượng ra file JSON
           echo "{\"count\": $COUNT}" > static/deb-count.json
           
-          # Kiểm tra git status và commit/push nếu có thay đổi
+          # Kiểm tra và push thay đổi lên nhánh gh-pages (hoặc nhánh hiện tại)
           git status
           git add static/deb-count.json
           git commit -m "Auto-update deb count to $COUNT" || echo "No changes to commit"
