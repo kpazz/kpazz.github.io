@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and push
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.x'
 
       - name: Build repo
         run: python3 scripts/build.py
