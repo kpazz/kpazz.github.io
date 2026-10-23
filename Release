@@ -3,7 +3,7 @@ Label: KPazz
 Suite: stable
 Version: 1.0
 Codename: ios
-Date: Fri, 23 Oct 2026 04:44:09 UTC
+Date: Fri, 23 Oct 2026 04:50:20 UTC
 Architectures: iphoneos-arm64 iphoneos-arm64e
 Components: main
 Description: The power of CarPlay
