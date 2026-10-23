@@ -223,27 +223,76 @@ def main():
     current_date = datetime.now(tz_vn).strftime("%d/%m/%Y")
     current_time = datetime.now(tz_vn).strftime("%H:%M")
 
-    # Templates
+    # Templates Processing
     for f in list(OUT.rglob("*.html")) + list(OUT.rglob("*.json")):
-        text = f.read_text(encoding="utf-8").replace("__BASE__", base)
         rel = f.relative_to(OUT).parts
-        if len(rel) >= 3 and rel[0] == "depictions":
-            pkg = rel[1]
-            text = text.replace("__VERSION__", newest.get(pkg, "-"))
-            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
-            text = text.replace("__AUTHOR__", pkg_author.get(pkg, "Unknown"))
-            text = text.replace("__NAME__", pkg_name.get(pkg, pkg))
-            text = text.replace("__EDITION__", pkg_edition.get(pkg, "Quốc Tế"))
-            text = text.replace("__DESCRIPTION__", pkg_description.get(pkg, ""))
-            text = text.replace("__DATE__", current_date)
-            text = text.replace("__TIME__", current_time)
-            log = OUT / "depictions" / pkg / "changelog.md"
-            if "__CHANGELOG__" in text:
-                md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
-                text = text.replace('"__CHANGELOG__"', json.dumps(md, ensure_ascii=False))
         if f.suffix == ".json":
-            json.loads(text)
-        f.write_text(text, encoding="utf-8", newline="\n")
+            try:
+                # Parse file JSON thành Python Dictionary để xử lý an toàn
+                data = json.loads(f.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                # Fallback nếu template gốc bị lỗi cú pháp trước đó
+                data = None
+
+            if data and len(rel) >= 3 and rel[0] == "depictions":
+                pkg = rel[1]
+                version = newest.get(pkg, "-")
+                depends = pkg_firmware.get(pkg, "Không giới hạn")
+                author = pkg_author.get(pkg, "Unknown")
+                name = pkg_name.get(pkg, pkg)
+                edition = pkg_edition.get(pkg, "Quốc Tế")
+                desc = pkg_description.get(pkg, "")
+                log_file = OUT / "depictions" / pkg / "changelog.md"
+                changelog_text = log_file.read_text(encoding="utf-8") if log_file.exists() else "No changes listed."
+
+                # Hàm đệ quy duyệt qua dictionary để thay thế các placeholder chuỗi
+                def replace_placeholders(node):
+                    if isinstance(node, dict):
+                        return {k: replace_placeholders(v) for k, v in node.items()}
+                    elif isinstance(node, list):
+                        return [replace_placeholders(item) for item in node]
+                    elif isinstance(node, str):
+                        # Thay thế các biến template
+                        val = node
+                        val = val.replace("__BASE__", base)
+                        val = val.replace("__VERSION__", version)
+                        val = val.replace("__DEPENDS__", depends)
+                        val = val.replace("__AUTHOR__", author)
+                        val = val.replace("__NAME__", name)
+                        val = val.replace("__EDITION__", edition)
+                        val = val.replace("__DESCRIPTION__", desc)
+                        val = val.replace("__DATE__", current_date)
+                        val = val.replace("__TIME__", current_time)
+                        val = val.replace("__CHANGELOG__", changelog_text)
+                        return val
+                    return node
+
+                updated_data = replace_placeholders(data)
+                
+                # Ghi lại file JSON thông qua json.dumps để tự động escape các ký tự xuống dòng / đặc biệt chuẩn xác
+                f.write_text(json.dumps(updated_data, ensure_ascii=False, indent=4), encoding="utf-8", newline="\n")
+            else:
+                # Xử lý file JSON thông thường không nằm trong depictions
+                text = f.read_text(encoding="utf-8").replace("__BASE__", base)
+                f.write_text(text, encoding="utf-8", newline="\n")
+        else:
+            # Xử lý các file .html thông thường
+            text = f.read_text(encoding="utf-8").replace("__BASE__", base)
+            if len(rel) >= 3 and rel[0] == "depictions":
+                pkg = rel[1]
+                text = text.replace("__VERSION__", newest.get(pkg, "-"))
+                text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
+                text = text.replace("__AUTHOR__", pkg_author.get(pkg, "Unknown"))
+                text = text.replace("__NAME__", pkg_name.get(pkg, pkg))
+                text = text.replace("__EDITION__", pkg_edition.get(pkg, "Quốc Tế"))
+                text = text.replace("__DESCRIPTION__", pkg_description.get(pkg, ""))
+                text = text.replace("__DATE__", current_date)
+                text = text.replace("__TIME__", current_time)
+                log = OUT / "depictions" / pkg / "changelog.md"
+                if "__CHANGELOG__" in text:
+                    md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
+                    text = text.replace('"__CHANGELOG__"', json.dumps(md, ensure_ascii=False))
+            f.write_text(text, encoding="utf-8", newline="\n")
 
     packages = ("\n\n".join(stanzas) + "\n").encode() if stanzas else b""
     (OUT / "Packages").write_bytes(packages)
@@ -283,4 +332,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

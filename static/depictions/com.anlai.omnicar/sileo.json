@@ -14,8 +14,8 @@
         },
         {
           "class": "DepictionMarkdownView",
-          "useSpacing": true,
-          "markdown": "__DESCRIPTION__"
+  "useSpacing": true,
+  "markdown": "__DESCRIPTION__"
         },
         { "class": "DepictionSeparatorView" },
         
