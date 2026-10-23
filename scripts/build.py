@@ -127,9 +127,19 @@ def main():
             fields.append(["Depends", default_depends])
             depends_val = default_depends
 
-        # Trích xuất số phiên bản firmware từ chuỗi Depends (VD: lấy "14.0" từ "firmware (>= 14.0)")
-        fw_match = re.search(r"firmware\s*\(\>=\s*([0-9\.]+)\)", depends_val, re.IGNORECASE)
-        pkg_firmware[pkg] = fw_match.group(1) if fw_match else "14.0"
+        # Trích xuất toán tử và số phiên bản firmware từ chuỗi Depends (VD: bắt được ">=" hoặc "=" và "15.0")
+        fw_match = re.search(r"firmware\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)", depends_val, re.IGNORECASE)
+        if fw_match:
+            op = fw_match.group(1) or ""
+            fw_ver = fw_match.group(2)
+            # Nếu là lớn hơn hoặc bằng (>=), tự động kèm chữ "trở lên"
+            if ">=" in op or op == "":
+                pkg_firmware[pkg] = f"{fw_ver} Trở lên"
+            else:
+                # Nếu là dấu bằng (=) hoặc các dấu khác, giữ nguyên số phiên bản
+                pkg_firmware[pkg] = fw_ver
+        else:
+            pkg_firmware[pkg] = "14.0 Trở lên"
         # ----------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
@@ -171,7 +181,7 @@ def main():
         if len(rel) >= 3 and rel[0] == "depictions":
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
-            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "14.0"))
+            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "14.0 trở lên"))
             log = OUT / "depictions" / pkg / "changelog.md"
             if "__CHANGELOG__" in text:
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
