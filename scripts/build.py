@@ -102,7 +102,7 @@ def main():
     shutil.copytree(ROOT / "static", OUT)
     (OUT / "pool").mkdir()
 
-    stanzas, newest, pkg_firmware, pkg_author, pkg_name = [], {}, {}, {}, {}
+    stanzas, newest, pkg_firmware, pkg_author, pkg_name, pkg_edition = [], {}, {}, {}, {}, {}
     for deb in sorted((ROOT / "debs").glob("*.deb")):
         fields = parse_control(read_control(deb))
         info = dict(fields)
@@ -111,7 +111,7 @@ def main():
         shutil.copyfile(deb, OUT / target)
         blob = deb.read_bytes()
 
-        # --- TỰ ĐỘNG ĐỌC DEPENDS & FIRMWARE ---
+        # --- TỰ ĐỘNG ĐỌC PHIÊN BẢN FIRMWARE TỪ DEPENDS ---
         depends_val = info.get("Depends", "")
         fw_match = re.search(r"firmware\s*\(\s*(\>\=|\=|\<\=)?\s*([0-9\.]+)\s*\)", depends_val, re.IGNORECASE)
         if fw_match:
@@ -128,15 +128,29 @@ def main():
             else:
                 pkg_firmware[pkg] = "Không giới hạn"
 
-        # --- TỰ ĐỘNG ĐỌC TÊN TÁC GIẢ (Author / Maintainer) ---
+        # --- NHẬN DIỆN PHÂN LOẠI: VIỆT HÓA HOẶC QUỐC TẾ ---
+        combined_meta = (deb.name + " " + pkg + " " + info.get("Description", "")).lower()
+        if "-vn" in combined_meta or "_vn" in combined_meta or "việt hóa" in combined_meta:
+            edition_text = "Việt Hóa"
+            edition_label = "[Việt Hóa]"
+        else:
+            edition_text = "Quốc Tế"
+            edition_label = "[Quốc Tế]"
+        pkg_edition[pkg] = edition_text
+
+        # Tự động chèn nhãn vào dòng đầu tiên của Description trong control/Packages
+        for f in fields:
+            if f[0] == "Description":
+                desc_lines = f[1].splitlines()
+                if desc_lines and not desc_lines[0].startswith("["):
+                    desc_lines[0] = f"{edition_label} {desc_lines[0]}"
+                f[1] = "\n".join(desc_lines)
+
+        # --- TỰ ĐỘNG ĐỌC TÊN TÁC GIẢ VÀ TÊN TWEAK ---
         author_val = info.get("Author") or info.get("Maintainer") or "Unknown"
         clean_author = re.sub(r"<.*?>", "", author_val).strip()
         pkg_author[pkg] = clean_author if clean_author else author_val
-
-        # --- TỰ ĐỘNG ĐỌC TÊN TWEAK (Name) ---
-        # Nếu deb có trường Name, lấy Name; nếu không, lấy mã Package làm dự phòng
         pkg_name[pkg] = info.get("Name", pkg)
-        # ----------------------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
             if conf.get(key):
@@ -183,6 +197,7 @@ def main():
             text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "Không giới hạn"))
             text = text.replace("__AUTHOR__", pkg_author.get(pkg, "Unknown"))
             text = text.replace("__NAME__", pkg_name.get(pkg, pkg))
+            text = text.replace("__EDITION__", pkg_edition.get(pkg, "Quốc Tế"))
             text = text.replace("__DATE__", current_date)
             text = text.replace("__TIME__", current_time)
             log = OUT / "depictions" / pkg / "changelog.md"
@@ -231,3 +246,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

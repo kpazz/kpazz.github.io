@@ -32,7 +32,8 @@
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên Bản", "text": "__VERSION__" },
         { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "__DEPENDS__" },
-        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "__DATE__" },
+        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "__TIME_,__DATE__" },
+        { "class": "DepictionTableTextView", "title": "Ngôn ngữ", "text": "__EDITION__" },
         { "class": "DepictionTableTextView", "title": "Tác Giả", "text": "__AUTHOR__" },
         
         { "class": "DepictionSeparatorView" },
