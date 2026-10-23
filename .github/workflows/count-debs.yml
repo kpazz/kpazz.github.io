@@ -1,0 +1,27 @@
+name: Auto Count Debs
+
+on:
+  push:
+    paths:
+      - 'debs/**' # Chỉ chạy khi có thay đổi trong thư mục debs
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Count .deb files
+        run: |
+          COUNT=$(find debs -name "*.deb" | wc -l)
+          echo "{\"count\": $COUNT}" > deb-count.json
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add deb-count.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb file count [skip ci]" && git push)

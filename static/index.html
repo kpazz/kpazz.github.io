@@ -36,7 +36,26 @@
   <img class="icon" src="CydiaIcon.png" alt="">
   <h1>KPazz</h1>
   <p>Tweak & Options</p>
-  <div class="url">__BASE__</div>
+  <div class="mt-6 bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 flex items-center justify-around">
+    <div>
+        <!-- Nơi hiển thị số lượng -->
+        <span class="block text-2xl font-extrabold text-indigo-400" id="deb-count">...</span>
+        <span class="text-xs text-slate-400 uppercase tracking-wider">Gói Tinh Chỉnh</span>
+    </div>
+</div>
+
+<script>
+    // Lấy dữ liệu từ file JSON do GitHub Actions tạo tự động
+    fetch('./deb-count.json')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('deb-count').innerText = data.count;
+        })
+        .catch(error => {
+            console.error('Không thể lấy số lượng deb:', error);
+            document.getElementById('deb-count').innerText = '0';
+        });
+</script>
   <div class="btns">
     <a class="btn" href="sileo://source/__BASE__">Thêm vào Sileo</a>
     <a class="btn alt" href="zbra://sources/add/__BASE__">Thêm vào Zebra</a>
