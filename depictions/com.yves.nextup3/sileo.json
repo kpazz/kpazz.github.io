@@ -5,12 +5,12 @@
   "tintColor": "#7B6CF6",
   "tabs": [
     {
-      "tabname": "Details",
+      "tabname": "Thông Tin",
       "class": "DepictionStackView",
       "views": [
         {
           "class": "DepictionHeaderView",
-          "title": "Bổ sung thêm tính năng cho trình phát ios"
+          "title": "Tính năng cho trình phát ios"
         },
         {
           "class": "DepictionMarkdownView",
@@ -19,21 +19,21 @@
         },
      
         { "class": "DepictionSeparatorView" },
-        { "class": "DepictionTableTextView", "title": "Version", "text": "1.2" },
-        { "class": "DepictionTableTextView", "title": "Compatibility", "text": "iOS 14.2, rootless" },
-        { "class": "DepictionTableTextView", "title": "Developer", "text": "Yves" },
-        { "class": "DepictionTableTextView", "title": "Price", "text": "Free" },
+        { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "1.2" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ", "text": "iOS 14.2 trở lên, rootless" },
+        { "class": "DepictionTableTextView", "title": "Tác giả", "text": "Yves" },
+        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "23/10/2026" },
         { "class": "DepictionSeparatorView" },
         {
           "class": "DepictionTableButtonView",
-          "title": "Contact the developer",
-          "action": "/",
+          "title": "Báo Lỗi & Hỗ trợ",
+          "action": "https://facebook.com/KPIads",
           "openExternal": true
         }
       ]
     },
     {
-      "tabname": "Changelog",
+      "tabname": "nhật ký thay đổi",
       "class": "DepictionStackView",
       "views": [
         {
