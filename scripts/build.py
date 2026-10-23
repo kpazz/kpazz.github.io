@@ -90,7 +90,6 @@ def parse_control(text):
 
 
 def version_key(v):
-    # Good enough for x.y.z(-n)(~betaN): ~ sorts before everything, as in dpkg.
     parts = re.split(r"([0-9]+)", v)
     return [(0, int(p)) if p.isdigit() else (1, p.replace("~", "\x00")) for p in parts if p]
 
@@ -103,7 +102,7 @@ def main():
     shutil.copytree(ROOT / "static", OUT)
     (OUT / "pool").mkdir()
 
-    stanzas, newest = [], {}
+    stanzas, newest, pkg_firmware = [], {}, {}
     for deb in sorted((ROOT / "debs").glob("*.deb")):
         fields = parse_control(read_control(deb))
         info = dict(fields)
@@ -113,20 +112,24 @@ def main():
         blob = deb.read_bytes()
 
         # --- TỰ ĐỘNG XỬ LÝ DEPENDS & FIRMWARE ---
-        # Thiết lập các dependency mặc định bạn muốn tự động thêm vào nếu gói chưa có
-        default_depends = "firmware (>= 14.0), mobilesubstrate" # Bạn có thể đổi phiên bản iOS tại đây
-        
+        default_depends = "firmware (>= 14.0), mobilesubstrate"
         has_depends = False
+        depends_val = ""
         for f in fields:
             if f[0] == "Depends":
                 has_depends = True
-                # Nếu trong Depends chưa có khai báo firmware, tự động gộp thêm vào
+                depends_val = f[1]
                 if "firmware" not in f[1].lower():
                     f[1] = f"{f[1]}, firmware (>= 14.0)"
+                    depends_val = f[1]
         
         if not has_depends:
-            # Nếu file deb hoàn toàn không có trường Depends, tự động tạo mới
             fields.append(["Depends", default_depends])
+            depends_val = default_depends
+
+        # Trích xuất số phiên bản firmware từ chuỗi Depends (VD: lấy "14.0" từ "firmware (>= 14.0)")
+        fw_match = re.search(r"firmware\s*\(\>=\s*([0-9\.]+)\)", depends_val, re.IGNORECASE)
+        pkg_firmware[pkg] = fw_match.group(1) if fw_match else "14.0"
         # ----------------------------------------
 
         for key, field in (("AUTHOR", "Author"), ("MAINTAINER", "Maintainer")):
@@ -168,6 +171,7 @@ def main():
         if len(rel) >= 3 and rel[0] == "depictions":
             pkg = rel[1]
             text = text.replace("__VERSION__", newest.get(pkg, "-"))
+            text = text.replace("__DEPENDS__", pkg_firmware.get(pkg, "14.0"))
             log = OUT / "depictions" / pkg / "changelog.md"
             if "__CHANGELOG__" in text:
                 md = log.read_text(encoding="utf-8") if log.exists() else "No changes listed."
