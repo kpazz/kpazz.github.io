@@ -16,7 +16,7 @@ Release.gpg. Sileo and Zebra accept an unsigned repo, so this is optional.
 Needs only Python 3. dpkg-deb is used as a fallback for control.tar.zst when the zstd module is missing.
 """
 import bz2, gzip, hashlib, io, json, lzma, os, re, shutil, subprocess, sys, tarfile
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -99,7 +99,6 @@ def auto_translate_to_vietnamese(text):
     if not text:
         return text
     
-    # Từ điển dịch các cụm từ/câu phổ biến trong Tweak iOS
     dictionary = {
         "new Debian package": "Gói Debian mới",
         "takes CarPlay beyond what Apple allows": "đưa CarPlay vượt ra ngoài giới hạn của Apple",
@@ -120,7 +119,6 @@ def auto_translate_to_vietnamese(text):
 
     translated = text
     for en, vi in dictionary.items():
-        # Không phân biệt hoa thường khi tìm kiếm từ khóa
         translated = re.sub(re.escape(en), vi, translated, flags=re.IGNORECASE)
     
     return translated
@@ -134,7 +132,7 @@ def main():
     shutil.copytree(ROOT / "static", OUT)
     (OUT / "pool").mkdir()
 
-    stanzas, newest, pkg_firmware, pkg_author, pkg_name, pkg_edition = [], {}, {}, {}, {}, {}
+    stanzas, newest, pkg_firmware, pkg_author, pkg_name, pkg_edition, pkg_description = [], {}, {}, {}, {}, {}, {}
     for deb in sorted((ROOT / "debs").glob("*.deb")):
         fields = parse_control(read_control(deb))
         info = dict(fields)
@@ -171,10 +169,12 @@ def main():
         pkg_edition[pkg] = edition_text
 
         # --- TỰ ĐỘNG DỊCH VÀ CHÈN NHÃN VÀO DESCRIPTION ---
+        raw_desc = info.get("Description", "")
+        translated_desc = auto_translate_to_vietnamese(raw_desc)
+        pkg_description[pkg] = translated_desc
+
         for f in fields:
             if f[0] == "Description":
-                # Dịch nội dung mô tả sang tiếng Việt tự động
-                translated_desc = auto_translate_to_vietnamese(f[1])
                 desc_lines = translated_desc.splitlines()
                 if desc_lines and not desc_lines[0].startswith("["):
                     desc_lines[0] = f"{edition_label} {desc_lines[0]}"
@@ -218,8 +218,10 @@ def main():
             newest[pkg] = ver
         print(f"  {pkg} {ver}  <- {deb.name}")
 
-    current_date = datetime.now().strftime("%d/%m/%Y")
-    current_time = datetime.now().strftime("%H:%M")
+    # --- THỜI GIAN CHUẨN MÚI GIỜ VIỆT NAM (UTC+7) ---
+    tz_vn = timezone(timedelta(hours=7))
+    current_date = datetime.now(tz_vn).strftime("%d/%m/%Y")
+    current_time = datetime.now(tz_vn).strftime("%H:%M")
 
     # Templates
     for f in list(OUT.rglob("*.html")) + list(OUT.rglob("*.json")):
@@ -232,6 +234,7 @@ def main():
             text = text.replace("__AUTHOR__", pkg_author.get(pkg, "Unknown"))
             text = text.replace("__NAME__", pkg_name.get(pkg, pkg))
             text = text.replace("__EDITION__", pkg_edition.get(pkg, "Quốc Tế"))
+            text = text.replace("__DESCRIPTION__", pkg_description.get(pkg, ""))
             text = text.replace("__DATE__", current_date)
             text = text.replace("__TIME__", current_time)
             log = OUT / "depictions" / pkg / "changelog.md"
@@ -280,4 +283,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
