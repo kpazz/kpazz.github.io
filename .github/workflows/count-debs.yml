@@ -25,16 +25,17 @@ jobs:
 
       - name: Count files and save to static/deb-count.json
         run: |
-          # Đếm số lượng file .deb trong thư mục debs
+          # Tạo thư mục static nếu chưa có
+          mkdir -p static
+          
+          # Đếm chính xác số lượng file .deb (hỗ trợ cả tìm kiếm trong thư mục con)
           COUNT=$(find debs -name "*.deb" | wc -l)
           
-          # Đảm bảo có thư mục static và tạo file JSON trong đó
-          mkdir -p static
+          # Ghi kết quả ra file JSON
           echo "{\"count\": $COUNT}" > static/deb-count.json
           
-          # Đưa file vào git
+          # Kiểm tra git status và commit/push nếu có thay đổi
+          git status
           git add static/deb-count.json
-
-      - name: Commit and push changes
-        run: |
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb count to $COUNT on gh-pages [skip ci]" && git push origin gh-pages)
+          git commit -m "Auto-update deb count to $COUNT" || echo "No changes to commit"
+          git push
