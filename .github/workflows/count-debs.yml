@@ -2,41 +2,39 @@ name: Auto Count Debs
 
 on:
   push:
+    branches:
+      - gh-pages # Lắng nghe sự kiện khi bạn đẩy code trực tiếp lên nhánh gh-pages
     paths:
-      - 'debs/**' # Chỉ chạy khi có thay đổi trong thư mục debs
+      - 'debs/**'
 
 jobs:
   count:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Cấp quyền cho bot được phép push code lên repo
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Tải toàn bộ lịch sử để thao tác giữa các nhánh
+          ref: gh-pages # Bắt buộc checkout thẳng vào nhánh gh-pages
 
       - name: Configure Git Identity
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Switch to gh-pages branch and count files
+      - name: Count files and save to static/deb-count.json
         run: |
-          # Chuyển sang nhánh gh-pages
-          git checkout gh-pages || git checkout -b gh-pages
-          
           # Đếm số lượng file .deb trong thư mục debs
           COUNT=$(find debs -name "*.deb" | wc -l)
           
-          # Đảm bảo thư mục static tồn tại, sau đó ghi file deb-count.json vào trong static/
+          # Đảm bảo có thư mục static và tạo file JSON trong đó
           mkdir -p static
           echo "{\"count\": $COUNT}" > static/deb-count.json
           
           # Đưa file vào git
           git add static/deb-count.json
 
-      - name: Commit and push changes to gh-pages
+      - name: Commit and push changes
         run: |
-          # Kiểm tra thay đổi và push lên nhánh gh-pages
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb count to $COUNT in static [skip ci]" && git push origin gh-pages)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update deb count to $COUNT on gh-pages [skip ci]" && git push origin gh-pages)
