@@ -1,6 +1,6 @@
 Package: com.anlai.omnicar
 Name: OmniCar
-Description: The power of CarPlay.
+Description: [Quốc Tế] The power of CarPlay.
  OmniCar takes CarPlay beyond what Apple allows: more freedom, more features and everything you need on the road, in one package.
  .
  APP BRIDGE
@@ -56,7 +56,7 @@ SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 
 Package: com.kpazz.aimpro
 Name: AIM Pro (Rootless)
-Description: Màn hình khóa ngày và giờ phong cách iOS 16
+Description: [Quốc Tế] Màn hình khóa ngày và giờ phong cách iOS 16
 Maintainer: alimaulana
 Author: alimaulana
 Section: Tweaks
@@ -74,7 +74,7 @@ SHA256: 92e0172d3912c93dd341cbfbc732f10dac63665600d190d5a8628777abbfe5ce
 
 Package: com.kpazz.evocenter
 Name: Evo Center (Rootless)
-Description: Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
+Description: [Quốc Tế] Mang trải nghiệm Trung tâm điều khiển hiện đại kiểu iOS 18 lên các phiên bản iOS cũ.
 Maintainer: chatgpt5.6sol, chatgpt6.1sol, JaySuen
 Author: chatgpt5.6sol, chatgpt6.1sol, JaySuen
 Section: Tweaks
@@ -99,7 +99,7 @@ Section: Applications
 Architecture: iphoneos-arm64
 Maintainer: KPazz Repo
 Author: Tim Apple
-Description: Thiết bị đầu cuối Apple gốc bí mật cho iOS
+Description: [Quốc Tế] Thiết bị đầu cuối Apple gốc bí mật cho iOS
 Icon: https://repo.cypwn.xyz/packages/Terminal-Rootless/icon.png
 Filename: pool/com.kpazz.terminal_1.11.2_iphoneos-arm64.deb
 Size: 18277644
@@ -110,7 +110,7 @@ SHA256: 67681bbefbad1bfd81a9438dcf5a791c36d418447f54dec5c9c7fd8e7ab3e7b4
 Package: com.kpazz.ytlite
 Name: Youtube Plus (Rootless)
 Depends: mobilesubstrate
-Description: Tính năng nâng cao cho youtube
+Description: [Quốc Tế] Tính năng nâng cao cho youtube
 Maintainer: dvntm
 Author: dvntm
 Section: Tweaks
@@ -133,7 +133,7 @@ Architecture: iphoneos-arm64
 Version: 1.0.5
 Depends: mobilesubstrate (>= 0.9.5000), com.mrgcgamer.libgcuniversal, firmware (>= 14), firmware (<< 16), preferenceloader
 Conflicts: ch.mdaus.utils, com.johnzaro.perfectmusic13, com.p2kdev.tinywidget, com.laughingquoll.quart, com.tako3s.printemps, com.teslaman3092.16player, xyz.cypwn.16player
-Description: 16Player - tinh chỉnh tốt nhất để đưa trình phát nhạc màn hình khóa iOS 16 lên iPhone hoặc iPad chạy iOS 14 hoặc iOS 15 của bạn.
+Description: [Quốc Tế] 16Player - tinh chỉnh tốt nhất để đưa trình phát nhạc màn hình khóa iOS 16 lên iPhone hoặc iPad chạy iOS 14 hoặc iOS 15 của bạn.
 Icon: https://kpazz.github.io/CydiaIcon.png
 Author: tesla_man, Bibi Fire <computerman939+16playersupport@gmail.com>
 Filename: pool/com.teslaman3092.16player_1.0.5_iphoneos-arm64.deb
@@ -144,7 +144,7 @@ SHA256: c3396f6bd858885e490f75c6ddba23490beed3d593015e9140580d8e54db72f8
 
 Package: com.yves.crescendo
 Name: Crescendo
-Description: Brings back the Lock Screen volume slider
+Description: [Quốc Tế] Brings back the Lock Screen volume slider
  Adds the volume slider back to the Lock Screen and the Dynamic Island.
 Maintainer: Yves <85767885+Yves000@users.noreply.github.com>
 Author: Yves <85767885+Yves000@users.noreply.github.com>
@@ -162,7 +162,7 @@ SHA256: 8a632f3266b6cb7215ed023ce2be19dfcdde81edd17e1c382029d291703792a4
 
 Package: com.yves.nextup3
 Name: NextUp 3
-Description: See and skip the upcoming track right from the now-playing UI
+Description: [Quốc Tế] See and skip the upcoming track right from the now-playing UI
  Works with Apple Music, Apple Podcasts, YouTube, YouTube Music, Spotify and SoundCloud on
  iOS 14.2 - 26, in the Lock Screen, Control Center and Dynamic Island.
 Maintainer: Yves <85767885+Yves000@users.noreply.github.com>
