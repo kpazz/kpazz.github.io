@@ -31,7 +31,7 @@
         },
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên Bản", "text": "1.0.3" },
-        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "15.0" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.0 Trở lên" },
         { "class": "DepictionTableTextView", "title": "Môi trường JB", "text": "rootless" },
         { "class": "DepictionTableTextView", "title": "Tác Giả", "text": "OmniCar" },
         { "class": "DepictionTableTextView", "title": "Phát Hành", "text": "Free" },

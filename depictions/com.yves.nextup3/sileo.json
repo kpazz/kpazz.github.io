@@ -20,7 +20,7 @@
      
         { "class": "DepictionSeparatorView" },
         { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "1.2" },
-        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.2 trở lên" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "14.0 Trở lên" },
         { "class": "DepictionTableTextView", "title": "Môi Trường JB", "text": "rootless" },
         { "class": "DepictionTableTextView", "title": "Tác giả", "text": "Yves" },
         { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "24/10/2026" },
