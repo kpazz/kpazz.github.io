@@ -93,12 +93,13 @@
               return response.json();
           })
           .then(data => {
-              console.log("Số lượng deb lấy được:", data.count);
-              document.getElementById('deb-count').innerText = data.count;
+              // Lấy số đếm từ file JSON và cộng thêm 1
+              const adjustedCount = Number(data.count) + 1;
+              console.log("Số lượng deb thực tế (đã +1):", adjustedCount);
+              document.getElementById('deb-count').innerText = adjustedCount;
           })
           .catch(error => {
               console.error('Lỗi khi fetch:', error);
-              // Nếu không lấy được file, thử tìm thêm ở đường dẫn tuyệt đối tĩnh 'deb-count.json'
               document.getElementById('deb-count').innerText = '!';
           });
   </script>
