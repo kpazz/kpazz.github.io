@@ -1,0 +1,48 @@
+{
+  "minVersion": "0.1",
+  "class": "DepictionTabView",
+  "headerImage": "__BASE__depictions/kpazz.icon/header.png",
+  "tintColor": "#7B6CF6",
+  "tabs": [
+    {
+      "tabname": "Thông Tin __NAME__",
+      "class": "DepictionStackView",
+      "views": [
+        {
+          "class": "DepictionHeaderView",
+          "title": "Bản cập nhật hiện tại __VERSION__"
+        },
+        {
+          "class": "DepictionMarkdownView",
+    "useSpacing": true,
+   "markdown": "__DESCRIPTION__"
+        },
+     
+        { "class": "DepictionSeparatorView" },
+        { "class": "DepictionTableTextView", "title": "Phiên bản", "text": "__VERSION__" },
+        { "class": "DepictionTableTextView", "title": "Hỗ trợ ios", "text": "__DEPENDS__" },
+        { "class": "DepictionTableTextView", "title": "Ngày cập nhật", "text": "__TIME__, __DATE__" },
+        { "class": "DepictionTableTextView", "title": "Ngôn ngữ", "text": "__EDITION__" },
+        { "class": "DepictionTableTextView", "title": "Tác Giả", "text": "__AUTHOR__" },
+        { "class": "DepictionSeparatorView" },
+        {
+          "class": "DepictionTableButtonView",
+          "title": "Báo Lỗi & Hỗ trợ",
+          "action": "https://facebook.com/KPIads",
+          "openExternal": true
+        }
+      ]
+    },
+    {
+      "tabname": "nhật ký thay đổi",
+      "class": "DepictionStackView",
+      "views": [
+        {
+          "class": "DepictionMarkdownView",
+          "useSpacing": true,
+          "markdown": "__CHANGELOG__"
+        }
+      ]
+    }
+  ]
+}
