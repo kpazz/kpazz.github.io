@@ -29,6 +29,41 @@
           background:var(--btn); }
   a.btn.alt { background:var(--card); color:var(--ink); border:1px solid var(--line); }
   a.more { color:var(--sub); font-size:15px; }
+
+  /* CSS cho phần Thống kê */
+  .stats-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .stat-val {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    color: #8B5CF6;
+  }
+  .stat-val.status {
+    color: #10B981;
+  }
+  .stat-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--sub);
+    margin-top: 2px;
+  }
+  .stat-divider {
+    height: 32px;
+    width: 1px;
+    background: var(--line);
+  }
 </style>
 </head>
 <body>
@@ -36,38 +71,37 @@
   <img class="icon" src="CydiaIcon.png" alt="">
   <h1>KPazz</h1>
   <p>Tweak & Options</p>
-<!-- Thống kê số lượng deb -->
-<div class="mt-6 bg-slate-900/60 rounded-xl p-4 border border-slate-700/50 flex items-center justify-around">
-    <div>
-        <!-- QUAN TRỌNG: Phải có id="deb-count" ở đây để JS điền số lượng vào -->
-        <span class="block text-2xl font-extrabold text-indigo-400" id="deb-count">...</span>
-        <span class="text-xs text-slate-400 uppercase tracking-wider">Gói Tinh Chỉnh</span>
-    </div>
-    <div class="h-8 w-px bg-slate-700"></div>
-    <div>
-        <span class="block text-2xl font-extrabold text-emerald-400" id="repo-status">Online</span>
-        <span class="text-xs text-slate-400 uppercase tracking-wider">Trạng Thái</span>
-    </div>
-</div>
 
-<script>
-    // Tải file deb-count.json nằm cùng thư mục static/
-    fetch('./deb-count.json?v=' + new Date().getTime())
-        .then(response => {
-            if (!response.ok) throw new Error('Không thể tải file JSON');
-            return response.json();
-        })
-        .then(data => {
-            console.log("Số lượng deb lấy được:", data.count);
-            // Gán con số đếm được vào thẻ có id là deb-count
-            document.getElementById('deb-count').innerText = data.count;
-        })
-        .catch(error => {
-            console.error('Lỗi khi fetch:', error);
-            document.getElementById('deb-count').innerText = '0';
-        });
-</script>
+  <!-- Thống kê số lượng deb -->
+  <div class="stats-card">
+      <div>
+          <span class="stat-val" id="deb-count">...</span>
+          <span class="stat-label">Gói Tinh Chỉnh</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div>
+          <span class="stat-val status" id="repo-status">Online</span>
+          <span class="stat-label">Trạng Thái</span>
+      </div>
+  </div>
 
+  <script>
+      // Đọc file deb-count.json nằm cùng thư mục
+      fetch('deb-count.json?v=' + new Date().getTime())
+          .then(response => {
+              if (!response.ok) throw new Error('Không thể tải file JSON');
+              return response.json();
+          })
+          .then(data => {
+              console.log("Số lượng deb lấy được:", data.count);
+              document.getElementById('deb-count').innerText = data.count;
+          })
+          .catch(error => {
+              console.error('Lỗi khi fetch:', error);
+              // Nếu không lấy được file, thử tìm thêm ở đường dẫn tuyệt đối tĩnh 'deb-count.json'
+              document.getElementById('deb-count').innerText = '!';
+          });
+  </script>
 
   <div class="btns">
     <a class="btn" href="sileo://source/__BASE__">Thêm vào Sileo</a>
