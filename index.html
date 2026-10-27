@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KPazz - Tải xuống APK & Mẹo Công Nghệ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        uptoBg: '#0b161c',       
+                        uptoHeader: '#0b161c',   
+                        uptoCard: '#13222a',     
+                        uptoCardHover: '#1a2c37',
+                        uptoAccent: '#00baa3',   
+                        uptoBlueBtn: '#00a8e8',
+                        uptoGreenBadge: '#3cb64e',
+                        uptoOrangeBadge: '#e58e26',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Chống Zoom trên iOS & Thiết bị di động */
+        html, body {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: 100%;
+            transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input, select, textarea {
+            font-size: 16px !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .section-title {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .section-arrow {
+            color: #00baa3;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .app-icon-squircle {
+            border-radius: 22%;
+        }
+
+        /* Hero Slider Custom Styles */
+        .card-slider-container {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-card {
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            opacity: 0.6;
+            transform: scale(0.9);
+            border: 1.5px solid transparent;
+        }
+
+        .hero-card.active-card {
+            opacity: 1;
+            transform: scale(1);
+            border-color: #e56338;
+            box-shadow: 0 10px 25px -5px rgba(229, 99, 56, 0.3);
+        }
+
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Hiệu ứng NẢY MỞ POPUP (Pop In) */
+        @keyframes modalBounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.6) translateY(30px);
+            }
+            65% {
+                opacity: 1;
+                transform: scale(1.04) translateY(-4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Hiệu ứng NẢY ĐÓNG POPUP (Pop Out) */
+        @keyframes modalBounceOut {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            30% {
+                transform: scale(1.03) translateY(-2px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.65) translateY(20px);
+            }
+        }
+
+        .animate-pop-in {
+            animation: modalBounceIn 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .animate-pop-out {
+            animation: modalBounceOut 0.28s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+        }
+
+        mark {
+            background-color: #00baa3;
+            color: #ffffff;
+            border-radius: 2px;
+            padding: 0 3px;
+        }
+    </style>
+</head>
+<body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white transition-colors duration-800 ease-in-out antialiased pb-20">
+
+    <!-- ==================== HEADER (CỐ ĐỊNH Ở ĐỈNH MÀN HÌNH) ==================== -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white shadow-md border-b border-gray-200 dark:border-gray-800/80 transition-colors duration-800 ease-in-out">
+        <div class="flex items-center justify-between px-3.5 py-2.5 max-w-md mx-auto">
+            <!-- Left: Menu & Logo -->
+            <div class="flex items-center space-x-3.5">
+                <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                
+                <a href="#" class="flex items-center space-x-1.5">
+                    <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
+                    </svg>
+                    <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white font-sans transition-colors duration-800">KPazz</span>
+                </a>
+            </div>
+
+            <!-- Right: Action Icons -->
+            <div class="flex items-center space-x-3.5">
+                <button id="themeToggleBtn" aria-label="Toggle Theme" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 text-amber-500 dark:text-yellow-400 flex items-center justify-center text-sm shadow hover:opacity-90 active:scale-90 transition-all duration-500">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <button id="searchOpenBtn" aria-label="Search" class="text-uptoAccent text-xl hover:opacity-80 active:scale-90 transition">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+
+                <button id="profileOpenBtn" aria-label="Account" class="text-uptoAccent text-2xl hover:opacity-80 active:scale-90 transition">
+                    <i class="fa-regular fa-circle-user"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Thanh ngày tháng -->
+        <div class="py-2 px-3.5 bg-gray-100 dark:bg-[#091116] border-t border-gray-200 dark:border-gray-800/50 transition-colors duration-800 ease-in-out">
+            <div class="flex items-center justify-between max-w-md mx-auto text-xs font-bold tracking-wide">
+                <span class="text-uptoAccent flex items-center space-x-1.5">
+                    <i class="fa-solid fa-calendar-day text-sm"></i>
+                    <span>Hôm Nay!</span>
+                </span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 27 tháng 10, 2026</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Khoảng bù chiều cao cho Header Fixed -->
+    <div class="h-28"></div>
+
+    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG ==================== -->
+    <div id="appDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
+        <div id="appDetailCard" class="bg-[#0b161c] text-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-gray-800 relative max-h-[92vh] flex flex-col overflow-hidden">
+            
+            <!-- Nút đóng X luôn cố định nổi bật -->
+            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-800/90 hover:bg-gray-700 text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Khung cuộn nội dung bên trong (Nội dung trượt dưới gầm nút tải & nút X) -->
+            <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-6 pr-1 pb-20 pt-2">
+                
+                <!-- PHẦN 1: THÔNG TIN CHÍNH & RATING -->
+                <div class="space-y-4 pt-1">
+                    <div class="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
+                        <span>ANDROID</span>
+                        <span>/</span>
+                        <span>TRÒ CHƠI</span>
+                        <span>/</span>
+                        <span>PHIÊU LƯU HÀNH ĐỘNG</span>
+                        <span>/</span>
+                        <span id="detailBreadcrumbName" class="text-gray-200 font-extrabold truncate">LARA CROFT: TEMPLE OF OSIRIS</span>
+                    </div>
+
+                    <div class="flex items-start space-x-3.5">
+                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border border-gray-700/80 shadow-lg flex-shrink-0">
+                        <div class="flex-1 min-w-0 pr-4">
+                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight">Lara Croft: Temple of Osiris</h2>
+                            <p id="detailAppVersion" class="text-xs text-gray-400 mt-1 font-medium">1.2.3RC2</p>
+                            <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-semibold mt-1">Feral Interactive</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-gray-800/80 text-center">
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="flex items-center space-x-1 font-extrabold text-base text-white">
+                                <i class="fa-solid fa-star text-gray-400 text-sm"></i>
+                                <span id="detailRatingScore">4.8</span>
+                            </div>
+                            <p class="text-[11px] text-gray-400 mt-0.5 font-medium flex items-center justify-center">
+                                <span>6 đánh giá</span>
+                                <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
+                            </p>
+                        </div>
+                        <div class="border-x border-gray-800/80 flex flex-col items-center justify-center px-1">
+                            <span id="detailDownloadCount" class="font-extrabold text-base text-white">832</span>
+                            <p class="text-[11px] text-gray-400 mt-0.5 font-medium">tải xuống</p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <div class="w-5 h-5 rounded-md bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <p class="text-[11px] text-gray-400 mt-1 font-medium flex items-center justify-center">
+                                <span>bảo mật</span>
+                                <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHẦN 2: ĐIỂM NỔI BẬT, YÊU CẦU & MÔ HÌNH PHÂN PHỐI -->
+                <div class="space-y-4">
+                    <div class="bg-[#0e212b] border border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-200 leading-relaxed shadow-inner">
+                        <h4 id="detailHighlightTitle" class="font-bold text-white text-sm">Lara Croft: Temple of Osiris dành cho bạn nếu</h4>
+                        <ul class="space-y-2 text-[11px] text-gray-300">
+                            <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn một game ARPG kịch tính kết hợp bắn súng twin-stick, đi cảnh và giải đố trong bối cảnh Ai Cập thần thoại.</span></li>
+                            <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn đánh giá cao việc được chơi thử miễn phí trọn vẹn chương đầu trước khi quyết định mua một lần cho toàn bộ trò chơi.</span></li>
+                            <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn thích những cuộc phiêu lưu co-op tối đa bốn người chơi, hệ thống loot tùy biến sâu và trải nghiệm mượt mà với tay cầm ngoài.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-0.5">
+                        <h4 class="font-bold text-sm text-white">Yêu cầu <span class="font-normal text-gray-400 text-xs">(Phiên bản mới nhất)</span></h4>
+                        <p class="text-xs text-gray-400">Cần cài đặt Android phiên bản 13 trở lên</p>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <h4 class="font-bold text-sm text-white">Thông tin về <span id="detailInfoTitle" class="text-gray-200">Lara Croft: Temple of Osiris 1.2.3RC2</span></h4>
+                        <p class="text-xs font-semibold text-gray-400">Thông tin cơ bản</p>
+
+                        <div class="grid grid-cols-2 gap-3 text-xs pt-1">
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                    <i class="fa-solid fa-building text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-400">Nhà phát triển</p>
+                                    <p id="detailDevInfo" class="font-bold text-gray-200 underline cursor-pointer">Feral Interactive</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                    <i class="fa-solid fa-list-check text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-400">Phân loại</p>
+                                    <p id="detailCategoryInfo" class="font-bold text-gray-200 underline cursor-pointer">Phiêu lưu Hành động</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                    <i class="fa-solid fa-circle-info text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-400">Phân loại tuổi</p>
+                                    <p class="font-bold text-gray-200">+12</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center space-x-2.5">
+                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                    <i class="fa-solid fa-globe text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-gray-400">Ngôn ngữ</p>
+                                    <p class="font-bold text-gray-200">tiếng Việt <span class="underline text-gray-400 font-normal">7 khác</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tiêu đề Mô hình phân phối (Mốc kích hoạt nút tải nổi cố định) -->
+                    <div id="distributionAnchor" class="pt-2">
+                        <p class="text-xs font-semibold text-gray-400 mb-1.5">Mô hình phân phối</p>
+                    </div>
+                </div>
+
+                <!-- PHẦN 3: XẾP HẠNG, ĐÁNH GIÁ & TAGS -->
+                <div class="space-y-4 pt-2 border-t border-gray-800/80">
+                    <div class="space-y-3">
+                        <a href="#" class="flex items-center justify-between text-sm font-bold text-white hover:text-uptoAccent transition">
+                            <span>Xếp hạng Ứng dụng này</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
+                        </a>
+
+                        <div class="flex items-center justify-between px-2">
+                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-700">
+                            <div class="flex items-center space-x-2 text-2xl text-gray-600">
+                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-[#00a8e8] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow">
+                            ĐÁNH GIÁ ỨNG DỤNG
+                        </button>
+
+                        <div class="grid grid-cols-2 gap-2 text-[10px] font-bold uppercase tracking-wider text-gray-200">
+                            <button class="border border-gray-700 py-2 rounded-xl flex items-center justify-center space-x-1.5 hover:bg-gray-800 transition">
+                                <i class="fa-regular fa-heart"></i>
+                                <span>THÊM VÀO MONG WEỐN</span>
+                            </button>
+                            <button class="border border-gray-700 py-2 rounded-xl flex items-center justify-center space-x-1.5 hover:bg-gray-800 transition">
+                                <i class="fa-regular fa-bookmark"></i>
+                                <span>THÊM VÀO ĐỀ XUẤT</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <h4 class="font-bold text-sm text-white">Xếp hạng</h4>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-center">
+                                <span class="text-5xl font-black text-gray-300 tracking-tighter leading-none">4.8</span>
+                                <p class="text-[10px] text-gray-400 mt-2 flex items-center justify-center">
+                                    <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
+                                    <span>6 đánh giá</span>
+                                </p>
+                            </div>
+                            <div class="flex-1 space-y-1 text-[10px] text-gray-400 font-bold">
+                                <div class="flex items-center space-x-2">
+                                    <span>5</span>
+                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-cyan-500 w-[85%]"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span>4</span>
+                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-cyan-500 w-[15%]"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span>3</span>
+                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span>2</span>
+                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span>1</span>
+                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 pt-2">
+                        <a href="#" class="flex items-center justify-between text-sm font-bold text-white hover:text-uptoAccent transition">
+                            <span>Đánh giá</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
+                        </a>
+
+                        <div class="flex items-start space-x-3 bg-gray-900/60 p-3 rounded-2xl border border-gray-800">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                                <i class="fa-solid fa-desktop text-lg"></i>
+                            </div>
+                            <div class="flex-1 min-w-0 text-xs space-y-1">
+                                <p class="font-bold text-uptoBlueBtn truncate">adorableredgrape48365</p>
+                                <div class="flex text-amber-400 text-[10px] space-x-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                    <span class="text-gray-500 ml-2 font-normal">2 tháng trước</span>
+                                </div>
+                                <p class="text-gray-300 pt-0.5">rất tốt</p>
+                                <div class="flex items-center space-x-4 text-[10px] text-gray-400 font-bold pt-1">
+                                    <button class="flex items-center space-x-1 hover:text-white"><i class="fa-solid fa-heart"></i><span>Thích</span></button>
+                                    <button class="flex items-center space-x-1 hover:text-white"><i class="fa-solid fa-comment-dots"></i><span>Trả lời</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2 pb-6">
+                        <h4 class="font-bold text-xs text-white">Ứng dụng có thể khiến bạn quan tâm</h4>
+                        <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar text-[10px] font-bold text-gray-200 uppercase whitespace-nowrap">
+                            <span class="bg-gray-800 px-3 py-2 rounded-xl border border-gray-700">TRÒ CHƠI CÓ HỖ TRỢ BỘ ĐIỀU KHIỂN</span>
+                            <span class="bg-gray-800 px-3 py-2 rounded-xl border border-gray-700">TRÒ CHƠI HỢP TÁC</span>
+                            <span class="bg-gray-800 px-3 py-2 rounded-xl border border-gray-700">NHÂN VẬT NỮ CHÍNH</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NÚT TẢI PHIÊN BẢN MỚI NHẤT CỐ ĐỊNH Ở ĐÁY POPUP (CHỈ HIỆN KHI LƯỚT TỚI VỊ TRÍ PHÂN PHỐI) -->
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
+                <button class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto">
+                    <div class="text-left">
+                        <h4 class="font-black text-sm leading-tight">Tải phiên bản mới nhất</h4>
+                        <p class="text-[10px] text-cyan-100 opacity-90 mt-0.5">1.2.3RC2 &bull; 27 Th10 2026</p>
+                    </div>
+                    <i class="fa-solid fa-download text-lg pr-1"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== SEARCH OVERLAY MODAL ==================== -->
+    <div id="searchModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="searchBoxContainer" class="max-w-md w-full bg-white dark:bg-[#13222a] rounded-3xl p-4 border border-gray-200 dark:border-gray-700 shadow-2xl transition-colors duration-800 flex flex-col max-h-[80vh] overflow-hidden">
+            <div class="flex items-center justify-between w-full mb-3 pb-2.5 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+                <div class="relative w-full mr-2">
+                    <input type="text" id="searchInput" placeholder="Tìm từ bất kỳ trong trang..." class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:border-uptoAccent text-base shadow-inner">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
+                </div>
+                <button id="searchCloseBtn" class="text-gray-500 dark:text-gray-300 text-sm font-semibold px-2 hover:text-uptoAccent">Hủy</button>
+            </div>
+            
+            <div id="searchResults" class="overflow-y-auto no-scrollbar text-gray-800 dark:text-gray-200 text-sm space-y-2.5 flex-1 pr-1">
+                <p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP ĐĂNG NHẬP ==================== -->
+    <div id="loginModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div id="loginCard" class="bg-white dark:bg-[#13222a] text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-gray-200 dark:border-gray-700 relative transition-colors duration-800">
+            <button id="loginCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold tracking-tight">Đăng Nhập</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Chào mừng bạn quay trở lại KPazz</p>
+            </div>
+
+            <form id="loginForm" class="space-y-4" onsubmit="event.preventDefault();">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản hoặc Số điện thoại</label>
+                    <input type="text" required placeholder="Nhập username hoặc SĐT" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu</label>
+                    <input type="password" required placeholder="••••••••" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+
+                <div class="flex items-center justify-end">
+                    <a href="#" class="text-xs text-uptoAccent hover:underline font-medium">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95">
+                    Đăng Nhập
+                </button>
+            </form>
+
+            <div class="mt-5 pt-4 border-t border-gray-200 dark:border-gray-800 text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Chưa có tài khoản?</p>
+                <button id="openRegisterBtn" class="w-full bg-transparent border border-uptoAccent text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
+                    Tạo tài khoản mới
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP ĐĂNG KÝ ==================== -->
+    <div id="registerModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div id="registerCard" class="bg-white dark:bg-[#13222a] text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-gray-200 dark:border-gray-700 relative transition-colors duration-800">
+            <button id="registerCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="text-center mb-5">
+                <h3 class="text-xl font-bold tracking-tight">Tạo Tài Khoản</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Trở thành thành viên cộng đồng KPazz</p>
+            </div>
+
+            <form id="registerForm" class="space-y-3.5" onsubmit="event.preventDefault();">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản *</label>
+                    <input type="text" required placeholder="Nhập tên tài khoản" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Số điện thoại *</label>
+                    <input type="tel" required placeholder="Nhập số điện thoại" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Email (không bắt buộc)</label>
+                    <input type="email" placeholder="example@gmail.com" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu *</label>
+                    <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                </div>
+
+                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2">
+                    Hoàn Tất Đăng Ký
+                </button>
+            </form>
+
+            <div class="mt-4 pt-3 border-t border-gray-200 dark:border-gray-800 text-center">
+                <p class="text-xs text-gray-500 dark:text-gray-400">Đã có tài khoản? <button id="backToLoginBtn" class="text-uptoAccent font-bold hover:underline">Đăng nhập</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIDEBAR NAVIGATION DRAWER -->
+    <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-72 bg-white dark:bg-[#091116] text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between">
+        <div>
+            <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
+                    </svg>
+                    <span class="text-lg font-bold tracking-tight">KPazz</span>
+                </div>
+                <button id="drawerCloseBtn" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <nav class="p-3 space-y-1 text-sm">
+                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold">
+                    <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                    <i class="fa-solid fa-gamepad w-5 text-center"></i><span>Trò chơi</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                    <i class="fa-solid fa-shapes w-5 text-center"></i><span>Ứng dụng</span>
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 text-xs text-gray-500 text-center">KPazz App Store & Community</div>
+    </div>
+    <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="max-w-md mx-auto pt-3 space-y-6">
+
+        <!-- HERO SLIDER -->
+        <section id="heroSection" class="relative w-full overflow-hidden py-1">
+            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw]">
+                
+                <!-- Slide 1 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Zenless Zone Zero" data-app-dev="HoYoverse" data-app-img="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Zenless Zone Zero" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>15.02.2022</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Zenless Zone Zero</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>75</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-card active-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Apex Legends Mobile" data-app-dev="Electronic Arts" data-app-img="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80" alt="Apex Legends" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>15.02.2022</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/90 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-base text-gray-900 dark:text-white truncate">Apex Legends</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/50 px-2.5 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-extrabold flex items-center justify-center text-[8px]">B</span>
+                                <span>75</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/50 px-2.5 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-[8px]">T</span>
+                                <span>Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="H.I.D Choice" data-app-dev="HID Studio" data-app-img="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="H.I.D Choice" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>15.02.2022</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">H.I.D Choice</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>75</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>$49.97</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Subway Surfers" data-app-dev="SYBO Games" data-app-img="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Subway Surfers" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>20.10.2026</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Subway Surfers</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>90</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Super Mario Odyssey" data-app-dev="Nintendo" data-app-img="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=600&q=80" alt="Super Mario Odyssey" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>12.08.2026</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Super Mario Odyssey</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>120</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>$59.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Call of Duty: Mobile" data-app-dev="Activision" data-app-img="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Call of Duty Mobile" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>05.09.2026</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Call of Duty: Mobile</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>85</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 7 -->
+                <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                     data-app-name="Genshin Impact" data-app-dev="HoYoverse" data-app-img="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80">
+                    <div class="relative h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Genshin Impact" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[9px]"></i>
+                            <span>28.09.2026</span>
+                        </div>
+                        <div class="absolute bottom-3 left-3 bg-black/80 border border-gray-700/80 px-3 py-1 rounded-full text-[11px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                            <span>Playing</span>
+                        </div>
+                    </div>
+                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Genshin Impact</h3>
+                        <div class="flex items-center justify-center space-x-2 mt-1.5">
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-amber-600 text-black font-bold flex items-center justify-center text-[8px]">B</span>
+                                <span>95</span>
+                            </div>
+                            <div class="flex items-center space-x-1 bg-black/40 px-2 py-0.5 rounded-full text-[10px] text-gray-200">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[8px]">T</span>
+                                <span>Free</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HORIZONTAL CIRCLE AVATARS ROW -->
+        <section class="overflow-x-auto no-scrollbar py-0.5 px-3.5">
+            <div class="flex items-center space-x-3.5 min-w-max px-0.5">
+                <button class="w-12 h-12 rounded-full bg-uptoAccent flex items-center justify-center text-white shadow-md active:scale-95 transition">
+                    <i class="fa-solid fa-play text-lg translate-x-0.5"></i>
+                </button>
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-amber-800 flex items-center justify-center cursor-pointer shadow">
+                    <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Minecraft">
+                </div>
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-gray-800 flex items-center justify-center cursor-pointer shadow">
+                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Character">
+                </div>
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-amber-900 cursor-pointer shadow">
+                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="King">
+                </div>
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-slate-700 cursor-pointer shadow">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Grandma">
+                </div>
+                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-cyan-900 cursor-pointer shadow">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Officer">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: NHẬP VAI HÀNH ĐỘNG -->
+        <section class="space-y-3 px-3.5">
+            <a href="#" class="section-title text-gray-900 dark:text-white">
+                <span>Nhập vai hành động</span>
+                <i class="fa-solid fa-chevron-right section-arrow"></i>
+            </a>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="app-card-clickable bg-gray-100 dark:bg-uptoCard rounded-2xl p-2.5 flex space-x-3 items-center border border-gray-200 dark:border-gray-800/80 cursor-pointer hover:bg-gray-200 dark:hover:bg-uptoCardHover transition"
+                     data-app-name="Lara Croft: Temple of Osiris" data-app-dev="Feral Interactive" data-app-img="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80">
+                    <div class="w-28 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover" alt="Lara Croft">
+                    </div>
+                    <div class="flex-1 min-w-0 pr-1">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-7 h-7 rounded-full object-cover border border-gray-400 flex-shrink-0" alt="Icon">
+                            <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Lara Croft: Temple of Osiris</h4>
+                        </div>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2 mt-1.5">Khám phá Ai Cập cùng Lara Croft</p>
+                    </div>
+                </div>
+
+                <div class="app-card-clickable bg-gray-100 dark:bg-uptoCard rounded-2xl p-2.5 flex space-x-3 items-center border border-gray-200 dark:border-gray-800/80 cursor-pointer hover:bg-gray-200 dark:hover:bg-uptoCardHover transition"
+                     data-app-name="Broken Soul" data-app-dev="Indie Game Studio" data-app-img="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80">
+                    <div class="w-28 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover filter blur-[0.5px]" alt="Broken Soul Background">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                    </div>
+                    <div class="flex-1 min-w-0 pr-1">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-7 h-7 rounded-full object-cover border border-gray-400 flex-shrink-0" alt="Icon">
+                            <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Broken Soul</h4>
+                        </div>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2 mt-1.5">Rpg hành động 2D đầy thách thức với chiến đấu kỹ năng</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CẬP NHẬT MỚI NHẤT -->
+        <section class="space-y-3 px-3.5">
+            <a href="#" class="section-title text-gray-900 dark:text-white">
+                <span>Cập nhật mới nhất</span>
+                <i class="fa-solid fa-chevron-right section-arrow"></i>
+            </a>
+
+            <div class="grid grid-cols-4 gap-3">
+                <div class="app-card-clickable flex flex-col items-center cursor-pointer" data-app-name="Seven Net" data-app-dev="Seven & I Holdings" data-app-img="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=150&q=80">
+                    <div class="w-16 h-16 bg-[#2d8d47] app-icon-squircle flex flex-col items-center justify-center p-1 shadow">
+                        <span class="text-white font-black text-xs tracking-tighter leading-none">SEVEN</span>
+                        <span class="text-white font-normal text-[8px] tracking-wider border-t border-white/50 mt-0.5 pt-0.5">NET</span>
+                    </div>
+                </div>
+
+                <div class="app-card-clickable flex flex-col items-center cursor-pointer" data-app-name="Meeff" data-app-dev="Meeff Global" data-app-img="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80">
+                    <div class="w-16 h-16 bg-[#ff4d6d] app-icon-squircle flex items-center justify-center shadow">
+                        <span class="text-white font-bold text-sm tracking-tight">meeff</span>
+                    </div>
+                </div>
+
+                <div class="app-card-clickable flex flex-col items-center cursor-pointer" data-app-name="Gamepad Booster" data-app-dev="Game Studio Pro" data-app-img="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80">
+                    <div class="w-16 h-16 bg-[#2292d0] app-icon-squircle flex items-center justify-center relative overflow-hidden shadow">
+                        <i class="fa-solid fa-gamepad text-3xl text-black"></i>
+                        <div class="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-red-500 via-yellow-400 to-green-500"></div>
+                    </div>
+                </div>
+
+                <div class="app-card-clickable flex flex-col items-center cursor-pointer" data-app-name="T-App" data-app-dev="T-Tech Corp" data-app-img="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80">
+                    <div class="w-16 h-16 bg-[#95c11f] app-icon-squircle flex items-center justify-center shadow">
+                        <span class="text-black font-black text-3xl">T</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- NÚT CUỘN LÊN ĐẦU TRANG -->
+    <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-white shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- FLOATING BOTTOM SAFARI CAPSULE -->
+    <div class="fixed bottom-2.5 inset-x-0 flex justify-center z-30 px-4 pointer-events-none">
+        <div class="pointer-events-auto bg-gray-200/90 dark:bg-[#1b2b34]/95 backdrop-blur-md border border-gray-300 dark:border-gray-700/70 rounded-full px-5 py-2 flex items-center justify-between w-full max-w-xs shadow-2xl transition-colors duration-800 ease-in-out">
+            <i class="fa-solid fa-bars text-xs text-gray-700 dark:text-gray-300"></i>
+            <span class="text-xs font-medium text-gray-800 dark:text-gray-200 tracking-wide">kpazz.github.io</span>
+            <i class="fa-solid fa-rotate-right text-xs text-gray-700 dark:text-gray-300"></i>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. CẬP NHẬT NGÀY THÁNG REALTIME
+        function updateDateHeader() {
+            const dateEl = document.getElementById('currentDateText');
+            if (!dateEl) return;
+            const now = new Date();
+            const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+            const dayName = days[now.getDay()];
+            const day = now.getDate();
+            const month = now.getMonth() + 1;
+            const year = now.getFullYear();
+            dateEl.textContent = `${dayName}, ${day} tháng ${month}, ${year}`;
+        }
+        updateDateHeader();
+
+        // 2. CHẾ ĐỘ SÁNG / TỐI CHUYỂN MÀU CHẬM (0.8s)
+        const htmlEl = document.documentElement;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlEl.classList.add('dark');
+                document.body.classList.remove('bg-white', 'text-gray-900');
+                document.body.classList.add('bg-uptoBg', 'text-white');
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                htmlEl.classList.remove('dark');
+                document.body.classList.remove('bg-uptoBg', 'text-white');
+                document.body.classList.add('bg-white', 'text-gray-900');
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        let currentThemeIsDark = systemPrefersDark.matches;
+        applyTheme(currentThemeIsDark);
+
+        systemPrefersDark.addEventListener('change', (e) => {
+            currentThemeIsDark = e.matches;
+            applyTheme(currentThemeIsDark);
+        });
+
+        themeToggleBtn.addEventListener('click', () => {
+            currentThemeIsDark = !currentThemeIsDark;
+            applyTheme(currentThemeIsDark);
+        });
+
+        // 3. LOGIC NÚT CUỘN LÊN ĐẦU TRANG
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        const heroSection = document.getElementById('heroSection');
+
+        window.addEventListener('scroll', () => {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (window.scrollY > heroBottom) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 4. LOGIC HIỆU ỨNG POPUP NẢY MỞ VÀ NẢY ĐÓNG
+        function openModalWithBounce(modalEl, cardEl) {
+            modalEl.classList.remove('hidden');
+            modalEl.classList.add('flex');
+            cardEl.classList.remove('animate-pop-out');
+            cardEl.classList.add('animate-pop-in');
+        }
+
+        function closeModalWithBounce(modalEl, cardEl, callback) {
+            cardEl.classList.remove('animate-pop-in');
+            cardEl.classList.add('animate-pop-out');
+            setTimeout(() => {
+                modalEl.classList.add('hidden');
+                modalEl.classList.remove('flex');
+                cardEl.classList.remove('animate-pop-out');
+                if (callback) callback();
+            }, 260);
+        }
+
+        function setupBackdropClose(modalEl, cardEl, callback) {
+            modalEl.addEventListener('click', (e) => {
+                if (e.target === modalEl) {
+                    closeModalWithBounce(modalEl, cardEl, callback);
+                }
+            });
+        }
+
+        // App Detail Modal Controller & Sticky Download Bar Logic
+        const appDetailModal = document.getElementById('appDetailModal');
+        const appDetailCard = document.getElementById('appDetailCard');
+        const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
+        const appDetailScrollBody = document.getElementById('appDetailScrollBody');
+        const stickyDownloadBar = document.getElementById('stickyDownloadBar');
+        const distributionAnchor = document.getElementById('distributionAnchor');
+
+        const detailAppName = document.getElementById('detailAppName');
+        const detailAppDeveloper = document.getElementById('detailAppDeveloper');
+        const detailAppIcon = document.getElementById('detailAppIcon');
+        const detailSmallAvatar = document.getElementById('detailSmallAvatar');
+        const detailBreadcrumbName = document.getElementById('detailBreadcrumbName');
+        const detailHighlightTitle = document.getElementById('detailHighlightTitle');
+        const detailInfoTitle = document.getElementById('detailInfoTitle');
+
+        function openAppDetail(name, dev, img) {
+            if (name) {
+                detailAppName.textContent = name;
+                detailBreadcrumbName.textContent = name.toUpperCase();
+                detailHighlightTitle.textContent = `${name} dành cho bạn nếu`;
+                detailInfoTitle.textContent = `${name} 1.2.3RC2`;
+            }
+            if (dev) detailAppDeveloper.textContent = dev;
+            if (img) {
+                detailAppIcon.src = img;
+                detailSmallAvatar.src = img;
+            }
+            openModalWithBounce(appDetailModal, appDetailCard);
+            appDetailScrollBody.scrollTop = 0;
+            stickyDownloadBar.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+        }
+
+        appDetailScrollBody.addEventListener('scroll', () => {
+            const anchorTop = distributionAnchor.offsetTop - appDetailScrollBody.scrollTop;
+            if (anchorTop <= appDetailScrollBody.clientHeight - 120) {
+                stickyDownloadBar.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+                stickyDownloadBar.classList.add('translate-y-0', 'opacity-100');
+            } else {
+                stickyDownloadBar.classList.remove('translate-y-0', 'opacity-100');
+                stickyDownloadBar.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+            }
+        });
+
+        appDetailCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(appDetailModal, appDetailCard);
+        });
+        setupBackdropClose(appDetailModal, appDetailCard);
+
+        document.querySelectorAll('.hero-card, .app-card-clickable').forEach(card => {
+            card.addEventListener('click', () => {
+                const name = card.getAttribute('data-app-name') || card.querySelector('h3, h4')?.textContent;
+                const dev = card.getAttribute('data-app-dev') || 'Feral Interactive';
+                const img = card.getAttribute('data-app-img') || card.querySelector('img')?.src;
+                openAppDetail(name, dev, img);
+            });
+        });
+
+        // Search Modal Controller
+        const searchOpenBtn = document.getElementById('searchOpenBtn');
+        const searchCloseBtn = document.getElementById('searchCloseBtn');
+        const searchModal = document.getElementById('searchModal');
+        const searchBoxContainer = document.getElementById('searchBoxContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        const resetSearch = () => {
+            searchInput.value = '';
+            searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
+        };
+
+        searchOpenBtn.addEventListener('click', () => {
+            openModalWithBounce(searchModal, searchBoxContainer);
+            setTimeout(() => searchInput.focus(), 100);
+        });
+
+        searchCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(searchModal, searchBoxContainer, resetSearch);
+        });
+
+        setupBackdropClose(searchModal, searchBoxContainer, resetSearch);
+
+        // Login & Register Modal Controllers
+        const profileOpenBtn = document.getElementById('profileOpenBtn');
+        const loginModal = document.getElementById('loginModal');
+        const loginCard = document.getElementById('loginCard');
+        const loginCloseBtn = document.getElementById('loginCloseBtn');
+        
+        const registerModal = document.getElementById('registerModal');
+        const registerCard = document.getElementById('registerCard');
+        const registerCloseBtn = document.getElementById('registerCloseBtn');
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+
+        profileOpenBtn.addEventListener('click', () => {
+            openModalWithBounce(loginModal, loginCard);
+        });
+
+        loginCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(loginModal, loginCard);
+        });
+
+        setupBackdropClose(loginModal, loginCard);
+
+        openRegisterBtn.addEventListener('click', () => {
+            closeModalWithBounce(loginModal, loginCard, () => {
+                openModalWithBounce(registerModal, registerCard);
+            });
+        });
+
+        registerCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(registerModal, registerCard);
+        });
+
+        setupBackdropClose(registerModal, registerCard);
+
+        backToLoginBtn.addEventListener('click', () => {
+            closeModalWithBounce(registerModal, registerCard, () => {
+                openModalWithBounce(loginModal, loginCard);
+            });
+        });
+
+        // 5. TÌM KIẾM TOÀN BỘ TỪ TRONG PAGE REALTIME
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (!query) {
+                searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
+                return;
+            }
+
+            const elements = document.querySelectorAll('main h2, main h3, main h4, main h5, main p, main a, main span');
+            let matches = [];
+
+            elements.forEach(el => {
+                const text = el.textContent.trim();
+                if (text && text.toLowerCase().includes(query) && text.length > 2) {
+                    if (!matches.some(m => m.text === text)) {
+                        matches.push({ text: text, element: el });
+                    }
+                }
+            });
+
+            if (matches.length === 0) {
+                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả cho "${query}"</p>`;
+            } else {
+                let html = `<p class="text-xs text-uptoAccent font-bold mb-2">Tìm thấy ${matches.length} kết quả:</p>`;
+                matches.forEach(item => {
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    const highlightedText = item.text.replace(regex, '<mark>$1</mark>');
+                    html += `
+                        <div class="p-2.5 rounded-xl bg-gray-100 dark:bg-[#0b161c] border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition">
+                            <p class="text-xs font-medium leading-relaxed">${highlightedText}</p>
+                        </div>
+                    `;
+                });
+                searchResults.innerHTML = html;
+            }
+        });
+
+        // Sidebar Navigation Drawer
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+        const sidebarDrawer = document.getElementById('sidebarDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebarDrawer.classList.remove('-translate-x-full');
+            drawerBackdrop.classList.remove('hidden');
+        });
+
+        function closeDrawer() {
+            sidebarDrawer.classList.add('-translate-x-full');
+            drawerBackdrop.classList.add('hidden');
+        }
+
+        drawerCloseBtn.addEventListener('click', closeDrawer);
+        drawerBackdrop.addEventListener('click', closeDrawer);
+
+        // Auto Hero Slider
+        const slider = document.getElementById('heroSlider');
+        const cards = slider.querySelectorAll('.hero-card');
+        let currentIndex = 1;
+        let autoSlideTimer;
+
+        function updateSliderPosition() {
+            cards.forEach((card, idx) => {
+                if (idx === currentIndex) {
+                    card.classList.add('active-card');
+                } else {
+                    card.classList.remove('active-card');
+                }
+            });
+
+            const activeCard = cards[currentIndex];
+            const scrollLeftPos = activeCard.offsetLeft - (slider.clientWidth / 2) + (activeCard.clientWidth / 2);
+            slider.scrollTo({
+                left: scrollLeftPos,
+                behavior: 'smooth'
+            });
+        }
+
+        function autoNext() {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateSliderPosition();
+        }
+
+        function startAutoSlide() {
+            autoSlideTimer = setInterval(autoNext, 3500);
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideTimer);
+        }
+
+        cards.forEach((card, index) => {
+            card.addEventListener('click', (e) => {
+                if (index !== currentIndex) {
+                    e.stopPropagation();
+                    currentIndex = index;
+                    updateSliderPosition();
+                    stopAutoSlide();
+                    startAutoSlide();
+                }
+            });
+        });
+
+        slider.addEventListener('touchstart', stopAutoSlide, { passive: true });
+        slider.addEventListener('touchend', startAutoSlide, { passive: true });
+
+        setTimeout(() => {
+            updateSliderPosition();
+            startAutoSlide();
+        }, 300);
+    </script>
+</body>
+</html>
