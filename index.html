@@ -101,7 +101,7 @@
         }
 
         .glass-badge {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
@@ -195,7 +195,7 @@
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 27 tháng 10, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Tư, 28 tháng 10, 2026</span>
             </div>
         </div>
     </header>
@@ -399,7 +399,7 @@
                     </div>
                 </div>
 
-                <!-- PHẦN 4: ỨNG DỤNG & GAME ĐỀ XUẤT LIÊN QUAN (MỚI BỔ SUNG) -->
+                <!-- PHẦN 4: ỨNG DỤNG & GAME ĐỀ XUẤT LIÊN QUAN -->
                 <div class="space-y-3 pt-3 border-t border-gray-800/80">
                     <div class="flex items-center justify-between">
                         <h4 class="font-bold text-sm text-white flex items-center space-x-1.5">
@@ -439,7 +439,7 @@
 
             </div>
 
-            <!-- NÚT TẢI PHIÊN BẢN MỚI NHẤT CỐ ĐỊNH Ở ĐÁY POPUP (TỰ ĐỘNG ẨN VỚI MẸO & NHẬP VAI HÀNH ĐỘNG) -->
+            <!-- NÚT TẢI PHIÊN BẢN MỚI NHẤT CỐ ĐỊNH Ở ĐÁY POPUP -->
             <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <button class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto">
                     <div class="text-left">
@@ -578,48 +578,88 @@
     <!-- ==================== MAIN CONTENT ==================== -->
     <main class="max-w-md mx-auto pt-3 space-y-6">
 
-        <!-- HERO SLIDER KÈM DOTS CHỈ SỐ -->
+        <!-- HERO SLIDER (CÓ NGÀY ĐĂNG, TÊN, MÔ TẢ & 5 SAO NGANG + SỐ ĐIỂM) -->
         <section id="heroSection" class="relative w-full overflow-hidden py-1">
             <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw]">
                 
                 <!-- Slide 1 -->
                 <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
                      data-app-name="Zenless Zone Zero" data-app-dev="HoYoverse" data-app-img="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80">
-                    <div class="relative h-64 w-full">
+                    <div class="relative h-48 w-full">
                         <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Zenless Zone Zero" class="w-full h-full object-cover">
-                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
-                            <i class="fa-regular fa-calendar text-[9px]"></i>
-                            <span>15.02.2022</span>
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[10px] text-uptoAccent"></i>
+                            <span>15.02.2026</span>
                         </div>
                     </div>
-                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                    <div class="p-3 bg-gray-100 dark:bg-[#141b22] space-y-1.5">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Zenless Zone Zero</h3>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Siêu phẩm hành động đô thị 3D thế hệ mới từ HoYoverse.</p>
+                        
+                        <div class="flex items-center space-x-1.5 pt-0.5">
+                            <div class="flex text-amber-400 text-[10px] space-x-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">4.9</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Slide 2 -->
                 <div class="hero-card active-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
                      data-app-name="Apex Legends Mobile" data-app-dev="Electronic Arts" data-app-img="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80">
-                    <div class="relative h-64 w-full">
+                    <div class="relative h-48 w-full">
                         <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=600&q=80" alt="Apex Legends" class="w-full h-full object-cover">
-                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
-                            <i class="fa-regular fa-calendar text-[9px]"></i>
-                            <span>15.02.2022</span>
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[10px] text-uptoAccent"></i>
+                            <span>20.03.2026</span>
                         </div>
                     </div>
-                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
-                        <h3 class="font-bold text-base text-gray-900 dark:text-white truncate">Apex Legends</h3>
+                    <div class="p-3 bg-gray-100 dark:bg-[#141b22] space-y-1.5">
+                        <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">Apex Legends</h3>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Bắn súng sinh tồn Battle Royale kịch tính hàng đầu.</p>
+                        
+                        <div class="flex items-center space-x-1.5 pt-0.5">
+                            <div class="flex text-amber-400 text-[10px] space-x-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">4.8</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Slide 3 -->
                 <div class="hero-card snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
                      data-app-name="H.I.D Choice" data-app-dev="HID Studio" data-app-img="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80">
-                    <div class="relative h-64 w-full">
+                    <div class="relative h-48 w-full">
                         <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="H.I.D Choice" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1.5 font-medium shadow">
+                            <i class="fa-regular fa-calendar text-[10px] text-uptoAccent"></i>
+                            <span>10.10.2026</span>
+                        </div>
                     </div>
-                    <div class="p-3 text-center bg-gray-100 dark:bg-[#141b22]">
+                    <div class="p-3 bg-gray-100 dark:bg-[#141b22] space-y-1.5">
                         <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">H.I.D Choice</h3>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Tuyển tập ứng dụng & công cụ tùy biến thiết bị tốt nhất.</p>
+                        
+                        <div class="flex items-center space-x-1.5 pt-0.5">
+                            <div class="flex text-amber-400 text-[10px] space-x-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">4.7</span>
+                        </div>
                     </div>
                 </div>
 
@@ -650,10 +690,10 @@
             </div>
         </section>
 
-        <!-- SECTION 1: NHẬP VAI HÀNH ĐỘNG (KHÔNG NÚT TẢI XUỐNG KHI MỞ POPUP) -->
+        <!-- SECTION 1: ĐỀ XUẤT CHO BẠN (ÁP DỤNG 5 SAO NGANG + SỐ ĐIỂM) -->
         <section class="space-y-3 px-3.5">
             <a href="#" class="section-title text-gray-900 dark:text-white">
-                <span>Nhập vai hành động</span>
+                <span>Đề xuất cho bạn</span>
                 <i class="fa-solid fa-chevron-right section-arrow"></i>
             </a>
 
@@ -661,36 +701,50 @@
                 <div class="app-card-clickable bg-gray-100 dark:bg-uptoCard rounded-2xl p-2.5 flex space-x-3 items-center border border-gray-200 dark:border-gray-800/80 cursor-pointer hover:bg-gray-200 dark:hover:bg-uptoCardHover transition"
                      data-no-download="true"
                      data-app-name="Lara Croft: Temple of Osiris" data-app-dev="Feral Interactive" data-app-img="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80">
-                    <div class="w-28 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
+                    <div class="w-24 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover" alt="Lara Croft">
                     </div>
-                    <div class="flex-1 min-w-0 pr-1">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-7 h-7 rounded-full object-cover border border-gray-400 flex-shrink-0" alt="Icon">
-                            <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Lara Croft: Temple of Osiris</h4>
+                    <div class="flex-1 min-w-0 pr-1 space-y-1">
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Lara Croft</h4>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2">Khám phá Ai Cập cùng Lara Croft</p>
+                        <div class="flex items-center space-x-1.5 pt-0.5">
+                            <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">4.9</span>
                         </div>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2 mt-1.5">Khám phá Ai Cập cùng Lara Croft</p>
                     </div>
                 </div>
 
                 <div class="app-card-clickable bg-gray-100 dark:bg-uptoCard rounded-2xl p-2.5 flex space-x-3 items-center border border-gray-200 dark:border-gray-800/80 cursor-pointer hover:bg-gray-200 dark:hover:bg-uptoCardHover transition"
                      data-no-download="true"
                      data-app-name="Broken Soul" data-app-dev="Indie Game Studio" data-app-img="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80">
-                    <div class="w-28 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
+                    <div class="w-24 h-20 flex-shrink-0 rounded-xl overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover filter blur-[0.5px]" alt="Broken Soul Background">
                     </div>
-                    <div class="flex-1 min-w-0 pr-1">
-                        <div class="flex items-center space-x-2">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-7 h-7 rounded-full object-cover border border-gray-400 flex-shrink-0" alt="Icon">
-                            <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Broken Soul</h4>
+                    <div class="flex-1 min-w-0 pr-1 space-y-1">
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Broken Soul</h4>
+                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2">RPG hành động 2D đầy thách thức</p>
+                        <div class="flex items-center space-x-1.5 pt-0.5">
+                            <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">4.7</span>
                         </div>
-                        <p class="text-[11px] text-gray-500 dark:text-gray-400 leading-snug line-clamp-2 mt-1.5">Rpg hành động 2D đầy thách thức</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: TRÒ CHƠI (ĐÃ CHUYỂN SANG DẠNG SLIDE SNAP CAROUSEL GIỐNG MẸO CÔNG NGHỆ) -->
+        <!-- SECTION 2: TRÒ CHƠI (ÁP DỤNG 5 SAO NGANG + SỐ ĐIỂM) -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -715,7 +769,16 @@
                             </div>
                             <div class="min-w-0 flex-1">
                                 <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Roblox</h4>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">Vũ trụ sáng tạo</p>
+                                <div class="flex items-center space-x-1 mt-0.5">
+                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">4.6</span>
+                                </div>
                             </div>
                         </div>
                         <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
@@ -734,7 +797,16 @@
                             <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=100&q=80" class="w-10 h-10 rounded-xl object-cover flex-shrink-0 shadow" alt="Icon">
                             <div class="min-w-0 flex-1">
                                 <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Honor of Kings</h4>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">MOBA số 1 di động</p>
+                                <div class="flex items-center space-x-1 mt-0.5">
+                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">4.8</span>
+                                </div>
                             </div>
                         </div>
                         <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
@@ -755,7 +827,16 @@
                             </div>
                             <div class="min-w-0 flex-1">
                                 <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">Minecraft</h4>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">Thế giới ô vuông</p>
+                                <div class="flex items-center space-x-1 mt-0.5">
+                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">4.9</span>
+                                </div>
                             </div>
                         </div>
                         <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
@@ -776,7 +857,16 @@
                             </div>
                             <div class="min-w-0 flex-1">
                                 <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">PUBG Mobile</h4>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">Sinh tồn đỉnh cao</p>
+                                <div class="flex items-center space-x-1 mt-0.5">
+                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">4.7</span>
+                                </div>
                             </div>
                         </div>
                         <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
@@ -789,7 +879,7 @@
             <div id="gamesDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 3: ĐA PHƯƠNG TIỆN (LƯỚI 2 DÒNG ĐÃ SỬA LỖI HIỂN THỊ CỐ ĐỊNH) -->
+        <!-- SECTION 3: ĐA PHƯƠNG TIỆN (GIỮ HIỂN THỊ BAN ĐẦU) -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -873,7 +963,7 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 4: HƯỚNG DẪN & MẸO CÔNG NGHỆ (CUỘN DẠNG SLIDE SNAP & KHÔNG NÚT TẢI) -->
+        <!-- SECTION 4: HƯỚNG DẪN & MẸO CÔNG NGHỆ (ÁP DỤNG 5 SAO NGANG + SỐ ĐIỂM) -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -886,41 +976,74 @@
             <!-- Slide Snap Carousel cho Mẹo & Hướng dẫn -->
             <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true">
                 
-                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer"
+                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                      data-no-download="true"
                      data-app-name="Tối Ưu Android 2026" data-app-dev="Mẹo Công Nghệ KPazz" data-app-img="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80">
-                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-2 bg-gradient-to-r from-emerald-600 to-teal-800 flex items-center justify-center p-3 text-white shadow">
+                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1 bg-gradient-to-r from-emerald-600 to-teal-800 flex items-center justify-center p-3 text-white shadow">
                         <i class="fa-solid fa-gauge-high text-4xl opacity-90"></i>
                     </div>
                     <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">Cách Tăng Tốc Android Mượt Như Mới</h4>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">Hướng dẫn dọn dẹp bộ nhớ đệm và tối ưu RAM cực dễ.</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Hướng dẫn dọn dẹp bộ nhớ đệm và tối ưu RAM cực dễ.</p>
+                    
+                    <div class="flex items-center space-x-1.5 pt-1">
+                        <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">5.0</span>
+                    </div>
                 </div>
 
-                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer"
+                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                      data-no-download="true"
                      data-app-name="Tiết Kiệm Pin iOS & Android" data-app-dev="Mẹo Công Nghệ KPazz" data-app-img="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80">
-                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-2 bg-gradient-to-r from-amber-500 to-orange-700 flex items-center justify-center p-3 text-white shadow">
+                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1 bg-gradient-to-r from-amber-500 to-orange-700 flex items-center justify-center p-3 text-white shadow">
                         <i class="fa-solid fa-battery-full text-4xl opacity-90"></i>
                     </div>
                     <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">Mẹo Tăng Dùng Pin Thêm 30%</h4>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">Tắt các tính năng chạy ngầm tốn pin không cần thiết.</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Tắt các tính năng chạy ngầm tốn pin không cần thiết.</p>
+                    
+                    <div class="flex items-center space-x-1.5 pt-1">
+                        <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">4.8</span>
+                    </div>
                 </div>
 
-                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer"
+                <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                      data-no-download="true"
                      data-app-name="Thủ Thuật Wi-Fi 5GHz" data-app-dev="Mẹo Công Nghệ KPazz" data-app-img="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80">
-                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-2 bg-gradient-to-r from-blue-600 to-indigo-800 flex items-center justify-center p-3 text-white shadow">
+                    <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1 bg-gradient-to-r from-blue-600 to-indigo-800 flex items-center justify-center p-3 text-white shadow">
                         <i class="fa-solid fa-wifi text-4xl opacity-90"></i>
                     </div>
                     <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">Cấu Hình Wi-Fi Xuyên Tường</h4>
-                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-1">Cách chọn băng tần và kênh sóng mượt nhất cho modem.</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">Cách chọn băng tần và kênh sóng mượt nhất cho modem.</p>
+                    
+                    <div class="flex items-center space-x-1.5 pt-1">
+                        <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">4.9</span>
+                    </div>
                 </div>
 
             </div>
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 5: NĂNG SUẤT (ĐÃ BỔ SUNG THÊM 10 UNG DUNG MỚI) -->
+        <!-- SECTION 5: NĂNG SUẤT (GIỮ HIỂN THỊ BAN ĐẦU) -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -1047,15 +1170,6 @@
     <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-white shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
-
-    <!-- FLOATING BOTTOM SAFARI CAPSULE -->
-    <div class="fixed bottom-2.5 inset-x-0 flex justify-center z-30 px-4 pointer-events-none">
-        <div class="pointer-events-auto bg-gray-200/90 dark:bg-[#1b2b34]/95 backdrop-blur-md border border-gray-300 dark:border-gray-700/70 rounded-full px-5 py-2 flex items-center justify-between w-full max-w-xs shadow-2xl">
-            <i class="fa-solid fa-bars text-xs text-gray-700 dark:text-gray-300"></i>
-            <span class="text-xs font-medium text-gray-800 dark:text-gray-200 tracking-wide">kpazz.github.io</span>
-            <i class="fa-solid fa-rotate-right text-xs text-gray-700 dark:text-gray-300"></i>
-        </div>
-    </div>
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
