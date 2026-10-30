@@ -190,6 +190,7 @@ SHA256: bff9707b02b5c1575db638402c8519cc2779fc82716586aef3019ddc11f4ab3e
 
 Package: com.anlai.omnicar
 Version: 1.0.4
+Name: OmniCar
 Architecture: iphoneos-arm64
 Maintainer: OmniCar <omnicartweak@gmail.com>
 Installed-Size: 6416
@@ -197,7 +198,7 @@ Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)
 Conflicts: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay, com.leemin.carbridge, com.ethanarbuckle.carplay-cast
 Replaces: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay
 Section: Tweaks
-Description: The power of CarPlay.
+Description: Sức mạnh của CarPlay.
  OmniCar takes CarPlay beyond what Apple allows: more freedom, more features and everything you need on the road, in one package.
  .
  APP BRIDGE
@@ -234,9 +235,9 @@ Description: The power of CarPlay.
  .
  (Repackaged on Fri, 30 Oct 2026 16:11:25 +0700 by dpkg-repack.)
 Filename: debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb
-Size: 1369724
-MD5sum: dea83aa7ff22fbc2c559efc1a1dcf050
-SHA256: f82e0b0706d2b1c03acab4702a90bb8a424c4807ec9e5990f6b0eabc226e9034
+Size: 1369512
+MD5sum: 5baf51cab085fc24bd39b0b83c947736
+SHA256: 87ea45a75e02772f24441b447eb611e06ed361ca4b55ec880350d61db49a3334
 
 Package: xyz.cypwn.aimpro
 Maintainer: CyPwn
