@@ -148,3 +148,18 @@ Size: 1311144
 MD5sum: 33596181382bba271d4298ae297f8cf2
 SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 
+Package: xyz.alimaulana.aimpro
+Maintainer: alimaulana
+Name: AIM Pro
+Description: Màn hình khóa ngày và thời gian theo phong cách iOS 16 
+Author: alimaulana
+Section: Tweaks
+Depends: mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker
+Conflicts: com.laughingquoll.watermelon, com.laughingquoll.watermelon.beta, moe.absolucy.lucient, moe.absolucy.lucient.trial, org.coolstar.ventana-modern, xyz.royalapps.jellyfish, hi.my.name.is.ubik.kalm, love.litten.diary, com.eliofegh.tulipe, com.ali.aim, com.icraze.nexus
+Architecture: iphoneos-arm64
+Version: 1.1.3k
+Filename: debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb
+Size: 2353084
+MD5sum: 308ff70cff1937d6163d7461046c347e
+SHA256: ff640da35f2451ce9fe22e1adefa038369b822e3270469681fcbc446ba4d642c
+

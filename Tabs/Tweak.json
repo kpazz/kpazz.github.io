@@ -78,5 +78,21 @@
         "highlights": [
             "The power of CarPlay."
         ]
+    },
+    {
+        "name": "AIM Pro",
+        "version": "1.1.3k",
+        "dev": "alimaulana",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
+        "highlights": [
+            "Màn hình khóa ngày và thời gian theo phong cách iOS 16"
+        ]
     }
 ]
