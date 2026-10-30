@@ -235,7 +235,7 @@
                     <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-gray-800/80 text-center">
                         <div class="flex flex-col items-center justify-center">
                             <div class="flex items-center space-x-1 font-extrabold text-base text-white">
-                                <i class="fa-solid fa-star text-gray-400 text-sm"></i>
+                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
                                 <span id="detailRatingScore">4.8</span>
                             </div>
                             <p class="text-[11px] text-gray-400 mt-0.5 font-medium flex items-center justify-center">
@@ -333,7 +333,7 @@
                         <h4 class="font-bold text-sm text-white">Xếp hạng</h4>
                         <div class="flex items-center space-x-4">
                             <div class="text-center">
-                                <span class="text-5xl font-black text-gray-300 tracking-tighter leading-none">4.8</span>
+                                <span id="detailLargeRatingNum" class="text-5xl font-black text-gray-300 tracking-tighter leading-none">4.8</span>
                                 <p class="text-[10px] text-gray-400 mt-2 flex items-center justify-center">
                                     <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
                                     <span>6 đánh giá</span>
@@ -408,14 +408,14 @@
 
                     <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
                         <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk'})">
+                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.9'})">
                             <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border border-gray-700">
                             <h5 class="text-[11px] font-bold text-white truncate">Zenless Zone</h5>
                             <p class="text-[9px] text-gray-400 truncate">HoYoverse</p>
                         </div>
 
                         <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk'})">
+                             onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.8'})">
                             <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-700">
                                 <i class="fa-solid fa-atom text-2xl text-black"></i>
                             </div>
@@ -424,7 +424,7 @@
                         </div>
 
                         <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk'})">
+                             onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '5.0'})">
                             <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-700">
                                 <i class="fa-solid fa-scissors text-2xl text-black"></i>
                             </div>
@@ -544,34 +544,72 @@
         </div>
     </div>
 
-    <!-- SIDEBAR NAVIGATION DRAWER -->
-    <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-72 bg-white dark:bg-[#091116] text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between">
+    <!-- SIDEBAR NAVIGATION DRAWER (KHI BẤM CÁC ITEM TRONG NÀY SẼ NỔI POPUP CHI TIẾT CARD) -->
+    <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 bg-white dark:bg-[#091116] text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto no-scrollbar">
         <div>
-            <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between sticky top-0 bg-white dark:bg-[#091116] z-10">
                 <div class="flex items-center space-x-2">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                     </svg>
-                    <span class="text-lg font-bold tracking-tight">KPazz</span>
+                    <span class="text-lg font-bold tracking-tight">KPazz Menu</span>
                 </div>
                 <button id="drawerCloseBtn" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <nav class="p-3 space-y-1 text-sm">
-                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold">
-                    <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                    <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                    <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                    <i class="fa-solid fa-shapes w-5 text-center"></i><span>Ứng dụng</span>
-                </a>
+            
+            <nav class="p-3 space-y-4 text-sm">
+                <!-- Mục 1: Tin tức mới -->
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold">
+                        <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
+                    </a>
+                    <div id="drawerNewsList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    </div>
+                </div>
+
+                <!-- Mục 2: APP Jailbreak -->
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                        <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
+                    </a>
+                    <div id="drawerJbList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    </div>
+                </div>
+
+                <!-- Mục 3: Đa phương tiện -->
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                        <i class="fa-solid fa-shapes w-5 text-center"></i><span>Đa phương tiện</span>
+                    </a>
+                    <div id="drawerMediaList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    </div>
+                </div>
+
+                <!-- Mục 4: Mẹo & Hướng dẫn -->
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                        <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
+                    </a>
+                    <div id="drawerTipsList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    </div>
+                </div>
+
+                <!-- Mục 5: Năng suất -->
+                <div class="space-y-1">
+                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
+                        <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
+                    </a>
+                    <div id="drawerProdList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
+                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    </div>
+                </div>
             </nav>
         </div>
-        <div class="p-4 text-xs text-gray-500 text-center">KPazz App Store & Community</div>
+        <div class="p-4 text-xs text-gray-500 text-center border-t border-gray-200 dark:border-gray-800">KPazz App Store & Community</div>
     </div>
     <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
 
@@ -826,6 +864,8 @@
         const detailPublishDate = document.getElementById('detailPublishDate');
         const detailSystemReq = document.getElementById('detailSystemReq');
         const systemRequirementsBlock = document.getElementById('systemRequirementsBlock');
+        const detailRatingScore = document.getElementById('detailRatingScore');
+        const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
 
         let isNoDownloadItem = false;
 
@@ -851,6 +891,10 @@
             if (item.category) {
                 detailCategoryInfo.textContent = item.category;
             }
+            const itemRating = item.rating || '4.9';
+            if (detailRatingScore) detailRatingScore.textContent = itemRating;
+            if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating;
+
             if (item.downloadLink && !item.noDownload) {
                 stickyDownloadLink.href = item.downloadLink;
                 stickyDownloadLink.style.display = 'flex';
@@ -915,6 +959,35 @@
             return items.sort((a, b) => parseDate(b.publishDate) - parseDate(a.publishDate));
         }
 
+        // BIẾN LƯU DỮ LIỆU TỰ ĐỘNG ĐỂ TRUY XUẤT CHO MENU DRAWER POPUP
+        window.drawerStoreCache = {};
+
+        // HÀM RENDER CÁC LINK CON TRONG DRAWER - KHI ẤN VÀO SẼ BẬT POPUP NỔI BẢO TOÀN DỮ LIỆU
+        function renderDrawerList(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            window.drawerStoreCache[containerId] = items;
+
+            let html = '';
+            items.forEach((item, index) => {
+                html += `
+                    <a href="javascript:void(0)" class="block py-1.5 px-2 rounded hover:bg-gray-200 dark:hover:bg-uptoCardHover truncate transition text-gray-600 dark:text-gray-300 active:scale-98"
+                       onclick="handleDrawerItemClick('${containerId}', ${index})">
+                        &bull; ${item.name}
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function handleDrawerItemClick(containerId, index) {
+            closeDrawer();
+            if (window.drawerStoreCache[containerId] && window.drawerStoreCache[containerId][index]) {
+                const selectedItem = window.drawerStoreCache[containerId][index];
+                openAppDetail(selectedItem);
+            }
+        }
+
         // --- FETCH DỮ LIỆU TỪ CÁC FILE JSON TRONG THƯ MỤC TABS ---
         async function loadStoreData() {
             const jsonFiles = {
@@ -934,6 +1007,7 @@
                     let data = await resNews.json();
                     data = sortItemsByDate(data);
                     renderNewsSection(data);
+                    renderDrawerList('drawerNewsList', data);
                     allLoadedItems.push(...data);
                 }
 
@@ -943,6 +1017,7 @@
                     let data = await resJb.json();
                     data = sortItemsByDate(data);
                     renderJbSection(data);
+                    renderDrawerList('drawerJbList', data);
                     allLoadedItems.push(...data);
                 }
 
@@ -952,6 +1027,7 @@
                     let data = await resMedia.json();
                     data = sortItemsByDate(data);
                     renderMultimediaSection(data);
+                    renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
                 }
 
@@ -961,6 +1037,7 @@
                     let data = await resTips.json();
                     data = sortItemsByDate(data);
                     renderTipsSection(data);
+                    renderDrawerList('drawerTipsList', data);
                     allLoadedItems.push(...data);
                 }
 
@@ -970,6 +1047,7 @@
                     let data = await resProd.json();
                     data = sortItemsByDate(data);
                     renderProductivitySection(data);
+                    renderDrawerList('drawerProdList', data);
                     allLoadedItems.push(...data);
                 }
 
@@ -994,6 +1072,7 @@
 
             let html = '';
             items.forEach(item => {
+                const itemRating = item.rating || '4.9';
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
@@ -1006,7 +1085,7 @@
                             <div class="flex text-amber-400 text-[9px] space-x-0.5">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">4.9</span>
+                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                         </div>
                     </div>
                 `;
@@ -1023,6 +1102,7 @@
 
             let html = '';
             items.forEach(item => {
+                const itemRating = item.rating || '4.9';
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer"
                          data-app-json='${JSON.stringify(item)}'>
@@ -1040,7 +1120,7 @@
                                         <div class="flex text-amber-400 text-[8px] space-x-0.5">
                                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                                         </div>
-                                        <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">4.9</span>
+                                        <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">${itemRating}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1089,6 +1169,7 @@
 
             let html = '';
             items.forEach(item => {
+                const itemRating = item.rating || '5.0';
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
@@ -1101,7 +1182,7 @@
                             <div class="flex text-amber-400 text-[9px] space-x-0.5">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
-                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">5.0</span>
+                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                         </div>
                     </div>
                 `;
@@ -1155,12 +1236,12 @@
             const heroDotsContainer = document.getElementById('heroDots');
             if (!heroSlider || !allItems.length) return;
 
-            // Sắp xếp các item theo ngày mới nhất giảm dần và lấy tối đa 6 item mới nhất cho slider
             let sortedHeroItems = sortItemsByDate([...allItems]).slice(0, 6);
 
             let slidesHtml = '';
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 1 ? 'active-card' : '';
+                const itemRating = item.rating || '4.9';
                 slidesHtml += `
                     <div class="hero-card ${isActive} snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
                          data-hero-json='${JSON.stringify(item)}'>
@@ -1179,7 +1260,7 @@
                                 <div class="flex text-amber-400 text-[10px] space-x-0.5">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
-                                <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">4.9</span>
+                                <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">${itemRating}</span>
                             </div>
                         </div>
                     </div>
