@@ -2,11 +2,14 @@ import os
 import subprocess
 import hashlib
 import glob
+import json
+from datetime import datetime
 
 # Cấu hình đường dẫn
 DEB_DIR = "debs"         # Thư mục chứa các file .deb của bạn
 PACKAGES_FILE = "Packages"
 RELEASE_FILE = "Release"
+JSON_FILE = "Tabs/Tweak.json"
 
 def get_file_hash(filepath):
     sha256 = hashlib.sha256()
@@ -98,7 +101,75 @@ Description: Kho lưu trữ tweak và ứng dụng iOS cá nhân của KPazz.
         f.write(release_content)
     print(f"[✔] Đã cập nhật xong tệp {RELEASE_FILE}")
 
+def update_tweak_json():
+    if not os.path.exists("Tabs"):
+        os.makedirs("Tabs")
+
+    deb_files = glob.glob(os.path.join(DEB_DIR, "*.deb"))
+    tweak_list = []
+
+    existing_data = {}
+    if os.path.exists(JSON_FILE):
+        try:
+            with open(JSON_FILE, "r", encoding="utf-8") as f:
+                old_items = json.load(f)
+                for item in old_items:
+                    existing_data[item.get("name")] = item
+        except Exception:
+            pass
+
+    for deb in deb_files:
+        try:
+            control_raw = subprocess.check_output(["dpkg-deb", "-f", deb]).decode("utf-8")
+        except Exception:
+            continue
+
+        control = {}
+        for line in control_raw.splitlines():
+            if ":" in line:
+                key, val = line.split(":", 1)
+                control[key.strip()] = val.strip()
+
+        pkg_name = control.get("Package", "")
+        name = control.get("Name", pkg_name)
+        version = control.get("Version", "1.0.0")
+        dev = control.get("Author", control.get("Maintainer", "Unknown"))
+        category = control.get("Section", "Tweaks")
+        depends = control.get("Depends", "iOS 14.0 trở lên")
+        description = control.get("Description", "Không có mô tả.")
+        
+        file_mtime = os.path.getmtime(deb)
+        publish_date = datetime.fromtimestamp(file_mtime).strftime("%d/%m/%Y")
+
+        filename = os.path.basename(deb)
+        download_link = f"{DEB_DIR}/{filename}"
+
+        old_item = existing_data.get(name, {})
+        img = old_item.get("img", "CydiaIcon.png")
+        highlights = old_item.get("highlights", [description])
+
+        tweak_item = {
+            "name": name,
+            "version": version,
+            "dev": dev,
+            "category": category,
+            "systemRequirements": depends,
+            "img": img,
+            "publishDate": publish_date,
+            "isApp": False,
+            "noDownload": False,
+            "downloadLink": download_link,
+            "highlightTitle": f"{name} dành cho bạn nếu",
+            "highlights": highlights
+        }
+        tweak_list.append(tweak_item)
+
+    with open(JSON_FILE, "w", encoding="utf-8") as f:
+        json.dump(tweak_list, f, ensure_ascii=False, indent=4)
+    print(f"[✔] Đã tự động cập nhật {JSON_FILE} thành công!")
+
 if __name__ == "__main__":
     if generate_packages():
         update_release()
+        update_tweak_json()
         print("[🎉] Hoàn tất toàn bộ gói repo cho Sileo & Zebra!")
