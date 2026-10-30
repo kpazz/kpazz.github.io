@@ -228,7 +228,7 @@
                 <!-- PHẦN 1: THÔNG TIN CHÍNH & RATING -->
                 <div class="space-y-4 pt-1">
                     <div class="text-[10px] sm:text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
-                        <span>ANDROID</span>
+                        <span>KPAZZ</span>
                         <span>/</span>
                         <span>NỘI DUNG</span>
                         <span>/</span>
@@ -271,9 +271,19 @@
                     </div>
                 </div>
 
-                <!-- PHẦN 2: ĐIỂM NỔI BẬT, YÊU CẦU & THÔNG TIN TÁC GIẢ -->
+                <!-- PHẦN 2: NỘI DUNG CHI TIẾT HOẶC ĐIỂM NỔI BẬT -->
                 <div class="space-y-4">
-                    <div class="bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                    <!-- Khối hiển thị Nội dung bài viết / Mẹo đầy đủ (cho Tin tức & Mẹo) -->
+                    <div id="articleContentBlock" class="hidden bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                        <h4 class="font-bold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
+                            <span>Nội dung bài viết / Hướng dẫn</span>
+                        </h4>
+                        <p id="detailArticleText" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Khối Điểm nổi bật chuẩn (cho App/Game) -->
+                    <div id="highlightsBlock" class="bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
                         <h4 id="detailHighlightTitle" class="font-bold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
                         <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-600 dark:text-gray-300">
                             <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
@@ -355,31 +365,31 @@
                                 <div class="flex items-center space-x-2">
                                     <span>5</span>
                                     <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-cyan-500 w-[85%]"></div>
+                                        <div id="starBar5" class="h-full bg-cyan-500 w-[85%] transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>4</span>
                                     <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-cyan-500 w-[15%]"></div>
+                                        <div id="starBar4" class="h-full bg-cyan-500 w-[15%] transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>3</span>
                                     <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
+                                        <div id="starBar3" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>2</span>
                                     <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
+                                        <div id="starBar2" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>1</span>
                                     <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
+                                        <div id="starBar1" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
                             </div>
@@ -879,10 +889,14 @@
         const distributionAnchor = document.getElementById('distributionAnchor');
 
         const detailAppName = document.getElementById('detailAppName');
+        const detailAppVersion = document.getElementById('detailAppVersion');
         const detailAppDeveloper = document.getElementById('detailAppDeveloper');
         const detailAppIcon = document.getElementById('detailAppIcon');
         const detailSmallAvatar = document.getElementById('detailSmallAvatar');
         const detailBreadcrumbName = document.getElementById('detailBreadcrumbName');
+        const articleContentBlock = document.getElementById('articleContentBlock');
+        const detailArticleText = document.getElementById('detailArticleText');
+        const highlightsBlock = document.getElementById('highlightsBlock');
         const detailHighlightTitle = document.getElementById('detailHighlightTitle');
         const detailHighlightsList = document.getElementById('detailHighlightsList');
         const detailDevInfo = document.getElementById('detailDevInfo');
@@ -893,6 +907,13 @@
         const detailRatingScore = document.getElementById('detailRatingScore');
         const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
 
+        // Các thanh biểu đồ sao (5 đến 1)
+        const starBar5 = document.getElementById('starBar5');
+        const starBar4 = document.getElementById('starBar4');
+        const starBar3 = document.getElementById('starBar3');
+        const starBar2 = document.getElementById('starBar2');
+        const starBar1 = document.getElementById('starBar1');
+
         let isNoDownloadItem = false;
 
         function openAppDetail(item) {
@@ -901,7 +922,6 @@
             if (item.name) {
                 detailAppName.textContent = item.name;
                 detailBreadcrumbName.textContent = item.name.toUpperCase();
-                detailHighlightTitle.textContent = item.highlightTitle || `${item.name} dành cho bạn nếu`;
             }
             if (item.dev) {
                 detailAppDeveloper.textContent = item.dev;
@@ -917,9 +937,60 @@
             if (item.category) {
                 detailCategoryInfo.textContent = item.category;
             }
-            const itemRating = item.rating || '4.9';
-            if (detailRatingScore) detailRatingScore.textContent = itemRating;
-            if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating;
+
+            const itemRating = parseFloat(item.rating) || 4.9;
+            if (detailRatingScore) detailRatingScore.textContent = itemRating.toFixed(1);
+            if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
+
+            // TÍNH TOÁN TỶ LỆ PHẦN TRĂM BIỂU ĐỒ SAO DỰA TRÊN CHỈ SỐ ĐÁNH GIÁ (itemRating)
+            // Thang 5 sao: giả định phân bổ phần lớn ở 5 sao và 4 sao tùy theo điểm số
+            let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
+            let pct4 = Math.min(100, Math.max(0, ((itemRating - 1) / 4) * 80));
+            let pct3 = itemRating < 3 ? 40 : 10;
+            let pct2 = itemRating < 2 ? 30 : 5;
+            let pct1 = itemRating < 1.5 ? 20 : 0;
+
+            if (starBar5) starBar5.style.width = `${pct5}%`;
+            if (starBar4) starBar4.style.width = `${pct4}%`;
+            if (starBar3) starBar3.style.width = `${pct3}%`;
+            if (starBar2) starBar2.style.width = `${pct2}%`;
+            if (starBar1) starBar1.style.width = `${pct1}%`;
+
+            // Xử lý riêng cho các mục KHÔNG PHẢI APP (Tin tức, Mẹo, v.v.): Bỏ số phiên bản, hiển thị nội dung bài viết
+            if (item.isArticle || item.isTip || !item.isApp) {
+                // Bỏ phiên bản
+                detailAppVersion.style.display = 'none';
+
+                // Hiển thị khối nội dung chi tiết bài viết
+                articleContentBlock.classList.remove('hidden');
+                highlightsBlock.classList.add('hidden');
+
+                // Lấy nội dung từ highlights hoặc mô tả
+                let contentText = '';
+                if (item.highlights && item.highlights.length > 0) {
+                    contentText = item.highlights.join('\n\n');
+                } else if (item.highlightTitle) {
+                    contentText = item.highlightTitle;
+                } else {
+                    contentText = `Chi tiết bài viết và hướng dẫn đầy đủ về ${item.name}. Nội dung được biên soạn chất lượng cao giúp bạn nắm bắt nhanh chóng và dễ dàng áp dụng hiệu quả.`;
+                }
+                detailArticleText.textContent = contentText;
+            } else {
+                // Dành cho App / Game thông thường
+                detailAppVersion.style.display = 'block';
+                detailAppVersion.textContent = item.version || '1.2.3RC2';
+                articleContentBlock.classList.add('hidden');
+                highlightsBlock.classList.remove('hidden');
+                detailHighlightTitle.textContent = item.highlightTitle || `${item.name} dành cho bạn nếu`;
+
+                if (item.highlights && Array.isArray(item.highlights)) {
+                    let highlightsHtml = '';
+                    item.highlights.forEach(h => {
+                        highlightsHtml += `<li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>${h}</span></li>`;
+                    });
+                    detailHighlightsList.innerHTML = highlightsHtml;
+                }
+            }
 
             if (item.downloadLink && !item.noDownload) {
                 stickyDownloadLink.href = item.downloadLink;
@@ -927,14 +998,6 @@
             } else {
                 stickyDownloadLink.href = '#';
                 stickyDownloadLink.style.display = 'none';
-            }
-
-            if (item.highlights && Array.isArray(item.highlights)) {
-                let highlightsHtml = '';
-                item.highlights.forEach(h => {
-                    highlightsHtml += `<li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>${h}</span></li>`;
-                });
-                detailHighlightsList.innerHTML = highlightsHtml;
             }
 
             if (item.isApp) {
@@ -979,13 +1042,11 @@
             return new Date(dateStr);
         }
 
-        // Sắp xếp dữ liệu theo ngày mới nhất từ trên xuống / từ trái qua phải (mới nhất lên đầu)
         function sortItemsByDate(items) {
             if (!Array.isArray(items)) return [];
             return items.sort((a, b) => parseDate(b.publishDate) - parseDate(a.publishDate));
         }
 
-        // HÀM RÚT GỌN VĂN BẢN THEO SỐ LƯỢNG TỪ (MAX WORDS)
         function truncateByWords(str, maxWords = 10) {
             if (!str) return '';
             const words = str.trim().split(/\s+/);
@@ -993,7 +1054,6 @@
             return words.slice(0, maxWords).join(' ') + '...';
         }
 
-        // HÀM QUẢN LÝ TRẠNG THÁI ACTIVE ĐƯỢC CHỌN CHO CÁC MỤC Ở DRAWER MENU
         function selectDrawerItem(targetEl) {
             const allItems = document.querySelectorAll('.drawer-main-item');
             allItems.forEach(item => {
@@ -1007,7 +1067,6 @@
             }
         }
 
-        // HÀM TOGGLE TRỎ XUỐNG CHO MENU DRAWER (MỤC MỚI MỞ SẼ TỰ ĐÓNG MỤC CŨ)
         function toggleDrawerSubmenu(targetListId, targetChevronId) {
             const allSubmenus = document.querySelectorAll('.drawer-submenu');
             const allChevrons = document.querySelectorAll('.drawer-main-item .fa-chevron-down');
@@ -1039,10 +1098,8 @@
             }
         }
 
-        // BIẾN LƯU DỮ LIỆU TỰ ĐỘNG ĐỂ TRUY XUẤT CHO MENU DRAWER POPUP
         window.drawerStoreCache = {};
 
-        // HÀM RENDER CÁC LINK CON TRONG DRAWER
         function renderDrawerList(containerId, items) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1082,57 +1139,56 @@
             let allLoadedItems = [];
 
             try {
-                // 1. Fetch Tin Tức Mới
+                // 1. Tin Tức Mới (đánh dấu cờ isArticle = true)
                 const resNews = await fetch(jsonFiles.news);
                 if (resNews.ok) {
                     let data = await resNews.json();
-                    data = sortItemsByDate(data);
+                    data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
                     renderNewsSection(data);
                     renderDrawerList('drawerNewsList', data);
                     allLoadedItems.push(...data);
                 }
 
-                // 2. Fetch App Jailbreak
+                // 2. App Jailbreak
                 const resJb = await fetch(jsonFiles.jailbreak);
                 if (resJb.ok) {
                     let data = await resJb.json();
-                    data = sortItemsByDate(data);
+                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderJbSection(data);
                     renderDrawerList('drawerJbList', data);
                     allLoadedItems.push(...data);
                 }
 
-                // 3. Fetch Đa Phương Tiện
+                // 3. Đa Phương Tiện
                 const resMedia = await fetch(jsonFiles.multimedia);
                 if (resMedia.ok) {
                     let data = await resMedia.json();
-                    data = sortItemsByDate(data);
+                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
                     renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
                 }
 
-                // 4. Fetch Mẹo Công Nghệ
+                // 4. Mẹo Công Nghệ (đánh dấu cờ isTip = true)
                 const resTips = await fetch(jsonFiles.tips);
                 if (resTips.ok) {
                     let data = await resTips.json();
-                    data = sortItemsByDate(data);
+                    data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
                     renderTipsSection(data);
                     renderDrawerList('drawerTipsList', data);
                     allLoadedItems.push(...data);
                 }
 
-                // 5. Fetch Năng Suất
+                // 5. Năng Suất
                 const resProd = await fetch(jsonFiles.productivity);
                 if (resProd.ok) {
                     let data = await resProd.json();
-                    data = sortItemsByDate(data);
+                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderProductivitySection(data);
                     renderDrawerList('drawerProdList', data);
                     allLoadedItems.push(...data);
                 }
 
-                // Sau khi load xong tất cả, khởi tạo Hero Slider và hệ thống Search toàn cục
                 initDynamicHeroSlider(allLoadedItems);
                 initAutoScrollSections();
                 initNewsSlideCarousel();
@@ -1355,7 +1411,6 @@
             });
         }
 
-        // TỰ ĐỘNG KHỞI TẠO HERO SLIDER TỪ TẤT CẢ DỮ LIỆU ĐÃ LOAD
         function initDynamicHeroSlider(allItems) {
             const heroSlider = document.getElementById('heroSlider');
             const heroDotsContainer = document.getElementById('heroDots');
