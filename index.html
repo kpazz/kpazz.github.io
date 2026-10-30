@@ -215,7 +215,7 @@
     <!-- Khoảng bù chiều cao cho Header Fixed -->
     <div class="h-28"></div>
 
-    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT (HỖ TRỢ LIGHT/DARK MODE) ==================== -->
+    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT ==================== -->
     <div id="appDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
         <div id="appDetailCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[92vh] flex flex-col overflow-hidden">
             
@@ -571,7 +571,7 @@
             
             <nav class="p-3 space-y-2 text-sm">
                 <!-- Nút Trang chủ (Mặc định được chọn) -->
-                <a href="#" onclick="selectDrawerItem(this); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold transition">
+                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold transition">
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
 
@@ -985,6 +985,14 @@
             return items.sort((a, b) => parseDate(b.publishDate) - parseDate(a.publishDate));
         }
 
+        // HÀM RÚT GỌN VĂN BẢN THEO SỐ LƯỢNG TỪ (MAX WORDS)
+        function truncateByWords(str, maxWords = 10) {
+            if (!str) return '';
+            const words = str.trim().split(/\s+/);
+            if (words.length <= maxWords) return str;
+            return words.slice(0, maxWords).join(' ') + '...';
+        }
+
         // HÀM QUẢN LÝ TRẠNG THÁI ACTIVE ĐƯỢC CHỌN CHO CÁC MỤC Ở DRAWER MENU
         function selectDrawerItem(targetEl) {
             const allItems = document.querySelectorAll('.drawer-main-item');
@@ -993,21 +1001,40 @@
                 item.classList.add('text-gray-700', 'dark:text-gray-300');
             });
 
-            targetEl.classList.remove('text-gray-700', 'dark:text-gray-300');
-            targetEl.classList.add('bg-gray-100', 'dark:bg-uptoCard', 'text-uptoAccent');
+            if (targetEl) {
+                targetEl.classList.remove('text-gray-700', 'dark:text-gray-300');
+                targetEl.classList.add('bg-gray-100', 'dark:bg-uptoCard', 'text-uptoAccent');
+            }
         }
 
-        // HÀM TOGGLE TRỎ XUỐNG CHO MENU DRAWER VỚI HIỆU ỨNG MƯỢT MÀ
-        function toggleDrawerSubmenu(listId, chevronId) {
-            const listEl = document.getElementById(listId);
-            const chevronEl = document.getElementById(chevronId);
-            if (listEl && chevronEl) {
-                if (listEl.classList.contains('open')) {
-                    listEl.classList.remove('open');
-                    chevronEl.classList.remove('rotate-180');
-                } else {
-                    listEl.classList.add('open');
-                    chevronEl.classList.add('rotate-180');
+        // HÀM TOGGLE TRỎ XUỐNG CHO MENU DRAWER (MỤC MỚI MỞ SẼ TỰ ĐÓNG MỤC CŨ)
+        function toggleDrawerSubmenu(targetListId, targetChevronId) {
+            const allSubmenus = document.querySelectorAll('.drawer-submenu');
+            const allChevrons = document.querySelectorAll('.drawer-main-item .fa-chevron-down');
+
+            allSubmenus.forEach(sub => {
+                if (sub.id !== targetListId) {
+                    sub.classList.remove('open');
+                }
+            });
+
+            allChevrons.forEach(chv => {
+                if (chv.id !== targetChevronId) {
+                    chv.classList.remove('rotate-180');
+                }
+            });
+
+            if (targetListId && targetChevronId) {
+                const listEl = document.getElementById(targetListId);
+                const chevronEl = document.getElementById(targetChevronId);
+                if (listEl && chevronEl) {
+                    if (listEl.classList.contains('open')) {
+                        listEl.classList.remove('open');
+                        chevronEl.classList.remove('rotate-180');
+                    } else {
+                        listEl.classList.add('open');
+                        chevronEl.classList.add('rotate-180');
+                    }
                 }
             }
         }
@@ -1015,7 +1042,7 @@
         // BIẾN LƯU DỮ LIỆU TỰ ĐỘNG ĐỂ TRUY XUẤT CHO MENU DRAWER POPUP
         window.drawerStoreCache = {};
 
-        // HÀM RENDER CÁC LINK CON TRONG DRAWER - KHI ẤN VÀO SẼ BẬT POPUP NỔI BẢO TOÀN DỮ LIỆU
+        // HÀM RENDER CÁC LINK CON TRONG DRAWER
         function renderDrawerList(containerId, items) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1135,11 +1162,18 @@
                         </div>
                         <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <div class="flex items-center space-x-1.5 pt-1">
-                            <div class="flex text-amber-400 text-[9px] space-x-0.5">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <!-- Hàng chứa Đánh Giá Sao và Nút Xem Thêm -->
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex items-center space-x-1.5">
+                                <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                             </div>
-                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
+                            <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
+                                <span>Xem thêm</span>
+                                <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                            </button>
                         </div>
                     </div>
                 `;
@@ -1157,20 +1191,31 @@
             let html = '';
             items.forEach(item => {
                 const itemRating = item.rating || '4.9';
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 10);
+                const publishDateText = item.publishDate || 'Mới';
+
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer"
+                    <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-2"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="h-28 w-full rounded-xl overflow-hidden relative mb-2.5">
+                        <div class="h-28 w-full rounded-xl overflow-hidden relative">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
+                            <!-- Badge Ngày Đăng ở Góc Trên Trái Ảnh Banner -->
+                            <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
+                                <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
+                                <span>${publishDateText}</span>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-black text-sm shadow">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start space-x-2.5 min-w-0 flex-1 mr-2">
+                                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-black text-sm shadow mt-0.5">
                                     <i class="fa-solid fa-box-open"></i>
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <div class="flex items-center space-x-1 mt-0.5">
+                                    <!-- Mô Tả Bên Dưới Tiêu Đề (Tối đa 10 từ) -->
+                                    <p class="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
+                                    <div class="flex items-center space-x-1 mt-1">
                                         <div class="flex text-amber-400 text-[8px] space-x-0.5">
                                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                                         </div>
@@ -1178,7 +1223,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
+                            <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 mt-0.5">
                                 NHẬN
                             </button>
                         </div>
@@ -1197,15 +1242,25 @@
 
             let innerHtml = '';
             items.forEach(item => {
+                const itemRating = item.rating || '4.8';
+                const versionText = item.version || 'v1.0.0';
+
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[200px]"
+                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[210px]"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
                         </div>
-                        <div class="min-w-0 flex-1">
+                        <div class="min-w-0 flex-1 space-y-0.5">
                             <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${item.category}</p>
+                            <!-- Hiển thị Số Phiên Bản & Đánh Giá Sao -->
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium">
+                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-0.5 text-amber-400 font-bold">
+                                    <i class="fa-solid fa-star text-[9px]"></i>
+                                    <span class="text-gray-700 dark:text-gray-300">${itemRating}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1232,11 +1287,18 @@
                         </div>
                         <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <div class="flex items-center space-x-1.5 pt-1">
-                            <div class="flex text-amber-400 text-[9px] space-x-0.5">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        <!-- Hàng chứa Đánh Giá Sao và Nút Xem Thêm -->
+                        <div class="flex items-center justify-between pt-1">
+                            <div class="flex items-center space-x-1.5">
+                                <div class="flex text-amber-400 text-[9px] space-x-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                             </div>
-                            <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
+                            <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
+                                <span>Xem thêm</span>
+                                <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                            </button>
                         </div>
                     </div>
                 `;
