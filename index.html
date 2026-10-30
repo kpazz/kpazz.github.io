@@ -156,7 +156,6 @@
             padding: 0 3px;
         }
 
-        /* Giới hạn menu drawer tối đa khoảng 10 dòng (~280px) rồi cho cuộn */
         .drawer-submenu {
             max-height: 0;
             overflow: hidden;
@@ -220,11 +219,10 @@
     <!-- Khoảng bù chiều cao cho Header Fixed -->
     <div class="h-28"></div>
 
-    <!-- ==================== POPUP HIỂN THỊ TẤT CẢ NỘI DUNG CHUYÊN MỤC (THANH TÌM KIẾM CỐ ĐỊNH Ở ĐẦU) ==================== -->
+    <!-- ==================== POPUP HIỂN THỊ TẤT CẢ NỘI DUNG CHUYÊN MỤC ==================== -->
     <div id="categoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
         <div id="categoryCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[90vh] flex flex-col overflow-hidden">
             
-            <!-- Header của Popup & Nút Đóng -->
             <div class="flex items-start justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
                 <div>
                     <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
@@ -235,7 +233,6 @@
                 </button>
             </div>
 
-            <!-- Thanh tìm kiếm CỐ ĐỊNH NGAY Ở ĐẦU (dưới tiêu đề, trên danh sách) -->
             <div class="py-3 flex-shrink-0">
                 <div class="relative w-full">
                     <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-uptoAccent shadow-inner">
@@ -243,10 +240,7 @@
                 </div>
             </div>
 
-            <!-- Danh sách card nhỏ thực tế đầy đủ, kéo dài vô tận với thanh cuộn riêng -->
-            <div id="categoryItemList" class="overflow-y-auto no-scrollbar space-y-2.5 flex-1 pr-1 pb-2">
-                <!-- Nội dung được render tự động -->
-            </div>
+            <div id="categoryItemList" class="overflow-y-auto no-scrollbar space-y-2.5 flex-1 pr-1 pb-2"></div>
         </div>
     </div>
 
@@ -260,7 +254,6 @@
 
             <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-6 pr-1 pb-20 pt-2">
                 
-                <!-- PHẦN 1: THÔNG TIN CHÍNH & RATING -->
                 <div class="space-y-4 pt-1">
                     <div class="text-[10px] sm:text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
                         <span>KPAZZ</span>
@@ -306,7 +299,6 @@
                     </div>
                 </div>
 
-                <!-- PHẦN 2: NỘI DUNG CHI TIẾT HOẶC ĐIỂM NỔI BẬT -->
                 <div class="space-y-4">
                     <div id="articleContentBlock" class="hidden bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
                         <h4 class="font-bold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
@@ -360,7 +352,6 @@
                     </div>
                 </div>
 
-                <!-- PHẦN 3: XẾP HẠNG, BIỂU ĐỒ SAO, ĐÁNH GIÁ & BÌNH LUẬN -->
                 <div class="space-y-4 pt-2 border-t border-gray-200 dark:border-gray-800/80">
                     <div class="space-y-3">
                         <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
@@ -451,7 +442,6 @@
                     </div>
                 </div>
 
-                <!-- PHẦN 4: ỨNG DỤNG & GAME ĐỀ XUẤT LIÊN QUAN -->
                 <div class="space-y-3 pt-3 border-t border-gray-200 dark:border-gray-800/80">
                     <div class="flex items-center justify-between">
                         <h4 class="font-bold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5">
@@ -491,7 +481,6 @@
 
             </div>
 
-            <!-- NÚT TẢI PHIÊN BẢN MỚI NHẤT CỐ ĐỊNH Ở ĐÁY POPUP -->
             <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/90 dark:bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block">
                     <div class="text-left">
@@ -613,12 +602,10 @@
             </div>
             
             <nav class="p-3 space-y-2 text-sm">
-                <!-- Nút Trang chủ (Mặc định được chọn) -->
                 <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold transition">
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
 
-                <!-- Mục 1: Tweak Jailbreak IOS -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -629,7 +616,6 @@
                     <div id="drawerTweakList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 2: Tin tức mới -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -640,7 +626,6 @@
                     <div id="drawerNewsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 3: APP Jailbreak -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -651,7 +636,6 @@
                     <div id="drawerJbList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 4: Đa phương tiện -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -662,7 +646,6 @@
                     <div id="drawerMediaList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 5: Mẹo & Hướng dẫn -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -673,7 +656,6 @@
                     <div id="drawerTipsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 6: Năng suất -->
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
@@ -1144,7 +1126,6 @@
             currentCategoryItems = items;
             categorySearchInput.value = '';
             
-            // Lấy chính xác số lượng từ đối tượng đếm của mục đó
             if (categoryModalCountText) {
                 categoryModalCountText.textContent = `Tổng ${items.length} trong danh sách này`;
             }
@@ -1484,7 +1465,7 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px]"
+                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px] flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
@@ -1504,7 +1485,9 @@
                 `;
             });
 
-            container.innerHTML = `<div class="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            // Tự động tính số hàng cần thiết dựa trên tổng số lượng item để hiển thị đầy đủ 100% không bị giới hạn 8 app
+            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 3)));
+            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
@@ -1524,7 +1507,7 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px]"
+                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px] flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
@@ -1544,7 +1527,8 @@
                 `;
             });
 
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 3)));
+            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
@@ -1593,7 +1577,7 @@
             let innerHtml = '';
             items.forEach(item => {
                 innerHtml += `
-                    <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20"
+                    <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20 flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border border-gray-200 dark:border-gray-700 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-xl">
@@ -1603,7 +1587,10 @@
                     </div>
                 `;
             });
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            
+            // Tự động điều chỉnh số hàng (rows) theo tổng số lượng item để hiển thị đủ toàn bộ dữ liệu trong file JSON
+            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 4)));
+            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
