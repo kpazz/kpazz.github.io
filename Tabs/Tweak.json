@@ -66,9 +66,9 @@
     {
         "name": "CarPlaySplitter",
         "version": "0.0.2",
-        "dev": "Kim Trong",
+        "dev": "Kim Trung",
         "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate (>= 0.9.5000)",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, ws.hbang.common (>= 1.16)",
         "img": "CydiaIcon.png",
         "publishDate": "30/10/2026",
         "isApp": false,
