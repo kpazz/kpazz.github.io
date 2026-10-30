@@ -1,5 +1,3 @@
-Update py
-
 import os
 import subprocess
 import hashlib
