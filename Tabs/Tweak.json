@@ -64,6 +64,22 @@
         ]
     },
     {
+        "name": "CarPlaySplitter",
+        "version": "0.0.2",
+        "dev": "Kim Trong",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/com.kpazz.carplaysplitter_0.0.2_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 0.0.2 - Cập nhật mới",
+        "highlights": [
+            "Tự động chia đôi màn hình CarPlay khi kết nối."
+        ]
+    },
+    {
         "name": "OmniCar",
         "version": "1.0.4",
         "dev": "OmniCar <omnicartweak@gmail.com>",

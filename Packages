@@ -57,6 +57,21 @@ Size: 453792
 MD5sum: d2750d3b6271b36e73471434c35ee939
 SHA256: b84e0a8daa0f4a3575a296e839757b4c0cf29dc7466ab06583a4edb0c277c4ce
 
+Package: com.kpazz.carplaysplitter
+Name: CarPlaySplitter
+Depends: mobilesubstrate (>= 0.9.5000)
+Description: Tự động chia đôi màn hình CarPlay khi kết nối.
+Maintainer: Kim Trong
+Author: Kim Trong
+Section: Tweaks
+Architecture: iphoneos-arm64
+Version: 0.0.2
+Installed-Size: 248
+Filename: debs/com.kpazz.carplaysplitter_0.0.2_iphoneos-arm64.deb
+Size: 5618
+MD5sum: 65eaaab9bfd8105e7eaa10c5ebafcdcf
+SHA256: 0cd055c5626194fde5da234a37adced24c8d9a3f8faf1e04cb85a5c17d26cc57
+
 Package: com.anlai.omnicar
 Version: 1.0.4
 Name: OmniCar
