@@ -10,7 +10,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.3dglassiertouch_2.0_803890.deb",
-        "highlightTitle": "3DGlassierTouch dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
         "highlights": [
             "3DGlassierTouch enhances your iOS experience by dynamically customizing 3D context menus. It features adaptive coloring based on app icons, customizable separators, and a refined glassier background effect for both the lockscreen and homescreen. Tailor thickness, color, and radius to suit your style, with distinct settings for each screen. Experience a sleek, personalized touch with every interaction!"
         ]
@@ -26,9 +26,25 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libuuid16_1.6.2-3_663677.deb",
-        "highlightTitle": "libuuid16 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.6.2-3 - Cập nhật mới",
         "highlights": [
             "Universally Unique ID library"
+        ]
+    },
+    {
+        "name": "Abstract",
+        "version": "1.0",
+        "dev": "SGWC",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.abstract_1.0_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0 - Cập nhật mới",
+        "highlights": [
+            "Customise Message app UI"
         ]
     },
     {
@@ -42,9 +58,25 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libmpfr6_4.1.0_722774.deb",
-        "highlightTitle": "libmpfr6 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 4.1.0 - Cập nhật mới",
         "highlights": [
             "multiple precision floating-point computation"
+        ]
+    },
+    {
+        "name": "Accent Reborn",
+        "version": "0.0.2",
+        "dev": "Paisseon",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, firmware (>= 15.0), ws.hbang.alderis",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.accent_0.0.2_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 0.0.2 - Cập nhật mới",
+        "highlights": [
+            "Change accent colours systemwide"
         ]
     },
     {
@@ -58,9 +90,25 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/oldabi_2.0.1_562877.deb",
-        "highlightTitle": "Legacy arm64e Support dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.0.1 - Cập nhật mới",
         "highlights": [
             "Support for legacy arm64e ABI in iOS 15.0+"
+        ]
+    },
+    {
+        "name": "Accent Custom",
+        "version": "2.0.5",
+        "dev": "Lillie",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), firmware (>= 13.0), preferenceloader, com.spark.libsparkcolourpicker, com.spark.libsparkapplist",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.accentcustom_2.0.5_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 2.0.5 - Cập nhật mới",
+        "highlights": [
+            "iOS Accent Colours In macOS Style"
         ]
     },
     {
@@ -74,7 +122,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libplist3_2.2.0+git20230130.4b50a5a_968562.deb",
-        "highlightTitle": "libplist3 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.2.0+git20230130.4b50a5a - Cập nhật mới",
         "highlights": [
             "Library for handling Apple binary and XML property lists"
         ]
@@ -90,7 +138,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/plutil_0.2.2_633601.deb",
-        "highlightTitle": "plutil dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 0.2.2 - Cập nhật mới",
         "highlights": [
             "Utility for creating and editing Apple property list files."
         ]
@@ -106,9 +154,25 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/odcctools_1010.6-1_950618.deb",
-        "highlightTitle": "odcctools dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1010.6-1 - Cập nhật mới",
         "highlights": [
             "linker and assembler for the iPhone"
+        ]
+    },
+    {
+        "name": "AVPhotos",
+        "version": "1.0.1",
+        "dev": "MiRO",
+        "category": "Tweaks",
+        "systemRequirements": "firmware (>=14.0), mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.avphotos_1.0.1_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.1 - Cập nhật mới",
+        "highlights": [
+            "PiP for videos in photos.app"
         ]
     },
     {
@@ -122,7 +186,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libxar1_1.8.0.487.100.1-1_877655.deb",
-        "highlightTitle": "libxar1 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.8.0.487.100.1-1 - Cập nhật mới",
         "highlights": [
             "eXtensible ARchive format - dynamic library"
         ]
@@ -138,7 +202,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/com.spark.libsparkcolourpicker_1.0.3-rootless_319828.deb",
-        "highlightTitle": "libsparkcolourpicker dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.3-rootless - Cập nhật mới",
         "highlights": [
             "Simple to implement, simple to use colour picker library. Built by SparkDev."
         ]
@@ -154,7 +218,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libtapi_1500.0.12.3_752525.deb",
-        "highlightTitle": "libtapi dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1500.0.12.3 - Cập nhật mới",
         "highlights": [
             "Text-based Application Programming Interface (library)"
         ]
@@ -170,7 +234,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/file_5.45_823734.deb",
-        "highlightTitle": "file dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 5.45 - Cập nhật mới",
         "highlights": [
             "Recognize the type of data in a file using \"magic\" numbers"
         ]
@@ -186,7 +250,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.avlock_1.0.4_iphoneos-arm64.deb",
-        "highlightTitle": "AVLock dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
         "highlights": [
             "Add an orientation lock button to the stock iOS video player"
         ]
@@ -202,7 +266,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
-        "highlightTitle": "OmniCar dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
         "highlights": [
             "Sức mạnh của CarPlay."
         ]
@@ -218,7 +282,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.aimpro_1.1.3k_878860.deb",
-        "highlightTitle": "AIM Pro dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
         "highlights": [
             "iOS 16 Style Time & Date Lockscreen"
         ]
@@ -234,7 +298,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libmagic1_5.45_874313.deb",
-        "highlightTitle": "libmagic1 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 5.45 - Cập nhật mới",
         "highlights": [
             "Recognize the type of data in a file using \"magic\" numbers - library"
         ]
@@ -250,7 +314,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/llvm-dev_16.0.0~5.9.2~RELEASE-1_234454.deb",
-        "highlightTitle": "llvm-dev dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 16.0.0~5.9.2~RELEASE-1 - Cập nhật mới",
         "highlights": [
             "Low-Level Virtual Machine (LLVM), libraries and headers"
         ]
@@ -266,7 +330,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/libclang-cpp16_16.0.0~5.9.2~RELEASE-1_528895.deb",
-        "highlightTitle": "libclang-cpp16 dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 16.0.0~5.9.2~RELEASE-1 - Cập nhật mới",
         "highlights": [
             "Modular compiler and toolchain technologies, runtime library"
         ]
@@ -282,7 +346,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/llvm-16-runtime_16.0.0~5.9.2~RELEASE-1_552062.deb",
-        "highlightTitle": "llvm-16-runtime dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 16.0.0~5.9.2~RELEASE-1 - Cập nhật mới",
         "highlights": [
             "Modular compiler and toolchain technologies, IR interpreter"
         ]
@@ -298,7 +362,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/gawk_5.3.0_293484.deb",
-        "highlightTitle": "gawk dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 5.3.0 - Cập nhật mới",
         "highlights": [
             "GNU awk, a pattern scanning and processing language"
         ]
@@ -314,7 +378,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.3dtools_1.0.6k_518013.deb",
-        "highlightTitle": "3DTools dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
         "highlights": [
             "Add helpful tools to your 3D touch menu !"
         ]
@@ -330,7 +394,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
-        "highlightTitle": "OmniCar dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
         "highlights": [
             "The power of CarPlay."
         ]
@@ -346,7 +410,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.0_293406.deb",
-        "highlightTitle": "AI Chat VIP dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
         "highlights": [
             "VIP Membership Unlocked (Ignore the first pop-up !)"
         ]
@@ -362,7 +426,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/ldid_2.1.5-procursus7_747564.deb",
-        "highlightTitle": "ldid dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.1.5-procursus7 - Cập nhật mới",
         "highlights": [
             "pseudo-codesign Mach-O files"
         ]
@@ -378,7 +442,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.aismithpremium_1.0.0_146642.deb",
-        "highlightTitle": "AI Smith Premium dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
         "highlights": [
             "Yearly Membership Activated"
         ]
@@ -394,7 +458,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/ws.hbang.common_2.0_628415.deb",
-        "highlightTitle": "Cephei Tweak Support dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
         "highlights": [
             "Support library for tweaks"
         ]
@@ -410,7 +474,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/llvm-16-linker-tools_16.0.0~5.9.2~RELEASE-1_792440.deb",
-        "highlightTitle": "llvm-16-linker-tools dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 16.0.0~5.9.2~RELEASE-1 - Cập nhật mới",
         "highlights": [
             "Modular compiler and toolchain technologies"
         ]
@@ -426,7 +490,7 @@
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.cypwn.xinam1ne_2.6-8_286937.deb",
-        "highlightTitle": "Xinam1ne AIO (Rootless) dành cho bạn nếu",
+        "highlightTitle": "Phiên bản 2.6-8 - Cập nhật mới",
         "highlights": [
             "Xinamine Official All-in-One bundle. Convert rootful tweaks to rootless (and rootless to rootful) with ease using the Xinam1nePatcher in Filza or use the included Xinaf1re app."
         ]

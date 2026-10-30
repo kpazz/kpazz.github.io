@@ -36,6 +36,23 @@ Size: 21266
 MD5sum: 988dff6c48180aa8402c5c057512aa39
 SHA256: 62cf7df4f27c929393699ae2c12cdd0f359110879f83fa04ef292f8c2c8ad5f1
 
+Package: xyz.cypwn.abstract
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/1385
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/1385
+Name: Abstract
+Depends: mobilesubstrate
+Section: Tweaks
+Description: Customise Message app UI
+Author: SGWC
+Architecture: iphoneos-arm64
+Version: 1.0
+Icon: https://repo.cypwn.xyz/assets/repo/Featured/abstract.png
+Filename: debs/xyz.cypwn.abstract_1.0_iphoneos-arm64.deb
+Size: 123928
+MD5sum: a01d8b99c2d525bc72e8acacd54b2bab
+SHA256: 13dee59594c314066b5bec88f5ee49328ae0f680d0eff0dee28f169f1f8eb339
+
 Package: libmpfr6
 Version: 4.1.0
 Architecture: iphoneos-arm64
@@ -56,6 +73,24 @@ Size: 208510
 MD5sum: 00d950373b088328fb3930e66ff6aeac
 SHA256: f1f3207a095591c4b3fda250032bba2bc29f913ade170bc2510658898b986a12
 
+Package: xyz.cypwn.accent
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/1991
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/1991
+Section: Tweaks
+Installed-Size: 580
+Architecture: iphoneos-arm64
+Version: 0.0.2
+Depends: mobilesubstrate, firmware (>= 15.0), ws.hbang.alderis
+Description: Change accent colours systemwide
+Name: Accent Reborn
+Author: Paisseon
+Icon: https://repo.cypwn.xyz/assets/repo/Featured/accentreborn.png
+Filename: debs/xyz.cypwn.accent_0.0.2_iphoneos-arm64.deb
+Size: 137080
+MD5sum: 12f88c0741f9bb52eacbb55acf0dfbd1
+SHA256: e5e5af9ac38fb40111ecea85b026b71bd6cde10877544ef39c2c7ea406df2673
+
 Package: oldabi
 Name: Legacy arm64e Support
 Description: Support for legacy arm64e ABI in iOS 15.0+
@@ -70,6 +105,24 @@ Filename: debs/oldabi_2.0.1_562877.deb
 Size: 3420
 MD5sum: 7e88b7f873f58b63391aaff1f123d16d
 SHA256: 82ad764e1bcb7e8edc5f66512fad19400769fc54e494a1fd6212279e14553b87
+
+Package: xyz.cypwn.accentcustom
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/1204
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/1204
+Name: Accent Custom
+Architecture: iphoneos-arm64
+Description: iOS Accent Colours In macOS Style
+Author: Lillie
+Section: Tweaks
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 13.0), preferenceloader, com.spark.libsparkcolourpicker, com.spark.libsparkapplist
+Conflicts: com.ivanc.accent
+Version: 2.0.5
+Installed-Size: 408
+Filename: debs/xyz.cypwn.accentcustom_2.0.5_iphoneos-arm64.deb
+Size: 34176
+MD5sum: b599e5cfc86eda280f004ac7ad33f48d
+SHA256: d0c90c10360cc7957521c5662f9f6ca805b82c9cd3b240f10d7edb6b96a8f45f
 
 Package: libplist3
 Version: 2.2.0+git20230130.4b50a5a
@@ -119,6 +172,23 @@ Filename: debs/odcctools_1010.6-1_950618.deb
 Size: 876002
 MD5sum: c8b0746388ade69c6fdc07ea409a44e4
 SHA256: 015f8fe9da66e4fd669336b175beacb6dc0b3b67230244fbc435dc523a059bbc
+
+Package: xyz.cypwn.avphotos
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/2017
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/2017
+Version: 1.0.1
+Section: Tweaks
+Depends: firmware (>=14.0), mobilesubstrate
+Architecture: iphoneos-arm64
+Name: AVPhotos
+Description: PiP for videos in photos.app
+Author: MiRO
+Icon: https://apt.wxhbts.pro/icon/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.png
+Filename: debs/xyz.cypwn.avphotos_1.0.1_iphoneos-arm64.deb
+Size: 11422
+MD5sum: 74c2ea000e66217e580e6824ae7d830a
+SHA256: d5516380a8445968119239c3076ea2d0444cef4035395872903b315c3a457971
 
 Package: libxar1
 Version: 1.8.0.487.100.1-1
