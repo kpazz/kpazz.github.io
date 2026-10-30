@@ -1,3 +1,18 @@
+Package: xyz.3dglassiertouch
+Maintainer: CyPwn
+Name: 3DGlassierTouch
+Icon: https://cdn-static.yourepo.com/images/debs/com.yourepo.b4db1r3r3p0.glassier3dtouch.png
+Description: 3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D. Nó có tính năng tô màu thích ứng dựa trên các biểu tượng ứng dụng, dấu phân cách có thể tùy chỉnh và hiệu ứng nền thủy tinh tinh tinh cho cả màn hình khóa và màn hình chính. Điều chỉnh độ dày, màu sắc và bán kính cho phù hợp với phong cách của bạn, với các cài đặt riêng biệt cho mỗi màn hình. Trải nghiệm cảm ứng bóng bẩy, được cá nhân hóa với mọi tương tác! 
+Author: b4db1r3
+Section: Tweaks
+Depends: mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader
+Architecture: iphoneos-arm64
+Version: 2.0
+Filename: debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb
+Size: 4504384
+MD5sum: 620dae556f2580d2b7df3a327c913843
+SHA256: f17340edad7a66c87c65f70cb908c73092dc4c22fb3646ab17ffb0e5d4220dd1
+
 Package: com.anlai.omnicar
 Version: 1.0.4
 Name: OmniCar
@@ -48,6 +63,38 @@ Filename: debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb
 Size: 1369512
 MD5sum: 5baf51cab085fc24bd39b0b83c947736
 SHA256: 87ea45a75e02772f24441b447eb611e06ed361ca4b55ec880350d61db49a3334
+
+Package: xyz.smokin1337.3dtools
+Maintainer: smokin1337
+Name: 3DTools
+Version: 1.0.6k
+Architecture: iphoneos-arm64
+Description: Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn! 
+Depends: firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne
+Conflicts: com.smokin1337.3dtools
+Author: smokin1337
+Section: Tweaks
+Filename: debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb
+Size: 1144904
+MD5sum: a650f30826ac5b6ddcf00faccb1080dd
+SHA256: e4fac52294c96188ca33a66c859ae3562dc867c83130f7fd4453c15fcbdd7cd6
+
+Package: xyz.cypwn.aichatvip
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/1323
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/1323
+Name: AI Chat VIP
+Author: Ravand <Ravand0010@gmail.com>
+Description: Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!) 
+Depends: mobilesubstrate
+Section: Tweaks
+Architecture: iphoneos-arm64
+Version: 1.0.0
+Installed-Size: 280
+Filename: debs/xyz.cypwn.aichatvip_1.0.deb
+Size: 7936
+MD5sum: 2d60e08edfcf50f9272e13aec558ec64
+SHA256: 43911c4745b4f6a931d382b45b8afb3bedf5e81d56319400e4d065e2a2941b81
 
 Package: com.anlai.omnicar
 Name: OmniCar

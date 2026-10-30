@@ -1,5 +1,21 @@
 [
     {
+        "name": "3DGlassierTouch",
+        "version": "2.0",
+        "dev": "b4db1r3",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
+        "highlights": [
+            "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D. Nó có tính năng tô màu thích ứng dựa trên các biểu tượng ứng dụng, dấu phân cách có thể tùy chỉnh và hiệu ứng nền thủy tinh tinh tinh cho cả màn hình khóa và màn hình chính. Điều chỉnh độ dày, màu sắc và bán kính cho phù hợp với phong cách của bạn, với các cài đặt riêng biệt cho mỗi màn hình. Trải nghiệm cảm ứng bóng bẩy, được cá nhân hóa với mọi tương tác!"
+        ]
+    },
+    {
         "name": "OmniCar",
         "version": "1.0.4",
         "dev": "OmniCar <omnicartweak@gmail.com>",
@@ -13,6 +29,38 @@
         "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
         "highlights": [
             "Sức mạnh của CarPlay."
+        ]
+    },
+    {
+        "name": "3DTools",
+        "version": "1.0.6k",
+        "dev": "smokin1337",
+        "category": "Tweaks",
+        "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
+        "highlights": [
+            "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!"
+        ]
+    },
+    {
+        "name": "AI Chat VIP",
+        "version": "1.0.0",
+        "dev": "Ravand <Ravand0010@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
+        "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
+        "highlights": [
+            "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)"
         ]
     },
     {
