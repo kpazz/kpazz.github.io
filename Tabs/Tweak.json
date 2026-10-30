@@ -32,6 +32,22 @@
         ]
     },
     {
+        "name": "AddProfileInstallButton",
+        "version": "1.0.2",
+        "dev": "CyPwn",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, firmware (>= 12.0), cy+cpu.arm64v8 | oldabi-xina | oldabi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.addprofileinstallbutton_1.0.2_518460.deb",
+        "highlightTitle": "Phiên bản 1.0.2 - Cập nhật mới",
+        "highlights": [
+            "Add an \"Install Profile\" button to the \"Profile Downloaded\" popup."
+        ]
+    },
+    {
         "name": "Abstract",
         "version": "1.0",
         "dev": "SGWC",
@@ -240,6 +256,22 @@
         ]
     },
     {
+        "name": "odcctools",
+        "version": "1010.6-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libuuid16, libxar1, llvm-dev, libtapi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/odcctools_1010.6-1_867397.deb",
+        "highlightTitle": "Phiên bản 1010.6-1 - Cập nhật mới",
+        "highlights": [
+            "linker and assembler for the iPhone"
+        ]
+    },
+    {
         "name": "AVLock",
         "version": "1.0.4",
         "dev": "gilshahar7",
@@ -333,6 +365,22 @@
         "highlightTitle": "Phiên bản 16.0.0~5.9.2~RELEASE-1 - Cập nhật mới",
         "highlights": [
             "Modular compiler and toolchain technologies, runtime library"
+        ]
+    },
+    {
+        "name": "Legacy arm64e Support",
+        "version": "2.0.1",
+        "dev": "Nightwind",
+        "category": "Tweaks",
+        "systemRequirements": "ellekit (>= 0.4), cy+cpu.arm64e, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/oldabi_2.0.1_686824.deb",
+        "highlightTitle": "Phiên bản 2.0.1 - Cập nhật mới",
+        "highlights": [
+            "Support for legacy arm64e ABI in iOS 15.0+"
         ]
     },
     {
