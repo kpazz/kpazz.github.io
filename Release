@@ -1,8 +1,20 @@
-Origin: KPazz
-Label: KPazz
+Origin: KPazz Repository
+Label: KPazz Store
 Suite: stable
 Version: 1.0
 Codename: ios
 Architectures: iphoneos-arm iphoneos-arm64
 Components: main
-Description: Kho lưu trữ tweak và chia sẻ ứng dụng iOS - IPA
+Description: Kho lưu trữ tweak và ứng dụng iOS cá nhân của KPazz.
+MD5Sum:
+ abbaeca1c2894ee3205fc758e7578387 2150 Packages
+ 60933ea433ace93a4f33aa5997f79f8d 1267 Packages.bz2
+ 22e67387970f570df6d9b2757dc31c60 1209 Packages.zst
+SHA256:
+ d40fc1106b104860ac044ac47ba5dfb697ced3d8cb1acbba5c71fa54dc37b649 2150 Packages
+ 5f86d3f32f6a6498773f9dcbf7d4ed9e98cd7bd1fc5e488750f97bff645f5453 1267 Packages.bz2
+ 01ddef68430c3ad63e4360d304fbb41c67e37881743ae738f9d6f8f178a033c0 1209 Packages.zst
+SHA512:
+ 0daad910bcf991fd8b2154ccd6cc33062c392486d782d9ee12ec2ea7d72bc2078f0892de445a760fe1ada9ed49d0d29f4dd6bc6791a13b9981c893186256f7db 2150 Packages
+ 37774d9f8d4d8fa019ad188edb5532ec90d3b4d44aff1491628a67efb8413a396af0e6678634ab24fc057aacdae067880eae17d71db5ab927fd500b8b9380b8a 1267 Packages.bz2
+ 9ad86ba892ebde7c68b7ece74f0c7a1e2dc1da3585089f92fa88125c3b65c1b89d9223427d2ac7da28b58af485066f4c215d8a9904c32dcf34d57529125d19e6 1209 Packages.zst
