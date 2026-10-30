@@ -1,0 +1,75 @@
+[
+    {
+        "name": "Lara Croft: Temple of Osiris",
+        "dev": "Feral Interactive",
+        "category": "Tin tức game",
+        "description": "Khám phá hầm mộ Ai Cập bí ẩn cùng nữ khảo cổ nổi tiếng.",
+        "rating": "4.9",
+        "img": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "29/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Lara Croft: Temple of Osiris dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.",
+            "An toàn tuyệt đối, đã qua kiểm duyệt kỹ lưỡng.",
+            "Cập nhật thông tin mới nhất liên tục hàng ngày."
+        ]
+    },
+    {
+        "name": "Broken Soul",
+        "dev": "Indie Game Studio",
+        "category": "Tin tức game",
+        "description": "Bản cập nhật RPG hành động 2D đầy thách thức bối cảnh u tăm.",
+        "rating": "4.7",
+        "img": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "28/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Broken Soul dành cho bạn nếu",
+        "highlights": [
+            "Bạn thích thử thách với các tựa game RPG hành động phong cách u tối.",
+            "Khám phá các tính năng mới và màn chơi độc đáo vừa được cập nhật.",
+            "Cộng đồng game thủ đánh giá cao về độ khó và cốt truyện."
+        ]
+    },
+    {
+        "name": "Sự Kiện Công Nghệ 2026",
+        "dev": "KPazz News",
+        "category": "Sự kiện",
+        "description": "Điểm qua những xu hướng ứng dụng di động nổi bật nhất năm.",
+        "rating": "5.0",
+        "img": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "27/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Sự Kiện Công Nghệ 2026 dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn đón đầu các xu hướng công nghệ và ứng dụng di động mới.",
+            "Tổng hợp các sự kiện lớn và các sản phẩm đột phá trong năm.",
+            "Góc nhìn phân tích chi tiết, khách quan từ các chuyên gia."
+        ]
+    },
+    {
+        "name": "Bảo Mật Di Động",
+        "dev": "KPazz Security",
+        "category": "Bảo mật",
+        "description": "Các phương pháp bảo vệ thông tin tài khoản an toàn tuyệt đối.",
+        "rating": "4.8",
+        "img": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "26/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Bảo Mật Di Động dành cho bạn nếu",
+        "highlights": [
+            "Bạn quan tâm đến vấn đề an toàn thông tin và bảo mật tài khoản cá nhân.",
+            "Trang bị các kiến thức phòng chống mã độc và lừa đảo trực tuyến.",
+            "Giải pháp thiết thực giúp bảo vệ thiết bị di động hiệu quả."
+        ]
+    }
+]
+

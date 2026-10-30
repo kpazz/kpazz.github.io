@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Sileo Package Manager",
+        "version": "2.5.2",
+        "dev": "Sileo Team",
+        "category": "Quản lý gói",
+        "systemRequirements": "iOS 14.0 - 16.6.1 (Rootless / Jailbroken)",
+        "rating": "4.9",
+        "img": "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "25/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.deb",
+        "highlightTitle": "Sileo Manager dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn trải nghiệm một trình quản lý gói siêu mượt mà và hiện đại.",
+            "Tối ưu riêng cho các dòng máy chạy jailbreak đời mới.",
+            "Quản lý kho lưu trữ tweak, cài đặt và cập nhật nhanh chóng."
+        ]
+    },
+    {
+        "name": "Filza File Manager",
+        "version": "4.2.0",
+        "dev": "TIG Software",
+        "category": "Quản lý tệp hệ thống",
+        "systemRequirements": "iOS 12.0 - 16.5 (Jailbroken / FilzaEscaped)",
+        "rating": "4.8",
+        "img": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "24/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.ipa",
+        "highlightTitle": "Filza Escaped dành cho bạn nếu",
+        "highlights": [
+            "Bạn cần can thiệp sâu vào tệp hệ thống gốc trên thiết bị iOS.",
+            "Hỗ trợ chỉnh sửa, giải nén và xem trước mọi định dạng tệp tin.",
+            "Công cụ không thể thiếu đối với người dùng yêu thích tùy biến."
+        ]
+    },
+    {
+        "name": "Zebra Package Manager",
+        "version": "1.1.32",
+        "dev": "Wilson",
+        "category": "Quản lý gói",
+        "systemRequirements": "iOS 11.0 - 16.5 (Jailbroken)",
+        "rating": "4.9",
+        "img": "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "23/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.deb",
+        "highlightTitle": "Zebra Store dành cho bạn nếu",
+        "highlights": [
+            "Bạn tìm kiếm một giải pháp thay thế hoàn hảo cho Cydia.",
+            "Tốc độ tải nhanh, giao diện gọn gàng và dễ dàng sử dụng.",
+            "Hỗ trợ quản lý nguồn và tìm kiếm gói cài đặt cực nhạy."
+        ]
+    },
+    {
+        "name": "TrollStore Installer",
+        "version": "2.0.7",
+        "dev": "opa334",
+        "category": "Tiện ích cài đặt vĩnh viễn",
+        "systemRequirements": "iOS 14.0 - 17.0 (Hỗ trợ CoreTrust exploit)",
+        "rating": "4.7",
+        "img": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "22/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.tar",
+        "highlightTitle": "TrollStore 2 dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn cài đặt ứng dụng IPA bên ngoài mà không bị lỗi chứng chỉ ký lại.",
+            "Ứng dụng hoạt động vĩnh viễn nhờ khai thác lỗ hổng cốt lõi hệ thống.",
+            "Tiện ích giải trí và công việc tối ưu nhất cho người dùng iOS."
+        ]
+    }
+]
+

@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Tối Ưu Android 2026",
+        "dev": "Mẹo Công Nghệ KPazz",
+        "category": "Thủ thuật Android",
+        "description": "Hướng dẫn dọn dẹp bộ nhớ đệm và tối ưu RAM cực dễ.",
+        "rating": "5.0",
+        "img": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "15/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Nội dung này dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn cải thiện tốc độ xử lý cho chiếc điện thoại Android của mình.",
+            "Các bước tối ưu hóa dung lượng RAM và bộ nhớ trong cực kỳ hiệu quả.",
+            "Giúp thiết bị vận hành ổn định và kéo dài thời gian sử dụng pin."
+        ]
+    },
+    {
+        "name": "Tiết Kiệm Pin iOS & Android",
+        "dev": "Mẹo Công Nghệ KPazz",
+        "category": "Pin & Nguồn",
+        "description": "Tắt các tính năng chạy ngầm tốn pin không cần thiết.",
+        "rating": "4.8",
+        "img": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "14/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Nội dung này dành cho bạn nếu",
+        "highlights": [
+            "Bạn đang gặp tình trạng điện thoại nhanh hết pin và tụt nguồn đột ngột.",
+            "Mẹo nhận biết và vô hiệu hóa các ứng dụng ngầm ngốn năng lượng.",
+            "Kéo dài thời lượng pin đáng kể cho cả thiết bị iOS lẫn Android."
+        ]
+    },
+    {
+        "name": "Thủ Thuật Wi-Fi 5GHz",
+        "dev": "Mẹo Công Nghệ KPazz",
+        "category": "Mạng & Wi-Fi",
+        "description": "Cách chọn băng tần và kênh sóng mượt nhất cho modem.",
+        "rating": "4.9",
+        "img": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80",
+        "publishDate": "13/10/2026",
+        "isApp": false,
+        "noDownload": true,
+        "downloadLink": "",
+        "highlightTitle": "Nội dung này dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn cải thiện tốc độ mạng Wi-Fi tại nhà loại bỏ tình trạng giật lag.",
+            "Hướng dẫn lựa chọn kênh sóng và băng tần 5GHz tối ưu nhất.",
+            "Giúp tín hiệu mạng luôn ổn định khi chơi game hoặc xem video 4K."
+        ]
+    }
+]
