@@ -1,0 +1,8 @@
+Origin: KPazz
+Label: KPazz
+Suite: stable
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm iphoneos-arm64
+Components: main
+Description: Kho lưu trữ tweak và chia sẻ ứng dụng iOS - IPA

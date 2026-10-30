@@ -666,7 +666,7 @@
                     <span>Tweak Jailbreak IOS</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="tweakJbCountTextTop" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
+                <span id="tweakJbCountTextTop" class="text-[11px] font-bold text-gray-400">0 - Tweak</span>
             </div>
             <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
@@ -1136,7 +1136,7 @@
             const jsonFiles = {
                 news: 'Tabs/Tintucmoi.json',
                 jailbreak: 'Tabs/Appjailbreak.json',
-                multimedia: 'Tabs/Daphuongtien.json',
+                tweakJb: 'Tabs/Tweak.json',
                 tips: 'Tabs/Meo.json',
                 productivity: 'Tabs/Nangsuat.json'
             };
@@ -1162,9 +1162,9 @@
                     allLoadedItems.push(...data);
                 }
 
-                const resMedia = await fetch(jsonFiles.multimedia);
-                if (resMedia.ok) {
-                    let data = await resMedia.json();
+                const resTweakJb = await fetch(jsonFiles.tweakJb);
+                if (resTweakJb.ok) {
+                    let data = await resTweakJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
                     renderTweakJbSectionTop(data);
@@ -1185,7 +1185,6 @@
                 if (resProd.ok) {
                     let data = await resProd.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    // Nhân bản thêm dữ liệu để đủ thêm số lượng app yêu cầu
                     while (data.length < 28) {
                         data = data.concat(data);
                     }
@@ -1338,7 +1337,7 @@
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
             if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
+            if (countText) countText.textContent = `${items.length} - Tweak`;
 
             let innerHtml = '';
             items.forEach(item => {
@@ -1428,7 +1427,6 @@
                     </div>
                 `;
             });
-            // Giảm khoảng cách cột (gap-x-2) và thêm cuộn ngang mượt mà compact hơn
             container.innerHTML = `<div class="grid grid-rows-4 grid-flow-col gap-x-2 gap-y-2 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }

@@ -1,0 +1,110 @@
+[
+    {
+        "name": "Xingtu - 醒图",
+        "version": "13.2.0",
+        "dev": "Beijing Lingdong",
+        "category": "Chỉnh ảnh AI",
+        "systemRequirements": "Android 7.0 trở lên / iOS 14.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "21/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "Xingtu dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn sở hữu những bức ảnh chân dung lung linh nhờ công nghệ AI.",
+            "Bộ công cụ chỉnh sửa chi tiết khuôn mặt và bộ lọc màu độc đáo.",
+            "Thao tác dễ dàng, tạo ra các bức ảnh nghệ thuật chuyên nghiệp."
+        ]
+    },
+    {
+        "name": "TikTok",
+        "version": "35.1.2",
+        "dev": "TikTok Pte. Ltd.",
+        "category": "Video ngắn",
+        "systemRequirements": "Android 5.0 trở lên / iOS 12.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "20/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "TikTok dành cho bạn nếu",
+        "highlights": [
+            "Bạn thích xem và giải trí với các video ngắn xu hướng toàn cầu.",
+            "Kho nhạc nền phong phú cùng nhiều hiệu ứng quay dựng bắt mắt.",
+            "Kết nối cộng đồng sáng tạo nội dung đông đảo hàng đầu."
+        ]
+    },
+    {
+        "name": "YouTube",
+        "version": "19.16.3",
+        "dev": "Google LLC",
+        "category": "Kho video",
+        "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "19/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "YouTube dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn thưởng thức kho video giải trí và kiến thức lớn nhất thế giới.",
+            "Trải nghiệm phát video mượt mà chất lượng cao trên thiết bị di động.",
+            "Cập nhật liên tục các nhà sáng tạo nội dung yêu thích của bạn."
+        ]
+    },
+    {
+        "name": "Lightroom",
+        "version": "9.3.0",
+        "dev": "Adobe",
+        "category": "Chỉnh màu",
+        "systemRequirements": "Android 9.0 trở lên / iOS 16.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "18/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "Lightroom dành cho bạn nếu",
+        "highlights": [
+            "Bạn là người đam mê nhiếp ảnh và muốn tinh chỉnh màu sắc chuyên nghiệp.",
+            "Hỗ trợ chỉnh sửa ảnh RAW mạnh mẽ từ các thiết bị cao cấp.",
+            "Lưu trữ công thức màu và chia sẻ dễ dàng với cộng đồng."
+        ]
+    },
+    {
+        "name": "CapCut",
+        "version": "12.4.0",
+        "dev": "ByteDance",
+        "category": "Biên tập video",
+        "systemRequirements": "Android 8.0 trở lên / iOS 14.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "17/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "CapCut dành cho bạn nếu",
+        "highlights": [
+            "Bạn cần một công cụ cắt ghép và biên tập video nhanh chóng trên điện thoại.",
+            "Kho hiệu ứng chuyển cảnh, chữ nghệ thuật và template phong phú.",
+            "Xuất video sắc nét, tối ưu hóa trực tiếp cho các nền tảng mạng xã hội."
+        ]
+    },
+    {
+        "name": "Spotify",
+        "version": "8.9.38",
+        "dev": "Spotify AB",
+        "category": "Nghe nhạc",
+        "systemRequirements": "Android 7.0 trở lên / iOS 14.0 trở lên",
+        "img": "https://images.unsplash.com/photo-1614680376593-902f749f705c?auto=format&fit=crop&w=200&q=80",
+        "publishDate": "16/10/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "highlightTitle": "Spotify dành cho bạn nếu",
+        "highlights": [
+            "Bạn muốn tận hưởng thế giới âm nhạc không giới hạn với hàng triệu bài hát.",
+            "Gợi ý danh sách phát thông minh phù hợp với gu thưởng thức của bạn.",
+            "Chất lượng âm thanh cao cấp, hỗ trợ nghe nhạc ngoại tuyến tiện lợi."
+        ]
+    }
+]

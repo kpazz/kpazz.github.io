@@ -1,0 +1,38 @@
+name: Tự động cập nhật APT Repo
+
+on:
+  push:
+    paths:
+      - 'debs/**'        # Chỉ kích hoạt khi có thay đổi trong thư mục debs/
+      - 'update_repo.py' # Hoặc khi bạn sửa file script python
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write    # Cho phép workflow quyền ghi/commit ngược lại repo
+    
+    steps:
+      - name: Checkout mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Thiết lập Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cài đặt công cụ hệ thống (dpkg-dev, bzip2, zstd)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev bzip2 zstd
+
+      - name: Chạy tập lệnh cập nhật Repo
+        run: |
+          python3 update_repo.py
+
+      - name: Tự động Commit và Push thay đổi lên GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Packages Packages.bz2 Packages.zst Release
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update repository metadata [skip ci]" && git push)
