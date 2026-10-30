@@ -13,6 +13,35 @@ Size: 4504384
 MD5sum: 620dae556f2580d2b7df3a327c913843
 SHA256: f17340edad7a66c87c65f70cb908c73092dc4c22fb3646ab17ffb0e5d4220dd1
 
+Package: xyz.MiRO.avphotos
+Maintainer: MiRO
+Version: 1.0.1
+Section: Tweaks
+Depends: firmware (>=14.0), mobilesubstrate
+Architecture: iphoneos-arm64
+Name: AVPhotos
+Description: PiP cho video trong photos.app 
+Author: MiRO
+Icon: https://apt.wxhbts.pro/icon/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.png
+Filename: debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb
+Size: 7148
+MD5sum: 6f2504a91c1c0d54d6fc2d3e192d6138
+SHA256: e025798200baaa7293f5eff3cf932c137c04fe079bc95ee663a4624ed9ddb80a
+
+Package: xyz.gilshahar7.avlock
+Maintainer: gilshahar7
+Name: AVLock
+Version: 1.0.4
+Section: Tweaks
+Architecture: iphoneos-arm64
+Depends: mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi
+Author: gilshahar7
+Description: Thêm nút khóa định hướng vào trình phát video iOS gốc
+Filename: debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb
+Size: 20064
+MD5sum: 15d0524cf9a3a3f83f0b47ba47df77bd
+SHA256: d742014d1466591cf602d15218bfa5eff8b526b2e0bed87abe0be21815703f59
+
 Package: com.anlai.omnicar
 Version: 1.0.4
 Name: OmniCar

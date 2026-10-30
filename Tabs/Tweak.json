@@ -16,6 +16,38 @@
         ]
     },
     {
+        "name": "AVPhotos",
+        "version": "1.0.1",
+        "dev": "MiRO",
+        "category": "Tweaks",
+        "systemRequirements": "firmware (>=14.0), mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.1 - Cập nhật mới",
+        "highlights": [
+            "PiP cho video trong photos.app"
+        ]
+    },
+    {
+        "name": "AVLock",
+        "version": "1.0.4",
+        "dev": "gilshahar7",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+        "highlights": [
+            "Thêm nút khóa định hướng vào trình phát video iOS gốc"
+        ]
+    },
+    {
         "name": "OmniCar",
         "version": "1.0.4",
         "dev": "OmniCar <omnicartweak@gmail.com>",
