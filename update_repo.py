@@ -1,3 +1,5 @@
+Update py
+
 import os
 import subprocess
 import hashlib
@@ -146,7 +148,14 @@ def update_tweak_json():
 
         old_item = existing_data.get(name, {})
         img = old_item.get("img", "CydiaIcon.png")
-        highlights = old_item.get("highlights", [description])
+
+        # Tách toàn bộ nội dung Description thành danh sách các dòng hoặc lấy nguyên đoạn làm highlights
+        highlights = [line.strip() for line in description.splitlines() if line.strip()]
+        if not highlights:
+            highlights = ["Không có mô tả chi tiết."]
+
+        # highlightTitle lấy version và nội dung cập nhật
+        highlight_title = f"Phiên bản {version} - Cập nhật mới"
 
         tweak_item = {
             "name": name,
@@ -159,7 +168,7 @@ def update_tweak_json():
             "isApp": False,
             "noDownload": False,
             "downloadLink": download_link,
-            "highlightTitle": f"{name} dành cho bạn nếu",
+            "highlightTitle": highlight_title,
             "highlights": highlights
         }
         tweak_list.append(tweak_item)
