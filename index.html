@@ -203,11 +203,11 @@
     <!-- Khoảng bù chiều cao cho Header Fixed -->
     <div class="h-28"></div>
 
-    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT ==================== -->
+    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT (HỖ TRỢ LIGHT/DARK MODE) ==================== -->
     <div id="appDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
-        <div id="appDetailCard" class="bg-[#0b161c] text-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-gray-800 relative max-h-[92vh] flex flex-col overflow-hidden">
+        <div id="appDetailCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[92vh] flex flex-col overflow-hidden">
             
-            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-800/90 hover:bg-gray-700 text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
+            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800/90 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -215,43 +215,43 @@
                 
                 <!-- PHẦN 1: THÔNG TIN CHÍNH & RATING -->
                 <div class="space-y-4 pt-1">
-                    <div class="text-[10px] sm:text-[11px] font-bold text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
+                    <div class="text-[10px] sm:text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
                         <span>ANDROID</span>
                         <span>/</span>
                         <span>NỘI DUNG</span>
                         <span>/</span>
-                        <span id="detailBreadcrumbName" class="text-gray-200 font-extrabold truncate">TÊN ỨNG DỤNG</span>
+                        <span id="detailBreadcrumbName" class="text-gray-800 dark:text-gray-200 font-extrabold truncate">TÊN ỨNG DỤNG</span>
                     </div>
 
                     <div class="flex items-start space-x-3.5">
-                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border border-gray-700/80 shadow-lg flex-shrink-0">
+                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border border-gray-300 dark:border-gray-700/80 shadow-lg flex-shrink-0">
                         <div class="flex-1 min-w-0 pr-4">
-                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-black text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
-                            <p id="detailAppVersion" class="text-xs text-gray-400 mt-1 font-medium">1.2.3RC2</p>
+                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
+                            <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">1.2.3RC2</p>
                             <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-semibold mt-1">Nhà Phát Triển</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-gray-800/80 text-center">
+                    <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-gray-200 dark:border-gray-800/80 text-center">
                         <div class="flex flex-col items-center justify-center">
-                            <div class="flex items-center space-x-1 font-extrabold text-base text-white">
+                            <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
                                 <i class="fa-solid fa-star text-amber-400 text-sm"></i>
                                 <span id="detailRatingScore">4.8</span>
                             </div>
-                            <p class="text-[11px] text-gray-400 mt-0.5 font-medium flex items-center justify-center">
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
                                 <span>6 đánh giá</span>
                                 <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
                             </p>
                         </div>
-                        <div class="border-x border-gray-800/80 flex flex-col items-center justify-center px-1">
-                            <span id="detailPublishDate" class="font-extrabold text-sm text-white">30/10/2026</span>
-                            <p class="text-[11px] text-gray-400 mt-0.5 font-medium">ngày đăng</p>
+                        <div class="border-x border-gray-200 dark:border-gray-800/80 flex flex-col items-center justify-center px-1">
+                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">30/10/2026</span>
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">ngày đăng</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <div class="w-5 h-5 rounded-md bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs">
+                            <div class="w-5 h-5 rounded-md bg-cyan-100 dark:bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
-                            <p class="text-[11px] text-gray-400 mt-1 font-medium flex items-center justify-center">
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1 font-medium flex items-center justify-center">
                                 <span>bảo mật</span>
                                 <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
                             </p>
@@ -261,61 +261,61 @@
 
                 <!-- PHẦN 2: ĐIỂM NỔI BẬT, YÊU CẦU & THÔNG TIN TÁC GIẢ -->
                 <div class="space-y-4">
-                    <div class="bg-[#0e212b] border border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-200 leading-relaxed shadow-inner">
-                        <h4 id="detailHighlightTitle" class="font-bold text-white text-sm">Nội dung dành cho bạn nếu</h4>
-                        <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-300">
+                    <div class="bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                        <h4 id="detailHighlightTitle" class="font-bold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
+                        <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-600 dark:text-gray-300">
                             <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
                         </ul>
                     </div>
 
                     <div id="systemRequirementsBlock" class="space-y-0.5">
-                        <h4 class="font-bold text-sm text-white">Yêu cầu hệ thống</h4>
-                        <p id="detailSystemReq" class="text-xs text-gray-400">Tương thích tốt trên Android & iOS</p>
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Yêu cầu hệ thống</h4>
+                        <p id="detailSystemReq" class="text-xs text-gray-500 dark:text-gray-400">Tương thích tốt trên Android & iOS</p>
                     </div>
 
                     <div class="space-y-2 pt-2">
-                        <h4 class="font-bold text-sm text-white">Thông tin chi tiết</h4>
-                        <p class="text-xs font-semibold text-gray-400">Thông tin cơ bản & Tác giả</p>
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Thông tin chi tiết</h4>
+                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400">Thông tin cơ bản & Tác giả</p>
 
                         <div class="grid grid-cols-2 gap-3 text-xs pt-1">
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                <div class="w-8 h-8 rounded-xl bg-gray-100 dark:bg-gray-800/80 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300">
                                     <i class="fa-solid fa-building text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="text-[10px] text-gray-400">Tác giả</p>
-                                    <p id="detailDevInfo" class="font-bold text-gray-200 underline cursor-pointer">KPazz Studio</p>
+                                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Tác giả</p>
+                                    <p id="detailDevInfo" class="font-bold text-gray-800 dark:text-gray-200 underline cursor-pointer">KPazz Studio</p>
                                 </div>
                             </div>
 
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-gray-800/80 border border-gray-700 flex items-center justify-center text-gray-300">
+                                <div class="w-8 h-8 rounded-xl bg-gray-100 dark:bg-gray-800/80 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300">
                                     <i class="fa-solid fa-list-check text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="text-[10px] text-gray-400">Phân loại</p>
-                                    <p id="detailCategoryInfo" class="font-bold text-gray-200 underline cursor-pointer">Công nghệ / Tiện ích</p>
+                                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Phân loại</p>
+                                    <p id="detailCategoryInfo" class="font-bold text-gray-800 dark:text-gray-200 underline cursor-pointer">Công nghệ / Tiện ích</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div id="distributionAnchor" class="pt-2">
-                        <p class="text-xs font-semibold text-gray-400 mb-1.5">Mô hình nội dung</p>
+                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Mô hình nội dung</p>
                     </div>
                 </div>
 
                 <!-- PHẦN 3: XẾP HẠNG, BIỂU ĐỒ SAO, ĐÁNH GIÁ & BÌNH LUẬN -->
-                <div class="space-y-4 pt-2 border-t border-gray-800/80">
+                <div class="space-y-4 pt-2 border-t border-gray-200 dark:border-gray-800/80">
                     <div class="space-y-3">
-                        <a href="#" class="flex items-center justify-between text-sm font-bold text-white hover:text-uptoAccent transition">
+                        <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
                             <span>Xếp hạng nội dung này</span>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
                         <div class="flex items-center justify-between px-2">
-                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-700">
-                            <div class="flex items-center space-x-2 text-2xl text-gray-600">
+                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-300 dark:border-gray-700">
+                            <div class="flex items-center space-x-2 text-2xl text-gray-300 dark:text-gray-600">
                                 <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
                                 <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
                                 <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
@@ -330,44 +330,44 @@
                     </div>
 
                     <div class="space-y-2 pt-2">
-                        <h4 class="font-bold text-sm text-white">Xếp hạng</h4>
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Xếp hạng</h4>
                         <div class="flex items-center space-x-4">
                             <div class="text-center">
-                                <span id="detailLargeRatingNum" class="text-5xl font-black text-gray-300 tracking-tighter leading-none">4.8</span>
-                                <p class="text-[10px] text-gray-400 mt-2 flex items-center justify-center">
+                                <span id="detailLargeRatingNum" class="text-5xl font-black text-gray-700 dark:text-gray-300 tracking-tighter leading-none">4.8</span>
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-center">
                                     <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
                                     <span>6 đánh giá</span>
                                 </p>
                             </div>
-                            <div class="flex-1 space-y-1 text-[10px] text-gray-400 font-bold">
+                            <div class="flex-1 space-y-1 text-[10px] text-gray-500 dark:text-gray-400 font-bold">
                                 <div class="flex items-center space-x-2">
                                     <span>5</span>
-                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                                         <div class="h-full bg-cyan-500 w-[85%]"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>4</span>
-                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
                                         <div class="h-full bg-cyan-500 w-[15%]"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>3</span>
-                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>2</span>
-                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>1</span>
-                                    <div class="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gray-700 w-0"></div>
+                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gray-300 dark:bg-gray-700 w-0"></div>
                                     </div>
                                 </div>
                             </div>
@@ -375,61 +375,61 @@
                     </div>
 
                     <div class="space-y-2.5 pt-2">
-                        <a href="#" class="flex items-center justify-between text-sm font-bold text-white hover:text-uptoAccent transition">
+                        <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
                             <span>Đánh giá & Bình luận</span>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
-                        <div class="flex items-start space-x-3 bg-gray-900/60 p-3 rounded-2xl border border-gray-800">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                        <div class="flex items-start space-x-3 bg-gray-100 dark:bg-gray-900/60 p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
+                            <div class="w-10 h-10 rounded-xl bg-cyan-600 dark:bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
                                 <i class="fa-solid fa-user text-lg"></i>
                             </div>
                             <div class="flex-1 min-w-0 text-xs space-y-1">
                                 <p class="font-bold text-uptoBlueBtn truncate">kpazz_user_2026</p>
                                 <div class="flex text-amber-400 text-[10px] space-x-0.5">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                    <span class="text-gray-500 ml-2 font-normal">Hôm nay</span>
+                                    <span class="text-gray-400 dark:text-gray-500 ml-2 font-normal">Hôm nay</span>
                                 </div>
-                                <p class="text-gray-300 pt-0.5">Nội dung cực kỳ hữu ích, trình bày rõ ràng mượt mà!</p>
+                                <p class="text-gray-700 dark:text-gray-300 pt-0.5">Nội dung cực kỳ hữu ích, trình bày rõ ràng mượt mà!</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- PHẦN 4: ỨNG DỤNG & GAME ĐỀ XUẤT LIÊN QUAN -->
-                <div class="space-y-3 pt-3 border-t border-gray-800/80">
+                <div class="space-y-3 pt-3 border-t border-gray-200 dark:border-gray-800/80">
                     <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-white flex items-center space-x-1.5">
+                        <h4 class="font-bold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5">
                             <i class="fa-solid fa-lightbulb text-uptoAccent"></i>
                             <span>Nội dung tương tự đề xuất</span>
                         </h4>
-                        <span class="text-[10px] text-gray-400">Khám phá ngay</span>
+                        <span class="text-[10px] text-gray-500 dark:text-gray-400">Khám phá ngay</span>
                     </div>
 
                     <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
-                        <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
+                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
                              onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.9'})">
-                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border border-gray-700">
-                            <h5 class="text-[11px] font-bold text-white truncate">Zenless Zone</h5>
-                            <p class="text-[9px] text-gray-400 truncate">HoYoverse</p>
+                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
+                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">Zenless Zone</h5>
+                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">HoYoverse</p>
                         </div>
 
-                        <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
+                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
                              onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.8'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-700">
+                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
                                 <i class="fa-solid fa-atom text-2xl text-black"></i>
                             </div>
-                            <h5 class="text-[11px] font-bold text-white truncate">ChatGPT</h5>
-                            <p class="text-[9px] text-gray-400 truncate">OpenAI</p>
+                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">ChatGPT</h5>
+                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">OpenAI</p>
                         </div>
 
-                        <div class="flex-none w-28 bg-gray-900/80 p-2 rounded-2xl border border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
+                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
                              onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '5.0'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-700">
+                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
                                 <i class="fa-solid fa-scissors text-2xl text-black"></i>
                             </div>
-                            <h5 class="text-[11px] font-bold text-white truncate">CapCut</h5>
-                            <p class="text-[9px] text-gray-400 truncate">ByteDance</p>
+                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">CapCut</h5>
+                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">ByteDance</p>
                         </div>
                     </div>
                 </div>
@@ -437,7 +437,7 @@
             </div>
 
             <!-- NÚT TẢI PHIÊN BẢN MỚI NHẤT CỐ ĐỊNH Ở ĐÁY POPUP -->
-            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/90 dark:bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block">
                     <div class="text-left">
                         <h4 class="font-black text-sm leading-tight">Tải phiên bản mới nhất</h4>
@@ -544,7 +544,7 @@
         </div>
     </div>
 
-    <!-- SIDEBAR NAVIGATION DRAWER (KHI BẤM CÁC ITEM TRONG NÀY SẼ NỔI POPUP CHI TIẾT CARD) -->
+    <!-- SIDEBAR NAVIGATION DRAWER (THU GỌN MỤC, TRỎ XUỐNG KHI BẤM ĐỂ HIỆN LIST) -->
     <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 bg-white dark:bg-[#091116] text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto no-scrollbar">
         <div>
             <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between sticky top-0 bg-white dark:bg-[#091116] z-10">
@@ -557,54 +557,59 @@
                 <button id="drawerCloseBtn" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <nav class="p-3 space-y-4 text-sm">
+            <nav class="p-3 space-y-2 text-sm">
                 <!-- Mục 1: Tin tức mới -->
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold">
-                        <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
-                    </a>
-                    <div id="drawerNewsList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    <button onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span></span>
+                        <i id="newsChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerNewsList" class="hidden pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400 pt-1">
+                        <!-- Render danh sách card -->
                     </div>
                 </div>
 
                 <!-- Mục 2: APP Jailbreak -->
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                        <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
-                    </a>
-                    <div id="drawerJbList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    <button onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span></span>
+                        <i id="jbChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerJbList" class="hidden pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400 pt-1">
+                        <!-- Render danh sách card -->
                     </div>
                 </div>
 
                 <!-- Mục 3: Đa phương tiện -->
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                        <i class="fa-solid fa-shapes w-5 text-center"></i><span>Đa phương tiện</span>
-                    </a>
-                    <div id="drawerMediaList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    <button onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-shapes w-5 text-center"></i><span>Đa phương tiện</span></span>
+                        <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerMediaList" class="hidden pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400 pt-1">
+                        <!-- Render danh sách card -->
                     </div>
                 </div>
 
                 <!-- Mục 4: Mẹo & Hướng dẫn -->
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                        <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
-                    </a>
-                    <div id="drawerTipsList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    <button onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span></span>
+                        <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerTipsList" class="hidden pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400 pt-1">
+                        <!-- Render danh sách card -->
                     </div>
                 </div>
 
                 <!-- Mục 5: Năng suất -->
                 <div class="space-y-1">
-                    <a href="#" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition">
-                        <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
-                    </a>
-                    <div id="drawerProdList" class="pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render tự động danh sách card dạng link mở Popup -->
+                    <button onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')" class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span></span>
+                        <i id="prodChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerProdList" class="hidden pl-9 space-y-1 text-xs text-gray-500 dark:text-gray-400 pt-1">
+                        <!-- Render danh sách card -->
                     </div>
                 </div>
             </nav>
@@ -957,6 +962,21 @@
         function sortItemsByDate(items) {
             if (!Array.isArray(items)) return [];
             return items.sort((a, b) => parseDate(b.publishDate) - parseDate(a.publishDate));
+        }
+
+        // HÀM TOGGLE TRỎ XUỐNG CHO MENU DRAWER
+        function toggleDrawerSubmenu(listId, chevronId) {
+            const listEl = document.getElementById(listId);
+            const chevronEl = document.getElementById(chevronId);
+            if (listEl && chevronEl) {
+                if (listEl.classList.contains('hidden')) {
+                    listEl.classList.remove('hidden');
+                    chevronEl.classList.add('rotate-180');
+                } else {
+                    listEl.classList.add('hidden');
+                    chevronEl.classList.remove('rotate-180');
+                }
+            }
         }
 
         // BIẾN LƯU DỮ LIỆU TỰ ĐỘNG ĐỂ TRUY XUẤT CHO MENU DRAWER POPUP
