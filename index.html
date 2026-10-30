@@ -659,25 +659,17 @@
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 mt-2"></div>
         </section>
 
-        <!-- HORIZONTAL CIRCLE AVATARS ROW -->
-        <section class="overflow-x-auto no-scrollbar py-0.5 px-3.5">
-            <div class="flex items-center space-x-3.5 min-w-max px-0.5">
-                <button class="w-12 h-12 rounded-full bg-uptoAccent flex items-center justify-center text-white shadow-md active:scale-95 transition">
-                    <i class="fa-solid fa-play text-lg translate-x-0.5"></i>
-                </button>
-                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-amber-800 flex items-center justify-center cursor-pointer shadow">
-                    <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Minecraft">
-                </div>
-                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-gray-800 flex items-center justify-center cursor-pointer shadow">
-                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Character">
-                </div>
-                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-amber-900 cursor-pointer shadow">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="King">
-                </div>
-                <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300 dark:border-gray-700 bg-slate-700 cursor-pointer shadow">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" class="w-full h-full object-cover" alt="Grandma">
-                </div>
+        <!-- SECTION 3 (BẢN SAO 1): TWEAK JAILBREAK IOS (NGAY DƯỚI HERO SLIDER) -->
+        <section class="space-y-3 px-3.5">
+            <div class="flex items-center justify-between">
+                <a href="#" class="section-title text-gray-900 dark:text-white">
+                    <span>Tweak Jailbreak IOS</span>
+                    <i class="fa-solid fa-chevron-right section-arrow"></i>
+                </a>
+                <span id="multimediaCountTextTop" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
             </div>
+            <div id="multimediaSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
+            <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
         <!-- SECTION 1: TIN TỨC MỚI -->
@@ -741,7 +733,7 @@
                 </a>
                 <span id="productivityCountText" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
             </div>
-            <div id="productivitySlideContainer" class="auto-scroll-container flex space-x-4 overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="25"></div>
+            <div id="productivitySlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="25"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
@@ -1175,6 +1167,7 @@
                     let data = await resMedia.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
+                    renderMultimediaSectionTop(data);
                     renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
                 }
@@ -1332,6 +1325,45 @@
                 `;
             });
 
+            container.innerHTML = `<div class="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            bindCardClickEvents(container);
+        }
+
+        function renderMultimediaSectionTop(items) {
+            const container = document.getElementById('multimediaSlideContainerTop');
+            const countText = document.getElementById('multimediaCountTextTop');
+            if (!container) return;
+            if (countText) countText.textContent = `${items.length} - APPs`;
+
+            let innerHtml = '';
+            items.forEach(item => {
+                const itemRating = item.rating || '4.8';
+                const versionText = item.version || 'v1.0.0';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+
+                innerHtml += `
+                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px]"
+                         data-app-json='${JSON.stringify(item)}'>
+                        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
+                            <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5">
+                            <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-0.5 font-bold">
+                                    ${starsMarkup}
+                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
             container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
@@ -1378,9 +1410,9 @@
             if (!container) return;
             if (countText) countText.textContent = `${items.length} - APPs`;
 
-            let html = '';
+            let innerHtml = '';
             items.forEach(item => {
-                html += `
+                innerHtml += `
                     <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -1391,7 +1423,7 @@
                     </div>
                 `;
             });
-            container.innerHTML = html;
+            container.innerHTML = `<div class="grid grid-rows-4 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
