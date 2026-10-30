@@ -74,6 +74,10 @@
             align-items: center;
             font-weight: 700;
             font-size: 1.125rem;
+            cursor: pointer;
+        }
+        .section-title:hover {
+            opacity: 0.85;
         }
         .section-arrow {
             color: #00baa3;
@@ -160,7 +164,8 @@
             opacity: 0;
         }
         .drawer-submenu.open {
-            max-height: 500px;
+            max-height: 260px; /* Giới hạn chiều cao cho phép cuộn khi dài hơn 10 dòng */
+            overflow-y: auto;
             opacity: 1;
         }
     </style>
@@ -214,6 +219,32 @@
 
     <!-- Khoảng bù chiều cao cho Header Fixed -->
     <div class="h-28"></div>
+
+    <!-- ==================== POPUP HIỂN THỊ TẤT CẢ NỘI DUNG CHUYÊN MỤC ==================== -->
+    <div id="categoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
+        <div id="categoryCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[90vh] flex flex-col overflow-hidden">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+                <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
+                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Ô tìm kiếm trong Popup chuyên mục -->
+            <div class="py-3 flex-shrink-0">
+                <div class="relative w-full">
+                    <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-uptoAccent shadow-inner">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+                </div>
+            </div>
+
+            <!-- Danh sách card nhỏ -->
+            <div id="categoryItemList" class="overflow-y-auto no-scrollbar space-y-2.5 flex-1 pr-1 pb-2">
+                <!-- Nội dung được render tự động -->
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT ==================== -->
     <div id="appDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
@@ -273,7 +304,6 @@
 
                 <!-- PHẦN 2: NỘI DUNG CHI TIẾT HOẶC ĐIỂM NỔI BẬT -->
                 <div class="space-y-4">
-                    <!-- Khối hiển thị Nội dung bài viết / Mẹo đầy đủ (cho Tin tức & Mẹo) -->
                     <div id="articleContentBlock" class="hidden bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
                         <h4 class="font-bold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
                             <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
@@ -282,7 +312,6 @@
                         <p id="detailArticleText" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed"></p>
                     </div>
 
-                    <!-- Khối Điểm nổi bật chuẩn (cho App/Game) -->
                     <div id="highlightsBlock" class="bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
                         <h4 id="detailHighlightTitle" class="font-bold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
                         <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-600 dark:text-gray-300">
@@ -337,7 +366,6 @@
 
                         <div class="flex items-center justify-between px-2">
                             <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-300 dark:border-gray-700">
-                            <!-- Hiển thị chính xác số sao tương ứng điểm số, không hiện nửa sao -->
                             <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
@@ -659,11 +687,11 @@
         <!-- SECTION: TWEAK JAILBREAK IOS -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Tweak Jailbreak IOS</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="tweakJbCountTextTop" class="text-[11px] font-bold text-gray-400">0 - Tweak</span>
+                <span id="tweakJbCountTextTop" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Tweak</span>
             </div>
             <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
@@ -672,11 +700,11 @@
         <!-- SECTION: TIN TỨC MỚI -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Tin tức mới</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="newsCountText" class="text-[11px] font-bold text-gray-400">0 - Bài viết</span>
+                <span id="newsCountText" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
             <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
             <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
@@ -685,24 +713,24 @@
         <!-- SECTION: APP JAILBREAK -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="section-title text-gray-900 dark:text-white">
                     <span>APP Jailbreak</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="jbAppsCountText" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
+                <span id="jbAppsCountText" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
             <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: ĐA PHƯƠNG TIỆN (Lấy dữ liệu từ Tabs/Daphuongtien.json) -->
+        <!-- SECTION: ĐA PHƯƠNG TIỆN -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Đa phương tiện</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="multimediaCountText" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
+                <span id="multimediaCountText" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
             <div id="multimediaSlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
@@ -711,11 +739,11 @@
         <!-- SECTION: MẸO & HƯỚNG DẪN -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Mẹo & Hướng dẫn Công nghệ</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="tipsCountText" class="text-[11px] font-bold text-gray-400">0 - Bài viết</span>
+                <span id="tipsCountText" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
             <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
@@ -724,11 +752,11 @@
         <!-- SECTION: NĂNG SUẤT -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
-                <a href="#" class="section-title text-gray-900 dark:text-white">
+                <a href="javascript:void(0)" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Năng suất</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="productivityCountText" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
+                <span id="productivityCountText" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
             <div id="productivitySlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="25"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
@@ -771,7 +799,7 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- JAVASCRIPT LOGIC FETCH DỮ LIỆU JSON TỪ THƯ MỤC TABS -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
@@ -1033,6 +1061,96 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
+        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC & TÌM KIẾM ==================== */
+        const categoryModal = document.getElementById('categoryModal');
+        const categoryCard = document.getElementById('categoryCard');
+        const categoryCloseBtn = document.getElementById('categoryCloseBtn');
+        const categoryModalTitle = document.getElementById('categoryModalTitle');
+        const categoryItemList = document.getElementById('categoryItemList');
+        const categorySearchInput = document.getElementById('categorySearchInput');
+
+        let currentCategoryItems = [];
+
+        function renderCategoryItems(items) {
+            if (!categoryItemList) return;
+            if (!items.length) {
+                categoryItemList.innerHTML = '<p class="text-xs text-gray-400 text-center py-6">Không có nội dung nào trong danh mục này.</p>';
+                return;
+            }
+
+            let html = '';
+            items.forEach((item, index) => {
+                const itemRating = item.rating || '4.8';
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+
+                html += `
+                    <div class="category-item-card flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition"
+                         data-cat-idx="${index}">
+                        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
+                            <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5">
+                            <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-0.5 font-bold">
+                                    ${starsMarkup}
+                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            categoryItemList.innerHTML = html;
+
+            categoryItemList.querySelectorAll('.category-item-card').forEach(el => {
+                el.onclick = () => {
+                    const idx = el.getAttribute('data-cat-idx');
+                    const targetItem = items[idx];
+                    if (targetItem) {
+                        closeModalWithBounce(categoryModal, categoryCard, () => {
+                            openAppDetail(targetItem);
+                        });
+                    }
+                };
+            });
+        }
+
+        function openCategoryModal(title, items) {
+            categoryModalTitle.textContent = title;
+            currentCategoryItems = items;
+            categorySearchInput.value = '';
+            renderCategoryItems(items);
+            openModalWithBounce(categoryModal, categoryCard);
+        }
+
+        categorySearchInput.addEventListener('input', (e) => {
+            const query = e.target.value.trim().toLowerCase();
+            if (!query) {
+                renderCategoryItems(currentCategoryItems);
+                return;
+            }
+            const filtered = currentCategoryItems.filter(item => 
+                (item.name && item.name.toLowerCase().includes(query)) || 
+                (item.dev && item.dev.toLowerCase().includes(query)) ||
+                (item.category && item.category.toLowerCase().includes(query))
+            );
+            renderCategoryItems(filtered);
+        });
+
+        const resetCategoryModal = () => {
+            categorySearchInput.value = '';
+        };
+
+        categoryCloseBtn.addEventListener('click', () => closeModalWithBounce(categoryModal, categoryCard, resetCategoryModal));
+        setupBackdropClose(categoryModal, categoryCard, resetCategoryModal);
+
         function parseDate(dateStr) {
             if (!dateStr) return new Date(0);
             const parts = dateStr.split('/');
@@ -1099,6 +1217,7 @@
         }
 
         window.drawerStoreCache = {};
+        window.storeDataCache = {};
 
         function renderDrawerList(containerId, items) {
             const container = document.getElementById(containerId);
@@ -1144,6 +1263,7 @@
                 if (resNews.ok) {
                     let data = await resNews.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
+                    window.storeDataCache.news = data;
                     renderNewsSection(data);
                     renderDrawerList('drawerNewsList', data);
                     allLoadedItems.push(...data);
@@ -1153,6 +1273,7 @@
                 if (resJb.ok) {
                     let data = await resJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    window.storeDataCache.jailbreak = data;
                     renderJbSection(data);
                     renderDrawerList('drawerJbList', data);
                     allLoadedItems.push(...data);
@@ -1162,6 +1283,7 @@
                 if (resTweakJb.ok) {
                     let data = await resTweakJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    window.storeDataCache.tweak = data;
                     renderTweakJbSectionTop(data);
                     renderDrawerList('drawerTweakList', data);
                     allLoadedItems.push(...data);
@@ -1171,6 +1293,7 @@
                 if (resMedia.ok) {
                     let data = await resMedia.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    window.storeDataCache.media = data;
                     renderMultimediaSection(data);
                     renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
@@ -1180,6 +1303,7 @@
                 if (resTips.ok) {
                     let data = await resTips.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
+                    window.storeDataCache.tips = data;
                     renderTipsSection(data);
                     renderDrawerList('drawerTipsList', data);
                     allLoadedItems.push(...data);
@@ -1189,13 +1313,15 @@
                 if (resProd.ok) {
                     let data = await resProd.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    let rawProdData = [...data];
                     while (data.length < 28) {
                         data = data.concat(data);
                     }
                     data = data.slice(0, 28);
+                    window.storeDataCache.productivity = rawProdData;
                     renderProductivitySection(data);
-                    renderDrawerList('drawerProdList', data);
-                    allLoadedItems.push(...data);
+                    renderDrawerList('drawerProdList', rawProdData);
+                    allLoadedItems.push(...rawProdData);
                 }
 
                 initDynamicHeroSlider(allLoadedItems);
