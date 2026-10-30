@@ -34,5 +34,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Packages Packages.bz2 Packages.zst Release
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update repository metadata [skip ci]" && git push)
+          git add Packages Packages.bz2 Packages.zst Release Tabs/Tweak.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 Auto-update repository metadata and Tweak.json [skip ci]" && git push)
