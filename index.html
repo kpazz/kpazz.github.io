@@ -1206,8 +1206,9 @@
                                 <span>${publishDateText}</span>
                             </div>
                         </div>
-                        <div class="flex items-start justify-between">
-                            <div class="flex items-start space-x-2.5 min-w-0 flex-1 mr-2">
+                        
+                        <div class="space-y-1">
+                            <div class="flex items-start space-x-2.5 min-w-0">
                                 <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-black text-sm shadow mt-0.5">
                                     <i class="fa-solid fa-box-open"></i>
                                 </div>
@@ -1215,17 +1216,21 @@
                                     <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
                                     <!-- Mô Tả Bên Dưới Tiêu Đề (Tối đa 10 từ) -->
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
-                                    <div class="flex items-center space-x-1 mt-1">
-                                        <div class="flex text-amber-400 text-[8px] space-x-0.5">
-                                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                                        </div>
-                                        <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">${itemRating}</span>
-                                    </div>
                                 </div>
                             </div>
-                            <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 mt-0.5">
-                                NHẬN
-                            </button>
+
+                            <!-- Hàng chứa Đánh Giá Sao và Nút NHẬN Cùng Hàng -->
+                            <div class="flex items-center justify-between pt-1">
+                                <div class="flex items-center space-x-1">
+                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">${itemRating}</span>
+                                </div>
+                                <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
+                                    NHẬN
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1244,17 +1249,21 @@
             items.forEach(item => {
                 const itemRating = item.rating || '4.8';
                 const versionText = item.version || 'v1.0.0';
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[210px]"
+                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px]"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5">
                             <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <!-- Mô Tả Ngắn Gọn Dưới Tiêu Đề -->
+                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <!-- Hiển thị Số Phiên Bản & Đánh Giá Sao -->
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium">
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 text-amber-400 font-bold">
                                     <i class="fa-solid fa-star text-[9px]"></i>
