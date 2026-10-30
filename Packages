@@ -188,6 +188,23 @@ Size: 22320
 MD5sum: d6f7914d502bb5596df2387d50da9a9b
 SHA256: bff9707b02b5c1575db638402c8519cc2779fc82716586aef3019ddc11f4ab3e
 
+Package: xyz.cypwn.avlock
+Maintainer: CyPwn
+Depiction: https://repo.cypwn.xyz/depiction/2911
+SileoDepiction: https://repo.cypwn.xyz/sileo_depiction/2911
+Icon: https://repo.cypwn.xyz/packages/AVLock-Rootless/icon.png
+Name: AVLock
+Version: 1.0.4
+Section: Tweaks
+Architecture: iphoneos-arm64
+Depends: mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi
+Author: gilshahar7
+Description: Add an orientation lock button to the stock iOS video player
+Filename: debs/xyz.cypwn.avlock_1.0.4_iphoneos-arm64.deb
+Size: 28136
+MD5sum: 67a05e404981139122544c94da17bf0c
+SHA256: cdcd692525493fa79ab2a5d4b851383cbee214510c45405e6fcc80ceddf82aaf
+
 Package: com.anlai.omnicar
 Version: 1.0.4
 Name: OmniCar

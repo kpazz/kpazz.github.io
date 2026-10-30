@@ -1,110 +1,434 @@
 [
     {
-        "name": "Xingtu - 醒图",
-        "version": "13.2.0",
-        "dev": "Beijing Lingdong",
-        "category": "Chỉnh ảnh AI",
-        "systemRequirements": "Android 7.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "21/10/2026",
-        "isApp": true,
+        "name": "3DGlassierTouch",
+        "version": "2.0",
+        "dev": "b4db1r3",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Xingtu dành cho bạn nếu",
+        "downloadLink": "debs/xyz.cypwn.3dglassiertouch_2.0_803890.deb",
+        "highlightTitle": "3DGlassierTouch dành cho bạn nếu",
         "highlights": [
-            "Bạn muốn sở hữu những bức ảnh chân dung lung linh nhờ công nghệ AI.",
-            "Bộ công cụ chỉnh sửa chi tiết khuôn mặt và bộ lọc màu độc đáo.",
-            "Thao tác dễ dàng, tạo ra các bức ảnh nghệ thuật chuyên nghiệp."
+            "3DGlassierTouch enhances your iOS experience by dynamically customizing 3D context menus. It features adaptive coloring based on app icons, customizable separators, and a refined glassier background effect for both the lockscreen and homescreen. Tailor thickness, color, and radius to suit your style, with distinct settings for each screen. Experience a sleek, personalized touch with every interaction!"
         ]
     },
     {
-        "name": "TikTok",
-        "version": "35.1.2",
-        "dev": "TikTok Pte. Ltd.",
-        "category": "Video ngắn",
-        "systemRequirements": "Android 5.0 trở lên / iOS 12.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "20/10/2026",
-        "isApp": true,
+        "name": "libuuid16",
+        "version": "1.6.2-3",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Libraries",
+        "systemRequirements": "libiosexec1 (>= 1.2.2)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "TikTok dành cho bạn nếu",
+        "downloadLink": "debs/libuuid16_1.6.2-3_663677.deb",
+        "highlightTitle": "libuuid16 dành cho bạn nếu",
         "highlights": [
-            "Bạn thích xem và giải trí với các video ngắn xu hướng toàn cầu.",
-            "Kho nhạc nền phong phú cùng nhiều hiệu ứng quay dựng bắt mắt.",
-            "Kết nối cộng đồng sáng tạo nội dung đông đảo hàng đầu."
+            "Universally Unique ID library"
         ]
     },
     {
-        "name": "YouTube",
-        "version": "19.16.3",
-        "dev": "Google LLC",
-        "category": "Kho video",
-        "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "19/10/2026",
-        "isApp": true,
+        "name": "libmpfr6",
+        "version": "4.1.0",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Libraries",
+        "systemRequirements": "libiosexec1 (>= 1.2.2), libgmp10",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "YouTube dành cho bạn nếu",
+        "downloadLink": "debs/libmpfr6_4.1.0_722774.deb",
+        "highlightTitle": "libmpfr6 dành cho bạn nếu",
         "highlights": [
-            "Bạn muốn thưởng thức kho video giải trí và kiến thức lớn nhất thế giới.",
-            "Trải nghiệm phát video mượt mà chất lượng cao trên thiết bị di động.",
-            "Cập nhật liên tục các nhà sáng tạo nội dung yêu thích của bạn."
+            "multiple precision floating-point computation"
         ]
     },
     {
-        "name": "Lightroom",
-        "version": "9.3.0",
-        "dev": "Adobe",
-        "category": "Chỉnh màu",
-        "systemRequirements": "Android 9.0 trở lên / iOS 16.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "18/10/2026",
-        "isApp": true,
+        "name": "Legacy arm64e Support",
+        "version": "2.0.1",
+        "dev": "Nightwind",
+        "category": "Tweaks",
+        "systemRequirements": "ellekit (>= 0.4), cy+cpu.arm64e, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Lightroom dành cho bạn nếu",
+        "downloadLink": "debs/oldabi_2.0.1_562877.deb",
+        "highlightTitle": "Legacy arm64e Support dành cho bạn nếu",
         "highlights": [
-            "Bạn là người đam mê nhiếp ảnh và muốn tinh chỉnh màu sắc chuyên nghiệp.",
-            "Hỗ trợ chỉnh sửa ảnh RAW mạnh mẽ từ các thiết bị cao cấp.",
-            "Lưu trữ công thức màu và chia sẻ dễ dàng với cộng đồng."
+            "Support for legacy arm64e ABI in iOS 15.0+"
         ]
     },
     {
-        "name": "CapCut",
-        "version": "12.4.0",
-        "dev": "ByteDance",
-        "category": "Biên tập video",
-        "systemRequirements": "Android 8.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "17/10/2026",
-        "isApp": true,
+        "name": "libplist3",
+        "version": "2.2.0+git20230130.4b50a5a",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.2.2)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "CapCut dành cho bạn nếu",
+        "downloadLink": "debs/libplist3_2.2.0+git20230130.4b50a5a_968562.deb",
+        "highlightTitle": "libplist3 dành cho bạn nếu",
         "highlights": [
-            "Bạn cần một công cụ cắt ghép và biên tập video nhanh chóng trên điện thoại.",
-            "Kho hiệu ứng chuyển cảnh, chữ nghệ thuật và template phong phú.",
-            "Xuất video sắc nét, tối ưu hóa trực tiếp cho các nền tảng mạng xã hội."
+            "Library for handling Apple binary and XML property lists"
         ]
     },
     {
-        "name": "Spotify",
-        "version": "8.9.38",
-        "dev": "Spotify AB",
-        "category": "Nghe nhạc",
-        "systemRequirements": "Android 7.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1614680376593-902f749f705c?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "16/10/2026",
-        "isApp": true,
+        "name": "plutil",
+        "version": "0.2.2",
+        "dev": "Samuel Bingner",
+        "category": "System",
+        "systemRequirements": "libiosexec1 (>= 1.2.2)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
         "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Spotify dành cho bạn nếu",
+        "downloadLink": "debs/plutil_0.2.2_633601.deb",
+        "highlightTitle": "plutil dành cho bạn nếu",
         "highlights": [
-            "Bạn muốn tận hưởng thế giới âm nhạc không giới hạn với hàng triệu bài hát.",
-            "Gợi ý danh sách phát thông minh phù hợp với gu thưởng thức của bạn.",
-            "Chất lượng âm thanh cao cấp, hỗ trợ nghe nhạc ngoại tuyến tiện lợi."
+            "Utility for creating and editing Apple property list files."
+        ]
+    },
+    {
+        "name": "odcctools",
+        "version": "1010.6-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libuuid16, libxar1, llvm-dev, libtapi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/odcctools_1010.6-1_950618.deb",
+        "highlightTitle": "odcctools dành cho bạn nếu",
+        "highlights": [
+            "linker and assembler for the iPhone"
+        ]
+    },
+    {
+        "name": "libxar1",
+        "version": "1.8.0.487.100.1-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Libraries",
+        "systemRequirements": "libiosexec1 (>= 1.2.2), libssl3",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/libxar1_1.8.0.487.100.1-1_877655.deb",
+        "highlightTitle": "libxar1 dành cho bạn nếu",
+        "highlights": [
+            "eXtensible ARchive format - dynamic library"
+        ]
+    },
+    {
+        "name": "libsparkcolourpicker",
+        "version": "1.0.3-rootless",
+        "dev": "Spark",
+        "category": "System",
+        "systemRequirements": "",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/com.spark.libsparkcolourpicker_1.0.3-rootless_319828.deb",
+        "highlightTitle": "libsparkcolourpicker dành cho bạn nếu",
+        "highlights": [
+            "Simple to implement, simple to use colour picker library. Built by SparkDev."
+        ]
+    },
+    {
+        "name": "libtapi",
+        "version": "1500.0.12.3",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libncursesw6 (>= 6.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/libtapi_1500.0.12.3_752525.deb",
+        "highlightTitle": "libtapi dành cho bạn nếu",
+        "highlights": [
+            "Text-based Application Programming Interface (library)"
+        ]
+    },
+    {
+        "name": "file",
+        "version": "5.45",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Utilities",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libmagic1 (= 5.45), liblzma5 (>= 5.2.5)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/file_5.45_823734.deb",
+        "highlightTitle": "file dành cho bạn nếu",
+        "highlights": [
+            "Recognize the type of data in a file using \"magic\" numbers"
+        ]
+    },
+    {
+        "name": "AVLock",
+        "version": "1.0.4",
+        "dev": "gilshahar7",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.avlock_1.0.4_iphoneos-arm64.deb",
+        "highlightTitle": "AVLock dành cho bạn nếu",
+        "highlights": [
+            "Add an orientation lock button to the stock iOS video player"
+        ]
+    },
+    {
+        "name": "OmniCar",
+        "version": "1.0.4",
+        "dev": "OmniCar <omnicartweak@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
+        "highlightTitle": "OmniCar dành cho bạn nếu",
+        "highlights": [
+            "Sức mạnh của CarPlay."
+        ]
+    },
+    {
+        "name": "AIM Pro",
+        "version": "1.1.3k",
+        "dev": "alimaulana",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.aimpro_1.1.3k_878860.deb",
+        "highlightTitle": "AIM Pro dành cho bạn nếu",
+        "highlights": [
+            "iOS 16 Style Time & Date Lockscreen"
+        ]
+    },
+    {
+        "name": "libmagic1",
+        "version": "5.45",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Libraries",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), liblzma5 (>= 5.2.5)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/libmagic1_5.45_874313.deb",
+        "highlightTitle": "libmagic1 dành cho bạn nếu",
+        "highlights": [
+            "Recognize the type of data in a file using \"magic\" numbers - library"
+        ]
+    },
+    {
+        "name": "llvm-dev",
+        "version": "16.0.0~5.9.2~RELEASE-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "llvm-16-dev (= 16.0.0~5.9.2~RELEASE-1), llvm-16-linker-tools (= 16.0.0~5.9.2~RELEASE-1)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/llvm-dev_16.0.0~5.9.2~RELEASE-1_234454.deb",
+        "highlightTitle": "llvm-dev dành cho bạn nếu",
+        "highlights": [
+            "Low-Level Virtual Machine (LLVM), libraries and headers"
+        ]
+    },
+    {
+        "name": "libclang-cpp16",
+        "version": "16.0.0~5.9.2~RELEASE-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libllvm16 (= 16.0.0~5.9.2~RELEASE-1)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/libclang-cpp16_16.0.0~5.9.2~RELEASE-1_528895.deb",
+        "highlightTitle": "libclang-cpp16 dành cho bạn nếu",
+        "highlights": [
+            "Modular compiler and toolchain technologies, runtime library"
+        ]
+    },
+    {
+        "name": "llvm-16-runtime",
+        "version": "16.0.0~5.9.2~RELEASE-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libllvm16 (= 16.0.0~5.9.2~RELEASE-1)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/llvm-16-runtime_16.0.0~5.9.2~RELEASE-1_552062.deb",
+        "highlightTitle": "llvm-16-runtime dành cho bạn nếu",
+        "highlights": [
+            "Modular compiler and toolchain technologies, IR interpreter"
+        ]
+    },
+    {
+        "name": "gawk",
+        "version": "5.3.0",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Utilities",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libintl8, libreadline8, libmpfr6, libgmp10",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/gawk_5.3.0_293484.deb",
+        "highlightTitle": "gawk dành cho bạn nếu",
+        "highlights": [
+            "GNU awk, a pattern scanning and processing language"
+        ]
+    },
+    {
+        "name": "3DTools",
+        "version": "1.0.6k",
+        "dev": "smokin1337",
+        "category": "Tweaks",
+        "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.3dtools_1.0.6k_518013.deb",
+        "highlightTitle": "3DTools dành cho bạn nếu",
+        "highlights": [
+            "Add helpful tools to your 3D touch menu !"
+        ]
+    },
+    {
+        "name": "OmniCar",
+        "version": "1.0.3",
+        "dev": "OmniCar <omnicartweak@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
+        "highlightTitle": "OmniCar dành cho bạn nếu",
+        "highlights": [
+            "The power of CarPlay."
+        ]
+    },
+    {
+        "name": "AI Chat VIP",
+        "version": "1.0.0",
+        "dev": "Ravand <Ravand0010@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.0_293406.deb",
+        "highlightTitle": "AI Chat VIP dành cho bạn nếu",
+        "highlights": [
+            "VIP Membership Unlocked (Ignore the first pop-up !)"
+        ]
+    },
+    {
+        "name": "ldid",
+        "version": "2.1.5-procursus7",
+        "dev": "Jay Freeman (saurik) <saurik@saurik.com>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.2.2), libssl3, libplist3 (>= 2.2.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/ldid_2.1.5-procursus7_747564.deb",
+        "highlightTitle": "ldid dành cho bạn nếu",
+        "highlights": [
+            "pseudo-codesign Mach-O files"
+        ]
+    },
+    {
+        "name": "AI Smith Premium",
+        "version": "1.0.0",
+        "dev": "Ravand <Ravand0010@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.aismithpremium_1.0.0_146642.deb",
+        "highlightTitle": "AI Smith Premium dành cho bạn nếu",
+        "highlights": [
+            "Yearly Membership Activated"
+        ]
+    },
+    {
+        "name": "Cephei Tweak Support",
+        "version": "2.0",
+        "dev": "HASHBANG Productions <support@hbang.ws>",
+        "category": "Development",
+        "systemRequirements": "firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/ws.hbang.common_2.0_628415.deb",
+        "highlightTitle": "Cephei Tweak Support dành cho bạn nếu",
+        "highlights": [
+            "Support library for tweaks"
+        ]
+    },
+    {
+        "name": "llvm-16-linker-tools",
+        "version": "16.0.0~5.9.2~RELEASE-1",
+        "dev": "Procursus Team <support@procurs.us>",
+        "category": "Development",
+        "systemRequirements": "libiosexec1 (>= 1.3.1), libllvm16 (= 16.0.0~5.9.2~RELEASE-1)",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/llvm-16-linker-tools_16.0.0~5.9.2~RELEASE-1_792440.deb",
+        "highlightTitle": "llvm-16-linker-tools dành cho bạn nếu",
+        "highlights": [
+            "Modular compiler and toolchain technologies"
+        ]
+    },
+    {
+        "name": "Xinam1ne AIO (Rootless)",
+        "version": "2.6-8",
+        "dev": "Paisseon, Sudo, NoW4U2Kid, Kixrd",
+        "category": "Utilities",
+        "systemRequirements": "mobilesubstrate, firmware (>= 15.0), gawk, gzip, libclang-cpp16, llvm-16, llvm-16-runtime, file, odcctools, ldid, plutil, com.tigisoftware.filza64bit (>= 4.0) | com.tigisoftware.filza (>= 4.0), cy+cpu.arm64v8 | oldabi-xina | oldabi",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.xinam1ne_2.6-8_286937.deb",
+        "highlightTitle": "Xinam1ne AIO (Rootless) dành cho bạn nếu",
+        "highlights": [
+            "Xinamine Official All-in-One bundle. Convert rootful tweaks to rootless (and rootless to rootful) with ease using the Xinam1nePatcher in Filza or use the included Xinaf1re app."
         ]
     }
 ]
