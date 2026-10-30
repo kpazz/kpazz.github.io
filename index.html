@@ -1485,9 +1485,7 @@
                 `;
             });
 
-            // Tự động tính số hàng cần thiết dựa trên tổng số lượng item để hiển thị đầy đủ 100% không bị giới hạn 8 app
-            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 3)));
-            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
@@ -1527,8 +1525,7 @@
                 `;
             });
 
-            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 3)));
-            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
@@ -1568,10 +1565,12 @@
             bindCardClickEvents(container);
         }
 
+        /* ĐÃ SỬA: Cho phép Năng suất hiển thị đầy đủ 100% tất cả các app không bị giới hạn 8 app cố định */
         function renderProductivitySection(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
             if (!container) return;
+            
             if (countText) countText.textContent = `${items.length} - APPs`;
 
             let innerHtml = '';
@@ -1588,9 +1587,7 @@
                 `;
             });
             
-            // Tự động điều chỉnh số hàng (rows) theo tổng số lượng item để hiển thị đủ toàn bộ dữ liệu trong file JSON
-            const totalRows = Math.min(3, Math.max(2, Math.ceil(items.length / 4)));
-            container.innerHTML = `<div class="grid grid-rows-${totalRows} grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
