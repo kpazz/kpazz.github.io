@@ -42,6 +42,21 @@ Size: 20064
 MD5sum: 15d0524cf9a3a3f83f0b47ba47df77bd
 SHA256: d742014d1466591cf602d15218bfa5eff8b526b2e0bed87abe0be21815703f59
 
+Package: xyz.Wijk.ainsworth
+Maintainer: Wijk
+Section: Tweaks
+Architecture: iphoneos-arm64
+Version: 1.6k
+Depends: mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack
+Description: Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!
+Author: Dave van Wijk
+Name: Ainsworth
+Icon: https://img.chariz.cloud/icon/ainsworth/icon@3x.png
+Filename: debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb
+Size: 453792
+MD5sum: d2750d3b6271b36e73471434c35ee939
+SHA256: b84e0a8daa0f4a3575a296e839757b4c0cf29dc7466ab06583a4edb0c277c4ce
+
 Package: com.anlai.omnicar
 Version: 1.0.4
 Name: OmniCar

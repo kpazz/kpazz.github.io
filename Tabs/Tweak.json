@@ -48,6 +48,22 @@
         ]
     },
     {
+        "name": "Ainsworth",
+        "version": "1.6k",
+        "dev": "Dave van Wijk",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
+        "img": "CydiaIcon.png",
+        "publishDate": "30/10/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.6k - Cập nhật mới",
+        "highlights": [
+            "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!"
+        ]
+    },
+    {
         "name": "OmniCar",
         "version": "1.0.4",
         "dev": "OmniCar <omnicartweak@gmail.com>",
