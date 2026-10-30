@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>KPazz - Tải xuống APK & Mẹo Công Nghệ</title>
+    <title>KPazz - Jailbreak & Mẹo Công Nghệ</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 -->
@@ -881,6 +881,22 @@
             });
         }
 
+        // HÀM TẠO HTML SỐ SAO CHUẨN XÁC DỰA TRÊN ĐIỂM SỐ (DÙNG CHUNG CHO CẢ POPUP VÀ CARD)
+        function generateStarsHtml(ratingScore, starTextSizeClass = 'text-[9px]') {
+            const ratingNum = parseFloat(ratingScore) || 4.9;
+            const roundedStars = Math.round(ratingNum);
+            let html = `<div class="flex text-amber-400 ${starTextSizeClass} space-x-0.5">`;
+            for (let i = 1; i <= 5; i++) {
+                if (i <= roundedStars) {
+                    html += `<i class="fa-solid fa-star"></i>`;
+                } else {
+                    html += `<i class="fa-solid fa-star text-gray-300 dark:text-gray-600"></i>`;
+                }
+            }
+            html += `</div>`;
+            return html;
+        }
+
         const appDetailModal = document.getElementById('appDetailModal');
         const appDetailCard = document.getElementById('appDetailCard');
         const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
@@ -909,7 +925,6 @@
         const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
         const detailInteractiveStars = document.getElementById('detailInteractiveStars');
 
-        // Các thanh biểu đồ sao (5 đến 1)
         const starBar5 = document.getElementById('starBar5');
         const starBar4 = document.getElementById('starBar4');
         const starBar3 = document.getElementById('starBar3');
@@ -944,22 +959,12 @@
             if (detailRatingScore) detailRatingScore.textContent = itemRating.toFixed(1);
             if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
 
-            // TÍNH TOÁN HIỂN THỊ CHÍNH XÁC SỐ SAO (LÀM TRÒN XUỐNG HOẶC GẦN NHẤT ĐỂ HIỆN SỐ SAO VÀNG NGUYÊN VẸN, KHÔNG HIỆN NỬA SAO)
-            const fullStarsCount = Math.floor(itemRating); // Ví dụ 4.0 hay 4.8 đều ra 4 sao vàng nếu lấy floor, hoặc làm tròn tùy ý. Ở đây dùng Math.round để chính xác theo ý muốn (4.0 -> 4 sao, 4.8 -> 5 sao)
-            const roundedStars = Math.round(itemRating);
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                if (i <= roundedStars) {
-                    starsHtml += `<i class="fa-solid fa-star cursor-pointer transition"></i>`;
-                } else {
-                    starsHtml += `<i class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition"></i>`;
-                }
-            }
+            // Dùng chung hàm chuẩn cho Popup
             if (detailInteractiveStars) {
-                detailInteractiveStars.innerHTML = starsHtml;
+                detailInteractiveStars.innerHTML = generateStarsHtml(itemRating, 'text-2xl');
             }
 
-            // TÍNH TOÁN TỶ LỆ PHẦN TRĂM BIỂU ĐỒ SAO
+            // Tỷ lệ phần trăm biểu đồ sao
             let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
             let pct4 = Math.min(100, Math.max(0, ((itemRating - 1) / 4) * 80));
             let pct3 = itemRating < 3 ? 40 : 10;
@@ -972,7 +977,6 @@
             if (starBar2) starBar2.style.width = `${pct2}%`;
             if (starBar1) starBar1.style.width = `${pct1}%`;
 
-            // Xử lý riêng cho các mục KHÔNG PHẢI APP (Tin tức, Mẹo, v.v.): Bỏ số phiên bản, hiển thị nội dung bài viết
             if (item.isArticle || item.isTip || !item.isApp) {
                 detailAppVersion.style.display = 'none';
                 articleContentBlock.classList.remove('hidden');
@@ -1213,6 +1217,8 @@
             let html = '';
             items.forEach(item => {
                 const itemRating = item.rating || '4.9';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
@@ -1223,9 +1229,7 @@
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
-                                <div class="flex text-amber-400 text-[9px] space-x-0.5">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
+                                ${starsMarkup}
                                 <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                             </div>
                             <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
@@ -1249,6 +1253,7 @@
             let html = '';
             items.forEach(item => {
                 const itemRating = item.rating || '4.9';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[8px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 10);
                 const publishDateText = item.publishDate || 'Mới';
@@ -1277,10 +1282,8 @@
 
                             <div class="flex items-center justify-between pt-1">
                                 <div class="flex items-center space-x-1">
-                                    <div class="flex text-amber-400 text-[8px] space-x-0.5">
-                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star text-gray-400"></i>
-                                    </div>
-                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">${itemRating}</span>
+                                    ${starsMarkup}
+                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
                                 </div>
                                 <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
                                     NHẬN
@@ -1304,6 +1307,7 @@
             items.forEach(item => {
                 const itemRating = item.rating || '4.8';
                 const versionText = item.version || 'v1.0.0';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
@@ -1318,9 +1322,9 @@
                             <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 text-amber-400 font-bold">
-                                    <i class="fa-solid fa-star text-[9px]"></i>
-                                    <span class="text-gray-700 dark:text-gray-300">${itemRating}</span>
+                                <div class="flex items-center space-x-0.5 font-bold">
+                                    ${starsMarkup}
+                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
                                 </div>
                             </div>
                         </div>
@@ -1341,6 +1345,8 @@
             let html = '';
             items.forEach(item => {
                 const itemRating = item.rating || '5.0';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
@@ -1351,9 +1357,7 @@
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
-                                <div class="flex text-amber-400 text-[9px] space-x-0.5">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
+                                ${starsMarkup}
                                 <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
                             </div>
                             <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
@@ -1418,6 +1422,8 @@
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 1 ? 'active-card' : '';
                 const itemRating = item.rating || '4.9';
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[10px]');
+
                 slidesHtml += `
                     <div class="hero-card ${isActive} snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
                          data-hero-json='${JSON.stringify(item)}'>
@@ -1433,9 +1439,7 @@
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlightTitle ? item.highlightTitle : 'Khám phá ngay tính năng nổi bật.'}</p>
                             
                             <div class="flex items-center space-x-1.5 pt-0.5">
-                                <div class="flex text-amber-400 text-[10px] space-x-0.5">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
+                                ${starsMarkup}
                                 <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">${itemRating}</span>
                             </div>
                         </div>
