@@ -226,18 +226,18 @@
             <div class="flex items-start justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
                 <div>
                     <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
-                    <p id="categoryModalCountText" class="text-[11px] font-semibold text-uptoAccent mt-0.5">Tổng số lượng trong danh sách này</p>
                 </div>
                 <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div class="py-3 flex-shrink-0">
+            <div class="py-3 flex-shrink-0 space-y-1.5">
                 <div class="relative w-full">
                     <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-uptoAccent shadow-inner">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
                 </div>
+                <p id="categoryModalCountText" class="text-[11px] font-semibold text-uptoAccent px-0.5">Có 0 mục trong danh sách này</p>
             </div>
 
             <div id="categoryItemList" class="overflow-y-auto no-scrollbar space-y-2.5 flex-1 pr-1 pb-2"></div>
@@ -1070,8 +1070,14 @@
 
         let currentCategoryItems = [];
 
-        function renderCategoryItems(items) {
+        function renderCategoryItems(items, totalCount) {
             if (!categoryItemList) return;
+            
+            // Cập nhật số lượng mục hiển thị bên dưới ô tìm kiếm theo yêu cầu
+            if (categoryModalCountText) {
+                categoryModalCountText.textContent = `Có ${totalCount} mục trong danh sách này`;
+            }
+
             if (!items.length) {
                 categoryItemList.innerHTML = '<p class="text-xs text-gray-400 text-center py-6">Không có nội dung nào trong danh mục này.</p>';
                 return;
@@ -1125,19 +1131,15 @@
             categoryModalTitle.textContent = title;
             currentCategoryItems = items;
             categorySearchInput.value = '';
-            
-            if (categoryModalCountText) {
-                categoryModalCountText.textContent = `Tổng ${items.length} trong danh sách này`;
-            }
 
-            renderCategoryItems(items);
+            renderCategoryItems(items, items.length);
             openModalWithBounce(categoryModal, categoryCard);
         }
 
         categorySearchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim().toLowerCase();
             if (!query) {
-                renderCategoryItems(currentCategoryItems);
+                renderCategoryItems(currentCategoryItems, currentCategoryItems.length);
                 return;
             }
             const filtered = currentCategoryItems.filter(item => 
@@ -1145,7 +1147,7 @@
                 (item.dev && item.dev.toLowerCase().includes(query)) ||
                 (item.category && item.category.toLowerCase().includes(query))
             );
-            renderCategoryItems(filtered);
+            renderCategoryItems(filtered, currentCategoryItems.length);
         });
 
         const resetCategoryModal = () => {
@@ -1565,7 +1567,6 @@
             bindCardClickEvents(container);
         }
 
-        /* ĐÃ SỬA CHUẨN XÁC: Mục năng suất hiển thị đúng 2 dòng, nhận đủ tất cả hơn 20 app để cuộn ngang */
         function renderProductivitySection(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
@@ -2040,7 +2041,7 @@
 
         hamburgerBtn.addEventListener('click', () => {
             sidebarDrawer.classList.remove('-translate-x-full');
-            drawerBackdrop.classList.remove('hidden');
+            drawerBackdrop.classList.add('hidden');
         });
 
         function closeDrawer() {
