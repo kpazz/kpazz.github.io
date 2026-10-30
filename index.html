@@ -1165,6 +1165,7 @@
                 const resTweakJb = await fetch(jsonFiles.tweakJb);
                 if (resTweakJb.ok) {
                     let data = await resTweakJb.json();
+                    // Sắp xếp tweak theo ngày mới nhất lên đầu (từ trái qua phải)
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
                     renderTweakJbSectionTop(data);
@@ -1303,7 +1304,8 @@
             let innerHtml = '';
             items.forEach(item => {
                 const itemRating = item.rating || '4.8';
-                const versionText = item.version || 'v1.0.0';
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
@@ -1342,7 +1344,8 @@
             let innerHtml = '';
             items.forEach(item => {
                 const itemRating = item.rating || '4.8';
-                const versionText = item.version || 'v1.0.0';
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
