@@ -156,7 +156,7 @@
             padding: 0 3px;
         }
 
-        /* Giới hạn menu drawer tối đa khoảng 10 dòng (~260px) rồi cho cuộn */
+        /* Giới hạn menu drawer tối đa khoảng 10 dòng (~280px) rồi cho cuộn */
         .drawer-submenu {
             max-height: 0;
             overflow: hidden;
@@ -225,9 +225,12 @@
         <div id="categoryCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[90vh] flex flex-col overflow-hidden">
             
             <!-- Header của Popup & Nút Đóng -->
-            <div class="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
-                <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
-                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90">
+            <div class="flex items-start justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+                <div>
+                    <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
+                    <p id="categoryModalCountText" class="text-[11px] font-semibold text-uptoAccent mt-0.5">Tổng số lượng trong danh sách này</p>
+                </div>
+                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
@@ -617,66 +620,66 @@
 
                 <!-- Mục 1: Tweak Jailbreak IOS -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span>
                         </span>
-                        <i id="tweakChevron" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="tweakChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerTweakList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
                 <!-- Mục 2: Tin tức mới -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
                         </span>
-                        <i id="newsChevron" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="newsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerNewsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
                 <!-- Mục 3: APP Jailbreak -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
                         </span>
-                        <i id="jbChevron" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="jbChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerJbList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
                 <!-- Mục 4: Đa phương tiện -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-photo-film w-5 text-center"></i><span>Đa phương tiện</span>
                         </span>
-                        <i id="mediaChevron" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerMediaList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
                 <!-- Mục 5: Mẹo & Hướng dẫn -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
                         </span>
-                        <i id="tipsChevron" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerTipsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
                 <!-- Mục 6: Năng suất -->
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold">
-                        <span onclick="selectDrawerItem(this.parentElement.querySelector('.drawer-main-action')); closeDrawer(); openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="drawer-main-action flex items-center space-x-3 cursor-pointer flex-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
                         </span>
-                        <i id="prodChevron" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')" class="fa-solid fa-chevron-down text-xs cursor-pointer p-1 transition-transform duration-300"></i>
+                        <i id="prodChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
                     <div id="drawerProdList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
@@ -1074,11 +1077,12 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC (ĐẦY ĐỦ THỰC TẾ, CARD NHỎ GIỐNG TWEAK) ==================== */
+        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC (ĐẦY ĐỦ THỰC TẾ, CARD NHỎ GIỐNG TWEAK) ==================== -->
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
         const categoryModalTitle = document.getElementById('categoryModalTitle');
+        const categoryModalCountText = document.getElementById('categoryModalCountText');
         const categoryItemList = document.getElementById('categoryItemList');
         const categorySearchInput = document.getElementById('categorySearchInput');
 
@@ -1139,6 +1143,12 @@
             categoryModalTitle.textContent = title;
             currentCategoryItems = items;
             categorySearchInput.value = '';
+            
+            // Hiển thị tổng số lượng lấy trực tiếp từ bộ đếm/số lượng phần tử
+            if (categoryModalCountText) {
+                categoryModalCountText.textContent = `Tổng ${items.length} trong danh sách này`;
+            }
+
             renderCategoryItems(items);
             openModalWithBounce(categoryModal, categoryCard);
         }
@@ -1353,7 +1363,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     let rawProdData = [...data];
                     window.storeDataCache.productivity = rawProdData;
-                    renderProductivitySection(data);
+                    renderProductivitySection(rawProdData);
                     renderDrawerList('drawerProdList', rawProdData);
                     allLoadedItems.push(...rawProdData);
                 }
@@ -1593,7 +1603,7 @@
                     </div>
                 `;
             });
-            container.innerHTML = `<div class="grid grid-rows-4 grid-flow-col gap-x-2 gap-y-2 min-w-[500px]">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
