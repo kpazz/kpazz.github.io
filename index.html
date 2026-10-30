@@ -608,10 +608,10 @@
                     </div>
                 </div>
 
-                <!-- Mục 3: Đa phương tiện -->
+                <!-- Mục 3: Tweak Jailbreak IOS -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
-                        <span class="flex items-center space-x-3"><i class="fa-solid fa-shapes w-5 text-center"></i><span>Đa phương tiện</span></span>
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span></span>
                         <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
                     <div id="drawerMediaList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
@@ -666,9 +666,9 @@
                     <span>Tweak Jailbreak IOS</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="multimediaCountTextTop" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
+                <span id="tweakJbCountTextTop" class="text-[11px] font-bold text-gray-400">0 - APPs</span>
             </div>
-            <div id="multimediaSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
+            <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
@@ -1167,7 +1167,7 @@
                     let data = await resMedia.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
-                    renderMultimediaSectionTop(data);
+                    renderTweakJbSectionTop(data);
                     renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
                 }
@@ -1185,6 +1185,11 @@
                 if (resProd.ok) {
                     let data = await resProd.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    // Nhân bản thêm dữ liệu để đủ thêm số lượng app yêu cầu
+                    while (data.length < 28) {
+                        data = data.concat(data);
+                    }
+                    data = data.slice(0, 28);
                     renderProductivitySection(data);
                     renderDrawerList('drawerProdList', data);
                     allLoadedItems.push(...data);
@@ -1329,9 +1334,9 @@
             bindCardClickEvents(container);
         }
 
-        function renderMultimediaSectionTop(items) {
-            const container = document.getElementById('multimediaSlideContainerTop');
-            const countText = document.getElementById('multimediaCountTextTop');
+        function renderTweakJbSectionTop(items) {
+            const container = document.getElementById('tweakJbSlideContainerTop');
+            const countText = document.getElementById('tweakJbCountTextTop');
             if (!container) return;
             if (countText) countText.textContent = `${items.length} - APPs`;
 
@@ -1423,7 +1428,8 @@
                     </div>
                 `;
             });
-            container.innerHTML = `<div class="grid grid-rows-4 grid-flow-col gap-x-4 gap-y-3 min-w-[500px]">${innerHtml}</div>`;
+            // Giảm khoảng cách cột (gap-x-2) và thêm cuộn ngang mượt mà compact hơn
+            container.innerHTML = `<div class="grid grid-rows-4 grid-flow-col gap-x-2 gap-y-2 min-w-[500px]">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
