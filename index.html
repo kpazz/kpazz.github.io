@@ -586,59 +586,58 @@
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
 
-                <!-- Mục 1: Tin tức mới -->
+                <!-- Mục 1: Tweak Jailbreak IOS -->
+                <div class="space-y-1">
+                    <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span></span>
+                        <i id="tweakChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
+                    </button>
+                    <div id="drawerTweakList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
+                </div>
+
+                <!-- Mục 2: Tin tức mới -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerNewsList', 'newsChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
                         <span class="flex items-center space-x-3"><i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span></span>
                         <i id="newsChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
-                    <div id="drawerNewsList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render danh sách card -->
-                    </div>
+                    <div id="drawerNewsList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 2: APP Jailbreak -->
+                <!-- Mục 3: APP Jailbreak -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerJbList', 'jbChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
                         <span class="flex items-center space-x-3"><i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span></span>
                         <i id="jbChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
-                    <div id="drawerJbList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render danh sách card -->
-                    </div>
+                    <div id="drawerJbList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 3: Tweak Jailbreak IOS -->
+                <!-- Mục 4: Đa phương tiện -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
-                        <span class="flex items-center space-x-3"><i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span></span>
+                        <span class="flex items-center space-x-3"><i class="fa-solid fa-photo-film w-5 text-center"></i><span>Đa phương tiện</span></span>
                         <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
-                    <div id="drawerMediaList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render danh sách card -->
-                    </div>
+                    <div id="drawerMediaList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 4: Mẹo & Hướng dẫn -->
+                <!-- Mục 5: Mẹo & Hướng dẫn -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
                         <span class="flex items-center space-x-3"><i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span></span>
                         <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
-                    <div id="drawerTipsList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render danh sách card -->
-                    </div>
+                    <div id="drawerTipsList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
 
-                <!-- Mục 5: Năng suất -->
+                <!-- Mục 6: Năng suất -->
                 <div class="space-y-1">
                     <button onclick="selectDrawerItem(this); toggleDrawerSubmenu('drawerProdList', 'prodChevron')" class="drawer-main-item w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold focus:outline-none">
                         <span class="flex items-center space-x-3"><i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span></span>
                         <i id="prodChevron" class="fa-solid fa-chevron-down text-xs transition-transform duration-300"></i>
                     </button>
-                    <div id="drawerProdList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400">
-                        <!-- Render danh sách card -->
-                    </div>
+                    <div id="drawerProdList" class="drawer-submenu pl-9 text-xs text-gray-500 dark:text-gray-400"></div>
                 </div>
             </nav>
         </div>
@@ -653,13 +652,11 @@
 
         <!-- HERO SLIDER -->
         <section id="heroSection" class="relative w-full overflow-hidden py-1">
-            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw]">
-                <!-- Nội dung được render tự động qua JS từ các file JSON -->
-            </div>
+            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw]"></div>
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 mt-2"></div>
         </section>
 
-        <!-- SECTION 3 (BẢN SAO 1): TWEAK JAILBREAK IOS (NGAY DƯỚI HERO SLIDER) -->
+        <!-- SECTION: TWEAK JAILBREAK IOS -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -672,7 +669,7 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 1: TIN TỨC MỚI -->
+        <!-- SECTION: TIN TỨC MỚI -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -685,7 +682,7 @@
             <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 2: APP JAILBREAK -->
+        <!-- SECTION: APP JAILBREAK -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -698,7 +695,7 @@
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 3: ĐA PHƯƠNG TIỆN -->
+        <!-- SECTION: ĐA PHƯƠNG TIỆN (Lấy dữ liệu từ Tabs/Daphuongtien.json) -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -711,7 +708,7 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 4: HƯỚNG DẪN & MẸO CÔNG NGHỆ -->
+        <!-- SECTION: MẸO & HƯỚNG DẪN -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -724,7 +721,7 @@
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION 5: NĂNG SUẤT -->
+        <!-- SECTION: NĂNG SUẤT -->
         <section class="space-y-3 px-3.5">
             <div class="flex items-center justify-between">
                 <a href="#" class="section-title text-gray-900 dark:text-white">
@@ -873,7 +870,6 @@
             });
         }
 
-        // HÀM TẠO HTML SỐ SAO CHUẨN XÁC DỰA TRÊN ĐIỂM SỐ (DÙNG CHUNG CHO CẢ POPUP VÀ CARD)
         function generateStarsHtml(ratingScore, starTextSizeClass = 'text-[9px]') {
             const ratingNum = parseFloat(ratingScore) || 4.9;
             const roundedStars = Math.round(ratingNum);
@@ -951,12 +947,10 @@
             if (detailRatingScore) detailRatingScore.textContent = itemRating.toFixed(1);
             if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
 
-            // Dùng chung hàm chuẩn cho Popup
             if (detailInteractiveStars) {
                 detailInteractiveStars.innerHTML = generateStarsHtml(itemRating, 'text-2xl');
             }
 
-            // Tỷ lệ phần trăm biểu đồ sao
             let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
             let pct4 = Math.min(100, Math.max(0, ((itemRating - 1) / 4) * 80));
             let pct3 = itemRating < 3 ? 40 : 10;
@@ -1109,10 +1103,11 @@
         function renderDrawerList(containerId, items) {
             const container = document.getElementById(containerId);
             if (!container) return;
-            window.drawerStoreCache[containerId] = items;
+            const sortedItems = sortItemsByDate([...items]);
+            window.drawerStoreCache[containerId] = sortedItems;
 
             let html = '<div class="py-1 space-y-1">';
-            items.forEach((item, index) => {
+            sortedItems.forEach((item, index) => {
                 html += `
                     <a href="javascript:void(0)" class="block py-1.5 px-2 rounded hover:bg-gray-200 dark:hover:bg-uptoCardHover truncate transition text-gray-600 dark:text-gray-300 active:scale-98"
                        onclick="handleDrawerItemClick('${containerId}', ${index})">
@@ -1137,6 +1132,7 @@
                 news: 'Tabs/Tintucmoi.json',
                 jailbreak: 'Tabs/Appjailbreak.json',
                 tweakJb: 'Tabs/Tweak.json',
+                media: 'Tabs/Daphuongtien.json',
                 tips: 'Tabs/Meo.json',
                 productivity: 'Tabs/Nangsuat.json'
             };
@@ -1165,10 +1161,17 @@
                 const resTweakJb = await fetch(jsonFiles.tweakJb);
                 if (resTweakJb.ok) {
                     let data = await resTweakJb.json();
-                    // Sắp xếp tweak theo ngày mới nhất lên đầu (từ trái qua phải)
+                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    renderTweakJbSectionTop(data);
+                    renderDrawerList('drawerTweakList', data);
+                    allLoadedItems.push(...data);
+                }
+
+                const resMedia = await fetch(jsonFiles.media);
+                if (resMedia.ok) {
+                    let data = await resMedia.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     renderMultimediaSection(data);
-                    renderTweakJbSectionTop(data);
                     renderDrawerList('drawerMediaList', data);
                     allLoadedItems.push(...data);
                 }
