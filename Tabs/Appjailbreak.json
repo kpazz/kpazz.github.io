@@ -1,19 +1,19 @@
 [
     {
-        "name": "Sileo Package Manager",
+        "name": "Sileo Package Mane",
         "version": "2.5.2",
         "dev": "Sileo Team",
         "category": "Quản lý gói",
         "systemRequirements": "iOS 14.0 - 16.6.1 (Rootless / Jailbroken)",
-        "rating": "4.9",
+        "rating": "4.0",
         "img": "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=300&q=80",
-        "publishDate": "25/10/2026",
+        "publishDate": "30/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.deb",
-        "highlightTitle": "Sileo Manager dành cho bạn nếu",
+        "highlightTitle": "Sileo Manager sẽ - dành cho bạn nếu",
         "highlights": [
-            "Bạn muốn trải nghiệm một trình quản lý gói siêu mượt mà và hiện đại.",
+            "Bạn muốn trải nghiệm một trình quản lý gói siêu mượt mà và hiện đại hơn nè.",
             "Tối ưu riêng cho các dòng máy chạy jailbreak đời mới.",
             "Quản lý kho lưu trữ tweak, cài đặt và cập nhật nhanh chóng."
         ]
