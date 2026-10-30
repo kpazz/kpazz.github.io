@@ -1073,7 +1073,6 @@
         function renderCategoryItems(items, totalCount) {
             if (!categoryItemList) return;
             
-            // Cập nhật số lượng mục hiển thị bên dưới ô tìm kiếm theo yêu cầu
             if (categoryModalCountText) {
                 categoryModalCountText.textContent = `Có ${totalCount} mục trong danh sách này`;
             }
@@ -1229,10 +1228,11 @@
 
             let html = `
                 <div class="py-1.5 space-y-1.5">
-                    <div class="relative px-0.5 pb-1">
+                    <div class="relative px-0.5 pb-0.5">
                         <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg py-1 pl-7 pr-2.5 text-[11px] focus:outline-none focus:border-uptoAccent">
                         <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-gray-400 text-[10px]"></i>
                     </div>
+                    <p class="text-[10px] font-semibold text-uptoAccent px-0.5 pb-1">Có ${sortedItems.length} mục trong danh sách này</p>
                     <div id="${listItemsId}" class="space-y-1">
             `;
 
@@ -1491,6 +1491,7 @@
             bindCardClickEvents(container);
         }
 
+        /* ĐÃ SỬA CHUẨN XÁC: Tweak Jailbreak IOS hiển thị đúng cấu trúc 2 dòng, tự động xếp từ trên xuống dưới và trái sang phải */
         function renderTweakJbSectionTop(items) {
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
