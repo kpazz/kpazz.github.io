@@ -337,12 +337,13 @@
 
                         <div class="flex items-center justify-between px-2">
                             <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-300 dark:border-gray-700">
-                            <div class="flex items-center space-x-2 text-2xl text-gray-300 dark:text-gray-600">
-                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star hover:text-amber-400 cursor-pointer transition"></i>
+                            <!-- Hiển thị chính xác số sao tương ứng điểm số, không hiện nửa sao -->
+                            <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
+                                <i class="fa-solid fa-star cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star cursor-pointer transition"></i>
+                                <i class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition"></i>
                             </div>
                         </div>
 
@@ -430,7 +431,7 @@
 
                     <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
                         <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.9'})">
+                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.0'})">
                             <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
                             <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">Zenless Zone</h5>
                             <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">HoYoverse</p>
@@ -906,6 +907,7 @@
         const systemRequirementsBlock = document.getElementById('systemRequirementsBlock');
         const detailRatingScore = document.getElementById('detailRatingScore');
         const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
+        const detailInteractiveStars = document.getElementById('detailInteractiveStars');
 
         // Các thanh biểu đồ sao (5 đến 1)
         const starBar5 = document.getElementById('starBar5');
@@ -942,8 +944,22 @@
             if (detailRatingScore) detailRatingScore.textContent = itemRating.toFixed(1);
             if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
 
-            // TÍNH TOÁN TỶ LỆ PHẦN TRĂM BIỂU ĐỒ SAO DỰA TRÊN CHỈ SỐ ĐÁNH GIÁ (itemRating)
-            // Thang 5 sao: giả định phân bổ phần lớn ở 5 sao và 4 sao tùy theo điểm số
+            // TÍNH TOÁN HIỂN THỊ CHÍNH XÁC SỐ SAO (LÀM TRÒN XUỐNG HOẶC GẦN NHẤT ĐỂ HIỆN SỐ SAO VÀNG NGUYÊN VẸN, KHÔNG HIỆN NỬA SAO)
+            const fullStarsCount = Math.floor(itemRating); // Ví dụ 4.0 hay 4.8 đều ra 4 sao vàng nếu lấy floor, hoặc làm tròn tùy ý. Ở đây dùng Math.round để chính xác theo ý muốn (4.0 -> 4 sao, 4.8 -> 5 sao)
+            const roundedStars = Math.round(itemRating);
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= roundedStars) {
+                    starsHtml += `<i class="fa-solid fa-star cursor-pointer transition"></i>`;
+                } else {
+                    starsHtml += `<i class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition"></i>`;
+                }
+            }
+            if (detailInteractiveStars) {
+                detailInteractiveStars.innerHTML = starsHtml;
+            }
+
+            // TÍNH TOÁN TỶ LỆ PHẦN TRĂM BIỂU ĐỒ SAO
             let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
             let pct4 = Math.min(100, Math.max(0, ((itemRating - 1) / 4) * 80));
             let pct3 = itemRating < 3 ? 40 : 10;
@@ -958,14 +974,10 @@
 
             // Xử lý riêng cho các mục KHÔNG PHẢI APP (Tin tức, Mẹo, v.v.): Bỏ số phiên bản, hiển thị nội dung bài viết
             if (item.isArticle || item.isTip || !item.isApp) {
-                // Bỏ phiên bản
                 detailAppVersion.style.display = 'none';
-
-                // Hiển thị khối nội dung chi tiết bài viết
                 articleContentBlock.classList.remove('hidden');
                 highlightsBlock.classList.add('hidden');
 
-                // Lấy nội dung từ highlights hoặc mô tả
                 let contentText = '';
                 if (item.highlights && item.highlights.length > 0) {
                     contentText = item.highlights.join('\n\n');
@@ -976,7 +988,6 @@
                 }
                 detailArticleText.textContent = contentText;
             } else {
-                // Dành cho App / Game thông thường
                 detailAppVersion.style.display = 'block';
                 detailAppVersion.textContent = item.version || '1.2.3RC2';
                 articleContentBlock.classList.add('hidden');
@@ -1032,7 +1043,6 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        // Hàm phân tích ngày tháng DD/MM/YYYY để sắp xếp
         function parseDate(dateStr) {
             if (!dateStr) return new Date(0);
             const parts = dateStr.split('/');
@@ -1126,7 +1136,6 @@
             }
         }
 
-        // --- FETCH DỮ LIỆU TỪ CÁC FILE JSON TRONG THƯ MỤC TABS ---
         async function loadStoreData() {
             const jsonFiles = {
                 news: 'Tabs/Tintucmoi.json',
@@ -1139,7 +1148,6 @@
             let allLoadedItems = [];
 
             try {
-                // 1. Tin Tức Mới (đánh dấu cờ isArticle = true)
                 const resNews = await fetch(jsonFiles.news);
                 if (resNews.ok) {
                     let data = await resNews.json();
@@ -1149,7 +1157,6 @@
                     allLoadedItems.push(...data);
                 }
 
-                // 2. App Jailbreak
                 const resJb = await fetch(jsonFiles.jailbreak);
                 if (resJb.ok) {
                     let data = await resJb.json();
@@ -1159,7 +1166,6 @@
                     allLoadedItems.push(...data);
                 }
 
-                // 3. Đa Phương Tiện
                 const resMedia = await fetch(jsonFiles.multimedia);
                 if (resMedia.ok) {
                     let data = await resMedia.json();
@@ -1169,7 +1175,6 @@
                     allLoadedItems.push(...data);
                 }
 
-                // 4. Mẹo Công Nghệ (đánh dấu cờ isTip = true)
                 const resTips = await fetch(jsonFiles.tips);
                 if (resTips.ok) {
                     let data = await resTips.json();
@@ -1179,7 +1184,6 @@
                     allLoadedItems.push(...data);
                 }
 
-                // 5. Năng Suất
                 const resProd = await fetch(jsonFiles.productivity);
                 if (resProd.ok) {
                     let data = await resProd.json();
@@ -1200,7 +1204,6 @@
             }
         }
 
-        // RENDER CÁC SECTION
         function renderNewsSection(items) {
             const container = document.getElementById('newsSlideContainer');
             const countText = document.getElementById('newsCountText');
@@ -1218,7 +1221,6 @@
                         </div>
                         <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <!-- Hàng chứa Đánh Giá Sao và Nút Xem Thêm -->
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 <div class="flex text-amber-400 text-[9px] space-x-0.5">
@@ -1256,7 +1258,6 @@
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
-                            <!-- Badge Ngày Đăng ở Góc Trên Trái Ảnh Banner -->
                             <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
                                 <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
                                 <span>${publishDateText}</span>
@@ -1270,16 +1271,14 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <!-- Mô Tả Bên Dưới Tiêu Đề (Tối đa 10 từ) -->
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
                                 </div>
                             </div>
 
-                            <!-- Hàng chứa Đánh Giá Sao và Nút NHẬN Cùng Hàng -->
                             <div class="flex items-center justify-between pt-1">
                                 <div class="flex items-center space-x-1">
                                     <div class="flex text-amber-400 text-[8px] space-x-0.5">
-                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star text-gray-400"></i>
                                     </div>
                                     <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300">${itemRating}</span>
                                 </div>
@@ -1316,9 +1315,7 @@
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5">
                             <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <!-- Mô Tả Ngắn Gọn Dưới Tiêu Đề -->
                             <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                            <!-- Hiển thị Số Phiên Bản & Đánh Giá Sao -->
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 text-amber-400 font-bold">
@@ -1352,7 +1349,6 @@
                         </div>
                         <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <!-- Hàng chứa Đánh Giá Sao và Nút Xem Thêm -->
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 <div class="flex text-amber-400 text-[9px] space-x-0.5">
@@ -1732,7 +1728,6 @@
             jbAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
         }
 
-        // Search Modal Controller
         const searchOpenBtn = document.getElementById('searchOpenBtn');
         const searchCloseBtn = document.getElementById('searchCloseBtn');
         const searchModal = document.getElementById('searchModal');
@@ -1753,7 +1748,6 @@
         searchCloseBtn.addEventListener('click', () => closeModalWithBounce(searchModal, searchBoxContainer, resetSearch));
         setupBackdropClose(searchModal, searchBoxContainer, resetSearch);
 
-        // Login & Register Modal Controllers
         const profileOpenBtn = document.getElementById('profileOpenBtn');
         const loginModal = document.getElementById('loginModal');
         const loginCard = document.getElementById('loginCard');
@@ -1780,7 +1774,6 @@
             closeModalWithBounce(registerModal, registerCard, () => openModalWithBounce(loginModal, loginCard));
         });
 
-        // Realtime Search Engine trên tất cả các card được render
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim().toLowerCase();
             if (!query) {
@@ -1841,7 +1834,6 @@
             }
         });
 
-        // Sidebar Navigation Drawer
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const drawerCloseBtn = document.getElementById('drawerCloseBtn');
         const sidebarDrawer = document.getElementById('sidebarDrawer');
@@ -1860,7 +1852,6 @@
         drawerCloseBtn.addEventListener('click', closeDrawer);
         drawerBackdrop.addEventListener('click', closeDrawer);
 
-        // Khởi chạy nạp dữ liệu từ các tệp JSON khi trang vừa tải xong
         document.addEventListener('DOMContentLoaded', () => {
             loadStoreData();
         });
