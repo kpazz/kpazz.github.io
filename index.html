@@ -1565,12 +1565,11 @@
             bindCardClickEvents(container);
         }
 
-        /* ĐÃ SỬA: Cho phép Năng suất hiển thị đầy đủ 100% tất cả các app không bị giới hạn 8 app cố định */
+        /* ĐÃ SỬA CHUẨN XÁC: Mục năng suất hiển thị đúng 2 dòng, nhận đủ tất cả hơn 20 app để cuộn ngang */
         function renderProductivitySection(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
             if (!container) return;
-            
             if (countText) countText.textContent = `${items.length} - APPs`;
 
             let innerHtml = '';
@@ -1587,7 +1586,7 @@
                 `;
             });
             
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-flow-col gap-x-4 gap-y-3" style="grid-template-rows: repeat(2, minmax(0, 1fr)); min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
