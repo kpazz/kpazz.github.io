@@ -1077,7 +1077,7 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC (ĐẦY ĐỦ THỰC TẾ, CARD NHỎ GIỐNG TWEAK) ==================== -->
+        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC ==================== */
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
@@ -1144,7 +1144,7 @@
             currentCategoryItems = items;
             categorySearchInput.value = '';
             
-            // Hiển thị tổng số lượng lấy trực tiếp từ bộ đếm/số lượng phần tử
+            // Lấy chính xác số lượng từ đối tượng đếm của mục đó
             if (categoryModalCountText) {
                 categoryModalCountText.textContent = `Tổng ${items.length} trong danh sách này`;
             }
