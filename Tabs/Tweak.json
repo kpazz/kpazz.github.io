@@ -1,12 +1,28 @@
 [
     {
+        "name": "AI Chat VIP",
+        "version": "1.0.0",
+        "dev": "Ravand <Ravand0010@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate",
+        "img": "CydiaIcon.png",
+        "publishDate": "02/11/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
+        "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
+        "highlights": [
+            "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)"
+        ]
+    },
+    {
         "name": "3DGlassierTouch",
         "version": "2.0",
         "dev": "b4db1r3",
         "category": "Tweaks",
         "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
         "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
+        "publishDate": "02/11/2026",
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
@@ -16,13 +32,45 @@
         ]
     },
     {
+        "name": "OmniCar",
+        "version": "1.0.3",
+        "dev": "OmniCar <omnicartweak@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "02/11/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
+        "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
+        "highlights": [
+            "The power of CarPlay."
+        ]
+    },
+    {
+        "name": "OmniCar",
+        "version": "1.0.4",
+        "dev": "OmniCar <omnicartweak@gmail.com>",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+        "img": "CydiaIcon.png",
+        "publishDate": "02/11/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+        "highlights": [
+            "Sức mạnh của CarPlay."
+        ]
+    },
+    {
         "name": "AVPhotos",
         "version": "1.0.1",
         "dev": "MiRO",
         "category": "Tweaks",
         "systemRequirements": "firmware (>=14.0), mobilesubstrate",
         "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
+        "publishDate": "02/11/2026",
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
@@ -32,13 +80,45 @@
         ]
     },
     {
+        "name": "AIM Pro",
+        "version": "1.1.3k",
+        "dev": "alimaulana",
+        "category": "Tweaks",
+        "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+        "img": "CydiaIcon.png",
+        "publishDate": "02/11/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
+        "highlights": [
+            "Màn hình khóa ngày và thời gian theo phong cách iOS 16"
+        ]
+    },
+    {
+        "name": "3DTools",
+        "version": "1.0.6k",
+        "dev": "smokin1337",
+        "category": "Tweaks",
+        "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+        "img": "CydiaIcon.png",
+        "publishDate": "02/11/2026",
+        "isApp": false,
+        "noDownload": false,
+        "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
+        "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
+        "highlights": [
+            "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!"
+        ]
+    },
+    {
         "name": "AVLock",
         "version": "1.0.4",
         "dev": "gilshahar7",
         "category": "Tweaks",
         "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
         "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
+        "publishDate": "02/11/2026",
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
@@ -54,109 +134,13 @@
         "category": "Tweaks",
         "systemRequirements": "mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
         "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
+        "publishDate": "02/11/2026",
         "isApp": false,
         "noDownload": false,
         "downloadLink": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
         "highlightTitle": "Phiên bản 1.6k - Cập nhật mới",
         "highlights": [
             "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!"
-        ]
-    },
-    {
-        "name": "CarPlaySplitter",
-        "version": "0.0.2",
-        "dev": "Kim Trung",
-        "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, ws.hbang.common (>= 1.16)",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/com.kpazz.carplaysplitter_0.0.2_iphoneos-arm64.deb",
-        "highlightTitle": "Phiên bản 0.0.2 - Cập nhật mới",
-        "highlights": [
-            "Tự động chia đôi màn hình CarPlay khi kết nối."
-        ]
-    },
-    {
-        "name": "OmniCar",
-        "version": "1.0.4",
-        "dev": "OmniCar <omnicartweak@gmail.com>",
-        "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
-        "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
-        "highlights": [
-            "Sức mạnh của CarPlay."
-        ]
-    },
-    {
-        "name": "3DTools",
-        "version": "1.0.6k",
-        "dev": "smokin1337",
-        "category": "Tweaks",
-        "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
-        "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
-        "highlights": [
-            "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!"
-        ]
-    },
-    {
-        "name": "AI Chat VIP",
-        "version": "1.0.0",
-        "dev": "Ravand <Ravand0010@gmail.com>",
-        "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
-        "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
-        "highlights": [
-            "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)"
-        ]
-    },
-    {
-        "name": "OmniCar",
-        "version": "1.0.3",
-        "dev": "OmniCar <omnicartweak@gmail.com>",
-        "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
-        "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
-        "highlights": [
-            "The power of CarPlay."
-        ]
-    },
-    {
-        "name": "AIM Pro",
-        "version": "1.1.3k",
-        "dev": "alimaulana",
-        "category": "Tweaks",
-        "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
-        "img": "CydiaIcon.png",
-        "publishDate": "30/10/2026",
-        "isApp": false,
-        "noDownload": false,
-        "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
-        "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
-        "highlights": [
-            "Màn hình khóa ngày và thời gian theo phong cách iOS 16"
         ]
     }
 ]

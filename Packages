@@ -1,143 +1,3 @@
-Package: xyz.3dglassiertouch
-Maintainer: CyPwn
-Name: 3DGlassierTouch
-Icon: https://cdn-static.yourepo.com/images/debs/com.yourepo.b4db1r3r3p0.glassier3dtouch.png
-Description: 3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D. Nó có tính năng tô màu thích ứng dựa trên các biểu tượng ứng dụng, dấu phân cách có thể tùy chỉnh và hiệu ứng nền thủy tinh tinh tinh cho cả màn hình khóa và màn hình chính. Điều chỉnh độ dày, màu sắc và bán kính cho phù hợp với phong cách của bạn, với các cài đặt riêng biệt cho mỗi màn hình. Trải nghiệm cảm ứng bóng bẩy, được cá nhân hóa với mọi tương tác! 
-Author: b4db1r3
-Section: Tweaks
-Depends: mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader
-Architecture: iphoneos-arm64
-Version: 2.0
-Filename: debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb
-Size: 4504384
-MD5sum: 620dae556f2580d2b7df3a327c913843
-SHA256: f17340edad7a66c87c65f70cb908c73092dc4c22fb3646ab17ffb0e5d4220dd1
-
-Package: xyz.MiRO.avphotos
-Maintainer: MiRO
-Version: 1.0.1
-Section: Tweaks
-Depends: firmware (>=14.0), mobilesubstrate
-Architecture: iphoneos-arm64
-Name: AVPhotos
-Description: PiP cho video trong photos.app 
-Author: MiRO
-Icon: https://apt.wxhbts.pro/icon/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.png
-Filename: debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb
-Size: 7148
-MD5sum: 6f2504a91c1c0d54d6fc2d3e192d6138
-SHA256: e025798200baaa7293f5eff3cf932c137c04fe079bc95ee663a4624ed9ddb80a
-
-Package: xyz.gilshahar7.avlock
-Maintainer: gilshahar7
-Name: AVLock
-Version: 1.0.4
-Section: Tweaks
-Architecture: iphoneos-arm64
-Depends: mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi
-Author: gilshahar7
-Description: Thêm nút khóa định hướng vào trình phát video iOS gốc
-Filename: debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb
-Size: 20064
-MD5sum: 15d0524cf9a3a3f83f0b47ba47df77bd
-SHA256: d742014d1466591cf602d15218bfa5eff8b526b2e0bed87abe0be21815703f59
-
-Package: xyz.Wijk.ainsworth
-Maintainer: Wijk
-Section: Tweaks
-Architecture: iphoneos-arm64
-Version: 1.6k
-Depends: mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack
-Description: Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!
-Author: Dave van Wijk
-Name: Ainsworth
-Icon: https://img.chariz.cloud/icon/ainsworth/icon@3x.png
-Filename: debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb
-Size: 453792
-MD5sum: d2750d3b6271b36e73471434c35ee939
-SHA256: b84e0a8daa0f4a3575a296e839757b4c0cf29dc7466ab06583a4edb0c277c4ce
-
-Package: com.kpazz.carplaysplitter
-Name: CarPlaySplitter
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, ws.hbang.common (>= 1.16)
-Description: Tự động chia đôi màn hình CarPlay khi kết nối.
-Maintainer: Kim Trung
-Author: Kim Trung
-Section: Tweaks
-Architecture: iphoneos-arm64
-Version: 0.0.2
-Installed-Size: 248
-Filename: debs/com.kpazz.carplaysplitter_0.0.2_iphoneos-arm64.deb
-Size: 5686
-MD5sum: 8b8978c6d2796662e8745ea3753897b7
-SHA256: 1c9cc77cb6847920940850b5f454728a07f2e6ad4ff2eb5f9c948b9124b0d763
-
-Package: com.anlai.omnicar
-Version: 1.0.4
-Name: OmniCar
-Architecture: iphoneos-arm64
-Maintainer: OmniCar <omnicartweak@gmail.com>
-Installed-Size: 6416
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)
-Conflicts: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay, com.leemin.carbridge, com.ethanarbuckle.carplay-cast
-Replaces: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay
-Section: Tweaks
-Description: Sức mạnh của CarPlay.
- OmniCar takes CarPlay beyond what Apple allows: more freedom, more features and everything you need on the road, in one package.
- .
- APP BRIDGE
-  - iPhone apps without CarPlay, such as YouTube or TikTok, on the car screen
-  - In a Split Screen pane or full screen, resized live
-  - Built in: no CarBridge needed
- .
- SPEED BUBBLE
-  - Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn
-  - On the CarPlay screen, or on the iPhone when no car is connected
-  - 9 styles; drag, pinch to resize, tap to reopen the app
-  - Over-speed warning with light effects and sound
- .
- STARTUP SCREEN
-  - Your own video every time CarPlay connects
-  - Clips from Photos or Files, duration, Fill or Fit
-  - Sound through the car speakers, tap to skip
- .
- SPLIT SCREEN
-  - Two or three CarPlay apps side by side, each with its real interface
-  - Layouts: 2 panes, 3 panes or 1 large + 2
-  - Drag the divider to resize, swap panes, floating window
-  - Three favorite layouts; the last split reopens on connect
-  - Siri and Shortcuts through the omnicar:// URL scheme
- .
- SETTINGS
-  - Every feature has its own switch and page under Settings > OmniCar
-  - Changes apply the next time CarPlay connects
-  - Respring once after installing
- .
- COMPATIBILITY
-  - iOS 15 and 16
-  - Rootless jailbreaks: Dopamine, palera1n
- .
- (Repackaged on Fri, 30 Oct 2026 16:11:25 +0700 by dpkg-repack.)
-Filename: debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb
-Size: 1369512
-MD5sum: 5baf51cab085fc24bd39b0b83c947736
-SHA256: 87ea45a75e02772f24441b447eb611e06ed361ca4b55ec880350d61db49a3334
-
-Package: xyz.smokin1337.3dtools
-Maintainer: smokin1337
-Name: 3DTools
-Version: 1.0.6k
-Architecture: iphoneos-arm64
-Description: Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn! 
-Depends: firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne
-Conflicts: com.smokin1337.3dtools
-Author: smokin1337
-Section: Tweaks
-Filename: debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb
-Size: 1144904
-MD5sum: a650f30826ac5b6ddcf00faccb1080dd
-SHA256: e4fac52294c96188ca33a66c859ae3562dc867c83130f7fd4453c15fcbdd7cd6
-
 Package: xyz.cypwn.aichatvip
 Maintainer: CyPwn
 Depiction: https://repo.cypwn.xyz/depiction/1323
@@ -154,6 +14,21 @@ Filename: debs/xyz.cypwn.aichatvip_1.0.deb
 Size: 7936
 MD5sum: 2d60e08edfcf50f9272e13aec558ec64
 SHA256: 43911c4745b4f6a931d382b45b8afb3bedf5e81d56319400e4d065e2a2941b81
+
+Package: xyz.3dglassiertouch
+Maintainer: CyPwn
+Name: 3DGlassierTouch
+Icon: https://cdn-static.yourepo.com/images/debs/com.yourepo.b4db1r3r3p0.glassier3dtouch.png
+Description: 3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D. Nó có tính năng tô màu thích ứng dựa trên các biểu tượng ứng dụng, dấu phân cách có thể tùy chỉnh và hiệu ứng nền thủy tinh tinh tinh cho cả màn hình khóa và màn hình chính. Điều chỉnh độ dày, màu sắc và bán kính cho phù hợp với phong cách của bạn, với các cài đặt riêng biệt cho mỗi màn hình. Trải nghiệm cảm ứng bóng bẩy, được cá nhân hóa với mọi tương tác! 
+Author: b4db1r3
+Section: Tweaks
+Depends: mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader
+Architecture: iphoneos-arm64
+Version: 2.0
+Filename: debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb
+Size: 4504384
+MD5sum: 620dae556f2580d2b7df3a327c913843
+SHA256: f17340edad7a66c87c65f70cb908c73092dc4c22fb3646ab17ffb0e5d4220dd1
 
 Package: com.anlai.omnicar
 Name: OmniCar
@@ -207,6 +82,72 @@ Size: 1311144
 MD5sum: 33596181382bba271d4298ae297f8cf2
 SHA256: 8b3c2228a4cd1bc77c05a8d9599746a1919c72aad510ea50c3890aa9151f8fa8
 
+Package: com.anlai.omnicar
+Version: 1.0.4
+Name: OmniCar
+Architecture: iphoneos-arm64
+Maintainer: OmniCar <omnicartweak@gmail.com>
+Installed-Size: 6416
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)
+Conflicts: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay, com.leemin.carbridge, com.ethanarbuckle.carplay-cast
+Replaces: carsplash-rootless, carspeed, com.anlai97.speedpop, com.anlai97.carduo, com.anpham.splitcarplay
+Section: Tweaks
+Description: Sức mạnh của CarPlay.
+ OmniCar takes CarPlay beyond what Apple allows: more freedom, more features and everything you need on the road, in one package.
+ .
+ APP BRIDGE
+  - iPhone apps without CarPlay, such as YouTube or TikTok, on the car screen
+  - In a Split Screen pane or full screen, resized live
+  - Built in: no CarBridge needed
+ .
+ SPEED BUBBLE
+  - Current speed and the posted limit from Vietmap Live, GOFA, Waze or Wyn
+  - On the CarPlay screen, or on the iPhone when no car is connected
+  - 9 styles; drag, pinch to resize, tap to reopen the app
+  - Over-speed warning with light effects and sound
+ .
+ STARTUP SCREEN
+  - Your own video every time CarPlay connects
+  - Clips from Photos or Files, duration, Fill or Fit
+  - Sound through the car speakers, tap to skip
+ .
+ SPLIT SCREEN
+  - Two or three CarPlay apps side by side, each with its real interface
+  - Layouts: 2 panes, 3 panes or 1 large + 2
+  - Drag the divider to resize, swap panes, floating window
+  - Three favorite layouts; the last split reopens on connect
+  - Siri and Shortcuts through the omnicar:// URL scheme
+ .
+ SETTINGS
+  - Every feature has its own switch and page under Settings > OmniCar
+  - Changes apply the next time CarPlay connects
+  - Respring once after installing
+ .
+ COMPATIBILITY
+  - iOS 15 and 16
+  - Rootless jailbreaks: Dopamine, palera1n
+ .
+ (Repackaged on Fri, 30 Oct 2026 16:11:25 +0700 by dpkg-repack.)
+Filename: debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb
+Size: 1369512
+MD5sum: 5baf51cab085fc24bd39b0b83c947736
+SHA256: 87ea45a75e02772f24441b447eb611e06ed361ca4b55ec880350d61db49a3334
+
+Package: xyz.MiRO.avphotos
+Maintainer: MiRO
+Version: 1.0.1
+Section: Tweaks
+Depends: firmware (>=14.0), mobilesubstrate
+Architecture: iphoneos-arm64
+Name: AVPhotos
+Description: PiP cho video trong photos.app 
+Author: MiRO
+Icon: https://apt.wxhbts.pro/icon/%E5%B8%B8%E7%94%A8%E6%8F%92%E4%BB%B6.png
+Filename: debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb
+Size: 7148
+MD5sum: 6f2504a91c1c0d54d6fc2d3e192d6138
+SHA256: e025798200baaa7293f5eff3cf932c137c04fe079bc95ee663a4624ed9ddb80a
+
 Package: xyz.alimaulana.aimpro
 Maintainer: alimaulana
 Name: AIM Pro
@@ -221,4 +162,48 @@ Filename: debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb
 Size: 2353084
 MD5sum: 308ff70cff1937d6163d7461046c347e
 SHA256: ff640da35f2451ce9fe22e1adefa038369b822e3270469681fcbc446ba4d642c
+
+Package: xyz.smokin1337.3dtools
+Maintainer: smokin1337
+Name: 3DTools
+Version: 1.0.6k
+Architecture: iphoneos-arm64
+Description: Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn! 
+Depends: firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne
+Conflicts: com.smokin1337.3dtools
+Author: smokin1337
+Section: Tweaks
+Filename: debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb
+Size: 1144904
+MD5sum: a650f30826ac5b6ddcf00faccb1080dd
+SHA256: e4fac52294c96188ca33a66c859ae3562dc867c83130f7fd4453c15fcbdd7cd6
+
+Package: xyz.gilshahar7.avlock
+Maintainer: gilshahar7
+Name: AVLock
+Version: 1.0.4
+Section: Tweaks
+Architecture: iphoneos-arm64
+Depends: mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi
+Author: gilshahar7
+Description: Thêm nút khóa định hướng vào trình phát video iOS gốc
+Filename: debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb
+Size: 20064
+MD5sum: 15d0524cf9a3a3f83f0b47ba47df77bd
+SHA256: d742014d1466591cf602d15218bfa5eff8b526b2e0bed87abe0be21815703f59
+
+Package: xyz.Wijk.ainsworth
+Maintainer: Wijk
+Section: Tweaks
+Architecture: iphoneos-arm64
+Version: 1.6k
+Depends: mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack
+Description: Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!
+Author: Dave van Wijk
+Name: Ainsworth
+Icon: https://img.chariz.cloud/icon/ainsworth/icon@3x.png
+Filename: debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb
+Size: 453792
+MD5sum: d2750d3b6271b36e73471434c35ee939
+SHA256: b84e0a8daa0f4a3575a296e839757b4c0cf29dc7466ab06583a4edb0c277c4ce
 
