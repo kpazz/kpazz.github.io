@@ -1,6 +1,6 @@
 # kpazz - Mẹo Công Nghệ & Thủ Thuật Jailbreak iOS & Apps
 
-Welcome to **kpazz** – Trang chia sẻ ứng dụng, thủ thuật công nghệ, mẹo hay và tài nguyên iOS Jailbreak hoàn toàn miễn phí. Đây là nơi tổng hợp các thông tin hữu ích, công cụ tiện ích và hướng dẫn chi tiết dành cho người yêu công nghệ.
+Chaò mừng **kpazz** – Trang chia sẻ ứng dụng, thủ thuật công nghệ, mẹo hay và tài nguyên iOS Jailbreak hoàn toàn miễn phí. Đây là nơi tổng hợp các thông tin hữu ích, công cụ tiện ích và hướng dẫn chi tiết dành cho người yêu công nghệ.
 
 ---
 
