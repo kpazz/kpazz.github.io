@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Quản trị Website</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 70px;
+            --primary-color: #4361ee;
+            --bg-body: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styling */
+        #sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #212529;
+            color: #fff;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+        }
+
+        #sidebar.collapsed {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        #sidebar .sidebar-brand {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.25rem;
+            background: #1a1e21;
+            font-size: 1.15rem;
+            font-weight: bold;
+        }
+
+        #sidebar.collapsed .sidebar-brand-text,
+        #sidebar.collapsed .menu-text {
+            display: none;
+        }
+
+        #sidebar .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #sidebar .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #adb5bd;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        #sidebar .sidebar-menu li a:hover,
+        #sidebar .sidebar-menu li.active a {
+            color: #fff;
+            background: var(--primary-color);
+        }
+
+        #sidebar .sidebar-menu li a i {
+            font-size: 1.2rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* Content Wrapper Styling */
+        #content-wrapper {
+            margin-left: var(--sidebar-width);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #content-wrapper.expanded {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        /* Top Navbar */
+        .top-navbar {
+            height: 70px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: #495057;
+        }
+
+        /* Main Content Padding */
+        .main-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card-custom {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #sidebar {
+                margin-left: calc(-1 * var(--sidebar-width));
+            }
+            #sidebar.mobile-show {
+                margin-left: 0;
+            }
+            #content-wrapper {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR MENU -->
+    <nav id="sidebar">
+        <div class="sidebar-brand">
+            <span class="sidebar-brand-text"><i class="fa-solid fa-gauge-high text-primary me-2"></i> Admin Panel</span>
+            <button class="toggle-btn text-white bg-transparent border-0" id="sidebarToggleInner">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <ul class="sidebar-menu mt-3">
+            <li class="active">
+                <a href="#" onclick="switchTab(event, 'hero-section')">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span class="menu-text">Cấu hình Hero Slide</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'tweak-jailbreak')">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span class="menu-text">Tweak Jailbreak</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'tin-tuc')">
+                    <i class="fa-solid fa-newspaper"></i>
+                    <span class="menu-text">Tin tức mới</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'app-jailbreak')">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span class="menu-text">APP Jailbreak</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'da-phuong-tien')">
+                    <i class="fa-solid fa-photo-film"></i>
+                    <span class="menu-text">Đa phương tiện</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'meo-cong-nghe')">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span class="menu-text">Mẹo & Hướng dẫn</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'nang-suat')">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span class="menu-text">Năng suất</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- END SIDEBAR -->
+
+    <!-- CONTENT WRAPPER -->
+    <div id="content-wrapper">
+        
+        <!-- TOP NAVBAR -->
+        <nav class="top-navbar">
+            <button class="toggle-btn" id="sidebarToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=4361ee&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
+                    <span class="fw-semibold">Quản trị viên</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user gear me-2"></i>Hồ sơ</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Cài đặt</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- END NAVBAR -->
+
+        <!-- MAIN CONTENT AREA -->
+        <div class="main-content">
+            
+            <!-- TAB 1: HERO SLIDE SETTINGS (Mặc định hiển thị) -->
+            <div id="hero-section" class="tab-content-item">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2>Quản lý & Cấu hình Hero Slide</h2>
+                    <button class="btn btn-primary" onclick="saveSettings()">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>Lưu thay đổi
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card card-custom p-4 mb-4">
+                            <h5 class="card-title mb-3"><i class="fa-solid fa-sliders text-primary me-2"></i>Thông số kỹ thuật Slide</h5>
+                            <form id="heroForm">
+                                <div class="mb-3">
+                                    <label for="slideSpeed" class="form-label fw-semibold">Tốc độ trượt slide (giây / chuyển cảnh):</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="slideSpeed" value="3" min="1" max="15" step="0.5">
+                                        <span class="input-group-text">giây</span>
+                                    </div>
+                                    <div class="form-text">Thời gian hiển thị của mỗi slide trước khi chuyển sang slide tiếp theo.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="slideEffect" class="form-label fw-semibold">Kiểu chuyển động slide (Transition Style):</label>
+                                    <select class="form-select" id="slideEffect">
+                                        <option value="slide" selected>Trượt ngang (Slide Horizontal)</option>
+                                        <option value="fade">Mờ dần (Fade Effect)</option>
+                                        <option value="zoom">Phóng to/Thu nhỏ (Zoom Effect)</option>
+                                        <option value="cube">Hiệu ứng khối 3D (Cube Effect)</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="autoPlay" checked>
+                                    <label class="form-check-label fw-semibold" for="autoPlay">Tự động chạy Slide (Auto Play)</label>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="pauseOnHover" checked>
+                                    <label class="form-check-label fw-semibold" for="pauseOnHover">Dừng khi rê chuột vào (Pause on Hover)</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card card-custom p-4 bg-light">
+                            <h5 class="card-title text-dark mb-3"><i class="fa-solid fa-circle-info text-info me-2"></i>Hướng dẫn</h5>
+                            <p class="text-muted small">Cấu hình này sẽ áp dụng trực tiếp cho Banner/Hero Slider ở trang chủ website. Hãy đảm bảo tốc độ phù hợp để người dùng kịp đọc nội dung.</p>
+                            <div class="alert alert-success mt-3 mb-0" id="saveAlert" style="display: none;">
+                                <i class="fa-solid fa-check-circle me-1"></i> Đã lưu cấu hình thành công!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CÁC TAB KHÁC (Nội dung mẫu quản lý danh mục) -->
+            <div id="tweak-jailbreak" class="tab-content-item" style="display: none;">
+                <h2>Quản lý Tweak Jailbreak</h2>
+                <p class="text-muted">Danh sách các tweak hiện có trên hệ thống.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Tweak Jailbreak sẽ hiển thị ở đây...</p></div>
+            </div>
+
+            <div id="tin-tuc" class="tab-content-item" style="display: none;">
+                <h2>Quản lý Tin tức mới</h2>
+                <p class="text-muted">Đăng tải và chỉnh sửa các bài viết tin tức mới nhất.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Tin tức mới sẽ hiển thị ở đây...</p></div>
+            </div>
+
+            <div id="app-jailbreak" class="tab-content-item" style="display: none;">
+                <h2>Quản lý APP Jailbreak</h2>
+                <p class="text-muted">Cập nhật danh sách ứng dụng, công cụ jailbreak.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý APP Jailbreak sẽ hiển thị ở đây...</p></div>
+            </div>
+
+            <div id="da-phuong-tien" class="tab-content-item" style="display: none;">
+                <h2>Quản lý Đa phương tiện</h2>
+                <p class="text-muted">Kho lưu trữ hình ảnh, video, tài liệu đa phương tiện.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Đa phương tiện sẽ hiển thị ở đây...</p></div>
+            </div>
+
+            <div id="meo-cong-nghe" class="tab-content-item" style="display: none;">
+                <h2>Mẹo & Hướng dẫn công nghệ</h2>
+                <p class="text-muted">Chia sẻ các thủ thuật công nghệ và hướng dẫn chi tiết.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Mẹo & Hướng dẫn công nghệ sẽ hiển thị ở đây...</p></div>
+            </div>
+
+            <div id="nang-suat" class="tab-content-item" style="display: none;">
+                <h2>Quản lý Năng suất</h2>
+                <p class="text-muted">Thống kê, báo cáo hiệu suất hoạt động và tối ưu hóa.</p>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Năng suất sẽ hiển thị ở đây...</p></div>
+            </div>
+
+        </div>
+        <!-- END MAIN CONTENT -->
+    </div>
+    <!-- END CONTENT WRAPPER -->
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle Sidebar Script
+        const sidebar = document.getElementById('sidebar');
+        const contentWrapper = document.getElementById('content-wrapper');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarToggleInner = document.getElementById('sidebarToggleInner');
+
+        function toggleSidebar() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('mobile-show');
+            } else {
+                sidebar.classList.toggle('collapsed');
+                contentWrapper.classList.toggle('expanded');
+            }
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        sidebarToggleInner.addEventListener('click', toggleSidebar);
+
+        // Switch Tabs Script
+        function switchTab(event, tabId) {
+            event.preventDefault();
+            
+            // Remove active class from all menu items
+            document.querySelectorAll('.sidebar-menu li').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked parent li
+            event.currentTarget.parentElement.classList.add('active');
+
+            // Hide all tab content items
+            document.querySelectorAll('.tab-content-item').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+        // Mock save function
+        function saveSettings() {
+            const alertBox = document.getElementById('saveAlert');
+            alertBox.style.display = 'block';
+            setTimeout(() => {
+                alertBox.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
