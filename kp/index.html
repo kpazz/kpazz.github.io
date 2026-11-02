@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Quản trị Website</title>
+    <title>Admin Dashboard - KPazz Store Quản trị</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome Icons -->
@@ -12,14 +12,37 @@
         :root {
             --sidebar-width: 260px;
             --sidebar-collapsed-width: 70px;
-            --primary-color: #4361ee;
-            --bg-body: #f8f9fa;
+            --primary-color: #00baa3;
+            --primary-hover: #009683;
+            --bg-body: #f4f6f8;
+            --dark-card: #13222a;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-body);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Backdrop làm tối màn hình khi mở Menu */
+        #sidebarBackdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        #sidebarBackdrop.show {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Sidebar Styling */
@@ -29,11 +52,11 @@
             position: fixed;
             top: 0;
             left: 0;
-            background: #212529;
+            background: #0b161c;
             color: #fff;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+            box-shadow: 4px 0 15px rgba(0,0,0,0.15);
         }
 
         #sidebar.collapsed {
@@ -46,9 +69,10 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 1.25rem;
-            background: #1a1e21;
+            background: #081014;
             font-size: 1.15rem;
             font-weight: bold;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         #sidebar.collapsed .sidebar-brand-text,
@@ -65,11 +89,12 @@
         #sidebar .sidebar-menu li a {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
-            color: #adb5bd;
+            padding: 14px 20px;
+            color: #9ab0bd;
             text-decoration: none;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             white-space: nowrap;
+            font-weight: 500;
         }
 
         #sidebar .sidebar-menu li a:hover,
@@ -87,7 +112,7 @@
         /* Content Wrapper Styling */
         #content-wrapper {
             margin-left: var(--sidebar-width);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -101,14 +126,14 @@
         .top-navbar {
             height: 70px;
             background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
             position: sticky;
             top: 0;
-            z-index: 999;
+            z-index: 998;
         }
 
         .toggle-btn {
@@ -117,6 +142,11 @@
             font-size: 1.25rem;
             cursor: pointer;
             color: #495057;
+            transition: color 0.2s;
+        }
+
+        .toggle-btn:hover {
+            color: var(--primary-color);
         }
 
         /* Main Content Padding */
@@ -127,9 +157,46 @@
 
         .card-custom {
             border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: transform 0.2s;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            background: #ffffff;
+        }
+
+        /* Hero Preview Container */
+        .hero-preview-box {
+            background: #0b161c;
+            border-radius: 20px;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slide-item {
+            display: none;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .hero-slide-item.active {
+            display: block;
+        }
+
+        .hero-slide-item.effect-fade {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .hero-slide-item.effect-zoom {
+            animation: zoomIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         /* Responsive adjustments */
@@ -148,12 +215,17 @@
 </head>
 <body>
 
+    <!-- BACKDROP LÀM TỐI NỀN -->
+    <div id="sidebarBackdrop" onclick="closeSidebar()"></div>
+
     <!-- SIDEBAR MENU -->
     <nav id="sidebar">
         <div class="sidebar-brand">
-            <span class="sidebar-brand-text"><i class="fa-solid fa-gauge-high text-primary me-2"></i> Admin Panel</span>
+            <span class="sidebar-brand-text text-white">
+                <i class="fa-solid fa-layer-group text-info me-2"></i>KPazz Admin
+            </span>
             <button class="toggle-btn text-white bg-transparent border-0" id="sidebarToggleInner">
-                <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
         <ul class="sidebar-menu mt-3">
@@ -213,11 +285,11 @@
             </button>
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=4361ee&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
+                    <img src="https://ui-avatars.com/api/?name=KPazz+Admin&background=00baa3&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
                     <span class="fw-semibold">Quản trị viên</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user gear me-2"></i>Hồ sơ</a></li>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i>Hồ sơ</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Cài đặt</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
@@ -229,99 +301,114 @@
         <!-- MAIN CONTENT AREA -->
         <div class="main-content">
             
-            <!-- TAB 1: HERO SLIDE SETTINGS (Mặc định hiển thị) -->
+            <!-- TAB 1: HERO SLIDE SETTINGS -->
             <div id="hero-section" class="tab-content-item">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2>Quản lý & Cấu hình Hero Slide</h2>
-                    <button class="btn btn-primary" onclick="saveSettings()">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý & Cấu hình Hero Slide</h2>
+                        <p class="text-muted mb-0">Tùy chỉnh các tham số hiển thị cho slider Banner ngoài trang chủ KPazz Store</p>
+                    </div>
+                    <button class="btn btn-primary px-4 py-2 rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="saveSettings()">
                         <i class="fa-solid fa-floppy-disk me-2"></i>Lưu thay đổi
                     </button>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="card card-custom p-4 mb-4">
-                            <h5 class="card-title mb-3"><i class="fa-solid fa-sliders text-primary me-2"></i>Thông số kỹ thuật Slide</h5>
-                            <form id="heroForm">
-                                <div class="mb-3">
+                <div class="row g-4">
+                    <div class="col-lg-7">
+                        <div class="card card-custom p-4">
+                            <h5 class="card-title fw-bold mb-4 text-dark"><i class="fa-solid fa-sliders text-info me-2"></i>Thông số kỹ thuật Slide</h5>
+                            <form id="heroForm" onsubmit="event.preventDefault();">
+                                <div class="mb-4">
                                     <label for="slideSpeed" class="form-label fw-semibold">Tốc độ trượt slide (giây / chuyển cảnh):</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="slideSpeed" value="3" min="1" max="15" step="0.5">
-                                        <span class="input-group-text">giây</span>
+                                        <input type="number" class="form-control" id="slideSpeed" value="3.5" min="1" max="15" step="0.5">
+                                        <span class="input-group-text bg-light">giây</span>
                                     </div>
-                                    <div class="form-text">Thời gian hiển thị của mỗi slide trước khi chuyển sang slide tiếp theo.</div>
+                                    <div class="form-text">Thời gian dừng của mỗi slide trước khi chuyển tiếp.</div>
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label for="slideEffect" class="form-label fw-semibold">Kiểu chuyển động slide (Transition Style):</label>
                                     <select class="form-select" id="slideEffect">
                                         <option value="slide" selected>Trượt ngang (Slide Horizontal)</option>
                                         <option value="fade">Mờ dần (Fade Effect)</option>
                                         <option value="zoom">Phóng to/Thu nhỏ (Zoom Effect)</option>
-                                        <option value="cube">Hiệu ứng khối 3D (Cube Effect)</option>
                                     </select>
                                 </div>
 
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="autoPlay" checked>
+                                <div class="mb-3 form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="autoPlay" checked>
                                     <label class="form-check-label fw-semibold" for="autoPlay">Tự động chạy Slide (Auto Play)</label>
                                 </div>
 
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="pauseOnHover" checked>
+                                <div class="mb-4 form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="pauseOnHover" checked>
                                     <label class="form-check-label fw-semibold" for="pauseOnHover">Dừng khi rê chuột vào (Pause on Hover)</label>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card card-custom p-4 bg-light">
-                            <h5 class="card-title text-dark mb-3"><i class="fa-solid fa-circle-info text-info me-2"></i>Hướng dẫn</h5>
-                            <p class="text-muted small">Cấu hình này sẽ áp dụng trực tiếp cho Banner/Hero Slider ở trang chủ website. Hãy đảm bảo tốc độ phù hợp để người dùng kịp đọc nội dung.</p>
+                    <div class="col-lg-5">
+                        <div class="card card-custom p-4 mb-4">
+                            <h5 class="card-title fw-bold mb-3"><i class="fa-solid fa-eye text-primary me-2"></i>Xem trước trực quan</h5>
+                            
+                            <div class="hero-preview-box text-center my-2" id="heroPreviewContainer">
+                                <div class="hero-slide-item active p-3" id="previewSlide1">
+                                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="rounded-3 mb-2 w-100 object-fit-cover" height="130" alt="Slide 1">
+                                    <h6 class="fw-bold mb-1">Dopamine Jailbreak iOS 16</h6>
+                                    <span class="badge bg-info">Tweak & App</span>
+                                </div>
+                                <div class="hero-slide-item p-3" id="previewSlide2">
+                                    <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=300&q=80" class="rounded-3 mb-2 w-100 object-fit-cover" height="130" alt="Slide 2">
+                                    <h6 class="fw-bold mb-1">ChatGPT Mobile Mod</h6>
+                                    <span class="badge bg-success">Năng suất</span>
+                                </div>
+                            </div>
+
                             <div class="alert alert-success mt-3 mb-0" id="saveAlert" style="display: none;">
-                                <i class="fa-solid fa-check-circle me-1"></i> Đã lưu cấu hình thành công!
+                                <i class="fa-solid fa-check-circle me-1"></i> Đã lưu cấu hình Hero Slide thành công!
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- CÁC TAB KHÁC (Nội dung mẫu quản lý danh mục) -->
+            <!-- CÁC TAB KHÁC -->
             <div id="tweak-jailbreak" class="tab-content-item" style="display: none;">
                 <h2>Quản lý Tweak Jailbreak</h2>
                 <p class="text-muted">Danh sách các tweak hiện có trên hệ thống.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Tweak Jailbreak sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Tweak Jailbreak...</p></div>
             </div>
 
             <div id="tin-tuc" class="tab-content-item" style="display: none;">
                 <h2>Quản lý Tin tức mới</h2>
                 <p class="text-muted">Đăng tải và chỉnh sửa các bài viết tin tức mới nhất.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Tin tức mới sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Tin tức mới...</p></div>
             </div>
 
             <div id="app-jailbreak" class="tab-content-item" style="display: none;">
                 <h2>Quản lý APP Jailbreak</h2>
                 <p class="text-muted">Cập nhật danh sách ứng dụng, công cụ jailbreak.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý APP Jailbreak sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý APP Jailbreak...</p></div>
             </div>
 
             <div id="da-phuong-tien" class="tab-content-item" style="display: none;">
                 <h2>Quản lý Đa phương tiện</h2>
                 <p class="text-muted">Kho lưu trữ hình ảnh, video, tài liệu đa phương tiện.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Đa phương tiện sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Đa phương tiện...</p></div>
             </div>
 
             <div id="meo-cong-nghe" class="tab-content-item" style="display: none;">
                 <h2>Mẹo & Hướng dẫn công nghệ</h2>
                 <p class="text-muted">Chia sẻ các thủ thuật công nghệ và hướng dẫn chi tiết.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Mẹo & Hướng dẫn công nghệ sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Mẹo & Hướng dẫn...</p></div>
             </div>
 
             <div id="nang-suat" class="tab-content-item" style="display: none;">
                 <h2>Quản lý Năng suất</h2>
                 <p class="text-muted">Thống kê, báo cáo hiệu suất hoạt động và tối ưu hóa.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Năng suất sẽ hiển thị ở đây...</p></div>
+                <div class="card card-custom p-4"><p>Nội dung quản lý Năng suất...</p></div>
             </div>
 
         </div>
@@ -332,53 +419,132 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Toggle Sidebar Script
+        // DOM Elements
         const sidebar = document.getElementById('sidebar');
         const contentWrapper = document.getElementById('content-wrapper');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarToggleInner = document.getElementById('sidebarToggleInner');
+        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
+        // Toggle Sidebar & Backdrop Functionality
+        function openSidebar() {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add('mobile-show');
+            } else {
+                sidebar.classList.add('collapsed');
+                contentWrapper.classList.add('expanded');
+            }
+            sidebarBackdrop.classList.add('show');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('mobile-show', 'collapsed');
+            contentWrapper.classList.remove('expanded');
+            sidebarBackdrop.classList.remove('show');
+        }
 
         function toggleSidebar() {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.toggle('mobile-show');
+            const isOpened = sidebar.classList.contains('mobile-show') || sidebar.classList.contains('collapsed');
+            if (isOpened) {
+                closeSidebar();
             } else {
-                sidebar.classList.toggle('collapsed');
-                contentWrapper.classList.toggle('expanded');
+                openSidebar();
             }
         }
 
         sidebarToggle.addEventListener('click', toggleSidebar);
-        sidebarToggleInner.addEventListener('click', toggleSidebar);
+        sidebarToggleInner.addEventListener('click', closeSidebar);
 
         // Switch Tabs Script
         function switchTab(event, tabId) {
             event.preventDefault();
             
-            // Remove active class from all menu items
             document.querySelectorAll('.sidebar-menu li').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Add active class to clicked parent li
             event.currentTarget.parentElement.classList.add('active');
 
-            // Hide all tab content items
             document.querySelectorAll('.tab-content-item').forEach(content => {
                 content.style.display = 'none';
             });
 
-            // Show selected tab content
             document.getElementById(tabId).style.display = 'block';
+
+            // Đóng sidebar nếu đang mở trên màn hình nhỏ
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
         }
 
-        // Mock save function
+        // Hero Slide Realtime Config Manager
+        let previewTimer = null;
+        let previewIndex = 0;
+
+        function updateHeroPreview() {
+            if (previewTimer) clearInterval(previewTimer);
+
+            const speed = parseFloat(document.getElementById('slideSpeed').value) * 1000 || 3000;
+            const effect = document.getElementById('slideEffect').value;
+            const autoPlay = document.getElementById('autoPlay').checked;
+            
+            const slides = [document.getElementById('previewSlide1'), document.getElementById('previewSlide2')];
+
+            slides.forEach(slide => {
+                slide.className = 'hero-slide-item p-3';
+                if (effect === 'fade') slide.classList.add('effect-fade');
+                if (effect === 'zoom') slide.classList.add('effect-zoom');
+            });
+
+            slides[previewIndex].classList.add('active');
+
+            if (autoPlay) {
+                previewTimer = setInterval(() => {
+                    slides[previewIndex].classList.remove('active');
+                    previewIndex = (previewIndex + 1) % slides.length;
+                    slides[previewIndex].classList.add('active');
+                }, speed);
+            }
+        }
+
+        // Event listeners for inputs
+        document.getElementById('slideSpeed').addEventListener('change', updateHeroPreview);
+        document.getElementById('slideEffect').addEventListener('change', updateHeroPreview);
+        document.getElementById('autoPlay').addEventListener('change', updateHeroPreview);
+
+        // Save Function
         function saveSettings() {
+            const config = {
+                speed: document.getElementById('slideSpeed').value,
+                effect: document.getElementById('slideEffect').value,
+                autoPlay: document.getElementById('autoPlay').checked,
+                pauseOnHover: document.getElementById('pauseOnHover').checked
+            };
+
+            // Lưu vào localStorage để đồng bộ với client KPazz Store
+            localStorage.setItem('kpazz_hero_config', JSON.stringify(config));
+
             const alertBox = document.getElementById('saveAlert');
             alertBox.style.display = 'block';
             setTimeout(() => {
                 alertBox.style.display = 'none';
             }, 3000);
+
+            updateHeroPreview();
         }
+
+        // Initialize preview on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedConfig = localStorage.getItem('kpazz_hero_config');
+            if (savedConfig) {
+                const config = JSON.parse(savedConfig);
+                document.getElementById('slideSpeed').value = config.speed || 3.5;
+                document.getElementById('slideEffect').value = config.effect || 'slide';
+                document.getElementById('autoPlay').checked = config.autoPlay !== undefined ? config.autoPlay : true;
+                document.getElementById('pauseOnHover').checked = config.pauseOnHover !== undefined ? config.pauseOnHover : true;
+            }
+            updateHeroPreview();
+        });
     </script>
 </body>
 </html>
