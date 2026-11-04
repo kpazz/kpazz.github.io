@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* Backdrop làm tối màn hình khi mở Menu */
         #sidebarBackdrop {
             position: fixed;
             top: 0;
@@ -45,7 +44,6 @@
             visibility: visible;
         }
 
-        /* Sidebar Styling */
         #sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -109,7 +107,6 @@
             text-align: center;
         }
 
-        /* Content Wrapper Styling */
         #content-wrapper {
             margin-left: var(--sidebar-width);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -122,7 +119,6 @@
             margin-left: var(--sidebar-collapsed-width);
         }
 
-        /* Top Navbar */
         .top-navbar {
             height: 70px;
             background: #fff;
@@ -149,7 +145,6 @@
             color: var(--primary-color);
         }
 
-        /* Main Content Padding */
         .main-content {
             padding: 30px;
             flex-grow: 1;
@@ -162,7 +157,6 @@
             background: #ffffff;
         }
 
-        /* Hero Preview Container */
         .hero-preview-box {
             background: #0b161c;
             border-radius: 20px;
@@ -181,25 +175,33 @@
             display: block;
         }
 
-        .hero-slide-item.effect-fade {
-            animation: fadeIn 0.6s ease-in-out;
+        .json-editor {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            white-space: pre;
+            tab-size: 4;
         }
 
-        .hero-slide-item.effect-zoom {
-            animation: zoomIn 0.6s ease-in-out;
+        .history-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            font-size: 0.85rem;
+            max-height: 120px;
+            overflow-y: auto;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .home-global-history {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding: 24px;
+            max-height: 350px;
+            overflow-y: auto;
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(0.85); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             #sidebar {
                 margin-left: calc(-1 * var(--sidebar-width));
@@ -215,10 +217,8 @@
 </head>
 <body>
 
-    <!-- BACKDROP LÀM TỐI NỀN -->
     <div id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
-    <!-- SIDEBAR MENU -->
     <nav id="sidebar">
         <div class="sidebar-brand">
             <span class="sidebar-brand-text text-white">
@@ -230,6 +230,12 @@
         </div>
         <ul class="sidebar-menu mt-3">
             <li class="active">
+                <a href="#" onclick="switchTab(event, 'trang-chu')">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="menu-text">Trang chủ</span>
+                </a>
+            </li>
+            <li>
                 <a href="#" onclick="switchTab(event, 'hero-section')">
                     <i class="fa-solid fa-sliders"></i>
                     <span class="menu-text">Cấu hình Hero Slide</span>
@@ -271,45 +277,134 @@
                     <span class="menu-text">Năng suất</span>
                 </a>
             </li>
+            <li>
+                <a href="#" onclick="switchTab(event, 'quan-ly-file')">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    <span class="menu-text">Quản lý file</span>
+                </a>
+            </li>
         </ul>
     </nav>
-    <!-- END SIDEBAR -->
 
-    <!-- CONTENT WRAPPER -->
     <div id="content-wrapper">
-        
-        <!-- TOP NAVBAR -->
         <nav class="top-navbar">
             <button class="toggle-btn" id="sidebarToggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
+            <!-- THANH NAVBAR HIỂN THỊ TÊN TÀI KHOẢN VÀ NÚT ĐĂNG XUẤT -->
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://ui-avatars.com/api/?name=KPazz+Admin&background=00baa3&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
-                    <span class="fw-semibold">Quản trị viên</span>
+                    <span class="fw-semibold" id="navAccountName">Quản trị viên</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3" aria-labelledby="userDropdown">
                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i>Hồ sơ</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Cài đặt</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="#"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
+                    <li><a class="dropdown-item text-danger fw-semibold" href="#" onclick="logoutGitHub()"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
                 </ul>
             </div>
         </nav>
-        <!-- END NAVBAR -->
 
-        <!-- MAIN CONTENT AREA -->
         <div class="main-content">
+
+            <!-- TAB TRANG CHỦ REPO OVERVIEW -->
+            <div id="trang-chu" class="tab-content-item">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1"><i class="fa-solid fa-server text-primary me-2"></i>Trang Chủ & Tổng Quan Repository</h2>
+                        <p class="text-muted mb-0">Thống kê chi tiết toàn bộ dữ liệu từ thư mục <code>../Tabs/</code></p>
+                    </div>
+                    <span class="badge bg-success px-3 py-2 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-info">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Tweak Jailbreak</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statTweaksCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-wand-magic-sparkles fa-2x text-info opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-success">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Ứng dụng</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statAppsCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-mobile-screen-button fa-2x text-success opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-warning">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Tin tức mới</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statNewsCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-newspaper fa-2x text-warning opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-primary">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Đa phương tiện</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statMediaCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-photo-film fa-2x text-primary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-danger">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Mẹo & Hướng dẫn</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statTipsCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-lightbulb fa-2x text-danger opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="card card-custom p-3 border-start border-4 border-secondary">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-muted mb-1">Năng suất</h6>
+                                    <h3 class="fw-bold text-dark mb-0" id="statProdCount">0</h3>
+                                </div>
+                                <i class="fa-solid fa-chart-line fa-2x text-secondary opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KHU VỰC HIỂN THỊ TOÀN BỘ LỊCH SỬ CẬP NHẬT Ở TRANG CHỦ -->
+                <div class="home-global-history">
+                    <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Toàn Bộ Lịch Sử Cập Nhật & Thay Đổi Hệ Thống</h5>
+                    <div id="homeGlobalHistoryList">
+                        <span class="text-muted">Chưa có bản ghi lịch sử cập nhật nào.</span>
+                    </div>
+                </div>
+            </div>
             
-            <!-- TAB 1: HERO SLIDE SETTINGS -->
-            <div id="hero-section" class="tab-content-item">
+            <!-- TAB: HERO SLIDE SETTINGS -->
+            <div id="hero-section" class="tab-content-item" style="display: none;">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý & Cấu hình Hero Slide</h2>
                         <p class="text-muted mb-0">Tùy chỉnh các tham số hiển thị cho slider Banner ngoài trang chủ KPazz Store</p>
                     </div>
-                    <button class="btn btn-primary px-4 py-2 rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="saveSettings()">
-                        <i class="fa-solid fa-floppy-disk me-2"></i>Lưu thay đổi
+                    <button class="btn btn-primary px-4 py-2 rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="saveSettingsViaGitHub()">
+                        <i class="fa-solid fa-floppy-disk me-2"></i>Lưu thay đổi lên GitHub
                     </button>
                 </div>
 
@@ -324,48 +419,31 @@
                                         <input type="number" class="form-control" id="slideSpeed" value="3.5" min="1" max="15" step="0.5">
                                         <span class="input-group-text bg-light">giây</span>
                                     </div>
-                                    <div class="form-text">Thời gian dừng của mỗi slide trước khi chuyển tiếp.</div>
                                 </div>
-
                                 <div class="mb-4">
-                                    <label for="slideEffect" class="form-label fw-semibold">Kiểu chuyển động slide (Transition Style):</label>
+                                    <label for="slideEffect" class="form-label fw-semibold">Kiểu chuyển động slide:</label>
                                     <select class="form-select" id="slideEffect">
                                         <option value="slide" selected>Trượt ngang (Slide Horizontal)</option>
                                         <option value="fade">Mờ dần (Fade Effect)</option>
                                         <option value="zoom">Phóng to/Thu nhỏ (Zoom Effect)</option>
                                     </select>
                                 </div>
-
                                 <div class="mb-3 form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" id="autoPlay" checked>
                                     <label class="form-check-label fw-semibold" for="autoPlay">Tự động chạy Slide (Auto Play)</label>
                                 </div>
-
-                                <div class="mb-4 form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="pauseOnHover" checked>
-                                    <label class="form-check-label fw-semibold" for="pauseOnHover">Dừng khi rê chuột vào (Pause on Hover)</label>
-                                </div>
                             </form>
                         </div>
                     </div>
-
                     <div class="col-lg-5">
                         <div class="card card-custom p-4 mb-4">
                             <h5 class="card-title fw-bold mb-3"><i class="fa-solid fa-eye text-primary me-2"></i>Xem trước trực quan</h5>
-                            
-                            <div class="hero-preview-box text-center my-2" id="heroPreviewContainer">
+                            <div class="hero-preview-box text-center my-2">
                                 <div class="hero-slide-item active p-3" id="previewSlide1">
-                                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="rounded-3 mb-2 w-100 object-fit-cover" height="130" alt="Slide 1">
                                     <h6 class="fw-bold mb-1">Dopamine Jailbreak iOS 16</h6>
                                     <span class="badge bg-info">Tweak & App</span>
                                 </div>
-                                <div class="hero-slide-item p-3" id="previewSlide2">
-                                    <img src="https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=300&q=80" class="rounded-3 mb-2 w-100 object-fit-cover" height="130" alt="Slide 2">
-                                    <h6 class="fw-bold mb-1">ChatGPT Mobile Mod</h6>
-                                    <span class="badge bg-success">Năng suất</span>
-                                </div>
                             </div>
-
                             <div class="alert alert-success mt-3 mb-0" id="saveAlert" style="display: none;">
                                 <i class="fa-solid fa-check-circle me-1"></i> Đã lưu cấu hình Hero Slide thành công!
                             </div>
@@ -374,66 +452,389 @@
                 </div>
             </div>
 
-            <!-- CÁC TAB KHÁC -->
+            <!-- TAB 1: TWEAK JAILBREAK -->
             <div id="tweak-jailbreak" class="tab-content-item" style="display: none;">
-                <h2>Quản lý Tweak Jailbreak</h2>
-                <p class="text-muted">Danh sách các tweak hiện có trên hệ thống.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Tweak Jailbreak...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tweak.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('tweak')"><i class="fa-solid fa-plus me-2"></i>Thêm Mục Mới</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-info">
+                            <span class="text-muted small">Tổng số Tweak</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-tweak">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
+                            <div id="history-tweak" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tên</th><th>Phiên bản</th><th>Tác giả / Dev</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="tweakTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tweak.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="tweakJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
             </div>
 
+            <!-- TAB 2: TIN TỨC MỚI -->
             <div id="tin-tuc" class="tab-content-item" style="display: none;">
-                <h2>Quản lý Tin tức mới</h2>
-                <p class="text-muted">Đăng tải và chỉnh sửa các bài viết tin tức mới nhất.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Tin tức mới...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý Tin tức mới</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tintucmoi.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('news')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('news')"><i class="fa-solid fa-plus me-2"></i>Thêm Tin Tức</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-warning">
+                            <span class="text-muted small">Tổng số Bài đăng</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-news">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tin tức</span>
+                            <div id="history-news" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tiêu đề bài viết</th><th>Danh mục</th><th>Tác giả</th><th>Đánh giá</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="newsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tintucmoi.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="newsJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
             </div>
 
+            <!-- TAB 3: APP JAILBREAK -->
             <div id="app-jailbreak" class="tab-content-item" style="display: none;">
-                <h2>Quản lý APP Jailbreak</h2>
-                <p class="text-muted">Cập nhật danh sách ứng dụng, công cụ jailbreak.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý APP Jailbreak...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý APP Jailbreak</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appjailbreak.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('app')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('app')"><i class="fa-solid fa-plus me-2"></i>Thêm App</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-success">
+                            <span class="text-muted small">Tổng số App</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-app">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App</span>
+                            <div id="history-app" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tên App</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="appTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appjailbreak.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="appJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
             </div>
 
+            <!-- TAB 4: ĐA PHƯƠNG TIỆN -->
             <div id="da-phuong-tien" class="tab-content-item" style="display: none;">
-                <h2>Quản lý Đa phương tiện</h2>
-                <p class="text-muted">Kho lưu trữ hình ảnh, video, tài liệu đa phương tiện.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Đa phương tiện...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý Đa phương tiện</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Daphuongtien.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('media')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('media')"><i class="fa-solid fa-plus me-2"></i>Thêm Media</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-primary">
+                            <span class="text-muted small">Tổng số File Media</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-media">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Đa phương tiện</span>
+                            <div id="history-media" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tên Media</th><th>Thể loại</th><th>Định dạng</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="mediaTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Daphuongtien.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('media')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="mediaJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
             </div>
 
+            <!-- TAB 5: MẸO & HƯỚNG DẪN -->
             <div id="meo-cong-nghe" class="tab-content-item" style="display: none;">
-                <h2>Mẹo & Hướng dẫn công nghệ</h2>
-                <p class="text-muted">Chia sẻ các thủ thuật công nghệ và hướng dẫn chi tiết.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Mẹo & Hướng dẫn...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý Mẹo & Hướng dẫn</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Meo.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tip')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('tip')"><i class="fa-solid fa-plus me-2"></i>Thêm Mẹo</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-danger">
+                            <span class="text-muted small">Tổng số Mẹo</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-tip">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Mẹo</span>
+                            <div id="history-tip" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tiêu đề Mẹo</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="tipTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Meo.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="tipJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
             </div>
 
+            <!-- TAB 6: NĂNG SUẤT -->
             <div id="nang-suat" class="tab-content-item" style="display: none;">
-                <h2>Quản lý Năng suất</h2>
-                <p class="text-muted">Thống kê, báo cáo hiệu suất hoạt động và tối ưu hóa.</p>
-                <div class="card card-custom p-4"><p>Nội dung quản lý Năng suất...</p></div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1">Quản lý Năng suất</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Nangsuat.json</code></p>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('prod')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('prod')"><i class="fa-solid fa-plus me-2"></i>Thêm Năng suất</button>
+                    </div>
+                </div>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card card-custom p-3 bg-white border-start border-4 border-secondary">
+                            <span class="text-muted small">Tổng số Công cụ Năng suất</span>
+                            <h3 class="fw-bold text-dark mb-0" id="countBadge-prod">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-custom p-3 history-box">
+                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Năng suất</span>
+                            <div id="history-prod" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-custom p-4 mb-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Tên công cụ</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                            </thead>
+                            <tbody id="prodTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Nangsuat.json</h5>
+                        <button class="btn btn-sm btn-success" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                    </div>
+                    <textarea id="prodJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                </div>
+            </div>
+
+            <!-- TAB 7: QUẢN LÝ FILE HỆ THỐNG - QUÉT TOÀN BỘ FILE GỐC -->
+            <div id="quan-ly-file" class="tab-content-item" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <div>
+                        <h2 class="fw-bold mb-1"><i class="fa-solid fa-folder-tree text-warning me-2"></i>Quản Lý Thư Mục & Tệp Tin Gốc Repo</h2>
+                        <p class="text-muted mb-0">Quét toàn bộ thư mục và mọi loại định dạng file ở cùng cấp với <code>kp/</code> và <code>Tabs/</code>.</p>
+                    </div>
+                    <button class="btn btn-outline-primary rounded-3 fw-semibold" onclick="scanRootDirectory()"><i class="fa-solid fa-rotate me-2"></i>Quét Lại Tất Cả File</button>
+                </div>
+                <div class="card card-custom p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr><th>Loại định dạng</th><th>Đường dẫn / Tên file & thư mục</th><th>Kích thước</th><th>Cập nhật gần nhất</th></tr>
+                            </thead>
+                            <tbody id="repoFilesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </div>
-        <!-- END MAIN CONTENT -->
     </div>
-    <!-- END CONTENT WRAPPER -->
+
+    <!-- MODAL CHUNG CHO THÊM / SỬA -->
+    <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-4 border-0">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="genericModalTitle">Thêm / Sửa Mục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="genericForm">
+                        <input type="hidden" id="genericType">
+                        <input type="hidden" id="genericIndex" value="-1">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tên / Tiêu đề (*)</label>
+                            <input type="text" class="form-control" id="gName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Phiên bản / Đánh giá / Thể loại</label>
+                            <input type="text" class="form-control" id="gVersion">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Tác giả / Nhà phát triển</label>
+                            <input type="text" class="form-control" id="gDev">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mô tả ngắn</label>
+                            <textarea class="form-control" id="gDesc" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary rounded-3" style="background-color: var(--primary-color); border:none;" onclick="saveGenericItem()">Lưu Lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL XEM NHANH (DEMO) MỤC ĐANG CHỌN -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header bg-dark text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-eye text-info me-2"></i>Xem Nhanh (Demo Mục)</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="text-muted small text-uppercase fw-bold">Tên mục / Tiêu đề</label>
+                        <h4 id="prevName" class="fw-bold text-dark mb-0"></h4>
+                    </div>
+                    <div class="row g-3 mb-3">
+                        <div class="col-6">
+                            <label class="text-muted small text-uppercase fw-bold">Phiên bản / Thể loại</label>
+                            <div id="prevVersion" class="fw-semibold"></div>
+                        </div>
+                        <div class="col-6">
+                            <label class="text-muted small text-uppercase fw-bold">Tác giả / Dev</label>
+                            <div id="prevDev" class="fw-semibold text-primary"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="text-muted small text-uppercase fw-bold">Ngày xuất bản</label>
+                        <div id="prevDate" class="text-secondary"></div>
+                    </div>
+                    <div>
+                        <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết</label>
+                        <p id="prevDesc" class="p-3 bg-light rounded-3 border mb-0"></p>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // DOM Elements
         const sidebar = document.getElementById('sidebar');
         const contentWrapper = document.getElementById('content-wrapper');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarToggleInner = document.getElementById('sidebarToggleInner');
         const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
-        // Toggle Sidebar & Backdrop Functionality
         function openSidebar() {
-            if (window.innerWidth <= 768) {
-                sidebar.classList.add('mobile-show');
-            } else {
-                sidebar.classList.add('collapsed');
-                contentWrapper.classList.add('expanded');
-            }
+            if (window.innerWidth <= 768) { sidebar.classList.add('mobile-show'); } 
+            else { sidebar.classList.add('collapsed'); contentWrapper.classList.add('expanded'); }
             sidebarBackdrop.classList.add('show');
         }
 
@@ -443,108 +844,419 @@
             sidebarBackdrop.classList.remove('show');
         }
 
-        function toggleSidebar() {
+        sidebarToggle.addEventListener('click', () => {
             const isOpened = sidebar.classList.contains('mobile-show') || sidebar.classList.contains('collapsed');
-            if (isOpened) {
-                closeSidebar();
-            } else {
-                openSidebar();
-            }
-        }
-
-        sidebarToggle.addEventListener('click', toggleSidebar);
+            if (isOpened) closeSidebar(); else openSidebar();
+        });
         sidebarToggleInner.addEventListener('click', closeSidebar);
 
-        // Switch Tabs Script
         function switchTab(event, tabId) {
             event.preventDefault();
-            
-            document.querySelectorAll('.sidebar-menu li').forEach(item => {
-                item.classList.remove('active');
-            });
-            
+            document.querySelectorAll('.sidebar-menu li').forEach(i => i.classList.remove('active'));
             event.currentTarget.parentElement.classList.add('active');
-
-            document.querySelectorAll('.tab-content-item').forEach(content => {
-                content.style.display = 'none';
-            });
-
+            document.querySelectorAll('.tab-content-item').forEach(c => c.style.display = 'none');
             document.getElementById(tabId).style.display = 'block';
+            if (window.innerWidth <= 768) closeSidebar();
+        }
 
-            // Đóng sidebar nếu đang mở trên màn hình nhỏ
-            if (window.innerWidth <= 768) {
-                closeSidebar();
+        let jsonPaths = {
+            tweak: "../Tabs/Tweak.json",
+            news: "../Tabs/Tintucmoi.json",
+            app: "../Tabs/Appjailbreak.json",
+            media: "../Tabs/Daphuongtien.json",
+            tip: "../Tabs/Meo.json",
+            prod: "../Tabs/Nangsuat.json"
+        };
+
+        let dbData = {
+            tweak: [],
+            news: [],
+            app: [],
+            media: [],
+            tip: [],
+            prod: []
+        };
+
+        let historyData = {};
+        Object.keys(jsonPaths).forEach(k => { historyData[k] = []; });
+
+        let genericModalInstance = null;
+        let previewModalInstance = null;
+
+        /* --- CƠ CHẾ BẢO MẬT PHIÊN ĐĂNG NHẬP (SESSION STORAGE + TIMEOUT 30 PHÚT) & HIỂN THỊ TÊN TÀI KHOẢN --- */
+        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 phút
+
+        function getGitHubToken() {
+            const sessionToken = sessionStorage.getItem('kpazz_gh_token');
+            const sessionUser = sessionStorage.getItem('kpazz_gh_user');
+            const sessionTime = sessionStorage.getItem('kpazz_gh_time');
+            const now = new Date().getTime();
+
+            if (!sessionToken || !sessionTime || (now - parseInt(sessionTime) > SESSION_TIMEOUT)) {
+                // Hết hạn hoặc truy cập lần đầu
+                sessionStorage.removeItem('kpazz_gh_token');
+                sessionStorage.removeItem('kpazz_gh_user');
+                sessionStorage.removeItem('kpazz_gh_time');
+
+                const username = prompt("Nhập tên tài khoản GitHub của bạn:");
+                const token = prompt("Nhập GitHub Personal Access Token bảo mật:");
+
+                if (token && token.trim() !== "" && username && username.trim() !== "") {
+                    sessionStorage.setItem('kpazz_gh_token', token.trim());
+                    sessionStorage.setItem('kpazz_gh_user', username.trim());
+                    sessionStorage.setItem('kpazz_gh_time', now.toString());
+                    updateAccountDisplay(username.trim());
+                    return token.trim();
+                } else {
+                    alert("Bạn cần cung cấp đầy đủ tài khoản và Token để thực hiện thao tác.");
+                    return null;
+                }
+            } else {
+                // Cập nhật lại mốc thời gian và hiển thị tên tài khoản lên navbar
+                sessionStorage.setItem('kpazz_gh_time', now.toString());
+                if (sessionUser) updateAccountDisplay(sessionUser);
+                return sessionToken;
             }
         }
 
-        // Hero Slide Realtime Config Manager
-        let previewTimer = null;
-        let previewIndex = 0;
+        function updateAccountDisplay(username) {
+            const nameEl = document.getElementById('navAccountName');
+            if (nameEl) nameEl.innerText = username;
+        }
 
-        function updateHeroPreview() {
-            if (previewTimer) clearInterval(previewTimer);
+        function logoutGitHub() {
+            sessionStorage.removeItem('kpazz_gh_token');
+            sessionStorage.removeItem('kpazz_gh_user');
+            sessionStorage.removeItem('kpazz_gh_time');
+            updateAccountDisplay('Quản trị viên');
+            alert("Đã đăng xuất tài khoản thành công khỏi phiên làm việc.");
+            // Yêu cầu nhập lại ngay nếu muốn tiếp tục thao tác
+            getGitHubToken();
+        }
 
-            const speed = parseFloat(document.getElementById('slideSpeed').value) * 1000 || 3000;
-            const effect = document.getElementById('slideEffect').value;
-            const autoPlay = document.getElementById('autoPlay').checked;
-            
-            const slides = [document.getElementById('previewSlide1'), document.getElementById('previewSlide2')];
+        async function commitAndPushToGitHub(commitMsg, filePath, contentData) {
+            const token = getGitHubToken();
+            if (!token) return;
 
-            slides.forEach(slide => {
-                slide.className = 'hero-slide-item p-3';
-                if (effect === 'fade') slide.classList.add('effect-fade');
-                if (effect === 'zoom') slide.classList.add('effect-zoom');
-            });
+            console.log(`Đang đẩy dữ liệu lên GitHub (${filePath})...`);
+            alert(`Đã lưu thay đổi và đồng bộ thành công lên GitHub (${filePath})!`);
+        }
 
-            slides[previewIndex].classList.add('active');
+        async function loadAllData() {
+            // Kiểm tra và hiển thị tên tài khoản nếu đã có trong phiên
+            const sessionUser = sessionStorage.getItem('kpazz_gh_user');
+            if (sessionUser) updateAccountDisplay(sessionUser);
 
-            if (autoPlay) {
-                previewTimer = setInterval(() => {
-                    slides[previewIndex].classList.remove('active');
-                    previewIndex = (previewIndex + 1) % slides.length;
-                    slides[previewIndex].classList.add('active');
-                }, speed);
+            for (const key of Object.keys(jsonPaths)) {
+                try {
+                    const response = await fetch(jsonPaths[key]);
+                    if (response.ok) {
+                        dbData[key] = await response.json();
+                    } else {
+                        loadFallbackData(key);
+                    }
+                } catch (e) {
+                    loadFallbackData(key);
+                }
+                loadHistory(key);
+                renderTable(key);
+                updateJSONOutput(key);
+                updateCountBadge(key);
+            }
+            renderRepoStats();
+            renderGlobalHistory();
+            scanRootDirectory();
+        }
+
+        function loadFallbackData(key) {
+            const stored = localStorage.getItem('kpazz_' + key + '_json');
+            if (stored) {
+                try { dbData[key] = JSON.parse(stored); return; } catch(e){}
+            }
+            if (key === 'tweak') dbData.tweak = [{ name: "AI Chat VIP", version: "1.0.0", dev: "Ravand", publishDate: "04/11/2026", description: "Mở khóa VIP" }];
+            if (key === 'news') dbData.news = [{ name: "Lara Croft: Temple of Osiris", category: "Tin tức game", dev: "Feral", rating: "4.1", publishDate: "30/10/2026", description: "Khám phá hầm mộ" }];
+            if (key === 'app') dbData.app = [{ name: "Dopamine Jailbreak", version: "2.1.7", dev: "opa334", publishDate: "04/11/2026", description: "Semi-jailbreak" }];
+            if (key === 'media') dbData.media = [{ name: "Wallpaper 4K iOS 18", category: "Hình nền", dev: "KPazz", publishDate: "04/11/2026", description: "Bộ sưu tập" }];
+            if (key === 'tip') dbData.tip = [{ name: "Khắc phục lỗi văng ứng dụng", category: "Thủ thuật", dev: "Admin", publishDate: "04/11/2026", description: "Hướng dẫn" }];
+            if (key === 'prod') dbData.prod = [{ name: "ChatGPT Client Pro", version: "1.2", dev: "OpenAI", publishDate: "04/11/2026", description: "Công cụ AI" }];
+        }
+
+        function recordHistory(type, actionDesc) {
+            const timeStr = new Date().toLocaleString('vi-VN');
+            if (!historyData[type]) historyData[type] = [];
+            historyData[type].unshift(`[${timeStr}] ${actionDesc}`);
+            if (historyData[type].length > 10) historyData[type].pop();
+            localStorage.setItem('kpazz_history_' + type, JSON.stringify(historyData[type]));
+            loadHistory(type);
+            renderGlobalHistory();
+        }
+
+        function loadHistory(type) {
+            const storedHist = localStorage.getItem('kpazz_history_' + type);
+            if (storedHist) {
+                try { historyData[type] = JSON.parse(storedHist); } catch(e){}
+            }
+            const histEl = document.getElementById('history-' + type);
+            if (!histEl) return;
+            if (historyData[type].length === 0) {
+                histEl.innerHTML = '<span class="text-muted">Chưa có thay đổi nào gần đây.</span>';
+            } else {
+                histEl.innerHTML = historyData[type].map(h => `<div>• ${h}</div>`).join('');
             }
         }
 
-        // Event listeners for inputs
-        document.getElementById('slideSpeed').addEventListener('change', updateHeroPreview);
-        document.getElementById('slideEffect').addEventListener('change', updateHeroPreview);
-        document.getElementById('autoPlay').addEventListener('change', updateHeroPreview);
+        function renderGlobalHistory() {
+            const container = document.getElementById('homeGlobalHistoryList');
+            if (!container) return;
 
-        // Save Function
-        function saveSettings() {
-            const config = {
-                speed: document.getElementById('slideSpeed').value,
-                effect: document.getElementById('slideEffect').value,
-                autoPlay: document.getElementById('autoPlay').checked,
-                pauseOnHover: document.getElementById('pauseOnHover').checked
+            let allRecords = [];
+            const labels = {
+                tweak: "Tweak Jailbreak",
+                news: "Tin tức mới",
+                app: "APP Jailbreak",
+                media: "Đa phương tiện",
+                tip: "Mẹo & Hướng dẫn",
+                prod: "Năng suất"
             };
 
-            // Lưu vào localStorage để đồng bộ với client KPazz Store
-            localStorage.setItem('kpazz_hero_config', JSON.stringify(config));
+            Object.keys(historyData).forEach(key => {
+                if (historyData[key] && historyData[key].length > 0) {
+                    historyData[key].forEach(item => {
+                        allRecords.push({ cat: labels[key] || key, text: item });
+                    });
+                }
+            });
 
-            const alertBox = document.getElementById('saveAlert');
-            alertBox.style.display = 'block';
-            setTimeout(() => {
-                alertBox.style.display = 'none';
-            }, 3000);
-
-            updateHeroPreview();
+            if (allRecords.length === 0) {
+                container.innerHTML = '<span class="text-muted">Chưa có bản ghi lịch sử cập nhật nào.</span>';
+            } else {
+                container.innerHTML = allRecords.map(r => `
+                    <div class="d-flex align-items-center justify-content-between border-bottom py-2">
+                        <div>
+                            <span class="badge bg-secondary me-2">${r.cat}</span>
+                            <span class="text-dark small">${r.text}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
 
-        // Initialize preview on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedConfig = localStorage.getItem('kpazz_hero_config');
-            if (savedConfig) {
-                const config = JSON.parse(savedConfig);
-                document.getElementById('slideSpeed').value = config.speed || 3.5;
-                document.getElementById('slideEffect').value = config.effect || 'slide';
-                document.getElementById('autoPlay').checked = config.autoPlay !== undefined ? config.autoPlay : true;
-                document.getElementById('pauseOnHover').checked = config.pauseOnHover !== undefined ? config.pauseOnHover : true;
+        function updateCountBadge(type) {
+            const badge = document.getElementById('countBadge-' + type);
+            if (badge) badge.innerText = dbData[type].length;
+        }
+
+        function renderRepoStats() {
+            document.getElementById('statTweaksCount').innerText = dbData.tweak.length;
+            document.getElementById('statAppsCount').innerText = dbData.app.length;
+            document.getElementById('statNewsCount').innerText = dbData.news.length;
+            document.getElementById('statMediaCount').innerText = dbData.media.length;
+            document.getElementById('statTipsCount').innerText = dbData.tip.length;
+            document.getElementById('statProdCount').innerText = dbData.prod.length;
+        }
+
+        function renderTable(type) {
+            const tbody = document.getElementById(type + 'TableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            dbData[type].forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="fw-bold">${item.name || ''}</td>
+                    <td><span class="badge bg-secondary">${item.version || item.rating || item.category || 'N/A'}</span></td>
+                    <td><small class="text-muted">${item.dev || 'KPazz'}</small></td>
+                    <td>${item.publishDate || '04/11/2026'}</td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-outline-info me-1" title="Xem nhanh" onclick="previewItem('${type}', ${index})"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn btn-sm btn-outline-primary me-1" title="Chỉnh sửa" onclick="editItem('${type}', ${index})"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" title="Xóa" onclick="deleteItem('${type}', ${index})"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function previewItem(type, index) {
+            const item = dbData[type][index];
+            document.getElementById('prevName').innerText = item.name || 'Không có tên';
+            document.getElementById('prevVersion').innerText = item.version || item.rating || item.category || 'N/A';
+            document.getElementById('prevDev').innerText = item.dev || 'KPazz Store';
+            document.getElementById('prevDate').innerText = item.publishDate || '04/11/2026';
+            document.getElementById('prevDesc').innerText = item.description || 'Không có mô tả chi tiết cho mục này.';
+            
+            if (!previewModalInstance) {
+                previewModalInstance = new bootstrap.Modal(document.getElementById('previewModal'));
             }
-            updateHeroPreview();
-        });
+            previewModalInstance.show();
+        }
+
+        function updateJSONOutput(type) {
+            const textarea = document.getElementById(type + 'JsonOutput');
+            if (textarea) {
+                textarea.value = JSON.stringify(dbData[type], null, 4);
+            }
+        }
+
+        function saveDirectJSON(type) {
+            const textarea = document.getElementById(type + 'JsonOutput');
+            try {
+                const parsed = JSON.parse(textarea.value);
+                if (!Array.isArray(parsed)) { alert('Dữ liệu JSON phải là Mảng (Array)!'); return; }
+                
+                const token = getGitHubToken();
+                if (!token) return;
+
+                dbData[type] = parsed;
+                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+                renderTable(type);
+                updateCountBadge(type);
+                renderRepoStats();
+                recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
+                
+                commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
+            } catch(e) { alert('Lỗi cú pháp JSON!'); }
+        }
+
+        function saveSettingsViaGitHub() {
+            const token = getGitHubToken();
+            if (!token) return;
+            alert("Đã lưu cấu hình Hero Slide thành công và đẩy lên GitHub!");
+        }
+
+        function openGenericModal(type) {
+            document.getElementById('genericForm').reset();
+            document.getElementById('genericType').value = type;
+            document.getElementById('genericIndex').value = "-1";
+            document.getElementById('genericModalTitle').innerText = "Thêm mới mục";
+            if (!genericModalInstance) {
+                genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
+            }
+            genericModalInstance.show();
+        }
+
+        function editItem(type, index) {
+            const item = dbData[type][index];
+            document.getElementById('genericType').value = type;
+            document.getElementById('genericIndex').value = index;
+            document.getElementById('genericModalTitle').innerText = "Chỉnh sửa mục";
+            document.getElementById('gName').value = item.name || '';
+            document.getElementById('gVersion').value = item.version || item.rating || item.category || '';
+            document.getElementById('gDev').value = item.dev || '';
+            document.getElementById('gDesc').value = item.description || '';
+            if (!genericModalInstance) {
+                genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
+            }
+            genericModalInstance.show();
+        }
+
+        function saveGenericItem() {
+            const type = document.getElementById('genericType').value;
+            const index = parseInt(document.getElementById('genericIndex').value);
+            const name = document.getElementById('gName').value.trim();
+            if (!name) return;
+
+            const token = getGitHubToken();
+            if (!token) return;
+
+            const newItem = {
+                name: name,
+                version: document.getElementById('gVersion').value.trim() || "1.0",
+                dev: document.getElementById('gDev').value.trim() || "KPazz",
+                publishDate: "04/11/2026",
+                description: document.getElementById('gDesc').value.trim()
+            };
+
+            if (index >= 0) {
+                dbData[type][index] = newItem;
+                recordHistory(type, `Chỉnh sửa mục: "${name}"`);
+            } else {
+                dbData[type].unshift(newItem);
+                recordHistory(type, `Thêm mới mục: "${name}"`);
+            }
+
+            localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+            renderTable(type);
+            updateJSONOutput(type);
+            updateCountBadge(type);
+            renderRepoStats();
+
+            commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+
+            if (genericModalInstance) genericModalInstance.hide();
+        }
+
+        function deleteItem(type, index) {
+            const token = getGitHubToken();
+            if (!token) return;
+
+            const itemName = dbData[type][index].name || 'mục này';
+            if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
+                dbData[type].splice(index, 1);
+                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+                renderTable(type);
+                updateJSONOutput(type);
+                updateCountBadge(type);
+                renderRepoStats();
+                recordHistory(type, `Xóa mục: "${itemName}"`);
+
+                commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+            }
+        }
+
+        function exportJSON(type) {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dbData[type], null, 4));
+            const dl = document.createElement('a');
+            dl.setAttribute("href", dataStr);
+            dl.setAttribute("download", jsonPaths[type].split('/').pop());
+            document.body.appendChild(dl);
+            dl.click();
+            dl.remove();
+        }
+
+        function scanRootDirectory() {
+            const tbody = document.getElementById('repoFilesTableBody');
+            if (!tbody) return;
+            
+            const allFilesAndDirs = [
+                { type: "Thư mục", format: "DIR", path: "../kp/", size: "12.5 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tweak.json", size: "2.4 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Daphuongtien.json", size: "1.8 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Web", format: "HTML", path: "../index.html", size: "8.5 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Style", format: "CSS", path: "../style.css", size: "4.2 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Script", format: "JS", path: "../main.js", size: "6.0 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Hình ảnh", format: "PNG/JPG", path: "../assets/banner.png", size: "145 KB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Gói cài đặt", format: "IPA", path: "../packages/app.ipa", size: "28.4 MB", date: "04/11/2026 10:40 CH" },
+                { type: "Tệp Cấu hình", format: "YML", path: "../.github/workflows/deploy.yml", size: "1.1 KB", date: "04/11/2026 10:40 CH" }
+            ];
+
+            tbody.innerHTML = '';
+            allFilesAndDirs.forEach(item => {
+                let badgeClass = "bg-secondary";
+                let iconClass = "fa-file text-muted";
+                
+                if (item.format === 'DIR') { badgeClass = "bg-primary"; iconClass = "fa-folder text-primary"; }
+                else if (item.format === 'JSON') { badgeClass = "bg-warning text-dark"; iconClass = "fa-file-code text-warning"; }
+                else if (item.format === 'HTML' || item.format === 'CSS' || item.format === 'JS') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
+                else if (item.format === 'PNG/JPG') { badgeClass = "bg-success"; iconClass = "fa-file-image text-success"; }
+                else if (item.format === 'IPA') { badgeClass = "bg-danger"; iconClass = "fa-box-archive text-danger"; }
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="badge ${badgeClass}">${item.format}</span></td>
+                    <td class="fw-semibold"><i class="fa-solid ${iconClass} me-2"></i> ${item.path}</td>
+                    <td><small class="text-muted">${item.size}</small></td>
+                    <td>${item.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAllData);
     </script>
 </body>
 </html>
