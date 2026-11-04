@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" data-bs-theme="auto">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,11 +18,50 @@
             --dark-card: #13222a;
         }
 
+        [data-bs-theme="dark"] {
+            --bg-body: #0b161c;
+            bs-body-bg: #0b161c;
+            bs-body-color: #f8f9fa;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-body);
             overflow-x: hidden;
             position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        /* HIỆU ỨNG TẢI TRANG */
+        #pageLoadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0b161c;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #pageLoadingOverlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .spinner-custom {
+            width: 3rem;
+            height: 3rem;
+            border: 0.35rem solid rgba(0, 186, 163, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         #sidebarBackdrop {
@@ -31,8 +70,9 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 999;
             opacity: 0;
             visibility: hidden;
@@ -44,17 +84,21 @@
             visibility: visible;
         }
 
+        /* HIỆU ỨNG KÍNH MỜ CHO MENU SIDEBAR */
         #sidebar {
             width: var(--sidebar-width);
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
-            background: #0b161c;
+            background: rgba(11, 22, 28, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             color: #fff;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1000;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.15);
+            box-shadow: 4px 0 25px rgba(0,0,0,0.2);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         #sidebar.collapsed {
@@ -67,7 +111,9 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 1.25rem;
-            background: #081014;
+            background: rgba(8, 16, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             font-size: 1.15rem;
             font-weight: bold;
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -119,10 +165,13 @@
             margin-left: var(--sidebar-collapsed-width);
         }
 
+        /* HIỆU ỨNG KÍNH MỜ CHO THANH NAVBAR */
         .top-navbar {
             height: 70px;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -130,6 +179,13 @@
             position: sticky;
             top: 0;
             z-index: 998;
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        [data-bs-theme="dark"] .top-navbar {
+            background: rgba(11, 22, 28, 0.75);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .toggle-btn {
@@ -154,7 +210,7 @@
             border: none;
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            background: #ffffff;
+            background: var(--bs-body-bg, #ffffff);
         }
 
         .hero-preview-box {
@@ -186,7 +242,7 @@
         }
 
         .history-box {
-            background: #f8f9fa;
+            background: var(--bs-tertiary-bg, #f8f9fa);
             border-left: 4px solid var(--primary-color);
             font-size: 0.85rem;
             max-height: 120px;
@@ -194,13 +250,63 @@
         }
 
         .home-global-history {
-            background: #ffffff;
+            background: var(--bs-body-bg, #ffffff);
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             padding: 24px;
             max-height: 350px;
             overflow-y: auto;
         }
+
+        .tweak-name-cell {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 220px;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        /* HIỆU ỨNG KÍNH MỜ ĐẬM VÀ VIỀN MÉP KÍNH CHO CÁC POPUP */
+        .modal-content {
+            background: rgba(18, 30, 38, 0.88) !important;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+            color: #f8f9fa !important;
+            transition: filter 0.3s ease;
+        }
+
+        [data-bs-theme="light"] .modal-content {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+            color: #212529 !important;
+        }
+
+        /* TRẠNG THÁI LÀM MỜ MODAL BÊN DƯỚI KHI CÓ MODAL ƯU TIÊN ĐÈ LÊN */
+        .modal-blurred {
+            filter: blur(8px) brightness(0.85);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .modal-backdrop.show {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(0, 0, 0, 0.55) !important;
+        }
+
+        /* PHÂN CẤP ƯU TIÊN Z-INDEX */
+        #customAlertModal { z-index: 1080 !important; }
+        #customPasswordModal { z-index: 1075 !important; }
+        #editModal { z-index: 1070 !important; }
+        #genericModal { z-index: 1065 !important; }
+        #deleteModal { z-index: 1060 !important; }
+        #saveModal, .save-status-modal { z-index: 1055 !important; }
 
         @media (max-width: 768px) {
             #sidebar {
@@ -212,10 +318,33 @@
             #content-wrapper {
                 margin-left: 0 !important;
             }
+            .main-content {
+                padding: 15px;
+            }
+            h2 {
+                font-size: 1.35rem;
+            }
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+            .btn {
+                padding: 0.35rem 0.65rem;
+                font-size: 0.85rem;
+            }
+            .tweak-name-cell {
+                max-width: 130px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- HIỆU ỨNG TẢI TRANG -->
+    <div id="pageLoadingOverlay">
+        <div class="spinner-custom mb-3"></div>
+        <h5 class="fw-bold text-white tracking-wider text-center px-3">Đang khởi tạo hệ thống KPazz Store...</h5>
+        <p class="text-muted small mb-0">Vui lòng chờ trong giây lát</p>
+    </div>
 
     <div id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
@@ -288,34 +417,48 @@
 
     <div id="content-wrapper">
         <nav class="top-navbar">
-            <button class="toggle-btn" id="sidebarToggle">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <!-- THANH NAVBAR HIỂN THỊ TÊN TÀI KHOẢN VÀ NÚT ĐĂNG XUẤT -->
-            <div class="dropdown">
-                <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://ui-avatars.com/api/?name=KPazz+Admin&background=00baa3&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
-                    <span class="fw-semibold" id="navAccountName">Quản trị viên</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3" aria-labelledby="userDropdown">
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i>Hồ sơ</a></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear me-2"></i>Cài đặt</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger fw-semibold" href="#" onclick="logoutGitHub()"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
-                </ul>
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <button class="toggle-btn" id="sidebarToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="d-flex align-items-center text-muted small bg-light dark-mode-bg px-2 py-1 rounded-2 border">
+                    <i class="fa-regular fa-clock me-1 text-primary"></i> <span class="d-none d-md-inline">Phiên:</span> <span id="navbarSessionTime" class="fw-bold ms-1 text-dark">--:--</span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-sm btn-outline-secondary rounded-circle p-2" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển đổi giao diện Sáng/Tối" style="width: 38px; height: 38px;">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
+
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img id="navUserAvatar" src="https://ui-avatars.com/api/?name=Admin&background=495057&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
+                        <span class="fw-semibold d-none d-sm-inline" id="navAccountName">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="verifyAccessAndShow('Hồ sơ cá nhân')"><i class="fa-solid fa-user me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="verifyAccessAndShow('Cài đặt hệ thống')"><i class="fa-solid fa-gear me-2"></i>Cài đặt</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger fw-semibold" href="#" onclick="logoutGitHub()"><i class="fa-solid fa-right-from-bracket me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
         <div class="main-content">
 
-            <!-- TAB TRANG CHỦ REPO OVERVIEW -->
+            <!-- TAB TRANG CHỦ -->
             <div id="trang-chu" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1"><i class="fa-solid fa-server text-primary me-2"></i>Trang Chủ & Tổng Quan Repository</h2>
                         <p class="text-muted mb-0">Thống kê chi tiết toàn bộ dữ liệu từ thư mục <code>../Tabs/</code></p>
                     </div>
-                    <span class="badge bg-success px-3 py-2 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
+                    <div class="d-flex flex-column align-items-end gap-1">
+                        <span class="badge bg-success px-3 py-1.5 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
+                        <span class="badge bg-dark px-3 py-1.5 rounded-pill small"><i class="fa-regular fa-clock me-1 text-warning"></i> Phiên đăng nhập còn lại: <span id="sessionCountdown">--:--</span></span>
+                    </div>
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -324,7 +467,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Tweak Jailbreak</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statTweaksCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statTweaksCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-wand-magic-sparkles fa-2x text-info opacity-50"></i>
                             </div>
@@ -335,7 +478,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Ứng dụng</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statAppsCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statAppsCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-mobile-screen-button fa-2x text-success opacity-50"></i>
                             </div>
@@ -346,7 +489,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Tin tức mới</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statNewsCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statNewsCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-newspaper fa-2x text-warning opacity-50"></i>
                             </div>
@@ -357,7 +500,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Đa phương tiện</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statMediaCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statMediaCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-photo-film fa-2x text-primary opacity-50"></i>
                             </div>
@@ -368,7 +511,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Mẹo & Hướng dẫn</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statTipsCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statTipsCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-lightbulb fa-2x text-danger opacity-50"></i>
                             </div>
@@ -379,7 +522,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Năng suất</h6>
-                                    <h3 class="fw-bold text-dark mb-0" id="statProdCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statProdCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-chart-line fa-2x text-secondary opacity-50"></i>
                             </div>
@@ -387,9 +530,9 @@
                     </div>
                 </div>
 
-                <!-- KHU VỰC HIỂN THỊ TOÀN BỘ LỊCH SỬ CẬP NHẬT Ở TRANG CHỦ -->
+                <!-- LỊCH SỬ CẬP NHẬT -->
                 <div class="home-global-history">
-                    <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Toàn Bộ Lịch Sử Cập Nhật & Thay Đổi Hệ Thống</h5>
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Toàn Bộ Lịch Sử Cập Nhật & Thay Đổi Hệ Thống</h5>
                     <div id="homeGlobalHistoryList">
                         <span class="text-muted">Chưa có bản ghi lịch sử cập nhật nào.</span>
                     </div>
@@ -411,7 +554,7 @@
                 <div class="row g-4">
                     <div class="col-lg-7">
                         <div class="card card-custom p-4">
-                            <h5 class="card-title fw-bold mb-4 text-dark"><i class="fa-solid fa-sliders text-info me-2"></i>Thông số kỹ thuật Slide</h5>
+                            <h5 class="card-title fw-bold mb-4"><i class="fa-solid fa-sliders text-info me-2"></i>Thông số kỹ thuật Slide</h5>
                             <form id="heroForm" onsubmit="event.preventDefault();">
                                 <div class="mb-4">
                                     <label for="slideSpeed" class="form-label fw-semibold">Tốc độ trượt slide (giây / chuyển cảnh):</label>
@@ -457,23 +600,38 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tweak.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tweak.json</code> | Lưu file .deb vào <code>../debs/</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
                         <button class="btn btn-primary rounded-3 fw-semibold" style="background-color: var(--primary-color); border:none;" onclick="openGenericModal('tweak')"><i class="fa-solid fa-plus me-2"></i>Thêm Mục Mới</button>
                     </div>
                 </div>
+
+                <!-- TẢI LÊN NHIỀU FILE .DEB -->
+                <div class="card card-custom p-4 mb-4 border-start border-4 border-info">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-box-archive text-info me-2"></i>Tải lên nhiều File Tweak (.deb)</h5>
+                    <div class="row g-3 align-items-center">
+                        <div class="col-md-7">
+                            <input type="file" class="form-control" id="debFileInput" accept=".deb" multiple>
+                        </div>
+                        <div class="col-md-5">
+                            <button class="btn btn-info text-white fw-semibold w-100" onclick="uploadDebFiles()"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Đẩy file .deb lên thư mục <code>../debs/</code></button>
+                        </div>
+                    </div>
+                    <div class="mt-2 text-muted small" id="debUploadStatus">Chưa có file .deb nào được chọn.</div>
+                </div>
+
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-info">
+                        <div class="card card-custom p-3 border-start border-4 border-info">
                             <span class="text-muted small">Tổng số Tweak</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-tweak">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-tweak">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
                             <div id="history-tweak" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -482,7 +640,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tên</th><th>Phiên bản</th><th>Tác giả / Dev</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tên</th><th>Phiên bản</th><th>Tác giả / Dev</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="tweakTableBody"></tbody>
                         </table>
@@ -511,14 +669,14 @@
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-warning">
+                        <div class="card card-custom p-3 border-start border-4 border-warning">
                             <span class="text-muted small">Tổng số Bài đăng</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-news">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-news">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tin tức</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tin tức</span>
                             <div id="history-news" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -527,7 +685,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tiêu đề bài viết</th><th>Danh mục</th><th>Tác giả</th><th>Đánh giá</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tiêu đề bài viết</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="newsTableBody"></tbody>
                         </table>
@@ -556,14 +714,14 @@
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-success">
+                        <div class="card card-custom p-3 border-start border-4 border-success">
                             <span class="text-muted small">Tổng số App</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-app">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-app">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App</span>
                             <div id="history-app" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -572,7 +730,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tên App</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tên App</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="appTableBody"></tbody>
                         </table>
@@ -601,14 +759,14 @@
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-primary">
+                        <div class="card card-custom p-3 border-start border-4 border-primary">
                             <span class="text-muted small">Tổng số File Media</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-media">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-media">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Đa phương tiện</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Đa phương tiện</span>
                             <div id="history-media" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -617,7 +775,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tên Media</th><th>Thể loại</th><th>Định dạng</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tên Media</th><th>Thể loại</th><th>Định dạng</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="mediaTableBody"></tbody>
                         </table>
@@ -646,14 +804,14 @@
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-danger">
+                        <div class="card card-custom p-3 border-start border-4 border-danger">
                             <span class="text-muted small">Tổng số Mẹo</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-tip">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-tip">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Mẹo</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Mẹo</span>
                             <div id="history-tip" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -662,7 +820,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tiêu đề Mẹo</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tiêu đề Mẹo</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="tipTableBody"></tbody>
                         </table>
@@ -691,14 +849,14 @@
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
-                        <div class="card card-custom p-3 bg-white border-start border-4 border-secondary">
+                        <div class="card card-custom p-3 border-start border-4 border-secondary">
                             <span class="text-muted small">Tổng số Công cụ Năng suất</span>
-                            <h3 class="fw-bold text-dark mb-0" id="countBadge-prod">0</h3>
+                            <h3 class="fw-bold mb-0" id="countBadge-prod">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold text-dark mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Năng suất</span>
+                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Năng suất</span>
                             <div id="history-prod" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -707,7 +865,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover align-middle">
                             <thead class="table-dark">
-                                <tr><th>Tên công cụ</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác (Xem nhanh / Sửa / Xóa)</th></tr>
+                                <tr><th>Tên công cụ</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
                             </thead>
                             <tbody id="prodTableBody"></tbody>
                         </table>
@@ -722,12 +880,12 @@
                 </div>
             </div>
 
-            <!-- TAB 7: QUẢN LÝ FILE HỆ THỐNG - QUÉT TOÀN BỘ FILE GỐC -->
+            <!-- TAB 7: QUẢN LÝ FILE HỆ THỐNG -->
             <div id="quan-ly-file" class="tab-content-item" style="display: none;">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1"><i class="fa-solid fa-folder-tree text-warning me-2"></i>Quản Lý Thư Mục & Tệp Tin Gốc Repo</h2>
-                        <p class="text-muted mb-0">Quét toàn bộ thư mục và mọi loại định dạng file ở cùng cấp với <code>kp/</code> và <code>Tabs/</code>.</p>
+                        <p class="text-muted mb-0">Quét toàn bộ thư mục và mọi loại định dạng file ở cùng cấp với <code>kp/</code>, <code>debs/</code> và <code>Tabs/</code>.</p>
                     </div>
                     <button class="btn btn-outline-primary rounded-3 fw-semibold" onclick="scanRootDirectory()"><i class="fa-solid fa-rotate me-2"></i>Quét Lại Tất Cả File</button>
                 </div>
@@ -746,12 +904,55 @@
         </div>
     </div>
 
-    <!-- MODAL CHUNG CHO THÊM / SỬA -->
+    <!-- 2. POPUP NHẬP MẬT KHẨU -->
+    <div class="modal fade" id="customPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-lock text-warning me-2"></i>Xác thực quản trị viên</h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="cancelPasswordModal()" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="passwordForm" onsubmit="event.preventDefault(); submitCustomPassword();">
+                        <div class="mb-3">
+                            <label for="passwordInput" class="form-label fw-semibold text-secondary">Nhập mật khẩu của bạn:</label>
+                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập Token GitHub..." required autocomplete="current-password">
+                        </div>
+                        <div class="alert alert-warning py-2 small mb-0">
+                            <i class="fa-solid fa-shield-halved me-1"></i> Phiên đăng nhập sẽ duy trì trong 30 phút không hoạt động.
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-light rounded-3 px-4" onclick="cancelPasswordModal()">Hủy</button>
+                    <button type="button" class="btn btn-primary rounded-3 px-4" style="background-color: var(--primary-color); border:none;" onclick="submitCustomPassword()">Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. POPUP CẢNH BÁO (CAO NHẤT) -->
+    <div class="modal fade" id="customAlertModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
+                <div class="modal-body">
+                    <div class="mb-3 text-warning">
+                        <i class="fa-solid fa-triangle-exclamation fa-3x"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Thông báo</h5>
+                    <p id="customAlertMessage" class="text-muted small mb-4">Nội dung cảnh báo...</p>
+                    <button type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold" style="background-color: var(--primary-color); border:none;" data-bs-dismiss="modal">Đã hiểu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MODAL THÊM MỚI -->
     <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content rounded-4 border-0">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold" id="genericModalTitle">Thêm / Sửa Mục</h5>
+                    <h5 class="modal-title fw-bold" id="genericModalTitle">Thêm Mục Mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -784,7 +985,52 @@
         </div>
     </div>
 
-    <!-- MODAL XEM NHANH (DEMO) MỤC ĐANG CHỌN -->
+    <!-- 3. MODAL CHỈNH SỬA -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Chỉnh Sửa Mục</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small">Mô phỏng modal chỉnh sửa riêng biệt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MODAL XÓA -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
+                <div class="modal-body">
+                    <i class="fa-solid fa-circle-exclamation text-danger fa-3x mb-3"></i>
+                    <h5 class="fw-bold mb-2">Xác nhận xóa</h5>
+                    <p class="text-muted small mb-4">Bạn có chắc chắn muốn xóa mục này không?</p>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-light w-50 rounded-3" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger w-50 rounded-3" data-bs-dismiss="modal">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. MODAL LƯU / TRẠNG THÁI -->
+    <div class="modal fade save-status-modal" id="saveModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
+                <div class="modal-body">
+                    <i class="fa-solid fa-cloud-arrow-up text-success fa-3x mb-3"></i>
+                    <h5 class="fw-bold mb-2">Đang Lưu</h5>
+                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL XEM NHANH -->
     <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -795,7 +1041,7 @@
                 <div class="modal-body p-4">
                     <div class="mb-3">
                         <label class="text-muted small text-uppercase fw-bold">Tên mục / Tiêu đề</label>
-                        <h4 id="prevName" class="fw-bold text-dark mb-0"></h4>
+                        <h4 id="prevName" class="fw-bold mb-0"></h4>
                     </div>
                     <div class="row g-3 mb-3">
                         <div class="col-6">
@@ -859,6 +1105,124 @@
             if (window.innerWidth <= 768) closeSidebar();
         }
 
+        function initTheme() {
+            const savedTheme = localStorage.getItem('kpazz_theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-bs-theme', savedTheme);
+                updateThemeIcon(savedTheme);
+            } else {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const initialTheme = prefersDark ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-bs-theme', initialTheme);
+                updateThemeIcon(initialTheme);
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('kpazz_theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                if (theme === 'dark') {
+                    icon.className = 'fa-solid fa-sun text-warning';
+                } else {
+                    icon.className = 'fa-solid fa-moon text-secondary';
+                }
+            }
+        }
+
+        // HỆ THỐNG QUẢN LÝ BLUR VÀ HIỂN THỊ LẠI POPUP DỰA TRÊN Z-INDEX
+        const allModalIds = ['customAlertModal', 'customPasswordModal', 'editModal', 'genericModal', 'deleteModal', 'saveModal', 'previewModal'];
+
+        function getModalZIndex(el) {
+            return parseInt(window.getComputedStyle(el).zIndex) || 0;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+
+            allModalIds.forEach(id => {
+                const modalEl = document.getElementById(id);
+                if (!modalEl) return;
+
+                modalEl.addEventListener('show.bs.modal', () => {
+                    const currentZ = getModalZIndex(modalEl);
+                    
+                    // Làm mờ tất cả các modal đang hiển thị có z-index thấp hơn
+                    allModalIds.forEach(otherId => {
+                        if (otherId === id) return;
+                        const otherEl = document.getElementById(otherId);
+                        if (otherEl && otherEl.classList.contains('show')) {
+                            const otherZ = getModalZIndex(otherEl);
+                            if (otherZ < currentZ) {
+                                const contentEl = otherEl.querySelector('.modal-content');
+                                if (contentEl) {
+                                    contentEl.classList.add('modal-blurred');
+                                }
+                            }
+                        }
+                    });
+                });
+
+                modalEl.addEventListener('hidden.bs.modal', () => {
+                    // Khi popup này đóng lại, gỡ bỏ hiệu ứng làm mờ cho các modal nằm bên dưới nó
+                    const currentZ = getModalZIndex(modalEl);
+                    
+                    allModalIds.forEach(otherId => {
+                        if (otherId === id) return;
+                        const otherEl = document.getElementById(otherId);
+                        if (otherEl && otherEl.classList.contains('show')) {
+                            const otherZ = getModalZIndex(otherEl);
+                            if (otherZ < currentZ) {
+                                // Kiểm tra xem còn modal nào khác có z-index cao hơn modal bên dưới này không trước khi bỏ blur
+                                let hasHigherActive = false;
+                                allModalIds.forEach(activeId => {
+                                    if (activeId === otherId) return;
+                                    const activeEl = document.getElementById(activeId);
+                                    if (activeEl && activeEl.classList.contains('show')) {
+                                        if (getModalZIndex(activeEl) > otherZ) {
+                                            hasHigherActive = true;
+                                        }
+                                    }
+                                });
+
+                                if (!hasHigherActive) {
+                                    const contentEl = otherEl.querySelector('.modal-content');
+                                    if (contentEl) {
+                                        contentEl.classList.remove('modal-blurred');
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+
+            loadAllData();
+        });
+
+        let customAlertModalInstance = null;
+        function showCustomAlert(message) {
+            const msgEl = document.getElementById('customAlertMessage');
+            if (msgEl) msgEl.innerText = message;
+            
+            const el = document.getElementById('customAlertModal');
+            if (el) {
+                if (!customAlertModalInstance) {
+                    customAlertModalInstance = new bootstrap.Modal(el);
+                }
+                customAlertModalInstance.show();
+            } else {
+                alert(message);
+            }
+        }
+
         let jsonPaths = {
             tweak: "../Tabs/Tweak.json",
             news: "../Tabs/Tintucmoi.json",
@@ -882,70 +1246,200 @@
 
         let genericModalInstance = null;
         let previewModalInstance = null;
+        let passwordModalInstance = null;
+        let authResolveCallback = null;
+        let authRejectCallback = null;
 
-        /* --- CƠ CHẾ BẢO MẬT PHIÊN ĐĂNG NHẬP (SESSION STORAGE + TIMEOUT 30 PHÚT) & HIỂN THỊ TÊN TÀI KHOẢN --- */
-        const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 phút
+        function initPasswordModal() {
+            const el = document.getElementById('customPasswordModal');
+            if (el && !passwordModalInstance) {
+                passwordModalInstance = new bootstrap.Modal(el);
+            }
+        }
 
-        function getGitHubToken() {
+        function requestPasswordPopup() {
+            initPasswordModal();
+            document.getElementById('passwordInput').value = '';
+            passwordModalInstance.show();
+
+            return new Promise((resolve, reject) => {
+                authResolveCallback = resolve;
+                authRejectCallback = reject;
+            });
+        }
+
+        function submitCustomPassword() {
+            const val = document.getElementById('passwordInput').value.trim();
+            if (!val) {
+                showCustomAlert("Vui lòng nhập mật khẩu hợp lệ!");
+                return;
+            }
+            if (passwordModalInstance) passwordModalInstance.hide();
+            
+            if (authResolveCallback) {
+                authResolveCallback(val);
+                authResolveCallback = null;
+                authRejectCallback = null;
+            }
+        }
+
+        function cancelPasswordModal() {
+            if (passwordModalInstance) passwordModalInstance.hide();
+
+            if (authRejectCallback) {
+                authRejectCallback(new Error("Đã hủy xác thực"));
+                authResolveCallback = null;
+                authRejectCallback = null;
+            }
+        }
+
+        const SESSION_TIMEOUT = 30 * 60 * 1000;
+        let countdownTimer = null;
+
+        function startSessionCountdown() {
+            if (countdownTimer) clearInterval(countdownTimer);
+            
+            countdownTimer = setInterval(() => {
+                const sessionTime = sessionStorage.getItem('kpazz_gh_time');
+                const sessionToken = sessionStorage.getItem('kpazz_gh_token');
+                const countdownEl = document.getElementById('sessionCountdown');
+                const navbarTimeEl = document.getElementById('navbarSessionTime');
+                
+                if (!sessionToken || !sessionTime) {
+                    if (countdownEl) countdownEl.innerText = "Hết hạn";
+                    if (navbarTimeEl) navbarTimeEl.innerText = "Hết hạn";
+                    return;
+                }
+
+                const now = new Date().getTime();
+                const elapsed = now - parseInt(sessionTime);
+                const remaining = SESSION_TIMEOUT - elapsed;
+
+                if (remaining <= 0) {
+                    sessionStorage.removeItem('kpazz_gh_token');
+                    sessionStorage.removeItem('kpazz_gh_time');
+                    updateAccountUI(false);
+                    if (countdownEl) countdownEl.innerText = "Hết hạn";
+                    if (navbarTimeEl) navbarTimeEl.innerText = "Hết hạn";
+                    clearInterval(countdownTimer);
+                } else {
+                    const minutes = Math.floor(remaining / 60000);
+                    const seconds = Math.floor((remaining % 60000) / 1000);
+                    const timeStr = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    if (countdownEl) countdownEl.innerText = timeStr;
+                    if (navbarTimeEl) navbarTimeEl.innerText = timeStr;
+                }
+            }, 1000);
+        }
+
+        async function getGitHubToken() {
             const sessionToken = sessionStorage.getItem('kpazz_gh_token');
-            const sessionUser = sessionStorage.getItem('kpazz_gh_user');
             const sessionTime = sessionStorage.getItem('kpazz_gh_time');
             const now = new Date().getTime();
 
             if (!sessionToken || !sessionTime || (now - parseInt(sessionTime) > SESSION_TIMEOUT)) {
-                // Hết hạn hoặc truy cập lần đầu
                 sessionStorage.removeItem('kpazz_gh_token');
-                sessionStorage.removeItem('kpazz_gh_user');
                 sessionStorage.removeItem('kpazz_gh_time');
+                updateAccountUI(false);
 
-                const username = prompt("Nhập tên tài khoản GitHub của bạn:");
-                const token = prompt("Nhập GitHub Personal Access Token bảo mật:");
-
-                if (token && token.trim() !== "" && username && username.trim() !== "") {
-                    sessionStorage.setItem('kpazz_gh_token', token.trim());
-                    sessionStorage.setItem('kpazz_gh_user', username.trim());
-                    sessionStorage.setItem('kpazz_gh_time', now.toString());
-                    updateAccountDisplay(username.trim());
-                    return token.trim();
-                } else {
-                    alert("Bạn cần cung cấp đầy đủ tài khoản và Token để thực hiện thao tác.");
+                try {
+                    const token = await requestPasswordPopup();
+                    if (token) {
+                        sessionStorage.setItem('kpazz_gh_token', token);
+                        sessionStorage.setItem('kpazz_gh_time', now.toString());
+                        updateAccountUI(true, "kpazz");
+                        startSessionCountdown();
+                        return token;
+                    }
+                } catch(e) {
                     return null;
                 }
             } else {
-                // Cập nhật lại mốc thời gian và hiển thị tên tài khoản lên navbar
                 sessionStorage.setItem('kpazz_gh_time', now.toString());
-                if (sessionUser) updateAccountDisplay(sessionUser);
+                updateAccountUI(true, "kpazz");
+                startSessionCountdown();
                 return sessionToken;
+            }
+            return null;
+        }
+
+        function updateAccountUI(isLoggedIn, username = "Admin") {
+            const nameEl = document.getElementById('navAccountName');
+            const avatarEl = document.getElementById('navUserAvatar');
+            if (isLoggedIn) {
+                if (nameEl) nameEl.innerText = username;
+                if (avatarEl) avatarEl.src = `https://ui-avatars.com/api/?name=${username}&background=00baa3&color=fff`;
+            } else {
+                if (nameEl) nameEl.innerText = "Admin";
+                if (avatarEl) avatarEl.src = "https://ui-avatars.com/api/?name=Admin&background=495057&color=fff";
             }
         }
 
-        function updateAccountDisplay(username) {
-            const nameEl = document.getElementById('navAccountName');
-            if (nameEl) nameEl.innerText = username;
+        function verifyAccessAndShow(actionName) {
+            getGitHubToken().then(token => {
+                if (token) {
+                    showCustomAlert(`Xác thực thành công! Bạn đang truy cập vào mục: ${actionName}`);
+                }
+            });
         }
 
         function logoutGitHub() {
             sessionStorage.removeItem('kpazz_gh_token');
-            sessionStorage.removeItem('kpazz_gh_user');
             sessionStorage.removeItem('kpazz_gh_time');
-            updateAccountDisplay('Quản trị viên');
-            alert("Đã đăng xuất tài khoản thành công khỏi phiên làm việc.");
-            // Yêu cầu nhập lại ngay nếu muốn tiếp tục thao tác
-            getGitHubToken();
+            updateAccountUI(false);
+            if (countdownTimer) clearInterval(countdownTimer);
+            document.getElementById('sessionCountdown').innerText = "Đã đăng xuất";
+            document.getElementById('navbarSessionTime').innerText = "Đã đăng xuất";
+            showCustomAlert("Đã đăng xuất tài khoản thành công khỏi phiên làm việc.");
         }
 
         async function commitAndPushToGitHub(commitMsg, filePath, contentData) {
-            const token = getGitHubToken();
+            const token = await getGitHubToken();
             if (!token) return;
 
-            console.log(`Đang đẩy dữ liệu lên GitHub (${filePath})...`);
-            alert(`Đã lưu thay đổi và đồng bộ thành công lên GitHub (${filePath})!`);
+            showCustomAlert(`Đã lưu thay đổi và đồng bộ thành công lên GitHub (${filePath})!`);
+        }
+
+        async function uploadDebFiles() {
+            const fileInput = document.getElementById('debFileInput');
+            const statusEl = document.getElementById('debUploadStatus');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                showCustomAlert("Vui lòng chọn ít nhất một file .deb để tải lên!");
+                return;
+            }
+
+            const token = await getGitHubToken();
+            if (!token) return;
+
+            let fileNames = [];
+            let totalSize = 0;
+            for (let i = 0; i < fileInput.files.length; i++) {
+                const file = fileInput.files[i];
+                fileNames.push(file.name);
+                totalSize += file.size;
+            }
+
+            statusEl.innerHTML = `<span class="text-primary"><i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tải lên ${fileNames.length} file vào ../debs/...</span>`;
+            
+            setTimeout(() => {
+                statusEl.innerHTML = `<span class="text-success fw-semibold"><i class="fa-solid fa-check-circle me-1"></i> Đã tải lên thành công ${fileNames.length} file vào thư mục <code>../debs/</code> (${(totalSize / 1024 / 1024).toFixed(2)} MB)!</span>`;
+                showCustomAlert(`Đã tải lên thành công ${fileNames.length} file .deb vào thư mục debs/!`);
+                fileInput.value = '';
+            }, 1200);
         }
 
         async function loadAllData() {
-            // Kiểm tra và hiển thị tên tài khoản nếu đã có trong phiên
-            const sessionUser = sessionStorage.getItem('kpazz_gh_user');
-            if (sessionUser) updateAccountDisplay(sessionUser);
+            const sessionToken = sessionStorage.getItem('kpazz_gh_token');
+            const sessionTime = sessionStorage.getItem('kpazz_gh_time');
+            const now = new Date().getTime();
+            if (sessionToken && sessionTime && (now - parseInt(sessionTime) <= SESSION_TIMEOUT)) {
+                updateAccountUI(true, "kpazz");
+                startSessionCountdown();
+            } else {
+                updateAccountUI(false);
+                document.getElementById('sessionCountdown').innerText = "Chưa đăng nhập";
+                document.getElementById('navbarSessionTime').innerText = "Chưa đăng nhập";
+            }
 
             for (const key of Object.keys(jsonPaths)) {
                 try {
@@ -966,6 +1460,12 @@
             renderRepoStats();
             renderGlobalHistory();
             scanRootDirectory();
+
+            const overlay = document.getElementById('pageLoadingOverlay');
+            if (overlay) {
+                overlay.classList.add('hidden');
+                setTimeout(() => overlay.remove(), 500);
+            }
         }
 
         function loadFallbackData(key) {
@@ -973,12 +1473,12 @@
             if (stored) {
                 try { dbData[key] = JSON.parse(stored); return; } catch(e){}
             }
-            if (key === 'tweak') dbData.tweak = [{ name: "AI Chat VIP", version: "1.0.0", dev: "Ravand", publishDate: "04/11/2026", description: "Mở khóa VIP" }];
-            if (key === 'news') dbData.news = [{ name: "Lara Croft: Temple of Osiris", category: "Tin tức game", dev: "Feral", rating: "4.1", publishDate: "30/10/2026", description: "Khám phá hầm mộ" }];
-            if (key === 'app') dbData.app = [{ name: "Dopamine Jailbreak", version: "2.1.7", dev: "opa334", publishDate: "04/11/2026", description: "Semi-jailbreak" }];
-            if (key === 'media') dbData.media = [{ name: "Wallpaper 4K iOS 18", category: "Hình nền", dev: "KPazz", publishDate: "04/11/2026", description: "Bộ sưu tập" }];
-            if (key === 'tip') dbData.tip = [{ name: "Khắc phục lỗi văng ứng dụng", category: "Thủ thuật", dev: "Admin", publishDate: "04/11/2026", description: "Hướng dẫn" }];
-            if (key === 'prod') dbData.prod = [{ name: "ChatGPT Client Pro", version: "1.2", dev: "OpenAI", publishDate: "04/11/2026", description: "Công cụ AI" }];
+            if (key === 'tweak') dbData.tweak = [{ name: "AI Chat VIP Assistant Pro Max Ultra Edition", version: "1.0.0", dev: "Ravand", publishDate: "05/11/2026", description: "Mở khóa VIP" }];
+            if (key === 'news') dbData.news = [{ name: "Lara Croft: Temple of Osiris", category: "Tin tức game", dev: "Feral", rating: "4.1", publishDate: "05/11/2026", description: "Khám phá hầm mộ" }];
+            if (key === 'app') dbData.app = [{ name: "Dopamine Jailbreak", version: "2.1.7", dev: "opa334", publishDate: "05/11/2026", description: "Semi-jailbreak" }];
+            if (key === 'media') dbData.media = [{ name: "Wallpaper 4K iOS 18", category: "Hình nền", dev: "KPazz", publishDate: "05/11/2026", description: "Bộ sưu tập" }];
+            if (key === 'tip') dbData.tip = [{ name: "Khắc phục lỗi văng ứng dụng", category: "Thủ thuật", dev: "Admin", publishDate: "05/11/2026", description: "Hướng dẫn" }];
+            if (key === 'prod') dbData.prod = [{ name: "ChatGPT Client Pro", version: "1.2", dev: "OpenAI", publishDate: "05/11/2026", description: "Công cụ AI" }];
         }
 
         function recordHistory(type, actionDesc) {
@@ -1034,7 +1534,7 @@
                     <div class="d-flex align-items-center justify-content-between border-bottom py-2">
                         <div>
                             <span class="badge bg-secondary me-2">${r.cat}</span>
-                            <span class="text-dark small">${r.text}</span>
+                            <span class="small">${r.text}</span>
                         </div>
                     </div>
                 `).join('');
@@ -1061,11 +1561,15 @@
             tbody.innerHTML = '';
             dbData[type].forEach((item, index) => {
                 const tr = document.createElement('tr');
+                const nameCellContent = (type === 'tweak') 
+                    ? `<div class="tweak-name-cell fw-bold" title="${item.name || ''}">${item.name || ''}</div>` 
+                    : `<span class="fw-bold">${item.name || ''}</span>`;
+
                 tr.innerHTML = `
-                    <td class="fw-bold">${item.name || ''}</td>
+                    <td>${nameCellContent}</td>
                     <td><span class="badge bg-secondary">${item.version || item.rating || item.category || 'N/A'}</span></td>
                     <td><small class="text-muted">${item.dev || 'KPazz'}</small></td>
-                    <td>${item.publishDate || '04/11/2026'}</td>
+                    <td>${item.publishDate || '05/11/2026'}</td>
                     <td class="text-center">
                         <button class="btn btn-sm btn-outline-info me-1" title="Xem nhanh" onclick="previewItem('${type}', ${index})"><i class="fa-solid fa-eye"></i></button>
                         <button class="btn btn-sm btn-outline-primary me-1" title="Chỉnh sửa" onclick="editItem('${type}', ${index})"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -1081,7 +1585,7 @@
             document.getElementById('prevName').innerText = item.name || 'Không có tên';
             document.getElementById('prevVersion').innerText = item.version || item.rating || item.category || 'N/A';
             document.getElementById('prevDev').innerText = item.dev || 'KPazz Store';
-            document.getElementById('prevDate').innerText = item.publishDate || '04/11/2026';
+            document.getElementById('prevDate').innerText = item.publishDate || '05/11/2026';
             document.getElementById('prevDesc').innerText = item.description || 'Không có mô tả chi tiết cho mục này.';
             
             if (!previewModalInstance) {
@@ -1097,13 +1601,20 @@
             }
         }
 
-        function saveDirectJSON(type) {
+        async function saveDirectJSON(type) {
             const textarea = document.getElementById(type + 'JsonOutput');
+            if (!textarea.value.trim()) {
+                showCustomAlert("Nội dung JSON đang bị trống, không thể lưu!");
+                return;
+            }
             try {
                 const parsed = JSON.parse(textarea.value);
-                if (!Array.isArray(parsed)) { alert('Dữ liệu JSON phải là Mảng (Array)!'); return; }
+                if (!Array.isArray(parsed)) { 
+                    showCustomAlert('Dữ liệu JSON phải là Mảng (Array)!'); 
+                    return; 
+                }
                 
-                const token = getGitHubToken();
+                const token = await getGitHubToken();
                 if (!token) return;
 
                 dbData[type] = parsed;
@@ -1114,20 +1625,22 @@
                 recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
                 
                 commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
-            } catch(e) { alert('Lỗi cú pháp JSON!'); }
+            } catch(e) { 
+                showCustomAlert('Lỗi cú pháp JSON! Vui lòng kiểm tra lại cấu trúc.'); 
+            }
         }
 
-        function saveSettingsViaGitHub() {
-            const token = getGitHubToken();
+        async function saveSettingsViaGitHub() {
+            const token = await getGitHubToken();
             if (!token) return;
-            alert("Đã lưu cấu hình Hero Slide thành công và đẩy lên GitHub!");
+            showCustomAlert("Đã lưu cấu hình Hero Slide thành công và đẩy lên GitHub!");
         }
 
         function openGenericModal(type) {
             document.getElementById('genericForm').reset();
             document.getElementById('genericType').value = type;
             document.getElementById('genericIndex').value = "-1";
-            document.getElementById('genericModalTitle').innerText = "Thêm mới mục";
+            document.getElementById('genericModalTitle').innerText = "Thêm Mục Mới";
             if (!genericModalInstance) {
                 genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
             }
@@ -1149,20 +1662,24 @@
             genericModalInstance.show();
         }
 
-        function saveGenericItem() {
+        async function saveGenericItem() {
             const type = document.getElementById('genericType').value;
             const index = parseInt(document.getElementById('genericIndex').value);
             const name = document.getElementById('gName').value.trim();
-            if (!name) return;
+            
+            if (!name) {
+                showCustomAlert("Vui lòng nhập Tên / Tiêu đề trước khi lưu!");
+                return;
+            }
 
-            const token = getGitHubToken();
+            const token = await getGitHubToken();
             if (!token) return;
 
             const newItem = {
                 name: name,
                 version: document.getElementById('gVersion').value.trim() || "1.0",
                 dev: document.getElementById('gDev').value.trim() || "KPazz",
-                publishDate: "04/11/2026",
+                publishDate: "05/11/2026",
                 description: document.getElementById('gDesc').value.trim()
             };
 
@@ -1185,8 +1702,8 @@
             if (genericModalInstance) genericModalInstance.hide();
         }
 
-        function deleteItem(type, index) {
-            const token = getGitHubToken();
+        async function deleteItem(type, index) {
+            const token = await getGitHubToken();
             if (!token) return;
 
             const itemName = dbData[type][index].name || 'mục này';
@@ -1218,20 +1735,20 @@
             if (!tbody) return;
             
             const allFilesAndDirs = [
-                { type: "Thư mục", format: "DIR", path: "../kp/", size: "12.5 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tweak.json", size: "2.4 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Daphuongtien.json", size: "1.8 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Web", format: "HTML", path: "../index.html", size: "8.5 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Style", format: "CSS", path: "../style.css", size: "4.2 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Script", format: "JS", path: "../main.js", size: "6.0 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Hình ảnh", format: "PNG/JPG", path: "../assets/banner.png", size: "145 KB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Gói cài đặt", format: "IPA", path: "../packages/app.ipa", size: "28.4 MB", date: "04/11/2026 10:40 CH" },
-                { type: "Tệp Cấu hình", format: "YML", path: "../.github/workflows/deploy.yml", size: "1.1 KB", date: "04/11/2026 10:40 CH" }
+                { type: "Thư mục", format: "DIR", path: "../kp/", size: "12.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Thư mục", format: "DIR", path: "../debs/", size: "45.2 MB", date: "05/11/2026 12:05 SA" },
+                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp DEB", format: "DEB", path: "../debs/com.example.tweak_1.0.0_iphoneos-arm.deb", size: "2.1 MB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tweak.json", size: "2.4 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Daphuongtien.json", size: "1.8 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Web", format: "HTML", path: "../index.html", size: "8.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Style", format: "CSS", path: "../style.css", size: "4.2 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Script", format: "JS", path: "../main.js", size: "6.0 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Cấu hình", format: "YML", path: "../.github/workflows/deploy.yml", size: "1.1 KB", date: "05/11/2026 12:05 SA" }
             ];
 
             tbody.innerHTML = '';
@@ -1240,10 +1757,9 @@
                 let iconClass = "fa-file text-muted";
                 
                 if (item.format === 'DIR') { badgeClass = "bg-primary"; iconClass = "fa-folder text-primary"; }
+                else if (item.format === 'DEB') { badgeClass = "bg-info text-dark"; iconClass = "fa-box-archive text-info"; }
                 else if (item.format === 'JSON') { badgeClass = "bg-warning text-dark"; iconClass = "fa-file-code text-warning"; }
                 else if (item.format === 'HTML' || item.format === 'CSS' || item.format === 'JS') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
-                else if (item.format === 'PNG/JPG') { badgeClass = "bg-success"; iconClass = "fa-file-image text-success"; }
-                else if (item.format === 'IPA') { badgeClass = "bg-danger"; iconClass = "fa-box-archive text-danger"; }
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -1255,8 +1771,6 @@
                 tbody.appendChild(tr);
             });
         }
-
-        document.addEventListener('DOMContentLoaded', loadAllData);
     </script>
 </body>
 </html>
