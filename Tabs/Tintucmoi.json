@@ -1,5 +1,12 @@
 [
     {
+        "name": "demo",
+        "version": "1/3.0/demo",
+        "dev": "peo",
+        "publishDate": "05/11/2026",
+        "description": "pèo\nkfjfjf\nkẹ"
+    },
+    {
         "name": "Lara Coffiex: Temple of Osiris",
         "dev": "Feral Interactive",
         "category": "Tin tức game",
@@ -72,4 +79,3 @@
         ]
     }
 ]
-
