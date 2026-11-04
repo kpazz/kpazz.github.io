@@ -287,7 +287,6 @@
             color: #212529 !important;
         }
 
-        /* TRẠNG THÁI LÀM MỜ MODAL BÊN DƯỚI KHI CÓ MODAL ƯU TIÊN ĐÈ LÊN */
         .modal-blurred {
             filter: blur(8px) brightness(0.85);
             pointer-events: none;
@@ -300,7 +299,6 @@
             background-color: rgba(0, 0, 0, 0.55) !important;
         }
 
-        /* PHÂN CẤP ƯU TIÊN Z-INDEX */
         #customAlertModal { z-index: 1080 !important; }
         #customPasswordModal { z-index: 1075 !important; }
         #editModal { z-index: 1070 !important; }
@@ -904,7 +902,7 @@
         </div>
     </div>
 
-    <!-- 2. POPUP NHẬP MẬT KHẨU -->
+    <!-- POPUP NHẬP MẬT KHẨU -->
     <div class="modal fade" id="customPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -916,7 +914,7 @@
                     <form id="passwordForm" onsubmit="event.preventDefault(); submitCustomPassword();">
                         <div class="mb-3">
                             <label for="passwordInput" class="form-label fw-semibold text-secondary">Nhập mật khẩu của bạn:</label>
-                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập Token GitHub..." required autocomplete="current-password">
+                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập Personal Access Token (PAT) GitHub..." required autocomplete="current-password">
                         </div>
                         <div class="alert alert-warning py-2 small mb-0">
                             <i class="fa-solid fa-shield-halved me-1"></i> Phiên đăng nhập sẽ duy trì trong 30 phút không hoạt động.
@@ -931,7 +929,7 @@
         </div>
     </div>
 
-    <!-- 1. POPUP CẢNH BÁO (CAO NHẤT) -->
+    <!-- POPUP CẢNH BÁO -->
     <div class="modal fade" id="customAlertModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content rounded-4 border-0 shadow text-center p-3">
@@ -947,7 +945,7 @@
         </div>
     </div>
 
-    <!-- 4. MODAL THÊM MỚI -->
+    <!-- MODAL THÊM MỚI -->
     <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -985,7 +983,7 @@
         </div>
     </div>
 
-    <!-- 3. MODAL CHỈNH SỬA -->
+    <!-- MODAL CHỈNH SỬA -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -1000,7 +998,7 @@
         </div>
     </div>
 
-    <!-- 5. MODAL XÓA -->
+    <!-- MODAL XÓA -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content rounded-4 border-0 shadow text-center p-3">
@@ -1017,14 +1015,14 @@
         </div>
     </div>
 
-    <!-- 6. MODAL LƯU / TRẠNG THÁI -->
+    <!-- MODAL LƯU / TRẠNG THÁI -->
     <div class="modal fade save-status-modal" id="saveModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content rounded-4 border-0 shadow text-center p-3">
                 <div class="modal-body">
                     <i class="fa-solid fa-cloud-arrow-up text-success fa-3x mb-3"></i>
                     <h5 class="fw-bold mb-2">Đang Lưu</h5>
-                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu...</p>
+                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu lên GitHub...</p>
                 </div>
             </div>
         </div>
@@ -1072,6 +1070,12 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // ==========================================
+        // THÔNG TIN REPOSITORY GITHUB KPPAZZ
+        // ==========================================
+        const REPO_OWNER = "kpazz"; 
+        const REPO_NAME = "kpazz.github.io";
+
         const sidebar = document.getElementById('sidebar');
         const contentWrapper = document.getElementById('content-wrapper');
         const sidebarToggle = document.getElementById('sidebarToggle');
@@ -1137,7 +1141,6 @@
             }
         }
 
-        // HỆ THỐNG QUẢN LÝ BLUR VÀ HIỂN THỊ LẠI POPUP DỰA TRÊN Z-INDEX
         const allModalIds = ['customAlertModal', 'customPasswordModal', 'editModal', 'genericModal', 'deleteModal', 'saveModal', 'previewModal'];
 
         function getModalZIndex(el) {
@@ -1153,8 +1156,6 @@
 
                 modalEl.addEventListener('show.bs.modal', () => {
                     const currentZ = getModalZIndex(modalEl);
-                    
-                    // Làm mờ tất cả các modal đang hiển thị có z-index thấp hơn
                     allModalIds.forEach(otherId => {
                         if (otherId === id) return;
                         const otherEl = document.getElementById(otherId);
@@ -1171,16 +1172,13 @@
                 });
 
                 modalEl.addEventListener('hidden.bs.modal', () => {
-                    // Khi popup này đóng lại, gỡ bỏ hiệu ứng làm mờ cho các modal nằm bên dưới nó
                     const currentZ = getModalZIndex(modalEl);
-                    
                     allModalIds.forEach(otherId => {
                         if (otherId === id) return;
                         const otherEl = document.getElementById(otherId);
                         if (otherEl && otherEl.classList.contains('show')) {
                             const otherZ = getModalZIndex(otherEl);
                             if (otherZ < currentZ) {
-                                // Kiểm tra xem còn modal nào khác có z-index cao hơn modal bên dưới này không trước khi bỏ blur
                                 let hasHigherActive = false;
                                 allModalIds.forEach(activeId => {
                                     if (activeId === otherId) return;
@@ -1224,12 +1222,12 @@
         }
 
         let jsonPaths = {
-            tweak: "../Tabs/Tweak.json",
-            news: "../Tabs/Tintucmoi.json",
-            app: "../Tabs/Appjailbreak.json",
-            media: "../Tabs/Daphuongtien.json",
-            tip: "../Tabs/Meo.json",
-            prod: "../Tabs/Nangsuat.json"
+            tweak: "Tabs/Tweak.json",
+            news: "Tabs/Tintucmoi.json",
+            app: "Tabs/Appjailbreak.json",
+            media: "Tabs/Daphuongtien.json",
+            tip: "Tabs/Meo.json",
+            prod: "Tabs/Nangsuat.json"
         };
 
         let dbData = {
@@ -1393,11 +1391,71 @@
             showCustomAlert("Đã đăng xuất tài khoản thành công khỏi phiên làm việc.");
         }
 
+        // ==========================================
+        // GỌI REST API ĐẨY TỆP TRỰC TIẾP LÊN REPO KPAZZ
+        // ==========================================
         async function commitAndPushToGitHub(commitMsg, filePath, contentData) {
             const token = await getGitHubToken();
             if (!token) return;
 
-            showCustomAlert(`Đã lưu thay đổi và đồng bộ thành công lên GitHub (${filePath})!`);
+            const saveModalEl = document.getElementById('saveModal');
+            let saveModal = null;
+            if (saveModalEl) {
+                saveModal = new bootstrap.Modal(saveModalEl);
+                saveModal.show();
+            }
+
+            try {
+                const apiPath = filePath.replace('../', ''); 
+                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${apiPath}`;
+
+                // Lấy SHA của tệp hiện tại
+                let fileSha = "";
+                const getRes = await fetch(url, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github+json"
+                    }
+                });
+
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    fileSha = fileData.sha;
+                }
+
+                // Mã hóa JSON UTF-8 sang Base64
+                const jsonString = JSON.stringify(contentData, null, 4);
+                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+                // Đẩy request PUT lên API
+                const putRes = await fetch(url, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github+json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: commitMsg,
+                        content: base64Content,
+                        sha: fileSha
+                    })
+                });
+
+                if (saveModal) saveModal.hide();
+
+                if (putRes.ok) {
+                    showCustomAlert(`Đã đẩy code thành công lên repo ${REPO_NAME}! Tab Actions sẽ kích hoạt.`);
+                } else {
+                    const errData = await putRes.json();
+                    showCustomAlert(`Lỗi GitHub API: ${errData.message || 'Không thể cập nhật tệp'}`);
+                }
+
+            } catch (error) {
+                if (saveModal) saveModal.hide();
+                console.error(error);
+                showCustomAlert(`Đã xảy ra lỗi kết nối khi đẩy code lên GitHub.`);
+            }
         }
 
         async function uploadDebFiles() {
@@ -1412,20 +1470,12 @@
             if (!token) return;
 
             let fileNames = [];
-            let totalSize = 0;
             for (let i = 0; i < fileInput.files.length; i++) {
-                const file = fileInput.files[i];
-                fileNames.push(file.name);
-                totalSize += file.size;
+                fileNames.push(fileInput.files[i].name);
             }
 
-            statusEl.innerHTML = `<span class="text-primary"><i class="fa-solid fa-spinner fa-spin me-1"></i> Đang tải lên ${fileNames.length} file vào ../debs/...</span>`;
-            
-            setTimeout(() => {
-                statusEl.innerHTML = `<span class="text-success fw-semibold"><i class="fa-solid fa-check-circle me-1"></i> Đã tải lên thành công ${fileNames.length} file vào thư mục <code>../debs/</code> (${(totalSize / 1024 / 1024).toFixed(2)} MB)!</span>`;
-                showCustomAlert(`Đã tải lên thành công ${fileNames.length} file .deb vào thư mục debs/!`);
-                fileInput.value = '';
-            }, 1200);
+            statusEl.innerHTML = `<span class="text-primary"><i class="fa-solid fa-spinner fa-spin me-1"></i> File .deb có dung lượng lớn. Bạn nên commit trực tiếp bằng Git client hoặc giao diện GitHub.</span>`;
+            showCustomAlert("Đối với file nén .deb, hãy tải lên qua Git client để tránh lỗi băng thông API!");
         }
 
         async function loadAllData() {
@@ -1443,7 +1493,7 @@
 
             for (const key of Object.keys(jsonPaths)) {
                 try {
-                    const response = await fetch(jsonPaths[key]);
+                    const response = await fetch("../" + jsonPaths[key]);
                     if (response.ok) {
                         dbData[key] = await response.json();
                     } else {
@@ -1614,9 +1664,6 @@
                     return; 
                 }
                 
-                const token = await getGitHubToken();
-                if (!token) return;
-
                 dbData[type] = parsed;
                 localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
                 renderTable(type);
@@ -1624,7 +1671,7 @@
                 renderRepoStats();
                 recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
                 
-                commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                await commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
             } catch(e) { 
                 showCustomAlert('Lỗi cú pháp JSON! Vui lòng kiểm tra lại cấu trúc.'); 
             }
@@ -1633,7 +1680,7 @@
         async function saveSettingsViaGitHub() {
             const token = await getGitHubToken();
             if (!token) return;
-            showCustomAlert("Đã lưu cấu hình Hero Slide thành công và đẩy lên GitHub!");
+            showCustomAlert("Đã lưu thành công cấu hình Slide!");
         }
 
         function openGenericModal(type) {
@@ -1672,9 +1719,6 @@
                 return;
             }
 
-            const token = await getGitHubToken();
-            if (!token) return;
-
             const newItem = {
                 name: name,
                 version: document.getElementById('gVersion').value.trim() || "1.0",
@@ -1697,15 +1741,12 @@
             updateCountBadge(type);
             renderRepoStats();
 
-            commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
-
             if (genericModalInstance) genericModalInstance.hide();
+
+            await commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
         }
 
         async function deleteItem(type, index) {
-            const token = await getGitHubToken();
-            if (!token) return;
-
             const itemName = dbData[type][index].name || 'mục này';
             if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
                 dbData[type].splice(index, 1);
@@ -1716,7 +1757,7 @@
                 renderRepoStats();
                 recordHistory(type, `Xóa mục: "${itemName}"`);
 
-                commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                await commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
             }
         }
 
@@ -1735,20 +1776,17 @@
             if (!tbody) return;
             
             const allFilesAndDirs = [
-                { type: "Thư mục", format: "DIR", path: "../kp/", size: "12.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Thư mục", format: "DIR", path: "../debs/", size: "45.2 MB", date: "05/11/2026 12:05 SA" },
-                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp DEB", format: "DEB", path: "../debs/com.example.tweak_1.0.0_iphoneos-arm.deb", size: "2.1 MB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tweak.json", size: "2.4 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Daphuongtien.json", size: "1.8 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Web", format: "HTML", path: "../index.html", size: "8.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Style", format: "CSS", path: "../style.css", size: "4.2 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Script", format: "JS", path: "../main.js", size: "6.0 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Cấu hình", format: "YML", path: "../.github/workflows/deploy.yml", size: "1.1 KB", date: "05/11/2026 12:05 SA" }
+                { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "05/11/2026 12:05 SA" },
+                { type: "Thư mục", format: "DIR", path: "Tabs/", size: "14.2 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tweak.json", size: "2.4 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tintucmoi.json", size: "3.1 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Appjailbreak.json", size: "2.0 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Daphuongtien.json", size: "1.8 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Meo.json", size: "1.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Nangsuat.json", size: "1.9 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "05/11/2026 12:05 SA" },
+                { type: "Tệp Cấu hình", format: "YML", path: ".github/workflows/deploy.yml", size: "1.1 KB", date: "05/11/2026 12:05 SA" }
             ];
 
             tbody.innerHTML = '';
@@ -1757,9 +1795,8 @@
                 let iconClass = "fa-file text-muted";
                 
                 if (item.format === 'DIR') { badgeClass = "bg-primary"; iconClass = "fa-folder text-primary"; }
-                else if (item.format === 'DEB') { badgeClass = "bg-info text-dark"; iconClass = "fa-box-archive text-info"; }
                 else if (item.format === 'JSON') { badgeClass = "bg-warning text-dark"; iconClass = "fa-file-code text-warning"; }
-                else if (item.format === 'HTML' || item.format === 'CSS' || item.format === 'JS') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
+                else if (item.format === 'HTML' || item.format === 'YML') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
