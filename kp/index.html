@@ -986,7 +986,7 @@
                     </div>
                     <div>
                         <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết</label>
-                        <p id="prevDesc" class="p-3 bg-light rounded-3 border mb-0"></p>
+                        <p id="prevDesc" class="p-3 bg-light rounded-3 border mb-0" style="white-space: pre-line;"></p>
                     </div>
                 </div>
                 <div class="modal-footer border-0 pt-0">
@@ -1160,14 +1160,13 @@
             }
         }
 
-        // ĐƯỜNG DẪN TƯƠNG ĐỐI TỚI THƯ MỤC TỪNG FILE JSON TRONG REPO
         let jsonPaths = {
-            tweak: "../Tabs/Tweak.json",
-            news: "../Tabs/Tintucmoi.json",
-            app: "../Tabs/Appjailbreak.json",
-            media: "../Tabs/Daphuongtien.json",
-            tip: "../Tabs/Meo.json",
-            prod: "../Tabs/Nangsuat.json"
+            tweak: "Tabs/Tweak.json",
+            news: "Tabs/Tintucmoi.json",
+            app: "Tabs/Appjailbreak.json",
+            media: "Tabs/Daphuongtien.json",
+            tip: "Tabs/Meo.json",
+            prod: "Tabs/Nangsuat.json"
         };
 
         let dbData = {
@@ -1445,7 +1444,7 @@
             }
 
             try {
-                const apiPath = filePath.replace('../', '');
+                const apiPath = filePath;
                 const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${apiPath}`;
 
                 let fileSha = "";
@@ -1504,55 +1503,26 @@
             showCustomAlert("Đối với file nén .deb, hãy tải lên qua Git client để tránh lỗi băng thông API!");
         }
 
-        // HÀM ĐỌC JSON CỤC BỘ TƯƠNG THÍCH CẢ FILE:// VÀ LOCALHOST/SERVER
-        async function loadLocalJSON(key, path) {
-            return new Promise((resolve) => {
-                if (window.location.protocol.startsWith('http')) {
-                    fetch(path + "?t=" + new Date().getTime(), { cache: "no-cache" })
-                        .then(res => res.json())
-                        .then(data => resolve(data))
-                        .catch(() => resolve([]));
-                } else {
-                    try {
-                        const xhr = new XMLHttpRequest();
-                        xhr.overrideMimeType("application/json");
-                        xhr.open("GET", path, true);
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4) {
-                                if (xhr.status === 0 || xhr.status === 200) {
-                                    try {
-                                        const json = JSON.parse(xhr.responseText);
-                                        resolve(json);
-                                        return;
-                                    } catch(e) {}
-                                }
-                                const cached = localStorage.getItem('kpazz_fallback_' + key);
-                                resolve(cached ? JSON.parse(cached) : []);
-                            }
-                        };
-                        xhr.send(null);
-                    } catch (e) {
-                        const cached = localStorage.getItem('kpazz_fallback_' + key);
-                        resolve(cached ? JSON.parse(cached) : []);
-                    }
-                }
-            });
-        }
-
         async function loadAllData() {
             for (const key of Object.keys(jsonPaths)) {
-                const jsonData = await loadLocalJSON(key, jsonPaths[key]);
-                
-                if (Array.isArray(jsonData)) {
-                    dbData[key] = jsonData;
-                } else if (typeof jsonData === 'object' && jsonData !== null) {
-                    const foundArray = Object.values(jsonData).find(val => Array.isArray(val));
-                    dbData[key] = foundArray || [];
-                } else {
-                    dbData[key] = [];
+                let loadedSuccessfully = false;
+                try {
+                    const response = await fetch(jsonPaths[key] + "?t=" + new Date().getTime());
+                    if (response.ok) {
+                        const jsonData = await response.json();
+                        if (Array.isArray(jsonData) && jsonData.length > 0) {
+                            dbData[key] = jsonData;
+                            localStorage.setItem('kpazz_' + key + '_json', JSON.stringify(jsonData));
+                            loadedSuccessfully = true;
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Không thể fetch trực tiếp file " + jsonPaths[key]);
                 }
 
-                localStorage.setItem('kpazz_fallback_' + key, JSON.stringify(dbData[key]));
+                if (!loadedSuccessfully) {
+                    loadFallbackData(key);
+                }
 
                 loadHistory(key);
                 renderTable(key);
@@ -1562,6 +1532,20 @@
             renderRepoStats();
             renderGlobalHistory();
             scanRootDirectory();
+        }
+
+        function loadFallbackData(key) {
+            const stored = localStorage.getItem('kpazz_' + key + '_json');
+            if (stored) {
+                try { 
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        dbData[key] = parsed;
+                        return;
+                    }
+                } catch(e){}
+            }
+            dbData[key] = [];
         }
 
         function recordHistory(type, actionDesc) {
@@ -1644,8 +1628,8 @@
             
             let htmlContent = '';
             
-            if (dbData[type].length === 0) {
-                container.innerHTML = `<div class="text-center text-muted py-3">Chưa có dữ liệu nào.</div>`;
+            if (!Array.isArray(dbData[type]) || dbData[type].length === 0) {
+                container.innerHTML = `<div class="text-center text-muted py-3">Chưa có dữ liệu nào. Bạn có thể bấm nút "Thêm Mục Mới" ở góc trên để tạo bản ghi.</div>`;
                 return;
             }
 
@@ -1718,14 +1702,13 @@
                 }
                 
                 dbData[type] = parsed;
-                localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
+                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
                 renderTable(type);
                 updateCountBadge(type);
                 renderRepoStats();
                 recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
                 
-                const cleanFilePath = jsonPaths[type].replace('../', '');
-                await commitAndPushToGitHub("Update " + cleanFilePath, cleanFilePath, dbData[type]);
+                await commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
             } catch(e) { 
                 showCustomAlert('Lỗi cú pháp JSON! Vui lòng kiểm tra lại cấu trúc.'); 
             }
@@ -1895,7 +1878,7 @@
                 recordHistory(type, `Thêm mới mục: "${name}"`);
             }
 
-            localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
+            localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
             renderTable(type);
             updateJSONOutput(type);
             updateCountBadge(type);
@@ -1903,23 +1886,21 @@
 
             if (genericModalInstance) genericModalInstance.hide();
 
-            const cleanFilePath = jsonPaths[type].replace('../', '');
-            await commitAndPushToGitHub("Add/Edit item in " + cleanFilePath, cleanFilePath, dbData[type]);
+            await commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
         }
 
         async function deleteItem(type, index) {
             const itemName = dbData[type][index].name || 'mục này';
-            if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
+            if (confirm(`Hệ thống sẽ xóa "${itemName}". Bạn có chắc chắn không?`)) {
                 dbData[type].splice(index, 1);
-                localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
+                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
                 renderTable(type);
                 updateJSONOutput(type);
                 updateCountBadge(type);
                 renderRepoStats();
                 recordHistory(type, `Xóa mục: "${itemName}"`);
 
-                const cleanFilePath = jsonPaths[type].replace('../', '');
-                await commitAndPushToGitHub("Delete item in " + cleanFilePath, cleanFilePath, dbData[type]);
+                await commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
             }
         }
 
@@ -1947,7 +1928,7 @@
                 { type: "Tệp JSON", format: "JSON", path: "Tabs/Daphuongtien.json", size: "1.8 KB", date: "07/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "Tabs/Meo.json", size: "1.5 KB", date: "07/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "Tabs/Nangsuat.json", size: "1.9 KB", date: "07/11/2026" },
-                { type: "Tệp Web", format: "HTML", path: "kp/index.html", size: "8.5 KB", date: "07/11/2026" }
+                { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "07/11/2026" }
             ];
 
             tbody.innerHTML = '';
