@@ -32,38 +32,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* HIỆU ỨNG TẢI TRANG */
-        #pageLoadingOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0b161c;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        #pageLoadingOverlay.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .spinner-custom {
-            width: 3rem;
-            height: 3rem;
-            border: 0.35rem solid rgba(0, 186, 163, 0.2);
-            border-top-color: var(--primary-color);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         #sidebarBackdrop {
             position: fixed;
             top: 0;
@@ -258,15 +226,18 @@
             overflow-y: auto;
         }
 
-        .tweak-name-cell {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 220px;
-            word-break: break-word;
-            line-height: 1.4;
+        /* GIAO DIỆN THẺ DỌC CHO MỖI MỤC TRÊN MOBILE */
+        .item-card-row {
+            background: var(--bs-body-bg, #ffffff);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        [data-bs-theme="dark"] .item-card-row {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
         }
 
         /* HIỆU ỨNG KÍNH MỜ ĐẬM VÀ VIỀN MÉP KÍNH CHO CÁC POPUP */
@@ -329,20 +300,10 @@
                 padding: 0.35rem 0.65rem;
                 font-size: 0.85rem;
             }
-            .tweak-name-cell {
-                max-width: 130px;
-            }
         }
     </style>
 </head>
 <body>
-
-    <!-- HIỆU ỨNG TẢI TRANG -->
-    <div id="pageLoadingOverlay">
-        <div class="spinner-custom mb-3"></div>
-        <h5 class="fw-bold text-white tracking-wider text-center px-3">Đang khởi tạo hệ thống KPazz Store...</h5>
-        <p class="text-muted small mb-0">Vui lòng chờ trong giây lát</p>
-    </div>
 
     <div id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
@@ -451,7 +412,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1"><i class="fa-solid fa-server text-primary me-2"></i>Trang Chủ & Tổng Quan Repository</h2>
-                        <p class="text-muted mb-0">Thống kê chi tiết toàn bộ dữ liệu từ thư mục <code>../Tabs/</code></p>
+                        <p class="text-muted mb-0">Thống kê chi tiết toàn bộ dữ liệu từ thư mục <code>Tabs/</code></p>
                     </div>
                     <div class="d-flex flex-column align-items-end gap-1">
                         <span class="badge bg-success px-3 py-1.5 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
@@ -598,7 +559,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tweak.json</code> | Lưu file .deb vào <code>../debs/</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Tweak.json</code> | Lưu file .deb vào <code>debs/</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -606,7 +567,6 @@
                     </div>
                 </div>
 
-                <!-- TẢI LÊN NHIỀU FILE .DEB -->
                 <div class="card card-custom p-4 mb-4 border-start border-4 border-info">
                     <h5 class="fw-bold mb-3"><i class="fa-solid fa-box-archive text-info me-2"></i>Tải lên nhiều File Tweak (.deb)</h5>
                     <div class="row g-3 align-items-center">
@@ -614,7 +574,7 @@
                             <input type="file" class="form-control" id="debFileInput" accept=".deb" multiple>
                         </div>
                         <div class="col-md-5">
-                            <button class="btn btn-info text-white fw-semibold w-100" onclick="uploadDebFiles()"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Đẩy file .deb lên thư mục <code>../debs/</code></button>
+                            <button class="btn btn-info text-white fw-semibold w-100" onclick="uploadDebFiles()"><i class="fa-solid fa-cloud-arrow-up me-2"></i>Đẩy file .deb lên <code>debs/</code></button>
                         </div>
                     </div>
                     <div class="mt-2 text-muted small" id="debUploadStatus">Chưa có file .deb nào được chọn.</div>
@@ -636,17 +596,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tên</th><th>Phiên bản</th><th>Tác giả / Dev</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="tweakTableBody"></tbody>
-                        </table>
+                        <div id="tweakTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tweak.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Tweak.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="tweakJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -658,7 +613,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tin tức mới</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tintucmoi.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Tintucmoi.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('news')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -681,17 +636,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tiêu đề bài viết</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="newsTableBody"></tbody>
-                        </table>
+                        <div id="newsTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tintucmoi.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Tintucmoi.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="newsJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -703,7 +653,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý APP Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appjailbreak.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Appjailbreak.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('app')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -726,17 +676,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tên App</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="appTableBody"></tbody>
-                        </table>
+                        <div id="appTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appjailbreak.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Appjailbreak.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="appJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -748,7 +693,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Đa phương tiện</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Daphuongtien.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Daphuongtien.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('media')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -771,17 +716,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tên Media</th><th>Thể loại</th><th>Định dạng</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="mediaTableBody"></tbody>
-                        </table>
+                        <div id="mediaTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Daphuongtien.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Daphuongtien.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('media')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="mediaJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -793,7 +733,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Mẹo & Hướng dẫn</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Meo.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Meo.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tip')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -816,17 +756,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tiêu đề Mẹo</th><th>Danh mục</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="tipTableBody"></tbody>
-                        </table>
+                        <div id="tipTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Meo.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Meo.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="tipJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -838,7 +773,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Năng suất</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Nangsuat.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Nangsuat.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('prod')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -861,17 +796,12 @@
                 </div>
                 <div class="card card-custom p-4 mb-4">
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr><th>Tên công cụ</th><th>Phiên bản</th><th>Tác giả</th><th>Ngày</th><th class="text-center">Thao tác</th></tr>
-                            </thead>
-                            <tbody id="prodTableBody"></tbody>
-                        </table>
+                        <div id="prodTableBody"></div>
                     </div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Nangsuat.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Nangsuat.json</h5>
                         <button class="btn btn-sm btn-success" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
                     </div>
                     <textarea id="prodJsonOutput" class="form-control json-editor" rows="10"></textarea>
@@ -908,22 +838,20 @@
             <div class="modal-content rounded-4 border-0 shadow-lg">
                 <div class="modal-header bg-dark text-white rounded-top-4">
                     <h5 class="modal-title fw-bold"><i class="fa-solid fa-lock text-warning me-2"></i>Xác thực quản trị viên</h5>
-                    <button type="button" class="btn-close btn-close-white" onclick="cancelPasswordModal()" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <form id="passwordForm" onsubmit="event.preventDefault(); submitCustomPassword();">
                         <div class="mb-3">
-                            <label for="passwordInput" class="form-label fw-semibold text-secondary">Nhập mật khẩu của bạn:</label>
-                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập Personal Access Token (PAT) GitHub..." required autocomplete="current-password">
+                            <label for="passwordInput" class="form-label fw-semibold text-secondary">Nhập mật khẩu đăng nhập:</label>
+                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập mật khẩu..." required autocomplete="current-password">
                         </div>
-                        <div class="alert alert-warning py-2 small mb-0">
-                            <i class="fa-solid fa-shield-halved me-1"></i> Phiên đăng nhập sẽ duy trì trong 30 phút không hoạt động.
+                        <div class="alert alert-warning py-2 small mb-0" id="authAlertBox">
+                            <i class="fa-solid fa-shield-halved me-1"></i> Nhập mật khẩu để vào trang. Phiên sẽ tự động hết hạn sau 30 phút không hoạt động.
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer border-0 pt-0">
-                    <button type="button" class="btn btn-light rounded-3 px-4" onclick="cancelPasswordModal()">Hủy</button>
-                    <button type="button" class="btn btn-primary rounded-3 px-4" style="background-color: var(--primary-color); border:none;" onclick="submitCustomPassword()">Đăng nhập</button>
+                    <button type="button" class="btn btn-primary w-100 rounded-3 py-2 fw-semibold" id="authSubmitBtn" style="background-color: var(--primary-color); border:none;" onclick="submitCustomPassword()">Đăng nhập</button>
                 </div>
             </div>
         </div>
@@ -947,7 +875,7 @@
 
     <!-- MODAL THÊM MỚI -->
     <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-title fw-bold" id="genericModalTitle">Thêm Mục Mới</h5>
@@ -957,72 +885,73 @@
                     <form id="genericForm">
                         <input type="hidden" id="genericType">
                         <input type="hidden" id="genericIndex" value="-1">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Tên / Tiêu đề (*)</label>
-                            <input type="text" class="form-control" id="gName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Phiên bản / Đánh giá / Thể loại</label>
-                            <input type="text" class="form-control" id="gVersion">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Tác giả / Nhà phát triển</label>
-                            <input type="text" class="form-control" id="gDev">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Mô tả ngắn</label>
-                            <textarea class="form-control" id="gDesc" rows="3"></textarea>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" id="labelName">Tiêu đề (*)</label>
+                                <input type="text" class="form-control" id="gName" placeholder="Ví dụ: Sileo Manager">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Tác giả / Nhà phát triển (dev)</label>
+                                <input type="text" class="form-control" id="gDev" placeholder="Ví dụ: Sileo Team">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Danh mục (category)</label>
+                                <input type="text" class="form-control" id="gCategory" placeholder="Ví dụ: Quản lý gói">
+                            </div>
+                            <div class="col-md-6" id="fieldVersionBox">
+                                <label class="form-label fw-semibold">Phiên bản (version)</label>
+                                <input type="text" class="form-control" id="gVersion" placeholder="Ví dụ: 2.5.2">
+                            </div>
+                            <div class="col-md-6" id="fieldRatingBox">
+                                <label class="form-label fw-semibold">Đánh giá sao (rating)</label>
+                                <input type="text" class="form-control" id="gRating" placeholder="Ví dụ: 4.0">
+                            </div>
+                            <div class="col-md-6" id="fieldSysReqBox">
+                                <label class="form-label fw-semibold">Yêu cầu hệ thống (systemRequirements)</label>
+                                <input type="text" class="form-control" id="gSysReq" placeholder="Ví dụ: iOS 14.0 - 16.6.1">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Hình ảnh (img) <span class="text-muted small">(Dán link hoặc chọn tệp)</span></label>
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" id="gImg" placeholder="https://... hoặc để trống tự lấy link mặc định">
+                                    <input type="file" class="form-control" id="gImgFile" accept="image/*" style="max-width: 200px;" onchange="handleImageFileSelect(event)">
+                                </div>
+                            </div>
+                            <div class="col-12" id="fieldDescBox" style="display: none;">
+                                <label class="form-label fw-semibold">Mô tả ngắn (description)</label>
+                                <textarea class="form-control" id="gDesc" rows="2" placeholder="Nhập mô tả ngắn gọn..."></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Tiêu đề nổi bật (highlightTitle)</label>
+                                <input type="text" class="form-control" id="gHighlightTitle" placeholder="Dành cho bạn nếu...">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Các điểm nổi bật (highlights)</label>
+                                <textarea class="form-control" id="gHighlights" rows="3" placeholder="Ý 1&#10;Ý 2&#10;Ý 3"></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="gIsApp" checked>
+                                    <label class="form-check-label fw-semibold" for="gIsApp">Là ứng dụng (isApp)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check form-switch mt-4">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="gNoDownload">
+                                    <label class="form-check-label fw-semibold" for="gNoDownload">Không có nút tải (noDownload)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Link tải (downloadLink)</label>
+                                <input type="text" class="form-control" id="gDownloadLink" placeholder="https://example.com/file.deb">
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer border-0 pt-0">
                     <button type="button" class="btn btn-light rounded-3" data-bs-dismiss="modal">Hủy</button>
                     <button type="button" class="btn btn-primary rounded-3" style="background-color: var(--primary-color); border:none;" onclick="saveGenericItem()">Lưu Lại</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL CHỈNH SỬA -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-4 border-0 shadow">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold">Chỉnh Sửa Mục</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="text-muted small">Mô phỏng modal chỉnh sửa riêng biệt.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL XÓA -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
-                <div class="modal-body">
-                    <i class="fa-solid fa-circle-exclamation text-danger fa-3x mb-3"></i>
-                    <h5 class="fw-bold mb-2">Xác nhận xóa</h5>
-                    <p class="text-muted small mb-4">Bạn có chắc chắn muốn xóa mục này không?</p>
-                    <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-light w-50 rounded-3" data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger w-50 rounded-3" data-bs-dismiss="modal">Xóa</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL LƯU / TRẠNG THÁI -->
-    <div class="modal fade save-status-modal" id="saveModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
-                <div class="modal-body">
-                    <i class="fa-solid fa-cloud-arrow-up text-success fa-3x mb-3"></i>
-                    <h5 class="fw-bold mb-2">Đang Lưu</h5>
-                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu lên GitHub...</p>
                 </div>
             </div>
         </div>
@@ -1067,12 +996,22 @@
         </div>
     </div>
 
+    <!-- MODAL LƯU / TRẠNG THÁI -->
+    <div class="modal fade save-status-modal" id="saveModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content rounded-4 border-0 shadow text-center p-3">
+                <div class="modal-body">
+                    <i class="fa-solid fa-cloud-arrow-up text-success fa-3x mb-3"></i>
+                    <h5 class="fw-bold mb-2">Đang Lưu</h5>
+                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu lên GitHub...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // ==========================================
-        // THÔNG TIN REPOSITORY GITHUB KPPAZZ
-        // ==========================================
         const REPO_OWNER = "kpazz"; 
         const REPO_NAME = "kpazz.github.io";
 
@@ -1147,7 +1086,7 @@
             return parseInt(window.getComputedStyle(el).zIndex) || 0;
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
 
             allModalIds.forEach(id => {
@@ -1202,7 +1141,7 @@
                 });
             });
 
-            loadAllData();
+            await enforceInitialAuth();
         });
 
         let customAlertModalInstance = null;
@@ -1221,13 +1160,14 @@
             }
         }
 
+        // ĐƯỜNG DẪN TƯƠNG ĐỐI TỚI THƯ MỤC TỪNG FILE JSON TRONG REPO
         let jsonPaths = {
-            tweak: "Tabs/Tweak.json",
-            news: "Tabs/Tintucmoi.json",
-            app: "Tabs/Appjailbreak.json",
-            media: "Tabs/Daphuongtien.json",
-            tip: "Tabs/Meo.json",
-            prod: "Tabs/Nangsuat.json"
+            tweak: "../Tabs/Tweak.json",
+            news: "../Tabs/Tintucmoi.json",
+            app: "../Tabs/Appjailbreak.json",
+            media: "../Tabs/Daphuongtien.json",
+            tip: "../Tabs/Meo.json",
+            prod: "../Tabs/Nangsuat.json"
         };
 
         let dbData = {
@@ -1255,9 +1195,20 @@
             }
         }
 
-        function requestPasswordPopup() {
+        function requestPasswordPopup(errorMsg = "") {
             initPasswordModal();
-            document.getElementById('passwordInput').value = '';
+            const inputEl = document.getElementById('passwordInput');
+            const alertBox = document.getElementById('authAlertBox');
+            inputEl.value = '';
+
+            if (errorMsg) {
+                alertBox.className = "alert alert-danger py-2 small mb-0";
+                alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${errorMsg}`;
+            } else {
+                alertBox.className = "alert alert-warning py-2 small mb-0";
+                alertBox.innerHTML = `<i class="fa-solid fa-shield-halved me-1"></i> Nhập mật khẩu để vào trang. Phiên sẽ tự động hết hạn sau 30 phút không hoạt động.`;
+            }
+
             passwordModalInstance.show();
 
             return new Promise((resolve, reject) => {
@@ -1266,26 +1217,55 @@
             });
         }
 
-        function submitCustomPassword() {
+        async function verifyGitHubTokenWithAPI(token) {
+            try {
+                const res = await fetch("https://api.github.com/user", {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github+json"
+                    }
+                });
+                if (res.ok) {
+                    const userData = await res.json();
+                    return { success: true, username: userData.login || "Admin" };
+                } else {
+                    return { success: false, message: "Mật khẩu không chính xác. Vui lòng nhập lại!" };
+                }
+            } catch (err) {
+                return { success: false, message: "Lỗi kết nối hệ thống. Vui lòng thử lại!" };
+            }
+        }
+
+        async function submitCustomPassword() {
             const val = document.getElementById('passwordInput').value.trim();
             if (!val) {
                 showCustomAlert("Vui lòng nhập mật khẩu hợp lệ!");
                 return;
             }
+
+            const submitBtn = document.getElementById('authSubmitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang xác thực...`;
+
+            const checkResult = await verifyGitHubTokenWithAPI(val);
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+
+            if (!checkResult.success) {
+                const alertBox = document.getElementById('authAlertBox');
+                alertBox.className = "alert alert-danger py-2 small mb-0";
+                alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${checkResult.message}`;
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                return;
+            }
+
             if (passwordModalInstance) passwordModalInstance.hide();
             
             if (authResolveCallback) {
-                authResolveCallback(val);
-                authResolveCallback = null;
-                authRejectCallback = null;
-            }
-        }
-
-        function cancelPasswordModal() {
-            if (passwordModalInstance) passwordModalInstance.hide();
-
-            if (authRejectCallback) {
-                authRejectCallback(new Error("Đã hủy xác thực"));
+                authResolveCallback({ token: val, username: checkResult.username });
                 authResolveCallback = null;
                 authRejectCallback = null;
             }
@@ -1297,7 +1277,7 @@
         function startSessionCountdown() {
             if (countdownTimer) clearInterval(countdownTimer);
             
-            countdownTimer = setInterval(() => {
+            countdownTimer = setInterval(async () => {
                 const sessionTime = sessionStorage.getItem('kpazz_gh_time');
                 const sessionToken = sessionStorage.getItem('kpazz_gh_token');
                 const countdownEl = document.getElementById('sessionCountdown');
@@ -1306,6 +1286,8 @@
                 if (!sessionToken || !sessionTime) {
                     if (countdownEl) countdownEl.innerText = "Hết hạn";
                     if (navbarTimeEl) navbarTimeEl.innerText = "Hết hạn";
+                    clearInterval(countdownTimer);
+                    await enforceInitialAuth();
                     return;
                 }
 
@@ -1316,10 +1298,14 @@
                 if (remaining <= 0) {
                     sessionStorage.removeItem('kpazz_gh_token');
                     sessionStorage.removeItem('kpazz_gh_time');
+                    sessionStorage.removeItem('kpazz_gh_user');
                     updateAccountUI(false);
                     if (countdownEl) countdownEl.innerText = "Hết hạn";
                     if (navbarTimeEl) navbarTimeEl.innerText = "Hết hạn";
                     clearInterval(countdownTimer);
+                    
+                    showCustomAlert("Phiên làm việc đã hết 30 phút. Vui lòng đăng nhập lại để tiếp tục!");
+                    await enforceInitialAuth();
                 } else {
                     const minutes = Math.floor(remaining / 60000);
                     const seconds = Math.floor((remaining % 60000) / 1000);
@@ -1330,31 +1316,85 @@
             }, 1000);
         }
 
+        async function enforceInitialAuth() {
+            const sessionToken = sessionStorage.getItem('kpazz_gh_token');
+            const sessionTime = sessionStorage.getItem('kpazz_gh_time');
+            const sessionUser = sessionStorage.getItem('kpazz_gh_user') || "Admin";
+            const now = new Date().getTime();
+
+            let needsAuth = false;
+            if (!sessionToken || !sessionTime || (now - parseInt(sessionTime) > SESSION_TIMEOUT)) {
+                needsAuth = true;
+            } else {
+                const check = await verifyGitHubTokenWithAPI(sessionToken);
+                if (!check.success) {
+                    needsAuth = true;
+                }
+            }
+
+            if (needsAuth) {
+                sessionStorage.removeItem('kpazz_gh_token');
+                sessionStorage.removeItem('kpazz_gh_time');
+                sessionStorage.removeItem('kpazz_gh_user');
+                updateAccountUI(false);
+
+                let authenticated = false;
+                while (!authenticated) {
+                    try {
+                        const result = await requestPasswordPopup();
+                        if (result && result.token) {
+                            sessionStorage.setItem('kpazz_gh_token', result.token);
+                            sessionStorage.setItem('kpazz_gh_user', result.username);
+                            sessionStorage.setItem('kpazz_gh_time', new Date().getTime().toString());
+                            updateAccountUI(true, result.username);
+                            startSessionCountdown();
+                            authenticated = true;
+                        }
+                    } catch(e) {}
+                }
+            } else {
+                sessionStorage.setItem('kpazz_gh_time', now.toString());
+                updateAccountUI(true, sessionUser);
+                startSessionCountdown();
+            }
+
+            loadAllData();
+        }
+
         async function getGitHubToken() {
             const sessionToken = sessionStorage.getItem('kpazz_gh_token');
             const sessionTime = sessionStorage.getItem('kpazz_gh_time');
             const now = new Date().getTime();
 
-            if (!sessionToken || !sessionTime || (now - parseInt(sessionTime) > SESSION_TIMEOUT)) {
+            let valid = false;
+            if (sessionToken && sessionTime && (now - parseInt(sessionTime) <= SESSION_TIMEOUT)) {
+                const check = await verifyGitHubTokenWithAPI(sessionToken);
+                if (check.success) valid = true;
+            }
+
+            if (!valid) {
                 sessionStorage.removeItem('kpazz_gh_token');
                 sessionStorage.removeItem('kpazz_gh_time');
+                sessionStorage.removeItem('kpazz_gh_user');
                 updateAccountUI(false);
-
+                
+                showCustomAlert("Phiên làm việc hết hạn hoặc mật khẩu không hợp lệ. Vui lòng đăng nhập lại!");
                 try {
-                    const token = await requestPasswordPopup();
-                    if (token) {
-                        sessionStorage.setItem('kpazz_gh_token', token);
+                    const result = await requestPasswordPopup();
+                    if (result && result.token) {
+                        sessionStorage.setItem('kpazz_gh_token', result.token);
+                        sessionStorage.setItem('kpazz_gh_user', result.username);
                         sessionStorage.setItem('kpazz_gh_time', now.toString());
-                        updateAccountUI(true, "kpazz");
+                        updateAccountUI(true, result.username);
                         startSessionCountdown();
-                        return token;
+                        return result.token;
                     }
                 } catch(e) {
                     return null;
                 }
             } else {
                 sessionStorage.setItem('kpazz_gh_time', now.toString());
-                updateAccountUI(true, "kpazz");
+                updateAccountUI(true, sessionStorage.getItem('kpazz_gh_user') || "Admin");
                 startSessionCountdown();
                 return sessionToken;
             }
@@ -1384,16 +1424,15 @@
         function logoutGitHub() {
             sessionStorage.removeItem('kpazz_gh_token');
             sessionStorage.removeItem('kpazz_gh_time');
+            sessionStorage.removeItem('kpazz_gh_user');
             updateAccountUI(false);
             if (countdownTimer) clearInterval(countdownTimer);
             document.getElementById('sessionCountdown').innerText = "Đã đăng xuất";
             document.getElementById('navbarSessionTime').innerText = "Đã đăng xuất";
-            showCustomAlert("Đã đăng xuất tài khoản thành công khỏi phiên làm việc.");
+            showCustomAlert("Đã đăng xuất tài khoản thành công. Yêu cầu nhập lại mật khẩu.");
+            enforceInitialAuth();
         }
 
-        // ==========================================
-        // GỌI REST API ĐẨY TỆP TRỰC TIẾP LÊN REPO KPAZZ
-        // ==========================================
         async function commitAndPushToGitHub(commitMsg, filePath, contentData) {
             const token = await getGitHubToken();
             if (!token) return;
@@ -1406,10 +1445,9 @@
             }
 
             try {
-                const apiPath = filePath.replace('../', ''); 
+                const apiPath = filePath.replace('../', '');
                 const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${apiPath}`;
 
-                // Lấy SHA của tệp hiện tại
                 let fileSha = "";
                 const getRes = await fetch(url, {
                     headers: {
@@ -1423,11 +1461,9 @@
                     fileSha = fileData.sha;
                 }
 
-                // Mã hóa JSON UTF-8 sang Base64
                 const jsonString = JSON.stringify(contentData, null, 4);
                 const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
 
-                // Đẩy request PUT lên API
                 const putRes = await fetch(url, {
                     method: "PUT",
                     headers: {
@@ -1445,7 +1481,7 @@
                 if (saveModal) saveModal.hide();
 
                 if (putRes.ok) {
-                    showCustomAlert(`Đã đẩy code thành công lên repo ${REPO_NAME}! Tab Actions sẽ kích hoạt.`);
+                    showCustomAlert(`Đã đẩy code thành công lên repo ${REPO_NAME}!`);
                 } else {
                     const errData = await putRes.json();
                     showCustomAlert(`Lỗi GitHub API: ${errData.message || 'Không thể cập nhật tệp'}`);
@@ -1453,7 +1489,6 @@
 
             } catch (error) {
                 if (saveModal) saveModal.hide();
-                console.error(error);
                 showCustomAlert(`Đã xảy ra lỗi kết nối khi đẩy code lên GitHub.`);
             }
         }
@@ -1465,43 +1500,60 @@
                 showCustomAlert("Vui lòng chọn ít nhất một file .deb để tải lên!");
                 return;
             }
-
-            const token = await getGitHubToken();
-            if (!token) return;
-
-            let fileNames = [];
-            for (let i = 0; i < fileInput.files.length; i++) {
-                fileNames.push(fileInput.files[i].name);
-            }
-
             statusEl.innerHTML = `<span class="text-primary"><i class="fa-solid fa-spinner fa-spin me-1"></i> File .deb có dung lượng lớn. Bạn nên commit trực tiếp bằng Git client hoặc giao diện GitHub.</span>`;
             showCustomAlert("Đối với file nén .deb, hãy tải lên qua Git client để tránh lỗi băng thông API!");
         }
 
-        async function loadAllData() {
-            const sessionToken = sessionStorage.getItem('kpazz_gh_token');
-            const sessionTime = sessionStorage.getItem('kpazz_gh_time');
-            const now = new Date().getTime();
-            if (sessionToken && sessionTime && (now - parseInt(sessionTime) <= SESSION_TIMEOUT)) {
-                updateAccountUI(true, "kpazz");
-                startSessionCountdown();
-            } else {
-                updateAccountUI(false);
-                document.getElementById('sessionCountdown').innerText = "Chưa đăng nhập";
-                document.getElementById('navbarSessionTime').innerText = "Chưa đăng nhập";
-            }
-
-            for (const key of Object.keys(jsonPaths)) {
-                try {
-                    const response = await fetch("../" + jsonPaths[key]);
-                    if (response.ok) {
-                        dbData[key] = await response.json();
-                    } else {
-                        loadFallbackData(key);
+        // HÀM ĐỌC JSON CỤC BỘ TƯƠNG THÍCH CẢ FILE:// VÀ LOCALHOST/SERVER
+        async function loadLocalJSON(key, path) {
+            return new Promise((resolve) => {
+                if (window.location.protocol.startsWith('http')) {
+                    fetch(path + "?t=" + new Date().getTime(), { cache: "no-cache" })
+                        .then(res => res.json())
+                        .then(data => resolve(data))
+                        .catch(() => resolve([]));
+                } else {
+                    try {
+                        const xhr = new XMLHttpRequest();
+                        xhr.overrideMimeType("application/json");
+                        xhr.open("GET", path, true);
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 0 || xhr.status === 200) {
+                                    try {
+                                        const json = JSON.parse(xhr.responseText);
+                                        resolve(json);
+                                        return;
+                                    } catch(e) {}
+                                }
+                                const cached = localStorage.getItem('kpazz_fallback_' + key);
+                                resolve(cached ? JSON.parse(cached) : []);
+                            }
+                        };
+                        xhr.send(null);
+                    } catch (e) {
+                        const cached = localStorage.getItem('kpazz_fallback_' + key);
+                        resolve(cached ? JSON.parse(cached) : []);
                     }
-                } catch (e) {
-                    loadFallbackData(key);
                 }
+            });
+        }
+
+        async function loadAllData() {
+            for (const key of Object.keys(jsonPaths)) {
+                const jsonData = await loadLocalJSON(key, jsonPaths[key]);
+                
+                if (Array.isArray(jsonData)) {
+                    dbData[key] = jsonData;
+                } else if (typeof jsonData === 'object' && jsonData !== null) {
+                    const foundArray = Object.values(jsonData).find(val => Array.isArray(val));
+                    dbData[key] = foundArray || [];
+                } else {
+                    dbData[key] = [];
+                }
+
+                localStorage.setItem('kpazz_fallback_' + key, JSON.stringify(dbData[key]));
+
                 loadHistory(key);
                 renderTable(key);
                 updateJSONOutput(key);
@@ -1510,25 +1562,6 @@
             renderRepoStats();
             renderGlobalHistory();
             scanRootDirectory();
-
-            const overlay = document.getElementById('pageLoadingOverlay');
-            if (overlay) {
-                overlay.classList.add('hidden');
-                setTimeout(() => overlay.remove(), 500);
-            }
-        }
-
-        function loadFallbackData(key) {
-            const stored = localStorage.getItem('kpazz_' + key + '_json');
-            if (stored) {
-                try { dbData[key] = JSON.parse(stored); return; } catch(e){}
-            }
-            if (key === 'tweak') dbData.tweak = [{ name: "AI Chat VIP Assistant Pro Max Ultra Edition", version: "1.0.0", dev: "Ravand", publishDate: "05/11/2026", description: "Mở khóa VIP" }];
-            if (key === 'news') dbData.news = [{ name: "Lara Croft: Temple of Osiris", category: "Tin tức game", dev: "Feral", rating: "4.1", publishDate: "05/11/2026", description: "Khám phá hầm mộ" }];
-            if (key === 'app') dbData.app = [{ name: "Dopamine Jailbreak", version: "2.1.7", dev: "opa334", publishDate: "05/11/2026", description: "Semi-jailbreak" }];
-            if (key === 'media') dbData.media = [{ name: "Wallpaper 4K iOS 18", category: "Hình nền", dev: "KPazz", publishDate: "05/11/2026", description: "Bộ sưu tập" }];
-            if (key === 'tip') dbData.tip = [{ name: "Khắc phục lỗi văng ứng dụng", category: "Thủ thuật", dev: "Admin", publishDate: "05/11/2026", description: "Hướng dẫn" }];
-            if (key === 'prod') dbData.prod = [{ name: "ChatGPT Client Pro", version: "1.2", dev: "OpenAI", publishDate: "05/11/2026", description: "Công cụ AI" }];
         }
 
         function recordHistory(type, actionDesc) {
@@ -1606,28 +1639,48 @@
         }
 
         function renderTable(type) {
-            const tbody = document.getElementById(type + 'TableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            dbData[type].forEach((item, index) => {
-                const tr = document.createElement('tr');
-                const nameCellContent = (type === 'tweak') 
-                    ? `<div class="tweak-name-cell fw-bold" title="${item.name || ''}">${item.name || ''}</div>` 
-                    : `<span class="fw-bold">${item.name || ''}</span>`;
+            const container = document.getElementById(type + 'TableBody');
+            if (!container) return;
+            
+            let htmlContent = '';
+            
+            if (dbData[type].length === 0) {
+                container.innerHTML = `<div class="text-center text-muted py-3">Chưa có dữ liệu nào.</div>`;
+                return;
+            }
 
-                tr.innerHTML = `
-                    <td>${nameCellContent}</td>
-                    <td><span class="badge bg-secondary">${item.version || item.rating || item.category || 'N/A'}</span></td>
-                    <td><small class="text-muted">${item.dev || 'KPazz'}</small></td>
-                    <td>${item.publishDate || '05/11/2026'}</td>
-                    <td class="text-center">
-                        <button class="btn btn-sm btn-outline-info me-1" title="Xem nhanh" onclick="previewItem('${type}', ${index})"><i class="fa-solid fa-eye"></i></button>
-                        <button class="btn btn-sm btn-outline-primary me-1" title="Chỉnh sửa" onclick="editItem('${type}', ${index})"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-sm btn-outline-danger" title="Xóa" onclick="deleteItem('${type}', ${index})"><i class="fa-solid fa-trash"></i></button>
-                    </td>
+            dbData[type].forEach((item, index) => {
+                const titleText = item.name || 'Không có tên';
+                const col2Text = item.category || item.version || item.rating || 'N/A';
+                const devText = item.dev || 'KPazz';
+                const dateText = item.publishDate || '07/11/2026';
+
+                htmlContent += `
+                    <div class="item-card-row">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="fw-bold fs-6 text-break pe-2" style="line-height: 1.3;">${titleText}</div>
+                            <span class="badge bg-secondary flex-shrink-0">${col2Text}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center text-muted small mb-3">
+                            <div><i class="fa-solid fa-user-pen me-1"></i> ${devText}</div>
+                            <div><i class="fa-regular fa-calendar me-1"></i> ${dateText}</div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-1 pt-2 border-top border-light">
+                            <button class="btn btn-sm btn-outline-info py-1 px-2.5" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
+                                <i class="fa-solid fa-eye me-1"></i> Xem
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary py-1 px-2.5" title="Chỉnh sửa" onclick="editItem('${type}', ${index})">
+                                <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger py-1 px-2.5" title="Xóa" onclick="deleteItem('${type}', ${index})">
+                                <i class="fa-solid fa-trash me-1"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
                 `;
-                tbody.appendChild(tr);
             });
+
+            container.innerHTML = `<div class="d-flex flex-column">${htmlContent}</div>`;
         }
 
         function previewItem(type, index) {
@@ -1635,8 +1688,8 @@
             document.getElementById('prevName').innerText = item.name || 'Không có tên';
             document.getElementById('prevVersion').innerText = item.version || item.rating || item.category || 'N/A';
             document.getElementById('prevDev').innerText = item.dev || 'KPazz Store';
-            document.getElementById('prevDate').innerText = item.publishDate || '05/11/2026';
-            document.getElementById('prevDesc').innerText = item.description || 'Không có mô tả chi tiết cho mục này.';
+            document.getElementById('prevDate').innerText = item.publishDate || '07/11/2026';
+            document.getElementById('prevDesc').innerText = item.description || item.systemRequirements || 'Không có mô tả chi tiết cho mục này.';
             
             if (!previewModalInstance) {
                 previewModalInstance = new bootstrap.Modal(document.getElementById('previewModal'));
@@ -1665,13 +1718,14 @@
                 }
                 
                 dbData[type] = parsed;
-                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+                localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
                 renderTable(type);
                 updateCountBadge(type);
                 renderRepoStats();
                 recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
                 
-                await commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                const cleanFilePath = jsonPaths[type].replace('../', '');
+                await commitAndPushToGitHub("Update " + cleanFilePath, cleanFilePath, dbData[type]);
             } catch(e) { 
                 showCustomAlert('Lỗi cú pháp JSON! Vui lòng kiểm tra lại cấu trúc.'); 
             }
@@ -1683,11 +1737,84 @@
             showCustomAlert("Đã lưu thành công cấu hình Slide!");
         }
 
+        function handleImageFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('gImg').value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
         function openGenericModal(type) {
             document.getElementById('genericForm').reset();
             document.getElementById('genericType').value = type;
             document.getElementById('genericIndex').value = "-1";
-            document.getElementById('genericModalTitle').innerText = "Thêm Mục Mới";
+            
+            const titleEl = document.getElementById('genericModalTitle');
+            const labelName = document.getElementById('labelName');
+            const fieldDescBox = document.getElementById('fieldDescBox');
+            const fieldVersionBox = document.getElementById('fieldVersionBox');
+            const fieldRatingBox = document.getElementById('fieldRatingBox');
+            const fieldSysReqBox = document.getElementById('fieldSysReqBox');
+
+            fieldDescBox.style.display = 'none';
+            fieldVersionBox.style.display = 'block';
+            fieldRatingBox.style.display = 'block';
+            fieldSysReqBox.style.display = 'block';
+
+            document.getElementById('gName').value = '';
+            document.getElementById('gDev').value = '';
+            document.getElementById('gCategory').value = '';
+            document.getElementById('gVersion').value = '';
+            document.getElementById('gRating').value = '';
+            document.getElementById('gSysReq').value = '';
+            document.getElementById('gImg').value = '';
+            document.getElementById('gDesc').value = '';
+            document.getElementById('gHighlightTitle').value = '';
+            document.getElementById('gHighlights').value = '';
+            document.getElementById('gDownloadLink').value = '';
+
+            if (type === 'news') {
+                titleEl.innerText = "Thêm Tin Tức Mới";
+                labelName.innerText = "Tiêu đề bài viết (*)";
+                fieldVersionBox.style.display = 'none';
+                fieldSysReqBox.style.display = 'none';
+                fieldDescBox.style.display = 'block';
+                document.getElementById('gNoDownload').checked = true;
+                document.getElementById('gIsApp').checked = false;
+            } else if (type === 'app') {
+                titleEl.innerText = "Thêm App Jailbreak";
+                labelName.innerText = "Tiêu đề bài viết / Tên app (*)";
+                document.getElementById('gIsApp').checked = true;
+                document.getElementById('gNoDownload').checked = false;
+            } else if (type === 'media') {
+                titleEl.innerText = "Thêm Đa Phương Tiện";
+                labelName.innerText = "Tiêu đề bài viết / Tên Media (*)";
+                fieldRatingBox.style.display = 'none';
+                document.getElementById('gIsApp').checked = true;
+                document.getElementById('gNoDownload').checked = false;
+            } else if (type === 'tip') {
+                titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
+                labelName.innerText = "Tiêu đề bài viết / Tên Mẹo (*)";
+                fieldVersionBox.style.display = 'none';
+                fieldSysReqBox.style.display = 'none';
+                fieldDescBox.style.display = 'block';
+                document.getElementById('gIsApp').checked = false;
+                document.getElementById('gNoDownload').checked = true;
+            } else if (type === 'prod') {
+                titleEl.innerText = "Thêm Công Cụ Năng Suất";
+                labelName.innerText = "Tiêu đề bài viết / Tên Công cụ (*)";
+                fieldRatingBox.style.display = 'none';
+                document.getElementById('gIsApp').checked = true;
+                document.getElementById('gNoDownload').checked = false;
+            } else {
+                titleEl.innerText = "Thêm Mục Mới";
+                labelName.innerText = "Tiêu đề (*)";
+            }
+
             if (!genericModalInstance) {
                 genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
             }
@@ -1696,17 +1823,24 @@
 
         function editItem(type, index) {
             const item = dbData[type][index];
-            document.getElementById('genericType').value = type;
+            openGenericModal(type);
             document.getElementById('genericIndex').value = index;
             document.getElementById('genericModalTitle').innerText = "Chỉnh sửa mục";
+
             document.getElementById('gName').value = item.name || '';
-            document.getElementById('gVersion').value = item.version || item.rating || item.category || '';
             document.getElementById('gDev').value = item.dev || '';
-            document.getElementById('gDesc').value = item.description || '';
-            if (!genericModalInstance) {
-                genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
-            }
-            genericModalInstance.show();
+            document.getElementById('gCategory').value = item.category || '';
+            document.getElementById('gImg').value = item.img || '';
+            document.getElementById('gHighlightTitle').value = item.highlightTitle || '';
+            document.getElementById('gHighlights').value = Array.isArray(item.highlights) ? item.highlights.join('\n') : (item.highlights || '');
+            document.getElementById('gIsApp').checked = !!item.isApp;
+            document.getElementById('gNoDownload').checked = !!item.noDownload;
+            document.getElementById('gDownloadLink').value = item.downloadLink || '';
+
+            if (item.version) document.getElementById('gVersion').value = item.version;
+            if (item.rating) document.getElementById('gRating').value = item.rating;
+            if (item.systemRequirements) document.getElementById('gSysReq').value = item.systemRequirements;
+            if (item.description) document.getElementById('gDesc').value = item.description;
         }
 
         async function saveGenericItem() {
@@ -1719,13 +1853,39 @@
                 return;
             }
 
-            const newItem = {
+            const highlightsRaw = document.getElementById('gHighlights').value.trim();
+            const highlightsArr = highlightsRaw ? highlightsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            
+            let imgInputVal = document.getElementById('gImg').value.trim();
+            if (!imgInputVal) {
+                imgInputVal = "https://kpazz.github.io/imgload.png";
+            }
+
+            let newItem = {
                 name: name,
-                version: document.getElementById('gVersion').value.trim() || "1.0",
                 dev: document.getElementById('gDev').value.trim() || "KPazz",
-                publishDate: "05/11/2026",
-                description: document.getElementById('gDesc').value.trim()
+                category: document.getElementById('gCategory').value.trim() || "Tiện ích",
+                img: imgInputVal,
+                publishDate: "07/11/2026",
+                isApp: document.getElementById('gIsApp').checked,
+                noDownload: document.getElementById('gNoDownload').checked,
+                downloadLink: document.getElementById('gDownloadLink').value.trim(),
+                highlightTitle: document.getElementById('gHighlightTitle').value.trim(),
+                highlights: highlightsArr
             };
+
+            if (type === 'news' || type === 'tip') {
+                newItem.description = document.getElementById('gDesc').value.trim();
+                newItem.rating = document.getElementById('gRating').value.trim() || "5.0";
+            } else if (type === 'app' || type === 'media' || type === 'prod') {
+                newItem.version = document.getElementById('gVersion').value.trim() || "1.0.0";
+                newItem.systemRequirements = document.getElementById('gSysReq').value.trim() || "Android / iOS";
+                if (type === 'app') {
+                    newItem.rating = document.getElementById('gRating').value.trim() || "4.0";
+                }
+            } else {
+                newItem.version = document.getElementById('gVersion').value.trim() || "1.0";
+            }
 
             if (index >= 0) {
                 dbData[type][index] = newItem;
@@ -1735,7 +1895,7 @@
                 recordHistory(type, `Thêm mới mục: "${name}"`);
             }
 
-            localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+            localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
             renderTable(type);
             updateJSONOutput(type);
             updateCountBadge(type);
@@ -1743,21 +1903,23 @@
 
             if (genericModalInstance) genericModalInstance.hide();
 
-            await commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+            const cleanFilePath = jsonPaths[type].replace('../', '');
+            await commitAndPushToGitHub("Add/Edit item in " + cleanFilePath, cleanFilePath, dbData[type]);
         }
 
         async function deleteItem(type, index) {
             const itemName = dbData[type][index].name || 'mục này';
             if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
                 dbData[type].splice(index, 1);
-                localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
+                localStorage.setItem('kpazz_fallback_' + type, JSON.stringify(dbData[type]));
                 renderTable(type);
                 updateJSONOutput(type);
                 updateCountBadge(type);
                 renderRepoStats();
                 recordHistory(type, `Xóa mục: "${itemName}"`);
 
-                await commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                const cleanFilePath = jsonPaths[type].replace('../', '');
+                await commitAndPushToGitHub("Delete item in " + cleanFilePath, cleanFilePath, dbData[type]);
             }
         }
 
@@ -1776,17 +1938,16 @@
             if (!tbody) return;
             
             const allFilesAndDirs = [
-                { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "05/11/2026 12:05 SA" },
-                { type: "Thư mục", format: "DIR", path: "Tabs/", size: "14.2 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tweak.json", size: "2.4 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tintucmoi.json", size: "3.1 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Appjailbreak.json", size: "2.0 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Daphuongtien.json", size: "1.8 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Meo.json", size: "1.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp JSON", format: "JSON", path: "Tabs/Nangsuat.json", size: "1.9 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "05/11/2026 12:05 SA" },
-                { type: "Tệp Cấu hình", format: "YML", path: ".github/workflows/deploy.yml", size: "1.1 KB", date: "05/11/2026 12:05 SA" }
+                { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "07/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "07/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "Tabs/", size: "14.2 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tweak.json", size: "2.4 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Tintucmoi.json", size: "3.1 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Appjailbreak.json", size: "2.0 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Daphuongtien.json", size: "1.8 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Meo.json", size: "1.5 KB", date: "07/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "Tabs/Nangsuat.json", size: "1.9 KB", date: "07/11/2026" },
+                { type: "Tệp Web", format: "HTML", path: "kp/index.html", size: "8.5 KB", date: "07/11/2026" }
             ];
 
             tbody.innerHTML = '';
@@ -1796,7 +1957,7 @@
                 
                 if (item.format === 'DIR') { badgeClass = "bg-primary"; iconClass = "fa-folder text-primary"; }
                 else if (item.format === 'JSON') { badgeClass = "bg-warning text-dark"; iconClass = "fa-file-code text-warning"; }
-                else if (item.format === 'HTML' || item.format === 'YML') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
+                else if (item.format === 'HTML') { badgeClass = "bg-info text-dark"; iconClass = "fa-file-lines text-info"; }
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
