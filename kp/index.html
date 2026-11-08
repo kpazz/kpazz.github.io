@@ -986,7 +986,7 @@
                     </div>
                     <div>
                         <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết</label>
-                        <p id="prevDesc" class="p-3 bg-light rounded-3 border mb-0" style="white-space: pre-line;"></p>
+                        <p id="prevDesc" class="p-3 bg-light rounded-3 border mb-0"></p>
                     </div>
                 </div>
                 <div class="modal-footer border-0 pt-0">
@@ -1505,25 +1505,16 @@
 
         async function loadAllData() {
             for (const key of Object.keys(jsonPaths)) {
-                let loadedSuccessfully = false;
                 try {
-                    const response = await fetch(jsonPaths[key] + "?t=" + new Date().getTime());
+                    const response = await fetch(jsonPaths[key]);
                     if (response.ok) {
-                        const jsonData = await response.json();
-                        if (Array.isArray(jsonData) && jsonData.length > 0) {
-                            dbData[key] = jsonData;
-                            localStorage.setItem('kpazz_' + key + '_json', JSON.stringify(jsonData));
-                            loadedSuccessfully = true;
-                        }
+                        dbData[key] = await response.json();
+                    } else {
+                        loadFallbackData(key);
                     }
                 } catch (e) {
-                    console.warn("Không thể fetch trực tiếp file " + jsonPaths[key]);
-                }
-
-                if (!loadedSuccessfully) {
                     loadFallbackData(key);
                 }
-
                 loadHistory(key);
                 renderTable(key);
                 updateJSONOutput(key);
@@ -1537,15 +1528,14 @@
         function loadFallbackData(key) {
             const stored = localStorage.getItem('kpazz_' + key + '_json');
             if (stored) {
-                try { 
-                    const parsed = JSON.parse(stored);
-                    if (Array.isArray(parsed) && parsed.length > 0) {
-                        dbData[key] = parsed;
-                        return;
-                    }
-                } catch(e){}
+                try { dbData[key] = JSON.parse(stored); return; } catch(e){}
             }
-            dbData[key] = [];
+            if (key === 'tweak') dbData.tweak = [{ name: "AI Chat VIP Assistant Pro Max Ultra Edition", version: "1.0.0", dev: "Ravand", publishDate: "07/11/2026", description: "Mở khóa VIP" }];
+            if (key === 'news') dbData.news = [{ name: "Lara Croft: Temple of Osiris", dev: "Feral Interactive", category: "Tin tức game", description: "Khám phá hầm mộ Ai Cập bí ẩn cùng nữ khảo cổ nổi tiếng nhé.", rating: "4.1", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80", publishDate: "07/11/2026", isApp: false, noDownload: true, downloadLink: "", highlightTitle: "Lara Croft dành cho bạn nếu", highlights: ["Bạn muốn trải nghiệm mượt mà."] }];
+            if (key === 'app') dbData.app = [{ name: "Sileo Package Manager", version: "2.5.2", dev: "Sileo Team", category: "Quản lý gói", systemRequirements: "iOS 14.0 - 16.6.1", rating: "4.0", img: "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=300&q=80", publishDate: "30/10/2026", isApp: true, noDownload: false, downloadLink: "https://example.com/downloads/sample-file.deb", highlightTitle: "Sileo Manager dành cho bạn nếu", highlights: ["Trải nghiệm quản lý gói mượt mà."] }];
+            if (key === 'media') dbData.media = [{ name: "Xingtu - 醒图", version: "13.2.0", dev: "Beijing Lingdong", category: "Chỉnh ảnh AI", systemRequirements: "Android 7.0 / iOS 14.0", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80", publishDate: "21/10/2026", isApp: true, noDownload: false, downloadLink: "https://example.com/downloads/sample-file.apk", highlightTitle: "Xingtu dành cho bạn nếu", highlights: ["Chỉnh ảnh chân dung lung linh."] }];
+            if (key === 'tip') dbData.tip = [{ name: "Tối Ưu Android 2026", dev: "Mẹo Công Nghệ KPazz", category: "Thủ thuật Android", description: "Hướng dẫn dọn dẹp bộ nhớ đệm.", rating: "5.0", img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80", publishDate: "15/10/2026", isApp: false, noDownload: true, downloadLink: "", highlightTitle: "Mẹo này dành cho bạn nếu", highlights: ["Cải thiện tốc độ xử lý RAM."] }];
+            if (key === 'prod') dbData.prod = [{ name: "VNeID", version: "2.1.5", dev: "Bộ Công An", category: "Dân cư quốc gia", systemRequirements: "Android 6.0 / iOS 13.0", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80", publishDate: "12/10/2026", isApp: true, noDownload: false, downloadLink: "https://example.com/downloads/sample-file.apk", highlightTitle: "VNeID dành cho bạn nếu", highlights: ["Tích hợp giấy tờ cá nhân."] }];
         }
 
         function recordHistory(type, actionDesc) {
@@ -1628,8 +1618,8 @@
             
             let htmlContent = '';
             
-            if (!Array.isArray(dbData[type]) || dbData[type].length === 0) {
-                container.innerHTML = `<div class="text-center text-muted py-3">Chưa có dữ liệu nào. Bạn có thể bấm nút "Thêm Mục Mới" ở góc trên để tạo bản ghi.</div>`;
+            if (dbData[type].length === 0) {
+                container.innerHTML = `<div class="text-center text-muted py-3">Chưa có dữ liệu nào.</div>`;
                 return;
             }
 
@@ -1748,6 +1738,7 @@
             fieldRatingBox.style.display = 'block';
             fieldSysReqBox.style.display = 'block';
 
+            // Đặt toàn bộ ô về trống để hiển thị placeholder
             document.getElementById('gName').value = '';
             document.getElementById('gDev').value = '';
             document.getElementById('gCategory').value = '';
@@ -1891,7 +1882,7 @@
 
         async function deleteItem(type, index) {
             const itemName = dbData[type][index].name || 'mục này';
-            if (confirm(`Hệ thống sẽ xóa "${itemName}". Bạn có chắc chắn không?`)) {
+            if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
                 dbData[type].splice(index, 1);
                 localStorage.setItem('kpazz_' + type + '_json', JSON.stringify(dbData[type]));
                 renderTable(type);
