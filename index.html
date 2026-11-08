@@ -12,8 +12,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -31,7 +29,7 @@
                         uptoOrangeBadge: '#e58e26',
                     },
                     fontFamily: {
-                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', "SF Pro Display", "SF Pro Text", 'Helvetica Neue', 'Roboto', 'sans-serif'],
                     }
                 }
             }
@@ -39,10 +37,58 @@
     </script>
 
     <style>
-        /* Chống Zoom trên iOS & Chuyển màu MỜ DẦN TỪ TỪ cho Sáng/Tối */
+        /* HIỆU ỨNG KÍNH GLASSMOPHISM CHUẨN iOS */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.45) !important;
+            backdrop-filter: blur(25px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
+            border: none !important;
+            box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.08) !important;
+        }
+
+        .dark .glass-panel {
+            background: rgba(15, 27, 34, 0.55) !important;
+            backdrop-filter: blur(25px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
+            border: none !important;
+            box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.37) !important;
+        }
+
+        /* NỀN DRAWER MENU CHÍNH */
+        .drawer-main-panel {
+            background: rgba(11, 22, 28, 0.85) !important;
+            backdrop-filter: blur(30px) saturate(200%) !important;
+            -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+            border: none !important;
+            box-shadow: 5px 0 35px rgba(0, 0, 0, 0.6) !important;
+        }
+        .dark .drawer-main-panel {
+            background: rgba(9, 17, 22, 0.92) !important;
+            backdrop-filter: blur(30px) saturate(200%) !important;
+            -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+            border: none !important;
+            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.8) !important;
+        }
+
+        /* NỀN SUBMENU TRONG DRAWER */
+        .drawer-submenu-container {
+            background: rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border-radius: 14px;
+            padding: 10px;
+            margin-top: 6px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+        .dark .drawer-submenu-container {
+            background: rgba(0, 0, 0, 0.45) !important;
+        }
+
+        /* Chống Zoom & Chuyển màu mượt mà */
         html, body, div, header, footer, button, input {
             touch-action: manipulation;
             -webkit-text-size-adjust: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
             transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
                         color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
                         border-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,7 +107,6 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
         }
@@ -89,7 +134,6 @@
             font-size: 0.9rem;
         }
 
-        /* Hero Slider Custom Styles */
         .card-slider-container {
             scroll-behavior: smooth;
         }
@@ -98,23 +142,22 @@
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             opacity: 0.6;
             transform: scale(0.9);
-            border: 1.5px solid transparent;
+            border: none !important;
         }
 
         .hero-card.active-card {
             opacity: 1;
             transform: scale(1);
-            border-color: #e56338;
-            box-shadow: 0 10px 25px -5px rgba(229, 99, 56, 0.3);
+            box-shadow: 0 12px 30px -5px rgba(229, 99, 56, 0.45) !important;
         }
 
         .glass-badge {
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.35) !important;
+            backdrop-filter: blur(12px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+            border: none !important;
         }
 
-        /* Hiệu ứng NẢY MỞ POPUP (Pop In) */
         @keyframes modalBounceIn {
             0% {
                 opacity: 0;
@@ -130,7 +173,6 @@
             }
         }
 
-        /* Hiệu ứng NẢY ĐÓNG POPUP (Pop Out) */
         @keyframes modalBounceOut {
             0% {
                 opacity: 1;
@@ -167,7 +209,7 @@
             opacity: 0;
         }
         .drawer-submenu.open {
-            max-height: 280px;
+            max-height: 360px;
             overflow-y: auto;
             opacity: 1;
         }
@@ -175,10 +217,9 @@
 </head>
 <body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-20">
 
-    <!-- ==================== HEADER (CỐ ĐỊNH Ở ĐỈNH MÀN HÌNH) ==================== -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white shadow-md border-b border-gray-200 dark:border-gray-800/80">
-        <div class="flex items-center justify-between px-3.5 py-2.5 max-w-md mx-auto">
-            <!-- Left: Menu & Logo -->
+    <!-- ==================== HEADER ==================== -->
+    <header class="fixed top-0 inset-x-0 z-40 bg-white/70 dark:bg-[#0b161c]/70 backdrop-blur-xl text-gray-900 dark:text-white shadow-md border-none">
+        <div class="flex items-center justify-between px-3.5 py-2.5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto">
             <div class="flex items-center space-x-3.5">
                 <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
                     <i class="fa-solid fa-bars"></i>
@@ -188,11 +229,10 @@
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                     </svg>
-                    <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white font-sans">KPazz</span>
+                    <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">KPazz</span>
                 </a>
             </div>
 
-            <!-- Right: Action Icons -->
             <div class="flex items-center space-x-3.5">
                 <button id="themeToggleBtn" aria-label="Toggle Theme" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 text-amber-500 dark:text-yellow-400 flex items-center justify-center text-sm shadow hover:opacity-90 active:scale-90">
                     <i id="themeIcon" class="fa-solid fa-moon"></i>
@@ -208,51 +248,64 @@
             </div>
         </div>
 
-        <!-- Thanh ngày tháng -->
-        <div class="py-2 px-3.5 bg-gray-100 dark:bg-[#091116] border-t border-gray-200 dark:border-gray-800/50">
-            <div class="flex items-center justify-between max-w-md mx-auto text-xs font-bold tracking-wide">
+        <div class="py-2 px-3.5 bg-gray-100/60 dark:bg-[#091116]/60 backdrop-blur-md border-none">
+            <div class="flex items-center justify-between max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-xs font-bold tracking-wide">
                 <span class="text-uptoAccent flex items-center space-x-1.5">
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Sáu, 30 tháng 10, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Hai, 9 tháng 11, 2026</span>
             </div>
         </div>
     </header>
 
-    <!-- Khoảng bù chiều cao cho Header Fixed -->
     <div class="h-28"></div>
 
-    <!-- ==================== POPUP HIỂN THỊ TẤT CẢ NỘI DUNG CHUYÊN MỤC ==================== -->
-    <div id="categoryModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
-        <div id="categoryCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[90vh] flex flex-col overflow-hidden">
+    <!-- ==================== POPUP XEM TẤT CẢ (CHỌN GRID 1-2-3-4 CỘT & LƯỚT XEM TOÀN BỘ) ==================== -->
+    <div id="categoryModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-0 md:p-3">
+        <div id="categoryCard" class="glass-panel text-gray-900 dark:text-white rounded-none md:rounded-3xl p-4 w-full h-full md:h-auto md:max-w-4xl shadow-2xl relative md:max-h-[90vh] flex flex-col overflow-hidden border-none">
             
-            <div class="flex items-start justify-between pb-3 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+            <!-- Header Popup -->
+            <div class="flex items-start justify-between pb-2 border-none flex-shrink-0 pt-2 md:pt-0">
                 <div>
-                    <h3 id="categoryModalTitle" class="font-black text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
+                    <h3 id="categoryModalTitle" class="font-extrabold text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
                 </div>
-                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
+                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div class="py-3 flex-shrink-0 space-y-1.5">
+            <!-- Thanh Tìm kiếm & Chọn Cột Mobile (1-2-3-4, Mặc định 3) -->
+            <div class="py-2 flex-shrink-0 space-y-2">
                 <div class="relative w-full">
-                    <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-uptoAccent shadow-inner">
+                    <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-white/40 dark:bg-black/30 border-none text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
                 </div>
-                <p id="categoryModalCountText" class="text-[11px] font-semibold text-uptoAccent px-0.5">Có 0 mục trong danh sách này</p>
+                
+                <div class="flex items-center justify-between px-0.5">
+                    <p id="categoryModalCountText" class="text-[11px] font-bold text-uptoAccent">Có 0 mục trong danh sách này</p>
+
+                    <!-- Chọn Cột Grid -->
+                    <div class="flex items-center space-x-1 bg-black/20 dark:bg-white/10 p-1 rounded-xl text-[10px] font-extrabold">
+                        <span class="text-gray-400 text-[9px] px-1 hidden sm:inline">Cột:</span>
+                        <button onclick="setGridColumns(1)" id="gridBtn1" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">1</button>
+                        <button onclick="setGridColumns(2)" id="gridBtn2" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">2</button>
+                        <button onclick="setGridColumns(3)" id="gridBtn3" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white">3</button>
+                        <button onclick="setGridColumns(4)" id="gridBtn4" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">4</button>
+                    </div>
+                </div>
             </div>
 
-            <div id="categoryItemList" class="overflow-y-auto no-scrollbar space-y-2.5 flex-1 pr-1 pb-2"></div>
+            <!-- DANH SÁCH HIỂN THỊ LƯỚI GRID HỖ TRỢ CUỘN HIỂN THỊ HẾT DỮ LIỆU -->
+            <div id="categoryItemList" class="overflow-y-auto no-scrollbar grid grid-cols-3 gap-2 sm:gap-3 flex-1 pr-1 pb-2"></div>
         </div>
     </div>
 
-    <!-- ==================== POPUP CHI TIẾT GAME / ỨNG DỤNG / BÀI VIẾT ==================== -->
-    <div id="appDetailModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-3">
-        <div id="appDetailCard" class="bg-white dark:bg-[#0b161c] text-gray-900 dark:text-white rounded-3xl p-4 sm:p-5 w-full max-w-md shadow-2xl border border-gray-200 dark:border-gray-800 relative max-h-[92vh] flex flex-col overflow-hidden">
+    <!-- ==================== POPUP CHI TIẾT ==================== -->
+    <div id="appDetailModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-3">
+        <div id="appDetailCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-4 sm:p-5 w-full max-w-md md:max-w-xl shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden border-none">
             
-            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-800/90 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
+            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-200/60 dark:bg-gray-800/60 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -268,31 +321,31 @@
                     </div>
 
                     <div class="flex items-start space-x-3.5">
-                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border border-gray-300 dark:border-gray-700/80 shadow-lg flex-shrink-0">
+                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border-none shadow-lg flex-shrink-0">
                         <div class="flex-1 min-w-0 pr-4">
-                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
-                            <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">1.2.3RC2</p>
-                            <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-semibold mt-1">Nhà Phát Triển</p>
+                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
+                            <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold">1.2.3RC2</p>
+                            <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-bold mt-1">Nhà Phát Triển</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 py-3 border-t border-b border-gray-200 dark:border-gray-800/80 text-center">
+                    <div class="grid grid-cols-3 gap-2 py-3 border-none text-center">
                         <div class="flex flex-col items-center justify-center">
                             <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
                                 <i class="fa-solid fa-star text-amber-400 text-sm"></i>
-                                <span id="detailRatingScore">4.8</span>
+                                <span id="detailRatingScore" class="font-extrabold">4.8</span>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
-                                <span>6 đánh giá</span>
+                                <span class="font-bold">6 đánh giá</span>
                                 <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
                             </p>
                         </div>
-                        <div class="border-x border-gray-200 dark:border-gray-800/80 flex flex-col items-center justify-center px-1">
-                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">30/10/2026</span>
+                        <div class="border-none flex flex-col items-center justify-center px-1">
+                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">09/11/2026</span>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">ngày đăng</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
-                            <div class="w-5 h-5 rounded-md bg-cyan-100 dark:bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs">
+                            <div class="w-5 h-5 rounded-md bg-cyan-100/60 dark:bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs font-bold">
                                 <i class="fa-solid fa-shield-halved"></i>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-1 font-medium flex items-center justify-center">
@@ -304,33 +357,33 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div id="articleContentBlock" class="hidden bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
-                        <h4 class="font-bold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
+                    <div id="articleContentBlock" class="hidden glass-panel border-none rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                        <h4 class="font-extrabold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
                             <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
                             <span>Nội dung bài viết / Hướng dẫn</span>
                         </h4>
                         <p id="detailArticleText" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed"></p>
                     </div>
 
-                    <div id="highlightsBlock" class="bg-gray-50 dark:bg-[#0e212b] border border-gray-200 dark:border-cyan-800/80 rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
-                        <h4 id="detailHighlightTitle" class="font-bold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
+                    <div id="highlightsBlock" class="glass-panel border-none rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                        <h4 id="detailHighlightTitle" class="font-extrabold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
                         <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-600 dark:text-gray-300">
                             <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
                         </ul>
                     </div>
 
                     <div id="systemRequirementsBlock" class="space-y-0.5">
-                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Yêu cầu hệ thống</h4>
+                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Yêu cầu hệ thống</h4>
                         <p id="detailSystemReq" class="text-xs text-gray-500 dark:text-gray-400">Tương thích tốt trên Android & iOS</p>
                     </div>
 
                     <div class="space-y-2 pt-2">
-                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Thông tin chi tiết</h4>
+                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Thông tin chi tiết</h4>
                         <p class="text-xs font-semibold text-gray-500 dark:text-gray-400">Thông tin cơ bản & Tác giả</p>
 
                         <div class="grid grid-cols-2 gap-3 text-xs pt-1">
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-gray-100 dark:bg-gray-800/80 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300">
+                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300">
                                     <i class="fa-solid fa-building text-sm"></i>
                                 </div>
                                 <div>
@@ -340,7 +393,7 @@
                             </div>
 
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl bg-gray-100 dark:bg-gray-800/80 border border-gray-300 dark:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300">
+                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300">
                                     <i class="fa-solid fa-list-check text-sm"></i>
                                 </div>
                                 <div>
@@ -356,7 +409,7 @@
                     </div>
                 </div>
 
-                <div class="space-y-4 pt-2 border-t border-gray-200 dark:border-gray-800/80">
+                <div class="space-y-4 pt-2 border-none">
                     <div class="space-y-3">
                         <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
                             <span>Xếp hạng nội dung này</span>
@@ -364,7 +417,7 @@
                         </a>
 
                         <div class="flex items-center justify-between px-2">
-                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border border-gray-300 dark:border-gray-700">
+                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border-none">
                             <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
@@ -374,17 +427,17 @@
                             </div>
                         </div>
 
-                        <button class="w-full bg-[#00a8e8] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow">
+                        <button class="w-full bg-[#00a8e8] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow border-none">
                             ĐÁNH GIÁ NỘI DUNG
                         </button>
                     </div>
 
                     <div class="space-y-2 pt-2">
-                        <h4 class="font-bold text-sm text-gray-900 dark:text-white">Xếp hạng</h4>
+                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Xếp hạng</h4>
                         <div class="flex items-center space-x-4">
                             <div class="text-center">
-                                <span id="detailLargeRatingNum" class="text-5xl font-black text-gray-700 dark:text-gray-300 tracking-tighter leading-none">4.8</span>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-center">
+                                <span id="detailLargeRatingNum" class="text-5xl font-extrabold text-gray-700 dark:text-gray-300 tracking-tighter leading-none">4.8</span>
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-center font-bold">
                                     <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
                                     <span>6 đánh giá</span>
                                 </p>
@@ -392,31 +445,31 @@
                             <div class="flex-1 space-y-1 text-[10px] text-gray-500 dark:text-gray-400 font-bold">
                                 <div class="flex items-center space-x-2">
                                     <span>5</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
                                         <div id="starBar5" class="h-full bg-cyan-500 w-[85%] transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>4</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
                                         <div id="starBar4" class="h-full bg-cyan-500 w-[15%] transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>3</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
                                         <div id="starBar3" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>2</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
                                         <div id="starBar2" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <span>1</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
                                         <div id="starBar1" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
                                     </div>
                                 </div>
@@ -430,7 +483,7 @@
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
-                        <div class="flex items-start space-x-3 bg-gray-100 dark:bg-gray-900/60 p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
+                        <div class="flex items-start space-x-3 glass-panel p-3 rounded-2xl border-none">
                             <div class="w-10 h-10 rounded-xl bg-cyan-600 dark:bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
                                 <i class="fa-solid fa-user text-lg"></i>
                             </div>
@@ -446,9 +499,9 @@
                     </div>
                 </div>
 
-                <div class="space-y-3 pt-3 border-t border-gray-200 dark:border-gray-800/80">
+                <div class="space-y-3 pt-3 border-none">
                     <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5">
+                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5">
                             <i class="fa-solid fa-lightbulb text-uptoAccent"></i>
                             <span>Nội dung tương tự đề xuất</span>
                         </h4>
@@ -456,25 +509,25 @@
                     </div>
 
                     <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
-                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.0'})">
-                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
+                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
+                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.0'})">
+                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border-none">
                             <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">Zenless Zone</h5>
                             <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">HoYoverse</p>
                         </div>
 
-                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.8'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
+                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
+                             onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.8'})">
+                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border-none">
                                 <i class="fa-solid fa-atom text-2xl text-black"></i>
                             </div>
                             <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">ChatGPT</h5>
                             <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">OpenAI</p>
                         </div>
 
-                        <div class="flex-none w-28 bg-gray-100 dark:bg-gray-900/80 p-2 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition text-center"
-                             onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '30/10/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '5.0'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border border-gray-300 dark:border-gray-700">
+                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
+                             onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '5.0'})">
+                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border-none">
                                 <i class="fa-solid fa-scissors text-2xl text-black"></i>
                             </div>
                             <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">CapCut</h5>
@@ -485,11 +538,11 @@
 
             </div>
 
-            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/90 dark:bg-[#0b161c]/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
-                <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block">
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/40 dark:bg-[#0b161c]/40 backdrop-blur-xl border-none transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
+                <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block border-none">
                     <div class="text-left">
-                        <h4 class="font-black text-sm leading-tight">Tải phiên bản mới nhất</h4>
-                        <p class="text-[10px] text-cyan-100 opacity-90 mt-0.5">APK An toàn &bull; KPazz Store</p>
+                        <h4 class="font-extrabold text-sm leading-tight">Tải phiên bản mới nhất</h4>
+                        <p class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">APK An toàn &bull; KPazz Store</p>
                     </div>
                     <i class="fa-solid fa-download text-lg pr-1"></i>
                 </a>
@@ -498,12 +551,12 @@
         </div>
     </div>
 
-    <!-- ==================== SEARCH OVERLAY MODAL ==================== -->
-    <div id="searchModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-        <div id="searchBoxContainer" class="max-w-md w-full bg-white dark:bg-[#13222a] rounded-3xl p-4 border border-gray-200 dark:border-gray-700 shadow-2xl transition-colors duration-800 flex flex-col max-h-[80vh] overflow-hidden">
-            <div class="flex items-center justify-between w-full mb-3 pb-2.5 border-b border-gray-200 dark:border-gray-800 flex-shrink-0">
+    <!-- ==================== SEARCH MODAL ==================== -->
+    <div id="searchModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="searchBoxContainer" class="max-w-md md:max-w-lg w-full glass-panel rounded-3xl p-4 border-none shadow-2xl transition-colors duration-800 flex flex-col max-h-[80vh] overflow-hidden">
+            <div class="flex items-center justify-between w-full mb-3 pb-2.5 border-none flex-shrink-0">
                 <div class="relative w-full mr-2">
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm ứng dụng, game, mẹo..." class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:border-uptoAccent text-base shadow-inner">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm ứng dụng, game, mẹo..." class="w-full bg-white/40 dark:bg-black/30 border-none text-gray-900 dark:text-white rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-uptoAccent text-base shadow-inner backdrop-blur-md">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
                 </div>
                 <button id="searchCloseBtn" class="text-gray-500 dark:text-gray-300 text-sm font-semibold px-2 hover:text-uptoAccent">Hủy</button>
@@ -515,10 +568,10 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP ĐĂNG NHẬP ==================== -->
-    <div id="loginModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div id="loginCard" class="bg-white dark:bg-[#13222a] text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-gray-200 dark:border-gray-700 relative">
-            <button id="loginCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ==================== LOGIN MODAL ==================== -->
+    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="loginCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md shadow-2xl border-none relative">
+            <button id="loginCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="text-center mb-6">
                 <h3 class="text-xl font-bold tracking-tight">Đăng Nhập</h3>
@@ -528,35 +581,35 @@
             <form id="loginForm" class="space-y-4" onsubmit="event.preventDefault();">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản hoặc Số điện thoại</label>
-                    <input type="text" required placeholder="Nhập username hoặc SĐT" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="text" required placeholder="Nhập username hoặc SĐT" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu</label>
-                    <input type="password" required placeholder="••••••••" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="password" required placeholder="••••••••" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
 
                 <div class="flex items-center justify-end">
                     <a href="#" class="text-xs text-uptoAccent hover:underline font-medium">Quên mật khẩu?</a>
                 </div>
 
-                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95">
+                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 border-none">
                     Đăng Nhập
                 </button>
             </form>
 
-            <div class="mt-5 pt-4 border-t border-gray-200 dark:border-gray-800 text-center">
+            <div class="mt-5 pt-4 border-none text-center">
                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Chưa có tài khoản?</p>
-                <button id="openRegisterBtn" class="w-full bg-transparent border border-uptoAccent text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
+                <button id="openRegisterBtn" class="w-full bg-white/20 dark:bg-black/20 border-none text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
                     Tạo tài khoản mới
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ==================== POPUP ĐĂNG KÝ ==================== -->
-    <div id="registerModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div id="registerCard" class="bg-white dark:bg-[#13222a] text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm shadow-2xl border border-gray-200 dark:border-gray-700 relative">
-            <button id="registerCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+    <!-- ==================== REGISTER MODAL ==================== -->
+    <div id="registerModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="registerCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md shadow-2xl border-none relative">
+            <button id="registerCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="text-center mb-5">
                 <h3 class="text-xl font-bold tracking-tight">Tạo Tài Khoản</h3>
@@ -566,123 +619,123 @@
             <form id="registerForm" class="space-y-3.5" onsubmit="event.preventDefault();">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản *</label>
-                    <input type="text" required placeholder="Nhập tên tài khoản" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="text" required placeholder="Nhập tên tài khoản" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Số điện thoại *</label>
-                    <input type="tel" required placeholder="Nhập số điện thoại" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="tel" required placeholder="Nhập số điện thoại" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Email (không bắt buộc)</label>
-                    <input type="email" placeholder="example@gmail.com" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="email" placeholder="example@gmail.com" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu *</label>
-                    <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full bg-gray-100 dark:bg-[#0b161c] border border-gray-300 dark:border-gray-700 rounded-xl px-3.5 py-2 text-base focus:outline-none focus:border-uptoAccent">
+                    <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
 
-                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2">
+                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2 border-none">
                     Hoàn Tất Đăng Ký
                 </button>
             </form>
 
-            <div class="mt-4 pt-3 border-t border-gray-200 dark:border-gray-800 text-center">
+            <div class="mt-4 pt-3 border-none text-center">
                 <p class="text-xs text-gray-500 dark:text-gray-400">Đã có tài khoản? <button id="backToLoginBtn" class="text-uptoAccent font-bold hover:underline">Đăng nhập</button></p>
             </div>
         </div>
     </div>
 
-    <!-- SIDEBAR NAVIGATION DRAWER -->
-    <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 bg-white dark:bg-[#091116] text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 shadow-2xl flex flex-col justify-between overflow-y-auto no-scrollbar">
+    <!-- SIDEBAR DRAWER MENU -->
+    <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 drawer-main-panel text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto no-scrollbar border-none">
         <div>
-            <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between sticky top-0 bg-white dark:bg-[#091116] z-10">
+            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-[#0b161c]/80 dark:bg-[#081014]/90 backdrop-blur-xl z-10">
                 <div class="flex items-center space-x-2">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                     </svg>
-                    <span class="text-lg font-bold tracking-tight">KPazz</span>
+                    <span class="text-lg font-bold tracking-tight text-white">KPazz</span>
                 </div>
-                <button id="drawerCloseBtn" class="text-gray-400 text-xl"><i class="fa-solid fa-xmark"></i></button>
+                <button id="drawerCloseBtn" class="text-gray-300 hover:text-white text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <nav class="p-3 space-y-2 text-sm">
-                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-gray-100 dark:bg-uptoCard text-uptoAccent font-semibold transition">
+                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-white/5 text-uptoAccent font-semibold transition border-none">
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span>
                         </span>
                         <i id="tweakChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerTweakList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerTweakList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
                         </span>
                         <i id="newsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerNewsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerNewsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
                         </span>
                         <i id="jbChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerJbList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerJbList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-photo-film w-5 text-center"></i><span>Đa phương tiện</span>
                         </span>
                         <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerMediaList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerMediaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
                         </span>
                         <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerTipsList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerTipsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-uptoCard transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
                         </span>
                         <i id="prodChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerProdList" class="drawer-submenu pl-6 pr-2 text-xs text-gray-500 dark:text-gray-400"></div>
+                    <div id="drawerProdList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
                 </div>
             </nav>
         </div>
-        <div class="p-4 text-xs text-gray-500 text-center border-t border-gray-200 dark:border-gray-800">
+        <div class="p-4 text-xs text-gray-400 text-center border-none">
             Thiết kế & Nội dung bởi Kim Trong @<span id="drawerYearText">2026</span>
         </div>
     </div>
     <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
 
     <!-- ==================== MAIN CONTENT ==================== -->
-    <main class="max-w-md mx-auto pt-3 space-y-6">
+    <main class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto pt-3 space-y-6">
 
         <!-- HERO SLIDER -->
         <section id="heroSection" class="relative w-full overflow-hidden py-1">
-            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw]"></div>
+            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw] md:px-[5vw]"></div>
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 mt-2"></div>
         </section>
 
@@ -766,14 +819,14 @@
 
     </main>
 
-    <!-- ==================== FOOTER CHÂN TRANG ==================== -->
-    <footer class="mt-12 border-t border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-[#081014] text-gray-600 dark:text-gray-400 py-8 px-4">
-        <div class="max-w-md mx-auto text-center space-y-4">
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="mt-12 border-none bg-gray-100/70 dark:bg-[#081014]/70 backdrop-blur-xl text-gray-600 dark:text-gray-400 py-8 px-4">
+        <div class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-center space-y-4">
             <div class="flex items-center justify-center space-x-2">
                 <svg class="w-7 h-7 text-uptoAccent fill-current" viewBox="0 0 24 24">
                     <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                 </svg>
-                <span class="text-xl font-black text-gray-900 dark:text-white tracking-tight">KPazz Store</span>
+                <span class="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight">KPazz Store</span>
             </div>
             
             <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs mx-auto">
@@ -790,14 +843,14 @@
                 <a href="#" class="hover:text-uptoAccent transition">Liên hệ</a>
             </div>
 
-            <p class="text-[11px] font-medium text-gray-500 dark:text-gray-500 pt-2 border-t border-gray-200 dark:border-gray-800/80">
+            <p class="text-[11px] font-medium text-gray-500 dark:text-gray-500 pt-2 border-none">
                 &copy; <span id="footerYearText">2026</span> KPazz. All rights reserved.
             </p>
         </div>
     </footer>
 
-    <!-- NÚT CUỘN LÊN ĐẦU TRANG -->
-    <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-white shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90">
+    <!-- NÚT CUỘN LÊN ĐẦU -->
+    <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-white shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90 border-none">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
@@ -1063,7 +1116,7 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== POPUP HIỂN THỊ TẤT CẢ TRONG MỤC ==================== */
+        /* ==================== LOGIC XEM TẤT CẢ & CUỘN LƯỚT TOÀN BỘ DANH SÁCH ==================== */
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
@@ -1073,6 +1126,31 @@
         const categorySearchInput = document.getElementById('categorySearchInput');
 
         let currentCategoryItems = [];
+        let currentGridCols = 3; // Mặc định là 3 cột
+
+        function setGridColumns(cols) {
+            currentGridCols = cols;
+            if (!categoryItemList) return;
+            
+            // Xóa các class grid-cols cũ
+            categoryItemList.className = categoryItemList.className.replace(/grid-cols-\d+/g, '');
+            categoryItemList.classList.add(`grid-cols-${cols}`);
+
+            // Cập nhật trạng thái active cho các nút chọn cột
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`gridBtn${i}`);
+                if (btn) {
+                    if (i === cols) {
+                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white shadow";
+                    } else {
+                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 text-gray-400 hover:text-white";
+                    }
+                }
+            }
+
+            // Render toàn bộ danh sách
+            renderCategoryItems(currentCategoryItems, currentCategoryItems.length);
+        }
 
         function renderCategoryItems(items, totalCount) {
             if (!categoryItemList) return;
@@ -1082,11 +1160,12 @@
             }
 
             if (!items.length) {
-                categoryItemList.innerHTML = '<p class="text-xs text-gray-400 text-center py-6">Không có nội dung nào trong danh mục này.</p>';
+                categoryItemList.innerHTML = '<p class="text-xs text-gray-400 text-center py-6 col-span-full">Không có nội dung nào trong danh mục này.</p>';
                 return;
             }
 
             let html = '';
+            // Render toàn bộ danh sách để có thể lướt xem đầy đủ theo đúng bộ đếm
             items.forEach((item, index) => {
                 const itemRating = item.rating || '4.8';
                 let rawVersion = item.version || 'v1.0.0';
@@ -1096,20 +1175,21 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
-                    <div class="category-item-card flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition"
+                    <div class="category-item-card flex flex-col items-start glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-95 transition space-y-1.5"
                          data-cat-idx="${index}">
-                        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
+                        <div class="w-full h-24 sm:h-28 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
                         </div>
-                        <div class="min-w-0 flex-1 space-y-0.5">
-                            <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                        <div class="min-w-0 flex-1 space-y-0.5 w-full">
+                            <h5 class="font-extrabold text-[11px] sm:text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 line-clamp-1 leading-tight font-normal">${truncatedDesc}</p>
+                            
+                            <div class="flex items-center justify-between pt-1">
                                 <div class="flex items-center space-x-0.5 font-bold">
                                     ${starsMarkup}
-                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                    <span class="text-[9px] text-gray-700 dark:text-white font-extrabold ml-0.5">${itemRating}</span>
                                 </div>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full uppercase">NHẬN</span>
                             </div>
                         </div>
                     </div>
@@ -1131,10 +1211,12 @@
         }
 
         function openCategoryModal(title, items) {
+            closeDrawer(); 
             categoryModalTitle.textContent = title;
             currentCategoryItems = items;
             categorySearchInput.value = '';
 
+            setGridColumns(3); // Mặc định là 3 cột khi mở
             renderCategoryItems(items, items.length);
             openModalWithBounce(categoryModal, categoryCard);
         }
@@ -1184,13 +1266,13 @@
         function selectDrawerItem(targetEl) {
             const allItems = document.querySelectorAll('.drawer-main-item');
             allItems.forEach(item => {
-                item.classList.remove('bg-gray-100', 'dark:bg-uptoCard', 'text-uptoAccent');
-                item.classList.add('text-gray-700', 'dark:text-gray-300');
+                item.classList.remove('bg-white/10', 'text-uptoAccent');
+                item.classList.add('text-gray-200');
             });
 
             if (targetEl) {
-                targetEl.classList.remove('text-gray-700', 'dark:text-gray-300');
-                targetEl.classList.add('bg-gray-100', 'dark:bg-uptoCard', 'text-uptoAccent');
+                targetEl.classList.remove('text-gray-200');
+                targetEl.classList.add('bg-white/10', 'text-uptoAccent');
             }
         }
 
@@ -1221,7 +1303,7 @@
         window.drawerStoreCache = {};
         window.storeDataCache = {};
 
-        function renderDrawerList(containerId, items) {
+        function renderDrawerList(containerId, items, categoryTitleName) {
             const container = document.getElementById(containerId);
             if (!container) return;
             const sortedItems = sortItemsByDate([...items]);
@@ -1231,18 +1313,26 @@
             const listItemsId = `subList_${containerId}`;
 
             let html = `
-                <div class="py-1.5 space-y-1.5">
-                    <div class="relative px-0.5 pb-0.5">
-                        <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-gray-100 dark:bg-[#13222a] border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg py-1 pl-7 pr-2.5 text-[11px] focus:outline-none focus:border-uptoAccent">
+                <div class="drawer-submenu-container space-y-2">
+                    <div class="flex items-center justify-between px-0.5">
+                        <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
+                            Có ${sortedItems.length} mục
+                        </span>
+                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
+                            <span>Xem tất cả</span>
+                            <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                        </button>
+                    </div>
+                    <div class="relative px-0.5">
+                        <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-black/40 border-none text-white rounded-lg py-1 pl-7 pr-2.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                         <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-gray-400 text-[10px]"></i>
                     </div>
-                    <p class="text-[10px] font-semibold text-uptoAccent px-0.5 pb-1">Có ${sortedItems.length} mục trong danh sách này</p>
-                    <div id="${listItemsId}" class="space-y-1">
+                    <div id="${listItemsId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
             `;
 
             sortedItems.forEach((item, index) => {
                 html += `
-                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2 rounded hover:bg-gray-200 dark:hover:bg-uptoCardHover truncate transition text-gray-600 dark:text-gray-300 active:scale-98"
+                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2 rounded-lg hover:bg-white/10 truncate transition text-gray-300 font-medium active:scale-98"
                        data-item-name="${item.name.toLowerCase()}"
                        onclick="handleDrawerItemClick('${containerId}', ${index})">
                         &bull; ${item.name}
@@ -1251,6 +1341,16 @@
             });
             html += `</div></div>`;
             container.innerHTML = html;
+        }
+
+        function getCategoryKey(containerId) {
+            if (containerId === 'drawerNewsList') return 'news';
+            if (containerId === 'drawerJbList') return 'jailbreak';
+            if (containerId === 'drawerTweakList') return 'tweak';
+            if (containerId === 'drawerMediaList') return 'media';
+            if (containerId === 'drawerTipsList') return 'tips';
+            if (containerId === 'drawerProdList') return 'productivity';
+            return 'news';
         }
 
         function filterDrawerSubmenu(containerId) {
@@ -1300,7 +1400,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
                     window.storeDataCache.news = data;
                     renderNewsSection(data);
-                    renderDrawerList('drawerNewsList', data);
+                    renderDrawerList('drawerNewsList', data, 'Tin tức mới');
                     allLoadedItems.push(...data);
                 }
 
@@ -1310,7 +1410,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.jailbreak = data;
                     renderJbSection(data);
-                    renderDrawerList('drawerJbList', data);
+                    renderDrawerList('drawerJbList', data, 'APP Jailbreak');
                     allLoadedItems.push(...data);
                 }
 
@@ -1320,7 +1420,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.tweak = data;
                     renderTweakJbSectionTop(data);
-                    renderDrawerList('drawerTweakList', data);
+                    renderDrawerList('drawerTweakList', data, 'Tweak Jailbreak IOS');
                     allLoadedItems.push(...data);
                 }
 
@@ -1330,7 +1430,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.media = data;
                     renderMultimediaSection(data);
-                    renderDrawerList('drawerMediaList', data);
+                    renderDrawerList('drawerMediaList', data, 'Đa phương tiện');
                     allLoadedItems.push(...data);
                 }
 
@@ -1340,7 +1440,7 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
                     window.storeDataCache.tips = data;
                     renderTipsSection(data);
-                    renderDrawerList('drawerTipsList', data);
+                    renderDrawerList('drawerTipsList', data, 'Mẹo & Hướng dẫn Công nghệ');
                     allLoadedItems.push(...data);
                 }
 
@@ -1351,7 +1451,7 @@
                     let rawProdData = [...data];
                     window.storeDataCache.productivity = rawProdData;
                     renderProductivitySection(rawProdData);
-                    renderDrawerList('drawerProdList', rawProdData);
+                    renderDrawerList('drawerProdList', rawProdData, 'Năng suất');
                     allLoadedItems.push(...rawProdData);
                 }
 
@@ -1378,19 +1478,19 @@
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
                         </div>
-                        <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
+                        <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 ${starsMarkup}
-                                <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
+                                <span class="text-[11px] font-extrabold text-gray-800 dark:text-white">${itemRating}</span>
                             </div>
-                            <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
+                            <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
                                 <span>Xem thêm</span>
                                 <i class="fa-solid fa-chevron-right text-[8px]"></i>
                             </button>
@@ -1417,7 +1517,7 @@
                 const publishDateText = item.publishDate || 'Mới';
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[280px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-2"
+                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-2"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
@@ -1429,11 +1529,11 @@
                         
                         <div class="space-y-1">
                             <div class="flex items-start space-x-2.5 min-w-0">
-                                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-black text-sm shadow mt-0.5">
+                                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-extrabold text-sm shadow mt-0.5">
                                     <i class="fa-solid fa-box-open"></i>
                                 </div>
                                 <div class="min-w-0 flex-1">
-                                    <h4 class="font-bold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
+                                    <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
                                 </div>
                             </div>
@@ -1441,9 +1541,9 @@
                             <div class="flex items-center justify-between pt-1">
                                 <div class="flex items-center space-x-1">
                                     ${starsMarkup}
-                                    <span class="text-[10px] font-bold text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                    <span class="text-[10px] font-extrabold text-gray-700 dark:text-white ml-1">${itemRating}</span>
                                 </div>
-                                <button class="bg-gray-200 dark:bg-gray-800 hover:bg-uptoAccent hover:text-white text-uptoAccent font-black text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0">
+                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 border-none">
                                     NHẬN
                                 </button>
                             </div>
@@ -1471,19 +1571,19 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px] flex-shrink-0"
+                    <div class="app-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl border-none cursor-pointer w-[220px] flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
+                        <div class="w-12 h-12 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5">
-                            <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                             <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 font-bold">
                                     ${starsMarkup}
-                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                    <span class="text-gray-700 dark:text-white ml-1 font-extrabold">${itemRating}</span>
                                 </div>
                             </div>
                         </div>
@@ -1495,7 +1595,6 @@
             bindCardClickEvents(container);
         }
 
-        /* ĐÃ SỬA CHUẨN XÁC: Tweak Jailbreak IOS hiển thị đúng cấu trúc 2 dòng, tự động xếp từ trên xuống dưới và trái sang phải */
         function renderTweakJbSectionTop(items) {
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
@@ -1512,19 +1611,19 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 bg-gray-100 dark:bg-uptoCard p-2.5 rounded-2xl border border-gray-200 dark:border-gray-800 cursor-pointer w-[220px] flex-shrink-0"
+                    <div class="app-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl border-none cursor-pointer w-[220px] flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center p-1 border border-gray-800 shadow flex-shrink-0 overflow-hidden">
+                        <div class="w-12 h-12 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow flex-shrink-0 overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5">
-                            <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                             <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-gray-200 dark:bg-gray-800 text-uptoAccent px-1.5 py-0.2 rounded font-semibold text-[9px]">${versionText}</span>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 font-bold">
                                     ${starsMarkup}
-                                    <span class="text-gray-700 dark:text-gray-300 ml-1">${itemRating}</span>
+                                    <span class="text-gray-700 dark:text-white ml-1 font-extrabold">${itemRating}</span>
                                 </div>
                             </div>
                         </div>
@@ -1548,19 +1647,19 @@
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] max-w-[270px] bg-gray-100 dark:bg-uptoCard rounded-2xl p-3 border border-gray-200 dark:border-gray-800 cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
                         </div>
-                        <h4 class="font-bold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
+                        <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 ${starsMarkup}
-                                <span class="text-[11px] font-bold text-gray-800 dark:text-gray-200">${itemRating}</span>
+                                <span class="text-[11px] font-extrabold text-gray-800 dark:text-white">${itemRating}</span>
                             </div>
-                            <button class="bg-uptoAccent/10 hover:bg-uptoAccent text-uptoAccent hover:text-white font-bold text-[10px] px-2.5 py-1 rounded-lg transition active:scale-95 flex items-center space-x-1">
+                            <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
                                 <span>Xem thêm</span>
                                 <i class="fa-solid fa-chevron-right text-[8px]"></i>
                             </button>
@@ -1583,10 +1682,10 @@
                 innerHtml += `
                     <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20 flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border border-gray-200 dark:border-gray-700 overflow-hidden">
+                        <div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border-none overflow-hidden">
                             <img src="${item.img}" class="w-full h-full object-cover rounded-xl">
                         </div>
-                        <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate w-full">${item.name}</h5>
+                        <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate w-full">${item.name}</h5>
                         <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-full">${item.category}</p>
                     </div>
                 `;
@@ -1626,7 +1725,7 @@
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[10px]');
 
                 slidesHtml += `
-                    <div class="hero-card ${isActive} snap-center flex-none w-[72vw] max-w-[290px] bg-gray-100 dark:bg-[#141b22] rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border border-gray-200 dark:border-gray-800"
+                    <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[45vw] md:w-[32vw] lg:w-[25vw] max-w-[290px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border-none"
                          data-hero-json='${JSON.stringify(item)}'>
                         <div class="relative h-48 w-full">
                             <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
@@ -1635,13 +1734,13 @@
                                 <span>Mới nhất</span>
                             </div>
                         </div>
-                        <div class="p-3 bg-gray-100 dark:bg-[#141b22] space-y-1.5">
-                            <h3 class="font-bold text-sm text-gray-900 dark:text-white truncate">${item.name}</h3>
+                        <div class="p-3 bg-transparent space-y-1.5">
+                            <h3 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h3>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlightTitle ? item.highlightTitle : 'Khám phá ngay tính năng nổi bật.'}</p>
                             
                             <div class="flex items-center space-x-1.5 pt-0.5">
                                 ${starsMarkup}
-                                <span class="text-xs font-bold text-gray-800 dark:text-gray-200 ml-1">${itemRating}</span>
+                                <span class="text-xs font-extrabold text-gray-800 dark:text-white ml-1">${itemRating}</span>
                             </div>
                         </div>
                     </div>
@@ -2012,9 +2111,9 @@
                     const highlightedName = app.name.replace(regex, '<mark>$1</mark>');
                     
                     html += `
-                        <div class="search-result-item p-2.5 rounded-xl bg-gray-100 dark:bg-[#0b161c] border border-gray-200 dark:border-gray-800 cursor-pointer hover:border-uptoAccent transition flex items-center space-x-3"
+                        <div class="search-result-item p-2.5 rounded-xl glass-panel border-none cursor-pointer hover:opacity-90 transition flex items-center space-x-3"
                              data-search-idx="${idx}">
-                            <img src="${app.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0 border border-gray-700" alt="icon">
+                            <img src="${app.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0 border-none" alt="icon">
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">${highlightedName}</h4>
                                 <p class="text-[10px] text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
@@ -2046,7 +2145,7 @@
 
         hamburgerBtn.addEventListener('click', () => {
             sidebarDrawer.classList.remove('-translate-x-full');
-            drawerBackdrop.classList.add('hidden');
+            drawerBackdrop.classList.remove('hidden');
         });
 
         function closeDrawer() {
