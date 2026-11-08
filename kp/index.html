@@ -54,7 +54,6 @@
             visibility: visible;
         }
 
-        /* HIỆU ỨNG KÍNH MỜ CHO MENU SIDEBAR */
         #sidebar {
             width: var(--sidebar-width);
             height: 100vh;
@@ -224,6 +223,7 @@
             padding: 0 0 10px 0;
         }
 
+        /* KHÓA FONT-SIZE >= 16px ĐỂ TRÁNH ZOOM TRANG TRÊN MOBILE KHI CLICK SEARCH */
         .submenu-search-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.12);
@@ -232,7 +232,7 @@
             border: 1px solid rgba(255, 255, 255, 0.22);
             border-radius: 14px;
             color: #fff;
-            font-size: 0.8rem;
+            font-size: 16px !important;
             padding: 8px 14px;
             outline: none;
             transition: border-color 0.2s, background 0.2s;
@@ -364,7 +364,6 @@
             display: block;
         }
 
-        /* BỎ HOÀN TOÀN VIỀN SÁNG CỦA THẺ KHUNG (CARD) */
         .card-custom {
             border: none !important;
             border-radius: 18px;
@@ -442,7 +441,6 @@
             background: rgba(19, 34, 42, 0.75);
         }
 
-        /* KHU VỰC LƯỚI DANH SÁCH ITEM CÓ THỂ CHỌN SỐ CỘT (MẶC ĐỊNH 4 CỘT TRÊN PC) */
         .items-grid-container {
             display: grid;
             grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -455,7 +453,6 @@
             .items-grid-container.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         }
 
-        /* THẺ ITEM CÓ ĐƯỜNG VIỀN MÀU Ở ĐẦU (CẠNH TRÁI) CHO SINH ĐỘNG */
         .item-card-row {
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(18px);
@@ -477,7 +474,6 @@
             border-left: 5px solid var(--primary-color) !important;
         }
 
-        /* NÚT BẤM XEM, SỬA, XÓA: CÓ MÀU NỀN ĐẶC TRƯNG KÍNH MỜ (SOLID GLASS) */
         .btn-appstore-glass-solid {
             border-radius: 30px !important;
             backdrop-filter: blur(14px) !important;
@@ -507,7 +503,6 @@
             filter: brightness(1.1);
         }
 
-        /* MÀU NỀN XANH LÁ CHO BADGE DANH MỤC PHÍA TRÊN NGÀY ĐĂNG */
         .badge-category-green {
             background: rgba(25, 135, 84, 0.85) !important;
             backdrop-filter: blur(10px);
@@ -857,7 +852,6 @@
             <div id="trang-chu" class="tab-content-item active-tab">
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
-                        <!-- TIÊU ĐỀ TÁCH THÀNH 2 DÒNG -->
                         <h2 class="fw-bold mb-1" id="homeTitleHeading">
                             <i class="fa-solid fa-server text-primary me-2"></i>Hôm nay!
                             <div class="fs-4 fw-bold mt-1" id="homeDateSubHeading">Chủ Nhật, 8 tháng 11, 2026</div>
@@ -1044,8 +1038,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- THANH TÙY CHỌN SỐ CỘT HIỂN THỊ (MẶC ĐỊNH 4 CỘT TRÊN PC) -->
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- THANH TÙY CHỌN SỐ CỘT HIỂN THỊ (CHỈ HIỆN TRÊN PC, ẨN TRÊN MOBILE) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-tweak" id="tweak-col1" autocomplete="off" onclick="changeColumnLayout('tweak', 1)">
@@ -1096,7 +1090,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- BỐ CỤC HIỂN THỊ (CHỈ PC) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-news" id="news-col1" autocomplete="off" onclick="changeColumnLayout('news', 1)">
@@ -1147,7 +1142,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- BỐ CỤC HIỂN THỊ (CHỈ PC) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-app" id="app-col1" autocomplete="off" onclick="changeColumnLayout('app', 1)">
@@ -1198,7 +1194,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- BỐ CỤC HIỂN THỊ (CHỈ PC) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-media" id="media-col1" autocomplete="off" onclick="changeColumnLayout('media', 1)">
@@ -1249,7 +1246,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- BỐ CỤC HIỂN THỊ (CHỈ PC) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-tip" id="tip-col1" autocomplete="off" onclick="changeColumnLayout('tip', 1)">
@@ -1300,7 +1298,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
+                <!-- BỐ CỤC HIỂN THỊ (CHỈ PC) -->
+                <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
                         <input type="radio" class="btn-check" name="colLayout-prod" id="prod-col1" autocomplete="off" onclick="changeColumnLayout('prod', 1)">
@@ -1429,9 +1428,9 @@
                                 <input type="text" class="form-control" id="gSysReq" placeholder="Ví dụ: iOS 14.0 - 16.6.1">
                             </div>
                             <div class="col-12">
-                                <label class="form-label fw-semibold">Hình ảnh (img) <span class="text-muted small">(Dán link hoặc chọn tệp)</span></label>
+                                <label class="form-label fw-semibold">Hình ảnh (img) <span class="text-muted small">(Dán link & chọn tệp)</span></label>
                                 <div class="input-group mb-2">
-                                    <input type="text" class="form-control" id="gImg" placeholder="https://... hoặc để trống tự lấy link mặc định">
+                                    <input type="text" class="form-control" id="gImg" placeholder="Link hoặc để trống tự lấy link mặc định">
                                     <input type="file" class="form-control" id="gImgFile" accept="image/*" style="max-width: 200px;" onchange="handleImageFileSelect(event)">
                                 </div>
                             </div>
@@ -1444,8 +1443,8 @@
                                 <input type="text" class="form-control" id="gHighlightTitle" placeholder="Dành cho bạn nếu...">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Các điểm nổi bật (highlights)</label>
-                                <textarea class="form-control" id="gHighlights" rows="3" placeholder="Ý 1&#10;Ý 2&#10;Ý 3"></textarea>
+                                <label class="form-label fw-semibold">Các điểm nổi bật (highlights) <span class="text-muted small"><br>Sau khi Enter/xuống dòng sẽ là 1 ý <br> (dấu . , không tính tách 1 ý)<br>Sau dấu : sẽ là ý con, mỗi ý con tách dòng nhau bằng dấu .<br>Viết liền sau dấu # hoặc link sẽ được tô đậm</span></label>
+                                <textarea class="form-control" id="gHighlights" rows="4" placeholder="Điểm #Nổibật / https://Kpazz.link....."></textarea>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-check form-switch mt-4">
@@ -1504,8 +1503,8 @@
                         <div id="prevDate" class="text-secondary"></div>
                     </div>
                     <div>
-                        <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết</label>
-                        <p id="prevDesc" class="p-3 rounded-3 mb-0"></p>
+                        <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết (từ các điểm nổi bật / highlights)</label>
+                        <div id="prevDesc" class="p-3 rounded-3 mb-0" style="font-size: 0.9rem; line-height: 1.5;"></div>
                     </div>
                 </div>
                 <div class="modal-footer border-0 pt-0 pb-3 px-4">
@@ -1541,7 +1540,6 @@
         const sidebarBackdrop = document.getElementById('sidebarBackdrop');
         const backToTopBtn = document.getElementById('backToTopBtn');
 
-        // Mặc định bố cục PC hiển thị tab là 4 cột
         let gridColumnsConfig = {
             tweak: 4,
             news: 4,
@@ -2363,6 +2361,30 @@
             sublistEl.innerHTML = html;
         }
 
+        // HÀM XỬ LÝ FORMAT ĐẶC BIỆT CHO #hashtag VÀ URL LINK (TÔ ĐẬM, MÀU CAM/ĐỎ)
+        function formatHighlightedText(text) {
+            if (!text) return "";
+            let safeText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            // Xử lý các từ bắt đầu bằng dấu # (ví dụ: #noidung viết liền)
+            safeText = safeText.replace(/#([A-Za-z0-9_À-ỹ]+)/g, '<strong style="color: #ff4757; font-weight: 700;">#$1</strong>');
+
+            // Xử lý link URL đơn giản thành thẻ a hoặc in đậm màu cam
+            safeText = safeText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: #ff6b81; font-weight: bold; text-decoration: underline;">$1</a>');
+
+            return safeText;
+        }
+
+        // HÀM CẮT MÔ TẢ TỐI ĐA 18 TỪ, NẾU DÀI HƠN THÌ THÊM DẤU ".."
+        function truncateDescription(text, maxWords = 18) {
+            if (!text) return "";
+            const words = text.trim().split(/\s+/);
+            if (words.length <= maxWords) {
+                return formatHighlightedText(text);
+            }
+            return formatHighlightedText(words.slice(0, maxWords).join(" ")) + "..";
+        }
+
         /* RENDER DANH SÁCH DẠNG LƯỚI KHÔNG VIỀN, CÓ MÀU VIỀN ĐẦU THẺ CHO SINH ĐỘNG */
         function renderTable(type) {
             const container = document.getElementById(type + 'TableBody');
@@ -2380,30 +2402,48 @@
                 const col2Text = item.category || item.version || item.rating || 'N/A';
                 const devText = item.dev || item.author || 'KPazz';
                 const dateText = item.publishDate || item.date || '07/11/2026';
+                
+                let highlightsArray = [];
+                if (Array.isArray(item.highlights)) {
+                    highlightsArray = item.highlights;
+                } else if (typeof item.highlights === 'string' && item.highlights.trim()) {
+                    highlightsArray = item.highlights.split('\n').map(s => s.trim()).filter(Boolean);
+                }
+
+                const sourceDesc = highlightsArray.length > 0 ? highlightsArray[0] : (item.description || item.systemRequirements || '');
+                const shortDesc = truncateDescription(sourceDesc, 18);
+
+                const versionOrCategory = item.version || item.category || '';
                 const borderColor = cardBorderColors[index % cardBorderColors.length];
 
                 htmlContent += `
                     <div class="item-card-row" style="border-left: 5px solid ${borderColor} !important;">
                         <div>
-                            <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
                                 <div class="fw-bold fs-6 text-break pe-2" style="line-height: 1.3;">${titleText}</div>
                                 <span class="badge badge-category-green flex-shrink-0">${col2Text}</span>
                             </div>
+                            ${shortDesc ? `<p class="text-muted small mb-2" style="font-size: 0.82rem; line-height: 1.35;">${shortDesc}</p>` : ''}
                             <div class="d-flex justify-content-between align-items-center text-muted small mb-3">
                                 <div><i class="fa-solid fa-user-pen me-1"></i> ${devText}</div>
                                 <div><i class="fa-regular fa-calendar me-1"></i> ${dateText}</div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end gap-2 pt-2 border-top border-light">
-                            <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
-                                <i class="fa-solid fa-eye me-1"></i> Xem
-                            </button>
-                            <button class="btn btn-sm btn-primary btn-appstore-glass-solid" title="Chỉnh sửa" onclick="editItem('${type}', ${index})">
-                                <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
-                            </button>
-                            <button class="btn btn-sm btn-danger btn-appstore-glass-solid" title="Xóa" onclick="deleteItem('${type}', ${index})">
-                                <i class="fa-solid fa-trash me-1"></i> Xóa
-                            </button>
+                        <div class="d-flex justify-content-between align-items-center pt-2 border-top border-light">
+                            <div class="text-secondary small fw-semibold">
+                                ${versionOrCategory ? `<i class="fa-solid fa-tag me-1 text-primary"></i>${versionOrCategory}` : ''}
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
+                                    <i class="fa-solid fa-eye me-1"></i> Xem
+                                </button>
+                                <button class="btn btn-sm btn-primary btn-appstore-glass-solid" title="Chỉnh sửa" onclick="editItem('${type}', ${index})">
+                                    <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
+                                </button>
+                                <button class="btn btn-sm btn-danger btn-appstore-glass-solid" title="Xóa" onclick="deleteItem('${type}', ${index})">
+                                    <i class="fa-solid fa-trash me-1"></i> Xóa
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -2413,13 +2453,51 @@
             container.innerHTML = `<div class="items-grid-container cols-${currentCols}">${htmlContent}</div>`;
         }
 
+        // HÀM XỬ LÝ XEM NHANH: NẾU CÓ DẤU HAI CHẤM (:), TÁCH PHẦN SAU THÀNH CÁC Ý CON BỞI DẤU CHẤM (.)
         function previewItem(type, index) {
             const item = dbData[type][index];
             document.getElementById('prevName').innerText = item.name || item.title || 'Không có tên';
             document.getElementById('prevVersion').innerText = item.version || item.rating || item.category || 'N/A';
             document.getElementById('prevDev').innerText = item.dev || item.author || 'KPazz Store';
             document.getElementById('prevDate').innerText = item.publishDate || item.date || '07/11/2026';
-            document.getElementById('prevDesc').innerText = item.description || item.systemRequirements || 'Không có mô tả chi tiết cho mục này.';
+            
+            let highlightsArray = [];
+            if (Array.isArray(item.highlights)) {
+                highlightsArray = item.highlights;
+            } else if (typeof item.highlights === 'string' && item.highlights.trim()) {
+                highlightsArray = item.highlights.split('\n').map(s => s.trim()).filter(Boolean);
+            }
+
+            let descHtml = '';
+            if (highlightsArray.length > 0) {
+                let listItemsHtml = '';
+                highlightsArray.forEach(h => {
+                    const colonIndex = h.indexOf(':');
+                    if (colonIndex !== -1) {
+                        const mainPart = h.substring(0, colonIndex + 1);
+                        const subPart = h.substring(colonIndex + 1).trim();
+                        // Tách các ý con bằng dấu chấm (.)
+                        const subSentences = subPart.split('.').map(s => s.trim()).filter(Boolean);
+
+                        listItemsHtml += `<li class="mb-2"><strong>${formatHighlightedText(mainPart)}</strong>`;
+                        if (subSentences.length > 0) {
+                            listItemsHtml += `<ul class="mt-1 ps-3" style="list-style-type: circle;">`;
+                            subSentences.forEach(sub => {
+                                listItemsHtml += `<li class="mb-1">${formatHighlightedText(sub)}.</li>`;
+                            });
+                            listItemsHtml += `</ul>`;
+                        }
+                        listItemsHtml += `</li>`;
+                    } else {
+                        listItemsHtml += `<li class="mb-1">${formatHighlightedText(h)}</li>`;
+                    }
+                });
+                descHtml = `<ul class="mb-0 ps-3">${listItemsHtml}</ul>`;
+            } else {
+                descHtml = formatHighlightedText(item.description || item.systemRequirements || 'Không có mô tả chi tiết cho mục này.');
+            }
+
+            document.getElementById('prevDesc').innerHTML = descHtml;
             
             if (!previewModalInstance) {
                 previewModalInstance = new bootstrap.Modal(document.getElementById('previewModal'));
@@ -2489,7 +2567,7 @@
             const fieldRatingBox = document.getElementById('fieldRatingBox');
             const fieldSysReqBox = document.getElementById('fieldSysReqBox');
 
-            fieldDescBox.style.display = 'none';
+            fieldDescBox.style.display = 'block';
             fieldVersionBox.style.display = 'block';
             fieldRatingBox.style.display = 'block';
             fieldSysReqBox.style.display = 'block';
@@ -2509,36 +2587,18 @@
             if (type === 'news') {
                 titleEl.innerText = "Thêm Tin Tức Mới";
                 labelName.innerText = "Tiêu đề bài viết (*)";
-                fieldVersionBox.style.display = 'none';
-                fieldSysReqBox.style.display = 'none';
-                fieldDescBox.style.display = 'block';
-                document.getElementById('gNoDownload').checked = true;
-                document.getElementById('gIsApp').checked = false;
             } else if (type === 'app') {
                 titleEl.innerText = "Thêm App Jailbreak";
                 labelName.innerText = "Tiêu đề bài viết / Tên app (*)";
-                document.getElementById('gIsApp').checked = true;
-                document.getElementById('gNoDownload').checked = false;
             } else if (type === 'media') {
                 titleEl.innerText = "Thêm Đa Phương Tiện";
                 labelName.innerText = "Tiêu đề bài viết / Tên Media (*)";
-                fieldRatingBox.style.display = 'none';
-                document.getElementById('gIsApp').checked = true;
-                document.getElementById('gNoDownload').checked = false;
             } else if (type === 'tip') {
                 titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
                 labelName.innerText = "Tiêu đề bài viết / Tên Mẹo (*)";
-                fieldVersionBox.style.display = 'none';
-                fieldSysReqBox.style.display = 'none';
-                fieldDescBox.style.display = 'block';
-                document.getElementById('gIsApp').checked = false;
-                document.getElementById('gNoDownload').checked = true;
             } else if (type === 'prod') {
                 titleEl.innerText = "Thêm Công Cụ Năng Suất";
                 labelName.innerText = "Tiêu đề bài viết / Tên Công cụ (*)";
-                fieldRatingBox.style.display = 'none';
-                document.getElementById('gIsApp').checked = true;
-                document.getElementById('gNoDownload').checked = false;
             } else {
                 titleEl.innerText = "Thêm Mục Mới";
                 labelName.innerText = "Tiêu đề (*)";
@@ -2561,7 +2621,13 @@
             document.getElementById('gCategory').value = item.category || '';
             document.getElementById('gImg').value = item.img || '';
             document.getElementById('gHighlightTitle').value = item.highlightTitle || '';
-            document.getElementById('gHighlights').value = Array.isArray(item.highlights) ? item.highlights.join('\n') : (item.highlights || '');
+            
+            if (Array.isArray(item.highlights)) {
+                document.getElementById('gHighlights').value = item.highlights.join('\n');
+            } else {
+                document.getElementById('gHighlights').value = item.highlights || '';
+            }
+
             document.getElementById('gIsApp').checked = !!item.isApp;
             document.getElementById('gNoDownload').checked = !!item.noDownload;
             document.getElementById('gDownloadLink').value = item.downloadLink || '';
@@ -2582,7 +2648,8 @@
                 return;
             }
 
-            const highlightsRaw = document.getElementById('gHighlights').value.trim();
+            const highlightsRaw = document.getElementById('gHighlights').value;
+            // Tách các ý dựa vào phím Enter (xuống dòng)
             const highlightsArr = highlightsRaw ? highlightsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
             
             let imgInputVal = document.getElementById('gImg').value.trim();
@@ -2596,6 +2663,7 @@
                 dev: document.getElementById('gDev').value.trim() || "KPazz",
                 category: document.getElementById('gCategory').value.trim() || "Tweaks",
                 systemRequirements: document.getElementById('gSysReq').value.trim() || "mobilesubstrate",
+                description: document.getElementById('gDesc').value.trim() || "",
                 img: imgInputVal,
                 publishDate: "07/11/2026",
                 isApp: document.getElementById('gIsApp').checked,
