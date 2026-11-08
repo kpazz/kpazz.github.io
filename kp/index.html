@@ -856,7 +856,7 @@
                             <i class="fa-solid fa-server text-primary me-2"></i>Hôm nay!
                             <div class="fs-4 fw-bold mt-1" id="homeDateSubHeading">Chủ Nhật, 8 tháng 11, 2026</div>
                         </h2>
-                        <p class="text-muted mb-0" id="refreshStatusLine">Dữ liệu được làm mới lúc --:--:-- 8 tháng 11, 2026</p>
+                        <p class="text-muted mb-0" id="refreshStatusLine">Dữ liệu được làm mới lúc --:--:--  8 tháng 11, 2026</p>
                     </div>
                     <div class="d-flex flex-column align-items-end gap-1">
                         <span class="badge bg-success px-3 py-1.5 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
@@ -870,7 +870,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Tweak Jailbreak</h6>
-                                    <h3 class="fw-bold mb-0" id="statTweaksCount">0</h3>
+                                    <h3 class="fw-bold mb-0" id="statTweaksCount" >0</h3>
                                 </div>
                                 <i class="fa-solid fa-wand-magic-sparkles fa-2x text-info opacity-50"></i>
                             </div>
@@ -1003,7 +1003,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tweak.json</code> | Lưu file .deb vào <code>debs/</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tweak.json</code> <br> Lưu file .deb vào <code>debs/</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1027,14 +1027,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-info">
-                            <span class="text-muted small">Tổng số Tweak</span>
-                            <h3 class="fw-bold mb-0" id="statTweaksCount-tab">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số Tweak</span>
+                            <h3 class="fw-bold mb-0" id="statTweaksCount-tab" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
-                            <div id="history-tweak" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;" ><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
+                            <div id="history-tweak" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1079,14 +1079,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-warning">
-                            <span class="text-muted small">Tổng số Bài đăng</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-news">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số Bài đăng</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-news" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tin tức</span>
-                            <div id="history-news" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tin tức</span>
+                            <div id="history-news" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1131,14 +1131,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-success">
-                            <span class="text-muted small">Tổng số App</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-app">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số App</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-app" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App</span>
-                            <div id="history-app" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App</span>
+                            <div id="history-app" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1183,14 +1183,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-primary">
-                            <span class="text-muted small">Tổng số File Media</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-media">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số File Media</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-media" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Đa phương tiện</span>
-                            <div id="history-media" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Đa phương tiện</span>
+                            <div id="history-media" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1235,14 +1235,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-danger">
-                            <span class="text-muted small">Tổng số Mẹo</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-tip">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số Mẹo</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-tip" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Mẹo</span>
-                            <div id="history-tip" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Mẹo</span>
+                            <div id="history-tip" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1287,14 +1287,14 @@
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-secondary">
-                            <span class="text-muted small">Tổng số Công cụ Năng suất</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-prod">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số Công cụ Năng suất</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-prod" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Năng suất</span>
-                            <div id="history-prod" class="text-muted small">Chưa có thay đổi nào gần đây.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Năng suất</span>
+                            <div id="history-prod" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1840,7 +1840,7 @@
 
             const statusLine = document.getElementById('refreshStatusLine');
             if (statusLine) {
-                statusLine.innerText = `Dữ liệu được làm mới lúc ${timeString} ${dateOnlyFormatted}`;
+                statusLine.innerText = `Dữ liệu làm mới lúc ${timeString} - Ngày ${dateOnlyFormatted}`;
             }
         }
 
