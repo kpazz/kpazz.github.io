@@ -37,54 +37,271 @@
     </script>
 
     <style>
-        /* HIỆU ỨNG KÍNH GLASSMOPHISM CHUẨN iOS */
+        /* HIỆU ỨNG LIQUID GLASS IOS CHUẨN VÀ CỐ ĐỊNH TRÁNH KÉO TRƯỢT NGANG */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.45) !important;
-            backdrop-filter: blur(25px) saturate(190%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
-            border: none !important;
-            box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.08) !important;
+            background: rgba(255, 255, 255, 0.96) !important;
+            backdrop-filter: blur(35px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+            overflow-x: hidden !important;
         }
 
         .dark .glass-panel {
-            background: rgba(15, 27, 34, 0.55) !important;
-            backdrop-filter: blur(25px) saturate(190%) !important;
-            -webkit-backdrop-filter: blur(25px) saturate(190%) !important;
-            border: none !important;
-            box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.37) !important;
+            background: rgba(18, 32, 40, 0.88) !important;
+            backdrop-filter: blur(35px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+            overflow-x: hidden !important;
         }
 
-        /* NỀN DRAWER MENU CHÍNH */
-        .drawer-main-panel {
-            background: rgba(11, 22, 28, 0.85) !important;
-            backdrop-filter: blur(30px) saturate(200%) !important;
-            -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+        #appDetailCard {
+            overflow-x: hidden !important;
+            max-width: 100vw !important;
+            touch-action: pan-y;
+        }
+
+        #appDetailScrollBody {
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+            touch-action: pan-y;
+        }
+
+        /* ================= CSS RIÊNG BIỆT CHO POPUP XEM TẤT CẢ (GRID 1 & 2) ================= */
+        .popup-card-item-custom {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.875rem;
+            cursor: pointer;
+            width: 100%;
+            flex-shrink: 0;
+            min-height: 4.2rem;
+        }
+        .popup-card-imgbox-custom {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            padding: 0.15rem;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+        .dark .popup-card-imgbox-custom {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        .popup-card-img-custom {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* ================= CSS RIÊNG BIỆT CHO CÁC MỤC TRÊN TRANG CHỦ ================= */
+        
+        /* 1. CSS Riêng Mục Đa Phương Tiện */
+        .home-media-item-box {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.875rem;
+            cursor: pointer;
+            width: 220px;
+            flex-shrink: 0;
+            min-height: 4.2rem;
+        }
+        .home-media-img-wrap {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            padding: 0.15rem;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+        .dark .home-media-img-wrap {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        .home-media-img-file {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* 2. CSS Riêng Mục Tweak Jailbreak */
+        .home-tweak-item-box {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.875rem;
+            cursor: pointer;
+            width: 220px;
+            flex-shrink: 0;
+            min-height: 4.2rem;
+        }
+        .home-tweak-img-wrap {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            padding: 0.15rem;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+        .dark .home-tweak-img-wrap {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        .home-tweak-img-file {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* 3. CSS Riêng Mục Đề Xuất Chi Tiết */
+        .rec-item-card {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.875rem;
+            cursor: pointer;
+            width: 220px;
+            flex-shrink: 0;
+            min-height: 4.2rem;
+        }
+        .rec-item-card-img-wrap {
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            padding: 0.15rem;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+        .dark .rec-item-card-img-wrap {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        .rec-item-card-img {
+            object-fit: contain !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.5rem !important;
+        }
+
+        /* =================================================================================== */
+
+        .account-modal-card {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(40px) saturate(220%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(220%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
+        }
+        .dark .account-modal-card {
+            background: rgba(10, 20, 26, 0.98) !important;
+            backdrop-filter: blur(45px) saturate(240%) !important;
+            -webkit-backdrop-filter: blur(45px) saturate(240%) !important;
+            border: 1.5px solid rgba(0, 186, 163, 0.4) !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.15) !important;
+        }
+
+        .popup-article-box {
+            background: rgba(225, 236, 244, 0.95) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: none !important;
-            box-shadow: 5px 0 35px rgba(0, 0, 0, 0.6) !important;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9) !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100% !important;
+        }
+        .dark .popup-article-box {
+            background: rgba(26, 46, 58, 0.95) !important;
+            border: none !important;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .comment-card-box {
+            background: rgba(232, 241, 247, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: none !important;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+        .dark .comment-card-box {
+            background: rgba(22, 40, 50, 0.92) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: none !important;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+        }
+
+        .custom-form-input {
+            background-color: rgba(240, 244, 248, 0.95) !important;
+            color: #0f172a !important;
+            border: 1px solid rgba(203, 213, 225, 0.9) !important;
+        }
+        .custom-form-input::placeholder {
+            color: #64748b !important;
+            opacity: 1 !important;
+        }
+        .dark .custom-form-input {
+            background-color: rgba(9, 18, 24, 0.85) !important;
+            color: #f8fafc !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        }
+        .dark .custom-form-input::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1 !important;
+        }
+
+        .drawer-main-panel {
+            background: rgba(248, 250, 252, 0.96) !important;
+            backdrop-filter: blur(35px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
+            border: none !important;
+            box-shadow: 5px 0 35px rgba(0, 0, 0, 0.15) !important;
         }
         .dark .drawer-main-panel {
-            background: rgba(9, 17, 22, 0.92) !important;
-            backdrop-filter: blur(30px) saturate(200%) !important;
-            -webkit-backdrop-filter: blur(30px) saturate(200%) !important;
+            background: rgba(9, 17, 22, 0.94) !important;
+            backdrop-filter: blur(35px) saturate(210%) !important;
+            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
             border: none !important;
             box-shadow: 5px 0 40px rgba(0, 0, 0, 0.8) !important;
         }
 
-        /* NỀN SUBMENU TRONG DRAWER */
         .drawer-submenu-container {
-            background: rgba(0, 0, 0, 0.3) !important;
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
             border-radius: 14px;
             padding: 10px;
             margin-top: 6px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 186, 163, 0.15);
         }
         .dark .drawer-submenu-container {
-            background: rgba(0, 0, 0, 0.45) !important;
+            background: rgba(0, 0, 0, 0.55) !important;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+            border: none !important;
         }
 
-        /* Chống Zoom & Chuyển màu mượt mà */
         html, body, div, header, footer, button, input {
             touch-action: manipulation;
             -webkit-text-size-adjust: 100%;
@@ -136,23 +353,20 @@
 
         .card-slider-container {
             scroll-behavior: smooth;
+            perspective: 1200px;
         }
         
         .hero-card {
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            opacity: 0.6;
-            transform: scale(0.9);
+            transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, box-shadow 0.4s ease;
             border: none !important;
-        }
-
-        .hero-card.active-card {
-            opacity: 1;
-            transform: scale(1);
-            box-shadow: 0 12px 30px -5px rgba(229, 99, 56, 0.45) !important;
+            position: relative;
+            transform-style: preserve-3d;
+            margin-left: -22px;
+            margin-right: -22px;
         }
 
         .glass-badge {
-            background: rgba(0, 0, 0, 0.35) !important;
+            background: rgba(0, 0, 0, 0.45) !important;
             backdrop-filter: blur(12px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
             border: none !important;
@@ -259,53 +473,47 @@
         </div>
     </header>
 
-    <div class="h-28"></div>
+    <div class="h-24"></div>
 
-    <!-- ==================== POPUP XEM TẤT CẢ (CHỌN GRID 1-2-3-4 CỘT & LƯỚT XEM TOÀN BỘ) ==================== -->
-    <div id="categoryModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-0 md:p-3">
+    <!-- ==================== POPUP XEM TẤT CẢ (CHỈ CÒN GRID 1 VÀ 2, MẶC ĐỊNH GRID 2) ==================== -->
+    <div id="categoryModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-center justify-center p-0 md:p-3">
         <div id="categoryCard" class="glass-panel text-gray-900 dark:text-white rounded-none md:rounded-3xl p-4 w-full h-full md:h-auto md:max-w-4xl shadow-2xl relative md:max-h-[90vh] flex flex-col overflow-hidden border-none">
             
-            <!-- Header Popup -->
             <div class="flex items-start justify-between pb-2 border-none flex-shrink-0 pt-2 md:pt-0">
                 <div>
                     <h3 id="categoryModalTitle" class="font-extrabold text-base text-gray-900 dark:text-white uppercase tracking-tight">Tên Chuyên Mục</h3>
                 </div>
-                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
+                <button id="categoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-lg hover:opacity-85 transition active:scale-90 flex-shrink-0 ml-2">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <!-- Thanh Tìm kiếm & Chọn Cột Mobile (1-2-3-4, Mặc định 3) -->
             <div class="py-2 flex-shrink-0 space-y-2">
                 <div class="relative w-full">
-                    <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full bg-white/40 dark:bg-black/30 border-none text-gray-900 dark:text-white rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
+                    <input type="text" id="categorySearchInput" placeholder="Tìm kiếm trong danh mục..." class="w-full custom-form-input rounded-xl py-2 pl-9 pr-4 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
                     <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
                 </div>
                 
                 <div class="flex items-center justify-between px-0.5">
                     <p id="categoryModalCountText" class="text-[11px] font-bold text-uptoAccent">Có 0 mục trong danh sách này</p>
 
-                    <!-- Chọn Cột Grid -->
-                    <div class="flex items-center space-x-1 bg-black/20 dark:bg-white/10 p-1 rounded-xl text-[10px] font-extrabold">
-                        <span class="text-gray-400 text-[9px] px-1 hidden sm:inline">Cột:</span>
+                    <div class="flex items-center space-x-1 bg-black/10 dark:bg-white/10 p-1 rounded-xl text-[10px] font-extrabold">
+                        <span class="text-gray-600 dark:text-gray-400 text-[9px] px-1 hidden sm:inline">Cột:</span>
                         <button onclick="setGridColumns(1)" id="gridBtn1" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">1</button>
-                        <button onclick="setGridColumns(2)" id="gridBtn2" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">2</button>
-                        <button onclick="setGridColumns(3)" id="gridBtn3" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white">3</button>
-                        <button onclick="setGridColumns(4)" id="gridBtn4" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">4</button>
+                        <button onclick="setGridColumns(2)" id="gridBtn2" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white shadow">2</button>
                     </div>
                 </div>
             </div>
 
-            <!-- DANH SÁCH HIỂN THỊ LƯỚI GRID HỖ TRỢ CUỘN HIỂN THỊ HẾT DỮ LIỆU -->
-            <div id="categoryItemList" class="overflow-y-auto no-scrollbar grid grid-cols-3 gap-2 sm:gap-3 flex-1 pr-1 pb-2"></div>
+            <div id="categoryItemList" class="overflow-y-auto no-scrollbar grid grid-cols-2 gap-2.5 sm:gap-3 flex-1 pr-1 pb-2"></div>
         </div>
     </div>
 
     <!-- ==================== POPUP CHI TIẾT ==================== -->
-    <div id="appDetailModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-3">
+    <div id="appDetailModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-center justify-center p-3">
         <div id="appDetailCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-4 sm:p-5 w-full max-w-md md:max-w-xl shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden border-none">
             
-            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-200/60 dark:bg-gray-800/60 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
+            <button id="appDetailCloseBtn" class="absolute top-3.5 right-4 w-9 h-9 rounded-full bg-gray-200/80 dark:bg-gray-800/80 hover:bg-gray-300 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
@@ -357,48 +565,48 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div id="articleContentBlock" class="hidden glass-panel border-none rounded-2xl p-4 space-y-3 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                    <div id="articleContentBlock" class="hidden popup-article-box rounded-2xl p-4 space-y-3 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                         <h4 class="font-extrabold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
                             <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
                             <span>Nội dung bài viết / Hướng dẫn</span>
                         </h4>
-                        <p id="detailArticleText" class="text-xs text-gray-600 dark:text-gray-300 leading-relaxed"></p>
+                        <p id="detailArticleText" class="text-xs text-gray-700 dark:text-gray-200 leading-relaxed font-normal"></p>
                     </div>
 
-                    <div id="highlightsBlock" class="glass-panel border-none rounded-2xl p-3.5 space-y-2 text-xs text-gray-700 dark:text-gray-200 leading-relaxed shadow-inner">
+                    <div id="highlightsBlock" class="popup-article-box rounded-2xl p-3.5 space-y-2 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                         <h4 id="detailHighlightTitle" class="font-extrabold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
-                        <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-600 dark:text-gray-300">
+                        <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-700 dark:text-gray-200">
                             <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
                         </ul>
                     </div>
 
-                    <div id="systemRequirementsBlock" class="space-y-0.5">
+                    <div id="systemRequirementsBlock" class="space-y-0.5 px-0.5">
                         <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Yêu cầu hệ thống</h4>
                         <p id="detailSystemReq" class="text-xs text-gray-500 dark:text-gray-400">Tương thích tốt trên Android & iOS</p>
                     </div>
 
-                    <div class="space-y-2 pt-2">
+                    <div class="space-y-2 pt-2 px-0.5">
                         <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Thông tin chi tiết</h4>
                         <p class="text-xs font-semibold text-gray-500 dark:text-gray-400">Thông tin cơ bản & Tác giả</p>
 
                         <div class="grid grid-cols-2 gap-3 text-xs pt-1">
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300">
-                                    <i class="fa-solid fa-building text-sm"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-building text-sm text-uptoAccent"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Tác giả</p>
-                                    <p id="detailDevInfo" class="font-bold text-gray-800 dark:text-gray-200 underline cursor-pointer">KPazz Studio</p>
+                                    <p id="detailDevInfo" class="font-bold text-gray-800 dark:text-gray-200 truncate">KPazz Studio</p>
                                 </div>
                             </div>
 
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300">
-                                    <i class="fa-solid fa-list-check text-sm"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-list-check text-sm text-uptoAccent"></i>
                                 </div>
-                                <div>
+                                <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Phân loại</p>
-                                    <p id="detailCategoryInfo" class="font-bold text-gray-800 dark:text-gray-200 underline cursor-pointer">Công nghệ / Tiện ích</p>
+                                    <p id="detailCategoryInfo" class="font-bold text-gray-800 dark:text-gray-200 truncate">Công nghệ / Tiện ích</p>
                                 </div>
                             </div>
                         </div>
@@ -483,7 +691,7 @@
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
-                        <div class="flex items-start space-x-3 glass-panel p-3 rounded-2xl border-none">
+                        <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl">
                             <div class="w-10 h-10 rounded-xl bg-cyan-600 dark:bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
                                 <i class="fa-solid fa-user text-lg"></i>
                             </div>
@@ -501,39 +709,14 @@
 
                 <div class="space-y-3 pt-3 border-none">
                     <div class="flex items-center justify-between">
-                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5">
+                        <h4 onclick="openAllRecommendationsModal()" class="font-extrabold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5 cursor-pointer hover:text-uptoAccent transition">
                             <i class="fa-solid fa-lightbulb text-uptoAccent"></i>
                             <span>Nội dung tương tự đề xuất</span>
                         </h4>
-                        <span class="text-[10px] text-gray-500 dark:text-gray-400">Khám phá ngay</span>
+                        <span onclick="openAllRecommendationsModal()" class="text-[10px] font-extrabold text-uptoAccent hover:underline cursor-pointer transition">Khám phá ngay &rsaquo;</span>
                     </div>
 
-                    <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-1">
-                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
-                             onclick="openAppDetail({name: 'Zenless Zone Zero', dev: 'HoYoverse', img: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.0'})">
-                            <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80" class="w-16 h-16 rounded-xl object-cover mx-auto mb-1.5 border-none">
-                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">Zenless Zone</h5>
-                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">HoYoverse</p>
-                        </div>
-
-                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
-                             onclick="openAppDetail({name: 'ChatGPT', dev: 'OpenAI', img: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '4.8'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border-none">
-                                <i class="fa-solid fa-atom text-2xl text-black"></i>
-                            </div>
-                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">ChatGPT</h5>
-                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">OpenAI</p>
-                        </div>
-
-                        <div class="flex-none w-28 glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-90 transition text-center"
-                             onclick="openAppDetail({name: 'CapCut', dev: 'ByteDance', img: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80', noDownload: false, isApp: true, publishDate: '09/11/2026', downloadLink: 'https://example.com/downloads/sample-file.apk', rating: '5.0'})">
-                            <div class="w-16 h-16 rounded-xl bg-white flex items-center justify-center mx-auto mb-1.5 border-none">
-                                <i class="fa-solid fa-scissors text-2xl text-black"></i>
-                            </div>
-                            <h5 class="text-[11px] font-bold text-gray-900 dark:text-white truncate">CapCut</h5>
-                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate">ByteDance</p>
-                        </div>
-                    </div>
+                    <div id="detailRecommendedContainer" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);" data-scroll-speed="35"></div>
                 </div>
 
             </div>
@@ -541,8 +724,8 @@
             <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/40 dark:bg-[#0b161c]/40 backdrop-blur-xl border-none transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block border-none">
                     <div class="text-left">
-                        <h4 class="font-extrabold text-sm leading-tight">Tải phiên bản mới nhất</h4>
-                        <p class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">APK An toàn &bull; KPazz Store</p>
+                        <h4 class="font-extrabold text-sm leading-tight">Tải & Cài đặt bản mới nhất</h4>
+                        <p id="stickySubText" class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">Nội dung an toàn, được phát hành 09/11/2026 - KPazz @2026</p>
                     </div>
                     <i class="fa-solid fa-download text-lg pr-1"></i>
                 </a>
@@ -552,14 +735,14 @@
     </div>
 
     <!-- ==================== SEARCH MODAL ==================== -->
-    <div id="searchModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-        <div id="searchBoxContainer" class="max-w-md md:max-w-lg w-full glass-panel rounded-3xl p-4 border-none shadow-2xl transition-colors duration-800 flex flex-col max-h-[80vh] overflow-hidden">
+    <div id="searchModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-start justify-center pt-16 p-4">
+        <div id="searchBoxContainer" class="max-w-md md:max-w-lg w-full glass-panel rounded-3xl p-4 border-none shadow-2xl transition-colors duration-800 flex flex-col max-h-[80vh] overflow-hidden animate-pop-in">
             <div class="flex items-center justify-between w-full mb-3 pb-2.5 border-none flex-shrink-0">
                 <div class="relative w-full mr-2">
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm ứng dụng, game, mẹo..." class="w-full bg-white/40 dark:bg-black/30 border-none text-gray-900 dark:text-white rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-uptoAccent text-base shadow-inner backdrop-blur-md">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm ứng dụng, game, mẹo..." class="w-full custom-form-input rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-uptoAccent text-base shadow-inner backdrop-blur-md">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
                 </div>
-                <button id="searchCloseBtn" class="text-gray-500 dark:text-gray-300 text-sm font-semibold px-2 hover:text-uptoAccent">Hủy</button>
+                <button id="searchCloseBtn" class="text-gray-600 dark:text-gray-300 text-sm font-semibold px-2 hover:text-uptoAccent">Hủy</button>
             </div>
             
             <div id="searchResults" class="overflow-y-auto no-scrollbar text-gray-800 dark:text-gray-200 text-sm space-y-2.5 flex-1 pr-1">
@@ -569,9 +752,9 @@
     </div>
 
     <!-- ==================== LOGIN MODAL ==================== -->
-    <div id="loginModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-        <div id="loginCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md shadow-2xl border-none relative">
-            <button id="loginCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+    <div id="loginModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="loginCard" class="account-modal-card text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md border-none relative">
+            <button id="loginCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="text-center mb-6">
                 <h3 class="text-xl font-bold tracking-tight">Đăng Nhập</h3>
@@ -581,11 +764,11 @@
             <form id="loginForm" class="space-y-4" onsubmit="event.preventDefault();">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản hoặc Số điện thoại</label>
-                    <input type="text" required placeholder="Nhập username hoặc SĐT" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="text" required placeholder="Nhập username hoặc SĐT" class="w-full custom-form-input rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu</label>
-                    <input type="password" required placeholder="••••••••" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="password" required placeholder="••••••••" class="w-full custom-form-input rounded-xl px-3.5 py-2.5 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
 
                 <div class="flex items-center justify-end">
@@ -599,7 +782,7 @@
 
             <div class="mt-5 pt-4 border-none text-center">
                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Chưa có tài khoản?</p>
-                <button id="openRegisterBtn" class="w-full bg-white/20 dark:bg-black/20 border-none text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
+                <button id="openRegisterBtn" class="w-full bg-gray-100 dark:bg-black/60 border-none text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
                     Tạo tài khoản mới
                 </button>
             </div>
@@ -607,9 +790,9 @@
     </div>
 
     <!-- ==================== REGISTER MODAL ==================== -->
-    <div id="registerModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-        <div id="registerCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md shadow-2xl border-none relative">
-            <button id="registerCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/60 dark:bg-gray-800/60 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+    <div id="registerModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+        <div id="registerCard" class="account-modal-card text-gray-900 dark:text-white rounded-3xl p-6 w-full max-w-sm md:max-w-md border-none relative">
+            <button id="registerCloseBtn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-600 dark:text-gray-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="text-center mb-5">
                 <h3 class="text-xl font-bold tracking-tight">Tạo Tài Khoản</h3>
@@ -619,19 +802,19 @@
             <form id="registerForm" class="space-y-3.5" onsubmit="event.preventDefault();">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Tên tài khoản *</label>
-                    <input type="text" required placeholder="Nhập tên tài khoản" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="text" required placeholder="Nhập tên tài khoản" class="w-full custom-form-input rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Số điện thoại *</label>
-                    <input type="tel" required placeholder="Nhập số điện thoại" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="tel" required placeholder="Nhập số điện thoại" class="w-full custom-form-input rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Email (không bắt buộc)</label>
-                    <input type="email" placeholder="example@gmail.com" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="email" placeholder="example@gmail.com" class="w-full custom-form-input rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">Mật khẩu *</label>
-                    <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full bg-white/40 dark:bg-black/30 border-none rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
+                    <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full custom-form-input rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
 
                 <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2 border-none">
@@ -648,172 +831,172 @@
     <!-- SIDEBAR DRAWER MENU -->
     <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 drawer-main-panel text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto no-scrollbar border-none">
         <div>
-            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-[#0b161c]/80 dark:bg-[#081014]/90 backdrop-blur-xl z-10">
+            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/90 dark:bg-[#081014]/90 backdrop-blur-xl z-10">
                 <div class="flex items-center space-x-2">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                     </svg>
-                    <span class="text-lg font-bold tracking-tight text-white">KPazz</span>
+                    <span class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">KPazz</span>
                 </div>
-                <button id="drawerCloseBtn" class="text-gray-300 hover:text-white text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+                <button id="drawerCloseBtn" class="text-gray-600 dark:text-gray-300 hover:text-uptoAccent text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <nav class="p-3 space-y-2 text-sm">
-                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-white/5 text-uptoAccent font-semibold transition border-none">
+                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/5 text-uptoAccent font-bold transition border-none shadow-sm">
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span>
                         </span>
                         <i id="tweakChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerTweakList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerTweakList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
                         </span>
                         <i id="newsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerNewsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerNewsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
                         </span>
                         <i id="jbChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerJbList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerJbList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-photo-film w-5 text-center"></i><span>Đa phương tiện</span>
                         </span>
                         <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerMediaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerMediaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
                         </span>
                         <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerTipsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerTipsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-200 hover:bg-white/10 transition font-semibold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
                             <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
                         </span>
                         <i id="prodChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerProdList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-300"></div>
+                    <div id="drawerProdList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
             </nav>
         </div>
-        <div class="p-4 text-xs text-gray-400 text-center border-none">
+        <div class="p-4 text-xs text-gray-500 dark:text-gray-400 text-center border-none">
             Thiết kế & Nội dung bởi Kim Trong @<span id="drawerYearText">2026</span>
         </div>
     </div>
     <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
 
     <!-- ==================== MAIN CONTENT ==================== -->
-    <main class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto pt-3 space-y-6">
+    <main class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto pt-0.5 space-y-3">
 
         <!-- HERO SLIDER -->
-        <section id="heroSection" class="relative w-full overflow-hidden py-1">
-            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[14vw] md:px-[5vw]"></div>
-            <div id="heroDots" class="flex items-center justify-center space-x-1.5 mt-2"></div>
+        <section id="heroSection" class="relative w-full overflow-hidden pt-0.5 pb-0 mb-0">
+            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[15vw] sm:px-[22vw] md:px-[26vw] py-2.5"></div>
+            <div id="heroDots" class="flex items-center justify-center space-x-1.5 py-0.5 my-0"></div>
         </section>
 
-        <!-- SECTION: TWEAK JAILBREAK IOS -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: TWEAK JAILBREAK IOS (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5 pt-0 mt-0">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Tweak Jailbreak IOS</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="tweakJbCountTextTop" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Tweak</span>
             </div>
-            <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
+            <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: TIN TỨC MỚI -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: TIN TỨC MỚI (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Tin tức mới</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="newsCountText" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
-            <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
+            <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: APP JAILBREAK -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: APP JAILBREAK (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="section-title text-gray-900 dark:text-white">
                     <span>APP Jailbreak</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="jbAppsCountText" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
+            <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: ĐA PHƯƠNG TIỆN -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: ĐA PHƯƠNG TIỆN (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Đa phương tiện</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="multimediaCountText" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="multimediaSlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="45"></div>
+            <div id="multimediaSlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: MẸO & HƯỚNG DẪN -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: MẸO & HƯỚNG DẪN (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Mẹo & Hướng dẫn Công nghệ</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="tipsCountText" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
-            <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-1 cursor-grab" data-slide-mode="true"></div>
+            <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: NĂNG SUẤT -->
-        <section class="space-y-3 px-3.5">
-            <div class="flex items-center justify-between">
+        <!-- SECTION: NĂNG SUẤT (Dùng hàm render riêng thủ công) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="section-title text-gray-900 dark:text-white">
                     <span>Năng suất</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
                 <span id="productivityCountText" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="productivitySlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="25"></div>
+            <div id="productivitySlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="25"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
@@ -854,8 +1037,11 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC THỦ CÔNG RIÊNG CHO TỪNG PHẦN -->
     <script>
+        let globalAllItems = [];
+        let currentOpenItem = null;
+
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
             const yearEl = document.getElementById('footerYearText');
@@ -974,6 +1160,7 @@
         const appDetailScrollBody = document.getElementById('appDetailScrollBody');
         const stickyDownloadBar = document.getElementById('stickyDownloadBar');
         const stickyDownloadLink = document.getElementById('stickyDownloadLink');
+        const stickySubText = document.getElementById('stickySubText');
         const distributionAnchor = document.getElementById('distributionAnchor');
 
         const detailAppName = document.getElementById('detailAppName');
@@ -1004,7 +1191,65 @@
 
         let isNoDownloadItem = false;
 
+        function renderRecommendedCarousel(currentItemName) {
+            const container = document.getElementById('detailRecommendedContainer');
+            if (!container) return;
+
+            let filtered = globalAllItems.filter(item => item.name !== currentItemName);
+            if (filtered.length === 0) filtered = globalAllItems;
+            let recItems = filtered.slice(0, 20);
+
+            let innerHtml = '';
+            recItems.forEach(item => {
+                const itemRating = item.rating || '4.8';
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+
+                innerHtml += `
+                    <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item)}'>
+                        <div class="rec-item-card-img-wrap">
+                            <img src="${item.img}" class="rec-item-card-img" alt="${item.name}">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-0.5 font-bold">
+                                    ${starsMarkup}
+                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `<div class="flex space-x-3 pr-4 sm:pr-5" style="min-width: max-content;">${innerHtml}</div>`;
+
+            container.querySelectorAll('.rec-item-card').forEach(card => {
+                card.onclick = () => {
+                    const rawJson = card.getAttribute('data-item-json');
+                    if (rawJson) openAppDetail(JSON.parse(rawJson));
+                };
+            });
+        }
+
+        function openAllRecommendationsModal() {
+            let filtered = globalAllItems.filter(item => item.name !== currentOpenItem?.name);
+            if (filtered.length === 0) filtered = globalAllItems;
+            const recItems = filtered.slice(0, 20);
+
+            closeModalWithBounce(appDetailModal, appDetailCard, () => {
+                openCategoryModal('Nội dung đề xuất tốt nhất', recItems);
+            });
+        }
+
         function openAppDetail(item) {
+            currentOpenItem = item;
             isNoDownloadItem = item.noDownload;
 
             if (item.name) {
@@ -1019,11 +1264,17 @@
                 detailAppIcon.src = item.img;
                 detailSmallAvatar.src = item.img;
             }
+            const publishDateStr = item.publishDate || '09/11/2026';
             if (item.publishDate) {
                 detailPublishDate.textContent = item.publishDate;
             }
             if (item.category) {
                 detailCategoryInfo.textContent = item.category;
+            }
+
+            if (stickySubText) {
+                const currentYear = new Date().getFullYear();
+                stickySubText.textContent = `Nội dung an toàn, được phát hành ${publishDateStr} - KPazz @${currentYear}`;
             }
 
             const itemRating = parseFloat(item.rating) || 4.9;
@@ -1092,6 +1343,8 @@
             } else {
                 systemRequirementsBlock.style.display = 'none';
             }
+
+            renderRecommendedCarousel(item.name);
             
             openModalWithBounce(appDetailModal, appDetailCard);
             appDetailScrollBody.scrollTop = 0;
@@ -1116,7 +1369,7 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== LOGIC XEM TẤT CẢ & CUỘN LƯỚT TOÀN BỘ DANH SÁCH ==================== */
+        /* ==================== LOGIC XEM TẤT CẢ (CHỈ 2 GRID) ==================== */
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
@@ -1126,29 +1379,26 @@
         const categorySearchInput = document.getElementById('categorySearchInput');
 
         let currentCategoryItems = [];
-        let currentGridCols = 3; // Mặc định là 3 cột
+        let currentGridCols = 2; // Mặc định Grid 2
 
         function setGridColumns(cols) {
             currentGridCols = cols;
             if (!categoryItemList) return;
             
-            // Xóa các class grid-cols cũ
             categoryItemList.className = categoryItemList.className.replace(/grid-cols-\d+/g, '');
             categoryItemList.classList.add(`grid-cols-${cols}`);
 
-            // Cập nhật trạng thái active cho các nút chọn cột
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 2; i++) {
                 const btn = document.getElementById(`gridBtn${i}`);
                 if (btn) {
                     if (i === cols) {
                         btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white shadow";
                     } else {
-                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 text-gray-400 hover:text-white";
+                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 text-gray-600 dark:text-gray-400 hover:text-white";
                     }
                 }
             }
 
-            // Render toàn bộ danh sách
             renderCategoryItems(currentCategoryItems, currentCategoryItems.length);
         }
 
@@ -1156,7 +1406,7 @@
             if (!categoryItemList) return;
             
             if (categoryModalCountText) {
-                categoryModalCountText.textContent = `Có ${totalCount} mục trong danh sách này`;
+                categoryModalCountText.textContent = `Hiển thị toàn bộ ${items.length} mục trong danh sách này`;
             }
 
             if (!items.length) {
@@ -1165,31 +1415,27 @@
             }
 
             let html = '';
-            // Render toàn bộ danh sách để có thể lướt xem đầy đủ theo đúng bộ đếm
             items.forEach((item, index) => {
                 const itemRating = item.rating || '4.8';
                 let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
+                const starsMarkup = `${generateStarsHtml(itemRating, 'text-[9px]')} <span class="text-gray-900 dark:text-white ml-1 font-extrabold text-[9px]">${itemRating}</span>`;
                 const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
-                    <div class="category-item-card flex flex-col items-start glass-panel p-2 rounded-2xl border-none cursor-pointer hover:opacity-95 transition space-y-1.5"
-                         data-cat-idx="${index}">
-                        <div class="w-full h-24 sm:h-28 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
+                    <div class="popup-card-item-custom glass-panel border-none" data-cat-idx="${index}">
+                        <div class="popup-card-imgbox-custom">
+                            <img src="${item.img}" class="popup-card-img-custom" alt="${item.name}">
                         </div>
-                        <div class="min-w-0 flex-1 space-y-0.5 w-full">
-                            <h5 class="font-extrabold text-[11px] sm:text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 line-clamp-1 leading-tight font-normal">${truncatedDesc}</p>
-                            
-                            <div class="flex items-center justify-between pt-1">
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5 sm:ml-2.5 w-full">
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 font-bold">
                                     ${starsMarkup}
-                                    <span class="text-[9px] text-gray-700 dark:text-white font-extrabold ml-0.5">${itemRating}</span>
                                 </div>
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full uppercase">NHẬN</span>
                             </div>
                         </div>
                     </div>
@@ -1197,7 +1443,7 @@
             });
             categoryItemList.innerHTML = html;
 
-            categoryItemList.querySelectorAll('.category-item-card').forEach(el => {
+            categoryItemList.querySelectorAll('.popup-card-item-custom').forEach(el => {
                 el.onclick = () => {
                     const idx = el.getAttribute('data-cat-idx');
                     const targetItem = items[idx];
@@ -1216,7 +1462,7 @@
             currentCategoryItems = items;
             categorySearchInput.value = '';
 
-            setGridColumns(3); // Mặc định là 3 cột khi mở
+            setGridColumns(2);
             renderCategoryItems(items, items.length);
             openModalWithBounce(categoryModal, categoryCard);
         }
@@ -1266,13 +1512,13 @@
         function selectDrawerItem(targetEl) {
             const allItems = document.querySelectorAll('.drawer-main-item');
             allItems.forEach(item => {
-                item.classList.remove('bg-white/10', 'text-uptoAccent');
-                item.classList.add('text-gray-200');
+                item.classList.remove('bg-uptoAccent/15', 'dark:bg-white/10', 'text-uptoAccent', 'font-bold');
+                item.classList.add('text-gray-800', 'dark:text-gray-200', 'font-semibold');
             });
 
             if (targetEl) {
-                targetEl.classList.remove('text-gray-200');
-                targetEl.classList.add('bg-white/10', 'text-uptoAccent');
+                targetEl.classList.remove('text-gray-800', 'dark:text-gray-200', 'font-semibold');
+                targetEl.classList.add('bg-uptoAccent/15', 'dark:bg-white/10', 'text-uptoAccent', 'font-bold');
             }
         }
 
@@ -1324,15 +1570,15 @@
                         </button>
                     </div>
                     <div class="relative px-0.5">
-                        <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-black/40 border-none text-white rounded-lg py-1 pl-7 pr-2.5 text-[11px] focus:outline-none focus:ring-1 focus:ring-uptoAccent">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-2.5 text-gray-400 text-[10px]"></i>
+                        <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-white/95 dark:bg-black/40 border-none text-gray-900 dark:text-white rounded-lg py-1.5 pl-7 pr-2.5 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-[10px]"></i>
                     </div>
                     <div id="${listItemsId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
             `;
 
             sortedItems.forEach((item, index) => {
                 html += `
-                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2 rounded-lg hover:bg-white/10 truncate transition text-gray-300 font-medium active:scale-98"
+                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 truncate transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
                        data-item-name="${item.name.toLowerCase()}"
                        onclick="handleDrawerItemClick('${containerId}', ${index})">
                         &bull; ${item.name}
@@ -1399,7 +1645,7 @@
                     let data = await resNews.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
                     window.storeDataCache.news = data;
-                    renderNewsSection(data);
+                    renderNewsSectionCustom(data);
                     renderDrawerList('drawerNewsList', data, 'Tin tức mới');
                     allLoadedItems.push(...data);
                 }
@@ -1409,7 +1655,7 @@
                     let data = await resJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.jailbreak = data;
-                    renderJbSection(data);
+                    renderJbSectionCustom(data);
                     renderDrawerList('drawerJbList', data, 'APP Jailbreak');
                     allLoadedItems.push(...data);
                 }
@@ -1419,7 +1665,7 @@
                     let data = await resTweakJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.tweak = data;
-                    renderTweakJbSectionTop(data);
+                    renderTweakSectionCustom(data);
                     renderDrawerList('drawerTweakList', data, 'Tweak Jailbreak IOS');
                     allLoadedItems.push(...data);
                 }
@@ -1429,7 +1675,7 @@
                     let data = await resMedia.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.media = data;
-                    renderMultimediaSection(data);
+                    renderMediaSectionCustom(data);
                     renderDrawerList('drawerMediaList', data, 'Đa phương tiện');
                     allLoadedItems.push(...data);
                 }
@@ -1439,7 +1685,7 @@
                     let data = await resTips.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
                     window.storeDataCache.tips = data;
-                    renderTipsSection(data);
+                    renderTipsSectionCustom(data);
                     renderDrawerList('drawerTipsList', data, 'Mẹo & Hướng dẫn Công nghệ');
                     allLoadedItems.push(...data);
                 }
@@ -1450,10 +1696,12 @@
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     let rawProdData = [...data];
                     window.storeDataCache.productivity = rawProdData;
-                    renderProductivitySection(rawProdData);
+                    renderProductivitySectionCustom(rawProdData);
                     renderDrawerList('drawerProdList', rawProdData, 'Năng suất');
                     allLoadedItems.push(...rawProdData);
                 }
+
+                globalAllItems = [...allLoadedItems];
 
                 initDynamicHeroSlider(allLoadedItems);
                 initAutoScrollSections();
@@ -1462,11 +1710,13 @@
                 initJbAppsSlideCarousel();
 
             } catch (err) {
-                console.error("Lỗi khi tải dữ liệu JSON từ thư mục Tabs:", err);
+                console.error("Lỗi tải dữ liệu JSON:", err);
             }
         }
 
-        function renderNewsSection(items) {
+        /* ==================== CÁC HÀM RENDER RIÊNG BIỆT THỦ CÔNG CHO TỪNG MỤC TRANG CHỦ ==================== */
+
+        function renderNewsSectionCustom(items) {
             const container = document.getElementById('newsSlideContainer');
             const countText = document.getElementById('newsCountText');
             if (!container) return;
@@ -1478,17 +1728,17 @@
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
                         </div>
                         <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                        <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
+                        <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 ${starsMarkup}
-                                <span class="text-[11px] font-extrabold text-gray-800 dark:text-white">${itemRating}</span>
+                                <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
                             </div>
                             <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
                                 <span>Xem thêm</span>
@@ -1502,7 +1752,7 @@
             bindCardClickEvents(container);
         }
 
-        function renderJbSection(items) {
+        function renderJbSectionCustom(items) {
             const container = document.getElementById('jbAppsSlideContainer');
             const countText = document.getElementById('jbAppsCountText');
             if (!container) return;
@@ -1517,7 +1767,7 @@
                 const publishDateText = item.publishDate || 'Mới';
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-2"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-2"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
@@ -1529,19 +1779,19 @@
                         
                         <div class="space-y-1">
                             <div class="flex items-start space-x-2.5 min-w-0">
-                                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0 text-white font-extrabold text-sm shadow mt-0.5">
-                                    <i class="fa-solid fa-box-open"></i>
+                                <div class="w-10 h-10 rounded-2xl glass-panel flex items-center justify-center flex-shrink-0 text-uptoAccent font-extrabold text-sm shadow-sm mt-0.5 overflow-hidden">
+                                    <img src="${item.img}" class="w-full h-full object-cover">
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <p class="text-[10px] text-gray-500 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
+                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
                                 </div>
                             </div>
 
                             <div class="flex items-center justify-between pt-1">
                                 <div class="flex items-center space-x-1">
                                     ${starsMarkup}
-                                    <span class="text-[10px] font-extrabold text-gray-700 dark:text-white ml-1">${itemRating}</span>
+                                    <span class="text-[10px] font-extrabold text-gray-900 dark:text-white ml-1">${itemRating}</span>
                                 </div>
                                 <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 border-none">
                                     NHẬN
@@ -1555,47 +1805,7 @@
             bindCardClickEvents(container);
         }
 
-        function renderMultimediaSection(items) {
-            const container = document.getElementById('multimediaSlideContainer');
-            const countText = document.getElementById('multimediaCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
-
-            let innerHtml = '';
-            items.forEach(item => {
-                const itemRating = item.rating || '4.8';
-                let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 6);
-
-                innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl border-none cursor-pointer w-[220px] flex-shrink-0"
-                         data-app-json='${JSON.stringify(item)}'>
-                        <div class="w-12 h-12 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow flex-shrink-0 overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-0.5">
-                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 font-bold">
-                                    ${starsMarkup}
-                                    <span class="text-gray-700 dark:text-white ml-1 font-extrabold">${itemRating}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
-            bindCardClickEvents(container);
-        }
-
-        function renderTweakJbSectionTop(items) {
+        function renderTweakSectionCustom(items) {
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
             if (!container) return;
@@ -1611,19 +1821,19 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl border-none cursor-pointer w-[220px] flex-shrink-0"
+                    <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="w-12 h-12 bg-black/80 rounded-xl flex items-center justify-center p-1 border-none shadow flex-shrink-0 overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover rounded-lg">
+                        <div class="home-tweak-img-wrap">
+                            <img src="${item.img}" class="home-tweak-img-file" alt="${item.name}">
                         </div>
-                        <div class="min-w-0 flex-1 space-y-0.5">
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 font-bold">
                                     ${starsMarkup}
-                                    <span class="text-gray-700 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
                                 </div>
                             </div>
                         </div>
@@ -1631,11 +1841,51 @@
                 `;
             });
 
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3" style="min-width: max-content;">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
-        function renderTipsSection(items) {
+        function renderMediaSectionCustom(items) {
+            const container = document.getElementById('multimediaSlideContainer');
+            const countText = document.getElementById('multimediaCountText');
+            if (!container) return;
+            if (countText) countText.textContent = `${items.length} - APPs`;
+
+            let innerHtml = '';
+            items.forEach(item => {
+                const itemRating = item.rating || '4.8';
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+
+                innerHtml += `
+                    <div class="app-card-clickable home-media-item-box glass-panel border-none"
+                         data-app-json='${JSON.stringify(item)}'>
+                        <div class="home-media-img-wrap">
+                            <img src="${item.img}" class="home-media-img-file" alt="${item.name}">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-0.5 font-bold">
+                                    ${starsMarkup}
+                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">${innerHtml}</div>`;
+            bindCardClickEvents(container);
+        }
+
+        function renderTipsSectionCustom(items) {
             const container = document.getElementById('tipsSlideContainer');
             const countText = document.getElementById('tipsCountText');
             if (!container) return;
@@ -1647,17 +1897,17 @@
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[75vw] sm:w-[40vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
                             <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
                         </div>
                         <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                        <p class="text-[10px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
+                        <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
                         <div class="flex items-center justify-between pt-1">
                             <div class="flex items-center space-x-1.5">
                                 ${starsMarkup}
-                                <span class="text-[11px] font-extrabold text-gray-800 dark:text-white">${itemRating}</span>
+                                <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
                             </div>
                             <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
                                 <span>Xem thêm</span>
@@ -1671,7 +1921,7 @@
             bindCardClickEvents(container);
         }
 
-        function renderProductivitySection(items) {
+        function renderProductivitySectionCustom(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
             if (!container) return;
@@ -1686,12 +1936,12 @@
                             <img src="${item.img}" class="w-full h-full object-cover rounded-xl">
                         </div>
                         <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate w-full">${item.name}</h5>
-                        <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate w-full">${item.category}</p>
+                        <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate w-full">${item.category}</p>
                     </div>
                 `;
             });
             
-            container.innerHTML = `<div class="grid grid-flow-col gap-x-4 gap-y-3" style="grid-template-rows: repeat(2, minmax(0, 1fr)); min-width: max-content;">${innerHtml}</div>`;
+            container.innerHTML = `<div class="grid grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="grid-template-rows: repeat(2, minmax(0, 1fr)); min-width: max-content;">${innerHtml}</div>`;
             bindCardClickEvents(container);
         }
 
@@ -1716,31 +1966,42 @@
             const heroDotsContainer = document.getElementById('heroDots');
             if (!heroSlider || !allItems.length) return;
 
-            let sortedHeroItems = sortItemsByDate([...allItems]).slice(0, 6);
+            let sortedHeroItems = sortItemsByDate([...allItems]).slice(0, 7);
 
             let slidesHtml = '';
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 1 ? 'active-card' : '';
                 const itemRating = item.rating || '4.9';
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[10px]');
+                const publishDateStr = item.publishDate || '09/11/2026';
+                const authorStr = item.dev || 'KPazz Studio';
+                const versionStr = item.version || 'v1.0.4';
+                const highlightDesc = (item.highlights && item.highlights[0]) ? item.highlights[0] : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
 
                 slidesHtml += `
-                    <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[45vw] md:w-[32vw] lg:w-[25vw] max-w-[290px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-xl my-1 border-none"
+                    <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[50vw] md:w-[35vw] lg:w-[26vw] max-w-[310px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between"
                          data-hero-json='${JSON.stringify(item)}'>
-                        <div class="relative h-48 w-full">
+                        <div class="relative h-64 sm:h-72 w-full">
                             <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
-                            <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1.5 font-medium shadow">
-                                <i class="fa-regular fa-calendar text-[10px] text-uptoAccent"></i>
-                                <span>Mới nhất</span>
-                            </div>
-                        </div>
-                        <div class="p-3 bg-transparent space-y-1.5">
-                            <h3 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h3>
-                            <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlightTitle ? item.highlightTitle : 'Khám phá ngay tính năng nổi bật.'}</p>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
                             
-                            <div class="flex items-center space-x-1.5 pt-0.5">
-                                ${starsMarkup}
-                                <span class="text-xs font-extrabold text-gray-800 dark:text-white ml-1">${itemRating}</span>
+                            <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
+                                <i class="fa-regular fa-calendar text-[9px] text-uptoAccent"></i>
+                                <span>${publishDateStr} &bull; ${authorStr}</span>
+                            </div>
+
+                            <div class="absolute bottom-3 inset-x-3 text-white space-y-1.5">
+                                <h3 class="font-extrabold text-base truncate drop-shadow">${item.name}</h3>
+                                
+                                <div class="flex items-center justify-between text-[11px] text-gray-200 gap-2">
+                                    <p class="line-clamp-1 opacity-90 flex-1">${highlightDesc}</p>
+                                    <span class="bg-uptoAccent/30 text-uptoAccent font-extrabold px-2 py-0.5 rounded-full text-[10px] flex-shrink-0 border border-uptoAccent/30">${versionStr}</span>
+                                </div>
+
+                                <div class="flex items-center space-x-1 pt-0.5">
+                                    ${starsMarkup}
+                                    <span class="text-[11px] font-extrabold text-white ml-1">${itemRating}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1759,23 +2020,52 @@
             if (heroDotsContainer && sortedHeroItems.length) {
                 let dotsHtml = '';
                 sortedHeroItems.forEach((_, idx) => {
-                    dotsHtml += `<span class="hero-dot w-2 h-2 rounded-full bg-gray-600 transition-all duration-300 cursor-pointer" data-slide-idx="${idx}"></span>`;
+                    dotsHtml += `<span class="hero-dot rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer shadow-sm" style="width: 5px; height: 5px;" data-slide-idx="${idx}"></span>`;
                 });
                 heroDotsContainer.innerHTML = dotsHtml;
             }
 
             const cards = heroSlider.querySelectorAll('.hero-card');
-            let currentIndex = Math.min(1, cards.length - 1);
+            let currentIndex = Math.floor(cards.length / 2);
             let autoSlideTimer;
 
             function updateSliderPosition() {
                 cards.forEach((card, idx) => {
-                    card.classList.toggle('active-card', idx === currentIndex);
+                    const isActive = idx === currentIndex;
+                    card.classList.toggle('active-card', isActive);
+                    
+                    const offset = idx - currentIndex;
+                    const absOffset = Math.abs(offset);
+
+                    if (isActive) {
+                        card.style.zIndex = '30';
+                        card.style.transform = 'translate3d(0, 0, 0) scale(1) rotateY(0deg)';
+                        card.style.opacity = '1';
+                        card.style.boxShadow = '0 22px 40px -10px rgba(0,0,0,0.5)';
+                    } else {
+                        card.style.zIndex = Math.max(1, 25 - absOffset * 5);
+                        const translateX = offset * 14; 
+                        const rotateY = offset > 0 ? -16 : 16; 
+                        const scale = Math.max(0.74, 1 - absOffset * 0.08);
+                        const opacity = Math.max(0.4, 1 - absOffset * 0.22);
+                        
+                        card.style.transform = `translate3d(${translateX}px, ${absOffset * 6}px, 0) scale(${scale}) rotateY(${rotateY}deg)`;
+                        card.style.opacity = opacity.toString();
+                        card.style.boxShadow = '0 10px 20px -5px rgba(0,0,0,0.3)';
+                    }
                 });
 
                 const heroDots = heroDotsContainer.querySelectorAll('.hero-dot');
                 heroDots.forEach((dot, idx) => {
-                    dot.className = idx === currentIndex ? 'hero-dot w-5 h-2 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer' : 'hero-dot w-2 h-2 rounded-full bg-gray-600 transition-all duration-300 cursor-pointer';
+                    if (idx === currentIndex) {
+                        dot.className = 'hero-dot w-6 h-2 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer shadow-md';
+                        dot.style.width = '24px';
+                        dot.style.height = '6px';
+                    } else {
+                        dot.className = 'hero-dot rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer shadow-sm';
+                        dot.style.width = '5px';
+                        dot.style.height = '5px';
+                    }
                 });
 
                 const activeCard = cards[currentIndex];
@@ -1835,12 +2125,12 @@
                 let scrollDirection = 1;
 
                 const indicatorEl = container.parentElement.querySelector('.section-scroll-indicator');
-                const itemCount = container.querySelectorAll('.app-card-clickable').length;
+                const itemCount = container.querySelectorAll('.app-card-clickable, .rec-item-card').length;
                 if (indicatorEl && itemCount > 0) {
                     let dotsHtml = '';
                     const totalDots = Math.min(itemCount, 8);
                     for (let i = 0; i < totalDots; i++) {
-                        dotsHtml += `<span class="section-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300"></span>`;
+                        dotsHtml += `<span class="section-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300"></span>`;
                     }
                     indicatorEl.innerHTML = dotsHtml;
                 }
@@ -1855,7 +2145,11 @@
                     const activeIndex = Math.min(Math.floor(progress * dots.length), dots.length - 1);
                     
                     dots.forEach((dot, idx) => {
-                        dot.className = idx === activeIndex ? 'section-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300' : 'section-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300';
+                        if (idx === activeIndex) {
+                            dot.className = 'section-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300';
+                        } else {
+                            dot.className = 'section-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300';
+                        }
                     });
                 };
 
@@ -1888,7 +2182,7 @@
             if (newsDotsContainer && cards.length) {
                 let dotsHtml = '';
                 cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="news-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer" data-news-idx="${idx}"></span>`;
+                    dotsHtml += `<span class="news-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-news-idx="${idx}"></span>`;
                 });
                 newsDotsContainer.innerHTML = dotsHtml;
             }
@@ -1897,7 +2191,11 @@
                 if(!newsDotsContainer) return;
                 const dots = newsDotsContainer.querySelectorAll('.news-dot');
                 dots.forEach((dot, idx) => {
-                    dot.className = idx === currentNewsIndex ? 'news-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer' : 'news-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    if (idx === currentNewsIndex) {
+                        dot.className = 'news-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'news-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    }
                 });
 
                 const targetCard = cards[currentNewsIndex];
@@ -1940,7 +2238,7 @@
             if (tipsDotsContainer && cards.length) {
                 let dotsHtml = '';
                 cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="tip-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer" data-tip-idx="${idx}"></span>`;
+                    dotsHtml += `<span class="tip-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-tip-idx="${idx}"></span>`;
                 });
                 tipsDotsContainer.innerHTML = dotsHtml;
             }
@@ -1949,7 +2247,11 @@
                 if(!tipsDotsContainer) return;
                 const dots = tipsDotsContainer.querySelectorAll('.tip-dot');
                 dots.forEach((dot, idx) => {
-                    dot.className = idx === currentTipIndex ? 'tip-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer' : 'tip-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    if (idx === currentTipIndex) {
+                        dot.className = 'tip-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'tip-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    }
                 });
 
                 const targetCard = cards[currentTipIndex];
@@ -1992,7 +2294,7 @@
             if (jbAppsDotsContainer && cards.length) {
                 let dotsHtml = '';
                 cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="jb-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer" data-jb-idx="${idx}"></span>`;
+                    dotsHtml += `<span class="jb-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-jb-idx="${idx}"></span>`;
                 });
                 jbAppsDotsContainer.innerHTML = dotsHtml;
             }
@@ -2001,7 +2303,11 @@
                 if(!jbAppsDotsContainer) return;
                 const dots = jbAppsDotsContainer.querySelectorAll('.jb-dot');
                 dots.forEach((dot, idx) => {
-                    dot.className = idx === currentJbAppIndex ? 'jb-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer' : 'jb-dot w-1.5 h-1.5 rounded-full bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    if (idx === currentJbAppIndex) {
+                        dot.className = 'jb-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'jb-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    }
                 });
 
                 const targetCard = cards[currentJbAppIndex];
@@ -2116,7 +2422,7 @@
                             <img src="${app.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0 border-none" alt="icon">
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">${highlightedName}</h4>
-                                <p class="text-[10px] text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
                             </div>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </div>
