@@ -6,16 +6,32 @@
         "category": "Quản lý gói",
         "systemRequirements": "iOS 14.0 - 16.6.1 (Rootless / Jailbroken)",
         "rating": "4.0",
-        "img": "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=300&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "30/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.deb",
+        "video": "https://youtu.be/OiLMJHIG_50?si=M4Q2F6h-dOIH7rj3",
+        "gif": "",
         "highlightTitle": "Sileo Manager sẽ - dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn trải nghiệm một trình quản lý gói siêu mượt mà và hiện đại hơn nè.",
-            "Tối ưu riêng cho các dòng máy chạy jailbreak đời mới.",
-            "Quản lý kho lưu trữ tweak, cài đặt và cập nhật nhanh chóng."
+            {
+                "text": "Bạn muốn trải nghiệm một trình quản lý gói siêu mượt mà và hiện đại hơn nè.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tối ưu riêng cho các dòng máy chạy jailbreak đời mới."
+            },
+            {
+                "text": "Quản lý kho lưu trữ tweak, cài đặt và cập nhật nhanh chóng.",
+                "img": "./Art/imgbanner.png"
+            }
         ]
     },
     {
@@ -25,16 +41,29 @@
         "category": "Quản lý tệp hệ thống",
         "systemRequirements": "iOS 12.0 - 16.5 (Jailbroken / FilzaEscaped)",
         "rating": "4.8",
-        "img": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "24/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.ipa",
+        "video": "https://vt.tiktok.com/ZSpfLkBSC/",
+        "gif": "",
         "highlightTitle": "Filza Escaped dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần can thiệp sâu vào tệp hệ thống gốc trên thiết bị iOS.",
-            "Hỗ trợ chỉnh sửa, giải nén và xem trước mọi định dạng tệp tin.",
-            "Công cụ không thể thiếu đối với người dùng yêu thích tùy biến."
+            {
+                "text": "Bạn cần can thiệp sâu vào tệp hệ thống gốc trên thiết bị iOS.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ chỉnh sửa, giải nén và xem trước mọi định dạng tệp tin."
+            },
+            {
+                "text": "Công cụ không thể thiếu đối với người dùng yêu thích tùy biến."
+            }
         ]
     },
     {
@@ -44,16 +73,28 @@
         "category": "Quản lý gói",
         "systemRequirements": "iOS 11.0 - 16.5 (Jailbroken)",
         "rating": "4.9",
-        "img": "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?auto=format&fit=crop&w=300&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "23/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.deb",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Zebra Store dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn tìm kiếm một giải pháp thay thế hoàn hảo cho Cydia.",
-            "Tốc độ tải nhanh, giao diện gọn gàng và dễ dàng sử dụng.",
-            "Hỗ trợ quản lý nguồn và tìm kiếm gói cài đặt cực nhạy."
+            {
+                "text": "Bạn tìm kiếm một giải pháp thay thế hoàn hảo cho Cydia."
+            },
+            {
+                "text": "Tốc độ tải nhanh, giao diện gọn gàng và dễ dàng sử dụng.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ quản lý nguồn và tìm kiếm gói cài đặt cực nhạy."
+            }
         ]
     },
     {
@@ -63,17 +104,29 @@
         "category": "Tiện ích cài đặt vĩnh viễn",
         "systemRequirements": "iOS 14.0 - 17.0 (Hỗ trợ CoreTrust exploit)",
         "rating": "4.7",
-        "img": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=300&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "22/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.tar",
+        "video": "https://www.w3schools.com/html/mov_bbb.mp4",
+        "gif": "",
         "highlightTitle": "TrollStore 2 dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn cài đặt ứng dụng IPA bên ngoài mà không bị lỗi chứng chỉ ký lại.",
-            "Ứng dụng hoạt động vĩnh viễn nhờ khai thác lỗ hổng cốt lõi hệ thống.",
-            "Tiện ích giải trí và công việc tối ưu nhất cho người dùng iOS."
+            {
+                "text": "Bạn muốn cài đặt ứng dụng IPA bên ngoài mà không bị lỗi chứng chỉ ký lại.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Ứng dụng hoạt động vĩnh viễn nhờ khai thác lỗ hổng cốt lõi hệ thống."
+            },
+            {
+                "text": "Tiện ích giải trí và công việc tối ưu nhất cho người dùng iOS."
+            }
         ]
     }
 ]
-

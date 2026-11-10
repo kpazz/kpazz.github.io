@@ -5,16 +5,30 @@
         "dev": "Bộ Công An",
         "category": "Dân cư quốc gia",
         "systemRequirements": "Android 6.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "12/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "VNeID dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần tích hợp giấy tờ cá nhân và định danh điện tử trên thiết bị di động.",
-            "Hỗ trợ thực hiện các thủ tục hành chính công nhanh chóng, tiện lợi.",
-            "Độ bảo mật cấp cao, xác thực thông tin chính xác từ Bộ Công An."
+            {
+                "text": "Bạn cần tích hợp giấy tờ cá nhân và định danh điện tử trên thiết bị di động.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ thực hiện các thủ tục hành chính công nhanh chóng, tiện lợi."
+            },
+            {
+                "text": "Độ bảo mật cấp cao, xác thực thông tin chính xác từ Bộ Công An.",
+                "img": "./Art/imgbanner.png"
+            }
         ]
     },
     {
@@ -23,16 +37,30 @@
         "dev": "OpenAI",
         "category": "Trợ lý AI",
         "systemRequirements": "Android 8.0 trở lên / iOS 16.1 trở lên",
-        "img": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "11/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "ChatGPT dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn có một trợ lý AI thông minh hỗ trợ giải đáp mọi thắc mắc.",
-            "Hỗ trợ soạn thảo văn bản, dịch thuật và lên ý tưởng sáng tạo cực nhanh.",
-            "Giao diện trò chuyện trực quan, phản hồi thông tin chuẩn xác."
+            {
+                "text": "Bạn muốn có một trợ lý AI thông minh hỗ trợ giải đáp mọi thắc mắc.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ soạn thảo văn bản, dịch thuật và lên ý tưởng sáng tạo cực nhanh."
+            },
+            {
+                "text": "Giao diện trò chuyện trực quan, phản hồi thông tin chuẩn xác.",
+                "img": "./Art/imgbanner.png"
+            }
         ]
     },
     {
@@ -41,16 +69,29 @@
         "dev": "Notion Labs",
         "category": "Ghi chú & Quản lý",
         "systemRequirements": "Android 7.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "10/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Notion dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần một không gian làm việc toàn diện để ghi chú và quản lý công việc.",
-            "Tùy biến bố cục linh hoạt từ bảng dữ liệu, lịch trình đến danh sách việc cần làm.",
-            "Đồng bộ hóa mượt mà trên tất cả các thiết bị cá nhân."
+            {
+                "text": "Bạn cần một không gian làm việc toàn diện để ghi chú và quản lý công việc.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tùy biến bố cục linh hoạt từ bảng dữ liệu, lịch trình đến danh sách việc cần làm."
+            },
+            {
+                "text": "Đồng bộ hóa mượt mà trên tất cả các thiết bị cá nhân."
+            }
         ]
     },
     {
@@ -59,16 +100,28 @@
         "dev": "Google LLC",
         "category": "Lưu trữ đám mây",
         "systemRequirements": "Android 6.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "09/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Google Drive dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần lưu trữ và đồng bộ hóa tài liệu an toàn trên không gian đám mây.",
-            "Dễ dàng chia sẻ tệp tin và cộng tác làm việc nhóm theo thời gian thực.",
-            "Truy cập dữ liệu mọi lúc mọi nơi từ mọi thiết bị khác nhau."
+            {
+                "text": "Bạn cần lưu trữ và đồng bộ hóa tài liệu an toàn trên không gian đám mây.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Dễ dàng chia sẻ tệp tin và cộng tác làm việc nhóm theo thời gian thực."
+            },
+            {
+                "text": "Truy cập dữ liệu mọi lúc mọi nơi từ mọi thiết bị khác nhau."
+            }
         ]
     },
     {
@@ -77,16 +130,29 @@
         "dev": "Microsoft Corporation",
         "category": "Soạn văn bản",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "08/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Microsoft Word dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần soạn thảo và chỉnh sửa văn bản chuyên nghiệp ngay trên điện thoại.",
-            "Tương thích hoàn hảo với các định dạng tài liệu văn phòng phổ biến.",
-            "Hỗ trợ định dạng trang và công cụ chỉnh sửa phong phú."
+            {
+                "text": "Bạn cần soạn thảo và chỉnh sửa văn bản chuyên nghiệp ngay trên điện thoại.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tương thích hoàn hảo với các định dạng tài liệu văn phòng phổ biến."
+            },
+            {
+                "text": "Hỗ trợ định dạng trang và công cụ chỉnh sửa phong phú."
+            }
         ]
     },
     {
@@ -95,16 +161,28 @@
         "dev": "Canva",
         "category": "Thiết kế đồ họa",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "07/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Canva dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn thiết kế ấn phẩm đồ họa, poster hoặc slide nhanh chóng.",
-            "Kho mẫu template khổng lồ phù hợp cho mọi nhu cầu sáng tạo.",
-            "Thao tác kéo thả đơn giản, không đòi hỏi kỹ năng thiết kế chuyên sâu."
+            {
+                "text": "Bạn muốn thiết kế ấn phẩm đồ họa, poster hoặc slide nhanh chóng.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Kho mẫu template khổng lồ phù hợp cho mọi nhu cầu sáng tạo."
+            },
+            {
+                "text": "Thao tác kéo thả đơn giản, không đòi hỏi kỹ năng thiết kế chuyên sâu."
+            }
         ]
     },
     {
@@ -113,16 +191,28 @@
         "dev": "Kingsoft Office",
         "category": "Đọc tài liệu PDF",
         "systemRequirements": "Android 5.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "06/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "WPS Office dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần một bộ công cụ văn phòng thu gọn đọc mượt mọi định dạng tệp.",
-            "Tích hợp đọc tài liệu PDF, bảng tính và trình chiếu tiện lợi.",
-            "Dung lượng nhẹ, tối ưu hóa hiệu suất hoạt động trên di động."
+            {
+                "text": "Bạn cần một bộ công cụ văn phòng thu gọn đọc mượt mọi định dạng tệp.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tích hợp đọc tài liệu PDF, bảng tính và trình chiếu tiện lợi."
+            },
+            {
+                "text": "Dung lượng nhẹ, tối ưu hóa hiệu suất hoạt động trên di động."
+            }
         ]
     },
     {
@@ -131,16 +221,28 @@
         "dev": "Evernote Corporation",
         "category": "Sổ tay thông minh",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "05/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Evernote dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn ghi lại mọi ý tưởng, hình ảnh và đoạn ghi chú quan trọng.",
-            "Hệ thống tìm kiếm thông minh giúp lọc dữ liệu nhanh chóng.",
-            "Đồng bộ hóa lịch trình và sổ tay cá nhân an toàn."
+            {
+                "text": "Bạn muốn ghi lại mọi ý tưởng, hình ảnh và đoạn ghi chú quan trọng.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hệ thống tìm kiếm thông minh giúp lọc dữ liệu nhanh chóng."
+            },
+            {
+                "text": "Đồng bộ hóa lịch trình và sổ tay cá nhân an toàn."
+            }
         ]
     },
     {
@@ -149,16 +251,30 @@
         "dev": "Bộ Công An",
         "category": "Dân cư quốc gia",
         "systemRequirements": "Android 6.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "12/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "VNeID dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần tích hợp giấy tờ cá nhân và định danh điện tử trên thiết bị di động.",
-            "Hỗ trợ thực hiện các thủ tục hành chính công nhanh chóng, tiện lợi.",
-            "Độ bảo mật cấp cao, xác thực thông tin chính xác từ Bộ Công An."
+            {
+                "text": "Bạn cần tích hợp giấy tờ cá nhân và định danh điện tử trên thiết bị di động.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ thực hiện các thủ tục hành chính công nhanh chóng, tiện lợi."
+            },
+            {
+                "text": "Độ bảo mật cấp cao, xác thực thông tin chính xác từ Bộ Công An.",
+                "img": "./Art/imgbanner.png"
+            }
         ]
     },
     {
@@ -167,16 +283,30 @@
         "dev": "OpenAI",
         "category": "Trợ lý AI",
         "systemRequirements": "Android 8.0 trở lên / iOS 16.1 trở lên",
-        "img": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "11/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "ChatGPT dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn có một trợ lý AI thông minh hỗ trợ giải đáp mọi thắc mắc.",
-            "Hỗ trợ soạn thảo văn bản, dịch thuật và lên ý tưởng sáng tạo cực nhanh.",
-            "Giao diện trò chuyện trực quan, phản hồi thông tin chuẩn xác."
+            {
+                "text": "Bạn muốn có một trợ lý AI thông minh hỗ trợ giải đáp mọi thắc mắc.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Hỗ trợ soạn thảo văn bản, dịch thuật và lên ý tưởng sáng tạo cực nhanh."
+            },
+            {
+                "text": "Giao diện trò chuyện trực quan, phản hồi thông tin chuẩn xác.",
+                "img": "./Art/imgbanner.png"
+            }
         ]
     },
     {
@@ -185,16 +315,29 @@
         "dev": "Notion Labs",
         "category": "Ghi chú & Quản lý",
         "systemRequirements": "Android 7.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "10/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Notion dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần một không gian làm việc toàn diện để ghi chú và quản lý công việc.",
-            "Tùy biến bố cục linh hoạt từ bảng dữ liệu, lịch trình đến danh sách việc cần làm.",
-            "Đồng bộ hóa mượt mà trên tất cả các thiết bị cá nhân."
+            {
+                "text": "Bạn cần một không gian làm việc toàn diện để ghi chú và quản lý công việc.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tùy biến bố cục linh hoạt từ bảng dữ liệu, lịch trình đến danh sách việc cần làm."
+            },
+            {
+                "text": "Đồng bộ hóa mượt mà trên tất cả các thiết bị cá nhân."
+            }
         ]
     },
     {
@@ -203,16 +346,28 @@
         "dev": "Google LLC",
         "category": "Lưu trữ đám mây",
         "systemRequirements": "Android 6.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "09/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Google Drive dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần lưu trữ và đồng bộ hóa tài liệu an toàn trên không gian đám mây.",
-            "Dễ dàng chia sẻ tệp tin và cộng tác làm việc nhóm theo thời gian thực.",
-            "Truy cập dữ liệu mọi lúc mọi nơi từ mọi thiết bị khác nhau."
+            {
+                "text": "Bạn cần lưu trữ và đồng bộ hóa tài liệu an toàn trên không gian đám mây.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Dễ dàng chia sẻ tệp tin và cộng tác làm việc nhóm theo thời gian thực."
+            },
+            {
+                "text": "Truy cập dữ liệu mọi lúc mọi nơi từ mọi thiết bị khác nhau."
+            }
         ]
     },
     {
@@ -221,16 +376,29 @@
         "dev": "Microsoft Corporation",
         "category": "Soạn văn bản",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "08/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Microsoft Word dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png",
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần soạn thảo và chỉnh sửa văn bản chuyên nghiệp ngay trên điện thoại.",
-            "Tương thích hoàn hảo với các định dạng tài liệu văn phòng phổ biến.",
-            "Hỗ trợ định dạng trang và công cụ chỉnh sửa phong phú."
+            {
+                "text": "Bạn cần soạn thảo và chỉnh sửa văn bản chuyên nghiệp ngay trên điện thoại.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tương thích hoàn hảo với các định dạng tài liệu văn phòng phổ biến."
+            },
+            {
+                "text": "Hỗ trợ định dạng trang và công cụ chỉnh sửa phong phú."
+            }
         ]
     },
     {
@@ -239,16 +407,28 @@
         "dev": "Canva",
         "category": "Thiết kế đồ họa",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "07/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Canva dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn thiết kế ấn phẩm đồ họa, poster hoặc slide nhanh chóng.",
-            "Kho mẫu template khổng lồ phù hợp cho mọi nhu cầu sáng tạo.",
-            "Thao tác kéo thả đơn giản, không đòi hỏi kỹ năng thiết kế chuyên sâu."
+            {
+                "text": "Bạn muốn thiết kế ấn phẩm đồ họa, poster hoặc slide nhanh chóng.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Kho mẫu template khổng lồ phù hợp cho mọi nhu cầu sáng tạo."
+            },
+            {
+                "text": "Thao tác kéo thả đơn giản, không đòi hỏi kỹ năng thiết kế chuyên sâu."
+            }
         ]
     },
     {
@@ -257,16 +437,28 @@
         "dev": "Kingsoft Office",
         "category": "Đọc tài liệu PDF",
         "systemRequirements": "Android 5.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "06/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "WPS Office dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn cần một bộ công cụ văn phòng thu gọn đọc mượt mọi định dạng tệp.",
-            "Tích hợp đọc tài liệu PDF, bảng tính và trình chiếu tiện lợi.",
-            "Dung lượng nhẹ, tối ưu hóa hiệu suất hoạt động trên di động."
+            {
+                "text": "Bạn cần một bộ công cụ văn phòng thu gọn đọc mượt mọi định dạng tệp.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Tích hợp đọc tài liệu PDF, bảng tính và trình chiếu tiện lợi."
+            },
+            {
+                "text": "Dung lượng nhẹ, tối ưu hóa hiệu suất hoạt động trên di động."
+            }
         ]
     },
     {
@@ -275,160 +467,28 @@
         "dev": "Evernote Corporation",
         "category": "Sổ tay thông minh",
         "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
+        "img": "./Art/imgicon.png",
         "publishDate": "05/10/2026",
         "isApp": true,
         "noDownload": false,
         "downloadLink": "https://example.com/downloads/sample-file.apk",
+        "video": "",
+        "gif": "",
         "highlightTitle": "Evernote dành cho bạn nếu",
+        "screenshots": [
+            "./Art/imgbanner.png"
+        ],
         "highlights": [
-            "Bạn muốn ghi lại mọi ý tưởng, hình ảnh và đoạn ghi chú quan trọng.",
-            "Hệ thống tìm kiếm thông minh giúp lọc dữ liệu nhanh chóng.",
-            "Đồng bộ hóa lịch trình và sổ tay cá nhân an toàn."
-        ]
-    },
-    {
-        "name": "VNeID",
-        "version": "2.1.5",
-        "dev": "Bộ Công An",
-        "category": "Dân cư quốc gia",
-        "systemRequirements": "Android 6.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "12/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "VNeID dành cho bạn nếu",
-        "highlights": [
-            "Bạn cần tích hợp giấy tờ cá nhân và định danh điện tử trên thiết bị di động.",
-            "Hỗ trợ thực hiện các thủ tục hành chính công nhanh chóng, tiện lợi.",
-            "Độ bảo mật cấp cao, xác thực thông tin chính xác từ Bộ Công An."
-        ]
-    },
-    {
-        "name": "ChatGPT",
-        "version": "1.2024.1",
-        "dev": "OpenAI",
-        "category": "Trợ lý AI",
-        "systemRequirements": "Android 8.0 trở lên / iOS 16.1 trở lên",
-        "img": "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "11/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "ChatGPT dành cho bạn nếu",
-        "highlights": [
-            "Bạn muốn có một trợ lý AI thông minh hỗ trợ giải đáp mọi thắc mắc.",
-            "Hỗ trợ soạn thảo văn bản, dịch thuật và lên ý tưởng sáng tạo cực nhanh.",
-            "Giao diện trò chuyện trực quan, phản hồi thông tin chuẩn xác."
-        ]
-    },
-    {
-        "name": "Notion",
-        "version": "3.8.2",
-        "dev": "Notion Labs",
-        "category": "Ghi chú & Quản lý",
-        "systemRequirements": "Android 7.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "10/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Notion dành cho bạn nếu",
-        "highlights": [
-            "Bạn cần một không gian làm việc toàn diện để ghi chú và quản lý công việc.",
-            "Tùy biến bố cục linh hoạt từ bảng dữ liệu, lịch trình đến danh sách việc cần làm.",
-            "Đồng bộ hóa mượt mà trên tất cả các thiết bị cá nhân."
-        ]
-    },
-    {
-        "name": "Google Drive",
-        "version": "2.24.1",
-        "dev": "Google LLC",
-        "category": "Lưu trữ đám mây",
-        "systemRequirements": "Android 6.0 trở lên / iOS 14.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "09/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Google Drive dành cho bạn nếu",
-        "highlights": [
-            "Bạn cần lưu trữ và đồng bộ hóa tài liệu an toàn trên không gian đám mây.",
-            "Dễ dàng chia sẻ tệp tin và cộng tác làm việc nhóm theo thời gian thực.",
-            "Truy cập dữ liệu mọi lúc mọi nơi từ mọi thiết bị khác nhau."
-        ]
-    },
-    {
-        "name": "Microsoft Word",
-        "version": "16.82",
-        "dev": "Microsoft Corporation",
-        "category": "Soạn văn bản",
-        "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "08/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Microsoft Word dành cho bạn nếu",
-        "highlights": [
-            "Bạn cần soạn thảo và chỉnh sửa văn bản chuyên nghiệp ngay trên điện thoại.",
-            "Tương thích hoàn hảo với các định dạng tài liệu văn phòng phổ biến.",
-            "Hỗ trợ định dạng trang và công cụ chỉnh sửa phong phú."
-        ]
-    },
-    {
-        "name": "Canva",
-        "version": "2.238.0",
-        "dev": "Canva",
-        "category": "Thiết kế đồ họa",
-        "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "07/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Canva dành cho bạn nếu",
-        "highlights": [
-            "Bạn muốn thiết kế ấn phẩm đồ họa, poster hoặc slide nhanh chóng.",
-            "Kho mẫu template khổng lồ phù hợp cho mọi nhu cầu sáng tạo.",
-            "Thao tác kéo thả đơn giản, không đòi hỏi kỹ năng thiết kế chuyên sâu."
-        ]
-    },
-    {
-        "name": "WPS Office",
-        "version": "13.6.1",
-        "dev": "Kingsoft Office",
-        "category": "Đọc tài liệu PDF",
-        "systemRequirements": "Android 5.0 trở lên / iOS 13.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "06/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "WPS Office dành cho bạn nếu",
-        "highlights": [
-            "Bạn cần một bộ công cụ văn phòng thu gọn đọc mượt mọi định dạng tệp.",
-            "Tích hợp đọc tài liệu PDF, bảng tính và trình chiếu tiện lợi.",
-            "Dung lượng nhẹ, tối ưu hóa hiệu suất hoạt động trên di động."
-        ]
-    },
-    {
-        "name": "Evernote",
-        "version": "10.85",
-        "dev": "Evernote Corporation",
-        "category": "Sổ tay thông minh",
-        "systemRequirements": "Android 8.0 trở lên / iOS 15.0 trở lên",
-        "img": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80",
-        "publishDate": "05/10/2026",
-        "isApp": true,
-        "noDownload": false,
-        "downloadLink": "https://example.com/downloads/sample-file.apk",
-        "highlightTitle": "Evernote dành cho bạn nếu",
-        "highlights": [
-            "Bạn muốn ghi lại mọi ý tưởng, hình ảnh và đoạn ghi chú quan trọng.",
-            "Hệ thống tìm kiếm thông minh giúp lọc dữ liệu nhanh chóng.",
-            "Đồng bộ hóa lịch trình và sổ tay cá nhân an toàn."
+            {
+                "text": "You want to record every important idea, image, and note.",
+                "img": "./Art/imgbanner.png"
+            },
+            {
+                "text": "Smart search system helps filter data quickly."
+            },
+            {
+                "text": "Securely sync schedules and personal notebooks."
+            }
         ]
     }
 ]

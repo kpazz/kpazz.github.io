@@ -34,6 +34,18 @@
             scroll-behavior: smooth;
         }
 
+        /* BO GÓC CHUNG CHO Ô NHẬP LIỆU & NÚT BẤM */
+        .form-control, .form-select {
+            border-radius: 12px !important;
+            padding: 10px 14px;
+        }
+
+        .btn {
+            border-radius: 12px !important;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
         #sidebarBackdrop {
             position: fixed;
             top: 0;
@@ -223,7 +235,6 @@
             padding: 0 0 10px 0;
         }
 
-        /* KHÓA FONT-SIZE >= 16px ĐỂ TRÁNH ZOOM TRANG TRÊN MOBILE KHI CLICK SEARCH */
         .submenu-search-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.12);
@@ -479,7 +490,7 @@
             backdrop-filter: blur(14px) !important;
             -webkit-backdrop-filter: blur(14px) !important;
             font-weight: 600 !important;
-            padding: 5px 16px !important;
+            padding: 6px 18px !important;
             transition: all 0.25s ease !important;
             border: none !important;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
@@ -521,6 +532,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
             color: #f8f9fa !important;
             transition: filter 0.3s ease;
+            border-radius: 20px !important;
         }
 
         [data-bs-theme="light"] .modal-content {
@@ -827,6 +839,11 @@
             </div>
 
             <div class="d-flex align-items-center gap-3">
+                <!-- NÚT ĐẨY LÊN SERVER (GITHUB) -->
+                <button class="btn btn-sm btn-primary rounded-pill px-3 fw-semibold btn-appstore-glass-solid" onclick="pushAllDataToGitHubServer()" title="Đẩy toàn bộ thay đổi lên GitHub Server">
+                    <i class="fa-solid fa-cloud-arrow-up me-1"></i> Đẩy lên Server
+                </button>
+
                 <button class="btn btn-sm btn-outline-secondary rounded-circle p-2" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển đổi giao diện Sáng/Tối" style="width: 38px; height: 38px;">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
                 </button>
@@ -870,7 +887,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-muted mb-1">Tweak Jailbreak</h6>
-                                    <h3 class="fw-bold mb-0" id="statTweaksCount" >0</h3>
+                                    <h3 class="fw-bold mb-0" id="statTweaksCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-wand-magic-sparkles fa-2x text-info opacity-50"></i>
                             </div>
@@ -986,7 +1003,7 @@
                             <h5 class="card-title fw-bold mb-3"><i class="fa-solid fa-eye text-primary me-2"></i>Xem trước trực quan</h5>
                             <div class="hero-preview-box text-center my-2">
                                 <div class="hero-slide-item active p-3" id="previewSlide1">
-                                    <h6 class="fw-bold mb-1">Dopamine Jailbreak iOS 16[span_0](start_span)[span_0](end_span)</h6>
+                                    <h6 class="fw-bold mb-1">Dopamine Jailbreak iOS 16</h6>
                                     <span class="badge bg-info">Tweak & App</span>
                                 </div>
                             </div>
@@ -1033,7 +1050,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1" style="text-align: center;" ><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật Tweak</span>
                             <div id="history-tweak" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
@@ -1058,7 +1075,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Tweak.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="tweakJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1110,7 +1127,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Tintucmoi.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="newsJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1162,7 +1179,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Appjailbreak.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="appJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1214,7 +1231,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Daphuongtien.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('media')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('media')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="mediaJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1266,7 +1283,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Meo.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="tipJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1318,7 +1335,7 @@
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp Tabs/Nangsuat.json</h5>
-                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu thay đổi lên GitHub</button>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="prodJsonOutput" class="form-control json-editor" rows="10"></textarea>
                 </div>
@@ -1329,7 +1346,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1"><i class="fa-solid fa-folder-tree text-warning me-2"></i>Quản Lý Thư Mục & Tệp Tin Gốc Repo</h2>
-                        <p class="text-muted mb-0">Quét toàn bộ thư mục và mọi loại định dạng file ở cùng cấp với <code>kp/</code>, <code>debs/</code> và <code>Tabs/</code>.</p>
+                        <p class="text-muted mb-0">Quét toàn bộ thư mục và mọi loại định dạng file ở cùng cấp với <code>kp/</code>, <code>debs/</code>, <code>Art/</code> và <code>Tabs/</code>.</p>
                     </div>
                     <button class="btn btn-outline-primary rounded-3 fw-semibold btn-appstore-glass-solid" onclick="scanRootDirectory()"><i class="fa-solid fa-rotate me-2"></i>Quét Lại Tất Cả File</button>
                 </div>
@@ -1405,7 +1422,7 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold" id="labelName">Tiêu đề (*)</label>
-                                <input type="text" class="form-control" id="gName" placeholder="Ví dụ: Sileo Manager">
+                                <input type="text" class="form-control" id="gName" placeholder="Ví dụ: Sileo Manager" oninput="updatePathHelperHints()">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Tác giả / Nhà phát triển (dev)</label>
@@ -1415,25 +1432,82 @@
                                 <label class="form-label fw-semibold">Danh mục (category)</label>
                                 <input type="text" class="form-control" id="gCategory" placeholder="Ví dụ: Quản lý gói">
                             </div>
+                            
+                            <!-- TRƯỜNG PHIÊN BẢN (VERSION) -->
                             <div class="col-md-6" id="fieldVersionBox">
                                 <label class="form-label fw-semibold">Phiên bản (version)</label>
                                 <input type="text" class="form-control" id="gVersion" placeholder="Ví dụ: 2.5.2">
                             </div>
+
                             <div class="col-md-6" id="fieldRatingBox">
-                                <label class="form-label fw-semibold">Đánh giá sao (rating)</label>
-                                <input type="text" class="form-control" id="gRating" placeholder="Ví dụ: 4.0">
+                                <label class="form-label fw-semibold">Đánh giá sao (rating) <span class="text-muted small">(Để trống = 5 sao)</span></label>
+                                <input type="text" class="form-control" id="gRating" placeholder="Ví dụ: 4.8 hoặc bỏ trống">
                             </div>
-                            <div class="col-md-6" id="fieldSysReqBox">
+
+                            <!-- TRƯỜNG YÊU CẦU HỆ THỐNG -->
+                            <div class="col-md-6" id="fieldSysReqBox" style="display: none;">
                                 <label class="form-label fw-semibold">Yêu cầu hệ thống (systemRequirements)</label>
                                 <input type="text" class="form-control" id="gSysReq" placeholder="Ví dụ: iOS 14.0 - 16.6.1">
                             </div>
+                            
+                            <!-- TRƯỜNG ẢNH ĐẠI DIỆN -->
                             <div class="col-12">
-                                <label class="form-label fw-semibold">Hình ảnh (img) <span class="text-muted small">(Dán link & chọn tệp)</span></label>
-                                <div class="input-group mb-2">
-                                    <input type="text" class="form-control" id="gImg" placeholder="Link hoặc để trống tự lấy link mặc định">
+                                <label class="form-label fw-semibold">Hình ảnh đại diện (img)</label>
+                                
+                                <div id="currentImgPreviewContainer" class="mb-2" style="display: none;">
+                                    <div class="d-inline-flex align-items-center bg-light dark-mode-bg p-2 rounded-3 border position-relative">
+                                        <img id="currentImgThumb" src="" alt="Thumbnail" style="width: 60px; height: 60px; object-fit: cover;" class="rounded-2 me-2">
+                                        <div class="small text-break pe-4" id="currentImgPathText" style="max-width: 300px;"></div>
+                                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle p-1" style="width: 24px; height: 24px; font-size: 11px; display: flex; align-items: center; justify-content: center;" onclick="clearImagePreview()" title="Xóa ảnh này">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-1">
+                                    <input type="text" class="form-control" id="gImg" placeholder="Chọn ảnh hoặc nhập link" oninput="checkImgInputChanged()">
                                     <input type="file" class="form-control" id="gImgFile" accept="image/*" style="max-width: 200px;" onchange="handleImageFileSelect(event)">
                                 </div>
+                                <div class="form-text text-primary small fw-semibold" id="helperPathImg">
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/img.png</code>
+                                </div>
                             </div>
+
+                            <!-- TRƯỜNG VIDEO GIỚI THIỆU (video) -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold"><i class="fa-solid fa-video me-1 text-danger"></i> Link hoặc Tệp Video giới thiệu (video)</label>
+                                <div class="input-group mb-1">
+                                    <input type="text" class="form-control" id="gVideo" placeholder="Nhập URL video (VD: https://... hoặc Art/.../video.mp4)">
+                                    <input type="file" class="form-control" id="gVideoFile" accept="video/*" style="max-width: 200px;" onchange="handleVideoFileSelect(event)" title="Chọn tệp video nội bộ">
+                                </div>
+                                <div class="form-text text-muted small">Hỗ trợ liên kết web (mp4, webm) hoặc đường dẫn tệp video nội bộ trong kho chứa.</div>
+                            </div>
+
+                            <!-- TRƯỜNG GIF GIỚI THIỆU (gif) -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold"><i class="fa-solid fa-image me-1 text-success"></i> Link hoặc Tệp GIF động (gif)</label>
+                                <div class="input-group mb-1">
+                                    <input type="text" class="form-control" id="gGif" placeholder="Nhập URL GIF hoặc đường dẫn tệp nội bộ (VD: Art/.../animation.gif)">
+                                    <input type="file" class="form-control" id="gGifFile" accept="image/gif" style="max-width: 200px;" onchange="handleGifFileSelect(event)" title="Chọn tệp GIF nội bộ">
+                                </div>
+                                <div class="form-text text-muted small">Tùy chọn tải lên tệp định dạng GIF hoặc dán đường dẫn liên kết tĩnh.</div>
+                            </div>
+                            
+                            <!-- TRƯỜNG SCREENSHOTS (SLIDER ẢNH/VIDEO) -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Ảnh chụp màn hình Slider (screenshots)</label>
+                                
+                                <div id="screenshotsThumbnailsList" class="row g-2 mb-2" style="display: none;"></div>
+
+                                <div class="input-group mb-1">
+                                    <input type="file" class="form-control" id="gScreenshotsFiles" accept="image/*,video/*" multiple onchange="handleScreenshotsFilesSelect(event)">
+                                </div>
+                                <textarea class="form-control mb-1" id="gScreenshots" rows="2" placeholder="Chọn ảnh hoặc nhập link (mỗi dòng 1 đường dẫn)" oninput="renderScreenshotsThumbnails()"></textarea>
+                                <div class="form-text text-primary small fw-semibold" id="helperPathScreenshots">
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/screenshot_1.png</code>
+                                </div>
+                            </div>
+
                             <div class="col-12" id="fieldDescBox" style="display: none;">
                                 <label class="form-label fw-semibold">Mô tả ngắn (description)</label>
                                 <textarea class="form-control" id="gDesc" rows="2" placeholder="Nhập mô tả ngắn gọn..."></textarea>
@@ -1442,10 +1516,22 @@
                                 <label class="form-label fw-semibold">Tiêu đề nổi bật (highlightTitle)</label>
                                 <input type="text" class="form-control" id="gHighlightTitle" placeholder="Dành cho bạn nếu...">
                             </div>
+                            
+                            <!-- TRƯỜNG HIGHLIGHTS -->
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Các điểm nổi bật (highlights) <span class="text-muted small"><br>Sau khi Enter/xuống dòng sẽ là 1 ý <br> (dấu . , không tính tách 1 ý)<br>Sau dấu : sẽ là ý con, mỗi ý con tách dòng nhau bằng dấu .<br>Viết liền sau dấu # hoặc link sẽ được tô đậm</span></label>
-                                <textarea class="form-control" id="gHighlights" rows="4" placeholder="Điểm #Nổibật / https://Kpazz.link....."></textarea>
+                                <label class="form-label fw-semibold">Các điểm nổi bật & ảnh/video đơn lập <span class="text-muted small"><br>Mỗi dòng là 1 ý. Kèm file bằng cách thêm <code>| đường_dẫn_file</code></span></label>
+                                
+                                <div id="highlightsThumbnailsList" class="d-flex flex-wrap gap-2 mb-2" style="display: none;"></div>
+
+                                <div class="mb-1">
+                                    <input type="file" class="form-control form-control-sm" id="gHighlightsFiles" accept="image/*,video/*" multiple onchange="handleHighlightsFilesSelect(event)" title="Chọn nhiều ảnh/video cho highlights">
+                                </div>
+                                <textarea class="form-control mb-1" id="gHighlights" rows="3" placeholder="Nội dung ý 1 | Chọn ảnh hoặc nhập link&#10;Nội dung ý 2 không ảnh/video" oninput="renderHighlightsThumbnails()"></textarea>
+                                <div class="form-text text-primary small fw-semibold" id="helperPathHighlights">
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/highlight_1.png</code>
+                                </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="form-check form-switch mt-4">
                                     <input class="form-check-input" type="checkbox" role="switch" id="gIsApp" checked>
@@ -1460,13 +1546,13 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-semibold">Link tải (downloadLink)</label>
-                                <input type="text" class="form-control" id="gDownloadLink" placeholder="https://... hoặc debs/file.deb">
-                                <small class="text-muted" style="font-size: 0.75rem;">Nhập URL ngoài hoặc đường dẫn tệp nội bộ (VD: <code>debs/tweak.deb</code>)</small>
+                                <input type="text" class="form-control" id="gDownloadLink" placeholder="Chọn ảnh hoặc nhập link hoặc debs/file.deb">
+                                <small class="text-muted" style="font-size: 0.75rem;">Đường dẫn tệp nội bộ (VD: <code>debs/tweak.deb</code>)</small>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- NÚT HỦY & LƯU LẠI LUÔN HIỂN THỊ (STICKY FOOTER) -->
+                <!-- NÚT HỦY & LƯU LẠI -->
                 <div class="modal-footer-sticky d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-secondary rounded-pill px-4 btn-appstore-glass-solid" data-bs-dismiss="modal">Hủy</button>
                     <button type="button" class="btn btn-primary rounded-pill px-4 btn-appstore-glass-solid" onclick="saveGenericItem()">Lưu Lại</button>
@@ -1477,7 +1563,7 @@
 
     <!-- MODAL XEM NHANH -->
     <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow">
                 <div class="modal-header bg-dark text-white rounded-top-4">
                     <h5 class="modal-title fw-bold"><i class="fa-solid fa-eye text-info me-2"></i>Xem Nhanh (Demo Mục)</h5>
@@ -1502,6 +1588,29 @@
                         <label class="text-muted small text-uppercase fw-bold">Ngày xuất bản</label>
                         <div id="prevDate" class="text-secondary"></div>
                     </div>
+
+                    <!-- KHU VỰC HIỂN THỊ VIDEO CHÍNH (NẾU CÓ) -->
+                    <div class="mb-3" id="prevVideoContainer" style="display: none;">
+                        <label class="text-muted small text-uppercase fw-bold mb-2">Video Giới Thiệu Chính</label>
+                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm bg-dark">
+                            <video id="prevVideoElement" controls class="w-100 h-100 object-fit-contain"></video>
+                        </div>
+                    </div>
+
+                    <!-- KHU VỰC HIỂN THỊ GIF ĐỘNG (NẾU CÓ) -->
+                    <div class="mb-3" id="prevGifContainer" style="display: none;">
+                        <label class="text-muted small text-uppercase fw-bold mb-2">Ảnh GIF Động</label>
+                        <div class="rounded-3 overflow-hidden shadow-sm text-center bg-dark p-2">
+                            <img id="prevGifElement" alt="GIF Preview" class="img-fluid rounded-2" style="max-height: 250px; object-fit: contain;">
+                        </div>
+                    </div>
+
+                    <!-- KHU VỰC HIỂN THỊ SLIDE ẢNH/VIDEO (SCREENSHOTS) -->
+                    <div class="mb-4" id="prevScreenshotsContainer" style="display: none;">
+                        <label class="text-muted small text-uppercase fw-bold mb-2">Ảnh/Video Slide (Từ trái qua phải)</label>
+                        <div class="d-flex gap-3 overflow-auto pb-2" id="prevScreenshotsSlider" style="white-space: nowrap;"></div>
+                    </div>
+
                     <div>
                         <label class="text-muted small text-uppercase fw-bold">Mô tả chi tiết (từ các điểm nổi bật / highlights)</label>
                         <div id="prevDesc" class="p-3 rounded-3 mb-0" style="font-size: 0.9rem; line-height: 1.5;"></div>
@@ -1520,8 +1629,8 @@
             <div class="modal-content rounded-4 border-0 shadow text-center p-3">
                 <div class="modal-body">
                     <i class="fa-solid fa-cloud-arrow-up text-success fa-3x mb-3"></i>
-                    <h5 class="fw-bold mb-2">Đang Lưu</h5>
-                    <p class="text-muted small mb-0">Đang đồng bộ dữ liệu lên GitHub...</p>
+                    <h5 class="fw-bold mb-2">Đang Đồng Bộ</h5>
+                    <p class="text-muted small mb-0">Đang đẩy toàn bộ dữ liệu lên GitHub Server...</p>
                 </div>
             </div>
         </div>
@@ -1814,10 +1923,6 @@
             });
 
             await enforceInitialAuth();
-
-            setInterval(() => {
-                silentCheckForNewData();
-            }, 5000);
         });
 
         function updateHeaderDateTime() {
@@ -2132,7 +2237,7 @@
             enforceInitialAuth();
         }
 
-        async function commitAndPushToGitHub(commitMsg, filePath, contentData) {
+        async function pushAllDataToGitHubServer() {
             const token = await getGitHubToken();
             if (!token) return;
 
@@ -2144,51 +2249,47 @@
             }
 
             try {
-                const apiPath = filePath;
-                const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${apiPath}`;
+                for (const key of Object.keys(jsonPaths)) {
+                    const filePath = jsonPaths[key];
+                    const contentData = dbData[key];
+                    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`;
 
-                let fileSha = "";
-                const getRes = await fetch(url, {
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Accept": "application/vnd.github+json"
+                    let fileSha = "";
+                    const getRes = await fetch(url, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Accept": "application/vnd.github+json"
+                        }
+                    });
+
+                    if (getRes.ok) {
+                        const fileData = await getRes.json();
+                        fileSha = fileData.sha;
                     }
-                });
 
-                if (getRes.ok) {
-                    const fileData = await getRes.json();
-                    fileSha = fileData.sha;
+                    const jsonString = JSON.stringify(contentData, null, 4);
+                    const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+
+                    await fetch(url, {
+                        method: "PUT",
+                        headers: {
+                            "Authorization": `Bearer ${token}`,
+                            "Accept": "application/vnd.github+json",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            message: `Update ${filePath} from Admin Dashboard`,
+                            content: base64Content,
+                            sha: fileSha
+                        })
+                    });
                 }
-
-                const jsonString = JSON.stringify(contentData, null, 4);
-                const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
-
-                const putRes = await fetch(url, {
-                    method: "PUT",
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                        "Accept": "application/vnd.github+json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        message: commitMsg,
-                        content: base64Content,
-                        sha: fileSha
-                    })
-                });
 
                 if (saveModal) saveModal.hide();
-
-                if (putRes.ok) {
-                    showCustomAlert(`Đã đẩy code thành công lên repo ${REPO_NAME}!`);
-                } else {
-                    const errData = await putRes.json();
-                    showCustomAlert(`Lỗi GitHub API: ${errData.message || 'Không thể cập nhật tệp'}`);
-                }
-
+                showCustomAlert("Đã đẩy toàn bộ dữ liệu thành công lên GitHub Server!");
             } catch (error) {
                 if (saveModal) saveModal.hide();
-                showCustomAlert(`Đã xảy ra lỗi kết nối khi đẩy code lên GitHub.`);
+                showCustomAlert("Đã xảy ra lỗi kết nối khi đẩy dữ liệu lên GitHub Server.");
             }
         }
 
@@ -2239,32 +2340,6 @@
             renderRepoStats();
             renderGlobalHistory();
             scanRootDirectory();
-        }
-
-        async function silentCheckForNewData() {
-            for (const key of Object.keys(jsonPaths)) {
-                try {
-                    const response = await fetch(jsonPaths[key] + "?t=" + new Date().getTime(), {
-                        cache: "no-store"
-                    });
-                    
-                    if (response.ok) {
-                        const rawText = await response.text();
-                        const parsedData = JSON.parse(rawText);
-                        
-                        if (Array.isArray(parsedData)) {
-                            if (parsedData.length !== dbData[key].length) {
-                                dbData[key] = parsedData;
-                                renderTable(key);
-                                renderSubmenuList(key);
-                                updateJSONOutput(key);
-                                updateCountBadge(key);
-                                renderRepoStats();
-                            }
-                        }
-                    }
-                } catch (e) {}
-            }
         }
 
         function recordHistory(type, actionDesc) {
@@ -2361,21 +2436,14 @@
             sublistEl.innerHTML = html;
         }
 
-        // HÀM XỬ LÝ FORMAT ĐẶC BIỆT CHO #hashtag VÀ URL LINK (TÔ ĐẬM, MÀU CAM/ĐỎ)
         function formatHighlightedText(text) {
             if (!text) return "";
             let safeText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-            // Xử lý các từ bắt đầu bằng dấu # (ví dụ: #noidung viết liền)
             safeText = safeText.replace(/#([A-Za-z0-9_À-ỹ]+)/g, '<strong style="color: #ff4757; font-weight: 700;">#$1</strong>');
-
-            // Xử lý link URL đơn giản thành thẻ a hoặc in đậm màu cam
             safeText = safeText.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" style="color: #ff6b81; font-weight: bold; text-decoration: underline;">$1</a>');
-
             return safeText;
         }
 
-        // HÀM CẮT MÔ TẢ TỐI ĐA 18 TỪ, NẾU DÀI HƠN THÌ THÊM DẤU ".."
         function truncateDescription(text, maxWords = 18) {
             if (!text) return "";
             const words = text.trim().split(/\s+/);
@@ -2385,7 +2453,6 @@
             return formatHighlightedText(words.slice(0, maxWords).join(" ")) + "..";
         }
 
-        /* RENDER DANH SÁCH DẠNG LƯỚI KHÔNG VIỀN, CÓ MÀU VIỀN ĐẦU THẺ CHO SINH ĐỘNG */
         function renderTable(type) {
             const container = document.getElementById(type + 'TableBody');
             if (!container) return;
@@ -2405,7 +2472,7 @@
                 
                 let highlightsArray = [];
                 if (Array.isArray(item.highlights)) {
-                    highlightsArray = item.highlights;
+                    highlightsArray = item.highlights.map(h => typeof h === 'object' ? h.text : h);
                 } else if (typeof item.highlights === 'string' && item.highlights.trim()) {
                     highlightsArray = item.highlights.split('\n').map(s => s.trim()).filter(Boolean);
                 }
@@ -2432,6 +2499,8 @@
                         <div class="d-flex justify-content-between align-items-center pt-2 border-top border-light">
                             <div class="text-secondary small fw-semibold">
                                 ${versionOrCategory ? `<i class="fa-solid fa-tag me-1 text-primary"></i>${versionOrCategory}` : ''}
+                                ${item.video ? `<span class="badge bg-danger ms-2" style="font-size: 0.65rem;"><i class="fa-solid fa-video me-1"></i>Video</span>` : ''}
+                                ${item.gif ? `<span class="badge bg-success ms-2" style="font-size: 0.65rem;"><i class="fa-solid fa-image me-1"></i>GIF</span>` : ''}
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
@@ -2453,7 +2522,6 @@
             container.innerHTML = `<div class="items-grid-container cols-${currentCols}">${htmlContent}</div>`;
         }
 
-        // HÀM XỬ LÝ XEM NHANH: NẾU CÓ DẤU HAI CHẤM (:), TÁCH PHẦN SAU THÀNH CÁC Ý CON BỞI DẤU CHẤM (.)
         function previewItem(type, index) {
             const item = dbData[type][index];
             document.getElementById('prevName').innerText = item.name || item.title || 'Không có tên';
@@ -2461,6 +2529,56 @@
             document.getElementById('prevDev').innerText = item.dev || item.author || 'KPazz Store';
             document.getElementById('prevDate').innerText = item.publishDate || item.date || '07/11/2026';
             
+            // HIỂN THỊ VIDEO CHÍNH (NẾU CÓ)
+            const videoContainer = document.getElementById('prevVideoContainer');
+            const videoElement = document.getElementById('prevVideoElement');
+            if (item.video && item.video.trim()) {
+                videoContainer.style.display = 'block';
+                videoElement.src = item.video.trim();
+            } else {
+                videoContainer.style.display = 'none';
+                videoElement.src = '';
+            }
+
+            // HIỂN THỊ GIF CHÍNH (NẾU CÓ)
+            const gifContainer = document.getElementById('prevGifContainer');
+            const gifElement = document.getElementById('prevGifElement');
+            if (item.gif && item.gif.trim()) {
+                gifContainer.style.display = 'block';
+                gifElement.src = item.gif.trim();
+            } else {
+                gifContainer.style.display = 'none';
+                gifElement.src = '';
+            }
+
+            // KHU VỰC HIỂN THỊ SLIDE ẢNH/VIDEO (SCREENSHOTS)
+            const sliderContainer = document.getElementById('prevScreenshotsSlider');
+            const containerWrapper = document.getElementById('prevScreenshotsContainer');
+            sliderContainer.innerHTML = '';
+
+            let screenshotsArr = [];
+            if (Array.isArray(item.screenshots)) {
+                screenshotsArr = item.screenshots;
+            } else if (typeof item.screenshots === 'string' && item.screenshots.trim()) {
+                screenshotsArr = item.screenshots.split('\n').map(s => s.trim()).filter(Boolean);
+            }
+
+            if (screenshotsArr.length > 0) {
+                containerWrapper.style.display = 'block';
+                screenshotsArr.forEach((src, sIdx) => {
+                    const isVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.mov');
+                    let mediaEl = '';
+                    if (isVideo) {
+                        mediaEl = `<video src="${src}" controls class="rounded-3 shadow-sm" style="width: 220px; height: 140px; object-fit: cover; flex-shrink: 0;"></video>`;
+                    } else {
+                        mediaEl = `<img src="${src}" alt="Screenshot ${sIdx + 1}" class="rounded-3 shadow-sm" style="width: 220px; height: 140px; object-fit: cover; flex-shrink: 0;">`;
+                    }
+                    sliderContainer.innerHTML += mediaEl;
+                });
+            } else {
+                containerWrapper.style.display = 'none';
+            }
+
             let highlightsArray = [];
             if (Array.isArray(item.highlights)) {
                 highlightsArray = item.highlights;
@@ -2472,25 +2590,44 @@
             if (highlightsArray.length > 0) {
                 let listItemsHtml = '';
                 highlightsArray.forEach(h => {
-                    const colonIndex = h.indexOf(':');
+                    let text = '';
+                    let imgOrVideo = '';
+                    if (typeof h === 'object' && h !== null) {
+                        text = h.text || '';
+                        imgOrVideo = h.img || '';
+                    } else {
+                        text = h;
+                    }
+
+                    const colonIndex = text.indexOf(':');
+                    let formattedContent = '';
                     if (colonIndex !== -1) {
-                        const mainPart = h.substring(0, colonIndex + 1);
-                        const subPart = h.substring(colonIndex + 1).trim();
-                        // Tách các ý con bằng dấu chấm (.)
+                        const mainPart = text.substring(0, colonIndex + 1);
+                        const subPart = text.substring(colonIndex + 1).trim();
                         const subSentences = subPart.split('.').map(s => s.trim()).filter(Boolean);
 
-                        listItemsHtml += `<li class="mb-2"><strong>${formatHighlightedText(mainPart)}</strong>`;
+                        formattedContent += `<strong>${formatHighlightedText(mainPart)}</strong>`;
                         if (subSentences.length > 0) {
-                            listItemsHtml += `<ul class="mt-1 ps-3" style="list-style-type: circle;">`;
+                            formattedContent += `<ul class="mt-1 ps-3" style="list-style-type: circle;">`;
                             subSentences.forEach(sub => {
-                                listItemsHtml += `<li class="mb-1">${formatHighlightedText(sub)}.</li>`;
+                                formattedContent += `<li class="mb-1">${formatHighlightedText(sub)}.</li>`;
                             });
-                            listItemsHtml += `</ul>`;
+                            formattedContent += `</ul>`;
                         }
-                        listItemsHtml += `</li>`;
                     } else {
-                        listItemsHtml += `<li class="mb-1">${formatHighlightedText(h)}</li>`;
+                        formattedContent += `${formatHighlightedText(text)}`;
                     }
+
+                    if (imgOrVideo) {
+                        const isVid = imgOrVideo.endsWith('.mp4') || imgOrVideo.endsWith('.webm') || imgOrVideo.endsWith('.mov');
+                        if (isVid) {
+                            formattedContent += `<div class="mt-2"><video src="${imgOrVideo}" controls class="rounded-3 shadow-sm" style="max-width: 260px; max-height: 160px;"></video></div>`;
+                        } else {
+                            formattedContent += `<div class="mt-2"><img src="${imgOrVideo}" alt="Highlight media" class="rounded-3 shadow-sm" style="max-width: 260px; max-height: 160px; object-fit: cover;"></div>`;
+                        }
+                    }
+
+                    listItemsHtml += `<li class="mb-3">${formattedContent}</li>`;
                 });
                 descHtml = `<ul class="mb-0 ps-3">${listItemsHtml}</ul>`;
             } else {
@@ -2512,7 +2649,7 @@
             }
         }
 
-        async function saveDirectJSON(type) {
+        function saveDirectJSON(type) {
             const textarea = document.getElementById(type + 'JsonOutput');
             if (!textarea.value.trim()) {
                 showCustomAlert("Nội dung JSON đang bị trống, không thể lưu!");
@@ -2530,29 +2667,211 @@
                 renderSubmenuList(type);
                 updateCountBadge(type);
                 renderRepoStats();
-                recordHistory(type, 'Ghi đè trực tiếp toàn bộ tệp JSON.');
-                
-                await commitAndPushToGitHub("Update " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                recordHistory(type, 'Cập nhật trực tiếp tệp JSON cục bộ.');
+                showCustomAlert("Đã lưu dữ liệu vào JSON cục bộ thành công!");
             } catch(e) { 
                 showCustomAlert('Lỗi cú pháp JSON! Kiểm tra lại dấu phẩy giữa các dấu ngoặc nhọn },'); 
             }
         }
 
         async function saveSettingsViaGitHub() {
-            const token = await getGitHubToken();
-            if (!token) return;
-            showCustomAlert("Đã lưu thành công cấu hình Slide!");
+            showCustomAlert("Đã lưu cấu hình Slide cục bộ!");
+        }
+
+        function updatePathHelperHints() {
+            const itemName = document.getElementById('gName').value.trim() || "tieu_de";
+            const type = document.getElementById('genericType').value || "muc";
+            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+            
+            const pathBase = `Art/${safeCategory}/${safeTitle}`;
+
+            document.getElementById('helperPathImg').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/img.png</code>`;
+            document.getElementById('helperPathScreenshots').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/screenshot_1.png</code>`;
+            document.getElementById('helperPathHighlights').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/highlight_1.png</code>`;
+        }
+
+        function checkImgInputChanged() {
+            const val = document.getElementById('gImg').value.trim();
+            const previewContainer = document.getElementById('currentImgPreviewContainer');
+            const thumb = document.getElementById('currentImgThumb');
+            const pathText = document.getElementById('currentImgPathText');
+
+            if (val) {
+                previewContainer.style.display = 'block';
+                thumb.src = val;
+                pathText.innerText = val;
+            } else {
+                previewContainer.style.display = 'none';
+            }
+        }
+
+        function clearImagePreview() {
+            document.getElementById('gImg').value = '';
+            document.getElementById('currentImgPreviewContainer').style.display = 'none';
+        }
+
+        function renderScreenshotsThumbnails() {
+            const raw = document.getElementById('gScreenshots').value;
+            const lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            const container = document.getElementById('screenshotsThumbnailsList');
+
+            if (lines.length === 0) {
+                container.style.display = 'none';
+                container.innerHTML = '';
+                return;
+            }
+
+            container.style.display = 'flex';
+            let html = '';
+            lines.forEach((src, idx) => {
+                const isVideo = src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.mov');
+                html += `
+                    <div class="col-6">
+                        <div class="d-flex align-items-center bg-light dark-mode-bg p-2 rounded-3 border position-relative w-100" style="height: 75px; overflow: hidden;">
+                            ${isVideo ? `<div class="bg-dark text-white rounded-2 me-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px;"><i class="fa-solid fa-video"></i></div>` : `<img src="${src}" alt="Thumb" style="width: 70px; height: 50px; object-fit: contain; background: #000;" class="rounded-2 me-2 flex-shrink-0">`}
+                            <div class="small text-break pe-3 text-truncate" style="font-size: 0.75rem;" title="${src}">${src}</div>
+                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle p-1" style="width: 22px; height: 22px; font-size: 10px; display: flex; align-items: center; justify-content: center;" onclick="removeScreenshotLine(${idx})" title="Xóa ảnh này">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function removeScreenshotLine(index) {
+            const raw = document.getElementById('gScreenshots').value;
+            let lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            lines.splice(index, 1);
+            document.getElementById('gScreenshots').value = lines.join('\n');
+            renderScreenshotsThumbnails();
+        }
+
+        function renderHighlightsThumbnails() {
+            const raw = document.getElementById('gHighlights').value;
+            const lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            const container = document.getElementById('highlightsThumbnailsList');
+
+            if (lines.length === 0) {
+                container.style.display = 'none';
+                container.innerHTML = '';
+                return;
+            }
+
+            container.style.display = 'flex';
+            let html = '';
+            lines.forEach((line, idx) => {
+                const parts = line.split('|');
+                const text = parts[0].trim();
+                const mediaPath = parts.slice(1).join('|').trim();
+
+                html += `
+                    <div class="d-inline-flex flex-column bg-light dark-mode-bg p-2 rounded-3 border position-relative mb-2" style="max-width: 220px;">
+                        <div class="small fw-bold text-truncate" style="max-width: 190px;" title="${text}">Ý: ${text}</div>
+                        ${mediaPath ? `<div class="small text-muted text-break" style="font-size: 0.7rem;"><i class="fa-solid fa-image me-1"></i>${mediaPath}</div>` : ''}
+                        <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1 rounded-circle p-1" style="width: 22px; height: 22px; font-size: 10px; display: flex; align-items: center; justify-content: center;" onclick="removeHighlightLine(${idx})" title="Xóa dòng này">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function removeHighlightLine(index) {
+            const raw = document.getElementById('gHighlights').value;
+            let lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            lines.splice(index, 1);
+            document.getElementById('gHighlights').value = lines.join('\n');
+            renderHighlightsThumbnails();
         }
 
         function handleImageFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('gImg').value = e.target.result;
-                };
-                reader.readAsDataURL(file);
+                const itemName = document.getElementById('gName').value.trim() || "item";
+                const type = document.getElementById('genericType').value || "misc";
+                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+                
+                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                document.getElementById('gImg').value = filePath;
+                checkImgInputChanged();
+                updatePathHelperHints();
             }
+        }
+
+        function handleVideoFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const itemName = document.getElementById('gName').value.trim() || "item";
+                const type = document.getElementById('genericType').value || "misc";
+                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+                
+                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                document.getElementById('gVideo').value = filePath;
+            }
+        }
+
+        function handleGifFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const itemName = document.getElementById('gName').value.trim() || "item";
+                const type = document.getElementById('genericType').value || "misc";
+                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+                
+                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                document.getElementById('gGif').value = filePath;
+            }
+        }
+
+        function handleScreenshotsFilesSelect(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            const itemName = document.getElementById('gName').value.trim() || "item";
+            const type = document.getElementById('genericType').value || "misc";
+            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+
+            const screenshotsTextarea = document.getElementById('gScreenshots');
+            let existingLines = screenshotsTextarea.value ? screenshotsTextarea.value.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+            Array.from(files).forEach((file) => {
+                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                existingLines.push(filePath);
+            });
+
+            screenshotsTextarea.value = existingLines.join('\n');
+            renderScreenshotsThumbnails();
+            updatePathHelperHints();
+        }
+
+        function handleHighlightsFilesSelect(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            const itemName = document.getElementById('gName').value.trim() || "item";
+            const type = document.getElementById('genericType').value || "misc";
+            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+
+            const highlightsTextarea = document.getElementById('gHighlights');
+            let existingLines = highlightsTextarea.value ? highlightsTextarea.value.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
+            Array.from(files).forEach((file) => {
+                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                const fileNameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                existingLines.push(`${fileNameWithoutExt} | ${filePath}`);
+            });
+
+            highlightsTextarea.value = existingLines.join('\n');
+            renderHighlightsThumbnails();
+            updatePathHelperHints();
         }
 
         function openGenericModal(type) {
@@ -2568,9 +2887,20 @@
             const fieldSysReqBox = document.getElementById('fieldSysReqBox');
 
             fieldDescBox.style.display = 'block';
-            fieldVersionBox.style.display = 'block';
+
+            if (['tweak', 'app', 'media', 'prod'].includes(type)) {
+                fieldVersionBox.style.display = 'block';
+            } else {
+                fieldVersionBox.style.display = 'none';
+            }
+
             fieldRatingBox.style.display = 'block';
-            fieldSysReqBox.style.display = 'block';
+
+            if (['tweak', 'prod'].includes(type)) {
+                fieldSysReqBox.style.display = 'block';
+            } else {
+                fieldSysReqBox.style.display = 'none';
+            }
 
             document.getElementById('gName').value = '';
             document.getElementById('gDev').value = '';
@@ -2579,10 +2909,20 @@
             document.getElementById('gRating').value = '';
             document.getElementById('gSysReq').value = '';
             document.getElementById('gImg').value = '';
+            document.getElementById('gVideo').value = '';
+            document.getElementById('gGif').value = '';
+            document.getElementById('currentImgPreviewContainer').style.display = 'none';
+            document.getElementById('gScreenshots').value = '';
+            document.getElementById('screenshotsThumbnailsList').style.display = 'none';
+            document.getElementById('screenshotsThumbnailsList').innerHTML = '';
             document.getElementById('gDesc').value = '';
             document.getElementById('gHighlightTitle').value = '';
             document.getElementById('gHighlights').value = '';
+            document.getElementById('highlightsThumbnailsList').style.display = 'none';
+            document.getElementById('highlightsThumbnailsList').innerHTML = '';
             document.getElementById('gDownloadLink').value = '';
+
+            updatePathHelperHints();
 
             if (type === 'news') {
                 titleEl.innerText = "Thêm Tin Tức Mới";
@@ -2619,14 +2959,43 @@
             document.getElementById('gName').value = item.name || item.title || '';
             document.getElementById('gDev').value = item.dev || item.author || '';
             document.getElementById('gCategory').value = item.category || '';
-            document.getElementById('gImg').value = item.img || '';
+            
+            const imgVal = item.img || '';
+            document.getElementById('gImg').value = imgVal;
+            
+            if (imgVal) {
+                const previewContainer = document.getElementById('currentImgPreviewContainer');
+                const thumb = document.getElementById('currentImgThumb');
+                const pathText = document.getElementById('currentImgPathText');
+                previewContainer.style.display = 'block';
+                thumb.src = imgVal;
+                pathText.innerText = imgVal;
+            }
+
+            document.getElementById('gVideo').value = item.video || '';
+            document.getElementById('gGif').value = item.gif || '';
+
+            if (Array.isArray(item.screenshots)) {
+                document.getElementById('gScreenshots').value = item.screenshots.join('\n');
+            } else {
+                document.getElementById('gScreenshots').value = '';
+            }
+            renderScreenshotsThumbnails();
+
             document.getElementById('gHighlightTitle').value = item.highlightTitle || '';
             
             if (Array.isArray(item.highlights)) {
-                document.getElementById('gHighlights').value = item.highlights.join('\n');
+                const formattedHighlights = item.highlights.map(h => {
+                    if (typeof h === 'object' && h !== null) {
+                        return h.img ? `${h.text} | ${h.img}` : h.text;
+                    }
+                    return h;
+                });
+                document.getElementById('gHighlights').value = formattedHighlights.join('\n');
             } else {
                 document.getElementById('gHighlights').value = item.highlights || '';
             }
+            renderHighlightsThumbnails();
 
             document.getElementById('gIsApp').checked = !!item.isApp;
             document.getElementById('gNoDownload').checked = !!item.noDownload;
@@ -2636,6 +3005,8 @@
             if (item.rating) document.getElementById('gRating').value = item.rating;
             if (item.systemRequirements) document.getElementById('gSysReq').value = item.systemRequirements;
             if (item.description) document.getElementById('gDesc').value = item.description;
+
+            updatePathHelperHints();
         }
 
         async function saveGenericItem() {
@@ -2649,12 +3020,36 @@
             }
 
             const highlightsRaw = document.getElementById('gHighlights').value;
-            // Tách các ý dựa vào phím Enter (xuống dòng)
-            const highlightsArr = highlightsRaw ? highlightsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
-            
+            const highlightsLines = highlightsRaw ? highlightsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+            const highlightsArr = highlightsLines.map(line => {
+                const parts = line.split('|');
+                if (parts.length >= 2) {
+                    return {
+                        text: parts[0].trim(),
+                        img: parts.slice(1).join('|').trim()
+                    };
+                }
+                return {
+                    text: line
+                };
+            });
+
+            const screenshotsRaw = document.getElementById('gScreenshots').value;
+            const screenshotsArr = screenshotsRaw ? screenshotsRaw.split('\n').map(s => s.trim()).filter(Boolean) : [];
+
             let imgInputVal = document.getElementById('gImg').value.trim();
+            
             if (!imgInputVal) {
-                imgInputVal = "https://kpazz.github.io/imgload.png";
+                if (type === 'tweak' || type === 'media' || type === 'prod') {
+                    imgInputVal = "Art/imgicon.png";
+                } else {
+                    imgInputVal = "Art/imgbanner.png";
+                }
+            }
+
+            let ratingVal = document.getElementById('gRating').value.trim();
+            if (!ratingVal) {
+                ratingVal = "5.0";
             }
 
             let newItem = {
@@ -2662,23 +3057,29 @@
                 version: document.getElementById('gVersion').value.trim() || "1.0.0",
                 dev: document.getElementById('gDev').value.trim() || "KPazz",
                 category: document.getElementById('gCategory').value.trim() || "Tweaks",
-                systemRequirements: document.getElementById('gSysReq').value.trim() || "mobilesubstrate",
+                systemRequirements: document.getElementById('gSysReq').value.trim() || "",
+                rating: ratingVal,
                 description: document.getElementById('gDesc').value.trim() || "",
                 img: imgInputVal,
                 publishDate: "07/11/2026",
                 isApp: document.getElementById('gIsApp').checked,
                 noDownload: document.getElementById('gNoDownload').checked,
                 downloadLink: document.getElementById('gDownloadLink').value.trim(),
+                video: document.getElementById('gVideo').value.trim(),
+                gif: document.getElementById('gGif').value.trim(),
                 highlightTitle: document.getElementById('gHighlightTitle').value.trim(),
+                screenshots: screenshotsArr,
                 highlights: highlightsArr
             };
 
             if (index >= 0) {
+                // Chỉnh sửa: Cập nhật trực tiếp vào vị trí hiện tại
                 dbData[type][index] = newItem;
                 recordHistory(type, `Chỉnh sửa mục: "${name}"`);
             } else {
+                // Thêm mới: Chèn dữ liệu vào ngay DÒNG ĐẦU TIÊN của chuỗi mảng JSON bằng unshift
                 dbData[type].unshift(newItem);
-                recordHistory(type, `Thêm mới mục: "${name}"`);
+                recordHistory(type, `Thêm mới mục và ghi lên dòng đầu: "${name}"`);
             }
 
             renderTable(type);
@@ -2688,8 +3089,7 @@
             renderRepoStats();
 
             if (genericModalInstance) genericModalInstance.hide();
-
-            await commitAndPushToGitHub("Add/Edit item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+            showCustomAlert(`Đã lưu và ghi đè trực tiếp dữ liệu vào tệp ${jsonPaths[type]} thành công!`);
         }
 
         async function deleteItem(type, index) {
@@ -2702,8 +3102,7 @@
                 updateCountBadge(type);
                 renderRepoStats();
                 recordHistory(type, `Xóa mục: "${itemName}"`);
-
-                await commitAndPushToGitHub("Delete item in " + jsonPaths[type], jsonPaths[type], dbData[type]);
+                showCustomAlert("Đã xóa mục thành công trong JSON cục bộ!");
             }
         }
 
@@ -2724,6 +3123,7 @@
             const allFilesAndDirs = [
                 { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "07/11/2026" },
                 { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "07/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "Art/", size: "120.0 KB", date: "07/11/2026" },
                 { type: "Thư mục", format: "DIR", path: "Tabs/", size: "14.2 KB", date: "07/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "Tabs/Tweak.json", size: "2.4 KB", date: "07/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "Tabs/Tintucmoi.json", size: "3.1 KB", date: "07/11/2026" },

@@ -68,7 +68,51 @@
             touch-action: pan-y;
         }
 
-        /* ================= CSS RIÊNG BIỆT CHO POPUP XEM TẤT CẢ (GRID 1 & 2) ================= */
+        /* ================= CSS TỶ LỆ ẢNH & VIDEO CHUẨN ================= */
+        .img-ratio-1-1 {
+            aspect-ratio: 1 / 1 !important;
+            object-fit: cover !important;
+        }
+
+        .img-ratio-16-9 {
+            aspect-ratio: 16 / 9 !important;
+            object-fit: cover !important;
+        }
+
+        /* Khung chứa video chuẩn chiều cao 145px và ôm sát width vừa khít với video */
+        .video-container-fixed {
+            height: 145px !important;
+            aspect-ratio: 16 / 9 !important;
+            width: calc(145px * (16 / 9)) !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            object-fit: cover !important;
+            border-radius: 1rem !important;
+            overflow: hidden !important;
+        }
+
+        /* ================= LIGHTBOX POPUP ZOOM CSS ================= */
+        .lightbox-slide {
+            scroll-snap-align: center;
+            overflow: hidden;
+            position: relative;
+            touch-action: pan-x pan-y pinch-zoom;
+        }
+
+        .zoomable-img {
+            transition: transform 0.2s ease-out;
+            max-height: 85vh;
+            max-width: 100%;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+
+        .zoomable-img.zoomed {
+            transform: scale(2.5);
+            cursor: grab;
+        }
+
+        /* ================= CSS POPUP XEM TẤT CẢ ================= */
         .popup-card-item-custom {
             display: flex;
             align-items: center;
@@ -95,16 +139,15 @@
             background-color: rgba(0, 0, 0, 0.35);
         }
         .popup-card-img-custom {
-            object-fit: contain !important;
+            aspect-ratio: 1 / 1 !important;
+            object-fit: cover !important;
             width: 100% !important;
             height: 100% !important;
             border-radius: 0.5rem !important;
         }
 
-        /* ================= CSS RIÊNG BIỆT CHO CÁC MỤC TRÊN TRANG CHỦ ================= */
-        
-        /* 1. CSS Riêng Mục Đa Phương Tiện */
-        .home-media-item-box {
+        /* ================= CSS CÁC MỤC TRANG CHỦ ================= */
+        .home-media-item-box, .home-tweak-item-box, .rec-item-card {
             display: flex;
             align-items: center;
             padding: 0.5rem;
@@ -114,7 +157,7 @@
             flex-shrink: 0;
             min-height: 4.2rem;
         }
-        .home-media-img-wrap {
+        .home-media-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
             width: 2.75rem;
             height: 2.75rem;
             border-radius: 0.65rem;
@@ -126,83 +169,16 @@
             padding: 0.15rem;
             background-color: rgba(0, 0, 0, 0.15);
         }
-        .dark .home-media-img-wrap {
+        .dark .home-media-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
             background-color: rgba(0, 0, 0, 0.35);
         }
-        .home-media-img-file {
-            object-fit: contain !important;
+        .home-media-img-file, .home-tweak-img-file, .rec-item-card-img {
+            aspect-ratio: 1 / 1 !important;
+            object-fit: cover !important;
             width: 100% !important;
             height: 100% !important;
             border-radius: 0.5rem !important;
         }
-
-        /* 2. CSS Riêng Mục Tweak Jailbreak */
-        .home-tweak-item-box {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            border-radius: 0.875rem;
-            cursor: pointer;
-            width: 220px;
-            flex-shrink: 0;
-            min-height: 4.2rem;
-        }
-        .home-tweak-img-wrap {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 0.65rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            flex-shrink: 0;
-            padding: 0.15rem;
-            background-color: rgba(0, 0, 0, 0.15);
-        }
-        .dark .home-tweak-img-wrap {
-            background-color: rgba(0, 0, 0, 0.35);
-        }
-        .home-tweak-img-file {
-            object-fit: contain !important;
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* 3. CSS Riêng Mục Đề Xuất Chi Tiết */
-        .rec-item-card {
-            display: flex;
-            align-items: center;
-            padding: 0.5rem;
-            border-radius: 0.875rem;
-            cursor: pointer;
-            width: 220px;
-            flex-shrink: 0;
-            min-height: 4.2rem;
-        }
-        .rec-item-card-img-wrap {
-            width: 2.75rem;
-            height: 2.75rem;
-            border-radius: 0.65rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            flex-shrink: 0;
-            padding: 0.15rem;
-            background-color: rgba(0, 0, 0, 0.15);
-        }
-        .dark .rec-item-card-img-wrap {
-            background-color: rgba(0, 0, 0, 0.35);
-        }
-        .rec-item-card-img {
-            object-fit: contain !important;
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 0.5rem !important;
-        }
-
-        /* =================================================================================== */
 
         .account-modal-card {
             background: rgba(255, 255, 255, 0.98) !important;
@@ -468,14 +444,30 @@
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Hai, 9 tháng 11, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 10 tháng 11, 2026</span>
             </div>
         </div>
     </header>
 
     <div class="h-24"></div>
 
-    <!-- ==================== POPUP XEM TẤT CẢ (CHỈ CÒN GRID 1 VÀ 2, MẶC ĐỊNH GRID 2) ==================== -->
+    <!-- ==================== POPUP XEM PHÓNG TO ẢNH & VIDEO (MEDIA LIGHTBOX) ==================== -->
+    <div id="mediaLightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[70] hidden flex-col justify-between p-0 m-0 select-none overflow-hidden">
+        <div class="flex items-center justify-between p-4 z-20 bg-gradient-to-b from-black/80 to-transparent">
+            <span id="lightboxCounter" class="text-xs font-extrabold text-gray-300 tracking-wider">1 / 1</span>
+            <button id="lightboxCloseBtn" class="w-9 h-9 rounded-full bg-white/20 text-white flex items-center justify-center text-lg hover:bg-white/40 active:scale-90 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="lightboxSlider" class="flex-1 flex overflow-x-auto snap-x snap-mandatory no-scrollbar w-full h-full items-center"></div>
+
+        <div class="p-3 text-center z-20 bg-gradient-to-t from-black/80 to-transparent text-[11px] text-gray-400 font-medium">
+            <p>Nhấp đúp hoặc dùng 2 ngón tay để phóng to ảnh. Vuốt sang trái / phải để xem phương tiện tiếp theo.</p>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP XEM TẤT CẢ ==================== -->
     <div id="categoryModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-center justify-center p-0 md:p-3">
         <div id="categoryCard" class="glass-panel text-gray-900 dark:text-white rounded-none md:rounded-3xl p-4 w-full h-full md:h-auto md:max-w-4xl shadow-2xl relative md:max-h-[90vh] flex flex-col overflow-hidden border-none">
             
@@ -529,7 +521,7 @@
                     </div>
 
                     <div class="flex items-start space-x-3.5">
-                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl object-cover border-none shadow-lg flex-shrink-0">
+                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl img-ratio-1-1 border-none shadow-lg flex-shrink-0">
                         <div class="flex-1 min-w-0 pr-4">
                             <h2 id="detailAppName" class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
                             <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold">1.2.3RC2</p>
@@ -549,7 +541,7 @@
                             </p>
                         </div>
                         <div class="border-none flex flex-col items-center justify-center px-1">
-                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">09/11/2026</span>
+                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">10/11/2026</span>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">ngày đăng</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
@@ -565,6 +557,11 @@
                 </div>
 
                 <div class="space-y-4">
+                    <!-- SLIDER PHƯƠNG TIỆN -->
+                    <div id="screenshotsSection" class="hidden space-y-2">
+                        <div id="screenshotsContainer" class="flex space-x-3 overflow-x-auto no-scrollbar pb-2 cursor-grab"></div>
+                    </div>
+
                     <div id="articleContentBlock" class="hidden popup-article-box rounded-2xl p-4 space-y-3 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                         <h4 class="font-extrabold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
                             <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
@@ -575,7 +572,7 @@
 
                     <div id="highlightsBlock" class="popup-article-box rounded-2xl p-3.5 space-y-2 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                         <h4 id="detailHighlightTitle" class="font-extrabold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
-                        <ul id="detailHighlightsList" class="space-y-2 text-[11px] text-gray-700 dark:text-gray-200">
+                        <ul id="detailHighlightsList" class="space-y-3 text-[11px] text-gray-700 dark:text-gray-200">
                             <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
                         </ul>
                     </div>
@@ -625,7 +622,7 @@
                         </a>
 
                         <div class="flex items-center justify-between px-2">
-                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl object-cover border-none">
+                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl img-ratio-1-1 object-cover border-none">
                             <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
                                 <i class="fa-solid fa-star cursor-pointer transition"></i>
@@ -725,7 +722,7 @@
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block border-none">
                     <div class="text-left">
                         <h4 class="font-extrabold text-sm leading-tight">Tải & Cài đặt bản mới nhất</h4>
-                        <p id="stickySubText" class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">Nội dung an toàn, được phát hành 09/11/2026 - KPazz @2026</p>
+                        <p id="stickySubText" class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">Nội dung an toàn, được phát hành 10/11/2026 - KPazz @2026</p>
                     </div>
                     <i class="fa-solid fa-download text-lg pr-1"></i>
                 </a>
@@ -922,7 +919,7 @@
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 py-0.5 my-0"></div>
         </section>
 
-        <!-- SECTION: TWEAK JAILBREAK IOS (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: TWEAK JAILBREAK IOS -->
         <section class="space-y-2.5 pt-0 mt-0">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="section-title text-gray-900 dark:text-white">
@@ -935,7 +932,7 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: TIN TỨC MỚI (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: TIN TỨC MỚI -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="section-title text-gray-900 dark:text-white">
@@ -948,7 +945,7 @@
             <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: APP JAILBREAK (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: APP JAILBREAK -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="section-title text-gray-900 dark:text-white">
@@ -961,7 +958,7 @@
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: ĐA PHƯƠNG TIỆN (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: ĐA PHƯƠNG TIỆN -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
@@ -974,7 +971,7 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: MẸO & HƯỚNG DẪN (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: MẸO & HƯỚNG DẪN -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="section-title text-gray-900 dark:text-white">
@@ -987,7 +984,7 @@
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: NĂNG SUẤT (Dùng hàm render riêng thủ công) -->
+        <!-- SECTION: NĂNG SUẤT -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
                 <a href="javascript:void(0)" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="section-title text-gray-900 dark:text-white">
@@ -1037,10 +1034,11 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- JAVASCRIPT LOGIC THỦ CÔNG RIÊNG CHO TỪNG PHẦN -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         let globalAllItems = [];
         let currentOpenItem = null;
+        let currentMediaList = [];
 
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
@@ -1069,23 +1067,24 @@
                 htmlEl.classList.add('dark');
                 document.body.classList.remove('bg-white', 'text-gray-900');
                 document.body.classList.add('bg-uptoBg', 'text-white');
-                themeIcon.className = 'fa-solid fa-sun';
+                themeIcon.className = 'fa-solid fa-moon';
             } else {
                 htmlEl.classList.remove('dark');
                 document.body.classList.remove('bg-uptoBg', 'text-white');
                 document.body.classList.add('bg-white', 'text-gray-900');
-                themeIcon.className = 'fa-solid fa-moon';
+                themeIcon.className = 'fa-solid fa-sun';
             }
         }
 
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        let currentThemeIsDark = systemPrefersDark.matches;
-        applyTheme(currentThemeIsDark);
+        // Tự động áp dụng chế độ Sáng/Tối theo thời gian trong ngày (Tối từ 18:00 đến 06:00 sáng hôm sau)
+        function getTimeBasedTheme() {
+            const currentHour = new Date().getHours();
+            // Nếu từ 18 giờ tối đến trước 6 giờ sáng -> Chế độ tối (true), ngược lại Sáng (false)
+            return currentHour >= 18 || currentHour < 6;
+        }
 
-        systemPrefersDark.addEventListener('change', (e) => {
-            currentThemeIsDark = e.matches;
-            applyTheme(currentThemeIsDark);
-        });
+        let currentThemeIsDark = getTimeBasedTheme();
+        applyTheme(currentThemeIsDark);
 
         themeToggleBtn.addEventListener('click', () => {
             currentThemeIsDark = !currentThemeIsDark;
@@ -1154,6 +1153,80 @@
             return html;
         }
 
+        function getPrimaryMediaSrc(item) {
+            if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0) {
+                return { type: 'img', url: item.screenshots[0] };
+            }
+            return { type: 'img', url: item.img };
+        }
+
+        /* ================= LIGHTBOX MEDIA LOGIC ================= */
+        const mediaLightboxModal = document.getElementById('mediaLightboxModal');
+        const lightboxSlider = document.getElementById('lightboxSlider');
+        const lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+
+        function openMediaLightbox(startIndex = 0) {
+            if (!currentMediaList || currentMediaList.length === 0) return;
+
+            let slidesHtml = '';
+            currentMediaList.forEach((media, idx) => {
+                if (media.type === 'video') {
+                    slidesHtml += `
+                        <div class="lightbox-slide w-full h-full flex-none flex flex-col items-center justify-center p-2 relative">
+                            <div class="relative max-w-full max-h-[80vh] flex flex-col items-center justify-center">
+                                <video id="lightboxVideo_${idx}" controls playsinline webkit-playsinline x5-playsinline disablePictureInPicture disableRemotePlayback class="max-h-[75vh] w-auto rounded-xl shadow-2xl bg-black">
+                                    <source src="${media.url}" type="video/mp4">
+                                    Trình duyệt không hỗ trợ xem Video.
+                                </video>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    slidesHtml += `
+                        <div class="lightbox-slide w-full h-full flex-none flex items-center justify-center p-2">
+                            <img src="${media.url}" class="zoomable-img" alt="Zoomable media" ondblclick="toggleImageZoom(this)">
+                        </div>
+                    `;
+                }
+            });
+
+            lightboxSlider.innerHTML = slidesHtml;
+            lightboxCounter.textContent = `${startIndex + 1} / ${currentMediaList.length}`;
+
+            mediaLightboxModal.classList.remove('hidden');
+            mediaLightboxModal.classList.add('flex');
+
+            setTimeout(() => {
+                const targetSlide = lightboxSlider.children[startIndex];
+                if (targetSlide) {
+                    lightboxSlider.scrollTo({
+                        left: targetSlide.offsetLeft,
+                        behavior: 'instant'
+                    });
+                }
+            }, 50);
+        }
+
+        lightboxSlider.addEventListener('scroll', () => {
+            const width = lightboxSlider.clientWidth;
+            if (width > 0 && currentMediaList.length > 0) {
+                const currentIndex = Math.round(lightboxSlider.scrollLeft / width);
+                lightboxCounter.textContent = `${Math.min(currentIndex + 1, currentMediaList.length)} / ${currentMediaList.length}`;
+            }
+        });
+
+        function toggleImageZoom(imgEl) {
+            imgEl.classList.toggle('zoomed');
+        }
+
+        lightboxCloseBtn.addEventListener('click', () => {
+            mediaLightboxModal.classList.add('hidden');
+            mediaLightboxModal.classList.remove('flex');
+            lightboxSlider.querySelectorAll('video').forEach(v => v.pause());
+        });
+
+        /* ================= POPUP CHI TIẾT LOGIC ================= */
         const appDetailModal = document.getElementById('appDetailModal');
         const appDetailCard = document.getElementById('appDetailCard');
         const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
@@ -1183,6 +1256,9 @@
         const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
         const detailInteractiveStars = document.getElementById('detailInteractiveStars');
 
+        const screenshotsSection = document.getElementById('screenshotsSection');
+        const screenshotsContainer = document.getElementById('screenshotsContainer');
+
         const starBar5 = document.getElementById('starBar5');
         const starBar4 = document.getElementById('starBar4');
         const starBar3 = document.getElementById('starBar3');
@@ -1205,13 +1281,13 @@
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
                     <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item)}'>
                         <div class="rec-item-card-img-wrap">
-                            <img src="${item.img}" class="rec-item-card-img" alt="${item.name}">
+                            <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -1251,6 +1327,7 @@
         function openAppDetail(item) {
             currentOpenItem = item;
             isNoDownloadItem = item.noDownload;
+            currentMediaList = [];
 
             if (item.name) {
                 detailAppName.textContent = item.name;
@@ -1264,7 +1341,7 @@
                 detailAppIcon.src = item.img;
                 detailSmallAvatar.src = item.img;
             }
-            const publishDateStr = item.publishDate || '09/11/2026';
+            const publishDateStr = item.publishDate || '10/11/2026';
             if (item.publishDate) {
                 detailPublishDate.textContent = item.publishDate;
             }
@@ -1297,6 +1374,80 @@
             if (starBar2) starBar2.style.width = `${pct2}%`;
             if (starBar1) starBar1.style.width = `${pct1}%`;
 
+            let scHtml = '';
+            let videoUrl = item.video || item.videoUrl;
+            let gifUrl = item.gif || item.gifUrl;
+
+            if (videoUrl) {
+                if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                    let ytEmbedUrl = videoUrl;
+                    if (videoUrl.includes('watch?v=')) {
+                        ytEmbedUrl = videoUrl.replace('watch?v=', 'embed/');
+                    } else if (videoUrl.includes('youtu.be/')) {
+                        ytEmbedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+                    }
+                    scHtml += `
+                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group flex justify-center bg-black">
+                            <div class="video-container-fixed">
+                                <iframe src="${ytEmbedUrl}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    `;
+                } else if (videoUrl.includes('tiktok.com') || videoUrl.includes('vt.tiktok.com')) {
+                    scHtml += `
+                        <div class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel border border-uptoAccent/30 shadow-md relative flex flex-col items-center justify-center p-3 text-center bg-black/40" style="aspect-ratio: 16/9;">
+                            <div class="w-9 h-9 rounded-full bg-uptoAccent/20 text-uptoAccent flex items-center justify-center text-base mb-1.5 shadow">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </div>
+                            <h4 class="font-extrabold text-[11px] text-white mb-0.5 truncate w-full">Xem trên Tiktok</h4>
+                            <p class="text-[9px] text-gray-300 mb-2 px-1 line-clamp-2">ấn vào xem video phía dưới để xem video hướng dẫn hoặc review.</p>
+                            <a href="${videoUrl}" target="_blank" class="bg-uptoAccent hover:opacity-90 text-white font-bold px-3 py-1.5 rounded-xl text-[10px] flex items-center space-x-1.5 shadow transition active:scale-95">
+                                <i class="fa-solid fa-play text-[9px]"></i>
+                                <span>Xem Video trên TikTok</span>
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    currentMediaList.push({ type: 'video', url: videoUrl });
+                    scHtml += `
+                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group flex justify-center bg-black">
+                            <video class="video-container-fixed object-cover bg-black" controls muted loop playsinline webkit-playsinline x5-playsinline disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen">
+                                <source src="${videoUrl}" type="video/mp4">
+                            </video>
+                        </div>
+                    `;
+                }
+            } else if (gifUrl) {
+                currentMediaList.push({ type: 'image', url: gifUrl });
+                const gifIdx = currentMediaList.length - 1;
+                scHtml += `
+                    <div onclick="openMediaLightbox(${gifIdx})" class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group cursor-pointer flex justify-center bg-black">
+                        <img src="${gifUrl}" class="video-container-fixed object-cover" alt="GIF Media">
+                    </div>
+                `;
+            }
+
+            if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0) {
+                item.screenshots.forEach(imgUrl => {
+                    currentMediaList.push({ type: 'image', url: imgUrl });
+                    const imgIdx = currentMediaList.length - 1;
+
+                    scHtml += `
+                        <div onclick="openMediaLightbox(${imgIdx})" class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel border-none shadow-md cursor-pointer hover:opacity-95 transition">
+                            <img src="${imgUrl}" class="w-full img-ratio-16-9 object-cover" alt="Screenshot">
+                        </div>
+                    `;
+                });
+            }
+
+            if (scHtml !== '') {
+                screenshotsSection.classList.remove('hidden');
+                screenshotsContainer.innerHTML = scHtml;
+            } else {
+                screenshotsSection.classList.add('hidden');
+                screenshotsContainer.innerHTML = '';
+            }
+
             if (item.isArticle || item.isTip || !item.isApp) {
                 detailAppVersion.style.display = 'none';
                 articleContentBlock.classList.remove('hidden');
@@ -1304,7 +1455,7 @@
 
                 let contentText = '';
                 if (item.highlights && item.highlights.length > 0) {
-                    contentText = item.highlights.join('\n\n');
+                    contentText = item.highlights.map(h => (typeof h === 'string' ? h : h.text)).join('\n\n');
                 } else if (item.highlightTitle) {
                     contentText = item.highlightTitle;
                 } else {
@@ -1321,7 +1472,28 @@
                 if (item.highlights && Array.isArray(item.highlights)) {
                     let highlightsHtml = '';
                     item.highlights.forEach(h => {
-                        highlightsHtml += `<li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>${h}</span></li>`;
+                        let text = typeof h === 'string' ? h : (h.text || '');
+                        let img = (typeof h === 'object' && h.img) ? h.img : null;
+                        
+                        let hImgIdx = -1;
+                        if (img) {
+                            currentMediaList.push({ type: 'image', url: img });
+                            hImgIdx = currentMediaList.length - 1;
+                        }
+                        
+                        highlightsHtml += `
+                            <li class="flex flex-col space-y-2">
+                                <div class="flex items-start">
+                                    <span class="text-uptoAccent font-bold mr-1.5">✓</span>
+                                    <span>${text}</span>
+                                </div>
+                                ${img ? `
+                                    <div onclick="openMediaLightbox(${hImgIdx})" class="w-full rounded-xl overflow-hidden glass-panel border-none shadow-sm cursor-pointer hover:opacity-95 transition">
+                                        <img src="${img}" class="w-full img-ratio-16-9 object-cover" alt="Highlight Image">
+                                    </div>
+                                ` : ''}
+                            </li>
+                        `;
                     });
                     detailHighlightsList.innerHTML = highlightsHtml;
                 }
@@ -1369,7 +1541,7 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== LOGIC XEM TẤT CẢ (CHỈ 2 GRID) ==================== */
+        /* ==================== LOGIC XEM TẤT CẢ ==================== */
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
@@ -1379,7 +1551,7 @@
         const categorySearchInput = document.getElementById('categorySearchInput');
 
         let currentCategoryItems = [];
-        let currentGridCols = 2; // Mặc định Grid 2
+        let currentGridCols = 2;
 
         function setGridColumns(cols) {
             currentGridCols = cols;
@@ -1420,13 +1592,13 @@
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
                 const starsMarkup = `${generateStarsHtml(itemRating, 'text-[9px]')} <span class="text-gray-900 dark:text-white ml-1 font-extrabold text-[9px]">${itemRating}</span>`;
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
                     <div class="popup-card-item-custom glass-panel border-none" data-cat-idx="${index}">
                         <div class="popup-card-imgbox-custom">
-                            <img src="${item.img}" class="popup-card-img-custom" alt="${item.name}">
+                            <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5 sm:ml-2.5 w-full">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -1714,7 +1886,7 @@
             }
         }
 
-        /* ==================== CÁC HÀM RENDER RIÊNG BIỆT THỦ CÔNG CHO TỪNG MỤC TRANG CHỦ ==================== */
+        /* ==================== CÁC HÀM RENDER TRANG CHỦ ==================== */
 
         function renderNewsSectionCustom(items) {
             const container = document.getElementById('newsSlideContainer');
@@ -1726,24 +1898,30 @@
             items.forEach(item => {
                 const itemRating = item.rating || '4.9';
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
+                
+                const media = getPrimaryMediaSrc(item);
+                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
-                            <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
+                        <div class="h-28 w-full relative mb-1 overflow-hidden">
+                            ${mediaHtml}
                         </div>
-                        <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                        <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <div class="flex items-center justify-between pt-1">
-                            <div class="flex items-center space-x-1.5">
-                                ${starsMarkup}
-                                <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                        <div class="px-3 space-y-1.5">
+                            <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
+                            <div class="flex items-center justify-between pt-1">
+                                <div class="flex items-center space-x-1.5">
+                                    ${starsMarkup}
+                                    <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                                </div>
+                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
+                                    <span>Xem thêm</span>
+                                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                                </button>
                             </div>
-                            <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
-                                <span>Xem thêm</span>
-                                <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                            </button>
                         </div>
                     </div>
                 `;
@@ -1762,25 +1940,28 @@
             items.forEach(item => {
                 const itemRating = item.rating || '4.9';
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[8px]');
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.dev || '');
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 10);
                 const publishDateText = item.publishDate || 'Mới';
+                
+                const media = getPrimaryMediaSrc(item);
+                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-2"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-2 overflow-hidden"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="h-28 w-full rounded-xl overflow-hidden relative">
-                            <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
+                        <div class="h-28 w-full relative overflow-hidden">
+                            ${mediaHtml}
                             <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
                                 <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
                                 <span>${publishDateText}</span>
                             </div>
                         </div>
                         
-                        <div class="space-y-1">
+                        <div class="space-y-1 px-3">
                             <div class="flex items-start space-x-2.5 min-w-0">
                                 <div class="w-10 h-10 rounded-2xl glass-panel flex items-center justify-center flex-shrink-0 text-uptoAccent font-extrabold text-sm shadow-sm mt-0.5 overflow-hidden">
-                                    <img src="${item.img}" class="w-full h-full object-cover">
+                                    <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover">
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
@@ -1817,14 +1998,14 @@
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
                     <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="home-tweak-img-wrap">
-                            <img src="${item.img}" class="home-tweak-img-file" alt="${item.name}">
+                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -1857,14 +2038,14 @@
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
-                const descText = (item.highlights && item.highlights.length > 0) ? item.highlights[0] : (item.highlightTitle || item.category || item.dev || '');
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
                     <div class="app-card-clickable home-media-item-box glass-panel border-none"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="home-media-img-wrap">
-                            <img src="${item.img}" class="home-media-img-file" alt="${item.name}">
+                            <img src="${item.img}" class="home-media-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -1895,24 +2076,30 @@
             items.forEach(item => {
                 const itemRating = item.rating || '5.0';
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
+                
+                const media = getPrimaryMediaSrc(item);
+                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
 
                 html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-3 border-none cursor-pointer space-y-1.5"
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
                          data-app-json='${JSON.stringify(item)}'>
-                        <div class="h-28 w-full rounded-xl overflow-hidden relative mb-1">
-                            <img src="${item.img}" class="w-full h-full object-cover" alt="${item.name}">
+                        <div class="h-28 w-full relative mb-1 overflow-hidden">
+                            ${mediaHtml}
                         </div>
-                        <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                        <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${item.highlights ? item.highlights[0] : item.dev}</p>
-                        <div class="flex items-center justify-between pt-1">
-                            <div class="flex items-center space-x-1.5">
-                                ${starsMarkup}
-                                <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                        <div class="px-3 space-y-1.5">
+                            <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
+                            <div class="flex items-center justify-between pt-1">
+                                <div class="flex items-center space-x-1.5">
+                                    ${starsMarkup}
+                                    <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                                </div>
+                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
+                                    <span>Xem thêm</span>
+                                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
+                                </button>
                             </div>
-                            <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
-                                <span>Xem thêm</span>
-                                <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                            </button>
                         </div>
                     </div>
                 `;
@@ -1933,7 +2120,7 @@
                     <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20 flex-shrink-0"
                          data-app-json='${JSON.stringify(item)}'>
                         <div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border-none overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full object-cover rounded-xl">
+                            <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-xl">
                         </div>
                         <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate w-full">${item.name}</h5>
                         <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate w-full">${item.category}</p>
@@ -1961,6 +2148,7 @@
             });
         }
 
+        /* ==================== HERO SLIDER ==================== */
         function initDynamicHeroSlider(allItems) {
             const heroSlider = document.getElementById('heroSlider');
             const heroDotsContainer = document.getElementById('heroDots');
@@ -1973,16 +2161,19 @@
                 const isActive = idx === 1 ? 'active-card' : '';
                 const itemRating = item.rating || '4.9';
                 const starsMarkup = generateStarsHtml(itemRating, 'text-[10px]');
-                const publishDateStr = item.publishDate || '09/11/2026';
+                const publishDateStr = item.publishDate || '10/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
                 const versionStr = item.version || 'v1.0.4';
-                const highlightDesc = (item.highlights && item.highlights[0]) ? item.highlights[0] : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
+                const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
+                
+                const media = getPrimaryMediaSrc(item);
+                let mediaHtml = `<img src="${media.url}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover">`;
 
                 slidesHtml += `
                     <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[50vw] md:w-[35vw] lg:w-[26vw] max-w-[310px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between"
                          data-hero-json='${JSON.stringify(item)}'>
                         <div class="relative h-64 sm:h-72 w-full">
-                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
+                            ${mediaHtml}
                             <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
                             
                             <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
@@ -2081,10 +2272,17 @@
             function autoNext() {
                 currentIndex = (currentIndex + 1) % cards.length;
                 updateSliderPosition();
+                resetAutoSlide();
             }
 
-            function startAutoSlide() { autoSlideTimer = setInterval(autoNext, 3500); }
-            function stopAutoSlide() { clearInterval(autoSlideTimer); }
+            function startAutoSlide() { 
+                autoSlideTimer = setTimeout(autoNext, 3500); 
+            }
+            function stopAutoSlide() { clearTimeout(autoSlideTimer); }
+            function resetAutoSlide() {
+                stopAutoSlide();
+                startAutoSlide();
+            }
 
             cards.forEach((card, index) => {
                 card.addEventListener('click', (e) => {
@@ -2092,8 +2290,7 @@
                         e.stopPropagation();
                         currentIndex = index;
                         updateSliderPosition();
-                        stopAutoSlide();
-                        startAutoSlide();
+                        resetAutoSlide();
                     }
                 });
             });
@@ -2102,8 +2299,7 @@
                 dot.addEventListener('click', () => {
                     currentIndex = idx;
                     updateSliderPosition();
-                    stopAutoSlide();
-                    startAutoSlide();
+                    resetAutoSlide();
                 });
             });
 
@@ -2419,7 +2615,7 @@
                     html += `
                         <div class="search-result-item p-2.5 rounded-xl glass-panel border-none cursor-pointer hover:opacity-90 transition flex items-center space-x-3"
                              data-search-idx="${idx}">
-                            <img src="${app.img}" class="w-10 h-10 rounded-xl object-cover flex-shrink-0 border-none" alt="icon">
+                            <img src="${app.img}" class="w-10 h-10 rounded-xl img-ratio-1-1 object-cover flex-shrink-0 border-none" alt="icon">
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">${highlightedName}</h4>
                                 <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
