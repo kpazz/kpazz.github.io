@@ -1020,7 +1020,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tweak.json</code> <br> Lưu file .deb vào <code>debs/</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Tweak.json</code> <br> Lưu file .deb vào <code>debs/</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1086,7 +1086,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Tin tức mới</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tintucmoi.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Tintucmoi.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('news')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1138,7 +1138,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý APP Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appjailbreak.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Appjailbreak.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('app')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1190,7 +1190,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Đa phương tiện</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Daphuongtien.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Daphuongtien.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('media')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1242,7 +1242,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Mẹo & Hướng dẫn</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Meo.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Meo.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tip')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1294,7 +1294,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
                         <h2 class="fw-bold mb-1">Quản lý Năng suất</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Nangsuat.json</code></p>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>Tabs/Nangsuat.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('prod')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1965,13 +1965,14 @@
             }
         }
 
+        // Đã sửa đường dẫn phù hợp với file index nằm trong thư mục kp/
         let jsonPaths = {
-            tweak: "../Tabs/Tweak.json",
-            news: "../Tabs/Tintucmoi.json",
-            app: "../Tabs/Appjailbreak.json",
-            media: "../Tabs/Daphuongtien.json",
-            tip: "../Tabs/Meo.json",
-            prod: "../Tabs/Nangsuat.json"
+            tweak: "Tabs/Tweak.json",
+            news: "Tabs/Tintucmoi.json",
+            app: "Tabs/Appjailbreak.json",
+            media: "Tabs/Daphuongtien.json",
+            tip: "Tabs/Meo.json",
+            prod: "Tabs/Nangsuat.json"
         };
 
         let dbData = {
@@ -2237,6 +2238,7 @@
             enforceInitialAuth();
         }
 
+        // Đã cập nhật hàm này để tương thích hoàn toàn với API GitHub và tránh lỗi kết nối
         async function pushAllDataToGitHubServer() {
             const token = await getGitHubToken();
             if (!token) return;
@@ -2250,7 +2252,8 @@
 
             try {
                 for (const key of Object.keys(jsonPaths)) {
-                    const filePath = jsonPaths[key];
+                    // Trỏ trực tiếp đến thư mục chính xác trên GitHub Repository
+                    const filePath = jsonPaths[key].replace(/^\.\.\//, ""); 
                     const contentData = dbData[key];
                     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`;
 
@@ -2268,9 +2271,9 @@
                     }
 
                     const jsonString = JSON.stringify(contentData, null, 4);
-                    const base64Content = btoa(unescape(encodeURIComponent(jsonString)));
+                    const base64Content = btoa(String.fromCharCode(...new TextEncoder().encode(jsonString)));
 
-                    await fetch(url, {
+                    const putRes = await fetch(url, {
                         method: "PUT",
                         headers: {
                             "Authorization": `Bearer ${token}`,
@@ -2280,16 +2283,22 @@
                         body: JSON.stringify({
                             message: `Update ${filePath} from Admin Dashboard`,
                             content: base64Content,
-                            sha: fileSha
+                            sha: fileSha || undefined
                         })
                     });
+
+                    if (!putRes.ok) {
+                        const errJson = await putRes.json();
+                        throw new Error(errJson.message || "Lỗi API GitHub");
+                    }
                 }
 
                 if (saveModal) saveModal.hide();
                 showCustomAlert("Đã đẩy toàn bộ dữ liệu thành công lên GitHub Server!");
             } catch (error) {
                 if (saveModal) saveModal.hide();
-                showCustomAlert("Đã xảy ra lỗi kết nối khi đẩy dữ liệu lên GitHub Server.");
+                console.error("GitHub Push Error:", error);
+                showCustomAlert("Lỗi: " + (error.message || "Không thể kết nối tới GitHub API."));
             }
         }
 
@@ -3073,11 +3082,9 @@
             };
 
             if (index >= 0) {
-                // Chỉnh sửa: Cập nhật trực tiếp vào vị trí hiện tại
                 dbData[type][index] = newItem;
                 recordHistory(type, `Chỉnh sửa mục: "${name}"`);
             } else {
-                // Thêm mới: Chèn dữ liệu vào ngay DÒNG ĐẦU TIÊN của chuỗi mảng JSON bằng unshift
                 dbData[type].unshift(newItem);
                 recordHistory(type, `Thêm mới mục và ghi lên dòng đầu: "${name}"`);
             }
