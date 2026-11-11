@@ -1,5 +1,31 @@
 [
     {
+        "name": "demo",
+        "version": "1",
+        "dev": "111",
+        "category": "rthr",
+        "systemRequirements": "",
+        "rating": "5.0",
+        "description": "rthrhrsrthr",
+        "img": "Art/imgbanner.png",
+        "publishDate": "07/11/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "",
+        "video": "",
+        "gif": "",
+        "highlightTitle": "tsrhrthrs",
+        "screenshots": [],
+        "highlights": [
+            {
+                "text": "shrth"
+            },
+            {
+                "text": "srthrsh"
+            }
+        ]
+    },
+    {
         "name": "Sileo Package Mane",
         "version": "2.5.2",
         "dev": "Sileo Team",
