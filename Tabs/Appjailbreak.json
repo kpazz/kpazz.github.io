@@ -10,7 +10,7 @@
         "img": "https://ellekit.space/dopamine/assets/icon.png",
         "publishDate": "07/11/2026",
         "isApp": true,
-        "noDownload": true,
+        "noDownload": false,
         "downloadLink": "https://github.com/opa334/Dopamine/releases/latest/download/Dopamine.ipa",
         "video": "",
         "gif": "",
