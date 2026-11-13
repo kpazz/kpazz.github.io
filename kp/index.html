@@ -40,6 +40,61 @@
             padding: 10px 14px;
         }
 
+        /* TẤT CẢ CÁC Ô TEXTAREA ĐỀU CÓ THỂ KÉO TÙY Ý VÀ TỰ ĐỘNG THU GỌN */
+        textarea.form-control {
+            resize: both !important;
+            min-height: 48px !important;
+            height: auto;
+            white-space: pre-wrap !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* RIÊNG Ô LINK / ĐƯỜNG DẪN */
+        textarea.link-auto-textarea {
+            word-break: break-all !important;
+            overflow-wrap: anywhere !important;
+        }
+
+        /* BỌC Ô TEXTAREA VỚI ICON KÉO GÓC DƯỚI PHẢI */
+        .resizable-textarea-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .resizable-textarea-wrapper textarea.form-control {
+            padding-right: 26px;
+            padding-bottom: 22px;
+            max-width: 100%;
+        }
+
+        .custom-resize-grip {
+            position: absolute;
+            right: 6px;
+            bottom: 6px;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            background: rgba(0, 186, 163, 0.14);
+            border: 1px solid rgba(0, 186, 163, 0.35);
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: nwse-resize;
+            touch-action: none;
+            user-select: none;
+            z-index: 5;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .custom-resize-grip:hover,
+        .custom-resize-grip:active {
+            background: rgba(0, 186, 163, 0.28);
+            transform: scale(1.08);
+        }
+
         .btn {
             border-radius: 12px !important;
             font-weight: 600;
@@ -1077,7 +1132,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tweak.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="tweakJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="tweakJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1129,7 +1184,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tintucmoi.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="newsJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="newsJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1181,7 +1236,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appjailbreak.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="appJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="appJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1233,7 +1288,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Daphuongtien.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('media')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="mediaJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="mediaJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1285,7 +1340,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Meo.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="tipJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="tipJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1337,7 +1392,7 @@
                         <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Nangsuat.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="prodJsonOutput" class="form-control json-editor" rows="10"></textarea>
+                    <textarea id="prodJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -1365,26 +1420,30 @@
         </div>
     </div>
 
-    <!-- POPUP NHẬP MẬT KHẨU -->
+    <!-- POPUP NHẬP MẬT KHẨU (CÂN ĐỐI CHÍNH GIỮA, ẨN NÚT ĐĂNG NHẬP BAN ĐẦU, DÁN LÀ ĐĂNG NHẬP LUÔN) -->
     <div class="modal fade" id="customPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" style="max-width: 340px;">
             <div class="modal-content rounded-4 border-0 shadow-lg">
-                <div class="modal-header bg-dark text-white rounded-top-4">
-                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-lock text-warning me-2"></i>Xác thực quản trị viên</h5>
+                <div class="modal-header bg-dark text-white rounded-top-4 py-2 px-3">
+                    <h6 class="modal-title fw-bold fs-6"><i class="fa-solid fa-lock text-warning me-1"></i>Xác thực quản trị viên</h6>
                 </div>
-                <div class="modal-body p-4">
+                <div class="modal-body p-3">
                     <form id="passwordForm" onsubmit="event.preventDefault(); submitCustomPassword();">
-                        <div class="mb-3">
-                            <label for="passwordInput" class="form-label fw-semibold text-secondary">Nhập mật khẩu đăng nhập:</label>
-                            <input type="password" class="form-control form-control-lg" id="passwordInput" placeholder="Nhập mật khẩu..." required autocomplete="current-password">
+                        <div class="mb-2">
+                            <label for="passwordInput" class="form-label fw-semibold text-secondary small mb-1">Mật khẩu đăng nhập:</label>
+                            <div class="input-group input-group-sm">
+                                <input type="password" class="form-control" id="passwordInput" placeholder="Nhập mật khẩu..." required autocomplete="current-password" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;">
+                                <button class="btn btn-outline-secondary px-3" type="button" onclick="pasteAndAutoLoginPassword()" title="Dán từ bộ nhớ tạm và đăng nhập ngay"><i class="fa-solid fa-paste me-1"></i>Dán</button>
+                            </div>
                         </div>
-                        <div class="alert alert-warning py-2 small mb-0" id="authAlertBox">
-                            <i class="fa-solid fa-shield-halved me-1"></i> Nhập mật khẩu để vào trang. Phiên sẽ tự động hết hạn sau 30 phút không hoạt động.
+                        <div class="alert alert-warning py-1 px-2 small mb-0" style="font-size: 0.75rem;" id="authAlertBox">
+                            <i class="fa-solid fa-shield-halved me-1"></i> Phiên hết hạn sau 30 phút không hoạt động.
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer-sticky d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary w-100 rounded-pill py-2 fw-semibold btn-appstore-glass-solid" id="authSubmitBtn" onclick="submitCustomPassword()">Đăng nhập</button>
+                <!-- BAN ĐẦU BỎ NÚT ĐĂNG NHẬP, SAI MẬT KHẨU MỚI HIỆN LẠI -->
+                <div class="modal-footer-sticky py-2 px-3 justify-content-end" id="authFooterSection" style="display: none !important;">
+                    <button type="button" class="btn btn-primary btn-sm w-100 rounded-pill py-1.5 fw-semibold btn-appstore-glass-solid" id="authSubmitBtn" onclick="submitCustomPassword()">Đăng nhập</button>
                 </div>
             </div>
         </div>
@@ -1406,7 +1465,7 @@
         </div>
     </div>
 
-    <!-- MODAL THÊM MỚI / CHỈNH SỬA -->
+    <!-- MODAL THÊM MỚI / CHỈNH SỬA (TẤT CẢ Ô NHẬP LÀ TEXTAREA KÉO DÃN TÙY Ý) -->
     <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -1422,32 +1481,50 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold" id="labelName">Tiêu đề (*)</label>
-                                <input type="text" class="form-control" id="gName" placeholder="Ví dụ: Sileo Manager" oninput="updatePathHelperHints()">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gName" rows="1" placeholder="Ví dụ: Sileo Manager" oninput="updatePathHelperHints(); autoExpandTextarea(this);"></textarea>
+                                    <span class="custom-resize-grip" data-target="gName" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Tác giả / Nhà phát triển (dev)</label>
-                                <input type="text" class="form-control" id="gDev" placeholder="Ví dụ: Sileo Team">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gDev" rows="1" placeholder="Ví dụ: Sileo Team" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gDev" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Danh mục (category)</label>
-                                <input type="text" class="form-control" id="gCategory" placeholder="Ví dụ: Quản lý gói">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gCategory" rows="1" placeholder="Ví dụ: Quản lý gói" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gCategory" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
                             
                             <!-- TRƯỜNG PHIÊN BẢN (VERSION) -->
                             <div class="col-md-6" id="fieldVersionBox">
                                 <label class="form-label fw-semibold">Phiên bản (version)</label>
-                                <input type="text" class="form-control" id="gVersion" placeholder="Ví dụ: 2.5.2">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gVersion" rows="1" placeholder="Ví dụ: 2.5.2" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gVersion" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
 
                             <div class="col-md-6" id="fieldRatingBox">
                                 <label class="form-label fw-semibold">Đánh giá sao (rating) <span class="text-muted small">(Để trống = 5 sao)</span></label>
-                                <input type="text" class="form-control" id="gRating" placeholder="Ví dụ: 4.8 hoặc bỏ trống">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gRating" rows="1" placeholder="Ví dụ: 4.8 hoặc bỏ trống" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gRating" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
 
                             <!-- TRƯỜNG YÊU CẦU HỆ THỐNG -->
                             <div class="col-md-6" id="fieldSysReqBox" style="display: none;">
                                 <label class="form-label fw-semibold">Yêu cầu hệ thống (systemRequirements)</label>
-                                <input type="text" class="form-control" id="gSysReq" placeholder="Ví dụ: iOS 14.0 - 16.6.1">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gSysReq" rows="1" placeholder="Ví dụ: iOS 14.0 - 16.6.1" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gSysReq" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
                             
                             <!-- TRƯỜNG ẢNH ĐẠI DIỆN -->
@@ -1465,11 +1542,14 @@
                                 </div>
 
                                 <div class="input-group mb-1">
-                                    <input type="text" class="form-control" id="gImg" placeholder="Chọn ảnh hoặc nhập link" oninput="checkImgInputChanged()">
                                     <input type="file" class="form-control" id="gImgFile" accept="image/*" style="max-width: 200px;" onchange="handleImageFileSelect(event)">
                                 </div>
+                                <div class="resizable-textarea-wrapper mb-1">
+                                    <textarea class="form-control link-auto-textarea" id="gImg" rows="1" placeholder="Chọn ảnh hoặc nhập link" oninput="checkImgInputChanged(); autoExpandTextarea(this);"></textarea>
+                                    <span class="custom-resize-grip" data-target="gImg" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                                 <div class="form-text text-primary small fw-semibold" id="helperPathImg">
-                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/img.png</code>
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_app/img.png</code>
                                 </div>
                             </div>
 
@@ -1477,8 +1557,11 @@
                             <div class="col-12">
                                 <label class="form-label fw-semibold"><i class="fa-solid fa-video me-1 text-danger"></i> Link hoặc Tệp Video giới thiệu (video)</label>
                                 <div class="input-group mb-1">
-                                    <input type="text" class="form-control" id="gVideo" placeholder="Nhập URL video (VD: https://... hoặc Art/.../video.mp4)">
                                     <input type="file" class="form-control" id="gVideoFile" accept="video/*" style="max-width: 200px;" onchange="handleVideoFileSelect(event)" title="Chọn tệp video nội bộ">
+                                </div>
+                                <div class="resizable-textarea-wrapper mb-1">
+                                    <textarea class="form-control link-auto-textarea" id="gVideo" rows="1" placeholder="Nhập URL video (VD: https://... hoặc Art/.../video.mp4)" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gVideo" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                                 </div>
                                 <div class="form-text text-muted small">Hỗ trợ liên kết web (mp4, webm) hoặc đường dẫn tệp video nội bộ trong kho chứa.</div>
                             </div>
@@ -1487,8 +1570,11 @@
                             <div class="col-12">
                                 <label class="form-label fw-semibold"><i class="fa-solid fa-image me-1 text-success"></i> Link hoặc Tệp GIF động (gif)</label>
                                 <div class="input-group mb-1">
-                                    <input type="text" class="form-control" id="gGif" placeholder="Nhập URL GIF hoặc đường dẫn tệp nội bộ (VD: Art/.../animation.gif)">
                                     <input type="file" class="form-control" id="gGifFile" accept="image/gif" style="max-width: 200px;" onchange="handleGifFileSelect(event)" title="Chọn tệp GIF nội bộ">
+                                </div>
+                                <div class="resizable-textarea-wrapper mb-1">
+                                    <textarea class="form-control link-auto-textarea" id="gGif" rows="1" placeholder="Nhập URL GIF hoặc đường dẫn tệp nội bộ (VD: Art/.../animation.gif)" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gGif" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                                 </div>
                                 <div class="form-text text-muted small">Tùy chọn tải lên tệp định dạng GIF hoặc dán đường dẫn liên kết tĩnh.</div>
                             </div>
@@ -1502,23 +1588,34 @@
                                 <div class="input-group mb-1">
                                     <input type="file" class="form-control" id="gScreenshotsFiles" accept="image/*,video/*" multiple onchange="handleScreenshotsFilesSelect(event)">
                                 </div>
-                                <textarea class="form-control mb-1" id="gScreenshots" rows="2" placeholder="Chọn ảnh hoặc nhập link (mỗi dòng 1 đường dẫn)" oninput="renderScreenshotsThumbnails()"></textarea>
+                                <div class="resizable-textarea-wrapper mb-1">
+                                    <textarea class="form-control link-auto-textarea" id="gScreenshots" rows="1" placeholder="Chọn ảnh hoặc nhập link (mỗi dòng 1 đường dẫn)" oninput="renderScreenshotsThumbnails(); autoExpandTextarea(this);"></textarea>
+                                    <span class="custom-resize-grip" data-target="gScreenshots" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                                 <div class="form-text text-primary small fw-semibold" id="helperPathScreenshots">
-                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/screenshot_1.png</code>
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_app/screenshot_1.png</code>
                                 </div>
                             </div>
 
                             <div class="col-12" id="fieldDescBox" style="display: none;">
                                 <label class="form-label fw-semibold">Mô tả ngắn (description)</label>
-                                <textarea class="form-control" id="gDesc" rows="2" placeholder="Nhập mô tả ngắn gọn..."></textarea>
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gDesc" rows="1" placeholder="Nhập mô tả ngắn gọn..." oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gDesc" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
-                            <div class="col-md-6">
+                            
+                            <!-- TRƯỜNG TIÊU ĐỀ NỔI BẬT (HIGHLIGHT TITLE) -->
+                            <div class="col-12">
                                 <label class="form-label fw-semibold">Tiêu đề nổi bật (highlightTitle)</label>
-                                <input type="text" class="form-control" id="gHighlightTitle" placeholder="Dành cho bạn nếu...">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control" id="gHighlightTitle" rows="1" placeholder="Dành cho bạn nếu..." oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gHighlightTitle" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                             </div>
                             
                             <!-- TRƯỜNG HIGHLIGHTS -->
-                            <div class="col-md-6">
+                            <div class="col-12">
                                 <label class="form-label fw-semibold">Các điểm nổi bật & ảnh/video đơn lập <span class="text-muted small"><br>Mỗi dòng là 1 ý. Kèm file bằng cách thêm <code>| đường_dẫn_file</code></span></label>
                                 
                                 <div id="highlightsThumbnailsList" class="d-flex flex-wrap gap-2 mb-2" style="display: none;"></div>
@@ -1526,9 +1623,12 @@
                                 <div class="mb-1">
                                     <input type="file" class="form-control form-control-sm" id="gHighlightsFiles" accept="image/*,video/*" multiple onchange="handleHighlightsFilesSelect(event)" title="Chọn nhiều ảnh/video cho highlights">
                                 </div>
-                                <textarea class="form-control mb-1" id="gHighlights" rows="3" placeholder="Nội dung ý 1 | Chọn ảnh hoặc nhập link&#10;Nội dung ý 2 không ảnh/video" oninput="renderHighlightsThumbnails()"></textarea>
+                                <div class="resizable-textarea-wrapper mb-1">
+                                    <textarea class="form-control link-auto-textarea" id="gHighlights" rows="1" placeholder="Nội dung ý 1 | Chọn ảnh hoặc nhập link&#10;Nội dung ý 2 không ảnh/video" oninput="renderHighlightsThumbnails(); autoExpandTextarea(this);"></textarea>
+                                    <span class="custom-resize-grip" data-target="gHighlights" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                                 <div class="form-text text-primary small fw-semibold" id="helperPathHighlights">
-                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_muc/tieu_de/highlight_1.png</code>
+                                    <i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">Art/ten_app/highlight_1.png</code>
                                 </div>
                             </div>
 
@@ -1546,7 +1646,10 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-semibold">Link tải (downloadLink)</label>
-                                <input type="text" class="form-control" id="gDownloadLink" placeholder="Chọn ảnh hoặc nhập link hoặc debs/file.deb">
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control link-auto-textarea" id="gDownloadLink" rows="1" placeholder="Chọn ảnh hoặc nhập link hoặc debs/file.deb" oninput="autoExpandTextarea(this)"></textarea>
+                                    <span class="custom-resize-grip" data-target="gDownloadLink" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
                                 <small class="text-muted" style="font-size: 0.75rem;">Đường dẫn tệp nội bộ (VD: <code>debs/tweak.deb</code>)</small>
                             </div>
                         </div>
@@ -1648,6 +1751,121 @@
         const sidebarToggleInner = document.getElementById('sidebarToggleInner');
         const sidebarBackdrop = document.getElementById('sidebarBackdrop');
         const backToTopBtn = document.getElementById('backToTopBtn');
+
+        // TỰ ĐỘNG THU GỌN/GIÃN CHIỀU CAO Ô TEXTAREA KHỚP VỚI ĐỘ DÀI NỘI DUNG
+        function autoExpandTextarea(el) {
+            if (!el) return;
+            if (el.dataset.manualResized === "true") return;
+            el.style.height = 'auto';
+            const minH = el.classList.contains('link-auto-textarea') ? 48 : 45;
+            el.style.height = Math.max(el.scrollHeight + 4, minH) + 'px';
+        }
+
+        function refreshAllModalTextareas() {
+            const ids = ['gName', 'gDev', 'gCategory', 'gVersion', 'gRating', 'gSysReq', 'gImg', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink', 'gVideo', 'gGif'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    delete el.dataset.manualResized;
+                    el.style.width = '';
+                    el.style.height = '';
+                    autoExpandTextarea(el);
+                }
+            });
+        }
+
+        function initCustomResizeGrips() {
+            document.querySelectorAll('.custom-resize-grip').forEach(grip => {
+                const targetId = grip.getAttribute('data-target');
+                const textarea = document.getElementById(targetId);
+                if (!textarea) return;
+
+                let isDragging = false;
+                let startX = 0;
+                let startY = 0;
+                let startWidth = 0;
+                let startHeight = 0;
+
+                const onPointerDown = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isDragging = true;
+                    textarea.dataset.manualResized = "true";
+                    const point = e.touches ? e.touches[0] : e;
+                    startX = point.clientX;
+                    startY = point.clientY;
+                    const rect = textarea.getBoundingClientRect();
+                    startWidth = rect.width;
+                    startHeight = rect.height;
+
+                    document.addEventListener('mousemove', onPointerMove);
+                    document.addEventListener('mouseup', onPointerUp);
+                    document.addEventListener('touchmove', onPointerMove, { passive: false });
+                    document.addEventListener('touchend', onPointerUp);
+                };
+
+                const onPointerMove = (e) => {
+                    if (!isDragging) return;
+                    if (e.cancelable) e.preventDefault();
+                    const point = e.touches ? e.touches[0] : e;
+                    const dx = point.clientX - startX;
+                    const dy = point.clientY - startY;
+                    const minH = textarea.classList.contains('link-auto-textarea') ? 48 : 45;
+                    const newHeight = Math.max(minH, startHeight + dy);
+                    textarea.style.height = newHeight + 'px';
+
+                    const parentWidth = textarea.parentElement ? textarea.parentElement.clientWidth : startWidth;
+                    if (Math.abs(dx) > 4) {
+                        const newWidth = Math.min(parentWidth, Math.max(180, startWidth + dx));
+                        textarea.style.width = newWidth + 'px';
+                    }
+                };
+
+                const onPointerUp = () => {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', onPointerMove);
+                    document.removeEventListener('mouseup', onPointerUp);
+                    document.removeEventListener('touchmove', onPointerMove);
+                    document.removeEventListener('touchend', onPointerUp);
+                };
+
+                grip.addEventListener('mousedown', onPointerDown);
+                grip.addEventListener('touchstart', onPointerDown, { passive: false });
+            });
+        }
+
+        // DÁN TỪ BỘ NHỚ TẠM VÀ TỰ ĐỘNG ĐĂNG NHẬP LUÔN
+        async function pasteAndAutoLoginPassword() {
+            try {
+                let text = "";
+                if (navigator.clipboard && navigator.clipboard.readText) {
+                    text = await navigator.clipboard.readText();
+                }
+                if (!text) {
+                    try {
+                        const inputEl = document.getElementById('passwordInput');
+                        if (inputEl) {
+                            inputEl.focus();
+                            document.execCommand('paste');
+                            text = inputEl.value;
+                        }
+                    } catch (e) {}
+                }
+
+                if (text) {
+                    const inputEl = document.getElementById('passwordInput');
+                    if (inputEl) {
+                        inputEl.value = text.trim();
+                        inputEl.focus();
+                    }
+                    submitCustomPassword();
+                } else {
+                    showCustomAlert("Bộ nhớ tạm đang trống hoặc trình duyệt chặn quyền đọc clipboard!");
+                }
+            } catch (err) {
+                showCustomAlert("Không thể đọc bộ nhớ tạm tự động, vui lòng dán thủ công!");
+            }
+        }
 
         let gridColumnsConfig = {
             tweak: 4,
@@ -1869,6 +2087,14 @@
         document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
             updateHeaderDateTime();
+            initCustomResizeGrips();
+
+            const genericModalEl = document.getElementById('genericModal');
+            if (genericModalEl) {
+                genericModalEl.addEventListener('shown.bs.modal', () => {
+                    refreshAllModalTextareas();
+                });
+            }
 
             allModalIds.forEach(id => {
                 const modalEl = document.getElementById(id);
@@ -1965,7 +2191,7 @@
             }
         }
 
-        // Đã sửa đường dẫn phù hợp với file index nằm trong thư mục kp/
+        // Đường dẫn JSON tương đối từ thư mục kp/
         let jsonPaths = {
             tweak: "../Tabs/Tweak.json",
             news: "../Tabs/Tintucmoi.json",
@@ -2004,14 +2230,20 @@
             initPasswordModal();
             const inputEl = document.getElementById('passwordInput');
             const alertBox = document.getElementById('authAlertBox');
+            const footerSection = document.getElementById('authFooterSection');
             inputEl.value = '';
 
             if (errorMsg) {
-                alertBox.className = "alert alert-danger py-2 small mb-0";
+                // Nếu sai mật khẩu mới hiển thị nút đăng nhập bên dưới để người dùng bấm lại
+                alertBox.className = "alert alert-danger py-1 px-2 small mb-0";
                 alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${errorMsg}`;
+                if (footerSection) footerSection.style.display = 'flex !important';
+                footerSection.style.setProperty('display', 'flex', 'important');
             } else {
-                alertBox.className = "alert alert-warning py-2 small mb-0";
-                alertBox.innerHTML = `<i class="fa-solid fa-shield-halved me-1"></i> Nhập mật khẩu để vào trang. Phiên sẽ tự động hết hạn sau 30 phút không hoạt động.`;
+                // Mặc định lúc đầu ẩn hẳn nút đăng nhập
+                alertBox.className = "alert alert-warning py-1 px-2 small mb-0";
+                alertBox.innerHTML = `<i class="fa-solid fa-shield-halved me-1"></i> Phiên hết hạn sau 30 phút không hoạt động.`;
+                if (footerSection) footerSection.style.setProperty('display', 'none', 'important');
             }
 
             passwordModalInstance.show();
@@ -2049,21 +2281,35 @@
             }
 
             const submitBtn = document.getElementById('authSubmitBtn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang xác thực...`;
+            const originalText = submitBtn ? submitBtn.innerHTML : 'Đăng nhập';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin me-1"></i> Đang xác thực...`;
+            }
 
             const checkResult = await verifyGitHubTokenWithAPI(val);
 
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
 
             if (!checkResult.success) {
+                // Sai mật khẩu mới hiện lại nút đăng nhập bên dưới để người dùng bấm
                 const alertBox = document.getElementById('authAlertBox');
-                alertBox.className = "alert alert-danger py-2 small mb-0";
-                alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${checkResult.message}`;
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
+                const footerSection = document.getElementById('authFooterSection');
+                if (alertBox) {
+                    alertBox.className = "alert alert-danger py-1 px-2 small mb-0";
+                    alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${checkResult.message}`;
+                }
+                if (footerSection) {
+                    footerSection.style.setProperty('display', 'flex', 'important');
+                }
+                const inputEl = document.getElementById('passwordInput');
+                if (inputEl) {
+                    inputEl.value = '';
+                    inputEl.focus();
+                }
                 return;
             }
 
@@ -2238,7 +2484,6 @@
             enforceInitialAuth();
         }
 
-        // Đã cập nhật hàm này để tương thích hoàn toàn với API GitHub và tránh lỗi kết nối
         async function pushAllDataToGitHubServer() {
             const token = await getGitHubToken();
             if (!token) return;
@@ -2252,7 +2497,6 @@
 
             try {
                 for (const key of Object.keys(jsonPaths)) {
-                    // Trỏ trực tiếp đến thư mục chính xác trên GitHub Repository
                     const filePath = jsonPaths[key].replace(/^\.\.\//, ""); 
                     const contentData = dbData[key];
                     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`;
@@ -2538,7 +2782,6 @@
             document.getElementById('prevDev').innerText = item.dev || item.author || 'KPazz Store';
             document.getElementById('prevDate').innerText = item.publishDate || item.date || '07/11/2026';
             
-            // HIỂN THỊ VIDEO CHÍNH (NẾU CÓ)
             const videoContainer = document.getElementById('prevVideoContainer');
             const videoElement = document.getElementById('prevVideoElement');
             if (item.video && item.video.trim()) {
@@ -2549,7 +2792,6 @@
                 videoElement.src = '';
             }
 
-            // HIỂN THỊ GIF CHÍNH (NẾU CÓ)
             const gifContainer = document.getElementById('prevGifContainer');
             const gifElement = document.getElementById('prevGifElement');
             if (item.gif && item.gif.trim()) {
@@ -2560,7 +2802,6 @@
                 gifElement.src = '';
             }
 
-            // KHU VỰC HIỂN THỊ SLIDE ẢNH/VIDEO (SCREENSHOTS)
             const sliderContainer = document.getElementById('prevScreenshotsSlider');
             const containerWrapper = document.getElementById('prevScreenshotsContainer');
             sliderContainer.innerHTML = '';
@@ -2687,17 +2928,23 @@
             showCustomAlert("Đã lưu cấu hình Slide cục bộ!");
         }
 
-        function updatePathHelperHints() {
-            const itemName = document.getElementById('gName').value.trim() || "tieu_de";
-            const type = document.getElementById('genericType').value || "muc";
-            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-            
-            const pathBase = `Art/${safeCategory}/${safeTitle}`;
+        function getSafeFolderName() {
+            const nameEl = document.getElementById('gName');
+            const itemName = nameEl ? nameEl.value.trim() : "ten_app";
+            return (itemName || "ten_app").toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
+        }
 
-            document.getElementById('helperPathImg').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/img.png</code>`;
-            document.getElementById('helperPathScreenshots').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/screenshot_1.png</code>`;
-            document.getElementById('helperPathHighlights').innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/highlight_1.png</code>`;
+        function updatePathHelperHints() {
+            const safeFolder = getSafeFolderName();
+            const pathBase = `Art/${safeFolder}`;
+
+            const helperImg = document.getElementById('helperPathImg');
+            const helperSc = document.getElementById('helperPathScreenshots');
+            const helperHi = document.getElementById('helperPathHighlights');
+
+            if (helperImg) helperImg.innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/img.png</code>`;
+            if (helperSc) helperSc.innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/screenshot_1.png</code>`;
+            if (helperHi) helperHi.innerHTML = `<i class="fa-solid fa-circle-info me-1"></i> Đường dẫn lưu thực tế: <code class="text-dark bg-light px-1 py-0.5 rounded border">${pathBase}/highlight_1.png</code>`;
         }
 
         function checkImgInputChanged() {
@@ -2716,8 +2963,10 @@
         }
 
         function clearImagePreview() {
-            document.getElementById('gImg').value = '';
+            const imgEl = document.getElementById('gImg');
+            if (imgEl) imgEl.value = '';
             document.getElementById('currentImgPreviewContainer').style.display = 'none';
+            autoExpandTextarea(imgEl);
         }
 
         function renderScreenshotsThumbnails() {
@@ -2754,8 +3003,10 @@
             const raw = document.getElementById('gScreenshots').value;
             let lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
             lines.splice(index, 1);
-            document.getElementById('gScreenshots').value = lines.join('\n');
+            const el = document.getElementById('gScreenshots');
+            el.value = lines.join('\n');
             renderScreenshotsThumbnails();
+            autoExpandTextarea(el);
         }
 
         function renderHighlightsThumbnails() {
@@ -2793,48 +3044,44 @@
             const raw = document.getElementById('gHighlights').value;
             let lines = raw ? raw.split('\n').map(s => s.trim()).filter(Boolean) : [];
             lines.splice(index, 1);
-            document.getElementById('gHighlights').value = lines.join('\n');
+            const el = document.getElementById('gHighlights');
+            el.value = lines.join('\n');
             renderHighlightsThumbnails();
+            autoExpandTextarea(el);
         }
 
         function handleImageFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
-                const itemName = document.getElementById('gName').value.trim() || "item";
-                const type = document.getElementById('genericType').value || "misc";
-                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-                
-                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
-                document.getElementById('gImg').value = filePath;
+                const safeFolder = getSafeFolderName();
+                const filePath = `Art/${safeFolder}/${file.name}`;
+                const imgEl = document.getElementById('gImg');
+                imgEl.value = filePath;
                 checkImgInputChanged();
                 updatePathHelperHints();
+                autoExpandTextarea(imgEl);
             }
         }
 
         function handleVideoFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
-                const itemName = document.getElementById('gName').value.trim() || "item";
-                const type = document.getElementById('genericType').value || "misc";
-                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-                
-                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
-                document.getElementById('gVideo').value = filePath;
+                const safeFolder = getSafeFolderName();
+                const filePath = `Art/${safeFolder}/${file.name}`;
+                const videoEl = document.getElementById('gVideo');
+                videoEl.value = filePath;
+                autoExpandTextarea(videoEl);
             }
         }
 
         function handleGifFileSelect(event) {
             const file = event.target.files[0];
             if (file) {
-                const itemName = document.getElementById('gName').value.trim() || "item";
-                const type = document.getElementById('genericType').value || "misc";
-                const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-                const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-                
-                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
-                document.getElementById('gGif').value = filePath;
+                const safeFolder = getSafeFolderName();
+                const filePath = `Art/${safeFolder}/${file.name}`;
+                const gifEl = document.getElementById('gGif');
+                gifEl.value = filePath;
+                autoExpandTextarea(gifEl);
             }
         }
 
@@ -2842,21 +3089,18 @@
             const files = event.target.files;
             if (!files || files.length === 0) return;
 
-            const itemName = document.getElementById('gName').value.trim() || "item";
-            const type = document.getElementById('genericType').value || "misc";
-            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-
+            const safeFolder = getSafeFolderName();
             const screenshotsTextarea = document.getElementById('gScreenshots');
             let existingLines = screenshotsTextarea.value ? screenshotsTextarea.value.split('\n').map(s => s.trim()).filter(Boolean) : [];
 
             Array.from(files).forEach((file) => {
-                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                const filePath = `Art/${safeFolder}/${file.name}`;
                 existingLines.push(filePath);
             });
 
             screenshotsTextarea.value = existingLines.join('\n');
             renderScreenshotsThumbnails();
+            autoExpandTextarea(screenshotsTextarea);
             updatePathHelperHints();
         }
 
@@ -2864,26 +3108,35 @@
             const files = event.target.files;
             if (!files || files.length === 0) return;
 
-            const itemName = document.getElementById('gName').value.trim() || "item";
-            const type = document.getElementById('genericType').value || "misc";
-            const safeCategory = type.toLowerCase().replace(/[^a-z0-9]/g, '_');
-            const safeTitle = itemName.toLowerCase().replace(/[^a-z0-9àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/g, '_');
-
+            const safeFolder = getSafeFolderName();
             const highlightsTextarea = document.getElementById('gHighlights');
             let existingLines = highlightsTextarea.value ? highlightsTextarea.value.split('\n').map(s => s.trim()).filter(Boolean) : [];
 
             Array.from(files).forEach((file) => {
-                const filePath = `Art/${safeCategory}/${safeTitle}/${file.name}`;
+                const filePath = `Art/${safeFolder}/${file.name}`;
                 const fileNameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
                 existingLines.push(`${fileNameWithoutExt} | ${filePath}`);
             });
 
             highlightsTextarea.value = existingLines.join('\n');
             renderHighlightsThumbnails();
+            autoExpandTextarea(highlightsTextarea);
             updatePathHelperHints();
         }
 
-        function openGenericModal(type) {
+        function getSectionDisplayName(type) {
+            const names = {
+                tweak: "Tweak Jailbreak",
+                news: "Tin tức mới",
+                app: "APP Jailbreak",
+                media: "Đa phương tiện",
+                tip: "Mẹo & Hướng dẫn",
+                prod: "Năng suất"
+            };
+            return names[type] || "Mục";
+        }
+
+        function openGenericModal(type, itemName = "") {
             document.getElementById('genericForm').reset();
             document.getElementById('genericType').value = type;
             document.getElementById('genericIndex').value = "-1";
@@ -2905,65 +3158,59 @@
 
             fieldRatingBox.style.display = 'block';
 
-            if (['tweak', 'prod'].includes(type)) {
+            if (['tweak', 'app', 'prod'].includes(type)) {
                 fieldSysReqBox.style.display = 'block';
             } else {
                 fieldSysReqBox.style.display = 'none';
             }
 
-            document.getElementById('gName').value = '';
-            document.getElementById('gDev').value = '';
-            document.getElementById('gCategory').value = '';
-            document.getElementById('gVersion').value = '';
-            document.getElementById('gRating').value = '';
-            document.getElementById('gSysReq').value = '';
-            document.getElementById('gImg').value = '';
-            document.getElementById('gVideo').value = '';
-            document.getElementById('gGif').value = '';
+            ['gName', 'gDev', 'gCategory', 'gVersion', 'gRating', 'gSysReq', 'gImg', 'gVideo', 'gGif', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
             document.getElementById('currentImgPreviewContainer').style.display = 'none';
-            document.getElementById('gScreenshots').value = '';
             document.getElementById('screenshotsThumbnailsList').style.display = 'none';
             document.getElementById('screenshotsThumbnailsList').innerHTML = '';
-            document.getElementById('gDesc').value = '';
-            document.getElementById('gHighlightTitle').value = '';
-            document.getElementById('gHighlights').value = '';
             document.getElementById('highlightsThumbnailsList').style.display = 'none';
             document.getElementById('highlightsThumbnailsList').innerHTML = '';
-            document.getElementById('gDownloadLink').value = '';
 
             updatePathHelperHints();
 
-            if (type === 'news') {
-                titleEl.innerText = "Thêm Tin Tức Mới";
-                labelName.innerText = "Tiêu đề bài viết (*)";
-            } else if (type === 'app') {
-                titleEl.innerText = "Thêm App Jailbreak";
-                labelName.innerText = "Tiêu đề bài viết / Tên app (*)";
-            } else if (type === 'media') {
-                titleEl.innerText = "Thêm Đa Phương Tiện";
-                labelName.innerText = "Tiêu đề bài viết / Tên Media (*)";
-            } else if (type === 'tip') {
-                titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
-                labelName.innerText = "Tiêu đề bài viết / Tên Mẹo (*)";
-            } else if (type === 'prod') {
-                titleEl.innerText = "Thêm Công Cụ Năng Suất";
-                labelName.innerText = "Tiêu đề bài viết / Tên Công cụ (*)";
+            const sectionName = getSectionDisplayName(type);
+            if (itemName) {
+                titleEl.innerText = `Chỉnh sửa ${sectionName}: ${itemName}`;
             } else {
-                titleEl.innerText = "Thêm Mục Mới";
-                labelName.innerText = "Tiêu đề (*)";
+                if (type === 'news') {
+                    titleEl.innerText = "Thêm Tin Tức Mới";
+                } else if (type === 'app') {
+                    titleEl.innerText = "Thêm App Jailbreak";
+                } else if (type === 'media') {
+                    titleEl.innerText = "Thêm Đa Phương Tiện";
+                } else if (type === 'tip') {
+                    titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
+                } else if (type === 'prod') {
+                    titleEl.innerText = "Thêm Công Cụ Năng Suất";
+                } else {
+                    titleEl.innerText = "Thêm Mục Mới";
+                }
             }
+
+            labelName.innerText = "Tiêu đề (*)";
 
             if (!genericModalInstance) {
                 genericModalInstance = new bootstrap.Modal(document.getElementById('genericModal'));
             }
             genericModalInstance.show();
+            refreshAllModalTextareas();
         }
 
         function editItem(type, index) {
             const item = dbData[type][index];
-            openGenericModal(type);
+            const itemName = item.name || item.title || 'Mục';
+            
+            openGenericModal(type, itemName);
             document.getElementById('genericIndex').value = index;
-            document.getElementById('genericModalTitle').innerText = "Chỉnh sửa mục";
 
             document.getElementById('gName').value = item.name || item.title || '';
             document.getElementById('gDev').value = item.dev || item.author || '';
@@ -3016,6 +3263,7 @@
             if (item.description) document.getElementById('gDesc').value = item.description;
 
             updatePathHelperHints();
+            refreshAllModalTextareas();
         }
 
         async function saveGenericItem() {
@@ -3049,11 +3297,8 @@
             let imgInputVal = document.getElementById('gImg').value.trim();
             
             if (!imgInputVal) {
-                if (type === 'tweak' || type === 'media' || type === 'prod') {
-                    imgInputVal = "Art/imgicon.png";
-                } else {
-                    imgInputVal = "Art/imgbanner.png";
-                }
+                const safeFolder = getSafeFolderName();
+                imgInputVal = `Art/${safeFolder}/img.png`;
             }
 
             let ratingVal = document.getElementById('gRating').value.trim();
