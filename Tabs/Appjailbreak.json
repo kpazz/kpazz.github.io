@@ -2,9 +2,9 @@
     {
         "name": "Dopamin",
         "version": "3.0.13",
-        "dev": "Oppa 334",
+        "dev": "Oppa334",
         "category": "App Jailbreak",
-        "systemRequirements": "",
+        "systemRequirements": "iOS 15.0 - 17.3.1 (A14 - A17 / M1 - M2) iOS 15.0 - 18.7.1 / 26.0 - 26.0.1 (A8 - A13)",
         "rating": "5.0",
         "description": "* Một bản bẻ khóa cho arm64 (A8 - A11) and arm64e (A12 - A17, M1 - M2)\n* Được hỗ trợ trên iOS 15.0 - 17.3.1 (A14 - A17 / M1 - M2)\n* Được hỗ trợ trên iOS 15.0 - 18.7.1 and 26.0 - 26.0.1 (A8 - A13)\n* Một bản bẻ khóa không root",
         "img": "https://ellekit.space/dopamine/assets/icon.png",
