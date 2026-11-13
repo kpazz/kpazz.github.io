@@ -1,1 +1,41 @@
-[]
+[
+    {
+        "name": "Dopamin",
+        "version": "3.0.13",
+        "dev": "Oppa 3343",
+        "category": "App Jailbreak",
+        "systemRequirements": "",
+        "rating": "5.0",
+        "description": "* Một bản bẻ khóa cho arm64 (A8 - A11) and arm64e (A12 - A17, M1 - M2)\n* Được hỗ trợ trên iOS 15.0 - 17.3.1 (A14 - A17 / M1 - M2)\n* Được hỗ trợ trên iOS 15.0 - 18.7.1 and 26.0 - 26.0.1 (A8 - A13)\n* Một bản bẻ khóa không root",
+        "img": "https://ellekit.space/dopamine/assets/icon.png",
+        "publishDate": "07/11/2026",
+        "isApp": true,
+        "noDownload": false,
+        "downloadLink": "",
+        "video": "",
+        "gif": "",
+        "highlightTitle": "iOS 15.0 - 17.3.1 (A14 - A17 / M1 - M2) iOS 15.0 - 18.7.1 / 26.0 - 26.0.1 (A8 - A13)",
+        "screenshots": [
+            "Art/app/dopamin/IMG_0213.jpeg",
+            "Art/app/dopamin/IMG_0214.jpeg",
+            "Art/app/dopamin/IMG_0212.jpeg"
+        ],
+        "highlights": [
+            {
+                "text": "Bẻ khóa không root là gì?"
+            },
+            {
+                "text": "Các bản bẻ khóa không root không cung cấp toàn quyền truy cập vào hệ điều hành của thiết bị iOS, vì chỉ một số phần nhất định của hệ thống tệp mới có thể được ghi vào."
+            },
+            {
+                "text": "Điều này có thể khiến các sửa đổi có thể phải được thực hiện theo những cách khác với những cách bạn đã quen và có thể yêu cầu các tinh chỉnh được cập nhật để hỗ trợ không cần root đúng cách."
+            },
+            {
+                "text": "Nó sẽ ảnh hưởng đến tôi như thế nào với tư cách là một người dùng?"
+            },
+            {
+                "text": "Người dùng nên kiểm tra xem các tinh chỉnh của họ có tương thích với iOS 15+ được biên dịch đúng cách cho rootless trước khi cài đặt chúng hay không, vì không phải tất cả các tinh chỉnh sẽ hoạt động ngay lập tức trên các phiên bản này."
+            }
+        ]
+    }
+]
