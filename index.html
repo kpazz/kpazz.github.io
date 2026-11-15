@@ -19,10 +19,10 @@
             theme: {
                 extend: {
                     colors: {
-                        uptoBg: '#0b161c',       
-                        uptoHeader: '#0b161c',   
-                        uptoCard: '#13222a',     
-                        uptoCardHover: '#1a2c37',
+                        uptoBg: '#06131a',       
+                        uptoHeader: '#06131a',   
+                        uptoCard: '#0c1c24',     
+                        uptoCardHover: '#132833',
                         uptoAccent: '#00baa3',   
                         uptoBlueBtn: '#00a8e8',
                         uptoGreenBadge: '#3cb64e',
@@ -48,11 +48,11 @@
         }
 
         .dark .glass-panel {
-            background: rgba(18, 32, 40, 0.88) !important;
-            backdrop-filter: blur(35px) saturate(210%) !important;
-            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+            background: rgba(10, 26, 34, 0.82) !important;
+            backdrop-filter: blur(40px) saturate(240%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(240%) !important;
+            border: 1px solid rgba(0, 186, 163, 0.22) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(0, 186, 163, 0.25) !important;
             overflow-x: hidden !important;
         }
 
@@ -89,6 +89,24 @@
             object-fit: cover !important;
             border-radius: 1rem !important;
             overflow: hidden !important;
+        }
+
+        /* ================= HIỆU ỨNG NỀN PHÁT SÁNG THÍCH ỨNG CHO KHU VỰC CARD ẢNH ================= */
+        #screenshotsSection {
+            position: relative;
+            z-index: 1;
+        }
+        #screenshotsSection::before {
+            content: '';
+            position: absolute;
+            inset: 6px 4px 12px 4px;
+            background: var(--screenshots-ambient-bg, radial-gradient(circle at center, rgba(0, 186, 163, 0.45), rgba(0, 168, 232, 0.2)));
+            filter: blur(22px);
+            opacity: 0.75;
+            z-index: -1;
+            border-radius: 1.5rem;
+            pointer-events: none;
+            transition: background 0.5s ease, opacity 0.4s ease;
         }
 
         /* ================= LIGHTBOX POPUP ZOOM CSS ================= */
@@ -188,11 +206,11 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
         }
         .dark .account-modal-card {
-            background: rgba(10, 20, 26, 0.98) !important;
+            background: rgba(8, 22, 30, 0.96) !important;
             backdrop-filter: blur(45px) saturate(240%) !important;
             -webkit-backdrop-filter: blur(45px) saturate(240%) !important;
             border: 1.5px solid rgba(0, 186, 163, 0.4) !important;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(0, 186, 163, 0.3) !important;
         }
 
         .popup-article-box {
@@ -206,9 +224,9 @@
             width: 100% !important;
         }
         .dark .popup-article-box {
-            background: rgba(26, 46, 58, 0.95) !important;
-            border: none !important;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+            background: rgba(10, 28, 38, 0.92) !important;
+            border: 1px solid rgba(0, 186, 163, 0.2) !important;
+            box-shadow: inset 0 1px 2px rgba(0, 186, 163, 0.15) !important;
         }
 
         .comment-card-box {
@@ -221,11 +239,11 @@
             width: 100% !important;
         }
         .dark .comment-card-box {
-            background: rgba(22, 40, 50, 0.92) !important;
+            background: rgba(10, 28, 38, 0.9) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border: none !important;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(0, 186, 163, 0.2) !important;
+            box-shadow: inset 0 1px 2px rgba(0, 186, 163, 0.15) !important;
         }
 
         .custom-form-input {
@@ -238,9 +256,9 @@
             opacity: 1 !important;
         }
         .dark .custom-form-input {
-            background-color: rgba(9, 18, 24, 0.85) !important;
+            background-color: rgba(6, 18, 25, 0.9) !important;
             color: #f8fafc !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border: 1px solid rgba(0, 186, 163, 0.3) !important;
         }
         .dark .custom-form-input::placeholder {
             color: #94a3b8 !important;
@@ -255,11 +273,11 @@
             box-shadow: 5px 0 35px rgba(0, 0, 0, 0.15) !important;
         }
         .dark .drawer-main-panel {
-            background: rgba(9, 17, 22, 0.94) !important;
-            backdrop-filter: blur(35px) saturate(210%) !important;
-            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
-            border: none !important;
-            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.8) !important;
+            background: rgba(6, 18, 25, 0.95) !important;
+            backdrop-filter: blur(40px) saturate(240%) !important;
+            -webkit-backdrop-filter: blur(40px) saturate(240%) !important;
+            border-right: 1px solid rgba(0, 186, 163, 0.25) !important;
+            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.85) !important;
         }
 
         .drawer-submenu-container {
@@ -273,9 +291,9 @@
             border: 1px solid rgba(0, 186, 163, 0.15);
         }
         .dark .drawer-submenu-container {
-            background: rgba(0, 0, 0, 0.55) !important;
+            background: rgba(10, 28, 38, 0.75) !important;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-            border: none !important;
+            border: 1px solid rgba(0, 186, 163, 0.2) !important;
         }
 
         html, body, div, header, footer, button, input {
@@ -408,7 +426,7 @@
 <body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-20">
 
     <!-- ==================== HEADER ==================== -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-white/70 dark:bg-[#0b161c]/70 backdrop-blur-xl text-gray-900 dark:text-white shadow-md border-none">
+    <header class="fixed top-0 inset-x-0 z-40 bg-white/70 dark:bg-[#06131a]/75 backdrop-blur-xl text-gray-900 dark:text-white shadow-md border-none">
         <div class="flex items-center justify-between px-3.5 py-2.5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto">
             <div class="flex items-center space-x-3.5">
                 <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
@@ -438,7 +456,7 @@
             </div>
         </div>
 
-        <div class="py-2 px-3.5 bg-gray-100/60 dark:bg-[#091116]/60 backdrop-blur-md border-none">
+        <div class="py-2 px-3.5 bg-gray-100/60 dark:bg-[#06131a]/60 backdrop-blur-md border-none">
             <div class="flex items-center justify-between max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-xs font-bold tracking-wide">
                 <span class="text-uptoAccent flex items-center space-x-1.5">
                     <i class="fa-solid fa-calendar-day text-sm"></i>
@@ -464,6 +482,22 @@
 
         <div class="p-3 text-center z-20 bg-gradient-to-t from-black/80 to-transparent text-[11px] text-gray-400 font-medium">
             <p>Nhấp đúp hoặc dùng 2 ngón tay để phóng to ảnh. Vuốt sang trái / phải để xem phương tiện tiếp theo.</p>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ (MULTI-LINK MODAL) ==================== -->
+    <div id="downloadVersionsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[65] hidden items-center justify-center p-4">
+        <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
+                <div>
+                    <h3 class="font-extrabold text-base text-gray-900 dark:text-white tracking-tight">Chọn phiên bản tải về</h3>
+                    <p id="downloadVersionsSubtitle" class="text-[11px] text-uptoAccent font-semibold mt-0.5 truncate">Chọn gói cài đặt phù hợp với thiết bị</p>
+                </div>
+                <button id="downloadVersionsCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="downloadVersionsList" class="overflow-y-auto no-scrollbar space-y-2.5 pt-3.5 pb-1"></div>
         </div>
     </div>
 
@@ -532,12 +566,11 @@
                     <div class="grid grid-cols-3 gap-2 py-3 border-none text-center">
                         <div class="flex flex-col items-center justify-center">
                             <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
-                                <i class="fa-solid fa-star text-amber-400 text-sm"></i>
-                                <span id="detailRatingScore" class="font-extrabold">4.8</span>
+                                <i class="fa-solid fa-eye text-uptoAccent text-sm"></i>
+                                <span id="detailViewCount" class="font-extrabold">1248</span>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
-                                <span id="detailRatingCountTop" class="font-bold">6 đánh giá</span>
-                                <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
+                                <span class="font-bold">lượt truy cập</span>
                             </p>
                         </div>
                         <div class="border-none flex flex-col items-center justify-center px-1">
@@ -557,8 +590,8 @@
                 </div>
 
                 <div class="space-y-4">
-                    <!-- SLIDER PHƯƠNG TIỆN -->
-                    <div id="screenshotsSection" class="hidden space-y-2">
+                    <!-- SLIDER PHƯƠNG TIỆN (NỀN PHÁT SÁNG THEO CARD ẢNH) -->
+                    <div id="screenshotsSection" class="hidden space-y-2 rounded-2xl p-1">
                         <div id="screenshotsContainer" class="flex space-x-3 overflow-x-auto no-scrollbar pb-2 cursor-grab"></div>
                     </div>
 
@@ -601,7 +634,7 @@
                             </div>
                         </div>
 
-                        <!-- Yêu cầu hệ thống -->
+                        <!-- Yêu cầu hệ thống (ngay bên dưới tác giả) -->
                         <div id="systemRequirementsBlock" class="flex items-center space-x-2.5">
                             <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                 <i class="fa-solid fa-mobile-screen-button text-sm text-uptoAccent"></i>
@@ -612,7 +645,7 @@
                             </div>
                         </div>
 
-                        <!-- Ngày đăng -->
+                        <!-- Ngày đăng (ngay bên dưới phân loại) -->
                         <div class="flex items-center space-x-2.5">
                             <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                 <i class="fa-regular fa-calendar-check text-sm text-uptoAccent"></i>
@@ -628,90 +661,35 @@
                 </div>
 
                 <div class="space-y-4 pt-2 border-none">
-                    <div class="space-y-3">
-                        <a href="javascript:void(0)" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
-                            <span>Xếp hạng nội dung này</span>
-                            <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
-                        </a>
-
-                        <div class="flex items-center justify-between px-2">
-                            <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl img-ratio-1-1 object-cover border-none">
-                            <!-- ẤN SAO ĐỂ CHỌN ĐÁNH GIÁ -->
-                            <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
-                                <i data-rating="1" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
-                                <i data-rating="2" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
-                                <i data-rating="3" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
-                                <i data-rating="4" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
-                                <i data-rating="5" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
-                            </div>
-                        </div>
-
-                        <!-- Ô NHẬP TÊN, EMAIL VÀ BÌNH LUẬN -->
-                        <div class="space-y-2 pt-1">
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="text" id="userReviewerName" placeholder="Tên của bạn..." class="w-full custom-form-input rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
-                                <input type="email" id="userReviewerEmail" placeholder="Email (nếu có)..." class="w-full custom-form-input rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
-                            </div>
-                            <textarea id="userCommentInput" rows="2" placeholder="Nhập bình luận và đánh giá của bạn về nội dung này..." class="w-full custom-form-input rounded-xl p-3 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md resize-none"></textarea>
-                        </div>
-
-                        <button id="submitReviewBtn" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow border-none transition active:scale-98 flex items-center justify-center space-x-2">
-                            <span>ĐÁNH GIÁ NỘI DUNG</span>
-                        </button>
-                    </div>
-
-                    <div class="space-y-2 pt-2">
-                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Xếp hạng</h4>
-                        <div class="flex items-center space-x-4">
-                            <div class="text-center">
-                                <span id="detailLargeRatingNum" class="text-5xl font-extrabold text-gray-700 dark:text-gray-300 tracking-tighter leading-none">4.8</span>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-center font-bold">
-                                    <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
-                                    <span id="detailRatingCountBottom">6 đánh giá</span>
-                                </p>
-                            </div>
-                            <div class="flex-1 space-y-1 text-[10px] text-gray-500 dark:text-gray-400 font-bold">
-                                <div class="flex items-center space-x-2">
-                                    <span>5</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
-                                        <div id="starBar5" class="h-full bg-cyan-500 w-[85%] transition-all duration-500"></div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span>4</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
-                                        <div id="starBar4" class="h-full bg-cyan-500 w-[15%] transition-all duration-500"></div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span>3</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
-                                        <div id="starBar3" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span>2</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
-                                        <div id="starBar2" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span>1</span>
-                                    <div class="flex-1 h-1.5 bg-gray-200/50 dark:bg-gray-800/50 rounded-full overflow-hidden">
-                                        <div id="starBar1" class="h-full bg-cyan-500 w-0 transition-all duration-500"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div id="commentsSectionList" class="space-y-2.5 pt-2">
-                        <a href="javascript:void(0)" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
-                            <span>Đánh giá & Bình luận</span>
+                        <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
+                            <span>Bình luận & Thảo luận</span>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
-                        <div id="commentsListContainer" class="space-y-2.5"></div>
+                        <!-- Ô NHẬP BÌNH LUẬN -->
+                        <div class="space-y-2 pt-1">
+                            <textarea id="userCommentInput" rows="2" placeholder="Nhập bình luận của bạn về nội dung này..." class="w-full custom-form-input rounded-xl p-3 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md resize-none"></textarea>
+                        </div>
+
+                        <button id="submitReviewBtn" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow border-none transition active:scale-98">
+                            GỬI BÌNH LUẬN
+                        </button>
+
+                        <div id="commentsListContainer" class="space-y-2.5 pt-2">
+                            <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl">
+                                <div class="w-10 h-10 rounded-xl bg-cyan-600 dark:bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                                    <i class="fa-solid fa-user text-lg"></i>
+                                </div>
+                                <div class="flex-1 min-w-0 text-xs space-y-1">
+                                    <p class="font-bold text-uptoBlueBtn truncate">kpazz_user_2026</p>
+                                    <div class="flex items-center text-[10px] text-gray-400 dark:text-gray-500 space-x-2">
+                                        <span>Hôm nay</span>
+                                    </div>
+                                    <p class="text-gray-700 dark:text-gray-300 pt-0.5">Nội dung cực kỳ hữu ích, trình bày rõ ràng mượt mà!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -729,10 +707,10 @@
 
             </div>
 
-            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/40 dark:bg-[#0b161c]/40 backdrop-blur-xl border-none transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/40 dark:bg-[#06131a]/40 backdrop-blur-xl border-none transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block border-none">
                     <div class="text-left">
-                        <h4 class="font-extrabold text-sm leading-tight">Tải & Cài đặt bản mới nhất</h4>
+                        <h4 id="stickyTitleText" class="font-extrabold text-sm leading-tight">Tải & Cài đặt bản mới nhất</h4>
                         <p id="stickySubText" class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">Nội dung an toàn, được phát hành 10/11/2026 - KPazz @2026</p>
                     </div>
                     <i class="fa-solid fa-download text-lg pr-1"></i>
@@ -839,7 +817,7 @@
     <!-- SIDEBAR DRAWER MENU -->
     <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 drawer-main-panel text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto no-scrollbar border-none">
         <div>
-            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/90 dark:bg-[#081014]/90 backdrop-blur-xl z-10">
+            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/90 dark:bg-[#06131a]/90 backdrop-blur-xl z-10">
                 <div class="flex items-center space-x-2">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
@@ -1011,7 +989,7 @@
     </main>
 
     <!-- ==================== FOOTER ==================== -->
-    <footer class="mt-12 border-none bg-gray-100/70 dark:bg-[#081014]/70 backdrop-blur-xl text-gray-600 dark:text-gray-400 py-8 px-4">
+    <footer class="mt-12 border-none bg-gray-100/70 dark:bg-[#06131a]/75 backdrop-blur-xl text-gray-600 dark:text-gray-400 py-8 px-4">
         <div class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-center space-y-4">
             <div class="flex items-center justify-center space-x-2">
                 <svg class="w-7 h-7 text-uptoAccent fill-current" viewBox="0 0 24 24">
@@ -1050,8 +1028,6 @@
         let globalAllItems = [];
         let currentOpenItem = null;
         let currentMediaList = [];
-        let selectedUserRating = 5;
-        let commentsCache = {};
 
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
@@ -1149,26 +1125,45 @@
             });
         }
 
-        function generateStarsHtml(ratingScore, starTextSizeClass = 'text-[9px]') {
-            const ratingNum = parseFloat(ratingScore) || 4.9;
-            const roundedStars = Math.round(ratingNum);
-            let html = `<div class="flex text-amber-400 ${starTextSizeClass} space-x-0.5">`;
-            for (let i = 1; i <= 5; i++) {
-                if (i <= roundedStars) {
-                    html += `<i class="fa-solid fa-star"></i>`;
-                } else {
-                    html += `<i class="fa-solid fa-star text-gray-300 dark:text-gray-600"></i>`;
-                }
-            }
-            html += `</div>`;
-            return html;
-        }
-
         function getPrimaryMediaSrc(item) {
             if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0) {
                 return { type: 'img', url: item.screenshots[0] };
             }
             return { type: 'img', url: item.img };
+        }
+
+        /* ================= HÀM TRÍCH XUẤT MÀU THÍCH ỨNG CHO NỀN CARD ẢNH ================= */
+        function applyAmbientColorToSection(imgUrl, targetSectionEl) {
+            if (!imgUrl || !targetSectionEl) return;
+            const img = new Image();
+            img.crossOrigin = "Anonymous";
+            img.src = imgUrl;
+            img.onload = () => {
+                try {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 30;
+                    canvas.height = 30;
+                    ctx.drawImage(img, 0, 0, 30, 30);
+                    const data = ctx.getImageData(0, 0, 30, 30).data;
+                    let r = 0, g = 0, b = 0, count = 0;
+                    for (let i = 0; i < data.length; i += 16) {
+                        r += data[i];
+                        g += data[i+1];
+                        b += data[i+2];
+                        count++;
+                    }
+                    r = Math.floor(r / count);
+                    g = Math.floor(g / count);
+                    b = Math.floor(b / count);
+                    targetSectionEl.style.setProperty(
+                        '--screenshots-ambient-bg',
+                        `radial-gradient(circle at center, rgba(${r},${g},${b},0.62) 0%, rgba(${Math.min(255, r+30)},${Math.min(255, g+30)},${Math.min(255, b+30)},0.25) 70%, transparent 100%)`
+                    );
+                } catch (e) {
+                    // Fallback mặc định nếu ảnh bị giới hạn CORS
+                }
+            };
         }
 
         /* ================= LIGHTBOX MEDIA LOGIC ================= */
@@ -1237,262 +1232,123 @@
             lightboxSlider.querySelectorAll('video').forEach(v => v.pause());
         });
 
-        /* ================= QUẢN LÝ BÌNH LUẬN LẤY TỪ Tabs/cmt.json ================= */
-        function escapeHTML(str) {
-            if (!str) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
+        /* ================= MULTI-LINK DOWNLOAD MODAL LOGIC ================= */
+        const downloadVersionsModal = document.getElementById('downloadVersionsModal');
+        const downloadVersionsCard = document.getElementById('downloadVersionsCard');
+        const downloadVersionsCloseBtn = document.getElementById('downloadVersionsCloseBtn');
+        const downloadVersionsList = document.getElementById('downloadVersionsList');
+        const downloadVersionsSubtitle = document.getElementById('downloadVersionsSubtitle');
 
-        function formatCurrentDateTime() {
-            const now = new Date();
-            const d = String(now.getDate()).padStart(2, '0');
-            const m = String(now.getMonth() + 1).padStart(2, '0');
-            const y = now.getFullYear();
-            const h = String(now.getHours()).padStart(2, '0');
-            const min = String(now.getMinutes()).padStart(2, '0');
-            return `${d}/${m}/${y} ${h}:${min}`;
-        }
-
-        async function loadCommentsFromJson() {
-            try {
-                const res = await fetch(`Tabs/cmt.json?t=${Date.now()}`);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data && typeof data === 'object' && !Array.isArray(data)) {
-                        commentsCache = data;
+        function getDownloadOptions(item) {
+            if (!item) return [];
+            const rawList = item.downloadLinks || item.downloads || item.versions || (Array.isArray(item.downloadLink) ? item.downloadLink : null);
+            if (Array.isArray(rawList) && rawList.length > 0) {
+                return rawList.map((entry, idx) => {
+                    if (typeof entry === 'string') {
+                        return {
+                            version: `${item.name} - Bản #${idx + 1}`,
+                            desc: 'Liên kết tải trực tiếp',
+                            url: entry
+                        };
                     }
-                }
-            } catch (err) {
-                console.warn('Chưa thể tải Tabs/cmt.json, khởi tạo dữ liệu trống.');
+                    return {
+                        version: entry.version || entry.name || entry.title || `Phiên bản ${idx + 1}`,
+                        desc: entry.desc || entry.description || entry.note || 'Nhấn để tải xuống gói cài đặt này',
+                        url: entry.url || entry.link || entry.href || '#'
+                    };
+                });
             }
-            const localSaved = localStorage.getItem('kpazz_cmt_backup');
-            if (localSaved) {
-                try {
-                    const parsedLocal = JSON.parse(localSaved);
-                    for (const key in parsedLocal) {
-                        if (!commentsCache[key]) commentsCache[key] = [];
-                        parsedLocal[key].forEach(c => {
-                            if (!commentsCache[key].some(exist => exist.id === c.id)) {
-                                commentsCache[key].unshift(c);
-                            }
-                        });
-                    }
-                } catch (e) {}
+            if (typeof item.downloadLink === 'string' && item.downloadLink.trim() !== '') {
+                return [{
+                    version: item.version || item.name || 'Bản mới nhất',
+                    desc: 'Phiên bản chính thức mới nhất',
+                    url: item.downloadLink
+                }];
             }
+            return [];
         }
 
-        async function saveCommentsToJsonFile() {
-            const jsonString = JSON.stringify(commentsCache, null, 2);
-            localStorage.setItem('kpazz_cmt_backup', jsonString);
-
-            try {
-                await fetch('Tabs/cmt.json', {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: jsonString
-                });
-            } catch (e) {}
-
-            try {
-                await fetch('Tabs/cmt.json', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: jsonString
-                });
-            } catch (e) {}
-        }
-
-        function renderCommentsForItem(item) {
-            const commentsList = document.getElementById('commentsListContainer');
-            const countTop = document.getElementById('detailRatingCountTop');
-            const countBottom = document.getElementById('detailRatingCountBottom');
-            if (!commentsList || !item) return;
-
-            // Tìm kiếm khóa trong cmt.json linh hoạt theo tên bài viết (không phân biệt chữ hoa/thường, hỗ trợ cả "Dopamin", "dopamin", ...)
-            const cleanName = (item.name || '').toLowerCase().trim();
-            let itemKey = Object.keys(commentsCache).find(k => k.toLowerCase().trim() === cleanName);
-            
-            if (!itemKey) {
-                itemKey = Object.keys(commentsCache).find(k => cleanName.includes(k.toLowerCase().trim()) || k.toLowerCase().trim().includes(cleanName));
-            }
-
-            const list = itemKey ? (commentsCache[itemKey] || []) : [];
-
-            const totalReviews = list.length;
-            if (countTop) countTop.textContent = `${totalReviews} đánh giá`;
-            if (countBottom) countBottom.textContent = `${totalReviews} đánh giá`;
-
+        function openDownloadVersionsModal(item, options) {
+            if (!downloadVersionsList) return;
+            downloadVersionsSubtitle.textContent = `${item.name || 'Ứng dụng'} • Có ${options.length} phiên bản tải`;
             let html = '';
-
-            if (list.length === 0) {
-                html = `
-                    <div class="comment-card-box p-3 rounded-2xl text-center text-xs text-gray-500 dark:text-gray-400">
-                        Chưa có đánh giá nào cho nội dung này. Hãy là người đầu tiên đánh giá!
-                    </div>
-                `;
-            } else {
-                list.forEach(cmt => {
-                    const stars = Math.min(5, Math.max(1, parseInt(cmt.rating) || 5));
-                    let starsHtml = '';
-                    for (let i = 1; i <= 5; i++) {
-                        if (i <= stars) {
-                            starsHtml += '<i class="fa-solid fa-star"></i>';
-                        } else {
-                            starsHtml += '<i class="fa-solid fa-star text-gray-300 dark:text-gray-600"></i>';
-                        }
-                    }
-
-                    const displayName = escapeHTML(cmt.name || 'Thành viên KPazz');
-                    const displayEmail = cmt.email ? `<span class="text-[10px] text-gray-400 dark:text-gray-500 font-normal ml-1">(${escapeHTML(cmt.email)})</span>` : '';
-                    const displayDate = escapeHTML(cmt.date || 'Vừa xong');
-                    const displayComment = escapeHTML(cmt.comment || '');
-
-                    html += `
-                        <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl">
-                            <div class="w-10 h-10 rounded-xl bg-uptoAccent flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
-                                <i class="fa-solid fa-user text-lg"></i>
+            options.forEach(opt => {
+                html += `
+                    <a href="${opt.url}" target="_blank" rel="noopener noreferrer"
+                       class="w-full bg-blue-50/90 hover:bg-[#00a8e8] dark:bg-white/5 dark:hover:bg-[#00a8e8] text-gray-900 dark:text-white hover:text-white rounded-2xl p-3.5 flex items-center justify-between transition shadow-sm border border-gray-200/70 dark:border-uptoAccent/20 group active:scale-98">
+                        <div class="min-w-0 flex-1 pr-3 text-left">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-extrabold text-xs sm:text-sm truncate">${opt.version}</span>
                             </div>
-                            <div class="flex-1 min-w-0 text-xs space-y-1">
-                                <p class="font-bold text-uptoBlueBtn truncate">${displayName}${displayEmail}</p>
-                                <div class="flex text-amber-400 text-[10px] space-x-0.5">
-                                    ${starsHtml}
-                                    <span class="text-gray-400 dark:text-gray-500 ml-2 font-normal">${displayDate}</span>
-                                </div>
-                                <p class="text-gray-700 dark:text-gray-300 pt-0.5 break-words">${displayComment}</p>
-                            </div>
+                            <p class="text-[11px] text-gray-600 dark:text-gray-300 group-hover:text-cyan-50 mt-0.5 leading-snug line-clamp-2">${opt.desc}</p>
                         </div>
-                    `;
-                });
-            }
-
-            commentsList.innerHTML = html;
+                        <div class="w-9 h-9 rounded-xl bg-[#00a8e8] group-hover:bg-white text-white group-hover:text-[#00a8e8] flex items-center justify-center flex-shrink-0 shadow transition">
+                            <i class="fa-solid fa-download text-sm"></i>
+                        </div>
+                    </a>
+                `;
+            });
+            downloadVersionsList.innerHTML = html;
+            openModalWithBounce(downloadVersionsModal, downloadVersionsCard);
         }
 
-        function setupInteractiveRating() {
-            const starsContainer = document.getElementById('detailInteractiveStars');
+        if (downloadVersionsCloseBtn) {
+            downloadVersionsCloseBtn.addEventListener('click', () => closeModalWithBounce(downloadVersionsModal, downloadVersionsCard));
+            setupBackdropClose(downloadVersionsModal, downloadVersionsCard);
+        }
+
+        /* ================= COMMENT LOGIC ================= */
+        function setupInteractiveComments() {
             const submitBtn = document.getElementById('submitReviewBtn');
-            const nameInput = document.getElementById('userReviewerName');
-            const emailInput = document.getElementById('userReviewerEmail');
             const commentInput = document.getElementById('userCommentInput');
+            const commentsList = document.getElementById('commentsListContainer');
 
-            if (!starsContainer) return;
-
-            function updateStarVisuals(rating) {
-                selectedUserRating = rating;
-                const stars = starsContainer.querySelectorAll('i');
-                stars.forEach((star, idx) => {
-                    if (idx < rating) {
-                        star.className = 'fa-solid fa-star text-amber-400 cursor-pointer transition hover:scale-110 active:scale-95';
-                    } else {
-                        star.className = 'fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition hover:scale-110 active:scale-95';
-                    }
-                });
-            }
-
-            starsContainer.addEventListener('click', (e) => {
-                const starEl = e.target.closest('i[data-rating]');
-                if (starEl) {
-                    const val = parseInt(starEl.getAttribute('data-rating'), 10);
-                    updateStarVisuals(val);
-                }
-            });
-
-            if (submitBtn && commentInput) {
-                submitBtn.addEventListener('click', async () => {
+            if (submitBtn && commentInput && commentsList) {
+                submitBtn.addEventListener('click', () => {
                     const text = commentInput.value.trim();
-                    const reviewerName = nameInput ? nameInput.value.trim() : '';
-                    const reviewerEmail = emailInput ? emailInput.value.trim() : '';
-
                     if (!text) {
                         commentInput.focus();
                         return;
                     }
 
-                    if (!currentOpenItem || !currentOpenItem.name) return;
-
-                    const originalBtnHtml = submitBtn.innerHTML;
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>ĐANG LƯU ĐÁNH GIÁ...</span>';
-
-                    let itemKey = Object.keys(commentsCache).find(k => k.toLowerCase().trim() === currentOpenItem.name.toLowerCase().trim());
-                    if (!itemKey) {
-                        itemKey = currentOpenItem.name;
-                        commentsCache[itemKey] = [];
-                    }
-
-                    const newReview = {
-                        id: Date.now(),
-                        name: reviewerName || 'Thành viên KPazz',
-                        email: reviewerEmail || '',
-                        rating: selectedUserRating,
-                        comment: text,
-                        date: formatCurrentDateTime()
-                    };
-
-                    commentsCache[itemKey].unshift(newReview);
-                    await saveCommentsToJsonFile();
-                    renderCommentsForItem(currentOpenItem);
-
+                    const newCommentHtml = `
+                        <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl animate-pop-in">
+                            <div class="w-10 h-10 rounded-xl bg-uptoAccent flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                                <i class="fa-solid fa-user text-lg"></i>
+                            </div>
+                            <div class="flex-1 min-w-0 text-xs space-y-1">
+                                <p class="font-bold text-uptoBlueBtn truncate">Bạn (Thành viên KPazz)</p>
+                                <div class="flex items-center text-[10px] text-gray-400 dark:text-gray-500 space-x-2">
+                                    <span>Vừa xong</span>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300 pt-0.5">${text.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
+                            </div>
+                        </div>
+                    `;
+                    commentsList.insertAdjacentHTML('afterbegin', newCommentHtml);
                     commentInput.value = '';
-                    if (nameInput) nameInput.value = '';
-                    if (emailInput) emailInput.value = '';
-
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>ĐÃ LƯU ĐÁNH GIÁ!</span>';
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalBtnHtml;
-                    }, 1800);
                 });
             }
         }
-        setupInteractiveRating();
+        setupInteractiveComments();
 
-        /* ================= POPUP CHI TIẾT LOGIC ================= */
-        const appDetailModal = document.getElementById('appDetailModal');
-        const appDetailCard = document.getElementById('appDetailCard');
-        const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
-        const appDetailScrollBody = document.getElementById('appDetailScrollBody');
-        const stickyDownloadBar = document.getElementById('stickyDownloadBar');
-        const stickyDownloadLink = document.getElementById('stickyDownloadLink');
-        const stickySubText = document.getElementById('stickySubText');
-        const distributionAnchor = document.getElementById('distributionAnchor');
+        /* ================= HỆ THỐNG LƯỢT TRUY CẬP TRỰC TIẾP TỪ JSON/HTML ================= */
+        function getStoredViews(item) {
+            if (item.views !== undefined && item.views !== null) {
+                return parseInt(item.views, 10) || 1248;
+            }
+            return 1248;
+        }
 
-        const detailAppName = document.getElementById('detailAppName');
-        const detailAppVersion = document.getElementById('detailAppVersion');
-        const detailAppDeveloper = document.getElementById('detailAppDeveloper');
-        const detailAppIcon = document.getElementById('detailAppIcon');
-        const detailSmallAvatar = document.getElementById('detailSmallAvatar');
-        const detailBreadcrumbName = document.getElementById('detailBreadcrumbName');
-        const articleContentBlock = document.getElementById('articleContentBlock');
-        const detailArticleText = document.getElementById('detailArticleText');
-        const highlightsBlock = document.getElementById('highlightsBlock');
-        const detailHighlightTitle = document.getElementById('detailHighlightTitle');
-        const detailHighlightsList = document.getElementById('detailHighlightsList');
-        const detailDevInfoExtra = document.getElementById('detailDevInfoExtra');
-        const detailCategoryInfoExtra = document.getElementById('detailCategoryInfoExtra');
-        const detailPublishDate = document.getElementById('detailPublishDate');
-        const detailPublishDateExtra = document.getElementById('detailPublishDateExtra');
-        const detailSystemReq = document.getElementById('detailSystemReq');
-        const systemRequirementsBlock = document.getElementById('systemRequirementsBlock');
-        const detailRatingScore = document.getElementById('detailRatingScore');
-        const detailLargeRatingNum = document.getElementById('detailLargeRatingNum');
-        const detailInteractiveStars = document.getElementById('detailInteractiveStars');
-
-        const screenshotsSection = document.getElementById('screenshotsSection');
-        const screenshotsContainer = document.getElementById('screenshotsContainer');
-
-        const starBar5 = document.getElementById('starBar5');
-        const starBar4 = document.getElementById('starBar4');
-        const starBar3 = document.getElementById('starBar3');
-        const starBar2 = document.getElementById('starBar2');
-        const starBar1 = document.getElementById('starBar1');
-
-        let isNoDownloadItem = false;
+        function incrementAndGetViews(item) {
+            if (!item.name) return 1248;
+            const key = `kpazz_views_${item.name.trim().toLowerCase()}`;
+            let stored = localStorage.getItem(key);
+            let views = stored !== null ? parseInt(stored, 10) : (item.views !== undefined ? parseInt(item.views, 10) : 1248);
+            views += 1;
+            localStorage.setItem(key, views);
+            return views;
+        }
 
         function renderRecommendedCarousel(currentItemName) {
             const container = document.getElementById('detailRecommendedContainer');
@@ -1504,15 +1360,14 @@
 
             let innerHtml = '';
             recItems.forEach(item => {
-                const itemRating = item.rating || '4.8';
+                const itemViews = getStoredViews(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item)}'>
+                    <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="rec-item-card-img-wrap">
                             <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
                         </div>
@@ -1521,9 +1376,9 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 font-bold">
-                                    ${starsMarkup}
-                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
+                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
                                 </div>
                             </div>
                         </div>
@@ -1551,7 +1406,28 @@
             });
         }
 
+        screenshotsContainer.addEventListener('scroll', () => {
+            const imgs = screenshotsContainer.querySelectorAll('img');
+            if (!imgs.length) return;
+            const containerCenter = screenshotsContainer.scrollLeft + screenshotsContainer.clientWidth / 2;
+            let closestImg = imgs[0];
+            let minDiff = Infinity;
+            imgs.forEach(img => {
+                const card = img.parentElement;
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const diff = Math.abs(containerCenter - cardCenter);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestImg = img;
+                }
+            });
+            if (closestImg && closestImg.src) {
+                applyAmbientColorToSection(closestImg.src, screenshotsSection);
+            }
+        }, { passive: true });
+
         function openAppDetail(item) {
+            if (!item) return;
             currentOpenItem = item;
             isNoDownloadItem = item.noDownload;
             currentMediaList = [];
@@ -1566,7 +1442,6 @@
             }
             if (item.img) {
                 detailAppIcon.src = item.img;
-                detailSmallAvatar.src = item.img;
             }
             const publishDateStr = item.publishDate || '10/11/2026';
             detailPublishDate.textContent = publishDateStr;
@@ -1581,35 +1456,14 @@
                 stickySubText.textContent = `Nội dung an toàn, được phát hành ${publishDateStr} - KPazz @${currentYear}`;
             }
 
-            const itemRating = parseFloat(item.rating) || 4.9;
-            if (detailRatingScore) detailRatingScore.textContent = itemRating.toFixed(1);
-            if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
-
-            if (detailInteractiveStars) {
-                const roundedStars = Math.round(itemRating);
-                selectedUserRating = roundedStars;
-                let starsMarkup = '';
-                for (let i = 1; i <= 5; i++) {
-                    if (i <= roundedStars) {
-                        starsMarkup += `<i data-rating="${i}" class="fa-solid fa-star text-amber-400 cursor-pointer transition hover:scale-110 active:scale-95"></i>`;
-                    } else {
-                        starsMarkup += `<i data-rating="${i}" class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition hover:scale-110 active:scale-95"></i>`;
-                    }
-                }
-                detailInteractiveStars.innerHTML = starsMarkup;
+            // Đọc và hiển thị downloadButtonLabel từ JSON (fallback nếu không có sẽ dùng mặc định)
+            const stickyTitleText = document.getElementById('stickyTitleText');
+            if (stickyTitleText) {
+                stickyTitleText.textContent = item.downloadButtonLabel || 'Tải & Cài đặt bản mới nhất';
             }
 
-            let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
-            let pct4 = Math.min(100, Math.max(0, ((itemRating - 1) / 4) * 80));
-            let pct3 = itemRating < 3 ? 40 : 10;
-            let pct2 = itemRating < 2 ? 30 : 5;
-            let pct1 = itemRating < 1.5 ? 20 : 0;
-
-            if (starBar5) starBar5.style.width = `${pct5}%`;
-            if (starBar4) starBar4.style.width = `${pct4}%`;
-            if (starBar3) starBar3.style.width = `${pct3}%`;
-            if (starBar2) starBar2.style.width = `${pct2}%`;
-            if (starBar1) starBar1.style.width = `${pct1}%`;
+            const updatedViews = incrementAndGetViews(item);
+            if (detailViewCount) detailViewCount.textContent = updatedViews;
 
             let scHtml = '';
             let videoUrl = item.video || item.videoUrl;
@@ -1680,6 +1534,10 @@
             if (scHtml !== '') {
                 screenshotsSection.classList.remove('hidden');
                 screenshotsContainer.innerHTML = scHtml;
+                const firstAmbientImg = (item.screenshots && item.screenshots[0]) || gifUrl || item.img;
+                if (firstAmbientImg) {
+                    applyAmbientColorToSection(firstAmbientImg, screenshotsSection);
+                }
             } else {
                 screenshotsSection.classList.add('hidden');
                 screenshotsContainer.innerHTML = '';
@@ -1736,11 +1594,24 @@
                 }
             }
 
-            if (item.downloadLink && !item.noDownload) {
-                stickyDownloadLink.href = item.downloadLink;
+            const downloadOptions = getDownloadOptions(item);
+            if (downloadOptions.length > 0 && !item.noDownload) {
                 stickyDownloadLink.style.display = 'flex';
+                if (downloadOptions.length > 1) {
+                    stickyDownloadLink.href = 'javascript:void(0)';
+                    stickyDownloadLink.removeAttribute('target');
+                    stickyDownloadLink.onclick = (e) => {
+                        e.preventDefault();
+                        openDownloadVersionsModal(item, downloadOptions);
+                    };
+                } else {
+                    stickyDownloadLink.href = downloadOptions[0].url;
+                    stickyDownloadLink.setAttribute('target', '_blank');
+                    stickyDownloadLink.onclick = null;
+                }
             } else {
                 stickyDownloadLink.href = '#';
+                stickyDownloadLink.onclick = null;
                 stickyDownloadLink.style.display = 'none';
             }
 
@@ -1751,7 +1622,6 @@
                 systemRequirementsBlock.style.display = 'none';
             }
 
-            renderCommentsForItem(item);
             renderRecommendedCarousel(item.name);
             
             openModalWithBounce(appDetailModal, appDetailCard);
@@ -1824,15 +1694,15 @@
 
             let html = '';
             items.forEach((item, index) => {
-                const itemRating = item.rating || '4.8';
+                const itemViews = getStoredViews(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
-                const starsMarkup = `${generateStarsHtml(itemRating, 'text-[9px]')} <span class="text-gray-900 dark:text-white ml-1 font-extrabold text-[9px]">${itemRating}</span>`;
+                const viewsMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></div>`;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
-                    <div class="popup-card-item-custom glass-panel border-none" data-cat-idx="${index}">
+                    <div class="popup-card-item-custom glass-panel border-none" data-cat-idx="${index}" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="popup-card-imgbox-custom">
                             <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1" alt="${item.name}">
                         </div>
@@ -1842,7 +1712,7 @@
                             <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
                                 <div class="flex items-center space-x-0.5 font-bold">
-                                    ${starsMarkup}
+                                    ${viewsMarkup}
                                 </div>
                             </div>
                         </div>
@@ -1972,7 +1842,7 @@
                         <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
                             Có ${sortedItems.length} mục
                         </span>
-                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/25 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
+                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
                             <span>Xem tất cả</span>
                             <i class="fa-solid fa-arrow-right text-[8px]"></i>
                         </button>
@@ -2047,8 +1917,6 @@
 
             let allLoadedItems = [];
 
-            await loadCommentsFromJson();
-
             try {
                 const resNews = await fetch(jsonFiles.news);
                 if (resNews.ok) {
@@ -2111,9 +1979,9 @@
                     allLoadedItems.push(...rawProdData);
                 }
 
-                globalAllItems = [...allLoadedItems];
+                globalAllItems = sortItemsByDate([...allLoadedItems]);
 
-                initDynamicHeroSlider(allLoadedItems);
+                initDynamicHeroSlider(globalAllItems);
                 initAutoScrollSections();
                 initNewsSlideCarousel();
                 initTipsSlideCarousel();
@@ -2126,6 +1994,7 @@
 
         /* ==================== CÁC HÀM RENDER TRANG CHỦ ==================== */
 
+        // TIN TỨC MỚI: Hiển thị lượt truy cập + tên tác giả
         function renderNewsSectionCustom(items) {
             const container = document.getElementById('newsSlideContainer');
             const countText = document.getElementById('newsCountText');
@@ -2134,8 +2003,8 @@
 
             let html = '';
             items.forEach(item => {
-                const itemRating = item.rating || '4.9';
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const itemViews = getStoredViews(item);
+                const authorName = item.dev || 'KPazz';
                 const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
                 
                 const media = getPrimaryMediaSrc(item);
@@ -2143,22 +2012,19 @@
 
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="h-28 w-full relative mb-1 overflow-hidden">
                             ${mediaHtml}
                         </div>
                         <div class="px-3 space-y-1.5">
                             <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
-                            <div class="flex items-center justify-between pt-1">
-                                <div class="flex items-center space-x-1.5">
-                                    ${starsMarkup}
-                                    <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                            <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
+                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                    <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
+                                    <span class="text-[11px] font-extrabold">${itemViews}</span>
                                 </div>
-                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
-                                    <span>Xem thêm</span>
-                                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                                </button>
+                                <span class="truncate max-w-[100px] text-uptoAccent font-semibold">${authorName}</span>
                             </div>
                         </div>
                     </div>
@@ -2168,6 +2034,7 @@
             bindCardClickEvents(container);
         }
 
+        // APP JAILBREAK: Hiển thị lượt truy cập + tên tác giả
         function renderJbSectionCustom(items) {
             const container = document.getElementById('jbAppsSlideContainer');
             const countText = document.getElementById('jbAppsCountText');
@@ -2176,8 +2043,8 @@
 
             let html = '';
             items.forEach(item => {
-                const itemRating = item.rating || '4.9';
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[8px]');
+                const itemViews = getStoredViews(item);
+                const authorName = item.dev || 'KPazz';
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 10);
                 const publishDateText = item.publishDate || 'Mới';
@@ -2187,7 +2054,7 @@
 
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-2 overflow-hidden"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="h-28 w-full relative overflow-hidden">
                             ${mediaHtml}
                             <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
@@ -2208,9 +2075,12 @@
                             </div>
 
                             <div class="flex items-center justify-between pt-1">
-                                <div class="flex items-center space-x-1">
-                                    ${starsMarkup}
-                                    <span class="text-[10px] font-extrabold text-gray-900 dark:text-white ml-1">${itemRating}</span>
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
+                                        <span class="text-[10px] font-extrabold">${itemViews}</span>
+                                    </div>
+                                    <span class="text-[10px] text-uptoAccent font-semibold truncate max-w-[90px]">&bull; ${authorName}</span>
                                 </div>
                                 <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 border-none">
                                     NHẬN
@@ -2224,6 +2094,7 @@
             bindCardClickEvents(container);
         }
 
+        // TWEAK JAILBREAK: Giữ nguyên
         function renderTweakSectionCustom(items) {
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
@@ -2232,16 +2103,15 @@
 
             let innerHtml = '';
             items.forEach(item => {
-                const itemRating = item.rating || '4.8';
+                const itemViews = getStoredViews(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
                     <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="home-tweak-img-wrap">
                             <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
@@ -2250,9 +2120,9 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 font-bold">
-                                    ${starsMarkup}
-                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
+                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
                                 </div>
                             </div>
                         </div>
@@ -2264,6 +2134,7 @@
             bindCardClickEvents(container);
         }
 
+        // ĐA PHƯƠNG TIỆN: Giữ nguyên
         function renderMediaSectionCustom(items) {
             const container = document.getElementById('multimediaSlideContainer');
             const countText = document.getElementById('multimediaCountText');
@@ -2272,16 +2143,15 @@
 
             let innerHtml = '';
             items.forEach(item => {
-                const itemRating = item.rating || '4.8';
+                const itemViews = getStoredViews(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
                     <div class="app-card-clickable home-media-item-box glass-panel border-none"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="home-media-img-wrap">
                             <img src="${item.img}" class="home-media-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
@@ -2290,9 +2160,9 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 font-bold">
-                                    ${starsMarkup}
-                                    <span class="text-gray-900 dark:text-white ml-1 font-extrabold">${itemRating}</span>
+                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
+                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
                                 </div>
                             </div>
                         </div>
@@ -2304,6 +2174,7 @@
             bindCardClickEvents(container);
         }
 
+        // MẸO & HƯỚNG DẪN CÔNG NGHỆ: Hiển thị lượt truy cập + tên tác giả
         function renderTipsSectionCustom(items) {
             const container = document.getElementById('tipsSlideContainer');
             const countText = document.getElementById('tipsCountText');
@@ -2312,8 +2183,8 @@
 
             let html = '';
             items.forEach(item => {
-                const itemRating = item.rating || '5.0';
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[9px]');
+                const itemViews = getStoredViews(item);
+                const authorName = item.dev || 'KPazz';
                 const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
                 
                 const media = getPrimaryMediaSrc(item);
@@ -2321,22 +2192,19 @@
 
                 html += `
                     <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="h-28 w-full relative mb-1 overflow-hidden">
                             ${mediaHtml}
                         </div>
                         <div class="px-3 space-y-1.5">
                             <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
-                            <div class="flex items-center justify-between pt-1">
-                                <div class="flex items-center space-x-1.5">
-                                    ${starsMarkup}
-                                    <span class="text-[11px] font-extrabold text-gray-900 dark:text-white">${itemRating}</span>
+                            <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
+                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                    <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
+                                    <span class="text-[11px] font-extrabold">${itemViews}</span>
                                 </div>
-                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-[10px] px-2.5 py-1 rounded-full transition active:scale-95 flex items-center space-x-1 border-none">
-                                    <span>Xem thêm</span>
-                                    <i class="fa-solid fa-chevron-right text-[8px]"></i>
-                                </button>
+                                <span class="truncate max-w-[100px] text-uptoAccent font-semibold">${authorName}</span>
                             </div>
                         </div>
                     </div>
@@ -2346,6 +2214,7 @@
             bindCardClickEvents(container);
         }
 
+        // NĂNG SUẤT: Giữ nguyên
         function renderProductivitySectionCustom(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
@@ -2356,7 +2225,7 @@
             items.forEach(item => {
                 innerHtml += `
                     <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20 flex-shrink-0"
-                         data-app-json='${JSON.stringify(item)}'>
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border-none overflow-hidden">
                             <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-xl">
                         </div>
@@ -2386,19 +2255,18 @@
             });
         }
 
-        /* ==================== HERO SLIDER ==================== */
+        /* ==================== HERO SLIDER: Hiển thị lượt truy cập + Tác giả ==================== */
         function initDynamicHeroSlider(allItems) {
             const heroSlider = document.getElementById('heroSlider');
             const heroDotsContainer = document.getElementById('heroDots');
             if (!heroSlider || !allItems.length) return;
 
-            let sortedHeroItems = sortItemsByDate([...allItems]).slice(0, 7);
+            let sortedHeroItems = [...allItems].slice(0, 7);
 
             let slidesHtml = '';
             sortedHeroItems.forEach((item, idx) => {
-                const isActive = idx === 1 ? 'active-card' : '';
-                const itemRating = item.rating || '4.9';
-                const starsMarkup = generateStarsHtml(itemRating, 'text-[10px]');
+                const isActive = idx === 0 ? 'active-card' : '';
+                const itemViews = getStoredViews(item);
                 const publishDateStr = item.publishDate || '10/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
                 const versionStr = item.version || 'v1.0.4';
@@ -2409,7 +2277,7 @@
 
                 slidesHtml += `
                     <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[50vw] md:w-[35vw] lg:w-[26vw] max-w-[310px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between"
-                         data-hero-json='${JSON.stringify(item)}'>
+                         data-hero-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="relative h-64 sm:h-72 w-full">
                             ${mediaHtml}
                             <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
@@ -2427,9 +2295,12 @@
                                     <span class="bg-uptoAccent/30 text-uptoAccent font-extrabold px-2 py-0.5 rounded-full text-[10px] flex-shrink-0 border border-uptoAccent/30">${versionStr}</span>
                                 </div>
 
-                                <div class="flex items-center space-x-1 pt-0.5">
-                                    ${starsMarkup}
-                                    <span class="text-[11px] font-extrabold text-white ml-1">${itemRating}</span>
+                                <div class="flex items-center justify-between pt-0.5 text-white text-[11px]">
+                                    <div class="flex items-center space-x-1 font-bold">
+                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
+                                        <span class="font-extrabold">${itemViews} lượt xem</span>
+                                    </div>
+                                    <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorStr}</span>
                                 </div>
                             </div>
                         </div>
@@ -2455,7 +2326,7 @@
             }
 
             const cards = heroSlider.querySelectorAll('.hero-card');
-            let currentIndex = Math.floor(cards.length / 2);
+            let currentIndex = 0;
             let autoSlideTimer;
 
             function updateSliderPosition() {
