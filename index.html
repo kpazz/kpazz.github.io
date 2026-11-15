@@ -536,7 +536,7 @@
                                 <span id="detailRatingScore" class="font-extrabold">4.8</span>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
-                                <span class="font-bold">6 đánh giá</span>
+                                <span id="detailRatingCountTop" class="font-bold">6 đánh giá</span>
                                 <i class="fa-regular fa-circle-question text-[9px] ml-1"></i>
                             </p>
                         </div>
@@ -577,63 +577,86 @@
                         </ul>
                     </div>
 
-                    <div id="systemRequirementsBlock" class="space-y-0.5 px-0.5">
-                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Yêu cầu hệ thống</h4>
-                        <p id="detailSystemReq" class="text-xs text-gray-500 dark:text-gray-400">Tương thích tốt trên Android & iOS</p>
-                    </div>
-
-                    <div class="space-y-2 pt-2 px-0.5">
-                        <h4 class="font-extrabold text-sm text-gray-900 dark:text-white">Thông tin chi tiết</h4>
-                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400">Thông tin cơ bản & Tác giả</p>
-
-                        <div class="grid grid-cols-2 gap-3 text-xs pt-1">
-                            <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-building text-sm text-uptoAccent"></i>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Tác giả</p>
-                                    <p id="detailDevInfo" class="font-bold text-gray-800 dark:text-gray-200 truncate">KPazz Studio</p>
-                                </div>
+                    <!-- GRID 4 MỤC: TÁC GIẢ | PHÂN LOẠI (HÀNG 1) VÀ YÊU CẦU HỆ THỐNG | NGÀY ĐĂNG (HÀNG 2) -->
+                    <div class="grid grid-cols-2 gap-3 text-xs pt-1 px-0.5">
+                        <!-- Tác giả -->
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                <i class="fa-solid fa-building text-sm text-uptoAccent"></i>
                             </div>
+                            <div class="min-w-0">
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400">Tác giả</p>
+                                <p id="detailDevInfoExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">KPazz Studio</p>
+                            </div>
+                        </div>
 
-                            <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-list-check text-sm text-uptoAccent"></i>
-                                </div>
-                                <div class="min-w-0">
-                                    <p class="text-[10px] text-gray-500 dark:text-gray-400">Phân loại</p>
-                                    <p id="detailCategoryInfo" class="font-bold text-gray-800 dark:text-gray-200 truncate">Công nghệ / Tiện ích</p>
-                                </div>
+                        <!-- Phân loại -->
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                <i class="fa-solid fa-list-check text-sm text-uptoAccent"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400">Phân loại</p>
+                                <p id="detailCategoryInfoExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">Công nghệ / Tiện ích</p>
+                            </div>
+                        </div>
+
+                        <!-- Yêu cầu hệ thống -->
+                        <div id="systemRequirementsBlock" class="flex items-center space-x-2.5">
+                            <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                <i class="fa-solid fa-mobile-screen-button text-sm text-uptoAccent"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400">Yêu cầu hệ thống</p>
+                                <p id="detailSystemReq" class="font-bold text-gray-800 dark:text-gray-200 truncate">Tương thích tốt trên Android & iOS</p>
+                            </div>
+                        </div>
+
+                        <!-- Ngày đăng -->
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                <i class="fa-regular fa-calendar-check text-sm text-uptoAccent"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400">Ngày đăng</p>
+                                <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">10/11/2026</p>
                             </div>
                         </div>
                     </div>
 
-                    <div id="distributionAnchor" class="pt-2">
-                        <p class="text-xs font-semibold text-gray-500 dark:text-gray-400 mb-1.5">Mô hình nội dung</p>
-                    </div>
+                    <div id="distributionAnchor" class="pt-2"></div>
                 </div>
 
                 <div class="space-y-4 pt-2 border-none">
                     <div class="space-y-3">
-                        <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
+                        <a href="javascript:void(0)" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
                             <span>Xếp hạng nội dung này</span>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
                         <div class="flex items-center justify-between px-2">
                             <img id="detailSmallAvatar" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=100&q=80" class="w-9 h-9 rounded-xl img-ratio-1-1 object-cover border-none">
+                            <!-- ẤN SAO ĐỂ CHỌN ĐÁNH GIÁ -->
                             <div id="detailInteractiveStars" class="flex items-center space-x-2 text-2xl text-amber-400">
-                                <i class="fa-solid fa-star cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star cursor-pointer transition"></i>
-                                <i class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition"></i>
+                                <i data-rating="1" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
+                                <i data-rating="2" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
+                                <i data-rating="3" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
+                                <i data-rating="4" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
+                                <i data-rating="5" class="fa-solid fa-star cursor-pointer transition hover:scale-110 active:scale-95"></i>
                             </div>
                         </div>
 
-                        <button class="w-full bg-[#00a8e8] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow border-none">
-                            ĐÁNH GIÁ NỘI DUNG
+                        <!-- Ô NHẬP TÊN, EMAIL VÀ BÌNH LUẬN -->
+                        <div class="space-y-2 pt-1">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="userReviewerName" placeholder="Tên của bạn..." class="w-full custom-form-input rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
+                                <input type="email" id="userReviewerEmail" placeholder="Email (nếu có)..." class="w-full custom-form-input rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md">
+                            </div>
+                            <textarea id="userCommentInput" rows="2" placeholder="Nhập bình luận và đánh giá của bạn về nội dung này..." class="w-full custom-form-input rounded-xl p-3 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md resize-none"></textarea>
+                        </div>
+
+                        <button id="submitReviewBtn" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider shadow border-none transition active:scale-98 flex items-center justify-center space-x-2">
+                            <span>ĐÁNH GIÁ NỘI DUNG</span>
                         </button>
                     </div>
 
@@ -644,7 +667,7 @@
                                 <span id="detailLargeRatingNum" class="text-5xl font-extrabold text-gray-700 dark:text-gray-300 tracking-tighter leading-none">4.8</span>
                                 <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-2 flex items-center justify-center font-bold">
                                     <i class="fa-solid fa-comment text-uptoAccent mr-1"></i>
-                                    <span>6 đánh giá</span>
+                                    <span id="detailRatingCountBottom">6 đánh giá</span>
                                 </p>
                             </div>
                             <div class="flex-1 space-y-1 text-[10px] text-gray-500 dark:text-gray-400 font-bold">
@@ -682,25 +705,13 @@
                         </div>
                     </div>
 
-                    <div class="space-y-2.5 pt-2">
-                        <a href="#" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
+                    <div id="commentsSectionList" class="space-y-2.5 pt-2">
+                        <a href="javascript:void(0)" class="flex items-center justify-between text-sm font-bold text-gray-900 dark:text-white hover:text-uptoAccent transition">
                             <span>Đánh giá & Bình luận</span>
                             <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                         </a>
 
-                        <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl">
-                            <div class="w-10 h-10 rounded-xl bg-cyan-600 dark:bg-cyan-700 flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
-                                <i class="fa-solid fa-user text-lg"></i>
-                            </div>
-                            <div class="flex-1 min-w-0 text-xs space-y-1">
-                                <p class="font-bold text-uptoBlueBtn truncate">kpazz_user_2026</p>
-                                <div class="flex text-amber-400 text-[10px] space-x-0.5">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                    <span class="text-gray-400 dark:text-gray-500 ml-2 font-normal">Hôm nay</span>
-                                </div>
-                                <p class="text-gray-700 dark:text-gray-300 pt-0.5">Nội dung cực kỳ hữu ích, trình bày rõ ràng mượt mà!</p>
-                            </div>
-                        </div>
+                        <div id="commentsListContainer" class="space-y-2.5"></div>
                     </div>
                 </div>
 
@@ -1039,6 +1050,8 @@
         let globalAllItems = [];
         let currentOpenItem = null;
         let currentMediaList = [];
+        let selectedUserRating = 5;
+        let commentsCache = {};
 
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
@@ -1076,10 +1089,8 @@
             }
         }
 
-        // Tự động áp dụng chế độ Sáng/Tối theo thời gian trong ngày (Tối từ 18:00 đến 06:00 sáng hôm sau)
         function getTimeBasedTheme() {
             const currentHour = new Date().getHours();
-            // Nếu từ 18 giờ tối đến trước 6 giờ sáng -> Chế độ tối (true), ngược lại Sáng (false)
             return currentHour >= 18 || currentHour < 6;
         }
 
@@ -1226,6 +1237,221 @@
             lightboxSlider.querySelectorAll('video').forEach(v => v.pause());
         });
 
+        /* ================= QUẢN LÝ BÌNH LUẬN LẤY TỪ Tabs/cmt.json ================= */
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function formatCurrentDateTime() {
+            const now = new Date();
+            const d = String(now.getDate()).padStart(2, '0');
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const y = now.getFullYear();
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            return `${d}/${m}/${y} ${h}:${min}`;
+        }
+
+        async function loadCommentsFromJson() {
+            try {
+                const res = await fetch(`Tabs/cmt.json?t=${Date.now()}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data === 'object' && !Array.isArray(data)) {
+                        commentsCache = data;
+                    }
+                }
+            } catch (err) {
+                console.warn('Chưa thể tải Tabs/cmt.json, khởi tạo dữ liệu trống.');
+            }
+            const localSaved = localStorage.getItem('kpazz_cmt_backup');
+            if (localSaved) {
+                try {
+                    const parsedLocal = JSON.parse(localSaved);
+                    for (const key in parsedLocal) {
+                        if (!commentsCache[key]) commentsCache[key] = [];
+                        parsedLocal[key].forEach(c => {
+                            if (!commentsCache[key].some(exist => exist.id === c.id)) {
+                                commentsCache[key].unshift(c);
+                            }
+                        });
+                    }
+                } catch (e) {}
+            }
+        }
+
+        async function saveCommentsToJsonFile() {
+            const jsonString = JSON.stringify(commentsCache, null, 2);
+            localStorage.setItem('kpazz_cmt_backup', jsonString);
+
+            try {
+                await fetch('Tabs/cmt.json', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: jsonString
+                });
+            } catch (e) {}
+
+            try {
+                await fetch('Tabs/cmt.json', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: jsonString
+                });
+            } catch (e) {}
+        }
+
+        function renderCommentsForItem(item) {
+            const commentsList = document.getElementById('commentsListContainer');
+            const countTop = document.getElementById('detailRatingCountTop');
+            const countBottom = document.getElementById('detailRatingCountBottom');
+            if (!commentsList || !item) return;
+
+            // Tìm kiếm khóa trong cmt.json linh hoạt theo tên bài viết (không phân biệt chữ hoa/thường, hỗ trợ cả "Dopamin", "dopamin", ...)
+            const cleanName = (item.name || '').toLowerCase().trim();
+            let itemKey = Object.keys(commentsCache).find(k => k.toLowerCase().trim() === cleanName);
+            
+            if (!itemKey) {
+                itemKey = Object.keys(commentsCache).find(k => cleanName.includes(k.toLowerCase().trim()) || k.toLowerCase().trim().includes(cleanName));
+            }
+
+            const list = itemKey ? (commentsCache[itemKey] || []) : [];
+
+            const totalReviews = list.length;
+            if (countTop) countTop.textContent = `${totalReviews} đánh giá`;
+            if (countBottom) countBottom.textContent = `${totalReviews} đánh giá`;
+
+            let html = '';
+
+            if (list.length === 0) {
+                html = `
+                    <div class="comment-card-box p-3 rounded-2xl text-center text-xs text-gray-500 dark:text-gray-400">
+                        Chưa có đánh giá nào cho nội dung này. Hãy là người đầu tiên đánh giá!
+                    </div>
+                `;
+            } else {
+                list.forEach(cmt => {
+                    const stars = Math.min(5, Math.max(1, parseInt(cmt.rating) || 5));
+                    let starsHtml = '';
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= stars) {
+                            starsHtml += '<i class="fa-solid fa-star"></i>';
+                        } else {
+                            starsHtml += '<i class="fa-solid fa-star text-gray-300 dark:text-gray-600"></i>';
+                        }
+                    }
+
+                    const displayName = escapeHTML(cmt.name || 'Thành viên KPazz');
+                    const displayEmail = cmt.email ? `<span class="text-[10px] text-gray-400 dark:text-gray-500 font-normal ml-1">(${escapeHTML(cmt.email)})</span>` : '';
+                    const displayDate = escapeHTML(cmt.date || 'Vừa xong');
+                    const displayComment = escapeHTML(cmt.comment || '');
+
+                    html += `
+                        <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl">
+                            <div class="w-10 h-10 rounded-xl bg-uptoAccent flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                                <i class="fa-solid fa-user text-lg"></i>
+                            </div>
+                            <div class="flex-1 min-w-0 text-xs space-y-1">
+                                <p class="font-bold text-uptoBlueBtn truncate">${displayName}${displayEmail}</p>
+                                <div class="flex text-amber-400 text-[10px] space-x-0.5">
+                                    ${starsHtml}
+                                    <span class="text-gray-400 dark:text-gray-500 ml-2 font-normal">${displayDate}</span>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300 pt-0.5 break-words">${displayComment}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            commentsList.innerHTML = html;
+        }
+
+        function setupInteractiveRating() {
+            const starsContainer = document.getElementById('detailInteractiveStars');
+            const submitBtn = document.getElementById('submitReviewBtn');
+            const nameInput = document.getElementById('userReviewerName');
+            const emailInput = document.getElementById('userReviewerEmail');
+            const commentInput = document.getElementById('userCommentInput');
+
+            if (!starsContainer) return;
+
+            function updateStarVisuals(rating) {
+                selectedUserRating = rating;
+                const stars = starsContainer.querySelectorAll('i');
+                stars.forEach((star, idx) => {
+                    if (idx < rating) {
+                        star.className = 'fa-solid fa-star text-amber-400 cursor-pointer transition hover:scale-110 active:scale-95';
+                    } else {
+                        star.className = 'fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition hover:scale-110 active:scale-95';
+                    }
+                });
+            }
+
+            starsContainer.addEventListener('click', (e) => {
+                const starEl = e.target.closest('i[data-rating]');
+                if (starEl) {
+                    const val = parseInt(starEl.getAttribute('data-rating'), 10);
+                    updateStarVisuals(val);
+                }
+            });
+
+            if (submitBtn && commentInput) {
+                submitBtn.addEventListener('click', async () => {
+                    const text = commentInput.value.trim();
+                    const reviewerName = nameInput ? nameInput.value.trim() : '';
+                    const reviewerEmail = emailInput ? emailInput.value.trim() : '';
+
+                    if (!text) {
+                        commentInput.focus();
+                        return;
+                    }
+
+                    if (!currentOpenItem || !currentOpenItem.name) return;
+
+                    const originalBtnHtml = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>ĐANG LƯU ĐÁNH GIÁ...</span>';
+
+                    let itemKey = Object.keys(commentsCache).find(k => k.toLowerCase().trim() === currentOpenItem.name.toLowerCase().trim());
+                    if (!itemKey) {
+                        itemKey = currentOpenItem.name;
+                        commentsCache[itemKey] = [];
+                    }
+
+                    const newReview = {
+                        id: Date.now(),
+                        name: reviewerName || 'Thành viên KPazz',
+                        email: reviewerEmail || '',
+                        rating: selectedUserRating,
+                        comment: text,
+                        date: formatCurrentDateTime()
+                    };
+
+                    commentsCache[itemKey].unshift(newReview);
+                    await saveCommentsToJsonFile();
+                    renderCommentsForItem(currentOpenItem);
+
+                    commentInput.value = '';
+                    if (nameInput) nameInput.value = '';
+                    if (emailInput) emailInput.value = '';
+
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>ĐÃ LƯU ĐÁNH GIÁ!</span>';
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalBtnHtml;
+                    }, 1800);
+                });
+            }
+        }
+        setupInteractiveRating();
+
         /* ================= POPUP CHI TIẾT LOGIC ================= */
         const appDetailModal = document.getElementById('appDetailModal');
         const appDetailCard = document.getElementById('appDetailCard');
@@ -1247,9 +1473,10 @@
         const highlightsBlock = document.getElementById('highlightsBlock');
         const detailHighlightTitle = document.getElementById('detailHighlightTitle');
         const detailHighlightsList = document.getElementById('detailHighlightsList');
-        const detailDevInfo = document.getElementById('detailDevInfo');
-        const detailCategoryInfo = document.getElementById('detailCategoryInfo');
+        const detailDevInfoExtra = document.getElementById('detailDevInfoExtra');
+        const detailCategoryInfoExtra = document.getElementById('detailCategoryInfoExtra');
         const detailPublishDate = document.getElementById('detailPublishDate');
+        const detailPublishDateExtra = document.getElementById('detailPublishDateExtra');
         const detailSystemReq = document.getElementById('detailSystemReq');
         const systemRequirementsBlock = document.getElementById('systemRequirementsBlock');
         const detailRatingScore = document.getElementById('detailRatingScore');
@@ -1335,18 +1562,18 @@
             }
             if (item.dev) {
                 detailAppDeveloper.textContent = item.dev;
-                detailDevInfo.textContent = item.dev;
+                if (detailDevInfoExtra) detailDevInfoExtra.textContent = item.dev;
             }
             if (item.img) {
                 detailAppIcon.src = item.img;
                 detailSmallAvatar.src = item.img;
             }
             const publishDateStr = item.publishDate || '10/11/2026';
-            if (item.publishDate) {
-                detailPublishDate.textContent = item.publishDate;
-            }
+            detailPublishDate.textContent = publishDateStr;
+            if (detailPublishDateExtra) detailPublishDateExtra.textContent = publishDateStr;
+
             if (item.category) {
-                detailCategoryInfo.textContent = item.category;
+                if (detailCategoryInfoExtra) detailCategoryInfoExtra.textContent = item.category;
             }
 
             if (stickySubText) {
@@ -1359,7 +1586,17 @@
             if (detailLargeRatingNum) detailLargeRatingNum.textContent = itemRating.toFixed(1);
 
             if (detailInteractiveStars) {
-                detailInteractiveStars.innerHTML = generateStarsHtml(itemRating, 'text-2xl');
+                const roundedStars = Math.round(itemRating);
+                selectedUserRating = roundedStars;
+                let starsMarkup = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= roundedStars) {
+                        starsMarkup += `<i data-rating="${i}" class="fa-solid fa-star text-amber-400 cursor-pointer transition hover:scale-110 active:scale-95"></i>`;
+                    } else {
+                        starsMarkup += `<i data-rating="${i}" class="fa-solid fa-star text-gray-300 dark:text-gray-600 cursor-pointer transition hover:scale-110 active:scale-95"></i>`;
+                    }
+                }
+                detailInteractiveStars.innerHTML = starsMarkup;
             }
 
             let pct5 = Math.min(100, Math.max(0, (itemRating / 5) * 100));
@@ -1508,14 +1745,13 @@
             }
 
             if (item.isApp) {
-                systemRequirementsBlock.style.display = 'block';
-                if (item.systemRequirements) {
-                    detailSystemReq.textContent = item.systemRequirements;
-                }
+                systemRequirementsBlock.style.display = 'flex';
+                detailSystemReq.textContent = item.systemRequirements || 'Tương thích tốt trên Android & iOS';
             } else {
                 systemRequirementsBlock.style.display = 'none';
             }
 
+            renderCommentsForItem(item);
             renderRecommendedCarousel(item.name);
             
             openModalWithBounce(appDetailModal, appDetailCard);
@@ -1736,7 +1972,7 @@
                         <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
                             Có ${sortedItems.length} mục
                         </span>
-                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
+                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/25 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
                             <span>Xem tất cả</span>
                             <i class="fa-solid fa-arrow-right text-[8px]"></i>
                         </button>
@@ -1810,6 +2046,8 @@
             };
 
             let allLoadedItems = [];
+
+            await loadCommentsFromJson();
 
             try {
                 const resNews = await fetch(jsonFiles.news);

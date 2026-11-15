@@ -1,0 +1,26 @@
+  "Dopamin": [
+    {
+      "id": 1718235123456,
+      "name": "Hoàng Nam",
+      "email": "hoangnam@example.com",
+      "rating": 5,
+      "comment": "Bài viết cực kỳ truyền cảm hứng! Hiểu thêm rất nhiều về cơ chế dopamin trong não bộ.",
+      "date": "15/11/2026 09:15"
+    },
+    {
+      "id": 1718235234567,
+      "name": "Thành viên KPazz",
+      "email": "",
+      "rating": 5,
+      "comment": "Nội dung rất chất lượng, mẹo áp dụng thực tế cao. Cảm ơn tác giả!",
+      "date": "15/11/2026 10:20"
+    },
+    {
+      "id": 1718235345678,
+      "name": "Mai Phương",
+      "email": "maiphuong@gmail.com",
+      "rating": 4,
+      "comment": "Bài viết chi tiết, trình bày rõ ràng. Đọc xong vỡ ra được nhiều điều về cách quản lý sự tập trung.",
+      "date": "15/11/2026 11:00"
+    }
+  ]
