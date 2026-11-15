@@ -32,7 +32,7 @@
         <priority>0.9</priority>
     </url>
 
-    <!-- Mục APP (Dành cho iOS - có file ipa) -->
+    <!-- Mục APP ( Dành cho ios - có file ipa) -->
     <url>
         <loc>https://kpazz.github.io/#ios-ipa</loc>
         <lastmod>2026-11-16</lastmod>
@@ -40,7 +40,7 @@
         <priority>0.9</priority>
     </url>
 
-    <!-- Mục APP (Tổng hợp iOS) -->
+    <!-- Mục APP ( Tổng hợp ios) -->
     <url>
         <loc>https://kpazz.github.io/#tonghop-ios</loc>
         <lastmod>2026-11-16</lastmod>
