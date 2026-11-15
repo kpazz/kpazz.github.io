@@ -1054,7 +1054,7 @@
                 <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerIpaList', 'ipaChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-file-arrow-down w-5 text-center"></i><span>APP ( Dành cho ios - có file ipa)</span>
+                            <i class="fa-solid fa-file-arrow-down w-5 text-center"></i><span>APP ( Dành cho ios )</span>
                         </span>
                         <i id="ipaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
@@ -1146,14 +1146,14 @@
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: APP ( DÀNH CHO IOS - CÓ FILE IPA) -->
+        <!-- SECTION: APP ( DÀNH CHO IOS ) -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Dành cho ios - có file ipa)', window.storeDataCache?.iosIpa || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>APP ( Dành cho ios - có file ipa)</span>
+                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Dành cho ios )', window.storeDataCache?.iosIpa || [])" class="section-title text-gray-900 dark:text-white">
+                    <span>APP ( Dành cho ios )</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="ipaAppsCountText" onclick="openCategoryModal('APP ( Dành cho ios - có file ipa)', window.storeDataCache?.iosIpa || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
+                <span id="ipaAppsCountText" onclick="openCategoryModal('APP ( Dành cho ios )', window.storeDataCache?.iosIpa || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
             <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
@@ -2199,7 +2199,7 @@
                     iosIpaData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.iosIpa = iosIpaData;
                     renderIpaSectionCustom(iosIpaData);
-                    renderDrawerList('drawerIpaList', iosIpaData, 'APP ( Dành cho ios - có file ipa)');
+                    renderDrawerList('drawerIpaList', iosIpaData, 'APP ( Dành cho ios )');
                     allLoadedItems.push(...iosIpaData);
                 }
 
