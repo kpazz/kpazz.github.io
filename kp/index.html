@@ -1420,7 +1420,7 @@
         </div>
     </div>
 
-    <!-- POPUP NHẬP MẬT KHẨU (CÂN ĐỐI CHÍNH GIỮA, ẨN NÚT ĐĂNG NHẬP BAN ĐẦU, DÁN LÀ ĐĂNG NHẬP LUÔN) -->
+    <!-- POPUP NHẬP MẬT KHẨU -->
     <div class="modal fade" id="customPasswordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm mx-auto" style="max-width: 340px;">
             <div class="modal-content rounded-4 border-0 shadow-lg">
@@ -1441,7 +1441,6 @@
                         </div>
                     </form>
                 </div>
-                <!-- BAN ĐẦU BỎ NÚT ĐĂNG NHẬP, SAI MẬT KHẨU MỚI HIỆN LẠI -->
                 <div class="modal-footer-sticky py-2 px-3 justify-content-end" id="authFooterSection" style="display: none !important;">
                     <button type="button" class="btn btn-primary btn-sm w-100 rounded-pill py-1.5 fw-semibold btn-appstore-glass-solid" id="authSubmitBtn" onclick="submitCustomPassword()">Đăng nhập</button>
                 </div>
@@ -1465,7 +1464,7 @@
         </div>
     </div>
 
-    <!-- MODAL THÊM MỚI / CHỈNH SỬA (TẤT CẢ Ô NHẬP LÀ TEXTAREA KÉO DÃN TÙY Ý) -->
+    <!-- MODAL THÊM MỚI / CHỈNH SỬA -->
     <div class="modal fade" id="genericModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content rounded-4 border-0 shadow">
@@ -1501,7 +1500,6 @@
                                 </div>
                             </div>
                             
-                            <!-- TRƯỜNG PHIÊN BẢN (VERSION) -->
                             <div class="col-md-6" id="fieldVersionBox">
                                 <label class="form-label fw-semibold">Phiên bản (version)</label>
                                 <div class="resizable-textarea-wrapper">
@@ -1510,15 +1508,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6" id="fieldRatingBox">
-                                <label class="form-label fw-semibold">Đánh giá sao (rating) <span class="text-muted small">(Để trống = 5 sao)</span></label>
-                                <div class="resizable-textarea-wrapper">
-                                    <textarea class="form-control" id="gRating" rows="1" placeholder="Ví dụ: 4.8 hoặc bỏ trống" oninput="autoExpandTextarea(this)"></textarea>
-                                    <span class="custom-resize-grip" data-target="gRating" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
-                                </div>
-                            </div>
-
-                            <!-- TRƯỜNG YÊU CẦU HỆ THỐNG -->
                             <div class="col-md-6" id="fieldSysReqBox" style="display: none;">
                                 <label class="form-label fw-semibold">Yêu cầu hệ thống (systemRequirements)</label>
                                 <div class="resizable-textarea-wrapper">
@@ -1527,7 +1516,6 @@
                                 </div>
                             </div>
                             
-                            <!-- TRƯỜNG ẢNH ĐẠI DIỆN -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Hình ảnh đại diện (img)</label>
                                 
@@ -1553,7 +1541,6 @@
                                 </div>
                             </div>
 
-                            <!-- TRƯỜNG VIDEO GIỚI THIỆU (video) -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold"><i class="fa-solid fa-video me-1 text-danger"></i> Link hoặc Tệp Video giới thiệu (video)</label>
                                 <div class="input-group mb-1">
@@ -1566,7 +1553,6 @@
                                 <div class="form-text text-muted small">Hỗ trợ liên kết web (mp4, webm) hoặc đường dẫn tệp video nội bộ trong kho chứa.</div>
                             </div>
 
-                            <!-- TRƯỜNG GIF GIỚI THIỆU (gif) -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold"><i class="fa-solid fa-image me-1 text-success"></i> Link hoặc Tệp GIF động (gif)</label>
                                 <div class="input-group mb-1">
@@ -1579,7 +1565,6 @@
                                 <div class="form-text text-muted small">Tùy chọn tải lên tệp định dạng GIF hoặc dán đường dẫn liên kết tĩnh.</div>
                             </div>
                             
-                            <!-- TRƯỜNG SCREENSHOTS (SLIDER ẢNH/VIDEO) -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Ảnh chụp màn hình Slider (screenshots)</label>
                                 
@@ -1605,7 +1590,6 @@
                                 </div>
                             </div>
                             
-                            <!-- TRƯỜNG TIÊU ĐỀ NỔI BẬT (HIGHLIGHT TITLE) -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Tiêu đề nổi bật (highlightTitle)</label>
                                 <div class="resizable-textarea-wrapper">
@@ -1614,7 +1598,6 @@
                                 </div>
                             </div>
                             
-                            <!-- TRƯỜNG HIGHLIGHTS -->
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Các điểm nổi bật & ảnh/video đơn lập <span class="text-muted small"><br>Mỗi dòng là 1 ý. Kèm file bằng cách thêm <code>| đường_dẫn_file</code></span></label>
                                 
@@ -1645,17 +1628,44 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Link tải (downloadLink)</label>
+                                <label class="form-label fw-semibold">Link tải đơn (downloadLink)</label>
                                 <div class="resizable-textarea-wrapper">
-                                    <textarea class="form-control link-auto-textarea" id="gDownloadLink" rows="1" placeholder="Chọn ảnh hoặc nhập link hoặc debs/file.deb" oninput="autoExpandTextarea(this)"></textarea>
+                                    <textarea class="form-control link-auto-textarea" id="gDownloadLink" rows="1" placeholder="Link hoặc debs/file.deb" oninput="autoExpandTextarea(this)"></textarea>
                                     <span class="custom-resize-grip" data-target="gDownloadLink" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
                                 </div>
-                                <small class="text-muted" style="font-size: 0.75rem;">Đường dẫn tệp nội bộ (VD: <code>debs/tweak.deb</code>)</small>
+                            </div>
+
+                            <!-- GIAO DIỆN ĐỘNG QUẢN LÝ ĐA LINK TẢI (downloadLinks) VỚI Ô THAY ĐỔI TÊN NÚT BẤM -->
+                            <div class="col-12 border-top pt-3 mt-2">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label fw-semibold text-primary mb-0"><i class="fa-solid fa-download me-1"></i> Danh sách Đa Link Tải (downloadLinks)</label>
+                                </div>
+                                
+                                <!-- Ô NHẬP TÊN NÚT BẤM TẢI & NÚT THÊM PHIÊN BẢN NẰM BÊN PHẢI -->
+                                <div class="row g-2 align-items-center mb-2">
+                                    <div class="col-md-9">
+                                        <label class="form-label fw-semibold small mb-1">Tên nút bấm tải & cài đặt ngoài trang chủ (downloadButtonLabel)</label>
+                                        <div class="resizable-textarea-wrapper">
+                                            <textarea class="form-control form-control-sm" id="gDownloadButtonLabel" rows="1" placeholder="VD: Tải & cài đặt hoặc Tải v3.0.13..." oninput="autoExpandTextarea(this)"></textarea>
+                                            <span class="custom-resize-grip" data-target="gDownloadButtonLabel" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-end">
+                                        <button type="button" class="btn btn-sm btn-primary w-100 rounded-pill py-2 fw-semibold btn-appstore-glass-solid" onclick="addDownloadLinkRow()">
+                                            <i class="fa-solid fa-plus me-1"></i> Thêm phiên bản tải
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-text text-muted small mb-3">Tùy chọn thêm số lượng phiên bản tải tùy ý (Tiêu đề, Mô tả và URL tương ứng).</div>
+                                
+                                <div id="downloadLinksDynamicContainer" class="d-flex flex-column gap-3">
+                                    <!-- Các dòng input được thêm động ở đây -->
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <!-- NÚT HỦY & LƯU LẠI -->
                 <div class="modal-footer-sticky d-flex justify-content-end gap-2">
                     <button type="button" class="btn btn-secondary rounded-pill px-4 btn-appstore-glass-solid" data-bs-dismiss="modal">Hủy</button>
                     <button type="button" class="btn btn-primary rounded-pill px-4 btn-appstore-glass-solid" onclick="saveGenericItem()">Lưu Lại</button>
@@ -1692,7 +1702,11 @@
                         <div id="prevDate" class="text-secondary"></div>
                     </div>
 
-                    <!-- KHU VỰC HIỂN THỊ VIDEO CHÍNH (NẾU CÓ) -->
+                    <div class="mb-3" id="prevDownloadLinksContainer" style="display: none;">
+                        <label class="text-muted small text-uppercase fw-bold mb-2">Danh sách Link Tải (downloadLinks)</label>
+                        <div id="prevDownloadLinksList" class="d-flex flex-column gap-2"></div>
+                    </div>
+
                     <div class="mb-3" id="prevVideoContainer" style="display: none;">
                         <label class="text-muted small text-uppercase fw-bold mb-2">Video Giới Thiệu Chính</label>
                         <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm bg-dark">
@@ -1700,7 +1714,6 @@
                         </div>
                     </div>
 
-                    <!-- KHU VỰC HIỂN THỊ GIF ĐỘNG (NẾU CÓ) -->
                     <div class="mb-3" id="prevGifContainer" style="display: none;">
                         <label class="text-muted small text-uppercase fw-bold mb-2">Ảnh GIF Động</label>
                         <div class="rounded-3 overflow-hidden shadow-sm text-center bg-dark p-2">
@@ -1708,7 +1721,6 @@
                         </div>
                     </div>
 
-                    <!-- KHU VỰC HIỂN THỊ SLIDE ẢNH/VIDEO (SCREENSHOTS) -->
                     <div class="mb-4" id="prevScreenshotsContainer" style="display: none;">
                         <label class="text-muted small text-uppercase fw-bold mb-2">Ảnh/Video Slide (Từ trái qua phải)</label>
                         <div class="d-flex gap-3 overflow-auto pb-2" id="prevScreenshotsSlider" style="white-space: nowrap;"></div>
@@ -1762,7 +1774,7 @@
         }
 
         function refreshAllModalTextareas() {
-            const ids = ['gName', 'gDev', 'gCategory', 'gVersion', 'gRating', 'gSysReq', 'gImg', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink', 'gVideo', 'gGif'];
+            const ids = ['gName', 'gDev', 'gCategory', 'gVersion', 'gSysReq', 'gImg', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink', 'gVideo', 'gGif', 'gDownloadButtonLabel'];
             ids.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) {
@@ -1771,6 +1783,12 @@
                     el.style.height = '';
                     autoExpandTextarea(el);
                 }
+            });
+            document.querySelectorAll('.dl-dynamic-row textarea').forEach(el => {
+                delete el.dataset.manualResized;
+                el.style.width = '';
+                el.style.height = '';
+                autoExpandTextarea(el);
             });
         }
 
@@ -1834,7 +1852,87 @@
             });
         }
 
-        // DÁN TỪ BỘ NHỚ TẠM VÀ TỰ ĐỘNG ĐĂNG NHẬP LUÔN
+        function renderDownloadLinksDynamic(linksArray = []) {
+            const container = document.getElementById('downloadLinksDynamicContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!linksArray || linksArray.length === 0) {
+                container.innerHTML = `<div class="text-muted small text-center py-2 border rounded-3 bg-light dark-mode-bg">Chưa có liên kết tải nào. Bấm "Thêm phiên bản tải" để thêm mới không giới hạn.</div>`;
+                return;
+            }
+
+            linksArray.forEach((linkObj, idx) => {
+                const rowIdVersion = `dl_version_${idx}_${Date.now()}`;
+                const rowIdDesc = `dl_desc_${idx}_${Date.now()}`;
+                const rowIdUrl = `dl_url_${idx}_${Date.now()}`;
+
+                const html = `
+                    <div class="dl-dynamic-row card card-custom p-3 border position-relative bg-light dark-mode-bg" data-index="${idx}">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-secondary">Phiên bản tải #${idx + 1}</span>
+                            <button type="button" class="btn btn-sm btn-danger rounded-circle p-1" style="width: 24px; height: 24px; font-size: 11px; display: flex; align-items: center; justify-content: center;" onclick="removeDownloadLinkRow(${idx})" title="Xóa phiên bản này">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small mb-1">Tiêu đề / Phiên bản (version)</label>
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control form-control-sm dl-version-input" id="${rowIdVersion}" rows="1" placeholder="VD: Dopamine v3.0.13 (Bản Chính Thức)" oninput="autoExpandTextarea(this)">${linkObj.version || ''}</textarea>
+                                    <span class="custom-resize-grip" data-target="${rowIdVersion}" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small mb-1">Đường dẫn URL (url)</label>
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control form-control-sm link-auto-textarea dl-url-input" id="${rowIdUrl}" rows="1" placeholder="VD: https://... hoặc debs/file.ipa" oninput="autoExpandTextarea(this)">${linkObj.url || ''}</textarea>
+                                    <span class="custom-resize-grip" data-target="${rowIdUrl}" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small mb-1">Mô tả phiên bản (desc)</label>
+                                <div class="resizable-textarea-wrapper">
+                                    <textarea class="form-control form-control-sm dl-desc-input" id="${rowIdDesc}" rows="1" placeholder="VD: Phiên bản ổn định mới nhất, tối ưu hóa toàn diện..." oninput="autoExpandTextarea(this)">${linkObj.desc || ''}</textarea>
+                                    <span class="custom-resize-grip" data-target="${rowIdDesc}" title="Kéo để phóng to / thu nhỏ"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            initCustomResizeGrips();
+            container.querySelectorAll('textarea').forEach(el => autoExpandTextarea(el));
+        }
+
+        function collectDownloadLinksFromUI() {
+            const rows = document.querySelectorAll('.dl-dynamic-row');
+            let results = [];
+            rows.forEach(row => {
+                const version = row.querySelector('.dl-version-input')?.value.trim() || '';
+                const desc = row.querySelector('.dl-desc-input')?.value.trim() || '';
+                const url = row.querySelector('.dl-url-input')?.value.trim() || '';
+                if (version || url || desc) {
+                    results.push({ version, desc, url });
+                }
+            });
+            return results;
+        }
+
+        function addDownloadLinkRow() {
+            let currentList = collectDownloadLinksFromUI();
+            currentList.push({ version: "", desc: "", url: "" });
+            renderDownloadLinksDynamic(currentList);
+        }
+
+        function removeDownloadLinkRow(index) {
+            let currentList = collectDownloadLinksFromUI();
+            currentList.splice(index, 1);
+            renderDownloadLinksDynamic(currentList);
+        }
+
         async function pasteAndAutoLoginPassword() {
             try {
                 let text = "";
@@ -1877,12 +1975,12 @@
         };
 
         const cardBorderColors = [
-            "#0dcaf0", // Xanh dương nhạt (info)
-            "#ffc107", // Vàng (warning)
-            "#198754", // Xanh lá (success)
-            "#0d6efd", // Xanh dương đậm (primary)
-            "#dc3545", // Đỏ (danger)
-            "#6c757d"  // Xám (secondary)
+            "#0dcaf0",
+            "#ffc107",
+            "#198754",
+            "#0d6efd",
+            "#dc3545",
+            "#6c757d"
         ];
 
         function changeColumnLayout(type, cols) {
@@ -2191,7 +2289,6 @@
             }
         }
 
-        // Đường dẫn JSON tương đối từ thư mục kp/
         let jsonPaths = {
             tweak: "../Tabs/Tweak.json",
             news: "../Tabs/Tintucmoi.json",
@@ -2234,13 +2331,11 @@
             inputEl.value = '';
 
             if (errorMsg) {
-                // Nếu sai mật khẩu mới hiển thị nút đăng nhập bên dưới để người dùng bấm lại
                 alertBox.className = "alert alert-danger py-1 px-2 small mb-0";
                 alertBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-1"></i> ${errorMsg}`;
                 if (footerSection) footerSection.style.display = 'flex !important';
                 footerSection.style.setProperty('display', 'flex', 'important');
             } else {
-                // Mặc định lúc đầu ẩn hẳn nút đăng nhập
                 alertBox.className = "alert alert-warning py-1 px-2 small mb-0";
                 alertBox.innerHTML = `<i class="fa-solid fa-shield-halved me-1"></i> Phiên hết hạn sau 30 phút không hoạt động.`;
                 if (footerSection) footerSection.style.setProperty('display', 'none', 'important');
@@ -2295,7 +2390,6 @@
             }
 
             if (!checkResult.success) {
-                // Sai mật khẩu mới hiện lại nút đăng nhập bên dưới để người dùng bấm
                 const alertBox = document.getElementById('authAlertBox');
                 const footerSection = document.getElementById('authFooterSection');
                 if (alertBox) {
@@ -2719,7 +2813,7 @@
 
             dbData[type].forEach((item, index) => {
                 const titleText = item.name || item.title || 'Không có tên';
-                const col2Text = item.category || item.version || item.rating || 'N/A';
+                const col2Text = item.category || item.version || 'N/A';
                 const devText = item.dev || item.author || 'KPazz';
                 const dateText = item.publishDate || item.date || '07/11/2026';
                 
@@ -2736,6 +2830,8 @@
                 const versionOrCategory = item.version || item.category || '';
                 const borderColor = cardBorderColors[index % cardBorderColors.length];
 
+                let customBtnLabel = item.downloadButtonLabel || "Tải & cài đặt";
+
                 htmlContent += `
                     <div class="item-card-row" style="border-left: 5px solid ${borderColor} !important;">
                         <div>
@@ -2750,10 +2846,8 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center pt-2 border-top border-light">
-                            <div class="text-secondary small fw-semibold">
-                                ${versionOrCategory ? `<i class="fa-solid fa-tag me-1 text-primary"></i>${versionOrCategory}` : ''}
-                                ${item.video ? `<span class="badge bg-danger ms-2" style="font-size: 0.65rem;"><i class="fa-solid fa-video me-1"></i>Video</span>` : ''}
-                                ${item.gif ? `<span class="badge bg-success ms-2" style="font-size: 0.65rem;"><i class="fa-solid fa-image me-1"></i>GIF</span>` : ''}
+                            <div class="text-secondary small fw-semibold text-truncate pe-2" style="max-width: 140px;" title="${customBtnLabel}">
+                                <i class="fa-solid fa-download me-1 text-primary"></i>${customBtnLabel}
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
@@ -2778,10 +2872,30 @@
         function previewItem(type, index) {
             const item = dbData[type][index];
             document.getElementById('prevName').innerText = item.name || item.title || 'Không có tên';
-            document.getElementById('prevVersion').innerText = item.version || item.rating || item.category || 'N/A';
+            document.getElementById('prevVersion').innerText = item.version || item.category || 'N/A';
             document.getElementById('prevDev').innerText = item.dev || item.author || 'KPazz Store';
             document.getElementById('prevDate').innerText = item.publishDate || item.date || '07/11/2026';
             
+            const dlLinksContainer = document.getElementById('prevDownloadLinksContainer');
+            const dlLinksList = document.getElementById('prevDownloadLinksList');
+            dlLinksList.innerHTML = '';
+            if (Array.isArray(item.downloadLinks) && item.downloadLinks.length > 0) {
+                dlLinksContainer.style.display = 'block';
+                item.downloadLinks.forEach(link => {
+                    dlLinksList.innerHTML += `
+                        <a href="${link.url || '#'}" target="_blank" class="p-2.5 rounded-3 bg-light dark-mode-bg border text-decoration-none d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="fw-bold text-dark dark-text small">${link.version || 'Phiên bản'}</div>
+                                <div class="text-muted" style="font-size: 0.75rem;">${link.desc || ''}</div>
+                            </div>
+                            <i class="fa-solid fa-download text-primary"></i>
+                        </a>
+                    `;
+                });
+            } else {
+                dlLinksContainer.style.display = 'none';
+            }
+
             const videoContainer = document.getElementById('prevVideoContainer');
             const videoElement = document.getElementById('prevVideoElement');
             if (item.video && item.video.trim()) {
@@ -3145,7 +3259,6 @@
             const labelName = document.getElementById('labelName');
             const fieldDescBox = document.getElementById('fieldDescBox');
             const fieldVersionBox = document.getElementById('fieldVersionBox');
-            const fieldRatingBox = document.getElementById('fieldRatingBox');
             const fieldSysReqBox = document.getElementById('fieldSysReqBox');
 
             fieldDescBox.style.display = 'block';
@@ -3156,18 +3269,18 @@
                 fieldVersionBox.style.display = 'none';
             }
 
-            fieldRatingBox.style.display = 'block';
-
             if (['tweak', 'app', 'prod'].includes(type)) {
                 fieldSysReqBox.style.display = 'block';
             } else {
                 fieldSysReqBox.style.display = 'none';
             }
 
-            ['gName', 'gDev', 'gCategory', 'gVersion', 'gRating', 'gSysReq', 'gImg', 'gVideo', 'gGif', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink'].forEach(id => {
+            ['gName', 'gDev', 'gCategory', 'gVersion', 'gSysReq', 'gImg', 'gVideo', 'gGif', 'gScreenshots', 'gDesc', 'gHighlightTitle', 'gHighlights', 'gDownloadLink', 'gDownloadButtonLabel'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = '';
             });
+
+            renderDownloadLinksDynamic([]);
 
             document.getElementById('currentImgPreviewContainer').style.display = 'none';
             document.getElementById('screenshotsThumbnailsList').style.display = 'none';
@@ -3256,9 +3369,15 @@
             document.getElementById('gIsApp').checked = !!item.isApp;
             document.getElementById('gNoDownload').checked = !!item.noDownload;
             document.getElementById('gDownloadLink').value = item.downloadLink || '';
+            document.getElementById('gDownloadButtonLabel').value = item.downloadButtonLabel || '';
+
+            if (Array.isArray(item.downloadLinks)) {
+                renderDownloadLinksDynamic(item.downloadLinks);
+            } else {
+                renderDownloadLinksDynamic([]);
+            }
 
             if (item.version) document.getElementById('gVersion').value = item.version;
-            if (item.rating) document.getElementById('gRating').value = item.rating;
             if (item.systemRequirements) document.getElementById('gSysReq').value = item.systemRequirements;
             if (item.description) document.getElementById('gDesc').value = item.description;
 
@@ -3301,10 +3420,8 @@
                 imgInputVal = `Art/${safeFolder}/img.png`;
             }
 
-            let ratingVal = document.getElementById('gRating').value.trim();
-            if (!ratingVal) {
-                ratingVal = "5.0";
-            }
+            const downloadLinksArr = collectDownloadLinksFromUI();
+            const downloadButtonLabelVal = document.getElementById('gDownloadButtonLabel').value.trim();
 
             let newItem = {
                 name: name,
@@ -3312,19 +3429,23 @@
                 dev: document.getElementById('gDev').value.trim() || "KPazz",
                 category: document.getElementById('gCategory').value.trim() || "Tweaks",
                 systemRequirements: document.getElementById('gSysReq').value.trim() || "",
-                rating: ratingVal,
                 description: document.getElementById('gDesc').value.trim() || "",
                 img: imgInputVal,
                 publishDate: "07/11/2026",
                 isApp: document.getElementById('gIsApp').checked,
                 noDownload: document.getElementById('gNoDownload').checked,
                 downloadLink: document.getElementById('gDownloadLink').value.trim(),
+                downloadButtonLabel: downloadButtonLabelVal,
                 video: document.getElementById('gVideo').value.trim(),
                 gif: document.getElementById('gGif').value.trim(),
                 highlightTitle: document.getElementById('gHighlightTitle').value.trim(),
                 screenshots: screenshotsArr,
                 highlights: highlightsArr
             };
+
+            if (downloadLinksArr.length > 0) {
+                newItem.downloadLinks = downloadLinksArr;
+            }
 
             if (index >= 0) {
                 dbData[type][index] = newItem;
