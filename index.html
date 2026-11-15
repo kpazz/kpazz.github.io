@@ -79,7 +79,6 @@
             object-fit: cover !important;
         }
 
-        /* Khung chứa video chuẩn chiều cao 145px và ôm sát width vừa khít với video */
         .video-container-fixed {
             height: 145px !important;
             aspect-ratio: 16 / 9 !important;
@@ -107,6 +106,152 @@
             border-radius: 1.5rem;
             pointer-events: none;
             transition: background 0.5s ease, opacity 0.4s ease;
+        }
+
+        /* ================= CSS RIÊNG CHO PHẦN YÊU CẦU HỆ THỐNG MỚI ================= */
+        .system-req-custom-text {
+            color: #00baa3 !important;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .dark .system-req-custom-text {
+            color: #00baa3 !important;
+        }
+        .system-req-more-hint {
+            color: #38bdf8;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 2px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .system-req-more-hint:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= NÚT "NHẬN" / TẢI KIỂU APP STORE (TO HƠN TRONG POPUP) ================= */
+        .appstore-get-btn {
+            background-color: rgba(0, 168, 232, 0.18);
+            color: #00a8e8;
+            font-weight: 800;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.8125rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 168, 232, 0.25);
+            flex-shrink: 0;
+        }
+        .appstore-get-btn:hover {
+            background-color: #00a8e8;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        .dark .appstore-get-btn {
+            background-color: rgba(0, 186, 163, 0.22);
+            color: #00baa3;
+            box-shadow: 0 3px 8px rgba(0, 186, 163, 0.25);
+        }
+        .dark .appstore-get-btn:hover {
+            background-color: #00baa3;
+            color: #ffffff;
+        }
+
+        /* ================= NÚT "NHẬN" BÊN NGOÀI CARD TRANG CHỦ (BÉ HƠN TÍ, CÓ ICON TẢI) ================= */
+        .appstore-get-btn-home {
+            background-color: rgba(0, 168, 232, 0.18);
+            color: #00a8e8;
+            font-weight: 800;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 168, 232, 0.2);
+            flex-shrink: 0;
+        }
+        .appstore-get-btn-home:hover {
+            background-color: #00a8e8;
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+        .dark .appstore-get-btn-home {
+            background-color: rgba(0, 186, 163, 0.22);
+            color: #00baa3;
+            box-shadow: 0 2px 5px rgba(0, 186, 163, 0.2);
+        }
+        .dark .appstore-get-btn-home:hover {
+            background-color: #00baa3;
+            color: #ffffff;
+        }
+
+        /* ================= NÚT TẢI CỐ ĐỊNH Ở ĐÁY: TO CAO, NỔI BẬT (CHẾ ĐỘ SÁNG SIÊU DỄ NHÌN), LIQUID GLASS & HIỆU ỨNG SLIDE TO UNLOCK ================= */
+        @keyframes bounceGlow {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 0 22px rgba(0, 168, 232, 0.5), 0 12px 30px rgba(0, 0, 0, 0.25);
+            }
+            50% {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 0 32px rgba(0, 186, 163, 0.7), 0 18px 35px rgba(0, 0, 0, 0.35);
+            }
+        }
+
+        @keyframes slideToUnlockShimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .sticky-download-glow-bounce {
+            background: linear-gradient(135deg, rgba(230, 248, 246, 0.98), rgba(220, 240, 252, 0.98)) !important;
+            backdrop-filter: blur(25px) saturate(220%) !important;
+            -webkit-backdrop-filter: blur(25px) saturate(220%) !important;
+            border: 2px solid rgba(0, 168, 232, 0.6) !important;
+            padding: 1.1rem 1.25rem !important;
+            border-radius: 1.25rem !important;
+            animation: bounceGlow 2.5s infinite ease-in-out;
+        }
+
+        .slide-to-unlock-text {
+            background: linear-gradient(90deg, #0b2533 0%, #0077b6 25%, #00a8e8 50%, #0077b6 75%, #0b2533 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: slideToUnlockShimmer 3s linear infinite;
+        }
+
+        .dark .sticky-download-glow-bounce {
+            background: linear-gradient(135deg, rgba(0, 186, 163, 0.38), rgba(0, 168, 232, 0.42)) !important;
+            border: 1.5px solid rgba(0, 186, 163, 0.6) !important;
+        }
+
+        .dark .slide-to-unlock-text {
+            background: linear-gradient(90deg, #ffffff 0%, #00f2fe 25%, #4facfe 50%, #00f2fe 75%, #ffffff 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: slideToUnlockShimmer 3s linear infinite;
         }
 
         /* ================= LIGHTBOX POPUP ZOOM CSS ================= */
@@ -165,7 +310,7 @@
         }
 
         /* ================= CSS CÁC MỤC TRANG CHỦ ================= */
-        .home-media-item-box, .home-tweak-item-box, .rec-item-card {
+        .home-ios-item-box, .home-tweak-item-box, .rec-item-card {
             display: flex;
             align-items: center;
             padding: 0.5rem;
@@ -175,7 +320,7 @@
             flex-shrink: 0;
             min-height: 4.2rem;
         }
-        .home-media-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
+        .home-ios-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
             width: 2.75rem;
             height: 2.75rem;
             border-radius: 0.65rem;
@@ -187,10 +332,10 @@
             padding: 0.15rem;
             background-color: rgba(0, 0, 0, 0.15);
         }
-        .dark .home-media-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
+        .dark .home-ios-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
             background-color: rgba(0, 0, 0, 0.35);
         }
-        .home-media-img-file, .home-tweak-img-file, .rec-item-card-img {
+        .home-ios-img-file, .home-tweak-img-file, .rec-item-card-img {
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
             width: 100% !important;
@@ -329,6 +474,14 @@
             overflow: hidden;
         }
 
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .section-title {
             display: inline-flex;
             align-items: center;
@@ -423,7 +576,7 @@
         }
     </style>
 </head>
-<body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-20">
+<body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-24">
 
     <!-- ==================== HEADER ==================== -->
     <header class="fixed top-0 inset-x-0 z-40 bg-white/70 dark:bg-[#06131a]/75 backdrop-blur-xl text-gray-900 dark:text-white shadow-md border-none">
@@ -462,7 +615,7 @@
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 10 tháng 11, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Chủ Nhật, 15 tháng 11, 2026</span>
             </div>
         </div>
     </header>
@@ -498,6 +651,21 @@
                 </button>
             </div>
             <div id="downloadVersionsList" class="overflow-y-auto no-scrollbar space-y-2.5 pt-3.5 pb-1"></div>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP HIỂN THỊ CHI TIẾT YÊU CẦU HỆ THỐNG ==================== -->
+    <div id="systemReqPopupModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[75] hidden items-center justify-center p-4">
+        <div id="systemReqPopupCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[80vh] overflow-hidden border-none animate-pop-in">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
+                <h3 class="font-extrabold text-base text-gray-900 dark:text-white tracking-tight">Chi tiết Yêu cầu hệ thống</h3>
+                <button id="systemReqPopupCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="overflow-y-auto no-scrollbar pt-4 pb-2">
+                <p id="systemReqPopupFullText" class="text-xs sm:text-sm text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line font-medium"></p>
+            </div>
         </div>
     </div>
 
@@ -543,7 +711,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-6 pr-1 pb-20 pt-2">
+            <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-6 pr-1 pb-24 pt-2">
                 
                 <div class="space-y-4 pt-1">
                     <div class="text-[10px] sm:text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap pr-10">
@@ -554,12 +722,23 @@
                         <span id="detailBreadcrumbName" class="text-gray-800 dark:text-gray-200 font-extrabold truncate">TÊN ỨNG DỤNG</span>
                     </div>
 
-                    <div class="flex items-start space-x-3.5">
-                        <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl img-ratio-1-1 border-none shadow-lg flex-shrink-0">
-                        <div class="flex-1 min-w-0 pr-4">
-                            <h2 id="detailAppName" class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight">Tên Ứng Dụng</h2>
-                            <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold">1.2.3RC2</p>
-                            <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-bold mt-1">Nhà Phát Triển</p>
+                    <!-- HEADER THÔNG TIN ỨNG DỤNG KÈM NÚT TẢI GIỐNG APP STORE BÊN PHẢI -->
+                    <div class="flex items-center justify-between space-x-3">
+                        <div class="flex items-start space-x-3.5 min-w-0 flex-1">
+                            <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl img-ratio-1-1 border-none shadow-lg flex-shrink-0">
+                            <div class="flex-1 min-w-0 pr-1">
+                                <h2 id="detailAppName" class="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight truncate">Tên Ứng Dụng</h2>
+                                <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold truncate">1.2.3RC2</p>
+                                <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-bold mt-1 truncate">Nhà Phát Triển</p>
+                            </div>
+                        </div>
+
+                        <!-- Nút Tải phong cách App Store (to hơn) -->
+                        <div class="flex-shrink-0 self-center">
+                            <a id="topAppStoreBtn" href="javascript:void(0)" class="appstore-get-btn">
+                                <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
+                                <span>Nhận</span>
+                            </a>
                         </div>
                     </div>
 
@@ -567,7 +746,7 @@
                         <div class="flex flex-col items-center justify-center">
                             <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
                                 <i class="fa-solid fa-eye text-uptoAccent text-sm"></i>
-                                <span id="detailViewCount" class="font-extrabold">1248</span>
+                                <span id="detailViewCount" class="font-extrabold">0</span>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
                                 <span class="font-bold">lượt truy cập</span>
@@ -590,9 +769,9 @@
                 </div>
 
                 <div class="space-y-4">
-                    <!-- SLIDER PHƯƠNG TIỆN (NỀN PHÁT SÁNG THEO CARD ẢNH) -->
+                    <!-- SLIDER PHƯƠNG TIỆN (TỐC ĐỘ CUỘN RẤT CHẬM, CỰC KỲ MƯỢT MÀ) -->
                     <div id="screenshotsSection" class="hidden space-y-2 rounded-2xl p-1">
-                        <div id="screenshotsContainer" class="flex space-x-3 overflow-x-auto no-scrollbar pb-2 cursor-grab"></div>
+                        <div id="screenshotsContainer" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-2 cursor-grab !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);" data-scroll-speed="100"></div>
                     </div>
 
                     <div id="articleContentBlock" class="hidden popup-article-box rounded-2xl p-4 space-y-3 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
@@ -639,9 +818,10 @@
                             <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                 <i class="fa-solid fa-mobile-screen-button text-sm text-uptoAccent"></i>
                             </div>
-                            <div class="min-w-0">
+                            <div class="min-w-0 flex-1">
                                 <p class="text-[10px] text-gray-500 dark:text-gray-400">Yêu cầu hệ thống</p>
-                                <p id="detailSystemReq" class="font-bold text-gray-800 dark:text-gray-200 truncate">Tương thích tốt trên Android & iOS</p>
+                                <p id="detailSystemReq" class="font-bold text-xs system-req-custom-text" onclick="openSystemReqPopup()">Tương thích tốt trên Android & iOS</p>
+                                <span class="system-req-more-hint" onclick="openSystemReqPopup()">Ấn để xem thêm</span>
                             </div>
                         </div>
 
@@ -693,6 +873,7 @@
                     </div>
                 </div>
 
+                <!-- PHẦN ĐỀ XUẤT 2 DÒNG -->
                 <div class="space-y-3 pt-3 border-none">
                     <div class="flex items-center justify-between">
                         <h4 onclick="openAllRecommendationsModal()" class="font-extrabold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5 cursor-pointer hover:text-uptoAccent transition">
@@ -702,18 +883,26 @@
                         <span onclick="openAllRecommendationsModal()" class="text-[10px] font-extrabold text-uptoAccent hover:underline cursor-pointer transition">Khám phá ngay &rsaquo;</span>
                     </div>
 
-                    <div id="detailRecommendedContainer" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);" data-scroll-speed="35"></div>
+                    <div class="space-y-2.5 !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);">
+                        <!-- Dòng 1 -->
+                        <div id="detailRecommendedContainer1" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="35" data-scroll-dir="1"></div>
+                        <!-- Dòng 2 -->
+                        <div id="detailRecommendedContainer2" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="65" data-scroll-dir="-1"></div>
+                    </div>
                 </div>
 
             </div>
 
-            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3 bg-white/40 dark:bg-[#06131a]/40 backdrop-blur-xl border-none transition-all duration-300 transform translate-y-full opacity-0 z-20 pointer-events-none">
-                <a id="stickyDownloadLink" href="#" target="_blank" class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white rounded-2xl p-3 flex items-center justify-between shadow-xl active:scale-98 transition pointer-events-auto block border-none">
+            <!-- NÚT TẢI CỐ ĐỊNH Ở ĐÁY KHI CUỘN -->
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3.5 bg-white/40 dark:bg-[#06131a]/40 backdrop-blur-xl border-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-full opacity-0 z-20 pointer-events-none">
+                <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
-                        <h4 id="stickyTitleText" class="font-extrabold text-sm leading-tight">Tải & Cài đặt bản mới nhất</h4>
-                        <p id="stickySubText" class="text-[10px] text-cyan-100 opacity-90 mt-0.5 font-medium">Nội dung an toàn, được phát hành 10/11/2026 - KPazz @2026</p>
+                        <h4 id="stickyTitleText" class="font-extrabold text-base leading-tight slide-to-unlock-text">Tải & Cài đặt bản mới nhất</h4>
+                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 15/11/2026 - KPazz @2026</p>
                     </div>
-                    <i class="fa-solid fa-download text-lg pr-1"></i>
+                    <div class="w-10 h-10 rounded-xl bg-[#00a8e8]/20 dark:bg-white/10 flex items-center justify-center text-[#00a8e8] dark:text-white shadow-inner flex-shrink-0 font-bold">
+                        <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
+                    </div>
                 </a>
             </div>
 
@@ -863,9 +1052,19 @@
                 </div>
 
                 <div class="space-y-1">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerIpaList', 'ipaChevron')">
+                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
+                            <i class="fa-solid fa-file-arrow-down w-5 text-center"></i><span>APP ( Dành cho ios - có file ipa)</span>
+                        </span>
+                        <i id="ipaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
+                    </div>
+                    <div id="drawerIpaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
+                </div>
+
+                <div class="space-y-1">
                     <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-photo-film w-5 text-center"></i><span>Đa phương tiện</span>
+                            <i class="fa-solid fa-photo-film w-5 text-center"></i><span>APP ( Tổng hợp ios)</span>
                         </span>
                         <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
@@ -947,14 +1146,27 @@
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION: ĐA PHƯƠNG TIỆN -->
+        <!-- SECTION: APP ( DÀNH CHO IOS - CÓ FILE IPA) -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>Đa phương tiện</span>
+                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Dành cho ios - có file ipa)', window.storeDataCache?.iosIpa || [])" class="section-title text-gray-900 dark:text-white">
+                    <span>APP ( Dành cho ios - có file ipa)</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="multimediaCountText" onclick="openCategoryModal('Đa phương tiện', window.storeDataCache?.media || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
+                <span id="ipaAppsCountText" onclick="openCategoryModal('APP ( Dành cho ios - có file ipa)', window.storeDataCache?.iosIpa || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
+            </div>
+            <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
+        </section>
+
+        <!-- SECTION: APP ( TỔNG HỢP IOS) -->
+        <section class="space-y-2.5">
+            <div class="flex items-center justify-between px-3.5">
+                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Tổng hợp ios)', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
+                    <span>APP ( Tổng hợp ios)</span>
+                    <i class="fa-solid fa-chevron-right section-arrow"></i>
+                </a>
+                <span id="multimediaCountText" onclick="openCategoryModal('APP ( Tổng hợp ios)', window.storeDataCache?.media || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
             <div id="multimediaSlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
@@ -1132,7 +1344,6 @@
             return { type: 'img', url: item.img };
         }
 
-        /* ================= HÀM TRÍCH XUẤT MÀU THÍCH ỨNG CHO NỀN CARD ẢNH ================= */
         function applyAmbientColorToSection(imgUrl, targetSectionEl) {
             if (!imgUrl || !targetSectionEl) return;
             const img = new Image();
@@ -1160,9 +1371,7 @@
                         '--screenshots-ambient-bg',
                         `radial-gradient(circle at center, rgba(${r},${g},${b},0.62) 0%, rgba(${Math.min(255, r+30)},${Math.min(255, g+30)},${Math.min(255, b+30)},0.25) 70%, transparent 100%)`
                     );
-                } catch (e) {
-                    // Fallback mặc định nếu ảnh bị giới hạn CORS
-                }
+                } catch (e) {}
             };
         }
 
@@ -1297,6 +1506,37 @@
             setupBackdropClose(downloadVersionsModal, downloadVersionsCard);
         }
 
+        function handleDirectDownloadOrModal(item, event) {
+            if (event) event.stopPropagation();
+            if (!item) return;
+            const options = getDownloadOptions(item);
+            if (options.length > 1) {
+                openDownloadVersionsModal(item, options);
+            } else if (options.length === 1) {
+                window.open(options[0].url, '_blank');
+            } else {
+                openAppDetail(item);
+            }
+        }
+
+        /* ================= POPUP XEM CHI TIẾT YÊU CẦU HỆ THỐNG ================= */
+        const systemReqPopupModal = document.getElementById('systemReqPopupModal');
+        const systemReqPopupCard = document.getElementById('systemReqPopupCard');
+        const systemReqPopupCloseBtn = document.getElementById('systemReqPopupCloseBtn');
+        const systemReqPopupFullText = document.getElementById('systemReqPopupFullText');
+
+        function openSystemReqPopup() {
+            if (!currentOpenItem) return;
+            const fullText = currentOpenItem.systemRequirements || 'Tương thích tốt trên Android & iOS';
+            systemReqPopupFullText.textContent = fullText;
+            openModalWithBounce(systemReqPopupModal, systemReqPopupCard);
+        }
+
+        if (systemReqPopupCloseBtn) {
+            systemReqPopupCloseBtn.addEventListener('click', () => closeModalWithBounce(systemReqPopupModal, systemReqPopupCard));
+            setupBackdropClose(systemReqPopupModal, systemReqPopupCard);
+        }
+
         /* ================= COMMENT LOGIC ================= */
         function setupInteractiveComments() {
             const submitBtn = document.getElementById('submitReviewBtn');
@@ -1332,67 +1572,79 @@
         }
         setupInteractiveComments();
 
-        /* ================= HỆ THỐNG LƯỢT TRUY CẬP TRỰC TIẾP TỪ JSON/HTML ================= */
         function getStoredViews(item) {
-            if (item.views !== undefined && item.views !== null) {
-                return parseInt(item.views, 10) || 1248;
+            if (!item || !item.name) return 0;
+            const key = `kpazz_views_${item.name.trim().toLowerCase()}`;
+            let stored = localStorage.getItem(key);
+            if (stored !== null) {
+                return parseInt(stored, 10) || 0;
             }
-            return 1248;
+            let initialViews = (item.views !== undefined && item.views !== null) ? parseInt(item.views, 10) : 0;
+            localStorage.setItem(key, initialViews);
+            return initialViews;
         }
 
         function incrementAndGetViews(item) {
-            if (!item.name) return 1248;
+            if (!item || !item.name) return 0;
             const key = `kpazz_views_${item.name.trim().toLowerCase()}`;
-            let stored = localStorage.getItem(key);
-            let views = stored !== null ? parseInt(stored, 10) : (item.views !== undefined ? parseInt(item.views, 10) : 1248);
-            views += 1;
-            localStorage.setItem(key, views);
-            return views;
+            let current = getStoredViews(item);
+            current += 1;
+            localStorage.setItem(key, current);
+            return current;
         }
 
         function renderRecommendedCarousel(currentItemName) {
-            const container = document.getElementById('detailRecommendedContainer');
-            if (!container) return;
+            const container1 = document.getElementById('detailRecommendedContainer1');
+            const container2 = document.getElementById('detailRecommendedContainer2');
+            if (!container1 || !container2) return;
 
             let filtered = globalAllItems.filter(item => item.name !== currentItemName);
             if (filtered.length === 0) filtered = globalAllItems;
-            let recItems = filtered.slice(0, 20);
+            let recItems1 = filtered.slice(0, 10);
+            let recItems2 = filtered.slice(10, 20);
+            if (recItems2.length === 0) recItems2 = recItems1;
 
-            let innerHtml = '';
-            recItems.forEach(item => {
-                const itemViews = getStoredViews(item);
-                let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 6);
+            let buildHtml = (items) => {
+                let innerHtml = '';
+                items.forEach(item => {
+                    const itemViews = getStoredViews(item);
+                    let rawVersion = item.version || 'v1.0.0';
+                    const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                    const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+                    const truncatedDesc = truncateByWords(descText, 6);
 
-                innerHtml += `
-                    <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="rec-item-card-img-wrap">
-                            <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
-                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
-                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
+                    innerHtml += `
+                        <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                            <div class="rec-item-card-img-wrap">
+                                <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
+                            </div>
+                            <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                                <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                                <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                                <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                        <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
+                                        <span class="font-extrabold text-[9px]">${itemViews}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
+                return `<div class="flex space-x-3 pr-4 sm:pr-5" style="min-width: max-content;">${innerHtml}</div>`;
+            };
 
-            container.innerHTML = `<div class="flex space-x-3 pr-4 sm:pr-5" style="min-width: max-content;">${innerHtml}</div>`;
+            container1.innerHTML = buildHtml(recItems1);
+            container2.innerHTML = buildHtml(recItems2);
 
-            container.querySelectorAll('.rec-item-card').forEach(card => {
-                card.onclick = () => {
-                    const rawJson = card.getAttribute('data-item-json');
-                    if (rawJson) openAppDetail(JSON.parse(rawJson));
-                };
+            [container1, container2].forEach(con => {
+                con.querySelectorAll('.rec-item-card').forEach(card => {
+                    card.onclick = () => {
+                        const rawJson = card.getAttribute('data-item-json');
+                        if (rawJson) openAppDetail(JSON.parse(rawJson));
+                    };
+                });
             });
         }
 
@@ -1406,25 +1658,43 @@
             });
         }
 
-        screenshotsContainer.addEventListener('scroll', () => {
-            const imgs = screenshotsContainer.querySelectorAll('img');
-            if (!imgs.length) return;
-            const containerCenter = screenshotsContainer.scrollLeft + screenshotsContainer.clientWidth / 2;
-            let closestImg = imgs[0];
-            let minDiff = Infinity;
-            imgs.forEach(img => {
-                const card = img.parentElement;
-                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                const diff = Math.abs(containerCenter - cardCenter);
-                if (diff < minDiff) {
-                    minDiff = diff;
-                    closestImg = img;
+        function setupDownloadButtonBehavior(item, downloadOptions, topBtn, stickyLink, stickyBar) {
+            if (downloadOptions.length > 0 && !item.noDownload) {
+                topBtn.style.display = 'inline-flex';
+                stickyLink.style.display = 'flex';
+                if (downloadOptions.length > 1) {
+                    topBtn.href = 'javascript:void(0)';
+                    topBtn.removeAttribute('target');
+                    topBtn.onclick = (e) => {
+                        e.preventDefault();
+                        openDownloadVersionsModal(item, downloadOptions);
+                    };
+
+                    stickyLink.href = 'javascript:void(0)';
+                    stickyLink.removeAttribute('target');
+                    stickyLink.onclick = (e) => {
+                        e.preventDefault();
+                        openDownloadVersionsModal(item, downloadOptions);
+                    };
+                } else {
+                    topBtn.href = downloadOptions[0].url;
+                    topBtn.setAttribute('target', '_blank');
+                    topBtn.onclick = null;
+
+                    stickyLink.href = downloadOptions[0].url;
+                    stickyLink.setAttribute('target', '_blank');
+                    stickyLink.onclick = null;
                 }
-            });
-            if (closestImg && closestImg.src) {
-                applyAmbientColorToSection(closestImg.src, screenshotsSection);
+            } else {
+                topBtn.href = '#';
+                topBtn.onclick = null;
+                topBtn.style.display = 'none';
+
+                stickyLink.href = '#';
+                stickyLink.onclick = null;
+                stickyLink.style.display = 'none';
             }
-        }, { passive: true });
+        }
 
         function openAppDetail(item) {
             if (!item) return;
@@ -1443,7 +1713,7 @@
             if (item.img) {
                 detailAppIcon.src = item.img;
             }
-            const publishDateStr = item.publishDate || '10/11/2026';
+            const publishDateStr = item.publishDate || '15/11/2026';
             detailPublishDate.textContent = publishDateStr;
             if (detailPublishDateExtra) detailPublishDateExtra.textContent = publishDateStr;
 
@@ -1451,16 +1721,14 @@
                 if (detailCategoryInfoExtra) detailCategoryInfoExtra.textContent = item.category;
             }
 
+            const currentYear = new Date().getFullYear();
             if (stickySubText) {
-                const currentYear = new Date().getFullYear();
                 stickySubText.textContent = `Nội dung an toàn, được phát hành ${publishDateStr} - KPazz @${currentYear}`;
             }
 
-            // Đọc và hiển thị downloadButtonLabel từ JSON (fallback nếu không có sẽ dùng mặc định)
             const stickyTitleText = document.getElementById('stickyTitleText');
-            if (stickyTitleText) {
-                stickyTitleText.textContent = item.downloadButtonLabel || 'Tải & Cài đặt bản mới nhất';
-            }
+            const downloadButtonLabelText = item.downloadButtonLabel || 'Tải & Cài đặt bản mới nhất';
+            if (stickyTitleText) stickyTitleText.textContent = downloadButtonLabelText;
 
             const updatedViews = incrementAndGetViews(item);
             if (detailViewCount) detailViewCount.textContent = updatedViews;
@@ -1531,9 +1799,12 @@
                 });
             }
 
+            const screenshotsSection = document.getElementById('screenshotsSection');
+            const screenshotsContainer = document.getElementById('screenshotsContainer');
+
             if (scHtml !== '') {
                 screenshotsSection.classList.remove('hidden');
-                screenshotsContainer.innerHTML = scHtml;
+                screenshotsContainer.innerHTML = `<div class="flex space-x-3 pr-4 sm:pr-5" style="min-width: max-content;">${scHtml}</div>`;
                 const firstAmbientImg = (item.screenshots && item.screenshots[0]) || gifUrl || item.img;
                 if (firstAmbientImg) {
                     applyAmbientColorToSection(firstAmbientImg, screenshotsSection);
@@ -1595,25 +1866,8 @@
             }
 
             const downloadOptions = getDownloadOptions(item);
-            if (downloadOptions.length > 0 && !item.noDownload) {
-                stickyDownloadLink.style.display = 'flex';
-                if (downloadOptions.length > 1) {
-                    stickyDownloadLink.href = 'javascript:void(0)';
-                    stickyDownloadLink.removeAttribute('target');
-                    stickyDownloadLink.onclick = (e) => {
-                        e.preventDefault();
-                        openDownloadVersionsModal(item, downloadOptions);
-                    };
-                } else {
-                    stickyDownloadLink.href = downloadOptions[0].url;
-                    stickyDownloadLink.setAttribute('target', '_blank');
-                    stickyDownloadLink.onclick = null;
-                }
-            } else {
-                stickyDownloadLink.href = '#';
-                stickyDownloadLink.onclick = null;
-                stickyDownloadLink.style.display = 'none';
-            }
+            const topAppStoreBtn = document.getElementById('topAppStoreBtn');
+            setupDownloadButtonBehavior(item, downloadOptions, topAppStoreBtn, stickyDownloadLink, stickyDownloadBar);
 
             if (item.isApp) {
                 systemRequirementsBlock.style.display = 'flex';
@@ -1647,7 +1901,6 @@
         appDetailCloseBtn.addEventListener('click', () => closeModalWithBounce(appDetailModal, appDetailCard));
         setupBackdropClose(appDetailModal, appDetailCard);
 
-        /* ==================== LOGIC XEM TẤT CẢ ==================== */
         const categoryModal = document.getElementById('categoryModal');
         const categoryCard = document.getElementById('categoryCard');
         const categoryCloseBtn = document.getElementById('categoryCloseBtn');
@@ -1856,7 +2109,7 @@
 
             sortedItems.forEach((item, index) => {
                 html += `
-                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 truncate transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
+                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
                        data-item-name="${item.name.toLowerCase()}"
                        onclick="handleDrawerItemClick('${containerId}', ${index})">
                         &bull; ${item.name}
@@ -1870,6 +2123,7 @@
         function getCategoryKey(containerId) {
             if (containerId === 'drawerNewsList') return 'news';
             if (containerId === 'drawerJbList') return 'jailbreak';
+            if (containerId === 'drawerIpaList') return 'iosIpa';
             if (containerId === 'drawerTweakList') return 'tweak';
             if (containerId === 'drawerMediaList') return 'media';
             if (containerId === 'drawerTipsList') return 'tips';
@@ -1909,8 +2163,8 @@
             const jsonFiles = {
                 news: 'Tabs/Tintucmoi.json',
                 jailbreak: 'Tabs/Appjailbreak.json',
+                iosIpa: 'Tabs/Appios.json',
                 tweakJb: 'Tabs/Tweak.json',
-                media: 'Tabs/Daphuongtien.json',
                 tips: 'Tabs/Meo.json',
                 productivity: 'Tabs/Nangsuat.json'
             };
@@ -1938,6 +2192,25 @@
                     allLoadedItems.push(...data);
                 }
 
+                const resIosIpa = await fetch(jsonFiles.iosIpa);
+                let iosIpaData = [];
+                if (resIosIpa.ok) {
+                    let data = await resIosIpa.json();
+                    iosIpaData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    window.storeDataCache.iosIpa = iosIpaData;
+                    renderIpaSectionCustom(iosIpaData);
+                    renderDrawerList('drawerIpaList', iosIpaData, 'APP ( Dành cho ios - có file ipa)');
+                    allLoadedItems.push(...iosIpaData);
+                }
+
+                // Xử lý mục APP ( Tổng hợp ios): nạp dữ liệu từ Appios.json và Appjailbreak.json, sắp xếp theo mới nhất
+                let combinedMediaData = [...iosIpaData, ...(window.storeDataCache.jailbreak || [])];
+                combinedMediaData = sortItemsByDate(combinedMediaData);
+                window.storeDataCache.media = combinedMediaData;
+                renderMediaSectionCustom(combinedMediaData);
+                renderDrawerList('drawerMediaList', combinedMediaData, 'APP ( Tổng hợp ios)');
+                allLoadedItems.push(...combinedMediaData);
+
                 const resTweakJb = await fetch(jsonFiles.tweakJb);
                 if (resTweakJb.ok) {
                     let data = await resTweakJb.json();
@@ -1945,16 +2218,6 @@
                     window.storeDataCache.tweak = data;
                     renderTweakSectionCustom(data);
                     renderDrawerList('drawerTweakList', data, 'Tweak Jailbreak IOS');
-                    allLoadedItems.push(...data);
-                }
-
-                const resMedia = await fetch(jsonFiles.media);
-                if (resMedia.ok) {
-                    let data = await resMedia.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    window.storeDataCache.media = data;
-                    renderMediaSectionCustom(data);
-                    renderDrawerList('drawerMediaList', data, 'Đa phương tiện');
                     allLoadedItems.push(...data);
                 }
 
@@ -1986,15 +2249,13 @@
                 initNewsSlideCarousel();
                 initTipsSlideCarousel();
                 initJbAppsSlideCarousel();
+                initIpaAppsSlideCarousel();
 
             } catch (err) {
                 console.error("Lỗi tải dữ liệu JSON:", err);
             }
         }
 
-        /* ==================== CÁC HÀM RENDER TRANG CHỦ ==================== */
-
-        // TIN TỨC MỚI: Hiển thị lượt truy cập + tên tác giả
         function renderNewsSectionCustom(items) {
             const container = document.getElementById('newsSlideContainer');
             const countText = document.getElementById('newsCountText');
@@ -2018,7 +2279,7 @@
                         </div>
                         <div class="px-3 space-y-1.5">
                             <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${highlightText}</p>
                             <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
                                 <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
                                     <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
@@ -2034,7 +2295,6 @@
             bindCardClickEvents(container);
         }
 
-        // APP JAILBREAK: Hiển thị lượt truy cập + tên tác giả
         function renderJbSectionCustom(items) {
             const container = document.getElementById('jbAppsSlideContainer');
             const countText = document.getElementById('jbAppsCountText');
@@ -2046,7 +2306,6 @@
                 const itemViews = getStoredViews(item);
                 const authorName = item.dev || 'KPazz';
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 10);
                 const publishDateText = item.publishDate || 'Mới';
                 
                 const media = getPrimaryMediaSrc(item);
@@ -2070,7 +2329,7 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5">${truncatedDesc}</p>
+                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5 line-clamp-3">${descText}</p>
                                 </div>
                             </div>
 
@@ -2082,8 +2341,9 @@
                                     </div>
                                     <span class="text-[10px] text-uptoAccent font-semibold truncate max-w-[90px]">&bull; ${authorName}</span>
                                 </div>
-                                <button class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white font-extrabold text-xs px-3.5 py-1 rounded-full uppercase tracking-wider transition shadow-sm flex-shrink-0 border-none">
-                                    NHẬN
+                                <button onclick='handleDirectDownloadOrModal(window.storeDataCache.jailbreak[${items.indexOf(item)}], event)' class="appstore-get-btn-home">
+                                    <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                    <span>NHẬN</span>
                                 </button>
                             </div>
                         </div>
@@ -2094,7 +2354,65 @@
             bindCardClickEvents(container);
         }
 
-        // TWEAK JAILBREAK: Giữ nguyên
+        function renderIpaSectionCustom(items) {
+            const container = document.getElementById('ipaAppsSlideContainer');
+            const countText = document.getElementById('ipaAppsCountText');
+            if (!container) return;
+            if (countText) countText.textContent = `${items.length} - APPs`;
+
+            let html = '';
+            items.forEach(item => {
+                const itemViews = getStoredViews(item);
+                const authorName = item.dev || 'KPazz';
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
+                const publishDateText = item.publishDate || 'Mới';
+                
+                const media = getPrimaryMediaSrc(item);
+                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
+
+                html += `
+                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-2 overflow-hidden"
+                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                        <div class="h-28 w-full relative overflow-hidden">
+                            ${mediaHtml}
+                            <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
+                                <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
+                                <span>${publishDateText}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-1 px-3">
+                            <div class="flex items-start space-x-2.5 min-w-0">
+                                <div class="w-10 h-10 rounded-2xl glass-panel flex items-center justify-center flex-shrink-0 text-uptoAccent font-extrabold text-sm shadow-sm mt-0.5 overflow-hidden">
+                                    <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover">
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
+                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5 line-clamp-3">${descText}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-1">
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
+                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
+                                        <span class="text-[10px] font-extrabold">${itemViews}</span>
+                                    </div>
+                                    <span class="text-[10px] text-uptoAccent font-semibold truncate max-w-[90px]">&bull; ${authorName}</span>
+                                </div>
+                                <button onclick='handleDirectDownloadOrModal(window.storeDataCache.iosIpa[${items.indexOf(item)}], event)' class="appstore-get-btn-home">
+                                    <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                    <span>NHẬN</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            bindCardClickEvents(container);
+        }
+
         function renderTweakSectionCustom(items) {
             const container = document.getElementById('tweakJbSlideContainerTop');
             const countText = document.getElementById('tweakJbCountTextTop');
@@ -2134,7 +2452,6 @@
             bindCardClickEvents(container);
         }
 
-        // ĐA PHƯƠNG TIỆN: Giữ nguyên
         function renderMediaSectionCustom(items) {
             const container = document.getElementById('multimediaSlideContainer');
             const countText = document.getElementById('multimediaCountText');
@@ -2150,10 +2467,10 @@
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 innerHtml += `
-                    <div class="app-card-clickable home-media-item-box glass-panel border-none"
+                    <div class="app-card-clickable home-ios-item-box glass-panel border-none"
                          data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="home-media-img-wrap">
-                            <img src="${item.img}" class="home-media-img-file img-ratio-1-1" alt="${item.name}">
+                        <div class="home-ios-img-wrap">
+                            <img src="${item.img}" class="home-ios-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -2174,7 +2491,6 @@
             bindCardClickEvents(container);
         }
 
-        // MẸO & HƯỚNG DẪN CÔNG NGHỆ: Hiển thị lượt truy cập + tên tác giả
         function renderTipsSectionCustom(items) {
             const container = document.getElementById('tipsSlideContainer');
             const countText = document.getElementById('tipsCountText');
@@ -2198,7 +2514,7 @@
                         </div>
                         <div class="px-3 space-y-1.5">
                             <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-2 leading-tight">${highlightText}</p>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${highlightText}</p>
                             <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
                                 <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
                                     <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
@@ -2214,7 +2530,6 @@
             bindCardClickEvents(container);
         }
 
-        // NĂNG SUẤT: Giữ nguyên
         function renderProductivitySectionCustom(items) {
             const container = document.getElementById('productivitySlideContainer');
             const countText = document.getElementById('productivityCountText');
@@ -2247,15 +2562,12 @@
                         try {
                             const itemObj = JSON.parse(rawJson);
                             openAppDetail(itemObj);
-                        } catch (e) {
-                            console.error("Lỗi đọc dữ liệu JSON card:", e);
-                        }
+                        } catch (e) {}
                     }
                 };
             });
         }
 
-        /* ==================== HERO SLIDER: Hiển thị lượt truy cập + Tác giả ==================== */
         function initDynamicHeroSlider(allItems) {
             const heroSlider = document.getElementById('heroSlider');
             const heroDotsContainer = document.getElementById('heroDots');
@@ -2267,7 +2579,7 @@
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 0 ? 'active-card' : '';
                 const itemViews = getStoredViews(item);
-                const publishDateStr = item.publishDate || '10/11/2026';
+                const publishDateStr = item.publishDate || '15/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
                 const versionStr = item.version || 'v1.0.4';
                 const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
@@ -2426,11 +2738,12 @@
             
             scrollContainers.forEach(container => {
                 const speed = parseInt(container.getAttribute('data-scroll-speed')) || 40;
+                let customDir = parseInt(container.getAttribute('data-scroll-dir')) || 1;
                 let isHovered = false;
-                let scrollDirection = 1;
+                let scrollDirection = customDir;
 
                 const indicatorEl = container.parentElement.querySelector('.section-scroll-indicator');
-                const itemCount = container.querySelectorAll('.app-card-clickable, .rec-item-card').length;
+                const itemCount = container.querySelectorAll('.app-card-clickable, .rec-item-card, .flex-shrink-0').length;
                 if (indicatorEl && itemCount > 0) {
                     let dotsHtml = '';
                     const totalDots = Math.min(itemCount, 8);
@@ -2641,6 +2954,62 @@
 
             jbAppsContainer.addEventListener('mouseenter', () => isUserHovered = true);
             jbAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
+        }
+
+        function initIpaAppsSlideCarousel() {
+            const ipaAppsContainer = document.getElementById('ipaAppsSlideContainer');
+            const ipaAppsDotsContainer = document.getElementById('ipaAppsDotsIndicator');
+            if (!ipaAppsContainer) return;
+
+            const cards = ipaAppsContainer.querySelectorAll('.app-card-clickable');
+            let currentIpaAppIndex = 0;
+            let isUserHovered = false;
+
+            if (ipaAppsDotsContainer && cards.length) {
+                let dotsHtml = '';
+                cards.forEach((_, idx) => {
+                    dotsHtml += `<span class="ipa-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-ipa-idx="${idx}"></span>`;
+                });
+                ipaAppsDotsContainer.innerHTML = dotsHtml;
+            }
+
+            function updateIpaAppSlide() {
+                if(!ipaAppsDotsContainer) return;
+                const dots = ipaAppsDotsContainer.querySelectorAll('.ipa-dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIpaAppIndex) {
+                        dot.className = 'ipa-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'ipa-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    }
+                });
+
+                const targetCard = cards[currentIpaAppIndex];
+                if (targetCard) {
+                    ipaAppsContainer.scrollTo({
+                        left: targetCard.offsetLeft - 14,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            if(cards.length > 0) {
+                setInterval(() => {
+                    if (isUserHovered) return;
+                    currentIpaAppIndex = (currentIpaAppIndex + 1) % cards.length;
+                    updateIpaAppSlide();
+                }, 3700);
+
+                ipaAppsDotsContainer.querySelectorAll('.ipa-dot').forEach((dot, idx) => {
+                    dot.addEventListener('click', () => {
+                        currentIpaAppIndex = idx;
+                        updateIpaAppSlide();
+                    });
+                });
+            }
+
+            ipaAppsContainer.addEventListener('mouseenter', () => isUserHovered = true);
+            ipaAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
         }
 
         const searchOpenBtn = document.getElementById('searchOpenBtn');
