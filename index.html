@@ -56,6 +56,48 @@
             overflow-x: hidden !important;
         }
 
+        /* HIỆU ỨNG NỀN MỜ PHỦ ĐÈ LÊN ẢNH BANNER KIỂU MEITU */
+        .meitu-overlay-blur {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0) 100%);
+            backdrop-filter: blur(12px) saturate(160%);
+            -webkit-backdrop-filter: blur(12px) saturate(160%);
+            mask-image: linear-gradient(to top, black 72%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 72%, transparent 100%);
+        }
+
+        /* NÚT PILL KIỂU APP STORE TRONG DANH SÁCH CARD NHỎ */
+        .appstore-pill-btn {
+            background-color: rgba(0, 168, 232, 0.14);
+            color: #00a8e8;
+            font-weight: 800;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            flex-shrink: 0;
+            z-index: 20;
+            position: relative;
+        }
+        .appstore-pill-btn:hover {
+            background-color: #00a8e8;
+            color: #ffffff;
+        }
+        .dark .appstore-pill-btn {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #0a84ff;
+        }
+        .dark .appstore-pill-btn:hover {
+            background-color: #0a84ff;
+            color: #ffffff;
+        }
+
         #appDetailCard {
             overflow-x: hidden !important;
             max-width: 100vw !important;
@@ -166,10 +208,12 @@
             color: #ffffff;
         }
 
-        /* ================= NÚT "NHẬN" BÊN NGOÀI CARD TRANG CHỦ (BÉ HƠN TÍ, CÓ ICON TẢI) ================= */
+        /* ================= NÚT "NHẬN" BÊN NGOÀI CARD TRANG CHỦ ================= */
         .appstore-get-btn-home {
-            background-color: rgba(0, 168, 232, 0.18);
-            color: #00a8e8;
+            background-color: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #ffffff;
             font-weight: 800;
             padding: 0.35rem 0.85rem;
             border-radius: 9999px;
@@ -180,27 +224,21 @@
             gap: 0.3rem;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 168, 232, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
             flex-shrink: 0;
+            z-index: 20;
+            position: relative;
         }
         .appstore-get-btn-home:hover {
-            background-color: #00a8e8;
+            background-color: #00baa3;
+            border-color: #00baa3;
             color: #ffffff;
             transform: scale(1.03);
         }
-        .dark .appstore-get-btn-home {
-            background-color: rgba(0, 186, 163, 0.22);
-            color: #00baa3;
-            box-shadow: 0 2px 5px rgba(0, 186, 163, 0.2);
-        }
-        .dark .appstore-get-btn-home:hover {
-            background-color: #00baa3;
-            color: #ffffff;
-        }
 
-        /* ================= NÚT TẢI CỐ ĐỊNH Ở ĐÁY: TO CAO, NỔI BẬT (CHẾ ĐỘ SÁNG SIÊU DỄ NHÌN), LIQUID GLASS & HIỆU ỨNG SLIDE TO UNLOCK ================= */
+        /* ================= NÚT TẢI CỐ ĐỊNH Ở ĐÁY: TO CAO, NỔI BẬT ================= */
         @keyframes bounceGlow {
             0%, 100% {
                 transform: translateY(0) scale(1);
@@ -310,7 +348,7 @@
         }
 
         /* ================= CSS CÁC MỤC TRANG CHỦ ================= */
-        .home-ios-item-box, .home-tweak-item-box, .rec-item-card {
+        .home-apk-item-box, .home-tweak-item-box, .rec-item-card {
             display: flex;
             align-items: center;
             padding: 0.5rem;
@@ -320,7 +358,7 @@
             flex-shrink: 0;
             min-height: 4.2rem;
         }
-        .home-ios-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
+        .home-apk-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
             width: 2.75rem;
             height: 2.75rem;
             border-radius: 0.65rem;
@@ -332,10 +370,10 @@
             padding: 0.15rem;
             background-color: rgba(0, 0, 0, 0.15);
         }
-        .dark .home-ios-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
+        .dark .home-apk-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
             background-color: rgba(0, 0, 0, 0.35);
         }
-        .home-ios-img-file, .home-tweak-img-file, .rec-item-card-img {
+        .home-apk-img-file, .home-tweak-img-file, .rec-item-card-img {
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
             width: 100% !important;
@@ -615,7 +653,7 @@
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Chủ Nhật, 15 tháng 11, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Hai, 16 tháng 11, 2026</span>
             </div>
         </div>
     </header>
@@ -753,8 +791,13 @@
                             </p>
                         </div>
                         <div class="border-none flex flex-col items-center justify-center px-1">
-                            <span id="detailPublishDate" class="font-extrabold text-sm text-gray-900 dark:text-white">10/11/2026</span>
-                            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">ngày đăng</p>
+                            <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
+                                <i class="fa-solid fa-download text-uptoAccent text-sm"></i>
+                                <span id="detailDownloadCount" class="font-extrabold">0</span>
+                            </div>
+                            <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
+                                <span class="font-bold">lượt tải</span>
+                            </p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <div class="w-5 h-5 rounded-md bg-cyan-100/60 dark:bg-cyan-900/60 text-uptoAccent flex items-center justify-center text-xs font-bold">
@@ -832,7 +875,7 @@
                             </div>
                             <div class="min-w-0">
                                 <p class="text-[10px] text-gray-500 dark:text-gray-400">Ngày đăng</p>
-                                <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">10/11/2026</p>
+                                <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">16/11/2026</p>
                             </div>
                         </div>
                     </div>
@@ -898,7 +941,7 @@
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
                         <h4 id="stickyTitleText" class="font-extrabold text-base leading-tight slide-to-unlock-text">Tải & Cài đặt bản mới nhất</h4>
-                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 15/11/2026 - KPazz @2026</p>
+                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 16/11/2026 - KPazz @2026</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-[#00a8e8]/20 dark:bg-white/10 flex items-center justify-center text-[#00a8e8] dark:text-white shadow-inner flex-shrink-0 font-bold">
                         <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
@@ -1062,13 +1105,13 @@
                 </div>
 
                 <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerMediaList', 'mediaChevron')">
+                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerApkList', 'apkChevron')">
                         <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-photo-film w-5 text-center"></i><span>APP ( Tổng hợp ios)</span>
+                            <i class="fa-brands fa-android w-5 text-center"></i><span>APP (Dành cho APK)</span>
                         </span>
-                        <i id="mediaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
+                        <i id="apkChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                     </div>
-                    <div id="drawerMediaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
+                    <div id="drawerApkList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
                 </div>
 
                 <div class="space-y-1">
@@ -1103,7 +1146,7 @@
 
         <!-- HERO SLIDER -->
         <section id="heroSection" class="relative w-full overflow-hidden pt-0.5 pb-0 mb-0">
-            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[15vw] sm:px-[22vw] md:px-[26vw] py-2.5"></div>
+            <div id="heroSlider" class="card-slider-container overflow-x-auto no-scrollbar flex items-center snap-x snap-mandatory px-[10vw] sm:px-[16vw] md:px-[20vw] py-2.5"></div>
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 py-0.5 my-0"></div>
         </section>
 
@@ -1129,8 +1172,10 @@
                 </a>
                 <span id="newsCountText" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
-            <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
+            <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
+            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
+            <div id="newsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
         <!-- SECTION: APP JAILBREAK -->
@@ -1142,8 +1187,10 @@
                 </a>
                 <span id="jbAppsCountText" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
+            <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
+            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
+            <div id="jbAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
         <!-- SECTION: APP ( DÀNH CHO IOS ) -->
@@ -1155,21 +1202,25 @@
                 </a>
                 <span id="ipaAppsCountText" onclick="openCategoryModal('APP ( Dành cho ios )', window.storeDataCache?.iosIpa || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
+            <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
+            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
+            <div id="ipaAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
-        <!-- SECTION: APP ( TỔNG HỢP IOS) -->
+        <!-- SECTION: APP (Dành cho APK) -->
         <section class="space-y-2.5">
             <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Tổng hợp ios)', window.storeDataCache?.media || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>APP ( Tổng hợp ios)</span>
+                <a href="javascript:void(0)" onclick="openCategoryModal('APP (Dành cho APK)', window.storeDataCache?.apk || [])" class="section-title text-gray-900 dark:text-white">
+                    <span>APP (Dành cho APK)</span>
                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                 </a>
-                <span id="multimediaCountText" onclick="openCategoryModal('APP ( Tổng hợp ios)', window.storeDataCache?.media || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
+                <span id="apkCountText" onclick="openCategoryModal('APP (Dành cho APK)', window.storeDataCache?.apk || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
             </div>
-            <div id="multimediaSlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
-            <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+            <div id="apkSlideContainer" class="apk-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="apkDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
+            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
+            <div id="apkSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
         <!-- SECTION: MẸO & HƯỚNG DẪN -->
@@ -1181,8 +1232,10 @@
                 </a>
                 <span id="tipsCountText" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
             </div>
-            <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-1"></div>
+            <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
+            <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
+            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
+            <div id="tipsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
         <!-- SECTION: NĂNG SUẤT -->
@@ -1240,6 +1293,7 @@
         let globalAllItems = [];
         let currentOpenItem = null;
         let currentMediaList = [];
+        let isNoDownloadItem = false;
 
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
@@ -1506,14 +1560,36 @@
             setupBackdropClose(downloadVersionsModal, downloadVersionsCard);
         }
 
+        function incrementAndGetDownloads(item) {
+            if (!item || !item.name) return 0;
+            const key = `kpazz_downloads_${item.name.trim().toLowerCase()}`;
+            let stored = localStorage.getItem(key);
+            let current = stored !== null ? (parseInt(stored, 10) || 0) : ((item.downloadsCount !== undefined && item.downloadsCount !== null) ? parseInt(item.downloadsCount, 10) : Math.floor(Math.random() * 5000) + 120);
+            current += 1;
+            localStorage.setItem(key, current);
+            return current;
+        }
+
+        function getStoredDownloads(item) {
+            if (!item || !item.name) return 150;
+            const key = `kpazz_downloads_${item.name.trim().toLowerCase()}`;
+            let stored = localStorage.getItem(key);
+            if (stored !== null) return parseInt(stored, 10) || 0;
+            let initial = (item.downloadsCount !== undefined && item.downloadsCount !== null) ? parseInt(item.downloadsCount, 10) : Math.floor(Math.random() * 5000) + 120;
+            localStorage.setItem(key, initial);
+            return initial;
+        }
+
         function handleDirectDownloadOrModal(item, event) {
-            if (event) event.stopPropagation();
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             if (!item) return;
+            incrementAndGetDownloads(item);
             const options = getDownloadOptions(item);
-            if (options.length > 1) {
+            if (options.length > 0) {
                 openDownloadVersionsModal(item, options);
-            } else if (options.length === 1) {
-                window.open(options[0].url, '_blank');
             } else {
                 openAppDetail(item);
             }
@@ -1614,7 +1690,7 @@
                     const truncatedDesc = truncateByWords(descText, 6);
 
                     innerHtml += `
-                        <div class="rec-item-card glass-panel border-none" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                        <div class="rec-item-card glass-panel border-none app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                             <div class="rec-item-card-img-wrap">
                                 <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
                             </div>
@@ -1638,14 +1714,8 @@
             container1.innerHTML = buildHtml(recItems1);
             container2.innerHTML = buildHtml(recItems2);
 
-            [container1, container2].forEach(con => {
-                con.querySelectorAll('.rec-item-card').forEach(card => {
-                    card.onclick = () => {
-                        const rawJson = card.getAttribute('data-item-json');
-                        if (rawJson) openAppDetail(JSON.parse(rawJson));
-                    };
-                });
-            });
+            bindCardClickEvents(container1);
+            bindCardClickEvents(container2);
         }
 
         function openAllRecommendationsModal() {
@@ -1658,6 +1728,11 @@
             });
         }
 
+        const stickyDownloadLink = document.getElementById('stickyDownloadLink');
+        const stickyDownloadBar = document.getElementById('stickyDownloadBar');
+        const distributionAnchor = document.getElementById('distributionAnchor');
+        const detailPublishDate = document.getElementById('detailPublishDateExtra');
+
         function setupDownloadButtonBehavior(item, downloadOptions, topBtn, stickyLink, stickyBar) {
             if (downloadOptions.length > 0 && !item.noDownload) {
                 topBtn.style.display = 'inline-flex';
@@ -1667,6 +1742,7 @@
                     topBtn.removeAttribute('target');
                     topBtn.onclick = (e) => {
                         e.preventDefault();
+                        incrementAndGetDownloads(item);
                         openDownloadVersionsModal(item, downloadOptions);
                     };
 
@@ -1674,16 +1750,17 @@
                     stickyLink.removeAttribute('target');
                     stickyLink.onclick = (e) => {
                         e.preventDefault();
+                        incrementAndGetDownloads(item);
                         openDownloadVersionsModal(item, downloadOptions);
                     };
                 } else {
                     topBtn.href = downloadOptions[0].url;
                     topBtn.setAttribute('target', '_blank');
-                    topBtn.onclick = null;
+                    topBtn.onclick = () => incrementAndGetDownloads(item);
 
                     stickyLink.href = downloadOptions[0].url;
                     stickyLink.setAttribute('target', '_blank');
-                    stickyLink.onclick = null;
+                    stickyLink.onclick = () => incrementAndGetDownloads(item);
                 }
             } else {
                 topBtn.href = '#';
@@ -1695,6 +1772,26 @@
                 stickyLink.style.display = 'none';
             }
         }
+
+        const detailAppName = document.getElementById('detailAppName');
+        const detailBreadcrumbName = document.getElementById('detailBreadcrumbName');
+        const detailAppDeveloper = document.getElementById('detailAppDeveloper');
+        const detailDevInfoExtra = document.getElementById('detailDevInfoExtra');
+        const detailAppIcon = document.getElementById('detailAppIcon');
+        const detailCategoryInfoExtra = document.getElementById('detailCategoryInfoExtra');
+        const detailViewCount = document.getElementById('detailViewCount');
+        const detailAppVersion = document.getElementById('detailAppVersion');
+        const articleContentBlock = document.getElementById('articleContentBlock');
+        const highlightsBlock = document.getElementById('highlightsBlock');
+        const detailHighlightTitle = document.getElementById('detailHighlightTitle');
+        const detailHighlightsList = document.getElementById('detailHighlightsList');
+        const detailArticleText = document.getElementById('detailArticleText');
+        const systemRequirementsBlock = document.getElementById('systemRequirementsBlock');
+        const detailSystemReq = document.getElementById('detailSystemReq');
+        const stickySubText = document.getElementById('stickySubText');
+        const appDetailScrollBody = document.getElementById('appDetailScrollBody');
+        const appDetailModal = document.getElementById('appDetailModal');
+        const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
 
         function openAppDetail(item) {
             if (!item) return;
@@ -1713,9 +1810,8 @@
             if (item.img) {
                 detailAppIcon.src = item.img;
             }
-            const publishDateStr = item.publishDate || '15/11/2026';
-            detailPublishDate.textContent = publishDateStr;
-            if (detailPublishDateExtra) detailPublishDateExtra.textContent = publishDateStr;
+            const publishDateStr = item.publishDate || '16/11/2026';
+            if (detailPublishDate) detailPublishDate.textContent = publishDateStr;
 
             if (item.category) {
                 if (detailCategoryInfoExtra) detailCategoryInfoExtra.textContent = item.category;
@@ -1732,6 +1828,10 @@
 
             const updatedViews = incrementAndGetViews(item);
             if (detailViewCount) detailViewCount.textContent = updatedViews;
+
+            const updatedDownloads = getStoredDownloads(item);
+            const detailDownloadCount = document.getElementById('detailDownloadCount');
+            if (detailDownloadCount) detailDownloadCount.textContent = updatedDownloads;
 
             let scHtml = '';
             let videoUrl = item.video || item.videoUrl;
@@ -1948,14 +2048,16 @@
             let html = '';
             items.forEach((item, index) => {
                 const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
                 const viewsMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></div>`;
+                const downloadsMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></div>`;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
-                    <div class="popup-card-item-custom glass-panel border-none" data-cat-idx="${index}" data-item-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                    <div class="popup-card-item-custom glass-panel border-none app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="popup-card-imgbox-custom">
                             <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1" alt="${item.name}">
                         </div>
@@ -1964,8 +2066,9 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
-                                <div class="flex items-center space-x-0.5 font-bold">
+                                <div class="flex items-center space-x-2 font-bold">
                                     ${viewsMarkup}
+                                    ${item.isApp ? downloadsMarkup : ''}
                                 </div>
                             </div>
                         </div>
@@ -1973,18 +2076,7 @@
                 `;
             });
             categoryItemList.innerHTML = html;
-
-            categoryItemList.querySelectorAll('.popup-card-item-custom').forEach(el => {
-                el.onclick = () => {
-                    const idx = el.getAttribute('data-cat-idx');
-                    const targetItem = items[idx];
-                    if (targetItem) {
-                        closeModalWithBounce(categoryModal, categoryCard, () => {
-                            openAppDetail(targetItem);
-                        });
-                    }
-                };
-            });
+            bindCardClickEvents(categoryItemList);
         }
 
         function openCategoryModal(title, items) {
@@ -2125,7 +2217,7 @@
             if (containerId === 'drawerJbList') return 'jailbreak';
             if (containerId === 'drawerIpaList') return 'iosIpa';
             if (containerId === 'drawerTweakList') return 'tweak';
-            if (containerId === 'drawerMediaList') return 'media';
+            if (containerId === 'drawerApkList') return 'apk';
             if (containerId === 'drawerTipsList') return 'tips';
             if (containerId === 'drawerProdList') return 'productivity';
             return 'news';
@@ -2164,6 +2256,7 @@
                 news: 'Tabs/Tintucmoi.json',
                 jailbreak: 'Tabs/Appjailbreak.json',
                 iosIpa: 'Tabs/Appios.json',
+                apk: 'Tabs/Appapk.json',
                 tweakJb: 'Tabs/Tweak.json',
                 tips: 'Tabs/Meo.json',
                 productivity: 'Tabs/Nangsuat.json'
@@ -2177,7 +2270,7 @@
                     let data = await resNews.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
                     window.storeDataCache.news = data;
-                    renderNewsSectionCustom(data);
+                    renderMeituBannerWithSmallList('newsSlideContainer', 'newsSmallListContainer', 'newsCountText', data, 'Bài viết');
                     renderDrawerList('drawerNewsList', data, 'Tin tức mới');
                     allLoadedItems.push(...data);
                 }
@@ -2187,29 +2280,30 @@
                     let data = await resJb.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.jailbreak = data;
-                    renderJbSectionCustom(data);
+                    renderMeituBannerWithSmallList('jbAppsSlideContainer', 'jbAppsSmallListContainer', 'jbAppsCountText', data, 'APPs');
                     renderDrawerList('drawerJbList', data, 'APP Jailbreak');
                     allLoadedItems.push(...data);
                 }
 
                 const resIosIpa = await fetch(jsonFiles.iosIpa);
-                let iosIpaData = [];
                 if (resIosIpa.ok) {
                     let data = await resIosIpa.json();
-                    iosIpaData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    let iosIpaData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
                     window.storeDataCache.iosIpa = iosIpaData;
-                    renderIpaSectionCustom(iosIpaData);
+                    renderMeituBannerWithSmallList('ipaAppsSlideContainer', 'ipaAppsSmallListContainer', 'ipaAppsCountText', iosIpaData, 'APPs');
                     renderDrawerList('drawerIpaList', iosIpaData, 'APP ( Dành cho ios )');
                     allLoadedItems.push(...iosIpaData);
                 }
 
-                // Xử lý mục APP ( Tổng hợp ios): nạp dữ liệu từ Appios.json và Appjailbreak.json, sắp xếp theo mới nhất
-                let combinedMediaData = [...iosIpaData, ...(window.storeDataCache.jailbreak || [])];
-                combinedMediaData = sortItemsByDate(combinedMediaData);
-                window.storeDataCache.media = combinedMediaData;
-                renderMediaSectionCustom(combinedMediaData);
-                renderDrawerList('drawerMediaList', combinedMediaData, 'APP ( Tổng hợp ios)');
-                allLoadedItems.push(...combinedMediaData);
+                const resApk = await fetch(jsonFiles.apk);
+                if (resApk.ok) {
+                    let data = await resApk.json();
+                    let apkData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
+                    window.storeDataCache.apk = apkData;
+                    renderMeituBannerWithSmallList('apkSlideContainer', 'apkSmallListContainer', 'apkCountText', apkData, 'APPs');
+                    renderDrawerList('drawerApkList', apkData, 'APP (Dành cho APK)');
+                    allLoadedItems.push(...apkData);
+                }
 
                 const resTweakJb = await fetch(jsonFiles.tweakJb);
                 if (resTweakJb.ok) {
@@ -2226,7 +2320,7 @@
                     let data = await resTips.json();
                     data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
                     window.storeDataCache.tips = data;
-                    renderTipsSectionCustom(data);
+                    renderMeituBannerWithSmallList('tipsSlideContainer', 'tipsSmallListContainer', 'tipsCountText', data, 'Bài viết');
                     renderDrawerList('drawerTipsList', data, 'Mẹo & Hướng dẫn Công nghệ');
                     allLoadedItems.push(...data);
                 }
@@ -2250,167 +2344,126 @@
                 initTipsSlideCarousel();
                 initJbAppsSlideCarousel();
                 initIpaAppsSlideCarousel();
+                initApkAppsSlideCarousel();
 
             } catch (err) {
                 console.error("Lỗi tải dữ liệu JSON:", err);
             }
         }
 
-        function renderNewsSectionCustom(items) {
-            const container = document.getElementById('newsSlideContainer');
-            const countText = document.getElementById('newsCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - Bài viết`;
+        /* ================= HÀM RENDER CARD BANNER LỚN + CARD NHỎ ================= */
+        function renderMeituBannerWithSmallList(bannerContainerId, smallContainerId, countTextId, items, labelType) {
+            const bannerContainer = document.getElementById(bannerContainerId);
+            const smallContainer = document.getElementById(smallContainerId);
+            const countText = document.getElementById(countTextId);
+            if (!bannerContainer) return;
+            if (countText) countText.textContent = `${items.length} - ${labelType}`;
 
-            let html = '';
-            items.forEach(item => {
+            const featuredItems = items.slice(0, 5);
+            const olderItems = items.slice(5);
+
+            let bannerHtml = '';
+            featuredItems.forEach((item) => {
                 const itemViews = getStoredViews(item);
-                const authorName = item.dev || 'KPazz';
-                const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
-                
-                const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
-
-                html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="h-28 w-full relative mb-1 overflow-hidden">
-                            ${mediaHtml}
-                        </div>
-                        <div class="px-3 space-y-1.5">
-                            <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${highlightText}</p>
-                            <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
-                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
-                                    <span class="text-[11px] font-extrabold">${itemViews}</span>
-                                </div>
-                                <span class="truncate max-w-[100px] text-uptoAccent font-semibold">${authorName}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            bindCardClickEvents(container);
-        }
-
-        function renderJbSectionCustom(items) {
-            const container = document.getElementById('jbAppsSlideContainer');
-            const countText = document.getElementById('jbAppsCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
-
-            let html = '';
-            items.forEach(item => {
-                const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
                 const authorName = item.dev || 'KPazz';
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
                 const publishDateText = item.publishDate || 'Mới';
                 
                 const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
+                const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
-                html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-2 overflow-hidden"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="h-28 w-full relative overflow-hidden">
-                            ${mediaHtml}
-                            <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
-                                <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
-                                <span>${publishDateText}</span>
-                            </div>
+                bannerHtml += `
+                    <div class="app-card-clickable snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-56 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                         data-app-json='${itemJsonEscaped}'>
+                        <!-- ẢNH BANNER TRÀN TOÀN BỘ CARD -->
+                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
+
+                        <!-- DÒNG MỚI CẬP NHẬT KÈM NGÀY Ở GÓC TRÊN CÙNG BÊN TRÁI BÊN TRONG CARD -->
+                        <div class="absolute top-3 left-3 z-20 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
+                            <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
+                            <span>Mới cập nhật: ${publishDateText}</span>
                         </div>
-                        
-                        <div class="space-y-1 px-3">
-                            <div class="flex items-start space-x-2.5 min-w-0">
-                                <div class="w-10 h-10 rounded-2xl glass-panel flex items-center justify-center flex-shrink-0 text-uptoAccent font-extrabold text-sm shadow-sm mt-0.5 overflow-hidden">
-                                    <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover">
+
+                        <!-- LỚP NỀN KÍNH MỜ PHỦ ĐÈ LÊN PHẦN DƯỚI CỦA ẢNH BANNER -->
+                        <div class="meitu-overlay-blur absolute inset-x-0 bottom-0 pt-10 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
+
+                            <div class="flex items-center justify-between space-x-2.5">
+                                <div class="flex items-center space-x-2.5 min-w-0 flex-1">
+                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
+                                        <p class="text-[11px] text-gray-200 line-clamp-3 leading-tight mt-0.5 opacity-95">${descText}</p>
+                                    </div>
                                 </div>
-                                <div class="min-w-0 flex-1">
-                                    <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5 line-clamp-3">${descText}</p>
-                                </div>
+
+                                ${showDownloadBtn ? `
+                                    <button type="button" class="btn-direct-download appstore-get-btn-home">
+                                        <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                        <span>NHẬN</span>
+                                    </button>
+                                ` : ''}
                             </div>
 
-                            <div class="flex items-center justify-between pt-1">
-                                <div class="flex items-center space-x-2">
-                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
-                                        <span class="text-[10px] font-extrabold">${itemViews}</span>
-                                    </div>
-                                    <span class="text-[10px] text-uptoAccent font-semibold truncate max-w-[90px]">&bull; ${authorName}</span>
+                            <!-- LƯỢT XEM & TÁC GIẢ Ở DƯỚI CÙNG (ĐÃ BỎ ĐƯỜNG KẺ) -->
+                            <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
+                                <div class="flex items-center space-x-2 font-bold text-white">
+                                    <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
+                                    ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
                                 </div>
-                                <button onclick='handleDirectDownloadOrModal(window.storeDataCache.jailbreak[${items.indexOf(item)}], event)' class="appstore-get-btn-home">
-                                    <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-                                    <span>NHẬN</span>
-                                </button>
+                                <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorName}</span>
                             </div>
                         </div>
                     </div>
                 `;
             });
-            container.innerHTML = html;
-            bindCardClickEvents(container);
-        }
+            bannerContainer.innerHTML = bannerHtml;
+            bindCardClickEvents(bannerContainer);
 
-        function renderIpaSectionCustom(items) {
-            const container = document.getElementById('ipaAppsSlideContainer');
-            const countText = document.getElementById('ipaAppsCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
+            if (smallContainer) {
+                if (olderItems.length === 0) {
+                    smallContainer.classList.add('hidden');
+                    smallContainer.innerHTML = '';
+                } else {
+                    smallContainer.classList.remove('hidden');
+                    let smallHtml = '';
+                    olderItems.forEach((item) => {
+                        const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+                        const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
+                        const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
-            let html = '';
-            items.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const authorName = item.dev || 'KPazz';
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
-                const publishDateText = item.publishDate || 'Mới';
-                
-                const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
-
-                html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[280px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-2 overflow-hidden"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="h-28 w-full relative overflow-hidden">
-                            ${mediaHtml}
-                            <div class="absolute top-2 left-2 glass-badge px-2 py-0.5 rounded-md text-[9px] text-white flex items-center space-x-1 font-semibold shadow">
-                                <i class="fa-regular fa-calendar-check text-[9px] text-uptoAccent"></i>
-                                <span>${publishDateText}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-1 px-3">
-                            <div class="flex items-start space-x-2.5 min-w-0">
-                                <div class="w-10 h-10 rounded-2xl glass-panel flex items-center justify-center flex-shrink-0 text-uptoAccent font-extrabold text-sm shadow-sm mt-0.5 overflow-hidden">
-                                    <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover">
-                                </div>
-                                <div class="min-w-0 flex-1">
-                                    <h4 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${item.name}</h4>
-                                    <p class="text-[10px] text-gray-600 dark:text-gray-400 leading-tight mt-0.5 line-clamp-3">${descText}</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between pt-1">
-                                <div class="flex items-center space-x-2">
-                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
-                                        <span class="text-[10px] font-extrabold">${itemViews}</span>
+                        smallHtml += `
+                            <div class="app-card-clickable glass-panel flex items-center justify-between w-[80vw] sm:w-[320px] flex-shrink-0 p-2 rounded-2xl shadow-sm border border-black/10 dark:border-white/10 cursor-pointer group"
+                                 data-app-json='${itemJsonEscaped}'>
+                                <div class="flex items-center space-x-3 min-w-0 flex-1">
+                                    <img src="${item.img}" class="w-12 h-12 rounded-[13px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-black/10 dark:border-white/10" alt="${item.name}">
+                                    <div class="min-w-0 flex-1 pr-2">
+                                        <h5 class="font-bold text-[14px] text-gray-900 dark:text-white truncate leading-snug group-hover:text-uptoAccent transition">${item.name}</h5>
+                                        <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-3 mt-0.5">${descText}</p>
                                     </div>
-                                    <span class="text-[10px] text-uptoAccent font-semibold truncate max-w-[90px]">&bull; ${authorName}</span>
                                 </div>
-                                <button onclick='handleDirectDownloadOrModal(window.storeDataCache.iosIpa[${items.indexOf(item)}], event)' class="appstore-get-btn-home">
-                                    <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-                                    <span>NHẬN</span>
-                                </button>
+                                ${showDownloadBtn ? `
+                                    <button type="button" class="btn-direct-download appstore-pill-btn">
+                                        <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
+                                        <span>NHẬN</span>
+                                    </button>
+                                ` : `
+                                    <button type="button" class="btn-view-detail appstore-pill-btn">
+                                        <span>XEM</span>
+                                    </button>
+                                `}
                             </div>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            bindCardClickEvents(container);
+                        `;
+                    });
+
+                    const rowCount = Math.min(3, olderItems.length);
+                    smallContainer.innerHTML = `<div class="grid grid-flow-col gap-x-3 gap-y-2 pr-3.5" style="grid-template-rows: repeat(${rowCount}, minmax(0, 1fr)); min-width: max-content;">${smallHtml}</div>`;
+                    bindCardClickEvents(smallContainer);
+                }
+            }
         }
 
         function renderTweakSectionCustom(items) {
@@ -2422,25 +2475,27 @@
             let innerHtml = '';
             items.forEach(item => {
                 const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 innerHtml += `
                     <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                         data-app-json='${itemJsonEscaped}'>
                         <div class="home-tweak-img-wrap">
                             <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
-                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
                                 </div>
                             </div>
                         </div>
@@ -2449,84 +2504,6 @@
             });
 
             container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">${innerHtml}</div>`;
-            bindCardClickEvents(container);
-        }
-
-        function renderMediaSectionCustom(items) {
-            const container = document.getElementById('multimediaSlideContainer');
-            const countText = document.getElementById('multimediaCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
-
-            let innerHtml = '';
-            items.forEach(item => {
-                const itemViews = getStoredViews(item);
-                let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 6);
-
-                innerHtml += `
-                    <div class="app-card-clickable home-ios-item-box glass-panel border-none"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="home-ios-img-wrap">
-                            <img src="${item.img}" class="home-ios-img-file img-ratio-1-1" alt="${item.name}">
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
-                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
-                                    <span class="font-extrabold text-[9px]">${itemViews}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">${innerHtml}</div>`;
-            bindCardClickEvents(container);
-        }
-
-        function renderTipsSectionCustom(items) {
-            const container = document.getElementById('tipsSlideContainer');
-            const countText = document.getElementById('tipsCountText');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - Bài viết`;
-
-            let html = '';
-            items.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const authorName = item.dev || 'KPazz';
-                const highlightText = item.highlights && item.highlights.length > 0 ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : item.dev;
-                
-                const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" class="w-full h-full img-ratio-16-9 object-cover rounded-t-2xl" alt="${item.name}">`;
-
-                html += `
-                    <div class="app-card-clickable snap-center flex-none w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[22vw] max-w-[270px] glass-panel rounded-2xl p-0 pb-3 border-none cursor-pointer space-y-1.5 overflow-hidden"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="h-28 w-full relative mb-1 overflow-hidden">
-                            ${mediaHtml}
-                        </div>
-                        <div class="px-3 space-y-1.5">
-                            <h4 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h4>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${highlightText}</p>
-                            <div class="flex items-center justify-between pt-1 text-[10px] text-gray-500 dark:text-gray-400">
-                                <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                    <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
-                                    <span class="text-[11px] font-extrabold">${itemViews}</span>
-                                </div>
-                                <span class="truncate max-w-[100px] text-uptoAccent font-semibold">${authorName}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
             bindCardClickEvents(container);
         }
 
@@ -2555,14 +2532,38 @@
         }
 
         function bindCardClickEvents(parentElement) {
+            if (!parentElement) return;
             parentElement.querySelectorAll('.app-card-clickable').forEach(card => {
-                card.onclick = () => {
-                    const rawJson = card.getAttribute('data-app-json');
-                    if (rawJson) {
-                        try {
-                            const itemObj = JSON.parse(rawJson);
-                            openAppDetail(itemObj);
-                        } catch (e) {}
+                const rawJson = card.getAttribute('data-app-json');
+                let itemObj = null;
+                if (rawJson) {
+                    try {
+                        itemObj = JSON.parse(rawJson);
+                    } catch (err) {}
+                }
+
+                const directBtn = card.querySelector('.btn-direct-download');
+                if (directBtn && itemObj) {
+                    directBtn.onclick = (e) => {
+                        handleDirectDownloadOrModal(itemObj, e);
+                    };
+                }
+
+                const viewBtn = card.querySelector('.btn-view-detail');
+                if (viewBtn && itemObj) {
+                    viewBtn.onclick = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openAppDetail(itemObj);
+                    };
+                }
+
+                card.onclick = (e) => {
+                    if (e.target.closest('.btn-direct-download') || e.target.closest('.btn-view-detail')) {
+                        return;
+                    }
+                    if (itemObj) {
+                        openAppDetail(itemObj);
                     }
                 };
             });
@@ -2579,40 +2580,45 @@
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 0 ? 'active-card' : '';
                 const itemViews = getStoredViews(item);
-                const publishDateStr = item.publishDate || '15/11/2026';
+                const itemDownloads = getStoredDownloads(item);
+                const publishDateStr = item.publishDate || '16/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
-                const versionStr = item.version || 'v1.0.4';
                 const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
                 
                 const media = getPrimaryMediaSrc(item);
                 let mediaHtml = `<img src="${media.url}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover">`;
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 slidesHtml += `
-                    <div class="hero-card ${isActive} snap-center flex-none w-[72vw] sm:w-[50vw] md:w-[35vw] lg:w-[26vw] max-w-[310px] glass-panel rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between"
-                         data-hero-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                    <div class="hero-card ${isActive} app-card-clickable snap-center flex-none w-[80vw] sm:w-[58vw] md:w-[42vw] lg:w-[32vw] max-w-[360px] rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between group"
+                         data-app-json='${itemJsonEscaped}'>
                         <div class="relative h-64 sm:h-72 w-full">
                             ${mediaHtml}
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
                             
-                            <div class="absolute top-3 right-3 glass-badge px-2.5 py-1 rounded-full text-[10px] text-white flex items-center space-x-1 font-medium shadow">
-                                <i class="fa-regular fa-calendar text-[9px] text-uptoAccent"></i>
-                                <span>${publishDateStr} &bull; ${authorStr}</span>
+                            <!-- DÒNG MỚI CẬP NHẬT KÈM NGÀY DI CHUYỂN LÊN TRÊN ĐẦU ẢNH VÀ TIÊU ĐỀ -->
+                            <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5 text-[10px] text-white font-semibold shadow-md">
+                                <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
+                                <span>Mới cập nhật: ${publishDateStr}</span>
                             </div>
 
-                            <div class="absolute bottom-3 inset-x-3 text-white space-y-1.5">
-                                <h3 class="font-extrabold text-base truncate drop-shadow">${item.name}</h3>
-                                
-                                <div class="flex items-center justify-between text-[11px] text-gray-200 gap-2">
-                                    <p class="line-clamp-1 opacity-90 flex-1">${highlightDesc}</p>
-                                    <span class="bg-uptoAccent/30 text-uptoAccent font-extrabold px-2 py-0.5 rounded-full text-[10px] flex-shrink-0 border border-uptoAccent/30">${versionStr}</span>
+                            <!-- LỚP NỀN KÍNH MỜ PHỦ ĐÈ PHẦN DƯỚI (ĐÃ BỎ NÚT NHẬN) -->
+                            <div class="meitu-overlay-blur absolute inset-x-0 bottom-0 pt-10 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
+                                <div class="flex items-center space-x-3 mb-1">
+                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <h3 class="font-extrabold text-sm sm:text-base text-white truncate drop-shadow">${item.name}</h3>
+                                        <p class="line-clamp-2 text-[11px] text-gray-200 leading-tight mt-0.5 opacity-95">${highlightDesc}</p>
+                                    </div>
                                 </div>
 
-                                <div class="flex items-center justify-between pt-0.5 text-white text-[11px]">
-                                    <div class="flex items-center space-x-1 font-bold">
-                                        <i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i>
-                                        <span class="font-extrabold">${itemViews} lượt xem</span>
+                                <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
+                                    <div class="flex items-center space-x-2 font-bold text-white">
+                                        <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
+                                        ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
                                     </div>
-                                    <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorStr}</span>
+                                    <span class="text-uptoAccent font-bold truncate max-w-[140px]">&bull; ${authorStr}</span>
                                 </div>
                             </div>
                         </div>
@@ -2621,13 +2627,7 @@
             });
 
             heroSlider.innerHTML = slidesHtml;
-
-            heroSlider.querySelectorAll('.hero-card').forEach(card => {
-                card.onclick = () => {
-                    const rawJson = card.getAttribute('data-hero-json');
-                    if (rawJson) openAppDetail(JSON.parse(rawJson));
-                };
-            });
+            bindCardClickEvents(heroSlider);
 
             if (heroDotsContainer && sortedHeroItems.length) {
                 let dotsHtml = '';
@@ -2704,17 +2704,6 @@
                 stopAutoSlide();
                 startAutoSlide();
             }
-
-            cards.forEach((card, index) => {
-                card.addEventListener('click', (e) => {
-                    if (index !== currentIndex) {
-                        e.stopPropagation();
-                        currentIndex = index;
-                        updateSliderPosition();
-                        resetAutoSlide();
-                    }
-                });
-            });
 
             heroDotsContainer.querySelectorAll('.hero-dot').forEach((dot, idx) => {
                 dot.addEventListener('click', () => {
@@ -3010,6 +2999,62 @@
 
             ipaAppsContainer.addEventListener('mouseenter', () => isUserHovered = true);
             ipaAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
+        }
+
+        function initApkAppsSlideCarousel() {
+            const apkContainer = document.getElementById('apkSlideContainer');
+            const apkDotsContainer = document.getElementById('apkDotsIndicator');
+            if (!apkContainer) return;
+
+            const cards = apkContainer.querySelectorAll('.app-card-clickable');
+            let currentApkIndex = 0;
+            let isUserHovered = false;
+
+            if (apkDotsContainer && cards.length) {
+                let dotsHtml = '';
+                cards.forEach((_, idx) => {
+                    dotsHtml += `<span class="apk-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-apk-idx="${idx}"></span>`;
+                });
+                apkDotsContainer.innerHTML = dotsHtml;
+            }
+
+            function updateApkSlide() {
+                if(!apkDotsContainer) return;
+                const dots = apkDotsContainer.querySelectorAll('.apk-dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === currentApkIndex) {
+                        dot.className = 'apk-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
+                    } else {
+                        dot.className = 'apk-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
+                    }
+                });
+
+                const targetCard = cards[currentApkIndex];
+                if (targetCard) {
+                    apkContainer.scrollTo({
+                        left: targetCard.offsetLeft - 14,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            if(cards.length > 0) {
+                setInterval(() => {
+                    if (isUserHovered) return;
+                    currentApkIndex = (currentApkIndex + 1) % cards.length;
+                    updateApkSlide();
+                }, 3900);
+
+                apkDotsContainer.querySelectorAll('.apk-dot').forEach((dot, idx) => {
+                    dot.addEventListener('click', () => {
+                        currentApkIndex = idx;
+                        updateApkSlide();
+                    });
+                });
+            }
+
+            apkContainer.addEventListener('mouseenter', () => isUserHovered = true);
+            apkContainer.addEventListener('mouseleave', () => isUserHovered = false);
         }
 
         const searchOpenBtn = document.getElementById('searchOpenBtn');
