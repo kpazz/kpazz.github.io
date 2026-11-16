@@ -56,13 +56,94 @@
             overflow-x: hidden !important;
         }
 
-        /* HIỆU ỨNG NỀN MỜ PHỦ ĐÈ LÊN ẢNH BANNER KIỂU MEITU */
-        .meitu-overlay-blur {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.6) 65%, rgba(0, 0, 0, 0) 100%);
-            backdrop-filter: blur(12px) saturate(160%);
-            -webkit-backdrop-filter: blur(12px) saturate(160%);
-            mask-image: linear-gradient(to top, black 72%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to top, black 72%, transparent 100%);
+        /* ĐÃ BỎ HIỆU ỨNG NẢY KHI ẤN VÀO CARD */
+        .app-card-clickable {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* LỚP NỀN MỜ CHO CARD BANNER NGANG (MẶC ĐỊNH) */
+        .meitu-overlay-blur-light {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0) 100%);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            mask-image: linear-gradient(to top, black 68%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 68%, transparent 100%);
+        }
+
+        /* ================= CSS RIÊNG BIỆT 100% CHO CARD BANNER ĐỀ XUẤT (TRONG SUỐT HƠN NỮA ĐỂ THẤY ẢNH RÕ) ================= */
+        .featured-banner-unique-card {
+            position: relative;
+            height: 13.5rem;
+            width: 100%;
+            border-radius: 1.625rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .featured-banner-unique-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .featured-banner-unique-card:hover .featured-banner-unique-bg {
+            transform: scale(1.04);
+        }
+
+        /* Lớp kính mờ tinh chỉnh trong suốt hơn nữa theo yêu cầu */
+        .featured-banner-unique-glass-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(20, 25, 35, 0.22);
+            backdrop-filter: blur(8px) saturate(150%);
+            -webkit-backdrop-filter: blur(8px) saturate(150%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.15rem 1.25rem;
+            z-index: 10;
+        }
+
+        .dark .featured-banner-unique-glass-overlay {
+            background: rgba(8, 16, 22, 0.26);
+            backdrop-filter: blur(10px) saturate(170%);
+            -webkit-backdrop-filter: blur(10px) saturate(170%);
+        }
+
+        /* Nút "Xem thêm" kiểu iOS bo tròn mờ */
+        .featured-banner-unique-action-btn {
+            background: rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.45rem 1.15rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .featured-banner-unique-action-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: scale(1.03);
+        }
+
+        /* LỚP NỀN MỜ CHO CARD TO */
+        .meitu-overlay-blur-custom {
+            background: linear-gradient(to top, rgba(8, 20, 28, 0.96) 0%, rgba(8, 20, 28, 0.88) 35%, rgba(8, 20, 28, 0.45) 68%, rgba(8, 20, 28, 0.1) 90%, rgba(8, 20, 28, 0) 100%);
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
         }
 
         /* NÚT PILL KIỂU APP STORE TRONG DANH SÁCH CARD NHỎ */
@@ -174,7 +255,7 @@
             text-decoration: underline;
         }
 
-        /* ================= NÚT "NHẬN" / TẢI KIỂU APP STORE (TO HƠN TRONG POPUP) ================= */
+        /* ================= NÚT "Tải Về" / TẢI KIỂU APP STORE (TO HƠN TRONG POPUP) ================= */
         .appstore-get-btn {
             background-color: rgba(0, 168, 232, 0.18);
             color: #00a8e8;
@@ -208,7 +289,7 @@
             color: #ffffff;
         }
 
-        /* ================= NÚT "NHẬN" BÊN NGOÀI CARD TRANG CHỦ ================= */
+        /* ================= NÚT "Tải Về" BÊN NGOÀI CARD TRANG CHỦ ================= */
         .appstore-get-btn-home {
             background-color: rgba(255, 255, 255, 0.22);
             backdrop-filter: blur(8px);
@@ -772,11 +853,12 @@
                         </div>
 
                         <!-- Nút Tải phong cách App Store (to hơn) -->
-                        <div class="flex-shrink-0 self-center">
+                        <div id="topAppStoreBtnWrap" class="flex flex-col items-center flex-shrink-0 self-center">
                             <a id="topAppStoreBtn" href="javascript:void(0)" class="appstore-get-btn">
                                 <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
-                                <span>Nhận</span>
+                                <span>Tải Về</span>
                             </a>
+                            <span class="text-[9px] text-gray-500 dark:text-gray-400 mt-0.5 font-semibold">Miễn phí</span>
                         </div>
                     </div>
 
@@ -796,7 +878,7 @@
                                 <span id="detailDownloadCount" class="font-extrabold">0</span>
                             </div>
                             <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium flex items-center justify-center">
-                                <span class="font-bold">lượt tải</span>
+                                <span class="font-bold">Lượt đã tải</span>
                             </p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
@@ -1161,6 +1243,18 @@
             </div>
             <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+        </section>
+
+        <!-- SECTION MỚI: 2 CARD APP STORE STYLE (CARD 5 NỘI DUNG NẰM TRÊN, CARD BANNER ĐỀ XUẤT NẰM DƯỚI) -->
+        <section id="featuredTwoCardsSection" class="px-3.5 space-y-4">
+            <!-- Card 2 (Danh Sách Yêu Thích - 5 Nội Dung) nằm phía trên -->
+            <div id="featuredBottomListCard"></div>
+
+            <!-- Card 1 (Banner Đề Xuất) kèm tiêu đề "Chúng tôi đề xuất cho bạn!" nằm phía dưới -->
+            <div class="space-y-2">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
+                <div id="featuredTopBannerCard"></div>
+            </div>
         </section>
 
         <!-- SECTION: TIN TỨC MỚI -->
@@ -1734,7 +1828,9 @@
         const detailPublishDate = document.getElementById('detailPublishDateExtra');
 
         function setupDownloadButtonBehavior(item, downloadOptions, topBtn, stickyLink, stickyBar) {
+            const topBtnWrap = document.getElementById('topAppStoreBtnWrap');
             if (downloadOptions.length > 0 && !item.noDownload) {
+                if (topBtnWrap) topBtnWrap.style.display = 'flex';
                 topBtn.style.display = 'inline-flex';
                 stickyLink.style.display = 'flex';
                 if (downloadOptions.length > 1) {
@@ -1763,6 +1859,7 @@
                     stickyLink.onclick = () => incrementAndGetDownloads(item);
                 }
             } else {
+                if (topBtnWrap) topBtnWrap.style.display = 'none';
                 topBtn.href = '#';
                 topBtn.onclick = null;
                 topBtn.style.display = 'none';
@@ -2339,6 +2436,7 @@
                 globalAllItems = sortItemsByDate([...allLoadedItems]);
 
                 initDynamicHeroSlider(globalAllItems);
+                renderFeaturedTwoCards(globalAllItems);
                 initAutoScrollSections();
                 initNewsSlideCarousel();
                 initTipsSlideCarousel();
@@ -2348,6 +2446,140 @@
 
             } catch (err) {
                 console.error("Lỗi tải dữ liệu JSON:", err);
+            }
+        }
+
+        /* ================= HÀM RENDER 2 CARD APP STORE STYLE ================= */
+        function renderFeaturedTwoCards(allItems) {
+            const topBannerEl = document.getElementById('featuredTopBannerCard');
+            const bottomListEl = document.getElementById('featuredBottomListCard');
+            if (!topBannerEl || !bottomListEl || !allItems || allItems.length === 0) return;
+
+            const randomIndex = Math.floor(Math.random() * allItems.length);
+            const topItem = allItems[randomIndex];
+
+            const thematicPairs = [
+                { sub: "TIỆN ÍCH KHÔNG THỂ THIẾU", main: "Ứng Dụng & Tweak" },
+                { sub: "TRẢI NGHIỆM ĐỈNH CAO", main: "Game & Giải Trí" },
+                { sub: "NÂNG TẤM HIỆU SUẤT", main: "Công Cụ Làm Việc" },
+                { sub: "XU HƯỚNG CÔNG NGHỆ", main: "Thủ Thuật Nổi Bật" },
+                { sub: "LỰA CHỌN HÀNG ĐẦU", main: "Phần Mềm Phổ Biến" }
+            ];
+            const chosenTheme = thematicPairs[Math.floor(Math.random() * thematicPairs.length)];
+
+            const poolForBottom = allItems.filter(item => item.name !== topItem?.name);
+            const shuffledPool = [...poolForBottom].sort(() => 0.5 - Math.random());
+            const listItems = shuffledPool.slice(0, 5);
+
+            if (topItem) {
+                const topDesc = (topItem.highlights && topItem.highlights.length > 0)
+                    ? (typeof topItem.highlights[0] === 'string' ? topItem.highlights[0] : topItem.highlights[0].text)
+                    : (topItem.highlightTitle || topItem.dev || 'Trợ lý AI và tính năng tuyệt vời');
+                const topJsonEscaped = JSON.stringify(topItem).replace(/'/g, "&#39;");
+
+                topBannerEl.innerHTML = `
+                    <div class="app-card-clickable featured-banner-unique-card"
+                         data-app-json='${topJsonEscaped}'>
+                        <img src="${topItem.img}" alt="${topItem.name}" class="featured-banner-unique-bg">
+                        
+                        <div class="featured-banner-unique-glass-overlay">
+                            <div class="flex items-center justify-between space-x-3 w-full">
+                                <div class="flex items-center space-x-3 min-w-0 flex-1">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/90 dark:bg-gray-900/90 shadow-xl p-1 flex items-center justify-center overflow-hidden border border-white/60 flex-shrink-0">
+                                        <img src="${topItem.img}" alt="${topItem.name}" class="w-full h-full img-ratio-1-1 object-cover rounded-xl">
+                                    </div>
+                                    <div class="min-w-0 flex-1 space-y-0.5">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="bg-[#3897f0] text-white text-[9px] font-bold px-2 py-0.5 rounded-[5px] shadow-sm">Quảng cáo</span>
+                                        </div>
+                                        <h3 class="text-white font-extrabold text-base sm:text-lg leading-snug truncate drop-shadow-md">${topItem.name}</h3>
+                                        <p class="text-gray-200 text-xs line-clamp-1 opacity-95">${topDesc}</p>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="featured-banner-unique-action-btn btn-view-detail flex-shrink-0">
+                                    Xem thêm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                bindCardClickEvents(topBannerEl);
+            }
+
+            if (listItems.length > 0) {
+                let itemsGridHtml = '';
+                listItems.forEach((item) => {
+                    const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                    const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
+                    const itemDownloads = getStoredDownloads(item);
+                    const itemDesc = (item.highlights && item.highlights.length > 0)
+                        ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text)
+                        : (item.highlightTitle || item.category || item.dev || '');
+
+                    let actionControlHtml = '';
+                    if (!showDownloadBtn) {
+                        actionControlHtml = `
+                            <button type="button" class="btn-view-detail appstore-pill-btn">
+                                <span>XEM</span>
+                            </button>
+                        `;
+                    } else {
+                        actionControlHtml = `
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <button type="button" class="btn-direct-download appstore-pill-btn">
+                                    <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
+                                    <span>Tải Về</span>
+                                </button>
+                                <span class="text-[8px] text-gray-200 dark:text-cyan-100 mt-0.5 font-semibold">Miễn phí</span>
+                                <span class="text-[7.5px] text-gray-300 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
+                            </div>
+                        `;
+                    }
+
+                    itemsGridHtml += `
+                        <div class="app-card-clickable flex items-center justify-between p-2 rounded-2xl cursor-pointer group hover:bg-black/10 dark:hover:bg-white/10 transition"
+                             data-app-json='${itemJsonEscaped}'>
+                            <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-1.5">
+                                <img src="${item.img}" alt="${item.name}" class="w-11 h-11 rounded-[12px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-black/10 dark:border-white/10">
+                                <div class="min-w-0 flex-1">
+                                    <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate leading-snug group-hover:text-uptoAccent transition">
+                                        ${item.name}
+                                    </h5>
+                                    <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate mt-0.5">
+                                        ${itemDesc}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0">
+                                ${actionControlHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                const randomBgItem = allItems[Math.floor(Math.random() * allItems.length)];
+                const randomBgMedia = getPrimaryMediaSrc(randomBgItem);
+
+                bottomListEl.innerHTML = `
+                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-white/10">
+                        <img src="${randomBgMedia.url}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 meitu-overlay-blur-custom"></div>
+
+                        <div class="relative z-10 space-y-3.5">
+                            <div>
+                                <p class="text-[11px] font-bold uppercase tracking-wider text-gray-300">${chosenTheme.sub}</p>
+                                <h3 class="text-xl sm:text-2xl font-extrabold text-white leading-tight mt-0.5 tracking-tight">
+                                    ${chosenTheme.main}
+                                </h3>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                ${itemsGridHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                bindCardClickEvents(bottomListEl);
             }
         }
 
@@ -2375,19 +2607,17 @@
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 bannerHtml += `
-                    <div class="app-card-clickable snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-56 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                    <div class="app-card-clickable snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
                          data-app-json='${itemJsonEscaped}'>
-                        <!-- ẢNH BANNER TRÀN TOÀN BỘ CARD -->
                         <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
 
-                        <!-- DÒNG MỚI CẬP NHẬT KÈM NGÀY Ở GÓC TRÊN CÙNG BÊN TRÁI BÊN TRONG CARD -->
-                        <div class="absolute top-3 left-3 z-20 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
+                        <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
                             <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
                             <span>Mới cập nhật: ${publishDateText}</span>
                         </div>
 
-                        <!-- LỚP NỀN KÍNH MỜ PHỦ ĐÈ LÊN PHẦN DƯỚI CỦA ẢNH BANNER -->
-                        <div class="meitu-overlay-blur absolute inset-x-0 bottom-0 pt-10 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
+                        <!-- LỚP NỀN KÍNH MỜ TIÊU CHUẨN KHÁC (ĐỘC LẬP) -->
+                        <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
 
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
@@ -2396,19 +2626,22 @@
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
-                                        <p class="text-[11px] text-gray-200 line-clamp-3 leading-tight mt-0.5 opacity-95">${descText}</p>
+                                        <p class="text-[11px] text-gray-200 line-clamp-2 leading-tight mt-0.5 opacity-95">${descText}</p>
                                     </div>
                                 </div>
 
                                 ${showDownloadBtn ? `
-                                    <button type="button" class="btn-direct-download appstore-get-btn-home">
-                                        <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-                                        <span>NHẬN</span>
-                                    </button>
+                                    <div class="flex flex-col items-center flex-shrink-0 z-20">
+                                        <button type="button" class="btn-direct-download appstore-get-btn-home">
+                                            <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                            <span>Tải Về</span>
+                                        </button>
+                                        <span class="text-[8px] text-gray-200 mt-0.5 font-semibold">Miễn phí</span>
+                                        <span class="text-[7.5px] text-gray-300 font-medium">${itemDownloads} Lượt đã tải</span>
+                                    </div>
                                 ` : ''}
                             </div>
 
-                            <!-- LƯỢT XEM & TÁC GIẢ Ở DƯỚI CÙNG (ĐÃ BỎ ĐƯỜNG KẺ) -->
                             <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
                                 <div class="flex items-center space-x-2 font-bold text-white">
                                     <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
@@ -2433,6 +2666,7 @@
                     olderItems.forEach((item) => {
                         const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                         const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
+                        const itemDownloads = getStoredDownloads(item);
                         const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                         smallHtml += `
@@ -2446,10 +2680,14 @@
                                     </div>
                                 </div>
                                 ${showDownloadBtn ? `
-                                    <button type="button" class="btn-direct-download appstore-pill-btn">
-                                        <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
-                                        <span>NHẬN</span>
-                                    </button>
+                                    <div class="flex flex-col items-center flex-shrink-0 z-20">
+                                        <button type="button" class="btn-direct-download appstore-pill-btn">
+                                            <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
+                                            <span>Tải Về</span>
+                                        </button>
+                                        <span class="text-[8px] text-gray-700 dark:text-cyan-100 mt-0.5 font-semibold">Miễn phí</span>
+                                        <span class="text-[7.5px] text-gray-500 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
+                                    </div>
                                 ` : `
                                     <button type="button" class="btn-view-detail appstore-pill-btn">
                                         <span>XEM</span>
@@ -2595,14 +2833,12 @@
                         <div class="relative h-64 sm:h-72 w-full">
                             ${mediaHtml}
                             
-                            <!-- DÒNG MỚI CẬP NHẬT KÈM NGÀY DI CHUYỂN LÊN TRÊN ĐẦU ẢNH VÀ TIÊU ĐỀ -->
                             <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5 text-[10px] text-white font-semibold shadow-md">
                                 <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
                                 <span>Mới cập nhật: ${publishDateStr}</span>
                             </div>
 
-                            <!-- LỚP NỀN KÍNH MỜ PHỦ ĐÈ PHẦN DƯỚI (ĐÃ BỎ NÚT NHẬN) -->
-                            <div class="meitu-overlay-blur absolute inset-x-0 bottom-0 pt-10 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
+                            <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
                                 <div class="flex items-center space-x-3 mb-1">
                                     <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
                                         <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
