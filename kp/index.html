@@ -873,22 +873,22 @@
                         </ul>
                     </div>
                 </li>
-                <li class="menu-group-wrapper" id="group-tonghopios">
+                <li class="menu-group-wrapper" id="group-appapk">
                     <div class="d-flex align-items-center">
-                        <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-tonghopios')">
+                        <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-appapk')">
                             <i class="fa-solid fa-folder-open"></i>
-                            <span class="menu-text ms-2">APP (Tổng hợp ios)</span>
+                            <span class="menu-text ms-2">APP (Dành cho APK)</span>
                         </a>
-                        <button class="submenu-toggle-btn" id="arrow-sub-tonghopios" onclick="toggleSubmenu(event, 'sub-tonghopios')">
+                        <button class="submenu-toggle-btn" id="arrow-sub-appapk" onclick="toggleSubmenu(event, 'sub-appapk')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
                         </button>
                     </div>
-                    <div class="submenu-container" id="sub-tonghopios">
-                        <a href="#" class="submenu-view-all" onclick="switchToTabDirect('tonghop-ios', event)"><i class="fa-solid fa-list-check me-1"></i> Xem toàn bộ</a>
+                    <div class="submenu-container" id="sub-appapk">
+                        <a href="#" class="submenu-view-all" onclick="switchToTabDirect('app-apk', event)"><i class="fa-solid fa-list-check me-1"></i> Xem toàn bộ</a>
                         <div class="submenu-search-box">
-                            <input type="text" class="submenu-search-input" placeholder="Tìm kiếm (Tổng hợp ios)..." oninput="filterSubmenu(event, 'sublist-tonghopios')">
+                            <input type="text" class="submenu-search-input" placeholder="Tìm kiếm (Dành cho APK)..." oninput="filterSubmenu(event, 'sublist-appapk')">
                         </div>
-                        <ul class="submenu-list" id="sublist-tonghopios">
+                        <ul class="submenu-list" id="sublist-appapk">
                             <li class="submenu-item text-muted">Đang tải dữ liệu...</li>
                         </ul>
                     </div>
@@ -1048,11 +1048,11 @@
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
-                        <div class="card card-custom stat-grid-card border-start border-4 border-secondary" style="border-left: 5px solid #6c757d !important;" role="button" onclick="switchToTabDirect('tonghop-ios', event)">
+                        <div class="card card-custom stat-grid-card border-start border-4 border-secondary" style="border-left: 5px solid #6c757d !important;" role="button" onclick="switchToTabDirect('app-apk', event)">
                             <div class="d-flex justify-content-between align-items-center gap-2">
                                 <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">APP (Tổng hợp ios)</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statTonghopIosCount">0</h3>
+                                    <h6 class="text-muted mb-1 stat-grid-title">APP (Dành cho APK)</h6>
+                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statAppApkCount">0</h3>
                                 </div>
                                 <i class="fa-solid fa-folder-open stat-grid-icon text-secondary opacity-50 flex-shrink-0"></i>
                             </div>
@@ -1369,28 +1369,29 @@
                 </div>
             </div>
 
-            <!-- TAB 5: APP ( (Tổng hợp ios)) -> Gộp từ Appjailbreak.json và Appios.json -->
-            <div id="tonghop-ios" class="tab-content-item">
+            <!-- TAB 5: APP (Dành cho APK) -> Đọc từ Tabs/Appapk.json -->
+            <div id="app-apk" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý APP (Tổng hợp ios)</h2>
-                        <p class="text-muted mb-0">Dữ liệu tổng hợp tự động từ <code>../Tabs/Appjailbreak.json</code> và <code>../Tabs/Appios.json</code></p>
+                        <h2 class="fw-bold mb-1">Quản lý APP (Dành cho APK)</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appapk.json</code></p>
                     </div>
                     <div>
-                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tonghopios')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON Tổng hợp</button>
+                        <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('appapk')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
+                        <button class="btn btn-primary rounded-3 fw-semibold btn-appstore-glass-solid" onclick="openGenericModal('appapk')"><i class="fa-solid fa-plus me-2"></i>Thêm App APK</button>
                     </div>
                 </div>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <div class="card card-custom p-3 border-start border-4 border-secondary">
-                            <span class="text-muted small" style="text-align: center;">Tổng số (Tổng hợp ios)</span>
-                            <h3 class="fw-bold mb-0" id="countBadge-tonghopios" style="text-align: center;">0</h3>
+                            <span class="text-muted small" style="text-align: center;">Tổng số App APK</span>
+                            <h3 class="fw-bold mb-0" id="countBadge-appapk" style="text-align: center;">0</h3>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card card-custom p-3 history-box">
-                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật (Tổng hợp ios)</span>
-                            <div id="history-tonghopios" class="text-muted small" style="text-align: center;">Dữ liệu gộp thời gian thực.</div>
+                            <span class="fw-bold mb-1" style="text-align: center;"><i class="fa-solid fa-clock-rotate-left me-1 text-primary"></i> Lịch sử cập nhật App APK</span>
+                            <div id="history-appapk" class="text-muted small" style="text-align: center;">Chưa có thay đổi nào gần đây.</div>
                         </div>
                     </div>
                 </div>
@@ -1398,24 +1399,25 @@
                 <div class="d-none d-lg-flex justify-content-between align-items-center mb-3 px-2 flex-wrap gap-2">
                     <span class="fw-semibold small text-muted"><i class="fa-solid fa-table-cells me-1"></i> Bố cục hiển thị (PC):</span>
                     <div class="btn-group btn-group-sm" role="group">
-                        <input type="radio" class="btn-check" name="colLayout-tonghopios" id="tonghopios-col1" autocomplete="off" onclick="changeColumnLayout('tonghopios', 1)">
-                        <label class="btn btn-outline-secondary" for="tonghopios-col1">1 Cột</label>
-                        <input type="radio" class="btn-check" name="colLayout-tonghopios" id="tonghopios-col2" autocomplete="off" onclick="changeColumnLayout('tonghopios', 2)">
-                        <label class="btn btn-outline-secondary" for="tonghopios-col2">2 Cột</label>
-                        <input type="radio" class="btn-check" name="colLayout-tonghopios" id="tonghopios-col3" autocomplete="off" onclick="changeColumnLayout('tonghopios', 3)">
-                        <label class="btn btn-outline-secondary" for="tonghopios-col3">3 Cột</label>
-                        <input type="radio" class="btn-check" name="colLayout-tonghopios" id="tonghopios-col4" autocomplete="off" checked onclick="changeColumnLayout('tonghopios', 4)">
-                        <label class="btn btn-outline-secondary" for="tonghopios-col4">4 Cột</label>
+                        <input type="radio" class="btn-check" name="colLayout-appapk" id="appapk-col1" autocomplete="off" onclick="changeColumnLayout('appapk', 1)">
+                        <label class="btn btn-outline-secondary" for="appapk-col1">1 Cột</label>
+                        <input type="radio" class="btn-check" name="colLayout-appapk" id="appapk-col2" autocomplete="off" onclick="changeColumnLayout('appapk', 2)">
+                        <label class="btn btn-outline-secondary" for="appapk-col2">2 Cột</label>
+                        <input type="radio" class="btn-check" name="colLayout-appapk" id="appapk-col3" autocomplete="off" onclick="changeColumnLayout('appapk', 3)">
+                        <label class="btn btn-outline-secondary" for="appapk-col3">3 Cột</label>
+                        <input type="radio" class="btn-check" name="colLayout-appapk" id="appapk-col4" autocomplete="off" checked onclick="changeColumnLayout('appapk', 4)">
+                        <label class="btn btn-outline-secondary" for="appapk-col4">4 Cột</label>
                     </div>
                 </div>
                 <div class="card card-custom p-4 mb-4">
-                    <div id="tonghopiosTableBody"></div>
+                    <div id="appapkTableBody"></div>
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Xem dữ liệu gộp JSON (Chỉ đọc)</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appapk.json</h5>
+                        <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('appapk')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
-                    <textarea id="tonghopiosJsonOutput" class="form-control json-editor" rows="15" readonly></textarea>
+                    <textarea id="appapkJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
@@ -2110,7 +2112,7 @@
             news: 4,
             app: 4,
             appios: 4,
-            tonghopios: 4,
+            appapk: 4,
             tip: 4,
             prod: 4
         };
@@ -2431,12 +2433,13 @@
             }
         }
 
-        // ĐƯỜNG DẪN CÁC TỆP JSON (appios lấy từ Tabs/Appios.json)
+        // ĐƯỜNG DẪN CÁC TỆP JSON (appapk lấy từ Tabs/Appapk.json)
         let jsonPaths = {
             tweak: "../Tabs/Tweak.json",
             news: "../Tabs/Tintucmoi.json",
             app: "../Tabs/Appjailbreak.json",
             appios: "../Tabs/Appios.json",
+            appapk: "../Tabs/Appapk.json",
             tip: "../Tabs/Meo.json",
             prod: "../Tabs/Nangsuat.json"
         };
@@ -2446,14 +2449,13 @@
             news: [],
             app: [],
             appios: [],
-            tonghopios: [],
+            appapk: [],
             tip: [],
             prod: []
         };
 
         let historyData = {};
         Object.keys(jsonPaths).forEach(k => { historyData[k] = []; });
-        historyData['tonghopios'] = [];
 
         let genericModalInstance = null;
         let previewModalInstance = null;
@@ -2830,13 +2832,6 @@
                 updateCountBadge(key);
             }
 
-            // GỘP DỮ LIỆU CHO MỤC(Tổng hợp ios)(Appjailbreak.json + Appios.json)
-            dbData['tonghopios'] = [...(dbData['app'] || []), ...(dbData['appios'] || [])];
-            renderTable('tonghopios');
-            renderSubmenuList('tonghopios');
-            updateJSONOutput('tonghopios');
-            updateCountBadge('tonghopios');
-
             renderRepoStats();
             renderGlobalHistory();
             scanRootDirectory();
@@ -2876,7 +2871,7 @@
                 news: "Tin tức mới",
                 app: "APP Jailbreak",
                 appios: "APP (Dành cho ios)",
-                tonghopios: "APP (Tổng hợp ios)",
+                appapk: "APP (Dành cho APK)",
                 tip: "Mẹo & Hướng dẫn",
                 prod: "Năng suất"
             };
@@ -2915,7 +2910,7 @@
             document.getElementById('statAppsCount').innerText = dbData.app.length;
             document.getElementById('statNewsCount').innerText = dbData.news.length;
             document.getElementById('statAppIosCount').innerText = dbData.appios.length;
-            document.getElementById('statTonghopIosCount').innerText = dbData.tonghopios.length;
+            document.getElementById('statAppApkCount').innerText = dbData.appapk.length;
             document.getElementById('statTipsCount').innerText = dbData.tip.length;
             document.getElementById('statProdCount').innerText = dbData.prod.length;
         }
@@ -2986,26 +2981,17 @@
 
                 let customBtnLabel = item.downloadButtonLabel || "Tải & cài đặt";
 
-                let actionButtonsHtml = '';
-                if (type === 'tonghopios') {
-                    actionButtonsHtml = `
-                        <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
-                            <i class="fa-solid fa-eye me-1"></i> Xem
-                        </button>
-                    `;
-                } else {
-                    actionButtonsHtml = `
-                        <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
-                            <i class="fa-solid fa-eye me-1"></i> Xem
-                        </button>
-                        <button class="btn btn-sm btn-primary btn-appstore-glass-solid" title="Chỉnh sửa" onclick="editItem('${type}', ${index})">
-                            <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
-                        </button>
-                        <button class="btn btn-sm btn-danger btn-appstore-glass-solid" title="Xóa" onclick="deleteItem('${type}', ${index})">
-                            <i class="fa-solid fa-trash me-1"></i> Xóa
-                        </button>
-                    `;
-                }
+                let actionButtonsHtml = `
+                    <button class="btn btn-sm btn-info btn-appstore-glass-solid" title="Xem nhanh" onclick="previewItem('${type}', ${index})">
+                        <i class="fa-solid fa-eye me-1"></i> Xem
+                    </button>
+                    <button class="btn btn-sm btn-primary btn-appstore-glass-solid" title="Chỉnh sửa" onclick="editItem('${type}', ${index})">
+                        <i class="fa-solid fa-pen-to-square me-1"></i> Sửa
+                    </button>
+                    <button class="btn btn-sm btn-danger btn-appstore-glass-solid" title="Xóa" onclick="deleteItem('${type}', ${index})">
+                        <i class="fa-solid fa-trash me-1"></i> Xóa
+                    </button>
+                `;
 
                 htmlContent += `
                     <div class="item-card-row" style="border-left: 5px solid ${borderColor} !important;">
@@ -3194,15 +3180,6 @@
                 }
                 
                 dbData[type] = parsed;
-
-                // Cập nhật lại gộp nếu lưu app hoặc appios
-                if (type === 'app' || type === 'appios') {
-                    dbData['tonghopios'] = [...(dbData['app'] || []), ...(dbData['appios'] || [])];
-                    renderTable('tonghopios');
-                    renderSubmenuList('tonghopios');
-                    updateJSONOutput('tonghopios');
-                    updateCountBadge('tonghopios');
-                }
 
                 renderTable(type);
                 renderSubmenuList(type);
@@ -3421,7 +3398,7 @@
                 news: "Tin tức mới",
                 app: "APP Jailbreak",
                 appios: "APP (Dành cho ios)",
-                tonghopios: "APP (Tổng hợp ios)",
+                appapk: "APP (Dành cho APK)",
                 tip: "Mẹo & Hướng dẫn",
                 prod: "Năng suất"
             };
@@ -3441,13 +3418,13 @@
 
             fieldDescBox.style.display = 'block';
 
-            if (['tweak', 'app', 'appios', 'tonghopios', 'prod'].includes(type)) {
+            if (['tweak', 'app', 'appios', 'appapk', 'prod'].includes(type)) {
                 fieldVersionBox.style.display = 'block';
             } else {
                 fieldVersionBox.style.display = 'none';
             }
 
-            if (['tweak', 'app', 'appios', 'prod'].includes(type)) {
+            if (['tweak', 'app', 'appios', 'appapk', 'prod'].includes(type)) {
                 fieldSysReqBox.style.display = 'block';
             } else {
                 fieldSysReqBox.style.display = 'none';
@@ -3478,6 +3455,8 @@
                     titleEl.innerText = "Thêm App Jailbreak";
                 } else if (type === 'appios') {
                     titleEl.innerText = "Thêm App iOS";
+                } else if (type === 'appapk') {
+                    titleEl.innerText = "Thêm App APK";
                 } else if (type === 'tip') {
                     titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
                 } else if (type === 'prod') {
@@ -3633,14 +3612,6 @@
                 recordHistory(type, `Thêm mới mục và ghi lên dòng đầu: "${name}"`);
             }
 
-            if (type === 'app' || type === 'appios') {
-                dbData['tonghopios'] = [...(dbData['app'] || []), ...(dbData['appios'] || [])];
-                renderTable('tonghopios');
-                renderSubmenuList('tonghopios');
-                updateJSONOutput('tonghopios');
-                updateCountBadge('tonghopios');
-            }
-
             renderTable(type);
             renderSubmenuList(type);
             updateJSONOutput(type);
@@ -3656,14 +3627,6 @@
             if (confirm(`Bạn có chắc muốn xóa "${itemName}"?`)) {
                 dbData[type].splice(index, 1);
 
-                if (type === 'app' || type === 'appios') {
-                    dbData['tonghopios'] = [...(dbData['app'] || []), ...(dbData['appios'] || [])];
-                    renderTable('tonghopios');
-                    renderSubmenuList('tonghopios');
-                    updateJSONOutput('tonghopios');
-                    updateCountBadge('tonghopios');
-                }
-
                 renderTable(type);
                 renderSubmenuList(type);
                 updateJSONOutput(type);
@@ -3675,8 +3638,8 @@
         }
 
         function exportJSON(type) {
-            const dataToExport = type === 'tonghopios' ? dbData['tonghopios'] : dbData[type];
-            const fileName = type === 'tonghopios' ? 'Tonghopios.json' : jsonPaths[type].split('/').pop();
+            const dataToExport = dbData[type];
+            const fileName = jsonPaths[type].split('/').pop();
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToExport, null, 4));
             const dl = document.createElement('a');
             dl.setAttribute("href", dataStr);
@@ -3700,6 +3663,7 @@
                 { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "16/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "16/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appios.json", size: "1.9 KB", date: "16/11/2026" },
+                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appapk.json", size: "1.8 KB", date: "16/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "16/11/2026" },
                 { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "16/11/2026" },
                 { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "16/11/2026" }
