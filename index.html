@@ -61,22 +61,20 @@
             border: none !important;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85) !important;
             padding: 0 !important;
-            background: rgba(255, 255, 255, 0.98) !important;
+            background: #ffffff !important;
             overflow-x: hidden !important;
             max-width: 100vw !important;
             touch-action: pan-y;
         }
         .dark #appDetailCard {
-            background: rgba(10, 26, 34, 0.96) !important;
+            background: #0a1a22 !important;
         }
 
-        /* ĐÃ BỎ HIỆU ỨNG NẢY KHI ẤN VÀO CARD */
         .app-card-clickable {
             -webkit-user-select: none;
             user-select: none;
         }
 
-        /* LỚP NỀN MỜ CHO CARD BANNER NGANG (MẶC ĐỊNH) */
         .meitu-overlay-blur-light {
             background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0) 100%);
             backdrop-filter: blur(14px) saturate(160%);
@@ -85,35 +83,94 @@
             -webkit-mask-image: linear-gradient(to top, black 68%, transparent 100%);
         }
 
-        /* HIỆU ỨNG HOÀ TRỘN LIỀN MẠCH GIỮA ẢNH BANNER TRÊN CÙNG VÀ NỀN POPUP */
         .popup-top-banner-blend {
-            mask-image: linear-gradient(to bottom, black 35%, rgba(0, 0, 0, 0.65) 68%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 35%, rgba(0, 0, 0, 0.65) 68%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 62%, rgba(0, 0, 0, 0.45) 84%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 62%, rgba(0, 0, 0, 0.45) 84%, transparent 100%);
         }
         .popup-top-banner-blur-bottom {
             background: linear-gradient(
                 to top,
-                rgba(255, 255, 255, 0.98) 0%,
-                rgba(255, 255, 255, 0.85) 32%,
-                rgba(255, 255, 255, 0.35) 68%,
+                #ffffff 0%,
+                rgba(255, 255, 255, 0.9) 18%,
+                rgba(255, 255, 255, 0.5) 48%,
+                rgba(255, 255, 255, 0.15) 78%,
                 rgba(255, 255, 255, 0) 100%
             );
-            backdrop-filter: blur(22px) saturate(180%);
-            -webkit-backdrop-filter: blur(22px) saturate(180%);
-            mask-image: linear-gradient(to top, black 55%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to top, black 55%, transparent 100%);
         }
         .dark .popup-top-banner-blur-bottom {
             background: linear-gradient(
                 to top,
-                rgba(10, 26, 34, 0.96) 0%,
-                rgba(10, 26, 34, 0.82) 32%,
-                rgba(10, 26, 34, 0.35) 68%,
+                #0a1a22 0%,
+                rgba(10, 26, 34, 0.9) 18%,
+                rgba(10, 26, 34, 0.5) 48%,
+                rgba(10, 26, 34, 0.15) 78%,
                 rgba(10, 26, 34, 0) 100%
             );
         }
 
-        /* ================= CSS RIÊNG BIỆT 100% CHO CARD BANNER ĐỀ XUẤT (TRONG SUỐT HƠN NỮA ĐỂ THẤY ẢNH RÕ) ================= */
+        .sticky-download-bar-blend {
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.5) 30%,
+                rgba(255, 255, 255, 0.92) 70%,
+                rgba(255, 255, 255, 0.98) 100%
+            );
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: none !important;
+        }
+        .dark .sticky-download-bar-blend {
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 26, 34, 0) 0%,
+                rgba(10, 26, 34, 0.5) 30%,
+                rgba(10, 26, 34, 0.92) 70%,
+                rgba(10, 26, 34, 0.98) 100%
+            );
+            border: none !important;
+        }
+
+        /* ================= CSS RIÊNG BIỆT CHO CARD BANNER ĐỀ XUẤT 5 DÒNG ================= */
+        .meitu-overlay-blur-custom {
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.88) 40%, rgba(255, 255, 255, 0.55) 75%, rgba(255, 255, 255, 0.2) 92%, rgba(255, 255, 255, 0) 100%);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+        }
+        .dark .meitu-overlay-blur-custom {
+            background: linear-gradient(to top, rgba(8, 20, 28, 0.96) 0%, rgba(8, 20, 28, 0.88) 35%, rgba(8, 20, 28, 0.45) 68%, rgba(8, 20, 28, 0.1) 90%, rgba(8, 20, 28, 0) 100%);
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
+        }
+
+        /* Tiêu đề chính lớn và tiêu đề phụ đã được đổi sang màu trắng khi ở chế độ sáng */
+        .featured-card-title-theme {
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .dark .featured-card-title-theme {
+            color: #ffffff !important;
+            text-shadow: none;
+        }
+
+        .featured-card-desc-theme {
+            color: #1e293b !important;
+            font-weight: 500;
+        }
+        .dark .featured-card-desc-theme {
+            color: #cbd5e1 !important;
+        }
+
+        .featured-card-sub-theme {
+            color: #ffffff !important;
+            font-weight: 800;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+        .dark .featured-card-sub-theme {
+            color: #38bdf8 !important;
+            text-shadow: none;
+        }
+
         .featured-banner-unique-card {
             position: relative;
             height: 13.5rem;
@@ -137,7 +194,6 @@
             transform: scale(1.04);
         }
 
-        /* Lớp kính mờ tinh chỉnh trong suốt hơn nữa theo yêu cầu */
         .featured-banner-unique-glass-overlay {
             position: absolute;
             inset: 0;
@@ -157,7 +213,6 @@
             -webkit-backdrop-filter: blur(10px) saturate(170%);
         }
 
-        /* Nút "Xem thêm" kiểu iOS bo tròn mờ */
         .featured-banner-unique-action-btn {
             background: rgba(255, 255, 255, 0.28);
             backdrop-filter: blur(12px);
@@ -181,17 +236,10 @@
             transform: scale(1.03);
         }
 
-        /* LỚP NỀN MỜ CHO CARD TO */
-        .meitu-overlay-blur-custom {
-            background: linear-gradient(to top, rgba(8, 20, 28, 0.96) 0%, rgba(8, 20, 28, 0.88) 35%, rgba(8, 20, 28, 0.45) 68%, rgba(8, 20, 28, 0.1) 90%, rgba(8, 20, 28, 0) 100%);
-            backdrop-filter: blur(20px) saturate(190%);
-            -webkit-backdrop-filter: blur(20px) saturate(190%);
-        }
-
-        /* NÚT PILL KIỂU APP STORE TRONG DANH SÁCH CARD NHỎ */
+        /* Chữ trong nút Tải về card 5 dòng đã được chỉnh sang màu trắng khi ở chế độ sáng */
         .appstore-pill-btn {
-            background-color: rgba(0, 168, 232, 0.14);
-            color: #00a8e8;
+            background-color: #00a8e8;
+            color: #ffffff;
             font-weight: 800;
             padding: 0.35rem 0.85rem;
             border-radius: 9999px;
@@ -207,14 +255,16 @@
             flex-shrink: 0;
             z-index: 20;
             position: relative;
+            box-shadow: 0 2px 6px rgba(0, 168, 232, 0.3);
         }
         .appstore-pill-btn:hover {
-            background-color: #00a8e8;
+            background-color: #0091ca;
             color: #ffffff;
         }
         .dark .appstore-pill-btn {
             background-color: rgba(255, 255, 255, 0.12);
             color: #0a84ff;
+            box-shadow: none;
         }
         .dark .appstore-pill-btn:hover {
             background-color: #0a84ff;
@@ -227,7 +277,6 @@
             touch-action: pan-y;
         }
 
-        /* ================= CSS TỶ LỆ ẢNH & VIDEO CHUẨN ================= */
         .img-ratio-1-1 {
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
@@ -249,7 +298,6 @@
             overflow: hidden !important;
         }
 
-        /* ================= HIỆU ỨNG NỀN PHÁT SÁNG THÍCH ỨNG CHO KHU VỰC CARD ẢNH ================= */
         #screenshotsSection {
             position: relative;
             z-index: 1;
@@ -267,7 +315,6 @@
             transition: background 0.5s ease, opacity 0.4s ease;
         }
 
-        /* ================= CSS RIÊNG CHO PHẦN YÊU CẦU HỆ THỐNG MỚI ================= */
         .system-req-custom-text {
             color: #00baa3 !important;
             display: -webkit-box;
@@ -291,7 +338,6 @@
             text-decoration: underline;
         }
 
-        /* ================= NÚT "Tải Về" / TẢI KIỂU APP STORE (TO HƠN TRONG POPUP) ================= */
         .appstore-get-btn {
             background-color: rgba(0, 168, 232, 0.18);
             color: #00a8e8;
@@ -325,7 +371,6 @@
             color: #ffffff;
         }
 
-        /* ================= NÚT "Tải Về" BÊN NGOÀI CARD TRANG CHỦ ================= */
         .appstore-get-btn-home {
             background-color: rgba(255, 255, 255, 0.22);
             backdrop-filter: blur(8px);
@@ -355,7 +400,6 @@
             transform: scale(1.03);
         }
 
-        /* ================= NÚT TẢI CỐ ĐỊNH Ở ĐÁY: TO CAO, NỔI BẬT ================= */
         @keyframes bounceGlow {
             0%, 100% {
                 transform: translateY(0) scale(1);
@@ -409,7 +453,6 @@
             animation: slideToUnlockShimmer 3s linear infinite;
         }
 
-        /* ================= LIGHTBOX POPUP ZOOM CSS ================= */
         .lightbox-slide {
             scroll-snap-align: center;
             overflow: hidden;
@@ -430,7 +473,6 @@
             cursor: grab;
         }
 
-        /* ================= POPUP XEM TẤT CẢ ================= */
         .popup-card-item-custom {
             display: flex;
             align-items: center;
@@ -464,7 +506,6 @@
             border-radius: 0.5rem !important;
         }
 
-        /* ================= CSS CÁC MỤC TRANG CHỦ ================= */
         .home-apk-item-box, .home-tweak-item-box, .rec-item-card {
             display: flex;
             align-items: center;
@@ -770,7 +811,7 @@
                     <i class="fa-solid fa-calendar-day text-sm"></i>
                     <span>Hôm Nay!</span>
                 </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Hai, 16 tháng 11, 2026</span>
+                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 17 tháng 11, 2026</span>
             </div>
         </div>
     </header>
@@ -866,13 +907,13 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-5 pb-24">
+            <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-5 pb-28">
                 
                 <!-- TOP BANNER TRÀN SÁT MÉP POPUP & HOÀ TRỘN NỀN LIỀN MẠCH -->
                 <div class="relative w-full">
                     <div id="detailTopBannerWrap" class="relative w-full h-56 sm:h-64 overflow-hidden">
                         <img id="detailTopBannerImg" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="App Banner Artwork" class="w-full h-full object-cover popup-top-banner-blend">
-                        <div class="popup-top-banner-blur-bottom absolute inset-x-0 bottom-0 h-32 pointer-events-none"></div>
+                        <div class="popup-top-banner-blur-bottom absolute inset-x-0 bottom-0 h-20 pointer-events-none"></div>
                         <div class="absolute top-3.5 left-3.5 z-20 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold text-gray-200 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap max-w-[78%]">
                             <span>KPAZZ</span>
                             <span>/</span>
@@ -1003,7 +1044,7 @@
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Ngày đăng</p>
-                                    <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">16/11/2026</p>
+                                    <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">17/11/2026</p>
                                 </div>
                             </div>
                         </div>
@@ -1066,11 +1107,11 @@
             </div>
 
             <!-- NÚT TẢI CỐ ĐỊNH Ở ĐÁY KHI CUỘN -->
-            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 p-3.5 bg-white/40 dark:bg-[#06131a]/40 backdrop-blur-xl border-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-full opacity-0 z-20 pointer-events-none">
+            <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 pt-9 pb-3.5 px-3.5 sticky-download-bar-blend border-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
                         <h4 id="stickyTitleText" class="font-extrabold text-base leading-tight slide-to-unlock-text">Tải & Cài đặt bản mới nhất</h4>
-                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 16/11/2026 - KPazz @2026</p>
+                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 17/11/2026 - KPazz @2026</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-[#00a8e8]/20 dark:bg-white/10 flex items-center justify-center text-[#00a8e8] dark:text-white shadow-inner flex-shrink-0 font-bold">
                         <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
@@ -1292,12 +1333,9 @@
             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
         </section>
 
-        <!-- SECTION MỚI: 2 CARD APP STORE STYLE (CARD 5 NỘI DUNG NẰM TRÊN, CARD BANNER ĐỀ XUẤT NẰM DƯỚI) -->
+        <!-- SECTION MỚI: 2 CARD APP STORE STYLE -->
         <section id="featuredTwoCardsSection" class="px-3.5 space-y-4">
-            <!-- Card 2 (Danh Sách Yêu Thích - 5 Nội Dung) nằm phía trên -->
             <div id="featuredBottomListCard"></div>
-
-            <!-- Card 1 (Banner Đề Xuất) kèm tiêu đề "Chúng tôi đề xuất cho bạn!" nằm phía dưới -->
             <div class="space-y-2">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
                 <div id="featuredTopBannerCard"></div>
@@ -1315,7 +1353,6 @@
             </div>
             <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
             <div id="newsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
@@ -1330,7 +1367,6 @@
             </div>
             <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
             <div id="jbAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
@@ -1345,7 +1381,6 @@
             </div>
             <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
             <div id="ipaAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
@@ -1360,7 +1395,6 @@
             </div>
             <div id="apkSlideContainer" class="apk-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="apkDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
             <div id="apkSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
@@ -1375,7 +1409,6 @@
             </div>
             <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
             <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <!-- Danh sách card nhỏ bên dưới cho nội dung cũ -->
             <div id="tipsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
         </section>
 
@@ -1961,7 +1994,7 @@
                 detailTopBannerImg.src = bannerSrc;
             }
 
-            const publishDateStr = item.publishDate || '16/11/2026';
+            const publishDateStr = item.publishDate || '17/11/2026';
             if (detailPublishDate) detailPublishDate.textContent = publishDateStr;
 
             if (item.category) {
@@ -2503,7 +2536,6 @@
             }
         }
 
-        /* ================= HÀM RENDER 2 CARD APP STORE STYLE ================= */
         function renderFeaturedTwoCards(allItems) {
             const topBannerEl = document.getElementById('featuredTopBannerCard');
             const bottomListEl = document.getElementById('featuredBottomListCard');
@@ -2586,7 +2618,7 @@
                                     <span>Tải Về</span>
                                 </button>
                                 <span class="text-[8px] text-gray-200 dark:text-cyan-100 mt-1 font-semibold">Miễn phí</span>
-                                <span class="text-[7.5px] text-gray-300 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
+                                <span class="text-[7.5px] text-gray-200 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
                             </div>
                         `;
                     }
@@ -2597,10 +2629,10 @@
                             <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-1.5">
                                 <img src="${item.img}" alt="${item.name}" class="w-11 h-11 rounded-[12px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-black/10 dark:border-white/10">
                                 <div class="min-w-0 flex-1">
-                                    <h5 class="font-bold text-xs text-gray-900 dark:text-white truncate leading-snug group-hover:text-uptoAccent transition">
+                                    <h5 class="font-extrabold text-xs featured-card-title-theme truncate leading-snug group-hover:text-uptoAccent transition">
                                         ${item.name}
                                     </h5>
-                                    <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate mt-0.5">
+                                    <p class="text-[10px] featured-card-desc-theme truncate mt-0.5">
                                         ${itemDesc}
                                     </p>
                                 </div>
@@ -2616,14 +2648,14 @@
                 const randomBgMedia = getPrimaryMediaSrc(randomBgItem);
 
                 bottomListEl.innerHTML = `
-                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-white/10">
+                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-black/10 dark:border-white/10">
                         <img src="${randomBgMedia.url}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute inset-0 meitu-overlay-blur-custom"></div>
 
                         <div class="relative z-10 space-y-3.5">
                             <div>
-                                <p class="text-[11px] font-bold uppercase tracking-wider text-gray-300">${chosenTheme.sub}</p>
-                                <h3 class="text-xl sm:text-2xl font-extrabold text-white leading-tight mt-0.5 tracking-tight">
+                                <p class="text-[11px] font-extrabold uppercase tracking-wider featured-card-sub-theme">${chosenTheme.sub}</p>
+                                <h3 class="text-xl sm:text-2xl font-extrabold featured-card-title-theme leading-tight mt-0.5 tracking-tight">
                                     ${chosenTheme.main}
                                 </h3>
                             </div>
@@ -2637,7 +2669,6 @@
             }
         }
 
-        /* ================= HÀM RENDER CARD BANNER LỚN + CARD NHỎ ================= */
         function renderMeituBannerWithSmallList(bannerContainerId, smallContainerId, countTextId, items, labelType) {
             const bannerContainer = document.getElementById(bannerContainerId);
             const smallContainer = document.getElementById(smallContainerId);
@@ -2872,7 +2903,7 @@
                 const isActive = idx === 0 ? 'active-card' : '';
                 const itemViews = getStoredViews(item);
                 const itemDownloads = getStoredDownloads(item);
-                const publishDateStr = item.publishDate || '16/11/2026';
+                const publishDateStr = item.publishDate || '17/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
                 const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
                 
