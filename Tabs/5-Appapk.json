@@ -1,0 +1,326 @@
+{
+    "nameTabs": "APP (Dành Cho APK)",
+    "items": [
+        {
+            "name": "TikTok",
+            "version": "34.5.2",
+            "dev": "TikTok Pte. Ltd.",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 7.0 trở lên\nARM64 / ARMv7",
+            "description": "* Nền tảng video ngắn hàng đầu thế giới\n* Kết nối tài năng, sáng tạo và giải trí không giới hạn\n* Khám phá hàng triệu video âm nhạc, hài hước và đời sống\n* Tối ưu hóa hiệu suất mượt mà trên thiết bị Android",
+            "img": "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "16/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Xem tuỳ chọn tải APK",
+            "downloadLinks": [
+                {
+                    "version": "TikTok v34.5.2 (Bản Chính Thức)",
+                    "desc": "Phiên bản ổn định mới nhất cập nhật đầy đủ tính năng.",
+                    "url": "https://example.com/downloads/tiktok-34.5.2.apk"
+                },
+                {
+                    "version": "TikTok v34.0.0 (Bản Ổn Định Cũ)",
+                    "desc": "Bản thay thế tương thích tốt với các dòng máy Android đời cũ.",
+                    "url": "https://example.com/downloads/tiktok-34.0.0.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 7.0+ (ARM64 / ARMv7)",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Trải nghiệm không gian video ngắn sắc nét, cá nhân hóa theo sở thích cá nhân của bạn."
+                },
+                {
+                    "text": "Tích hợp công cụ chỉnh sửa video, âm nhạc và bộ lọc hình ảnh độc quyền."
+                }
+            ]
+        },
+        {
+            "name": "Zalo",
+            "version": "24.04.01",
+            "dev": "VNG Corporation",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 5.0 trở lên\nBộ nhớ trống tối thiểu 200MB",
+            "description": "* Ứng dụng nhắn tin và gọi điện hàng đầu tại Việt Nam\n* Nhắn tin siêu tốc, ổn định và bảo mật riêng tư tuyệt đối\n* Hỗ trợ gọi video nhóm, gửi tệp dung lượng lớn lên tới 1GB",
+            "img": "https://images.unsplash.com/photo-1614680376593-902f749f7ffc?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "16/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Xem tuỳ chọn tải APK",
+            "downloadLinks": [
+                {
+                    "version": "Zalo v24.04.01 (Bản Mới Nhất)",
+                    "desc": "Bản cập nhật tối ưu hóa tốc độ gửi tin nhắn và tiết kiệm pin.",
+                    "url": "https://example.com/downloads/zalo-24.04.01.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 5.0 trở lên",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Kết nối trò chuyện mượt mà ngay cả khi kết nối mạng internet yếu (3G/4G chập chờn)."
+                },
+                {
+                    "text": "Tiện ích làm việc nhóm, giao việc và lưu trữ tệp tin an toàn."
+                }
+            ]
+        },
+        {
+            "name": "YouTube",
+            "version": "19.16.3",
+            "dev": "Google LLC",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 8.0 trở lên",
+            "description": "* Xem video giải trí, nghe nhạc, tin tức hàng đầu thế giới\n* Trải nghiệm phát video chất lượng cao lên đến 4K\n* Hỗ trợ tải xuống xem ngoại tuyến và chế độ nền tối",
+            "img": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "15/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Xem tuỳ chọn tải APK",
+            "downloadLinks": [
+                {
+                    "version": "YouTube v19.16.3 (Chính Thức)",
+                    "desc": "Bản gốc từ Google, khắc phục lỗi phát sinh ở bản cũ.",
+                    "url": "https://example.com/downloads/youtube-19.16.3.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 8.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Khám phá kho tệp video khổng lồ với thuật toán đề xuất thông minh."
+                }
+            ]
+        },
+        {
+            "name": "Spotify",
+            "version": "8.9.38",
+            "dev": "Spotify AB",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 7.0 trở lên",
+            "description": "* Kho nhạc số khổng lồ với hơn 100 triệu bài hát\n* Nghe podcast độc quyền và các chương trình âm thanh chất lượng cao\n* Tạo và chia sẻ danh sách phát cá nhân hóa",
+            "img": "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "14/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Spotify",
+            "downloadLinks": [
+                {
+                    "version": "Spotify v8.9.38",
+                    "desc": "Bản ổn định hỗ trợ âm thanh chất lượng cao.",
+                    "url": "https://example.com/downloads/spotify-8.9.38.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 7.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Thưởng thức âm nhạc không quảng cáo với gói Premium hoặc khám phá kho nhạc phong phú miễn phí."
+                }
+            ]
+        },
+        {
+            "name": "Telegram",
+            "version": "10.14.1",
+            "dev": "Telegram FZ-LLC",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 6.0 trở lên",
+            "description": "* Ứng dụng nhắn tin tập trung vào tốc độ và bảo mật\n* Không giới hạn dung lượng chia sẻ tệp tin và media\n* Hỗ trợ tạo nhóm chat lên tới hàng trăm ngàn thành viên",
+            "img": "https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "14/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Telegram",
+            "downloadLinks": [
+                {
+                    "version": "Telegram v10.14.1",
+                    "desc": "Bản cập nhật tính năng Stories và mini app mới nhất.",
+                    "url": "https://example.com/downloads/telegram-10.14.1.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 6.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Độ bảo mật đầu cuối cực cao, đồng bộ hóa mượt mà trên mọi thiết bị."
+                }
+            ]
+        },
+        {
+            "name": "CapCut",
+            "version": "11.7.0",
+            "dev": "Bytedance Pte. Ltd.",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 8.0 trở lên (Khuyên dùng RAM từ 4GB)",
+            "description": "* Trình chỉnh sửa video chuyên nghiệp và miễn phí trên di động\n* Kho hiệu ứng chuyển cảnh, bộ lọc màu và phông chữ đa dạng\n* Tích hợp công cụ AI hỗ trợ cắt ghép tự động",
+            "img": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "13/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK CapCut",
+            "downloadLinks": [
+                {
+                    "version": "CapCut v11.7.0",
+                    "desc": "Bản cập nhật bộ lọc AI và mẫu video thịnh hành.",
+                    "url": "https://example.com/downloads/capcut-11.7.0.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 8.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Dễ dàng tạo ra những video ngắn bắt mắt để đăng tải lên TikTok, Reels hay YouTube Shorts."
+                }
+            ]
+        },
+        {
+            "name": "Instagram",
+            "version": "325.0.0",
+            "dev": "Meta Platforms, Inc.",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 8.0 trở lên",
+            "description": "* Mạng xã hội chia sẻ hình ảnh và khoảnh khắc cuộc sống\n* Khám phá xu hướng thời trang, nghệ thuật và du lịch toàn cầu\n* Tính năng nhắn tin trực tiếp và gọi thoại tiện lợi",
+            "img": "https://images.unsplash.com/photo-1611262588024-d12430b989db?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "12/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Instagram",
+            "downloadLinks": [
+                {
+                    "version": "Instagram v325.0.0",
+                    "desc": "Bản chính thức sửa lỗi hiệu suất giao diện.",
+                    "url": "https://example.com/downloads/instagram-325.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 8.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Lưu giữ kỷ niệm qua các thước phim Stories và bài viết trang cá nhân."
+                }
+            ]
+        },
+        {
+            "name": "Facebook",
+            "version": "460.0.0",
+            "dev": "Meta Platforms, Inc.",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 7.0 trở lên",
+            "description": "* Kết nối bạn bè, người thân và cộng đồng toàn cầu\n* Cập nhật tin tức, sự kiện và tham gia các hội nhóm sở thích\n* Xem video giải trí đa dạng qua Facebook Watch",
+            "img": "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "11/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Facebook",
+            "downloadLinks": [
+                {
+                    "version": "Facebook v460.0.0",
+                    "desc": "Phiên bản tối ưu hóa dung lượng bộ nhớ đệm.",
+                    "url": "https://example.com/downloads/facebook-460.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 7.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Nền tảng mạng xã hội phổ biến giúp bạn dễ dàng kết nối mọi lúc mọi nơi."
+                }
+            ]
+        },
+        {
+            "name": "Netflix",
+            "version": "8.100.0",
+            "dev": "Netflix, Inc.",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 7.0 trở lên (Hỗ trợ Widevine L1)",
+            "description": "* Xem phim điện ảnh, series truyền hình và anime độc quyền\n* Chất lượng hình ảnh sắc nét chuẩn điện ảnh HDR / Dolby Vision\n* Tải phim về xem ngoại tuyến không cần kết nối mạng",
+            "img": "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "10/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Netflix",
+            "downloadLinks": [
+                {
+                    "version": "Netflix v8.100.0",
+                    "desc": "Bản chính thức hỗ trợ tối ưu trên các dòng máy tính bảng và TV Box.",
+                    "url": "https://example.com/downloads/netflix-8.100.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 7.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Kho nội dung giải trí khổng lồ cập nhật liên tục các tựa phim bom tấn mới nhất."
+                }
+            ]
+        },
+        {
+            "name": "Lightroom",
+            "version": "9.3.0",
+            "dev": "Adobe",
+            "category": "APP (Dành cho APK)",
+            "systemRequirements": "Android 9.0 trở lên (Khuyên dùng chip Snapdragon series 7/8)",
+            "description": "* Trình chỉnh sửa ảnh và tạo màu chuyên nghiệp từ Adobe\n* Hệ thống công cụ cân chỉnh ánh sáng, màu sắc chi tiết\n* Hỗ trợ chỉnh sửa file ảnh định dạng RAW cao cấp",
+            "img": "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=200&q=80",
+            "publishDate": "09/11/2026",
+            "isApp": true,
+            "noDownload": false,
+            "downloadButtonLabel": "Tải APK Lightroom",
+            "downloadLinks": [
+                {
+                    "version": "Adobe Lightroom v9.3.0",
+                    "desc": "Bản cập nhật tính năng AI Masking và Preset mới.",
+                    "url": "https://example.com/downloads/lightroom-9.3.0.apk"
+                }
+            ],
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Hỗ Trợ: Android 9.0+",
+            "screenshots": [
+                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            ],
+            "highlights": [
+                {
+                    "text": "Biến những bức ảnh chụp bằng điện thoại trở nên nghệ thuật và sắc nét như máy cơ chuyên nghiệp."
+                }
+            ]
+        }
+    ]
+}

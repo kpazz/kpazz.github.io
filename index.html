@@ -37,7 +37,93 @@
     </script>
 
     <style>
-        /* HIỆU ỨNG LIQUID GLASS IOS CHUẨN VÀ CỐ ĐỊNH TRÁNH KÉO TRƯỢT NGANG */
+        /* ================= HIỆU ỨNG LIQUID GLASS NAVBAR ================= */
+        header#mainHeader {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 24px);
+            max-width: 1280px;
+            border-radius: 1.35rem;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(35px) saturate(240%);
+            -webkit-backdrop-filter: blur(35px) saturate(240%);
+            border: 1.5px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            transition: all 1.9s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            transform-origin: top left;
+        }
+
+        .dark header#mainHeader {
+            background: rgba(6, 19, 26, 0.62);
+            backdrop-filter: blur(40px) saturate(260%);
+            -webkit-backdrop-filter: blur(40px) saturate(260%);
+            border: 1.5px solid rgba(0, 186, 163, 0.45);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(0, 186, 163, 0.35);
+        }
+
+        header#mainHeader.is-collapsed {
+            left: 12px;
+            transform: translateX(0);
+            width: 158px;
+            height: 74px;
+            border-radius: 1.5rem;
+            padding: 0 !important;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.45);
+        }
+
+        .dark header#mainHeader.is-collapsed {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(0, 186, 163, 0.35);
+        }
+
+        .header-inner-content {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        header#mainHeader.is-collapsed .header-inner-content {
+            opacity: 0;
+            transform: scale(0.92);
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            visibility: hidden;
+        }
+
+        .header-menu-pill {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 100%;
+            height: 100%;
+            padding: 0 12px;
+            opacity: 0;
+            transform: scale(0.85);
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        header#mainHeader.is-collapsed .header-menu-pill {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+            position: relative;
+        }
+
+        .header-menu-pill button {
+            color: #025952 !important;
+            font-weight: 900;
+        }
+        .dark .header-menu-pill button {
+            color: #00baa3 !important;
+        }
+
         .glass-panel {
             background: rgba(255, 255, 255, 0.96) !important;
             backdrop-filter: blur(35px) saturate(210%) !important;
@@ -56,7 +142,6 @@
             overflow-x: hidden !important;
         }
 
-        /* GỠ BỎ HOÀN TOÀN VIỀN & KHUNG CỦA POPUP DETAIL ĐỂ ẢNH VÀ NỘI DUNG TRÀN SÁT MÉP */
         #appDetailCard {
             border: none !important;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85) !important;
@@ -131,44 +216,55 @@
             border: none !important;
         }
 
-        /* ================= CSS RIÊNG BIỆT CHO CARD BANNER ĐỀ XUẤT 5 DÒNG ================= */
         .meitu-overlay-blur-custom {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.88) 40%, rgba(255, 255, 255, 0.55) 75%, rgba(255, 255, 255, 0.2) 92%, rgba(255, 255, 255, 0) 100%);
-            backdrop-filter: blur(25px) saturate(200%);
-            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            background: linear-gradient(180deg, rgba(16, 22, 32, 0.62) 0%, rgba(16, 22, 32, 0.72) 50%, rgba(12, 18, 26, 0.84) 100%);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
         }
         .dark .meitu-overlay-blur-custom {
-            background: linear-gradient(to top, rgba(8, 20, 28, 0.96) 0%, rgba(8, 20, 28, 0.88) 35%, rgba(8, 20, 28, 0.45) 68%, rgba(8, 20, 28, 0.1) 90%, rgba(8, 20, 28, 0) 100%);
-            backdrop-filter: blur(20px) saturate(190%);
-            -webkit-backdrop-filter: blur(20px) saturate(190%);
+            background: linear-gradient(180deg, rgba(8, 16, 22, 0.68) 0%, rgba(8, 16, 22, 0.78) 50%, rgba(6, 12, 18, 0.88) 100%);
+            backdrop-filter: blur(16px) saturate(175%);
+            -webkit-backdrop-filter: blur(16px) saturate(175%);
         }
 
-        /* Tiêu đề chính lớn và tiêu đề phụ đã được đổi sang màu trắng khi ở chế độ sáng */
         .featured-card-title-theme {
             color: #ffffff !important;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
         .dark .featured-card-title-theme {
             color: #ffffff !important;
-            text-shadow: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
 
         .featured-card-desc-theme {
-            color: #1e293b !important;
-            font-weight: 500;
+            color: #e2e8f0 !important;
+            font-weight: 400;
+            opacity: 0.95;
         }
         .dark .featured-card-desc-theme {
-            color: #cbd5e1 !important;
+            color: #e2e8f0 !important;
+            opacity: 0.95;
         }
 
         .featured-card-sub-theme {
-            color: #ffffff !important;
+            color: #38bdf8 !important;
             font-weight: 800;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
         .dark .featured-card-sub-theme {
             color: #38bdf8 !important;
-            text-shadow: none;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+        }
+
+        .featured-download-sub-outline {
+            color: #cbd5e1 !important;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+        }
+        .dark .featured-download-sub-outline {
+            color: #cbd5e1 !important;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
 
         .featured-banner-unique-card {
@@ -236,7 +332,6 @@
             transform: scale(1.03);
         }
 
-        /* Chữ trong nút Tải về card 5 dòng đã được chỉnh sang màu trắng khi ở chế độ sáng */
         .appstore-pill-btn {
             background-color: #00a8e8;
             color: #ffffff;
@@ -262,8 +357,8 @@
             color: #ffffff;
         }
         .dark .appstore-pill-btn {
-            background-color: rgba(255, 255, 255, 0.12);
-            color: #0a84ff;
+            background-color: rgba(255, 255, 255, 0.14);
+            color: #38bdf8;
             box-shadow: none;
         }
         .dark .appstore-pill-btn:hover {
@@ -539,6 +634,42 @@
             border-radius: 0.5rem !important;
         }
 
+        /* CARD Ô NHỎ DẠNG ICON Ở TRÊN, TÊN Ở DƯỚI (CHO MỤC NĂNG SUẤT/TIỆN ÍCH) */
+        .home-grid-icon-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: 1.15rem;
+            cursor: pointer;
+            width: 105px;
+            flex-shrink: 0;
+        }
+        .home-grid-icon-wrap {
+            width: 3.75rem;
+            height: 3.75rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            padding: 0.15rem;
+            background-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .dark .home-grid-icon-wrap {
+            background-color: rgba(0, 0, 0, 0.35);
+        }
+        .home-grid-icon-file {
+            aspect-ratio: 1 / 1 !important;
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0.85rem !important;
+        }
+
         .account-modal-card {
             background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(40px) saturate(220%) !important;
@@ -607,18 +738,22 @@
         }
 
         .drawer-main-panel {
-            background: rgba(248, 250, 252, 0.96) !important;
-            backdrop-filter: blur(35px) saturate(210%) !important;
-            -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
-            border: none !important;
-            box-shadow: 5px 0 35px rgba(0, 0, 0, 0.15) !important;
-        }
-        .dark .drawer-main-panel {
-            background: rgba(6, 18, 25, 0.95) !important;
+            background: rgba(255, 255, 255, 0.88) !important;
             backdrop-filter: blur(40px) saturate(240%) !important;
             -webkit-backdrop-filter: blur(40px) saturate(240%) !important;
-            border-right: 1px solid rgba(0, 186, 163, 0.25) !important;
-            box-shadow: 5px 0 40px rgba(0, 0, 0, 0.85) !important;
+            border-top-right-radius: 2rem !important;
+            border-bottom-right-radius: 2rem !important;
+            border: none !important;
+            box-shadow: 15px 0 50px rgba(0, 0, 0, 0.2) !important;
+        }
+        .dark .drawer-main-panel {
+            background: rgba(6, 18, 25, 0.86) !important;
+            backdrop-filter: blur(45px) saturate(260%) !important;
+            -webkit-backdrop-filter: blur(45px) saturate(260%) !important;
+            border-top-right-radius: 2rem !important;
+            border-bottom-right-radius: 2rem !important;
+            border-right: 1.5px solid rgba(0, 186, 163, 0.3) !important;
+            box-shadow: 15px 0 60px rgba(0, 0, 0, 0.9) !important;
         }
 
         .drawer-submenu-container {
@@ -708,13 +843,6 @@
             margin-right: -22px;
         }
 
-        .glass-badge {
-            background: rgba(0, 0, 0, 0.45) !important;
-            backdrop-filter: blur(12px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-            border: none !important;
-        }
-
         @keyframes modalBounceIn {
             0% {
                 opacity: 0;
@@ -775,50 +903,64 @@
 <body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-24">
 
     <!-- ==================== HEADER ==================== -->
-    <header class="fixed top-0 inset-x-0 z-40 bg-white/70 dark:bg-[#06131a]/75 backdrop-blur-xl text-gray-900 dark:text-white shadow-md border-none">
-        <div class="flex items-center justify-between px-3.5 py-2.5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto">
-            <div class="flex items-center space-x-3.5">
-                <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                
-                <a href="#" class="flex items-center space-x-1.5">
-                    <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
-                    </svg>
-                    <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">KPazz</span>
-                </a>
+    <header id="mainHeader" class="text-gray-900 dark:text-white shadow-md border-none">
+        <div class="header-inner-content">
+            <div class="flex items-center justify-between px-4 py-2.5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto">
+                <div class="flex items-center space-x-3.5">
+                    <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    
+                    <a href="#" class="flex items-center space-x-1.5">
+                        <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
+                        </svg>
+                        <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">KPazz</span>
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-3.5">
+                    <button id="themeToggleBtn" aria-label="Toggle Theme" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 text-amber-500 dark:text-yellow-400 flex items-center justify-center text-sm shadow hover:opacity-90 active:scale-90">
+                        <i id="themeIcon" class="fa-solid fa-moon"></i>
+                    </button>
+
+                    <button id="searchOpenBtn" aria-label="Search" class="text-uptoAccent text-xl hover:opacity-80 active:scale-90 transition">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                    <button id="profileOpenBtn" aria-label="Account" class="text-uptoAccent text-2xl hover:opacity-80 active:scale-90 transition">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </button>
+                </div>
             </div>
 
-            <div class="flex items-center space-x-3.5">
-                <button id="themeToggleBtn" aria-label="Toggle Theme" class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 text-amber-500 dark:text-yellow-400 flex items-center justify-center text-sm shadow hover:opacity-90 active:scale-90">
-                    <i id="themeIcon" class="fa-solid fa-moon"></i>
-                </button>
-
-                <button id="searchOpenBtn" aria-label="Search" class="text-uptoAccent text-xl hover:opacity-80 active:scale-90 transition">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-
-                <button id="profileOpenBtn" aria-label="Account" class="text-uptoAccent text-2xl hover:opacity-80 active:scale-90 transition">
-                    <i class="fa-regular fa-circle-user"></i>
-                </button>
+            <div class="py-2 px-4 bg-gray-100/60 dark:bg-[#06131a]/60 backdrop-blur-md border-none">
+                <div class="flex items-center justify-between max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-xs font-bold tracking-wide">
+                    <span class="text-uptoAccent flex items-center space-x-1.5">
+                        <i class="fa-solid fa-calendar-day text-sm"></i>
+                        <span>Hôm Nay!</span>
+                    </span>
+                    <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 17 tháng 11, 2026</span>
+                </div>
             </div>
         </div>
 
-        <div class="py-2 px-3.5 bg-gray-100/60 dark:bg-[#06131a]/60 backdrop-blur-md border-none">
-            <div class="flex items-center justify-between max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-xs font-bold tracking-wide">
-                <span class="text-uptoAccent flex items-center space-x-1.5">
-                    <i class="fa-solid fa-calendar-day text-sm"></i>
-                    <span>Hôm Nay!</span>
-                </span>
-                <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 17 tháng 11, 2026</span>
-            </div>
+        <div class="header-menu-pill" aria-label="Menu thu gọn" id="collapsedMenuPill">
+            <button id="collapsedMenuBtn" aria-label="Menu" class="text-2xl p-2 hover:opacity-80 active:scale-90 transition">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <button id="collapsedSearchBtn" aria-label="Search" class="text-xl p-2 hover:opacity-80 active:scale-90 transition">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button id="collapsedProfileBtn" aria-label="Account" class="text-2xl p-2 hover:opacity-80 active:scale-90 transition">
+                <i class="fa-regular fa-circle-user"></i>
+            </button>
         </div>
     </header>
 
     <div class="h-24"></div>
 
-    <!-- ==================== POPUP XEM PHÓNG TO ẢNH & VIDEO (MEDIA LIGHTBOX) ==================== -->
+    <!-- ==================== POPUP XEM PHÓNG TO ẢNH & VIDEO ==================== -->
     <div id="mediaLightboxModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[70] hidden flex-col justify-between p-0 m-0 select-none overflow-hidden">
         <div class="flex items-center justify-between p-4 z-20 bg-gradient-to-b from-black/80 to-transparent">
             <span id="lightboxCounter" class="text-xs font-extrabold text-gray-300 tracking-wider">1 / 1</span>
@@ -834,7 +976,7 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ (MULTI-LINK MODAL) ==================== -->
+    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ ==================== -->
     <div id="downloadVersionsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[65] hidden items-center justify-center p-4">
         <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none">
             <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
@@ -850,7 +992,7 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP HIỂN THỊ CHI TIẾT YÊU CẦU HỆ THỐNG ==================== -->
+    <!-- ==================== POPUP YÊU CẦU HỆ THỐNG ==================== -->
     <div id="systemReqPopupModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[75] hidden items-center justify-center p-4">
         <div id="systemReqPopupCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[80vh] overflow-hidden border-none animate-pop-in">
             <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
@@ -899,7 +1041,7 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP CHI TIẾT (TRÀN VIỀN & LIỀN MẠCH) ==================== -->
+    <!-- ==================== POPUP CHI TIẾT ==================== -->
     <div id="appDetailModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-center justify-center p-2.5 sm:p-4">
         <div id="appDetailCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl w-full max-w-md md:max-w-xl shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden">
             
@@ -909,7 +1051,6 @@
 
             <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-5 pb-28">
                 
-                <!-- TOP BANNER TRÀN SÁT MÉP POPUP & HOÀ TRỘN NỀN LIỀN MẠCH -->
                 <div class="relative w-full">
                     <div id="detailTopBannerWrap" class="relative w-full h-56 sm:h-64 overflow-hidden">
                         <img id="detailTopBannerImg" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="App Banner Artwork" class="w-full h-full object-cover popup-top-banner-blend">
@@ -923,7 +1064,6 @@
                         </div>
                     </div>
 
-                    <!-- HEADER THÔNG TIN ỨNG DỤNG + NÚT TẢI VỀ -->
                     <div class="px-4 sm:px-5 -mt-12 relative z-20 space-y-4">
                         <div class="flex items-center justify-between space-x-3">
                             <div class="flex items-start space-x-3.5 min-w-0 flex-1">
@@ -935,7 +1075,6 @@
                                 </div>
                             </div>
 
-                            <!-- Nút Tải Về phong cách App Store -->
                             <div id="topAppStoreBtnWrap" class="flex flex-col items-center flex-shrink-0 self-center">
                                 <a id="topAppStoreBtn" href="javascript:void(0)" class="appstore-get-btn">
                                     <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
@@ -945,7 +1084,6 @@
                             </div>
                         </div>
 
-                        <!-- APP STORE METRICS / STATS BAR -->
                         <div class="grid grid-cols-3 gap-2 py-3 text-center bg-gray-50/50 dark:bg-white/[0.03] rounded-2xl">
                             <div class="flex flex-col items-center justify-center">
                                 <div class="flex items-center space-x-1 font-extrabold text-base text-gray-900 dark:text-white">
@@ -978,10 +1116,8 @@
                     </div>
                 </div>
 
-                <!-- NỘI DUNG CHI TIẾT TRÀN SÁT MÉP -->
                 <div class="px-4 sm:px-5 space-y-5">
                     <div class="space-y-4">
-                        <!-- SLIDER PHƯƠNG TIỆN TRÀN SÁT MÉP -->
                         <div id="screenshotsSection" class="hidden space-y-2 rounded-2xl">
                             <div id="screenshotsContainer" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-2 cursor-grab !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);" data-scroll-speed="100"></div>
                         </div>
@@ -1001,9 +1137,7 @@
                             </ul>
                         </div>
 
-                        <!-- GRID 4 MỤC -->
                         <div class="grid grid-cols-2 gap-3 text-xs pt-1">
-                            <!-- Tác giả -->
                             <div class="flex items-center space-x-2.5">
                                 <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                     <i class="fa-solid fa-building text-sm text-uptoAccent"></i>
@@ -1014,7 +1148,6 @@
                                 </div>
                             </div>
 
-                            <!-- Phân loại -->
                             <div class="flex items-center space-x-2.5">
                                 <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                     <i class="fa-solid fa-list-check text-sm text-uptoAccent"></i>
@@ -1025,7 +1158,6 @@
                                 </div>
                             </div>
 
-                            <!-- Yêu cầu hệ thống -->
                             <div id="systemRequirementsBlock" class="flex items-center space-x-2.5">
                                 <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                     <i class="fa-solid fa-mobile-screen-button text-sm text-uptoAccent"></i>
@@ -1037,7 +1169,6 @@
                                 </div>
                             </div>
 
-                            <!-- Ngày đăng -->
                             <div class="flex items-center space-x-2.5">
                                 <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
                                     <i class="fa-regular fa-calendar-check text-sm text-uptoAccent"></i>
@@ -1059,7 +1190,6 @@
                                 <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                             </a>
 
-                            <!-- Ô NHẬP BÌNH LUẬN -->
                             <div class="space-y-2 pt-1">
                                 <textarea id="userCommentInput" rows="2" placeholder="Nhập bình luận của bạn về nội dung này..." class="w-full custom-form-input rounded-xl p-3 text-xs focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-inner backdrop-blur-md resize-none"></textarea>
                             </div>
@@ -1085,7 +1215,6 @@
                         </div>
                     </div>
 
-                    <!-- PHẦN ĐỀ XUẤT 2 DÒNG TRÀN SÁT MÉP -->
                     <div class="space-y-3 pt-3 border-none">
                         <div class="flex items-center justify-between">
                             <h4 onclick="openAllRecommendationsModal()" class="font-extrabold text-sm text-gray-900 dark:text-white flex items-center space-x-1.5 cursor-pointer hover:text-uptoAccent transition">
@@ -1096,9 +1225,7 @@
                         </div>
 
                         <div class="space-y-2.5 !-mx-4 sm:!-mx-5 !px-4 sm:!px-5" style="width: calc(100% + 2rem); max-width: calc(100% + 2rem);">
-                            <!-- Dòng 1 -->
                             <div id="detailRecommendedContainer1" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="35" data-scroll-dir="1"></div>
-                            <!-- Dòng 2 -->
                             <div id="detailRecommendedContainer2" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-1 cursor-grab" data-scroll-speed="65" data-scroll-dir="-1"></div>
                         </div>
                     </div>
@@ -1106,7 +1233,6 @@
 
             </div>
 
-            <!-- NÚT TẢI CỐ ĐỊNH Ở ĐÁY KHI CUỘN -->
             <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 pt-9 pb-3.5 px-3.5 sticky-download-bar-blend border-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
@@ -1219,7 +1345,7 @@
     <!-- SIDEBAR DRAWER MENU -->
     <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 drawer-main-panel text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto no-scrollbar border-none">
         <div>
-            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/90 dark:bg-[#06131a]/90 backdrop-blur-xl z-10">
+            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/70 dark:bg-[#06131a]/70 backdrop-blur-xl z-10">
                 <div class="flex items-center space-x-2">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
@@ -1229,80 +1355,10 @@
                 <button id="drawerCloseBtn" class="text-gray-600 dark:text-gray-300 hover:text-uptoAccent text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <nav class="p-3 space-y-2 text-sm">
+            <nav id="drawerNavContainer" class="p-3 space-y-2 text-sm">
                 <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/5 text-uptoAccent font-bold transition border-none shadow-sm">
                     <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
                 </a>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTweakList', 'tweakChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-shapes w-5 text-center"></i><span>Tweak Jailbreak IOS</span>
-                        </span>
-                        <i id="tweakChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerTweakList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerNewsList', 'newsChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-newspaper w-5 text-center"></i><span>Tin tức mới</span>
-                        </span>
-                        <i id="newsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerNewsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerJbList', 'jbChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-mobile-retro w-5 text-center"></i><span>APP Jailbreak</span>
-                        </span>
-                        <i id="jbChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerJbList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerIpaList', 'ipaChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-file-arrow-down w-5 text-center"></i><span>APP ( Dành cho ios )</span>
-                        </span>
-                        <i id="ipaChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerIpaList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerApkList', 'apkChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-brands fa-android w-5 text-center"></i><span>APP (Dành cho APK)</span>
-                        </span>
-                        <i id="apkChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerApkList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerTipsList', 'tipsChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-lightbulb w-5 text-center"></i><span>Mẹo & Hướng dẫn</span>
-                        </span>
-                        <i id="tipsChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerTipsList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
-
-                <div class="space-y-1">
-                    <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('drawerProdList', 'prodChevron')">
-                        <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                            <i class="fa-solid fa-gauge-high w-5 text-center"></i><span>Năng suất</span>
-                        </span>
-                        <i id="prodChevron" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
-                    </div>
-                    <div id="drawerProdList" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300"></div>
-                </div>
             </nav>
         </div>
         <div class="p-4 text-xs text-gray-500 dark:text-gray-400 text-center border-none">
@@ -1320,110 +1376,8 @@
             <div id="heroDots" class="flex items-center justify-center space-x-1.5 py-0.5 my-0"></div>
         </section>
 
-        <!-- SECTION: TWEAK JAILBREAK IOS -->
-        <section class="space-y-2.5 pt-0 mt-0">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>Tweak Jailbreak IOS</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="tweakJbCountTextTop" onclick="openCategoryModal('Tweak Jailbreak IOS', window.storeDataCache?.tweak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Tweak</span>
-            </div>
-            <div id="tweakJbSlideContainerTop" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="45"></div>
-            <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
-        </section>
-
-        <!-- SECTION MỚI: 2 CARD APP STORE STYLE -->
-        <section id="featuredTwoCardsSection" class="px-3.5 space-y-4">
-            <div id="featuredBottomListCard"></div>
-            <div class="space-y-2">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
-                <div id="featuredTopBannerCard"></div>
-            </div>
-        </section>
-
-        <!-- SECTION: TIN TỨC MỚI -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>Tin tức mới</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="newsCountText" onclick="openCategoryModal('Tin tức mới', window.storeDataCache?.news || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
-            </div>
-            <div id="newsSlideContainer" class="news-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="newsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <div id="newsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
-        </section>
-
-        <!-- SECTION: APP JAILBREAK -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>APP Jailbreak</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="jbAppsCountText" onclick="openCategoryModal('APP Jailbreak', window.storeDataCache?.jailbreak || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
-            </div>
-            <div id="jbAppsSlideContainer" class="jb-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="jbAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <div id="jbAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
-        </section>
-
-        <!-- SECTION: APP ( DÀNH CHO IOS ) -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('APP ( Dành cho ios )', window.storeDataCache?.iosIpa || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>APP ( Dành cho ios )</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="ipaAppsCountText" onclick="openCategoryModal('APP ( Dành cho ios )', window.storeDataCache?.iosIpa || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
-            </div>
-            <div id="ipaAppsSlideContainer" class="ipa-apps-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="ipaAppsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <div id="ipaAppsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
-        </section>
-
-        <!-- SECTION: APP (Dành cho APK) -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('APP (Dành cho APK)', window.storeDataCache?.apk || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>APP (Dành cho APK)</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="apkCountText" onclick="openCategoryModal('APP (Dành cho APK)', window.storeDataCache?.apk || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
-            </div>
-            <div id="apkSlideContainer" class="apk-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="apkDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <div id="apkSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
-        </section>
-
-        <!-- SECTION: MẸO & HƯỚNG DẪN -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>Mẹo & Hướng dẫn Công nghệ</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="tipsCountText" onclick="openCategoryModal('Mẹo & Hướng dẫn Công nghệ', window.storeDataCache?.tips || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - Bài viết</span>
-            </div>
-            <div id="tipsSlideContainer" class="tips-slider-container flex space-x-3 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-2 cursor-grab pl-3.5" data-slide-mode="true"></div>
-            <div id="tipsDotsIndicator" class="flex items-center justify-center space-x-1 pt-0.5"></div>
-            <div id="tipsSmallListContainer" class="hidden overflow-x-auto no-scrollbar pt-1 pb-3 pl-3.5 cursor-grab"></div>
-        </section>
-
-        <!-- SECTION: NĂNG SUẤT -->
-        <section class="space-y-2.5">
-            <div class="flex items-center justify-between px-3.5">
-                <a href="javascript:void(0)" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="section-title text-gray-900 dark:text-white">
-                    <span>Năng suất</span>
-                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                </a>
-                <span id="productivityCountText" onclick="openCategoryModal('Năng suất', window.storeDataCache?.productivity || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">0 - APPs</span>
-            </div>
-            <div id="productivitySlideContainer" class="auto-scroll-container overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="25"></div>
-            <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
-        </section>
+        <!-- DYNAMIC SECTIONS CONTAINER -->
+        <div id="dynamicSectionsContainer" class="space-y-3"></div>
 
     </main>
 
@@ -1520,17 +1474,81 @@
 
         const backToTopBtn = document.getElementById('backToTopBtn');
         const heroSection = document.getElementById('heroSection');
+        const mainHeader = document.getElementById('mainHeader');
+        const collapsedMenuBtn = document.getElementById('collapsedMenuBtn');
+        const collapsedSearchBtn = document.getElementById('collapsedSearchBtn');
+        const collapsedProfileBtn = document.getElementById('collapsedProfileBtn');
+
+        let lastScrollY = window.scrollY;
+        let touchStartY = 0;
+
+        window.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            const touchCurrentY = e.touches[0].clientY;
+            if (touchCurrentY - touchStartY > 12) {
+                mainHeader.classList.remove('is-collapsed');
+            }
+        }, { passive: true });
 
         window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
             const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-            if (window.scrollY >= heroBottom - 50) {
+
+            if (currentScrollY >= heroBottom - 50) {
                 backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
                 backToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
             } else {
                 backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
                 backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
             }
-        });
+
+            const refEl = document.getElementById('featuredTwoCardsSection') || document.getElementById('dynamicSectionsContainer');
+            if (refEl) {
+                const bannerTop = refEl.getBoundingClientRect().top;
+
+                if (currentScrollY < lastScrollY - 4 || currentScrollY <= 20) {
+                    mainHeader.classList.remove('is-collapsed');
+                } else if (currentScrollY > lastScrollY + 4 && bannerTop <= 70) {
+                    mainHeader.classList.add('is-collapsed');
+                }
+            }
+
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+
+        const sidebarDrawer = document.getElementById('sidebarDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const searchModal = document.getElementById('searchModal');
+        const searchBoxContainer = document.getElementById('searchBoxContainer');
+        const searchInput = document.getElementById('searchInput');
+        const loginModal = document.getElementById('loginModal');
+        const loginCard = document.getElementById('loginCard');
+
+        if (collapsedMenuBtn) {
+            collapsedMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebarDrawer.classList.remove('-translate-x-full');
+                drawerBackdrop.classList.remove('hidden');
+            });
+        }
+
+        if (collapsedSearchBtn) {
+            collapsedSearchBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModalWithBounce(searchModal, searchBoxContainer);
+                setTimeout(() => searchInput.focus(), 100);
+            });
+        }
+
+        if (collapsedProfileBtn) {
+            collapsedProfileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModalWithBounce(loginModal, loginCard);
+            });
+        }
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
@@ -1769,7 +1787,6 @@
             }
         }
 
-        /* ================= POPUP XEM CHI TIẾT YÊU CẦU HỆ THỐNG ================= */
         const systemReqPopupModal = document.getElementById('systemReqPopupModal');
         const systemReqPopupCard = document.getElementById('systemReqPopupCard');
         const systemReqPopupCloseBtn = document.getElementById('systemReqPopupCloseBtn');
@@ -1787,7 +1804,6 @@
             setupBackdropClose(systemReqPopupModal, systemReqPopupCard);
         }
 
-        /* ================= COMMENT LOGIC ================= */
         function setupInteractiveComments() {
             const submitBtn = document.getElementById('submitReviewBtn');
             const commentInput = document.getElementById('userCommentInput');
@@ -2356,184 +2372,229 @@
         window.drawerStoreCache = {};
         window.storeDataCache = {};
 
-        function renderDrawerList(containerId, items, categoryTitleName) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-            const sortedItems = sortItemsByDate([...items]);
-            window.drawerStoreCache[containerId] = sortedItems;
-
-            const searchInputId = `subSearch_${containerId}`;
-            const listItemsId = `subList_${containerId}`;
-
-            let html = `
-                <div class="drawer-submenu-container space-y-2">
-                    <div class="flex items-center justify-between px-0.5">
-                        <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
-                            Có ${sortedItems.length} mục
-                        </span>
-                        <button onclick="openCategoryModal('${categoryTitleName}', window.storeDataCache?.['${getCategoryKey(containerId)}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
-                            <span>Xem tất cả</span>
-                            <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                        </button>
-                    </div>
-                    <div class="relative px-0.5">
-                        <input type="text" id="${searchInputId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenu('${containerId}')" class="w-full bg-white/95 dark:bg-black/40 border-none text-gray-900 dark:text-white rounded-lg py-1.5 pl-7 pr-2.5 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-sm">
-                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-[10px]"></i>
-                    </div>
-                    <div id="${listItemsId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
-            `;
-
-            sortedItems.forEach((item, index) => {
-                html += `
-                    <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
-                       data-item-name="${item.name.toLowerCase()}"
-                       onclick="handleDrawerItemClick('${containerId}', ${index})">
-                        &bull; ${item.name}
-                    </a>
-                `;
-            });
-            html += `</div></div>`;
-            container.innerHTML = html;
-        }
-
-        function getCategoryKey(containerId) {
-            if (containerId === 'drawerNewsList') return 'news';
-            if (containerId === 'drawerJbList') return 'jailbreak';
-            if (containerId === 'drawerIpaList') return 'iosIpa';
-            if (containerId === 'drawerTweakList') return 'tweak';
-            if (containerId === 'drawerApkList') return 'apk';
-            if (containerId === 'drawerTipsList') return 'tips';
-            if (containerId === 'drawerProdList') return 'productivity';
-            return 'news';
-        }
-
-        function filterDrawerSubmenu(containerId) {
-            const searchInputId = `subSearch_${containerId}`;
-            const listItemsId = `subList_${containerId}`;
-            const inputEl = document.getElementById(searchInputId);
-            const listEl = document.getElementById(listItemsId);
-            if (!inputEl || !listEl) return;
-
-            const query = inputEl.value.trim().toLowerCase();
-            const subItems = listEl.querySelectorAll('.drawer-sub-item');
-
-            subItems.forEach(item => {
-                const itemName = item.getAttribute('data-item-name') || '';
-                if (itemName.includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+        async function fetchAndParseCategoryJson(filePath, fallbackIconClass, isArticleType = false, isTipType = false) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) return null;
+                const jsonText = await response.text();
+                
+                let parsedObj;
+                try {
+                    parsedObj = JSON.parse(jsonText);
+                } catch (err) {
+                    return null;
                 }
-            });
-        }
 
-        function handleDrawerItemClick(containerId, index) {
-            closeDrawer();
-            if (window.drawerStoreCache[containerId] && window.drawerStoreCache[containerId][index]) {
-                const selectedItem = window.drawerStoreCache[containerId][index];
-                openAppDetail(selectedItem);
+                let categoryName = "hãy thêm tên vào js";
+                if (parsedObj && typeof parsedObj === 'object' && !Array.isArray(parsedObj)) {
+                    if (parsedObj.nameTabs && typeof parsedObj.nameTabs === 'string' && parsedObj.nameTabs.trim() !== '') {
+                        categoryName = parsedObj.nameTabs.trim();
+                    }
+                }
+
+                let data = [];
+                if (Array.isArray(parsedObj)) {
+                    data = parsedObj;
+                } else if (parsedObj && typeof parsedObj === 'object') {
+                    const possibleArrayKey = Object.keys(parsedObj).find(k => Array.isArray(parsedObj[k]));
+                    if (possibleArrayKey) {
+                        data = parsedObj[possibleArrayKey];
+                    } else {
+                        data = Object.values(parsedObj).filter(v => Array.isArray(v) || (v && typeof v === 'object' && v.name));
+                        let flattened = [];
+                        data.forEach(val => {
+                            if (Array.isArray(val)) flattened.push(...val);
+                            else if (val && val.name) flattened.push(val);
+                        });
+                        data = flattened;
+                    }
+                }
+
+                data = sortItemsByDate(data).map(item => {
+                    if (isArticleType) return { ...item, isArticle: true };
+                    if (isTipType) return { ...item, isTip: true };
+                    return { ...item, isApp: true };
+                });
+
+                let sortNumber = 999;
+                const matchNum = filePath.match(/(\d+)[^\/]*$/);
+                if (matchNum && matchNum[1]) {
+                    sortNumber = parseInt(matchNum[1], 10);
+                }
+
+                return {
+                    filePath: filePath,
+                    sortNumber: sortNumber,
+                    categoryName: categoryName,
+                    iconClass: fallbackIconClass,
+                    items: data,
+                    isArticle: isArticleType,
+                    isTip: isTipType
+                };
+            } catch (e) {
+                console.warn("Không thể tải hoặc phân tích tệp:", filePath, e);
+                return null;
             }
         }
 
         async function loadStoreData() {
-            const jsonFiles = {
-                news: 'Tabs/Tintucmoi.json',
-                jailbreak: 'Tabs/Appjailbreak.json',
-                iosIpa: 'Tabs/Appios.json',
-                apk: 'Tabs/Appapk.json',
-                tweakJb: 'Tabs/Tweak.json',
-                tips: 'Tabs/Meo.json',
-                productivity: 'Tabs/Nangsuat.json'
-            };
+            const jsonFilesConfig = [
+                { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false },
+                { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false },
+                { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false },
+                { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false },
+                { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false },
+                { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true },
+                { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false }
+            ];
+
+            let loadedResults = [];
+            for (let cfg of jsonFilesConfig) {
+                const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip);
+                if (res) {
+                    loadedResults.push(res);
+                }
+            }
+
+            loadedResults.sort((a, b) => a.sortNumber - b.sortNumber);
 
             let allLoadedItems = [];
+            const drawerNavContainer = document.getElementById('drawerNavContainer');
+            const dynamicSectionsContainer = document.getElementById('dynamicSectionsContainer');
 
-            try {
-                const resNews = await fetch(jsonFiles.news);
-                if (resNews.ok) {
-                    let data = await resNews.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isArticle: true }));
-                    window.storeDataCache.news = data;
-                    renderMeituBannerWithSmallList('newsSlideContainer', 'newsSmallListContainer', 'newsCountText', data, 'Bài viết');
-                    renderDrawerList('drawerNewsList', data, 'Tin tức mới');
-                    allLoadedItems.push(...data);
-                }
-
-                const resJb = await fetch(jsonFiles.jailbreak);
-                if (resJb.ok) {
-                    let data = await resJb.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    window.storeDataCache.jailbreak = data;
-                    renderMeituBannerWithSmallList('jbAppsSlideContainer', 'jbAppsSmallListContainer', 'jbAppsCountText', data, 'APPs');
-                    renderDrawerList('drawerJbList', data, 'APP Jailbreak');
-                    allLoadedItems.push(...data);
-                }
-
-                const resIosIpa = await fetch(jsonFiles.iosIpa);
-                if (resIosIpa.ok) {
-                    let data = await resIosIpa.json();
-                    let iosIpaData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    window.storeDataCache.iosIpa = iosIpaData;
-                    renderMeituBannerWithSmallList('ipaAppsSlideContainer', 'ipaAppsSmallListContainer', 'ipaAppsCountText', iosIpaData, 'APPs');
-                    renderDrawerList('drawerIpaList', iosIpaData, 'APP ( Dành cho ios )');
-                    allLoadedItems.push(...iosIpaData);
-                }
-
-                const resApk = await fetch(jsonFiles.apk);
-                if (resApk.ok) {
-                    let data = await resApk.json();
-                    let apkData = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    window.storeDataCache.apk = apkData;
-                    renderMeituBannerWithSmallList('apkSlideContainer', 'apkSmallListContainer', 'apkCountText', apkData, 'APPs');
-                    renderDrawerList('drawerApkList', apkData, 'APP (Dành cho APK)');
-                    allLoadedItems.push(...apkData);
-                }
-
-                const resTweakJb = await fetch(jsonFiles.tweakJb);
-                if (resTweakJb.ok) {
-                    let data = await resTweakJb.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    window.storeDataCache.tweak = data;
-                    renderTweakSectionCustom(data);
-                    renderDrawerList('drawerTweakList', data, 'Tweak Jailbreak IOS');
-                    allLoadedItems.push(...data);
-                }
-
-                const resTips = await fetch(jsonFiles.tips);
-                if (resTips.ok) {
-                    let data = await resTips.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isTip: true }));
-                    window.storeDataCache.tips = data;
-                    renderMeituBannerWithSmallList('tipsSlideContainer', 'tipsSmallListContainer', 'tipsCountText', data, 'Bài viết');
-                    renderDrawerList('drawerTipsList', data, 'Mẹo & Hướng dẫn Công nghệ');
-                    allLoadedItems.push(...data);
-                }
-
-                const resProd = await fetch(jsonFiles.productivity);
-                if (resProd.ok) {
-                    let data = await resProd.json();
-                    data = sortItemsByDate(data).map(item => ({ ...item, isApp: true }));
-                    let rawProdData = [...data];
-                    window.storeDataCache.productivity = rawProdData;
-                    renderProductivitySectionCustom(rawProdData);
-                    renderDrawerList('drawerProdList', rawProdData, 'Năng suất');
-                    allLoadedItems.push(...rawProdData);
-                }
-
-                globalAllItems = sortItemsByDate([...allLoadedItems]);
-
-                initDynamicHeroSlider(globalAllItems);
-                renderFeaturedTwoCards(globalAllItems);
-                initAutoScrollSections();
-                initNewsSlideCarousel();
-                initTipsSlideCarousel();
-                initJbAppsSlideCarousel();
-                initIpaAppsSlideCarousel();
-                initApkAppsSlideCarousel();
-
-            } catch (err) {
-                console.error("Lỗi tải dữ liệu JSON:", err);
+            if (drawerNavContainer) {
+                drawerNavContainer.innerHTML = `
+                    <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/5 text-uptoAccent font-bold transition border-none shadow-sm">
+                        <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
+                    </a>
+                `;
             }
+            if (dynamicSectionsContainer) dynamicSectionsContainer.innerHTML = '';
+
+            for (let i = 0; i < loadedResults.length; i++) {
+                const result = loadedResults[i];
+                const catName = result.categoryName;
+                const iconCls = result.iconClass;
+                const items = result.items;
+                const uniqueId = `cat_sec_${i}`;
+                const listId = `subList_${uniqueId}`;
+                const chevronId = `chevron_${uniqueId}`;
+                const countLabelId = `count_${uniqueId}`;
+                const containerId = `container_${uniqueId}`;
+
+                window.storeDataCache[uniqueId] = items;
+                allLoadedItems.push(...items);
+
+                if (drawerNavContainer) {
+                    drawerNavContainer.innerHTML += `
+                        <div class="space-y-1">
+                            <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('${uniqueId}', '${chevronId}')">
+                                <span class="drawer-main-action flex items-center space-x-3 flex-1">
+                                    <i class="${iconCls} w-5 text-center"></i><span>${catName}</span>
+                                </span>
+                                <i id="${chevronId}" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
+                            </div>
+                            <div id="${uniqueId}" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300">
+                                <div class="drawer-submenu-container space-y-2">
+                                    <div class="flex items-center justify-between px-0.5">
+                                        <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
+                                            Có ${items.length} mục
+                                        </span>
+                                        <button onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
+                                            <span>Xem tất cả</span>
+                                            <i class="fa-solid fa-arrow-right text-[8px]"></i>
+                                        </button>
+                                    </div>
+                                    <div class="relative px-0.5">
+                                        <input type="text" id="search_${uniqueId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenuDynamic('${uniqueId}')" class="w-full bg-white/95 dark:bg-black/40 border-none text-gray-900 dark:text-white rounded-lg py-1.5 pl-7 pr-2.5 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-sm">
+                                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-[10px]"></i>
+                                    </div>
+                                    <div id="${listId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
+                                        ${items.map((item, idx) => `
+                                            <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
+                                               data-item-name="${item.name.toLowerCase()}"
+                                               onclick="closeDrawer(); openAppDetail(window.storeDataCache['${uniqueId}'][${idx}]);">
+                                                &bull; ${item.name}
+                                            </a>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                if (dynamicSectionsContainer) {
+                    let sectionBodyHtml = `
+                        <div id="${containerId}" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="35"></div>
+                        <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+                    `;
+
+                    if (i === 1) {
+                        dynamicSectionsContainer.innerHTML += `
+                            <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
+                                <div id="featuredBottomListCard"></div>
+                                <div class="space-y-2">
+                                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
+                                    <div id="featuredTopBannerCard"></div>
+                                </div>
+                            </section>
+                        `;
+                    }
+
+                    dynamicSectionsContainer.innerHTML += `
+                        <section class="space-y-2.5 pt-0 mt-0">
+                            <div class="flex items-center justify-between px-3.5">
+                                <a href="javascript:void(0)" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="section-title text-gray-900 dark:text-white">
+                                    <span>${catName}</span>
+                                    <i class="fa-solid fa-chevron-right section-arrow"></i>
+                                </a>
+                                <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - Mục</span>
+                            </div>
+                            <div id="section_wrapper_${uniqueId}">
+                                ${sectionBodyHtml}
+                            </div>
+                        </section>
+                    `;
+                }
+            }
+
+            globalAllItems = sortItemsByDate([...allLoadedItems]);
+
+            initDynamicHeroSlider(globalAllItems);
+            renderFeaturedTwoCards(globalAllItems);
+
+            Object.keys(window.storeDataCache).forEach(uniqueId => {
+                const items = window.storeDataCache[uniqueId];
+                const sectionWrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+                const sectionHeader = sectionWrapper ? sectionWrapper.previousElementSibling : null;
+                const headerTitleText = sectionHeader ? sectionHeader.textContent.toLowerCase() : '';
+
+                if (headerTitleText.includes('tweak')) {
+                    renderTweakSectionCustom(uniqueId, items);
+                } else if (headerTitleText.includes('năng suất') || headerTitleText.includes('tiện ích')) {
+                    renderGridTwoRowsScrollSection(uniqueId, items, headerTitleText);
+                } else if (headerTitleText.includes('app') || headerTitleText.includes('ứng dụng') || headerTitleText.includes('apk') || headerTitleText.includes('ios')) {
+                    renderAppMixedSection(uniqueId, items, headerTitleText);
+                } else if (headerTitleText.includes('mẹo') || headerTitleText.includes('thủ thuật') || headerTitleText.includes('tin tức') || headerTitleText.includes('sự kiện')) {
+                    renderTipBigCardSection(uniqueId, items, headerTitleText);
+                } else {
+                    renderGridTwoRowsScrollSection(uniqueId, items, headerTitleText);
+                }
+            });
+
+            initAutoScrollSections();
+        }
+
+        function filterDrawerSubmenuDynamic(uniqueId) {
+            const inputEl = document.getElementById(`search_${uniqueId}`);
+            const listEl = document.getElementById(`subList_${uniqueId}`);
+            if (!inputEl || !listEl) return;
+            const query = inputEl.value.trim().toLowerCase();
+            listEl.querySelectorAll('.drawer-sub-item').forEach(item => {
+                const name = item.getAttribute('data-item-name') || '';
+                item.style.display = name.includes(query) ? 'block' : 'none';
+            });
         }
 
         function renderFeaturedTwoCards(allItems) {
@@ -2617,22 +2678,22 @@
                                     <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
                                     <span>Tải Về</span>
                                 </button>
-                                <span class="text-[8px] text-gray-200 dark:text-cyan-100 mt-1 font-semibold">Miễn phí</span>
-                                <span class="text-[7.5px] text-gray-200 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
+                                <span class="text-[8px] mt-1 font-semibold featured-download-sub-outline">Miễn phí</span>
+                                <span class="text-[7.5px] font-medium featured-download-sub-outline">${itemDownloads} Lượt đã tải</span>
                             </div>
                         `;
                     }
 
                     itemsGridHtml += `
-                        <div class="app-card-clickable flex items-center justify-between p-2 rounded-2xl cursor-pointer group hover:bg-black/10 dark:hover:bg-white/10 transition"
+                        <div class="app-card-clickable flex items-center justify-between p-2 rounded-2xl cursor-pointer group hover:bg-white/10 transition"
                              data-app-json='${itemJsonEscaped}'>
-                            <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-1.5">
-                                <img src="${item.img}" alt="${item.name}" class="w-11 h-11 rounded-[12px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-black/10 dark:border-white/10">
+                            <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-2">
+                                <img src="${item.img}" alt="${item.name}" class="w-11 h-11 rounded-[12px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-white/15">
                                 <div class="min-w-0 flex-1">
                                     <h5 class="font-extrabold text-xs featured-card-title-theme truncate leading-snug group-hover:text-uptoAccent transition">
                                         ${item.name}
                                     </h5>
-                                    <p class="text-[10px] featured-card-desc-theme truncate mt-0.5">
+                                    <p class="text-[10px] featured-card-desc-theme line-clamp-2 leading-tight mt-0.5">
                                         ${itemDesc}
                                     </p>
                                 </div>
@@ -2648,7 +2709,7 @@
                 const randomBgMedia = getPrimaryMediaSrc(randomBgItem);
 
                 bottomListEl.innerHTML = `
-                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-black/10 dark:border-white/10">
+                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-white/15">
                         <img src="${randomBgMedia.url}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute inset-0 meitu-overlay-blur-custom"></div>
 
@@ -2669,30 +2730,189 @@
             }
         }
 
-        function renderMeituBannerWithSmallList(bannerContainerId, smallContainerId, countTextId, items, labelType) {
-            const bannerContainer = document.getElementById(bannerContainerId);
-            const smallContainer = document.getElementById(smallContainerId);
-            const countText = document.getElementById(countTextId);
-            if (!bannerContainer) return;
+        /* 1. MỤC TWEAK: Card nhỏ 2 hàng cuộn ngang */
+        function renderTweakSectionCustom(uniqueId, items) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
+            if (countText) countText.textContent = `${items.length} - Tweak`;
+
+            let innerHtml = '';
+            items.forEach(item => {
+                const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+
+                innerHtml += `
+                    <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
+                         data-app-json='${itemJsonEscaped}'>
+                        <div class="home-tweak-img-wrap">
+                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            wrapper.innerHTML = `
+                <div class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5" data-scroll-speed="40">
+                    <div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">
+                        ${innerHtml}
+                    </div>
+                </div>
+            `;
+            bindCardClickEvents(wrapper);
+        }
+
+        /* 2. MỤC APP IOS & APK: 1 hàng tối đa 5 card to tự động chuyển sau 3.5s */
+        function renderAppMixedSection(uniqueId, items, labelType) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
             if (countText) countText.textContent = `${items.length} - ${labelType}`;
 
-            const featuredItems = items.slice(0, 5);
-            const olderItems = items.slice(5);
+            const topItems = items.slice(0, 5);
+            const bottomItems = items.slice(5);
 
+            let topHtml = '';
+            topItems.forEach(item => {
+                const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
+                const publishDateStr = item.publishDate || 'Mới';
+                const authorStr = item.dev || 'KPazz';
+                const descText = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || '');
+                const media = getPrimaryMediaSrc(item);
+                const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+
+                topHtml += `
+                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                         data-app-json='${itemJsonEscaped}'>
+                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
+                        <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
+                            <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
+                            <span>Mới cập nhật: ${publishDateStr}</span>
+                        </div>
+                        <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
+                            <div class="flex items-center justify-between space-x-2.5">
+                                <div class="flex items-center space-x-2.5 min-w-0 flex-1">
+                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
+                                        <p class="text-[11px] text-gray-200 line-clamp-2 leading-tight mt-0.5 opacity-95">${descText}</p>
+                                    </div>
+                                </div>
+                                ${showDownloadBtn ? `
+                                    <div class="flex flex-col items-center flex-shrink-0 z-20">
+                                        <button type="button" class="btn-direct-download appstore-get-btn-home">
+                                            <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                            <span>Tải Về</span>
+                                        </button>
+                                        <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
+                                        <span class="text-[7.5px] text-gray-300 font-medium">${itemDownloads} Lượt đã tải</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
+                                <div class="flex items-center space-x-2 font-bold text-white">
+                                    <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
+                                    ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
+                                </div>
+                                <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorStr}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let bottomHtml = '';
+            bottomItems.forEach(item => {
+                const itemViews = getStoredViews(item);
+                const itemDownloads = getStoredDownloads(item);
+                let rawVersion = item.version || 'v1.0.0';
+                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+                const truncatedDesc = truncateByWords(descText, 6);
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+
+                bottomHtml += `
+                    <div class="app-card-clickable home-apk-item-box glass-panel border-none"
+                         data-app-json='${itemJsonEscaped}'>
+                        <div class="home-apk-img-wrap">
+                            <img src="${item.img}" class="home-apk-img-file img-ratio-1-1" alt="${item.name}">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
+                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            let bottomSectionHtml = bottomItems.length > 0 ? `
+                <div class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5 pt-2.5" data-scroll-speed="40">
+                    <div class="grid grid-rows-3 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">
+                        ${bottomHtml}
+                    </div>
+                </div>
+            ` : '';
+
+            wrapper.innerHTML = `
+                <div id="bigAutoSlider_${uniqueId}" class="flex space-x-3 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-2 cursor-grab pl-3.5 pr-3.5">
+                    ${topHtml}
+                </div>
+                <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+                ${bottomSectionHtml}
+            `;
+            bindCardClickEvents(wrapper);
+            initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
+        }
+
+        /* 3. MỤC THỦ THUẬT, MẸO HAY & TIN TỨC: 1 hàng card to bắt dính tự động chuyển sau 3.5s */
+        function renderTipBigCardSection(uniqueId, items, labelType) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
+            if (countText) countText.textContent = `${items.length} - ${labelType}`;
+
+            const tipItems = items.slice(0, 8);
             let bannerHtml = '';
-            featuredItems.forEach((item) => {
+
+            tipItems.forEach(item => {
                 const itemViews = getStoredViews(item);
                 const itemDownloads = getStoredDownloads(item);
                 const authorName = item.dev || 'KPazz';
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.dev || '');
+                const descText = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || '');
                 const publishDateText = item.publishDate || 'Mới';
-                
                 const media = getPrimaryMediaSrc(item);
                 const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 bannerHtml += `
-                    <div class="app-card-clickable snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
                          data-app-json='${itemJsonEscaped}'>
                         <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
 
@@ -2702,7 +2922,6 @@
                         </div>
 
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
-
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
                                     <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
@@ -2737,120 +2956,89 @@
                     </div>
                 `;
             });
-            bannerContainer.innerHTML = bannerHtml;
-            bindCardClickEvents(bannerContainer);
 
-            if (smallContainer) {
-                if (olderItems.length === 0) {
-                    smallContainer.classList.add('hidden');
-                    smallContainer.innerHTML = '';
-                } else {
-                    smallContainer.classList.remove('hidden');
-                    let smallHtml = '';
-                    olderItems.forEach((item) => {
-                        const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                        const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
-                        const itemDownloads = getStoredDownloads(item);
-                        const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
-
-                        smallHtml += `
-                            <div class="app-card-clickable glass-panel flex items-center justify-between w-[80vw] sm:w-[320px] flex-shrink-0 p-2 rounded-2xl shadow-sm border border-black/10 dark:border-white/10 cursor-pointer group"
-                                 data-app-json='${itemJsonEscaped}'>
-                                <div class="flex items-center space-x-3 min-w-0 flex-1">
-                                    <img src="${item.img}" class="w-12 h-12 rounded-[13px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-black/10 dark:border-white/10" alt="${item.name}">
-                                    <div class="min-w-0 flex-1 pr-2">
-                                        <h5 class="font-bold text-[14px] text-gray-900 dark:text-white truncate leading-snug group-hover:text-uptoAccent transition">${item.name}</h5>
-                                        <p class="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-3 mt-0.5">${descText}</p>
-                                    </div>
-                                </div>
-                                ${showDownloadBtn ? `
-                                    <div class="flex flex-col items-center flex-shrink-0 z-20">
-                                        <button type="button" class="btn-direct-download appstore-pill-btn">
-                                            <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
-                                            <span>Tải Về</span>
-                                        </button>
-                                        <span class="text-[8px] text-gray-700 dark:text-cyan-100 mt-1 font-semibold">Miễn phí</span>
-                                        <span class="text-[7.5px] text-gray-500 dark:text-gray-400 font-medium">${itemDownloads} Lượt đã tải</span>
-                                    </div>
-                                ` : `
-                                    <button type="button" class="btn-view-detail appstore-pill-btn">
-                                        <span>XEM</span>
-                                    </button>
-                                `}
-                            </div>
-                        `;
-                    });
-
-                    const rowCount = Math.min(3, olderItems.length);
-                    smallContainer.innerHTML = `<div class="grid grid-flow-col gap-x-3 gap-y-2 pr-3.5" style="grid-template-rows: repeat(${rowCount}, minmax(0, 1fr)); min-width: max-content;">${smallHtml}</div>`;
-                    bindCardClickEvents(smallContainer);
-                }
-            }
+            wrapper.innerHTML = `
+                <div id="bigAutoSlider_${uniqueId}" class="flex space-x-3 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 cursor-grab pl-3.5 pr-3.5">
+                    ${bannerHtml}
+                </div>
+                <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+            `;
+            bindCardClickEvents(wrapper);
+            initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
         }
 
-        function renderTweakSectionCustom(items) {
-            const container = document.getElementById('tweakJbSlideContainerTop');
-            const countText = document.getElementById('tweakJbCountTextTop');
-            if (!container) return;
-            if (countText) countText.textContent = `${items.length} - Tweak`;
+        /* 4. MỤC NĂNG SUẤT & TIỆN ÍCH: Card ô nhỏ icon nằm ở trên, tên ở dưới (2 hàng cuộn ngang) */
+        function renderGridTwoRowsScrollSection(uniqueId, items, labelType) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
+            if (countText) countText.textContent = `${items.length} - ${labelType}`;
 
             let innerHtml = '';
             items.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
-                let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 6);
+                const truncatedDesc = truncateByWords(descText, 3);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 innerHtml += `
-                    <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
+                    <div class="app-card-clickable home-grid-icon-box glass-panel border-none"
                          data-app-json='${itemJsonEscaped}'>
-                        <div class="home-tweak-img-wrap">
-                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
+                        <div class="home-grid-icon-wrap">
+                            <img src="${item.img}" class="home-grid-icon-file img-ratio-1-1" alt="${item.name}">
                         </div>
-                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                        <div class="w-full mt-2 space-y-0.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
-                                </div>
-                            </div>
+                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                         </div>
                     </div>
                 `;
             });
 
-            container.innerHTML = `<div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">${innerHtml}</div>`;
-            bindCardClickEvents(container);
+            wrapper.innerHTML = `
+                <div class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5" data-scroll-speed="40">
+                    <div class="grid grid-rows-2 grid-flow-col gap-x-3 gap-y-3 pr-3.5" style="min-width: max-content;">
+                        ${innerHtml}
+                    </div>
+                </div>
+            `;
+            bindCardClickEvents(wrapper);
         }
 
-        function renderProductivitySectionCustom(items) {
-            const container = document.getElementById('productivitySlideContainer');
-            const countText = document.getElementById('productivityCountText');
+        function initSectionAutoSlide(containerId) {
+            const container = document.getElementById(containerId);
             if (!container) return;
-            if (countText) countText.textContent = `${items.length} - APPs`;
+            const cards = container.querySelectorAll('.big-auto-card');
+            if (!cards.length) return;
 
-            let innerHtml = '';
-            items.forEach(item => {
-                innerHtml += `
-                    <div class="app-card-clickable flex flex-col items-center cursor-pointer text-center flex-none w-20 flex-shrink-0"
-                         data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="w-16 h-16 glass-panel rounded-2xl flex items-center justify-center p-1.5 shadow mb-1.5 border-none overflow-hidden">
-                            <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-xl">
-                        </div>
-                        <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate w-full">${item.name}</h5>
-                        <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate w-full">${item.category}</p>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = `<div class="grid grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="grid-template-rows: repeat(2, minmax(0, 1fr)); min-width: max-content;">${innerHtml}</div>`;
-            bindCardClickEvents(container);
+            let currentIndex = 0;
+            let timer = null;
+
+            function goToNextCard() {
+                currentIndex = (currentIndex + 1) % cards.length;
+                const targetCard = cards[currentIndex];
+                if (targetCard) {
+                    const scrollLeftPos = targetCard.offsetLeft - container.offsetLeft - (container.clientWidth / 2) + (targetCard.clientWidth / 2);
+                    container.scrollTo({
+                        left: scrollLeftPos,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            function startTimer() {
+                timer = setInterval(goToNextCard, 3500);
+            }
+
+            function stopTimer() {
+                clearInterval(timer);
+            }
+
+            container.addEventListener('touchstart', stopTimer, { passive: true });
+            container.addEventListener('touchend', startTimer, { passive: true });
+            container.addEventListener('mouseenter', stopTimer);
+            container.addEventListener('mouseleave', startTimer);
+
+            startTimer();
         }
 
         function bindCardClickEvents(parentElement) {
@@ -3097,292 +3285,8 @@
             });
         }
 
-        function initNewsSlideCarousel() {
-            const newsContainer = document.getElementById('newsSlideContainer');
-            const newsDotsContainer = document.getElementById('newsDotsIndicator');
-            if (!newsContainer) return;
-
-            const cards = newsContainer.querySelectorAll('.app-card-clickable');
-            let currentNewsIndex = 0;
-            let isUserHovered = false;
-
-            if (newsDotsContainer && cards.length) {
-                let dotsHtml = '';
-                cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="news-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-news-idx="${idx}"></span>`;
-                });
-                newsDotsContainer.innerHTML = dotsHtml;
-            }
-
-            function updateNewsSlide() {
-                if(!newsDotsContainer) return;
-                const dots = newsDotsContainer.querySelectorAll('.news-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentNewsIndex) {
-                        dot.className = 'news-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
-                    } else {
-                        dot.className = 'news-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
-                    }
-                });
-
-                const targetCard = cards[currentNewsIndex];
-                if (targetCard) {
-                    newsContainer.scrollTo({
-                        left: targetCard.offsetLeft - 14,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            if(cards.length > 0) {
-                setInterval(() => {
-                    if (isUserHovered) return;
-                    currentNewsIndex = (currentNewsIndex + 1) % cards.length;
-                    updateNewsSlide();
-                }, 3200);
-
-                newsDotsContainer.querySelectorAll('.news-dot').forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        currentNewsIndex = idx;
-                        updateNewsSlide();
-                    });
-                });
-            }
-
-            newsContainer.addEventListener('mouseenter', () => isUserHovered = true);
-            newsContainer.addEventListener('mouseleave', () => isUserHovered = false);
-        }
-
-        function initTipsSlideCarousel() {
-            const tipsContainer = document.getElementById('tipsSlideContainer');
-            const tipsDotsContainer = document.getElementById('tipsDotsIndicator');
-            if (!tipsContainer) return;
-
-            const cards = tipsContainer.querySelectorAll('.app-card-clickable');
-            let currentTipIndex = 0;
-            let isUserHovered = false;
-
-            if (tipsDotsContainer && cards.length) {
-                let dotsHtml = '';
-                cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="tip-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-tip-idx="${idx}"></span>`;
-                });
-                tipsDotsContainer.innerHTML = dotsHtml;
-            }
-
-            function updateTipSlide() {
-                if(!tipsDotsContainer) return;
-                const dots = tipsDotsContainer.querySelectorAll('.tip-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentTipIndex) {
-                        dot.className = 'tip-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
-                    } else {
-                        dot.className = 'tip-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
-                    }
-                });
-
-                const targetCard = cards[currentTipIndex];
-                if (targetCard) {
-                    tipsContainer.scrollTo({
-                        left: targetCard.offsetLeft - 14,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            if(cards.length > 0) {
-                setInterval(() => {
-                    if (isUserHovered) return;
-                    currentTipIndex = (currentTipIndex + 1) % cards.length;
-                    updateTipSlide();
-                }, 3200);
-
-                tipsDotsContainer.querySelectorAll('.tip-dot').forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        currentTipIndex = idx;
-                        updateTipSlide();
-                    });
-                });
-            }
-
-            tipsContainer.addEventListener('mouseenter', () => isUserHovered = true);
-            tipsContainer.addEventListener('mouseleave', () => isUserHovered = false);
-        }
-
-        function initJbAppsSlideCarousel() {
-            const jbAppsContainer = document.getElementById('jbAppsSlideContainer');
-            const jbAppsDotsContainer = document.getElementById('jbAppsDotsIndicator');
-            if (!jbAppsContainer) return;
-
-            const cards = jbAppsContainer.querySelectorAll('.app-card-clickable');
-            let currentJbAppIndex = 0;
-            let isUserHovered = false;
-
-            if (jbAppsDotsContainer && cards.length) {
-                let dotsHtml = '';
-                cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="jb-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-jb-idx="${idx}"></span>`;
-                });
-                jbAppsDotsContainer.innerHTML = dotsHtml;
-            }
-
-            function updateJbAppSlide() {
-                if(!jbAppsDotsContainer) return;
-                const dots = jbAppsDotsContainer.querySelectorAll('.jb-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentJbAppIndex) {
-                        dot.className = 'jb-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
-                    } else {
-                        dot.className = 'jb-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
-                    }
-                });
-
-                const targetCard = cards[currentJbAppIndex];
-                if (targetCard) {
-                    jbAppsContainer.scrollTo({
-                        left: targetCard.offsetLeft - 14,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            if(cards.length > 0) {
-                setInterval(() => {
-                    if (isUserHovered) return;
-                    currentJbAppIndex = (currentJbAppIndex + 1) % cards.length;
-                    updateJbAppSlide();
-                }, 3500);
-
-                jbAppsDotsContainer.querySelectorAll('.jb-dot').forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        currentJbAppIndex = idx;
-                        updateJbAppSlide();
-                    });
-                });
-            }
-
-            jbAppsContainer.addEventListener('mouseenter', () => isUserHovered = true);
-            jbAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
-        }
-
-        function initIpaAppsSlideCarousel() {
-            const ipaAppsContainer = document.getElementById('ipaAppsSlideContainer');
-            const ipaAppsDotsContainer = document.getElementById('ipaAppsDotsIndicator');
-            if (!ipaAppsContainer) return;
-
-            const cards = ipaAppsContainer.querySelectorAll('.app-card-clickable');
-            let currentIpaAppIndex = 0;
-            let isUserHovered = false;
-
-            if (ipaAppsDotsContainer && cards.length) {
-                let dotsHtml = '';
-                cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="ipa-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-ipa-idx="${idx}"></span>`;
-                });
-                ipaAppsDotsContainer.innerHTML = dotsHtml;
-            }
-
-            function updateIpaAppSlide() {
-                if(!ipaAppsDotsContainer) return;
-                const dots = ipaAppsDotsContainer.querySelectorAll('.ipa-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentIpaAppIndex) {
-                        dot.className = 'ipa-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
-                    } else {
-                        dot.className = 'ipa-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
-                    }
-                });
-
-                const targetCard = cards[currentIpaAppIndex];
-                if (targetCard) {
-                    ipaAppsContainer.scrollTo({
-                        left: targetCard.offsetLeft - 14,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            if(cards.length > 0) {
-                setInterval(() => {
-                    if (isUserHovered) return;
-                    currentIpaAppIndex = (currentIpaAppIndex + 1) % cards.length;
-                    updateIpaAppSlide();
-                }, 3700);
-
-                ipaAppsDotsContainer.querySelectorAll('.ipa-dot').forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        currentIpaAppIndex = idx;
-                        updateIpaAppSlide();
-                    });
-                });
-            }
-
-            ipaAppsContainer.addEventListener('mouseenter', () => isUserHovered = true);
-            ipaAppsContainer.addEventListener('mouseleave', () => isUserHovered = false);
-        }
-
-        function initApkAppsSlideCarousel() {
-            const apkContainer = document.getElementById('apkSlideContainer');
-            const apkDotsContainer = document.getElementById('apkDotsIndicator');
-            if (!apkContainer) return;
-
-            const cards = apkContainer.querySelectorAll('.app-card-clickable');
-            let currentApkIndex = 0;
-            let isUserHovered = false;
-
-            if (apkDotsContainer && cards.length) {
-                let dotsHtml = '';
-                cards.forEach((_, idx) => {
-                    dotsHtml += `<span class="apk-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer" data-apk-idx="${idx}"></span>`;
-                });
-                apkDotsContainer.innerHTML = dotsHtml;
-            }
-
-            function updateApkSlide() {
-                if(!apkDotsContainer) return;
-                const dots = apkDotsContainer.querySelectorAll('.apk-dot');
-                dots.forEach((dot, idx) => {
-                    if (idx === currentApkIndex) {
-                        dot.className = 'apk-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer';
-                    } else {
-                        dot.className = 'apk-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer';
-                    }
-                });
-
-                const targetCard = cards[currentApkIndex];
-                if (targetCard) {
-                    apkContainer.scrollTo({
-                        left: targetCard.offsetLeft - 14,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-
-            if(cards.length > 0) {
-                setInterval(() => {
-                    if (isUserHovered) return;
-                    currentApkIndex = (currentApkIndex + 1) % cards.length;
-                    updateApkSlide();
-                }, 3900);
-
-                apkDotsContainer.querySelectorAll('.apk-dot').forEach((dot, idx) => {
-                    dot.addEventListener('click', () => {
-                        currentApkIndex = idx;
-                        updateApkSlide();
-                    });
-                });
-            }
-
-            apkContainer.addEventListener('mouseenter', () => isUserHovered = true);
-            apkContainer.addEventListener('mouseleave', () => isUserHovered = false);
-        }
-
         const searchOpenBtn = document.getElementById('searchOpenBtn');
         const searchCloseBtn = document.getElementById('searchCloseBtn');
-        const searchModal = document.getElementById('searchModal');
-        const searchBoxContainer = document.getElementById('searchBoxContainer');
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
 
         const resetSearch = () => {
             searchInput.value = '';
@@ -3398,8 +3302,6 @@
         setupBackdropClose(searchModal, searchBoxContainer, resetSearch);
 
         const profileOpenBtn = document.getElementById('profileOpenBtn');
-        const loginModal = document.getElementById('loginModal');
-        const loginCard = document.getElementById('loginCard');
         const loginCloseBtn = document.getElementById('loginCloseBtn');
         
         const registerModal = document.getElementById('registerModal');
@@ -3485,8 +3387,6 @@
 
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-        const sidebarDrawer = document.getElementById('sidebarDrawer');
-        const drawerBackdrop = document.getElementById('drawerBackdrop');
 
         hamburgerBtn.addEventListener('click', () => {
             sidebarDrawer.classList.remove('-translate-x-full');
