@@ -23,10 +23,10 @@
                         uptoHeader: '#06131a',   
                         uptoCard: '#0c1c24',     
                         uptoCardHover: '#132833',
-                        uptoAccent: '#00baa3',   
-                        uptoBlueBtn: '#00a8e8',
-                        uptoGreenBadge: '#3cb64e',
-                        uptoOrangeBadge: '#e58e26',
+                        uptoAccent: '#00f2fe',   
+                        uptoBlueBtn: '#00b4d8',
+                        uptoGreenBadge: '#2ec4b6',
+                        uptoOrangeBadge: '#ffb703',
                     },
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', "SF Pro Display", "SF Pro Text", 'Helvetica Neue', 'Roboto', 'sans-serif'],
@@ -37,7 +37,85 @@
     </script>
 
     <style>
-        /* ================= HIỆU ỨNG LIQUID GLASS NAVBAR ================= */
+        /* ================= TÙY CHỈNH MÀU NAVBAR & MENU Ở CHẾ ĐỘ SÁNG ================= */
+        /* 1. Navbar: Toàn bộ chữ và icon trong navbar chính là màu đen, ngoại trừ logo icon KPazz và phần "Hôm Nay!" giữ màu xanh */
+        html:not(.dark) header#mainHeader span:not(#currentDateText):not(.text-uptoAccent):not(.text-\[\#14b8a6\]),
+        html:not(.dark) header#mainHeader i:not(#themeIcon):not(.fa-solid.fa-house):not(.fa-solid.fa-bars):not(.fa-solid.fa-magnifying-glass):not(.fa-regular.fa-circle-user):not(.fa-solid.fa-calendar-day),
+        html:not(.dark) header#mainHeader button,
+        html:not(.dark) header#mainHeader a span:not(.text-uptoAccent) {
+            color: #0f172a !important;
+        }
+
+        /* Giữ nguyên màu xanh ngọc cho icon cạnh chữ KPazz và phần "Hôm Nay!" (cả icon và text) trong navbar ở chế độ sáng */
+        html:not(.dark) header#mainHeader svg.text-uptoAccent,
+        html:not(.dark) header#mainHeader span.text-uptoAccent,
+        html:not(.dark) header#mainHeader .text-\[\#14b8a6\],
+        html:not(.dark) header#mainHeader span.text-\[\#14b8a6\],
+        html:not(.dark) header#mainHeader i.fa-solid.fa-calendar-day {
+            color: #14b8a6 !important;
+            fill: #14b8a6 !important;
+        }
+
+        /* Các nút icon menu, search, profile, theme trong navbar ở chế độ sáng */
+        html:not(.dark) header#mainHeader #hamburgerBtn,
+        html:not(.dark) header#mainHeader #searchOpenBtn,
+        html:not(.dark) header#mainHeader #profileOpenBtn,
+        html:not(.dark) header#mainHeader #collapsedMenuBtn,
+        html:not(.dark) header#mainHeader #collapsedSearchBtn,
+        html:not(.dark) header#mainHeader #collapsedProfileBtn {
+            color: #0f172a !important;
+        }
+
+        /* Ngày tháng trong navbar ở chế độ sáng */
+        html:not(.dark) header#mainHeader #currentDateText {
+            color: #475569 !important;
+        }
+
+        /* Nút chuyển đổi giao diện (themeIcon) giữ màu vàng cam đặc trưng */
+        html:not(.dark) header#mainHeader #themeIcon {
+            color: #f59e0b !important;
+        }
+
+        /* 2. Menu (Sidebar): Ở chế độ sáng, text và icon trong menu chuyển sang màu đen */
+        html:not(.dark) #sidebarDrawer nav a,
+        html:not(.dark) #sidebarDrawer nav div span,
+        html:not(.dark) #sidebarDrawer nav div i:not(.drawer-active-icon),
+        html:not(.dark) #sidebarDrawer .drawer-main-action span,
+        html:not(.dark) #sidebarDrawer .drawer-main-action i {
+            color: #0f172a !important;
+        }
+
+        /* Riêng mục đang được chọn (active) trong menu và logo icon cạnh chữ KPazz trong menu luôn giữ màu xanh ngọc `#14b8a6` */
+        html:not(.dark) #sidebarDrawer svg.text-uptoAccent,
+        html:not(.dark) #sidebarDrawer a.drawer-main-item,
+        html:not(.dark) #sidebarDrawer a.drawer-main-item span,
+        html:not(.dark) #sidebarDrawer a.drawer-main-item i {
+            color: #14b8a6 !important;
+            fill: #14b8a6 !important;
+        }
+        
+        /* Tiêu đề KPazz đầu menu ở chế độ sáng */
+        html:not(.dark) #sidebarDrawer div span.text-gray-900 {
+            color: #0f172a !important;
+        }
+
+        /* ================= HIỆU ỨNG PHÁT SÁNG & BO GÓC CHUẨN ICON IOS ================= */
+        .card-icon-glow {
+            position: relative;
+            overflow: visible !important;
+            border-radius: 22.5% !important;
+            box-shadow: 0 0 3.5px 0.35px rgba(0, 215, 255, 0.35), 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .card-icon-glow img {
+            border-radius: 22.5% !important;
+        }
+
+        .card-icon-glow::after {
+            display: none !important;
+        }
+
+        /* ================= HIỆU ỨNG LIQUID GLASS NAVBAR & TỊNH TIẾN CHUẨN IOS ================= */
         header#mainHeader {
             position: fixed;
             top: 12px;
@@ -47,22 +125,22 @@
             max-width: 1280px;
             border-radius: 1.35rem;
             z-index: 40;
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255, 255, 255, 0.52);
             backdrop-filter: blur(35px) saturate(240%);
             -webkit-backdrop-filter: blur(35px) saturate(240%);
-            border: 1.5px solid rgba(255, 255, 255, 0.75);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.9);
-            transition: all 1.9s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), inset 0 1.5px 3px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 242, 254, 0.3);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             transform-origin: top left;
         }
 
         .dark header#mainHeader {
-            background: rgba(6, 19, 26, 0.62);
+            background: rgba(6, 19, 26, 0.48);
             backdrop-filter: blur(40px) saturate(260%);
             -webkit-backdrop-filter: blur(40px) saturate(260%);
-            border: 1.5px solid rgba(0, 186, 163, 0.45);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(0, 186, 163, 0.35);
+            border: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), inset 0 1.5px 3px rgba(0, 242, 254, 0.6), inset 0 -1px 1px rgba(255, 255, 255, 0.2);
         }
 
         header#mainHeader.is-collapsed {
@@ -72,26 +150,32 @@
             height: 74px;
             border-radius: 1.5rem;
             padding: 0 !important;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.45);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), inset 0 1.5px 3px rgba(255, 255, 255, 0.7), inset 0 -1px 1px rgba(0, 242, 254, 0.4);
         }
 
         .dark header#mainHeader.is-collapsed {
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(0, 186, 163, 0.35);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75), inset 0 1.5px 3px rgba(0, 242, 254, 0.65), inset 0 -1px 1px rgba(255, 255, 255, 0.25);
         }
 
         .header-inner-content {
+            transform: translateX(0);
             opacity: 1;
-            transform: scale(1);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            visibility: visible;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease, visibility 0.15s ease;
+            width: 100%;
+        }
+
+        header#mainHeader:not(.is-collapsed) .header-inner-content {
+            transition-delay: 0s;
         }
 
         header#mainHeader.is-collapsed .header-inner-content {
+            transform: translateX(-100%);
             opacity: 0;
-            transform: scale(0.92);
+            visibility: hidden;
             pointer-events: none;
             position: absolute;
-            inset: 0;
-            visibility: hidden;
+            transition-delay: 0s;
         }
 
         .header-menu-pill {
@@ -101,35 +185,30 @@
             width: 100%;
             height: 100%;
             padding: 0 12px;
+            transform: translateX(100%);
             opacity: 0;
-            transform: scale(0.85);
-            pointer-events: none;
+            visibility: hidden;
             position: absolute;
             inset: 0;
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, visibility 0.2s ease;
+            pointer-events: none;
         }
 
         header#mainHeader.is-collapsed .header-menu-pill {
+            transform: translateX(0);
             opacity: 1;
-            transform: scale(1);
+            visibility: visible;
             pointer-events: auto;
             position: relative;
-        }
-
-        .header-menu-pill button {
-            color: #025952 !important;
-            font-weight: 900;
-        }
-        .dark .header-menu-pill button {
-            color: #00baa3 !important;
+            transition-delay: 0.1s;
         }
 
         .glass-panel {
             background: rgba(255, 255, 255, 0.96) !important;
             backdrop-filter: blur(35px) saturate(210%) !important;
             -webkit-backdrop-filter: blur(35px) saturate(210%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.6) !important;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+            border: none !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 180, 216, 0.25) !important;
             overflow-x: hidden !important;
         }
 
@@ -137,14 +216,14 @@
             background: rgba(10, 26, 34, 0.82) !important;
             backdrop-filter: blur(40px) saturate(240%) !important;
             -webkit-backdrop-filter: blur(40px) saturate(240%) !important;
-            border: 1px solid rgba(0, 186, 163, 0.22) !important;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(0, 186, 163, 0.25) !important;
+            border: none !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1.5px 2.5px rgba(0, 242, 254, 0.5), inset 0 -1px 1px rgba(255, 255, 255, 0.2) !important;
             overflow-x: hidden !important;
         }
 
         #appDetailCard {
             border: none !important;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 1.5px 3px rgba(255, 255, 255, 0.4) !important;
             padding: 0 !important;
             background: #ffffff !important;
             overflow-x: hidden !important;
@@ -153,6 +232,7 @@
         }
         .dark #appDetailCard {
             background: #0a1a22 !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 1.5px 3px rgba(0, 242, 254, 0.4) !important;
         }
 
         .app-card-clickable {
@@ -193,7 +273,6 @@
             );
         }
 
-        /* Thanh nút tải dưới chân trang popup: Làm mờ hoà trộn liền mạch hoàn toàn, không còn vạch chia ranh giới */
         .sticky-download-bar-blend {
             background: linear-gradient(
                 to bottom,
@@ -226,14 +305,18 @@
         }
 
         .meitu-overlay-blur-custom {
-            background: linear-gradient(180deg, rgba(16, 22, 32, 0.62) 0%, rgba(16, 22, 32, 0.72) 50%, rgba(12, 18, 26, 0.84) 100%);
-            backdrop-filter: blur(14px) saturate(160%);
-            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            background: linear-gradient(180deg, rgba(16, 22, 32, 0.35) 0%, rgba(12, 18, 26, 0.85) 55%, rgba(6, 12, 18, 0.98) 100%);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 22%, black 50%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 22%, black 50%, black 100%);
         }
         .dark .meitu-overlay-blur-custom {
-            background: linear-gradient(180deg, rgba(8, 16, 22, 0.68) 0%, rgba(8, 16, 22, 0.78) 50%, rgba(6, 12, 18, 0.88) 100%);
-            backdrop-filter: blur(16px) saturate(175%);
-            -webkit-backdrop-filter: blur(16px) saturate(175%);
+            background: linear-gradient(180deg, rgba(8, 16, 22, 0.4) 0%, rgba(6, 12, 18, 0.88) 55%, rgba(2, 6, 10, 0.99) 100%);
+            backdrop-filter: blur(18px) saturate(200%);
+            -webkit-backdrop-filter: blur(18px) saturate(200%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 22%, black 50%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 22%, black 50%, black 100%);
         }
 
         .featured-card-title-theme {
@@ -246,12 +329,12 @@
         }
 
         .featured-card-desc-theme {
-            color: #e2e8f0 !important;
+            color: #f1f5f9 !important;
             font-weight: 400;
             opacity: 0.95;
         }
         .dark .featured-card-desc-theme {
-            color: #e2e8f0 !important;
+            color: #f1f5f9 !important;
             opacity: 0.95;
         }
 
@@ -266,12 +349,12 @@
         }
 
         .featured-download-sub-outline {
-            color: #cbd5e1 !important;
+            color: #e2e8f0 !important;
             font-weight: 600;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
         }
         .dark .featured-download-sub-outline {
-            color: #cbd5e1 !important;
+            color: #e2e8f0 !important;
             font-weight: 600;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
         }
@@ -282,9 +365,9 @@
             width: 100%;
             border-radius: 1.625rem;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: none !important;
         }
 
         .featured-banner-unique-bg {
@@ -319,7 +402,7 @@
         }
 
         .featured-banner-unique-action-btn {
-            background: rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.32);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: #ffffff;
@@ -330,8 +413,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            border: none !important;
             transition: all 0.2s ease;
             white-space: nowrap;
         }
@@ -341,9 +424,10 @@
             transform: scale(1.03);
         }
 
+        /* ================= NÚT TẢI XUỐNG GIỮ NGUYÊN KHÔNG CHỈNH GÌ ================= */
         .appstore-pill-btn {
-            background-color: #00a8e8;
-            color: #ffffff;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%) !important;
+            color: #ffffff !important;
             font-weight: 800;
             padding: 0.35rem 0.85rem;
             border-radius: 9999px;
@@ -354,25 +438,31 @@
             gap: 0.3rem;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            border: none;
+            border: none !important;
             cursor: pointer;
             flex-shrink: 0;
             z-index: 20;
             position: relative;
-            box-shadow: 0 2px 6px rgba(0, 168, 232, 0.3);
+            box-shadow: 0 3px 10px rgba(0, 180, 216, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
         }
         .appstore-pill-btn:hover {
-            background-color: #0091ca;
-            color: #ffffff;
+            background: linear-gradient(135deg, #0096c7, #005f73) !important;
+            color: #ffffff !important;
+            transform: scale(1.03);
         }
         .dark .appstore-pill-btn {
-            background-color: rgba(255, 255, 255, 0.14);
-            color: #38bdf8;
-            box-shadow: none;
+            background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 3px 12px rgba(0, 242, 254, 0.4), inset 0 1px 1px rgba(0, 242, 254, 0.6);
+            font-weight: 900;
+        }
+        .dark .appstore-pill-btn i,
+        .dark .appstore-pill-btn span {
+            color: #ffffff !important;
         }
         .dark .appstore-pill-btn:hover {
-            background-color: #0a84ff;
-            color: #ffffff;
+            background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
+            color: #ffffff !important;
         }
 
         #appDetailScrollBody {
@@ -410,7 +500,7 @@
             content: '';
             position: absolute;
             inset: 6px 4px 12px 4px;
-            background: var(--screenshots-ambient-bg, radial-gradient(circle at center, rgba(0, 186, 163, 0.45), rgba(0, 168, 232, 0.2)));
+            background: var(--screenshots-ambient-bg, radial-gradient(circle at center, rgba(0, 242, 254, 0.45), rgba(0, 180, 216, 0.2)));
             filter: blur(22px);
             opacity: 0.75;
             z-index: -1;
@@ -420,7 +510,7 @@
         }
 
         .system-req-custom-text {
-            color: #00baa3 !important;
+            color: #14b8a6 !important;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -428,23 +518,26 @@
             text-overflow: ellipsis;
         }
         .dark .system-req-custom-text {
-            color: #00baa3 !important;
+            color: #00f2fe !important;
         }
         .system-req-more-hint {
-            color: #38bdf8;
             font-size: 10px;
             font-weight: 600;
             margin-top: 2px;
             display: inline-block;
             cursor: pointer;
+            color: #64748b;
+        }
+        .dark .system-req-more-hint {
+            color: #94a3b8;
         }
         .system-req-more-hint:hover {
             text-decoration: underline;
         }
 
         .appstore-get-btn {
-            background-color: rgba(0, 168, 232, 0.18);
-            color: #00a8e8;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%) !important;
+            color: #ffffff !important;
             font-weight: 800;
             padding: 0.5rem 1.25rem;
             border-radius: 9999px;
@@ -455,31 +548,34 @@
             gap: 0.4rem;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            border: none;
+            border: none !important;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0, 168, 232, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
             flex-shrink: 0;
         }
         .appstore-get-btn:hover {
-            background-color: #00a8e8;
-            color: #ffffff;
+            background: linear-gradient(135deg, #0096c7, #005f73) !important;
+            color: #ffffff !important;
             transform: scale(1.05);
         }
         .dark .appstore-get-btn {
-            background-color: rgba(0, 186, 163, 0.22);
-            color: #00baa3;
-            box-shadow: 0 3px 8px rgba(0, 186, 163, 0.25);
+            background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(0, 242, 254, 0.45), inset 0 1px 1px rgba(0, 242, 254, 0.6);
+            font-weight: 900;
+        }
+        .dark .appstore-get-btn i,
+        .dark .appstore-get-btn span {
+            color: #ffffff !important;
         }
         .dark .appstore-get-btn:hover {
-            background-color: #00baa3;
-            color: #ffffff;
+            background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
+            color: #ffffff !important;
         }
 
         .appstore-get-btn-home {
-            background-color: rgba(255, 255, 255, 0.22);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #ffffff;
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%) !important;
+            color: #ffffff !important;
             font-weight: 800;
             padding: 0.35rem 0.85rem;
             border-radius: 9999px;
@@ -490,28 +586,40 @@
             gap: 0.3rem;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: none !important;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 3px 10px rgba(0, 180, 216, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
             flex-shrink: 0;
             z-index: 20;
             position: relative;
         }
         .appstore-get-btn-home:hover {
-            background-color: #00baa3;
-            border-color: #00baa3;
-            color: #ffffff;
+            background: linear-gradient(135deg, #0096c7, #005f73) !important;
+            color: #ffffff !important;
             transform: scale(1.03);
+        }
+        .dark .appstore-get-btn-home {
+            background: linear-gradient(135deg, #0096c7 0%, #023e8a 100%) !important;
+            color: #ffffff !important;
+            font-weight: 900;
+        }
+        .dark .appstore-get-btn-home i,
+        .dark .appstore-get-btn-home span {
+            color: #ffffff !important;
+        }
+        .dark .appstore-get-btn-home:hover {
+            background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
+            color: #ffffff !important;
         }
 
         @keyframes bounceGlow {
             0%, 100% {
                 transform: translateY(0) scale(1);
-                box-shadow: 0 0 22px rgba(0, 168, 232, 0.5), 0 12px 30px rgba(0, 0, 0, 0.25);
+                box-shadow: 0 0 22px rgba(0, 180, 216, 0.5), 0 12px 30px rgba(0, 0, 0, 0.25);
             }
             50% {
                 transform: translateY(-4px) scale(1.02);
-                box-shadow: 0 0 32px rgba(0, 186, 163, 0.7), 0 18px 35px rgba(0, 0, 0, 0.35);
+                box-shadow: 0 0 32px rgba(0, 242, 254, 0.7), 0 18px 35px rgba(0, 0, 0, 0.35);
             }
         }
 
@@ -525,17 +633,18 @@
         }
 
         .sticky-download-glow-bounce {
-            background: linear-gradient(135deg, rgba(230, 248, 246, 0.98), rgba(220, 240, 252, 0.98)) !important;
+            background: linear-gradient(135deg, rgba(230, 248, 255, 0.98), rgba(210, 240, 252, 0.98)) !important;
             backdrop-filter: blur(25px) saturate(220%) !important;
             -webkit-backdrop-filter: blur(25px) saturate(220%) !important;
-            border: 2px solid rgba(0, 168, 232, 0.6) !important;
+            border: none !important;
             padding: 1.1rem 1.25rem !important;
             border-radius: 1.25rem !important;
+            box-shadow: 0 15px 35px rgba(0, 180, 216, 0.25), inset 0 1.5px 3px rgba(255, 255, 255, 0.95);
             animation: bounceGlow 2.5s infinite ease-in-out;
         }
 
         .slide-to-unlock-text {
-            background: linear-gradient(90deg, #0b2533 0%, #0077b6 25%, #00a8e8 50%, #0077b6 75%, #0b2533 100%);
+            background: linear-gradient(90deg, #03045e 0%, #0077b6 25%, #00b4d8 50%, #0077b6 75%, #03045e 100%);
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
@@ -544,8 +653,9 @@
         }
 
         .dark .sticky-download-glow-bounce {
-            background: linear-gradient(135deg, rgba(0, 186, 163, 0.38), rgba(0, 168, 232, 0.42)) !important;
-            border: 1.5px solid rgba(0, 186, 163, 0.6) !important;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.38), rgba(0, 180, 216, 0.42)) !important;
+            border: none !important;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 1.5px 3px rgba(0, 242, 254, 0.6);
         }
 
         .dark .slide-to-unlock-text {
@@ -590,24 +700,20 @@
         .popup-card-imgbox-custom {
             width: 2.75rem;
             height: 2.75rem;
-            border-radius: 0.65rem;
+            border-radius: 22.5%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             flex-shrink: 0;
-            padding: 0.15rem;
-            background-color: rgba(0, 0, 0, 0.15);
-        }
-        .dark .popup-card-imgbox-custom {
-            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0;
         }
         .popup-card-img-custom {
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
             width: 100% !important;
             height: 100% !important;
-            border-radius: 0.5rem !important;
+            border-radius: 22.5% !important;
         }
 
         .home-apk-item-box, .home-tweak-item-box, .rec-item-card {
@@ -623,34 +729,29 @@
         .home-apk-img-wrap, .home-tweak-img-wrap, .rec-item-card-img-wrap {
             width: 2.75rem;
             height: 2.75rem;
-            border-radius: 0.65rem;
+            border-radius: 22.5%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             flex-shrink: 0;
-            padding: 0.15rem;
-            background-color: rgba(0, 0, 0, 0.15);
-        }
-        .dark .home-apk-img-wrap, .dark .home-tweak-img-wrap, .dark .rec-item-card-img-wrap {
-            background-color: rgba(0, 0, 0, 0.35);
+            padding: 0;
         }
         .home-apk-img-file, .home-tweak-img-file, .rec-item-card-img {
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
             width: 100% !important;
             height: 100% !important;
-            border-radius: 0.5rem !important;
+            border-radius: 22.5% !important;
         }
 
-        /* ================= APP STORE STYLE 2-ROW SO LE ICON CARD ================= */
         .appstore-grid-card-box {
             position: relative;
             width: 100%;
             border-radius: 1.75rem;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1.5px 3px rgba(255, 255, 255, 0.45);
+            border: none !important;
             padding: 0; 
         }
         .appstore-grid-card-bg {
@@ -660,22 +761,51 @@
             height: 100%;
             object-fit: cover;
         }
+        
         .appstore-grid-card-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(4, 10, 16, 0.65) 0%, rgba(4, 10, 16, 0.88) 45%, rgba(2, 6, 10, 0.98) 100%);
-            backdrop-filter: blur(24px) saturate(200%);
-            -webkit-backdrop-filter: blur(24px) saturate(200%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
-        }
-        .dark .appstore-grid-card-overlay {
-            background: linear-gradient(180deg, rgba(2, 6, 10, 0.7) 0%, rgba(2, 6, 10, 0.9) 45%, rgba(1, 3, 5, 0.99) 100%);
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.82) 0%, 
+                rgba(255, 255, 255, 0.65) 32%, 
+                rgba(255, 255, 255, 0.48) 55%, 
+                rgba(255, 255, 255, 0.85) 100%
+            );
             backdrop-filter: blur(28px) saturate(220%);
             -webkit-backdrop-filter: blur(28px) saturate(220%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
+            border: none !important;
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.9);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 15%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 15%, black 100%);
         }
+        .dark .appstore-grid-card-overlay {
+            background: linear-gradient(
+                180deg, 
+                rgba(6, 19, 26, 0.85) 0%, 
+                rgba(6, 19, 26, 0.65) 32%, 
+                rgba(6, 19, 26, 0.5) 55%, 
+                rgba(6, 19, 26, 0.92) 100%
+            );
+            backdrop-filter: blur(32px) saturate(240%);
+            -webkit-backdrop-filter: blur(32px) saturate(240%);
+            border: none !important;
+            box-shadow: inset 0 1px 3px rgba(0, 242, 254, 0.4);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 15%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, black 15%, black 100%);
+        }
+
+        .appstore-grid-card-overlay h3,
+        .appstore-grid-card-overlay p {
+            color: #0f172a !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+        }
+        .dark .appstore-grid-card-overlay h3,
+        .dark .appstore-grid-card-overlay p {
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
         .appstore-icon-item {
             display: flex;
             align-items: center;
@@ -692,18 +822,16 @@
         .appstore-icon-wrap {
             width: 4.75rem;
             height: 4.75rem;
-            border-radius: 1.2rem;
+            border-radius: 22.5%;
             overflow: hidden;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.12);
+            padding: 0 !important;
         }
         .appstore-icon-img {
             width: 100%;
             height: 100%;
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
-            border-radius: 1.1rem !important;
+            border-radius: 22.5% !important;
         }
         .staggered-row-offset {
             margin-left: -2.6rem;
@@ -719,40 +847,44 @@
             text-transform: uppercase;
             padding: 6px 14px 6px 12px;
             border-bottom-right-radius: 1.1rem;
-            color: #ffffff;
+            color: #ffffff !important;
             z-index: 25;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-right: 1px solid rgba(255, 255, 255, 0.22);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+            border: none !important;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             line-height: 1.2;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+        }
+        .appstore-top-left-badge span {
+            color: #ffffff !important;
         }
         .appstore-top-left-badge .badge-sub-date {
             font-size: 8px;
             font-weight: 600;
-            opacity: 0.92;
+            opacity: 0.95;
             letter-spacing: 0.02em;
             text-transform: none;
             margin-top: 1px;
+            color: #ffffff !important;
         }
 
         .account-modal-card {
             background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(40px) saturate(220%) !important;
             -webkit-backdrop-filter: blur(40px) saturate(220%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.9) !important;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
+            border: none !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), inset 0 1.5px 3px rgba(255, 255, 255, 0.95) !important;
         }
         .dark .account-modal-card {
             background: rgba(8, 22, 30, 0.96) !important;
             backdrop-filter: blur(45px) saturate(240%) !important;
             -webkit-backdrop-filter: blur(45px) saturate(240%) !important;
-            border: 1.5px solid rgba(0, 186, 163, 0.4) !important;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), inset 0 1px 2px rgba(0, 186, 163, 0.3) !important;
+            border: none !important;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), inset 0 1.5px 3px rgba(0, 242, 254, 0.5) !important;
         }
 
         .popup-article-box {
@@ -760,15 +892,15 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: none !important;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9) !important;
+            box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.95) !important;
             margin-left: 0 !important;
             margin-right: 0 !important;
             width: 100% !important;
         }
         .dark .popup-article-box {
             background: rgba(10, 28, 38, 0.92) !important;
-            border: 1px solid rgba(0, 186, 163, 0.2) !important;
-            box-shadow: inset 0 1px 2px rgba(0, 186, 163, 0.15) !important;
+            border: none !important;
+            box-shadow: inset 0 1.5px 2px rgba(0, 242, 254, 0.25) !important;
         }
 
         .comment-card-box {
@@ -776,7 +908,7 @@
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
             border: none !important;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+            box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.9) !important;
             margin: 0 !important;
             width: 100% !important;
         }
@@ -784,14 +916,14 @@
             background: rgba(10, 28, 38, 0.9) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border: 1px solid rgba(0, 186, 163, 0.2) !important;
-            box-shadow: inset 0 1px 2px rgba(0, 186, 163, 0.15) !important;
+            border: none !important;
+            box-shadow: inset 0 1.5px 2px rgba(0, 242, 254, 0.25) !important;
         }
 
         .custom-form-input {
             background-color: rgba(240, 244, 248, 0.95) !important;
             color: #0f172a !important;
-            border: 1px solid rgba(203, 213, 225, 0.9) !important;
+            border: none !important;
         }
         .custom-form-input::placeholder {
             color: #64748b !important;
@@ -800,7 +932,7 @@
         .dark .custom-form-input {
             background-color: rgba(6, 18, 25, 0.9) !important;
             color: #f8fafc !important;
-            border: 1px solid rgba(0, 186, 163, 0.3) !important;
+            border: none !important;
         }
         .dark .custom-form-input::placeholder {
             color: #94a3b8 !important;
@@ -814,7 +946,7 @@
             border-top-right-radius: 2rem !important;
             border-bottom-right-radius: 2rem !important;
             border: none !important;
-            box-shadow: 15px 0 50px rgba(0, 0, 0, 0.2) !important;
+            box-shadow: 15px 0 50px rgba(0, 0, 0, 0.2), inset -1.5px 0 3px rgba(255, 255, 255, 0.95) !important;
         }
         .dark .drawer-main-panel {
             background: rgba(6, 18, 25, 0.86) !important;
@@ -822,8 +954,8 @@
             -webkit-backdrop-filter: blur(45px) saturate(260%) !important;
             border-top-right-radius: 2rem !important;
             border-bottom-right-radius: 2rem !important;
-            border-right: 1.5px solid rgba(0, 186, 163, 0.3) !important;
-            box-shadow: 15px 0 60px rgba(0, 0, 0, 0.9) !important;
+            border: none !important;
+            box-shadow: 15px 0 60px rgba(0, 0, 0, 0.9), inset -1.5px 0 3px rgba(0, 242, 254, 0.4) !important;
         }
 
         .drawer-submenu-container {
@@ -833,22 +965,22 @@
             border-radius: 14px;
             padding: 10px;
             margin-top: 6px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 186, 163, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            border: none !important;
         }
         .dark .drawer-submenu-container {
             background: rgba(10, 28, 38, 0.75) !important;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 186, 163, 0.2) !important;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 242, 254, 0.3);
+            border: none !important;
         }
 
         html, body, div, header, footer, button, input {
             touch-action: manipulation;
             -webkit-text-size-adjust: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
-            transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                        color 1.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                        border-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: background-color 0.25s ease, 
+                        color 0.25s ease, 
+                        border-color 0.25s ease;
         }
 
         input, select, textarea {
@@ -894,7 +1026,7 @@
             opacity: 0.85;
         }
         .section-arrow {
-            color: #00baa3;
+            color: #00f2fe;
             margin-left: 0.5rem;
             font-size: 0.9rem;
         }
@@ -951,8 +1083,9 @@
         }
 
         mark {
-            background-color: #00baa3;
-            color: #ffffff;
+            background-color: #00f2fe;
+            color: #06131a;
+            font-weight: bold;
             border-radius: 2px;
             padding: 0 3px;
         }
@@ -977,7 +1110,7 @@
         <div class="header-inner-content">
             <div class="flex items-center justify-between px-4 py-2.5 max-w-md md:max-w-5xl lg:max-w-7xl mx-auto">
                 <div class="flex items-center space-x-3.5">
-                    <button id="hamburgerBtn" aria-label="Menu" class="text-uptoAccent text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
+                    <button id="hamburgerBtn" aria-label="Menu" class="text-2xl focus:outline-none hover:opacity-80 transition active:scale-95">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     
@@ -985,7 +1118,7 @@
                         <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                             <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                         </svg>
-                        <span class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">KPazz</span>
+                        <span class="text-xl font-extrabold tracking-tight">KPazz</span>
                     </a>
                 </div>
 
@@ -994,23 +1127,23 @@
                         <i id="themeIcon" class="fa-solid fa-moon"></i>
                     </button>
 
-                    <button id="searchOpenBtn" aria-label="Search" class="text-uptoAccent text-xl hover:opacity-80 active:scale-90 transition">
+                    <button id="searchOpenBtn" aria-label="Search" class="text-xl hover:opacity-80 active:scale-90 transition">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
 
-                    <button id="profileOpenBtn" aria-label="Account" class="text-uptoAccent text-2xl hover:opacity-80 active:scale-90 transition">
+                    <button id="profileOpenBtn" aria-label="Account" class="text-2xl hover:opacity-80 active:scale-90 transition">
                         <i class="fa-regular fa-circle-user"></i>
                     </button>
                 </div>
             </div>
 
-            <div class="py-2 px-4 bg-gray-100/60 dark:bg-[#06131a]/60 backdrop-blur-md border-none">
+            <div class="py-2 px-4 bg-transparent border-none">
                 <div class="flex items-center justify-between max-w-md md:max-w-5xl lg:max-w-7xl mx-auto text-xs font-bold tracking-wide">
-                    <span class="text-uptoAccent flex items-center space-x-1.5">
-                        <i class="fa-solid fa-calendar-day text-sm"></i>
-                        <span>Hôm Nay!</span>
+                    <span class="text-[#14b8a6] dark:text-uptoAccent flex items-center space-x-1.5">
+                        <i class="fa-solid fa-calendar-day text-sm text-[#14b8a6] dark:text-uptoAccent"></i>
+                        <span class="text-[#14b8a6] dark:text-uptoAccent">Hôm Nay!</span>
                     </span>
-                    <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Tư, 18 tháng 11, 2026</span>
+                    <span id="currentDateText" class="font-semibold">Thứ Tư, 18 tháng 11, 2026</span>
                 </div>
             </div>
         </div>
@@ -1046,7 +1179,7 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ (KIỂU APP STORE) ==================== -->
+    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ ==================== -->
     <div id="downloadVersionsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[65] hidden items-center justify-center p-4">
         <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[85vh] overflow-hidden border-none animate-pop-in">
             
@@ -1064,7 +1197,7 @@
             </div>
 
             <div class="py-4 space-y-3 flex flex-col items-center text-center relative z-10">
-                <img id="popupAppStoreIcon" src="" alt="App Icon" class="w-16 h-16 rounded-2xl object-cover shadow-lg border border-white/20">
+                <img id="popupAppStoreIcon" src="" alt="App Icon" class="w-16 h-16 rounded-[22.5%] object-cover shadow-lg card-icon-glow">
                 <div>
                     <h4 id="popupAppStoreName" class="font-extrabold text-base text-gray-900 dark:text-white leading-tight">Tên Ứng Dụng</h4>
                     <p id="popupAppStoreDeveloper" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Nhà phát triển</p>
@@ -1126,7 +1259,7 @@
                     <div class="flex items-center space-x-1 bg-black/10 dark:bg-white/10 p-1 rounded-xl text-[10px] font-extrabold">
                         <span class="text-gray-600 dark:text-gray-400 text-[9px] px-1 hidden sm:inline">Cột:</span>
                         <button onclick="setGridColumns(1)" id="gridBtn1" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95">1</button>
-                        <button onclick="setGridColumns(2)" id="gridBtn2" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white shadow">2</button>
+                        <button onclick="setGridColumns(2)" id="gridBtn2" class="w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-[#06131a] shadow font-black">2</button>
                     </div>
                 </div>
             </div>
@@ -1167,18 +1300,18 @@
                     <div class="px-4 sm:px-5 -mt-12 relative z-20 space-y-4">
                         <div class="flex items-center justify-between space-x-3">
                             <div class="flex items-start space-x-3.5 min-w-0 flex-1">
-                                <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-2xl img-ratio-1-1 border-none shadow-xl flex-shrink-0">
+                                <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-[22.5%] img-ratio-1-1 shadow-xl flex-shrink-0 object-cover card-icon-glow">
                                 <div class="flex-1 min-w-0 pr-1 pt-1">
                                     <h2 id="detailAppName" class="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight truncate">Tên Ứng Dụng</h2>
                                     <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold truncate">1.2.3RC2</p>
-                                    <p id="detailAppDeveloper" class="text-xs text-uptoAccent font-bold mt-1 truncate">Nhà Phát Triển</p>
+                                    <p id="detailAppDeveloper" class="text-xs text-[#14b8a6] dark:text-uptoAccent font-bold mt-1 truncate">Nhà Phát Triển</p>
                                 </div>
                             </div>
 
                             <div id="topAppStoreBtnWrap" class="flex flex-col items-center flex-shrink-0 self-center">
                                 <a id="topAppStoreBtn" href="javascript:void(0)" class="appstore-get-btn">
                                     <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
-                                    <span>Tải Về</span>
+                                    <span>Tải Xuống</span>
                                 </a>
                                 <span class="text-[9px] text-gray-500 dark:text-gray-400 mt-1.5 font-semibold">Miễn phí</span>
                             </div>
@@ -1187,7 +1320,7 @@
                         <div class="grid grid-cols-3 gap-2 py-3 text-center bg-gray-50/50 dark:bg-white/[0.03] rounded-2xl">
                             <div class="flex flex-col items-center justify-center px-1">
                                 <div class="flex items-center space-x-1 font-extrabold text-xs text-gray-900 dark:text-white truncate max-w-full">
-                                    <i class="fa-solid fa-database text-uptoAccent text-sm flex-shrink-0"></i>
+                                    <i class="fa-solid fa-database text-[#14b8a6] dark:text-uptoAccent text-sm flex-shrink-0"></i>
                                     <span id="detailPopupFileSize" class="font-extrabold truncate">Đang tải...</span>
                                 </div>
                                 <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">
@@ -1196,7 +1329,7 @@
                             </div>
                             <div class="border-x border-gray-200/60 dark:border-white/10 flex flex-col items-center justify-center px-1">
                                 <div class="flex items-center space-x-1 font-extrabold text-xs text-gray-900 dark:text-white truncate max-w-full">
-                                    <i class="fa-solid fa-file-arrow-down text-uptoAccent text-sm flex-shrink-0"></i>
+                                    <i class="fa-solid fa-file-arrow-down text-[#14b8a6] dark:text-uptoAccent text-sm flex-shrink-0"></i>
                                     <span id="detailPopupFileFormat" class="font-extrabold truncate">IPA</span>
                                 </div>
                                 <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">
@@ -1205,7 +1338,7 @@
                             </div>
                             <div class="flex flex-col items-center justify-center px-1">
                                 <div class="flex items-center space-x-1 font-extrabold text-xs text-gray-900 dark:text-white truncate max-w-full">
-                                    <i class="fa-solid fa-folder-open text-uptoAccent text-sm flex-shrink-0"></i>
+                                    <i class="fa-solid fa-folder-open text-[#14b8a6] dark:text-uptoAccent text-sm flex-shrink-0"></i>
                                     <span id="detailPopupCategory" class="font-extrabold truncate">Ứng dụng</span>
                                 </div>
                                 <p class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">
@@ -1224,7 +1357,7 @@
 
                         <div id="articleContentBlock" class="hidden popup-article-box rounded-2xl p-4 space-y-3 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                             <h4 class="font-extrabold text-gray-900 dark:text-white text-sm flex items-center space-x-2">
-                                <i class="fa-solid fa-book-open-reader text-uptoAccent"></i>
+                                <i class="fa-solid fa-book-open-reader text-[#14b8a6] dark:text-uptoAccent"></i>
                                 <span>Nội dung bài viết / Hướng dẫn</span>
                             </h4>
                             <p id="detailArticleText" class="text-xs text-gray-700 dark:text-gray-200 leading-relaxed font-normal"></p>
@@ -1233,14 +1366,14 @@
                         <div id="highlightsBlock" class="popup-article-box rounded-2xl p-3.5 space-y-2 text-xs text-gray-800 dark:text-gray-100 leading-relaxed">
                             <h4 id="detailHighlightTitle" class="font-extrabold text-gray-900 dark:text-white text-sm">Nội dung dành cho bạn nếu</h4>
                             <ul id="detailHighlightsList" class="space-y-3 text-[11px] text-gray-700 dark:text-gray-200">
-                                <li class="flex items-start"><span class="text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
+                                <li class="flex items-start"><span class="text-[#14b8a6] dark:text-uptoAccent font-bold mr-1.5">✓</span><span>Bạn muốn trải nghiệm mượt mà, tối ưu hóa giao diện di động đỉnh cao.</span></li>
                             </ul>
                         </div>
 
                         <div class="grid grid-cols-2 gap-3 text-xs pt-1">
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-building text-sm text-uptoAccent"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-building text-sm text-[#14b8a6] dark:text-uptoAccent"></i>
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Tác giả</p>
@@ -1249,8 +1382,8 @@
                             </div>
 
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-list-check text-sm text-uptoAccent"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-list-check text-sm text-[#14b8a6] dark:text-uptoAccent"></i>
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Phân loại</p>
@@ -1259,8 +1392,8 @@
                             </div>
 
                             <div id="systemRequirementsBlock" class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-solid fa-mobile-screen-button text-sm text-uptoAccent"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-mobile-screen-button text-sm text-[#14b8a6] dark:text-uptoAccent"></i>
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Yêu cầu hệ thống</p>
@@ -1270,8 +1403,8 @@
                             </div>
 
                             <div class="flex items-center space-x-2.5">
-                                <div class="w-8 h-8 rounded-xl glass-panel border-none flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
-                                    <i class="fa-regular fa-calendar-check text-sm text-uptoAccent"></i>
+                                <div class="w-8 h-8 rounded-xl glass-panel flex items-center justify-center text-gray-700 dark:text-gray-300 flex-shrink-0 shadow-sm">
+                                    <i class="fa-regular fa-calendar-check text-sm text-[#14b8a6] dark:text-uptoAccent"></i>
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Ngày đăng</p>
@@ -1290,7 +1423,7 @@
                                 <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
                             </a>
 
-                            <div class="glass-panel p-3.5 rounded-2xl shadow-md space-y-3 border border-gray-200/60 dark:border-white/10">
+                            <div class="glass-panel p-3.5 rounded-2xl shadow-md space-y-3">
                                 <div class="flex items-center space-x-2 text-xs font-bold text-gray-700 dark:text-gray-300">
                                     <div class="w-6 h-6 rounded-full bg-uptoAccent/20 text-uptoAccent flex items-center justify-center">
                                         <i class="fa-solid fa-pen text-[10px]"></i>
@@ -1300,7 +1433,7 @@
                                 <textarea id="userCommentInput" rows="2.5" placeholder="Chia sẻ suy nghĩ của bạn về nội dung này..." class="w-full custom-form-input rounded-xl p-3 text-xs focus:outline-none focus:ring-2 focus:ring-uptoAccent shadow-inner backdrop-blur-md resize-none"></textarea>
                                 
                                 <div class="flex items-center justify-end">
-                                    <button id="submitReviewBtn" class="bg-gradient-to-r from-[#00a8e8] to-[#00baa3] hover:opacity-90 text-white font-extrabold px-5 py-2 rounded-xl text-xs uppercase tracking-wider shadow-lg transition active:scale-95 flex items-center space-x-2 border-none">
+                                    <button id="submitReviewBtn" class="bg-gradient-to-r from-[#00b4d8] to-[#00f2fe] text-white font-black px-5 py-2 rounded-xl text-xs uppercase tracking-wider shadow-lg transition active:scale-95 flex items-center space-x-2 border-none">
                                         <i class="fa-solid fa-paper-plane text-xs"></i>
                                         <span>Gửi Bình Luận</span>
                                     </button>
@@ -1313,7 +1446,7 @@
                                         <i class="fa-solid fa-user text-lg"></i>
                                     </div>
                                     <div class="flex-1 min-w-0 text-xs space-y-1">
-                                        <p class="font-bold text-uptoBlueBtn truncate">kpazz_user_2026</p>
+                                        <p class="font-bold text-uptoBlueBtn dark:text-cyan-300 truncate">kpazz_user_2026</p>
                                         <div class="flex items-center text-[10px] text-gray-400 dark:text-gray-500 space-x-2">
                                             <span>Hôm nay</span>
                                         </div>
@@ -1342,14 +1475,13 @@
 
             </div>
 
-            <!-- Thanh nút tải dưới chân trang popup với hiệu ứng blur hoà trộn không ranh giới -->
             <div id="stickyDownloadBar" class="absolute bottom-0 inset-x-0 pt-10 pb-4 px-3.5 sticky-download-bar-blend border-none transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform translate-y-full opacity-0 z-20 pointer-events-none">
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
                         <h4 id="stickyTitleText" class="font-extrabold text-base leading-tight slide-to-unlock-text">Tải & Cài đặt bản mới nhất</h4>
                         <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 18/11/2026 - KPazz @2026</p>
                     </div>
-                    <div class="w-10 h-10 rounded-xl bg-[#00a8e8]/20 dark:bg-white/10 flex items-center justify-center text-[#00a8e8] dark:text-white shadow-inner flex-shrink-0 font-bold">
+                    <div class="w-10 h-10 rounded-xl bg-[#00b4d8]/20 dark:bg-white/15 flex items-center justify-center text-[#00b4d8] dark:text-white shadow-inner flex-shrink-0 font-bold">
                         <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
                     </div>
                 </a>
@@ -1399,14 +1531,14 @@
                     <a href="#" class="text-xs text-uptoAccent hover:underline font-medium">Quên mật khẩu?</a>
                 </div>
 
-                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 border-none">
+                <button type="submit" class="w-full bg-gradient-to-r from-[#00b4d8] to-[#00f2fe] hover:opacity-90 text-[#06131a] font-black py-2.5 rounded-xl transition shadow-lg active:scale-95 border-none">
                     Đăng Nhập
                 </button>
             </form>
 
             <div class="mt-5 pt-4 border-none text-center">
                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Chưa có tài khoản?</p>
-                <button id="openRegisterBtn" class="w-full bg-gray-100 dark:bg-black/60 border-none text-uptoAccent hover:bg-uptoAccent hover:text-white font-semibold py-2 rounded-xl text-xs transition">
+                <button id="openRegisterBtn" class="w-full bg-gray-100 dark:bg-black/60 border-none text-uptoAccent hover:bg-uptoAccent hover:text-[#06131a] font-semibold py-2 rounded-xl text-xs transition">
                     Tạo tài khoản mới
                 </button>
             </div>
@@ -1441,7 +1573,7 @@
                     <input type="password" required placeholder="Tối thiểu 6 ký tự" class="w-full custom-form-input rounded-xl px-3.5 py-2 text-base focus:outline-none focus:ring-1 focus:ring-uptoAccent">
                 </div>
 
-                <button type="submit" class="w-full bg-uptoAccent hover:opacity-90 text-white font-bold py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2 border-none">
+                <button type="submit" class="w-full bg-gradient-to-r from-[#00b4d8] to-[#00f2fe] hover:opacity-90 text-[#06131a] font-black py-2.5 rounded-xl transition shadow-lg active:scale-95 mt-2 border-none">
                     Hoàn Tất Đăng Ký
                 </button>
             </form>
@@ -1462,12 +1594,12 @@
                     </svg>
                     <span class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">KPazz</span>
                 </div>
-                <button id="drawerCloseBtn" class="text-gray-600 dark:text-gray-300 hover:text-uptoAccent text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+                <button id="drawerCloseBtn" class="hover:text-uptoAccent text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <nav id="drawerNavContainer" class="p-3 space-y-2 text-sm">
-                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/5 text-uptoAccent font-bold transition border-none shadow-sm">
-                    <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
+                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/10 text-uptoAccent font-bold transition border-none shadow-sm">
+                    <i class="fa-solid fa-house w-5 text-center drawer-active-icon"></i><span>Trang chủ</span>
                 </a>
             </nav>
         </div>
@@ -1522,7 +1654,7 @@
     </footer>
 
     <!-- NÚT CUỘN LÊN ĐẦU -->
-    <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-white shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90 border-none">
+    <button id="backToTopBtn" aria-label="Back to top" class="fixed bottom-16 right-4 z-40 w-11 h-11 rounded-full bg-uptoAccent text-[#06131a] font-black shadow-2xl flex items-center justify-center text-base opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 active:scale-90 border-none">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
@@ -1702,7 +1834,7 @@
 
         function getDominantColorFromImg(imgUrl, callback) {
             if (!imgUrl) {
-                callback('#00baa3');
+                callback('#0096c7');
                 return;
             }
             const img = new Image();
@@ -1728,10 +1860,10 @@
                     b = Math.floor(b / count);
                     callback(`rgb(${r}, ${g}, ${b})`);
                 } catch (e) {
-                    callback('#00baa3');
+                    callback('#0096c7');
                 }
             };
-            img.onerror = () => callback('#00baa3');
+            img.onerror = () => callback('#0096c7');
         }
 
         function applyAmbientColorToSection(imgUrl, targetSectionEl) {
@@ -1739,7 +1871,7 @@
             getDominantColorFromImg(imgUrl, (colorRgb) => {
                 targetSectionEl.style.setProperty(
                     '--screenshots-ambient-bg',
-                    `radial-gradient(circle at center, ${colorRgb.replace(')', ', 0.62)')} 0%, rgba(0, 168, 232, 0.25) 70%, transparent 100%)`
+                    `radial-gradient(circle at center, ${colorRgb.replace(')', ', 0.65)')} 0%, rgba(0, 180, 216, 0.28) 70%, transparent 100%)`
                 );
             });
         }
@@ -1867,7 +1999,7 @@
                             <p class="text-[10px] text-gray-500 truncate">${opt.desc}</p>
                         </div>
                         <a href="${opt.url}" target="_blank" rel="noopener noreferrer"
-                           class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white font-extrabold py-3 rounded-2xl flex items-center justify-center space-x-2 text-sm shadow-lg transition active:scale-98 uppercase tracking-wide">
+                           class="w-full bg-gradient-to-r from-[#00b4d8] to-[#00f2fe] hover:opacity-95 text-[#06131a] dark:text-white font-black py-3 rounded-2xl flex items-center justify-center space-x-2 text-sm shadow-lg transition active:scale-98 uppercase tracking-wide">
                             <i class="fa-solid fa-cloud-arrow-down"></i>
                             <span>Tải Xuống</span>
                         </a>
@@ -1940,11 +2072,11 @@
 
                     const newCommentHtml = `
                         <div class="comment-card-box flex items-start space-x-3 p-3 rounded-2xl animate-pop-in">
-                            <div class="w-10 h-10 rounded-xl bg-uptoAccent flex items-center justify-center flex-shrink-0 text-white font-bold shadow">
+                            <div class="w-10 h-10 rounded-xl bg-uptoAccent flex items-center justify-center flex-shrink-0 text-[#06131a] font-black shadow">
                                 <i class="fa-solid fa-user text-lg"></i>
                             </div>
                             <div class="flex-1 min-w-0 text-xs space-y-1">
-                                <p class="font-bold text-uptoBlueBtn truncate">Bạn (Thành viên KPazz)</p>
+                                <p class="font-bold text-uptoBlueBtn dark:text-cyan-300 truncate">Bạn (Thành viên KPazz)</p>
                                 <div class="flex items-center text-[10px] text-gray-400 dark:text-gray-500 space-x-2">
                                     <span>Vừa xong</span>
                                 </div>
@@ -1980,15 +2112,15 @@
                     const truncatedDesc = truncateByWords(descText, 6);
 
                     innerHtml += `
-                        <div class="rec-item-card glass-panel border-none app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                            <div class="rec-item-card-img-wrap">
-                                <img src="${item.img}" class="rec-item-card-img img-ratio-1-1" alt="${item.name}">
+                        <div class="rec-item-card glass-panel app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                            <div class="rec-item-card-img-wrap card-icon-glow">
+                                <img src="${item.img}" class="rec-item-card-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                             </div>
                             <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                                 <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                                 <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                                 <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                     <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
                                         <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                     </div>
@@ -2117,7 +2249,6 @@
             return 'ZIP';
         }
 
-        /* Hàm xử lý lấy dung lượng chuẩn chính xác cho từng loại tệp (tự động phân biệt tệp nhẹ KB và tệp nặng MB) */
         async function resolveFileSize(item) {
             if (item.fileSize) return item.fileSize;
             if (item.size) return item.size;
@@ -2137,13 +2268,10 @@
                                 return Math.max(1, Math.round(bytes / 1024)) + ' KB';
                             }
                         }
-                    } catch (e) {
-                        // Fallback an toàn nếu bị CORS
-                    }
+                    } catch (e) {}
                 }
             }
 
-            // Nhận diện tệp tweak nhẹ, chatvit, script, mẹo nhỏ hoặc định dạng văn bản để hiện dung lượng chuẩn KB
             const isLightFile = item.isTip || item.isArticle || item.isTweak || 
                                 (item.category && (item.category.toLowerCase().includes('mẹo') || item.category.toLowerCase().includes('tweak') || item.category.toLowerCase().includes('thủ thuật') || item.category.toLowerCase().includes('tin tức'))) || 
                                 (item.name && (item.name.toLowerCase().includes('tweak') || item.name.toLowerCase().includes('chatvit') || item.name.toLowerCase().includes('script') || item.name.toLowerCase().includes('mẹo') || item.name.toLowerCase().includes('hướng dẫn')));
@@ -2154,13 +2282,12 @@
                     for (let i = 0; i < item.name.length; i++) {
                         hash = item.name.charCodeAt(i) + ((hash << 5) - hash);
                     }
-                    const randomKb = (Math.abs(hash) % 75 + 14); // Dao động từ 14 KB đến 88 KB chuẩn gọn nhẹ
+                    const randomKb = (Math.abs(hash) % 75 + 14);
                     return `${randomKb} KB`;
                 }
                 return '32 KB';
             }
             
-            // Đối với app/game hoặc file lớn thông thường
             if (item.name) {
                 let hash = 0;
                 for (let i = 0; i < item.name.length; i++) {
@@ -2251,7 +2378,7 @@
                         ytEmbedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
                     }
                     scHtml += `
-                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group flex justify-center bg-black">
+                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel shadow-md relative group flex justify-center bg-black">
                             <div class="video-container-fixed">
                                 <iframe src="${ytEmbedUrl}" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
@@ -2259,13 +2386,13 @@
                     `;
                 } else if (videoUrl.includes('tiktok.com') || videoUrl.includes('vt.tiktok.com')) {
                     scHtml += `
-                        <div class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel border border-uptoAccent/30 shadow-md relative flex flex-col items-center justify-center p-3 text-center bg-black/40" style="aspect-ratio: 16/9;">
+                        <div class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel shadow-md relative flex flex-col items-center justify-center p-3 text-center bg-black/40" style="aspect-ratio: 16/9;">
                             <div class="w-9 h-9 rounded-full bg-uptoAccent/20 text-uptoAccent flex items-center justify-center text-base mb-1.5 shadow">
                                 <i class="fa-brands fa-tiktok"></i>
                             </div>
                             <h4 class="font-extrabold text-[11px] text-white mb-0.5 truncate w-full">Xem trên Tiktok</h4>
                             <p class="text-[9px] text-gray-300 mb-2 px-1 line-clamp-2">ấn vào xem video phía dưới để xem video hướng dẫn hoặc review.</p>
-                            <a href="${videoUrl}" target="_blank" class="bg-uptoAccent hover:opacity-90 text-white font-bold px-3 py-1.5 rounded-xl text-[10px] flex items-center space-x-1.5 shadow transition active:scale-95">
+                            <a href="${videoUrl}" target="_blank" class="bg-uptoAccent hover:opacity-90 text-[#06131a] font-bold px-3 py-1.5 rounded-xl text-[10px] flex items-center space-x-1.5 shadow transition active:scale-95">
                                 <i class="fa-solid fa-play text-[9px]"></i>
                                 <span>Xem Video trên TikTok</span>
                             </a>
@@ -2274,7 +2401,7 @@
                 } else {
                     currentMediaList.push({ type: 'video', url: videoUrl });
                     scHtml += `
-                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group flex justify-center bg-black">
+                        <div class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel shadow-md relative group flex justify-center bg-black">
                             <video class="video-container-fixed object-cover bg-black" controls muted loop playsinline webkit-playsinline x5-playsinline disablePictureInPicture disableRemotePlayback controlsList="nodownload nofullscreen">
                                 <source src="${videoUrl}" type="video/mp4">
                             </video>
@@ -2285,7 +2412,7 @@
                 currentMediaList.push({ type: 'image', url: gifUrl });
                 const gifIdx = currentMediaList.length - 1;
                 scHtml += `
-                    <div onclick="openMediaLightbox(${gifIdx})" class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel border-none shadow-md relative group cursor-pointer flex justify-center bg-black">
+                    <div onclick="openMediaLightbox(${gifIdx})" class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel shadow-md relative group cursor-pointer flex justify-center bg-black">
                         <img src="${gifUrl}" class="video-container-fixed object-cover" alt="GIF Media">
                     </div>
                 `;
@@ -2297,7 +2424,7 @@
                     const imgIdx = currentMediaList.length - 1;
 
                     scHtml += `
-                        <div onclick="openMediaLightbox(${imgIdx})" class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel border-none shadow-md cursor-pointer hover:opacity-95 transition">
+                        <div onclick="openMediaLightbox(${imgIdx})" class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel shadow-md cursor-pointer hover:opacity-95 transition">
                             <img src="${imgUrl}" class="w-full img-ratio-16-9 object-cover" alt="Screenshot">
                         </div>
                     `;
@@ -2355,11 +2482,11 @@
                         highlightsHtml += `
                             <li class="flex flex-col space-y-2">
                                 <div class="flex items-start">
-                                    <span class="text-uptoAccent font-bold mr-1.5">✓</span>
+                                    <span class="text-[#14b8a6] dark:text-uptoAccent font-bold mr-1.5">✓</span>
                                     <span>${text}</span>
                                 </div>
                                 ${img ? `
-                                    <div onclick="openMediaLightbox(${hImgIdx})" class="w-full rounded-xl overflow-hidden glass-panel border-none shadow-sm cursor-pointer hover:opacity-95 transition">
+                                    <div onclick="openMediaLightbox(${hImgIdx})" class="w-full rounded-xl overflow-hidden glass-panel shadow-sm cursor-pointer hover:opacity-95 transition">
                                         <img src="${img}" class="w-full img-ratio-16-9 object-cover" alt="Highlight Image">
                                     </div>
                                 ` : ''}
@@ -2428,7 +2555,7 @@
                 const btn = document.getElementById(`gridBtn${i}`);
                 if (btn) {
                     if (i === cols) {
-                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-white shadow";
+                        btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 bg-uptoAccent text-[#06131a] shadow font-black";
                     } else {
                         btn.className = "w-6 h-5 rounded-lg flex items-center justify-center transition active:scale-95 text-gray-600 dark:text-gray-400 hover:text-white";
                     }
@@ -2442,7 +2569,7 @@
             if (!categoryItemList) return;
             
             if (categoryModalCountText) {
-                categoryModalCountText.textContent = `Hiển thị toàn bộ ${items.length} mục trong danh sách này`;
+                categoryModalCountText.textContent = `${items.length} - mục`;
             }
 
             if (!items.length) {
@@ -2456,21 +2583,21 @@
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
                 
-                const dateMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-700 dark:text-gray-300"><i class="fa-regular fa-calendar text-uptoAccent text-[9px]"></i><span class="text-[9px]">${publishDateStr}</span></div>`;
-                const versionMarkup = item.isApp ? `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-code-branch text-uptoAccent text-[9px]"></i><span class="text-[9px]">${versionText}</span></div>` : '';
+                const dateMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-700 dark:text-gray-300"><i class="fa-regular fa-calendar text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${publishDateStr}</span></div>`;
+                const versionMarkup = item.isApp ? `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-code-branch text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${versionText}</span></div>` : '';
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
                 html += `
-                    <div class="popup-card-item-custom glass-panel border-none app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="popup-card-imgbox-custom">
-                            <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1" alt="${item.name}">
+                    <div class="popup-card-item-custom glass-panel app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                        <div class="popup-card-imgbox-custom card-icon-glow">
+                            <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5 sm:ml-2.5 w-full">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
                                 <div class="flex items-center space-x-2 font-bold">
                                     ${dateMarkup}
                                     ${versionMarkup}
@@ -2614,13 +2741,16 @@
                 try {
                     parsedObj = JSON.parse(jsonText);
                 } catch (err) {
+                    console.error("Lỗi cú pháp JSON trong tệp:", filePath, err);
                     return null;
                 }
 
-                let categoryName = "hãy thêm tên vào js";
+                let categoryName = "Danh mục";
                 if (parsedObj && typeof parsedObj === 'object' && !Array.isArray(parsedObj)) {
                     if (parsedObj.nameTabs && typeof parsedObj.nameTabs === 'string' && parsedObj.nameTabs.trim() !== '') {
                         categoryName = parsedObj.nameTabs.trim();
+                    } else if (parsedObj.title && typeof parsedObj.title === 'string') {
+                        categoryName = parsedObj.title.trim();
                     }
                 }
 
@@ -2628,17 +2758,26 @@
                 if (Array.isArray(parsedObj)) {
                     data = parsedObj;
                 } else if (parsedObj && typeof parsedObj === 'object') {
-                    const possibleArrayKey = Object.keys(parsedObj).find(k => Array.isArray(parsedObj[k]));
-                    if (possibleArrayKey) {
-                        data = parsedObj[possibleArrayKey];
+                    if (Array.isArray(parsedObj.items)) {
+                        data = parsedObj.items;
+                    } else if (Array.isArray(parsedObj.data)) {
+                        data = parsedObj.data;
+                    } else if (Array.isArray(parsedObj.list)) {
+                        data = parsedObj.list;
                     } else {
-                        data = Object.values(parsedObj).filter(v => Array.isArray(v) || (v && typeof v === 'object' && v.name));
-                        let flattened = [];
-                        data.forEach(val => {
-                            if (Array.isArray(val)) flattened.push(...val);
-                            else if (val && val.name) flattened.push(val);
-                        });
-                        data = flattened;
+                        let potentialArrays = Object.values(parsedObj).filter(v => Array.isArray(v));
+                        if (potentialArrays.length > 0) {
+                            data = potentialArrays[0];
+                        } else {
+                            if (parsedObj.name) {
+                                data = [parsedObj];
+                            } else {
+                                let values = Object.values(parsedObj).filter(v => v && typeof v === 'object' && v.name);
+                                if (values.length > 0) {
+                                    data = values;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -2698,8 +2837,8 @@
 
             if (drawerNavContainer) {
                 drawerNavContainer.innerHTML = `
-                    <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/5 text-uptoAccent font-bold transition border-none shadow-sm">
-                        <i class="fa-solid fa-house w-5 text-center"></i><span>Trang chủ</span>
+                    <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/10 text-uptoAccent font-bold transition border-none shadow-sm">
+                        <i class="fa-solid fa-house w-5 text-center drawer-active-icon"></i><span>Trang chủ</span>
                     </a>
                 `;
             }
@@ -2732,9 +2871,9 @@
                                 <div class="drawer-submenu-container space-y-2">
                                     <div class="flex items-center justify-between px-0.5">
                                         <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
-                                            Có ${items.length} mục
+                                            ${items.length} - mục
                                         </span>
-                                        <button onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="bg-[#00a8e8]/20 hover:bg-[#00a8e8] text-[#00a8e8] hover:text-white border border-[#00a8e8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
+                                        <button onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="bg-[#00b4d8]/25 hover:bg-[#00b4d8] text-[#00b4d8] hover:text-white border border-[#00b4d8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
                                             <span>Xem tất cả</span>
                                             <i class="fa-solid fa-arrow-right text-[8px]"></i>
                                         </button>
@@ -2783,7 +2922,7 @@
                                     <span>${catName}</span>
                                     <i class="fa-solid fa-chevron-right section-arrow"></i>
                                 </a>
-                                <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - Mục</span>
+                                <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - mục</span>
                             </div>
                             <div id="section_wrapper_${uniqueId}">
                                 ${sectionBodyHtml}
@@ -2863,7 +3002,7 @@
                 topBannerEl.innerHTML = `
                     <div class="app-card-clickable featured-banner-unique-card"
                          data-app-json='${topJsonEscaped}'>
-                        <div id="${topBadgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                        <div id="${topBadgeId}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
@@ -2872,8 +3011,8 @@
                         <div class="featured-banner-unique-glass-overlay">
                             <div class="flex items-center justify-between space-x-3 w-full">
                                 <div class="flex items-center space-x-3 min-w-0 flex-1">
-                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/90 dark:bg-gray-900/90 shadow-xl p-1 flex items-center justify-center overflow-hidden border border-white/60 flex-shrink-0">
-                                        <img src="${topItem.img}" alt="${topItem.name}" class="w-full h-full img-ratio-1-1 object-cover rounded-xl">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[22.5%] flex items-center justify-center overflow-hidden flex-shrink-0 bg-transparent card-icon-glow">
+                                        <img src="${topItem.img}" alt="${topItem.name}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]">
                                     </div>
                                     <div class="min-w-0 flex-1 space-y-0.5">
                                         <div class="flex items-center space-x-2">
@@ -2916,7 +3055,7 @@
                             <div class="flex flex-col items-center flex-shrink-0">
                                 <button type="button" class="btn-direct-download appstore-pill-btn">
                                     <i class="fa-solid fa-cloud-arrow-down text-[9px]"></i>
-                                    <span>Tải Về</span>
+                                    <span>Tải Xuống</span>
                                 </button>
                                 <span class="text-[8px] mt-1 font-semibold featured-download-sub-outline">Miễn phí</span>
                                 <span class="text-[7.5px] font-medium featured-download-sub-outline">${item.isApp && itemVersion ? itemVersion : ''}</span>
@@ -2928,7 +3067,9 @@
                         <div class="app-card-clickable flex items-center justify-between p-2 rounded-2xl cursor-pointer group hover:bg-white/10 transition"
                              data-app-json='${itemJsonEscaped}'>
                             <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-2">
-                                <img src="${item.img}" alt="${item.name}" class="w-11 h-11 rounded-[12px] img-ratio-1-1 object-cover flex-shrink-0 shadow-sm border border-white/15">
+                                <div class="w-11 h-11 flex-shrink-0 rounded-[22.5%] card-icon-glow">
+                                    <img src="${item.img}" alt="${item.name}" class="w-11 h-11 img-ratio-1-1 object-cover rounded-[22.5%]">
+                                </div>
                                 <div class="min-w-0 flex-1">
                                     <h5 class="font-extrabold text-xs featured-card-title-theme truncate leading-snug group-hover:text-uptoAccent transition">
                                         ${item.name}
@@ -2949,7 +3090,7 @@
                 const randomBgMedia = getPrimaryMediaSrc(randomBgItem);
 
                 bottomListEl.innerHTML = `
-                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border border-white/15">
+                    <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border-none">
                         <img src="${randomBgMedia.url}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute inset-0 meitu-overlay-blur-custom"></div>
 
@@ -2975,6 +3116,7 @@
             if (!badgeEl) return;
             getDominantColorFromImg(imgEl.src, (colorRgb) => {
                 badgeEl.style.backgroundColor = colorRgb;
+                badgeEl.style.color = '#ffffff';
             });
         }
 
@@ -2983,7 +3125,7 @@
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
             if (!wrapper) return;
-            if (countText) countText.textContent = `${items.length} - Tweak`;
+            if (countText) countText.textContent = `${items.length} - mục`;
 
             let innerHtml = '';
             items.forEach(item => {
@@ -2995,16 +3137,16 @@
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 innerHtml += `
-                    <div class="app-card-clickable home-tweak-item-box glass-panel border-none"
+                    <div class="app-card-clickable home-tweak-item-box glass-panel"
                          data-app-json='${itemJsonEscaped}'>
-                        <div class="home-tweak-img-wrap">
-                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1" alt="${item.name}">
+                        <div class="home-tweak-img-wrap card-icon-glow">
+                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
                                     <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                 </div>
@@ -3039,7 +3181,7 @@
             let shuffledApps = [...appPool].sort(() => 0.5 - Math.random());
             let selectedApps = shuffledApps.slice(0, 16);
 
-            if (countText) countText.textContent = `${selectedApps.length} - ${labelType}`;
+            if (countText) countText.textContent = `${selectedApps.length} - mục`;
 
             const creativeThemes = [
                 { sub: "THỬ NGAY NỘI DUNG MỚI", main: "Công Cụ Tuyệt Vời Để Thiết Kế Đồ Họa" },
@@ -3063,8 +3205,8 @@
                     const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
                     html += `
                         <div class="app-card-clickable appstore-icon-item" data-app-json='${itemJsonEscaped}'>
-                            <div class="appstore-icon-wrap">
-                                <img src="${item.img}" class="appstore-icon-img img-ratio-1-1" alt="${item.name}">
+                            <div class="appstore-icon-wrap card-icon-glow">
+                                <img src="${item.img}" class="appstore-icon-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                             </div>
                         </div>
                     `;
@@ -3081,9 +3223,9 @@
                         <img src="${bgMedia.url}" alt="Background" class="appstore-grid-card-bg">
                         <div class="appstore-grid-card-overlay absolute inset-0 pointer-events-none"></div>
 
-                        <div class="relative z-10 flex flex-col justify-between h-full pt-3 pb-4">
-                            <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab w-full">
-                                <div class="flex flex-col space-y-3 pl-4 pr-4" style="min-width: max-content;" data-scroll-speed="75">
+                        <div class="relative z-10 flex flex-col justify-between h-full py-0">
+                            <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab w-full pt-4 pb-2" data-scroll-speed="160">
+                                <div class="flex flex-col space-y-3 pl-4 pr-4" style="min-width: max-content;">
                                     <div class="flex space-x-3 pl-2 pr-2">
                                         ${row1Html}
                                     </div>
@@ -3093,9 +3235,9 @@
                                 </div>
                             </div>
 
-                            <div class="px-5 pt-1.5">
-                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-cyan-300/90">${chosenTheme.sub}</p>
-                                <h3 class="text-xl sm:text-2xl font-extrabold text-white leading-snug tracking-tight mt-0.5">${chosenTheme.main}</h3>
+                            <div class="px-5 pb-4 pt-1">
+                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-uptoBlueBtn">${chosenTheme.sub}</p>
+                                <h3 class="text-xl sm:text-2xl font-extrabold leading-snug tracking-tight mt-0.5">${chosenTheme.main}</h3>
                             </div>
                         </div>
                     </div>
@@ -3109,7 +3251,7 @@
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
             if (!wrapper) return;
-            if (countText) countText.textContent = `${items.length} - ${labelType}`;
+            if (countText) countText.textContent = `${items.length} - mục`;
 
             const topItems = items.slice(0, 5);
             const bottomItems = items.slice(5);
@@ -3127,9 +3269,9 @@
                 const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
                 topHtml += `
-                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[353px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border-none group"
                          data-app-json='${itemJsonEscaped}'>
-                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
@@ -3138,8 +3280,8 @@
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
-                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
@@ -3150,7 +3292,7 @@
                                     <div class="flex flex-col items-center flex-shrink-0 z-20">
                                         <button type="button" class="btn-direct-download appstore-get-btn-home">
                                             <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-                                            <span>Tải Về</span>
+                                            <span>Tải Xuống</span>
                                         </button>
                                         <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
                                         <span class="text-[7.5px] text-gray-300 font-medium">${item.isApp && itemVersion ? itemVersion : ''}</span>
@@ -3179,16 +3321,16 @@
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
 
                 bottomHtml += `
-                    <div class="app-card-clickable home-apk-item-box glass-panel border-none"
+                    <div class="app-card-clickable home-apk-item-box glass-panel"
                          data-app-json='${itemJsonEscaped}'>
-                        <div class="home-apk-img-wrap">
-                            <img src="${item.img}" class="home-apk-img-file img-ratio-1-1" alt="${item.name}">
+                        <div class="home-apk-img-wrap card-icon-glow">
+                            <img src="${item.img}" class="home-apk-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
                                 <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
                                     <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                 </div>
@@ -3222,7 +3364,7 @@
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
             if (!wrapper) return;
-            if (countText) countText.textContent = `${items.length} - ${labelType}`;
+            if (countText) countText.textContent = `${items.length} - mục`;
 
             const tipItems = items.slice(0, 8);
             let bannerHtml = '';
@@ -3239,9 +3381,9 @@
                 const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
                 bannerHtml += `
-                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
+                    <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[353px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border-none group"
                          data-app-json='${itemJsonEscaped}'>
-                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
@@ -3250,8 +3392,8 @@
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
-                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
@@ -3263,7 +3405,7 @@
                                     <div class="flex flex-col items-center flex-shrink-0 z-20">
                                         <button type="button" class="btn-direct-download appstore-get-btn-home">
                                             <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
-                                            <span>Tải Về</span>
+                                            <span>Tải Xuống</span>
                                         </button>
                                         <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
                                         <span class="text-[7.5px] text-gray-300 font-medium">${item.isApp && itemVersion ? itemVersion : ''}</span>
@@ -3390,7 +3532,7 @@
                 slidesHtml += `
                     <div class="hero-card ${isActive} app-card-clickable snap-center flex-none w-[80vw] sm:w-[58vw] md:w-[42vw] lg:w-[32vw] max-w-[360px] rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between group"
                          data-app-json='${itemJsonEscaped}'>
-                        <div id="badge_hero_${idx}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                        <div id="badge_hero_${idx}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
@@ -3399,8 +3541,8 @@
                             
                             <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
                                 <div class="flex items-center space-x-3 mb-1">
-                                    <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[10px]" alt="${item.name}">
+                                    <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
+                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h3 class="font-extrabold text-sm sm:text-base text-white truncate drop-shadow">${item.name}</h3>
@@ -3522,9 +3664,12 @@
             
             scrollContainers.forEach(container => {
                 const speed = parseInt(container.getAttribute('data-scroll-speed')) || 40;
+                const pxPerSecond = 1000 / speed;
                 let customDir = parseInt(container.getAttribute('data-scroll-dir')) || 1;
-                let isHovered = false;
+                let isPaused = false;
                 let scrollDirection = customDir;
+                let exactScrollPos = container.scrollLeft;
+                let lastTimestamp = null;
 
                 const indicatorEl = container.parentElement.querySelector('.section-scroll-indicator');
                 const itemCount = container.querySelectorAll('.app-card-clickable, .rec-item-card, .flex-shrink-0').length;
@@ -3555,20 +3700,50 @@
                     });
                 };
 
-                container.addEventListener('scroll', updateDots);
-
-                setInterval(() => {
-                    if (isHovered) return;
-                    container.scrollLeft += scrollDirection;
-                    if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 2) {
-                        scrollDirection = -1;
-                    } else if (container.scrollLeft <= 0) {
-                        scrollDirection = 1;
+                container.addEventListener('scroll', () => {
+                    if (isPaused) {
+                        exactScrollPos = container.scrollLeft;
                     }
-                }, speed);
+                    updateDots();
+                }, { passive: true });
 
-                container.addEventListener('mouseenter', () => isHovered = true);
-                container.addEventListener('mouseleave', () => isHovered = false);
+                function step(timestamp) {
+                    if (!lastTimestamp) lastTimestamp = timestamp;
+                    const deltaSec = (timestamp - lastTimestamp) / 1000;
+                    lastTimestamp = timestamp;
+
+                    if (!isPaused && deltaSec > 0 && deltaSec < 0.2) {
+                        const maxScroll = container.scrollWidth - container.clientWidth;
+                        if (maxScroll > 0) {
+                            exactScrollPos += scrollDirection * pxPerSecond * deltaSec;
+                            if (exactScrollPos >= maxScroll) {
+                                exactScrollPos = maxScroll;
+                                scrollDirection = -1;
+                            } else if (exactScrollPos <= 0) {
+                                exactScrollPos = 0;
+                                scrollDirection = 1;
+                            }
+                            container.scrollLeft = exactScrollPos;
+                        }
+                    } else if (isPaused) {
+                        exactScrollPos = container.scrollLeft;
+                    }
+
+                    requestAnimationFrame(step);
+                }
+
+                requestAnimationFrame(step);
+
+                container.addEventListener('mouseenter', () => { isPaused = true; });
+                container.addEventListener('mouseleave', () => { 
+                    exactScrollPos = container.scrollLeft;
+                    isPaused = false; 
+                });
+                container.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
+                container.addEventListener('touchend', () => { 
+                    exactScrollPos = container.scrollLeft;
+                    isPaused = false; 
+                }, { passive: true });
             });
         }
 
@@ -3647,9 +3822,11 @@
                     const highlightedName = app.name.replace(regex, '<mark>$1</mark>');
                     
                     html += `
-                        <div class="search-result-item p-2.5 rounded-xl glass-panel border-none cursor-pointer hover:opacity-90 transition flex items-center space-x-3"
+                        <div class="search-result-item p-2.5 rounded-xl glass-panel cursor-pointer hover:opacity-90 transition flex items-center space-x-3"
                              data-search-idx="${idx}">
-                            <img src="${app.img}" class="w-10 h-10 rounded-xl img-ratio-1-1 object-cover flex-shrink-0 border-none" alt="icon">
+                            <div class="w-10 h-10 flex-shrink-0 rounded-[22.5%] card-icon-glow">
+                                <img src="${app.img}" class="w-10 h-10 img-ratio-1-1 object-cover rounded-[22.5%]" alt="icon">
+                            </div>
                             <div class="flex-1 min-w-0">
                                 <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">${highlightedName}</h4>
                                 <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
