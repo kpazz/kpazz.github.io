@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --sidebar-width: 320px;
+            --sidebar-width: 300px;
             --sidebar-collapsed-width: 70px;
             --primary-color: #00baa3;
             --primary-hover: #009683;
@@ -128,7 +128,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            background: rgba(11, 22, 28, 0.82);
+            background: rgba(11, 22, 28, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             color: #fff;
@@ -170,7 +170,7 @@
         .sidebar-menu-scroll {
             flex-grow: 1;
             overflow-y: auto;
-            padding: 12px;
+            padding: 10px;
         }
 
         .sidebar-menu-scroll::-webkit-scrollbar {
@@ -188,60 +188,61 @@
         }
 
         #sidebar .sidebar-menu li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         #sidebar .sidebar-menu li a.menu-item-link {
             display: flex;
             align-items: center;
-            padding: 12px 14px;
+            padding: 9px 12px;
             color: #9ab0bd;
             text-decoration: none;
             transition: all 0.25s ease;
-            white-space: normal;
-            line-height: 1.35;
-            word-break: break-word;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.88rem;
             font-weight: 500;
-            border-radius: 14px;
+            border-radius: 12px;
             background: transparent;
         }
 
         #sidebar .sidebar-menu li a.menu-item-link:hover {
             color: #fff;
             background: rgba(255, 255, 255, 0.12);
-            transform: translateX(4px);
-            border-radius: 14px;
+            transform: translateX(3px);
+            border-radius: 12px;
         }
 
         #sidebar .sidebar-menu li.active > a.menu-item-link,
         #sidebar .sidebar-menu li a.menu-item-link:active {
             color: #fff;
             background: var(--primary-color);
-            border-radius: 14px;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 186, 163, 0.3);
         }
 
         #sidebar .sidebar-menu li a i {
-            font-size: 1.15rem;
-            min-width: 28px;
+            font-size: 1.05rem;
+            min-width: 24px;
             text-align: center;
             flex-shrink: 0;
         }
 
         .menu-group-wrapper {
-            border-radius: 20px;
+            border-radius: 16px;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .menu-group-wrapper.submenu-open {
             background: rgba(0, 122, 255, 0.12);
             border: 1px solid rgba(0, 122, 255, 0.25);
-            padding: 8px;
+            padding: 6px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
         .menu-group-wrapper.submenu-open > div > a.menu-item-link {
             background: var(--appstore-blue) !important;
             color: #fff !important;
-            border-radius: 16px;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
         }
 
@@ -250,7 +251,7 @@
             border: none;
             color: #9ab0bd;
             cursor: pointer;
-            padding: 8px 10px;
+            padding: 6px 8px;
             flex-shrink: 0;
             transition: transform 0.3s ease, color 0.2s;
         }
@@ -264,7 +265,7 @@
 
         .submenu-container {
             display: none;
-            padding: 10px 8px 6px 36px;
+            padding: 8px 6px 4px 32px;
         }
 
         .submenu-view-all {
@@ -276,11 +277,11 @@
             border: 1px solid rgba(0, 122, 255, 0.45);
             color: #fff;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 14px;
-            margin-bottom: 10px;
+            padding: 7px 10px;
+            border-radius: 12px;
+            margin-bottom: 8px;
             text-decoration: none;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(0, 122, 255, 0.2);
@@ -292,7 +293,7 @@
         }
 
         .submenu-search-box {
-            padding: 0 0 10px 0;
+            padding: 0 0 8px 0;
         }
 
         .submenu-search-input {
@@ -301,10 +302,10 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 14px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 16px !important;
-            padding: 8px 14px;
+            font-size: 14px !important;
+            padding: 6px 12px;
             outline: none;
             transition: border-color 0.2s, background 0.2s;
         }
@@ -316,15 +317,15 @@
 
         .submenu-list {
             list-style: none;
-            padding: 8px;
+            padding: 6px;
             margin: 0;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border-radius: 18px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.18);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 24px rgba(0, 0, 0, 0.3);
-            max-height: 320px;
+            max-height: 280px;
             overflow-y: auto;
         }
 
@@ -337,14 +338,14 @@
         }
 
         .submenu-item {
-            padding: 9px 12px;
-            font-size: 0.84rem;
+            padding: 8px 10px;
+            font-size: 0.82rem;
             color: #e2e8f0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             cursor: pointer;
-            border-radius: 12px;
+            border-radius: 10px;
             margin-bottom: 2px;
             transition: all 0.2s;
         }
@@ -356,16 +357,13 @@
         }
 
         .sidebar-footer {
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: rgba(8, 16, 20, 0.7);
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: #8da5b2;
             text-align: center;
             flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
         }
 
         #content-wrapper {
@@ -389,7 +387,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
+            padding: 0 20px;
             position: sticky;
             top: 0;
             z-index: 998;
@@ -416,7 +414,7 @@
         }
 
         .main-content {
-            padding: 30px 40px;
+            padding: 25px 30px;
             flex-grow: 1;
             width: 100%;
             max-width: 100%;
@@ -448,13 +446,12 @@
             border: none !important;
         }
 
-        /* THẺ THỐNG KÊ SỐ LƯỢNG APP (LƯỚI 2-3 CỘT) */
+        /* CARD THỐNG KÊ: TIÊU ĐỀ 1 DÒNG, MỞ RỘNG TOÀN BỘ KHÔNG GIAN SANG PHẢI, ICON Ở GÓC DƯỚI */
         .stat-grid-card {
             padding: 14px 16px !important;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .stat-grid-card:hover {
@@ -462,18 +459,39 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.12);
         }
         .stat-grid-title {
-            font-size: 0.84rem;
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
+            font-size: 0.78rem !important;
+            line-height: 1.2;
+            font-weight: 700 !important;
+            white-space: nowrap;
             overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 8px !important;
+            padding-right: 0px !important; /* Không giới hạn lề phải, chữ có thể kéo dài sang phải qua cả phía trên icon */
         }
         .stat-grid-count {
             font-size: 1.5rem;
+            font-weight: 700;
+            display: inline-block;
+            transition: transform 0.2s ease-out;
+            margin-bottom: 0;
         }
         .stat-grid-icon {
-            font-size: 1.65rem;
+            position: absolute;
+            right: 12px;
+            bottom: 10px;
+            font-size: 1.4rem;
+            opacity: 0.45;
+            pointer-events: none; /* Đảm bảo icon không cản trở thao tác nhấn */
+        }
+
+        /* HIỆU ỨNG BOUNCE KHI ĐẾM XONG SỐ */
+        @keyframes countBounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.28); color: var(--primary-color); }
+            100% { transform: scale(1); }
+        }
+        .counter-bounce {
+            animation: countBounce 0.4s ease-in-out;
         }
 
         .hero-preview-box {
@@ -599,6 +617,23 @@
         .btn-appstore-glass-solid:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            filter: brightness(1.1);
+        }
+
+        .btn-push-server {
+            border-radius: 20px !important;
+            padding: 4px 12px !important;
+            font-size: 0.78rem !important;
+            font-weight: 600 !important;
+            white-space: nowrap !important;
+            background: rgba(0, 186, 163, 0.9) !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: 0 3px 10px rgba(0, 186, 163, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-push-server:hover {
+            transform: translateY(-1px);
             filter: brightness(1.1);
         }
 
@@ -731,31 +766,8 @@
             h2 {
                 font-size: 1.35rem;
             }
-            .stat-grid-card {
-                padding: 12px !important;
-            }
-            .stat-grid-title {
-                font-size: 0.78rem;
-            }
-            .stat-grid-count {
-                font-size: 1.35rem;
-            }
-            .stat-grid-icon {
-                font-size: 1.35rem;
-            }
-            .table-responsive {
-                font-size: 0.85rem;
-            }
-            .btn {
-                padding: 0.35rem 0.65rem;
-                font-size: 0.85rem;
-            }
-            #backToTopBtn {
-                bottom: 20px;
-                right: 20px;
-                width: 42px;
-                height: 42px;
-                font-size: 1rem;
+            .top-navbar {
+                padding: 0 12px;
             }
         }
     </style>
@@ -780,7 +792,7 @@
         </div>
         
         <div class="sidebar-menu-scroll">
-            <ul class="sidebar-menu">
+            <ul class="sidebar-menu" id="sidebarMenuList">
                 <li class="active">
                     <a href="#" class="menu-item-link" onclick="switchTab(event, 'trang-chu')">
                         <i class="fa-solid fa-house"></i>
@@ -797,7 +809,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-tweak')">
                             <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span class="menu-text ms-2">Tweak Jailbreak iOS</span>
+                            <span class="menu-text ms-2" id="menuLabel-tweak">Tweak Jailbreak iOS</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-tweak" onclick="toggleSubmenu(event, 'sub-tweak')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -817,7 +829,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-news')">
                             <i class="fa-solid fa-newspaper"></i>
-                            <span class="menu-text ms-2">Tin tức mới</span>
+                            <span class="menu-text ms-2" id="menuLabel-news">Tin tức mới</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-news" onclick="toggleSubmenu(event, 'sub-news')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -837,7 +849,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-app')">
                             <i class="fa-solid fa-mobile-screen-button"></i>
-                            <span class="menu-text ms-2">APP Jailbreak</span>
+                            <span class="menu-text ms-2" id="menuLabel-app">APP Jailbreak</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-app" onclick="toggleSubmenu(event, 'sub-app')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -857,7 +869,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-appios')">
                             <i class="fa-solid fa-file-zipper"></i>
-                            <span class="menu-text ms-2">APP (Dành cho ios)</span>
+                            <span class="menu-text ms-2" id="menuLabel-appios">APP (Dành cho ios)</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-appios" onclick="toggleSubmenu(event, 'sub-appios')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -877,7 +889,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-appapk')">
                             <i class="fa-solid fa-folder-open"></i>
-                            <span class="menu-text ms-2">APP (Dành cho APK)</span>
+                            <span class="menu-text ms-2" id="menuLabel-appapk">APP (Dành cho APK)</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-appapk" onclick="toggleSubmenu(event, 'sub-appapk')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -897,7 +909,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-tip')">
                             <i class="fa-solid fa-lightbulb"></i>
-                            <span class="menu-text ms-2">Mẹo & Hướng dẫn</span>
+                            <span class="menu-text ms-2" id="menuLabel-tip">Mẹo & Hướng dẫn</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-tip" onclick="toggleSubmenu(event, 'sub-tip')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -917,7 +929,7 @@
                     <div class="d-flex align-items-center">
                         <a href="#" class="menu-item-link flex-grow-1" onclick="handleMenuClickOnly(event, 'sub-prod')">
                             <i class="fa-solid fa-chart-line"></i>
-                            <span class="menu-text ms-2">Năng suất</span>
+                            <span class="menu-text ms-2" id="menuLabel-prod">Năng suất</span>
                         </a>
                         <button class="submenu-toggle-btn" id="arrow-sub-prod" onclick="toggleSubmenu(event, 'sub-prod')">
                             <i class="fa-solid fa-chevron-down fa-xs"></i>
@@ -958,20 +970,19 @@
                 </div>
             </div>
 
-            <div class="d-flex align-items-center gap-3">
-                <!-- NÚT ĐẨY LÊN SERVER (GITHUB) -->
-                <button class="btn btn-sm btn-primary rounded-pill px-3 fw-semibold btn-appstore-glass-solid" onclick="pushAllDataToGitHubServer()" title="Đẩy toàn bộ thay đổi lên GitHub Server">
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn-push-server" onclick="pushAllDataToGitHubServer()" title="Đẩy toàn bộ thay đổi lên GitHub Server">
                     <i class="fa-solid fa-cloud-arrow-up me-1"></i> Đẩy lên Server
                 </button>
 
-                <button class="btn btn-sm btn-outline-secondary rounded-circle p-2" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển đổi giao diện Sáng/Tối" style="width: 38px; height: 38px;">
+                <button class="btn btn-sm btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" onclick="toggleTheme()" title="Chuyển đổi giao diện Sáng/Tối" style="width: 36px; height: 36px;">
                     <i class="fa-solid fa-moon" id="themeIcon"></i>
                 </button>
 
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img id="navUserAvatar" src="https://ui-avatars.com/api/?name=Admin&background=495057&color=fff" alt="Avatar" width="40" height="40" class="rounded-circle me-2">
-                        <span class="fw-semibold d-none d-sm-inline" id="navAccountName">Admin</span>
+                        <img id="navUserAvatar" src="https://ui-avatars.com/api/?name=Admin&background=495057&color=fff" alt="Avatar" width="36" height="36" class="rounded-circle me-1">
+                        <span class="fw-semibold d-none d-sm-inline small" id="navAccountName">Admin</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3" aria-labelledby="userDropdown">
                         <li><a class="dropdown-item" href="#" onclick="verifyAccessAndShow('Hồ sơ cá nhân')"><i class="fa-solid fa-user me-2"></i>Hồ sơ</a></li>
@@ -991,9 +1002,9 @@
                     <div>
                         <h2 class="fw-bold mb-1" id="homeTitleHeading">
                             <i class="fa-solid fa-server text-primary me-2"></i>Hôm nay!
-                            <div class="fs-4 fw-bold mt-1" id="homeDateSubHeading">Thứ Hai, 16 tháng 11, 2026</div>
+                            <div class="fs-4 fw-bold mt-1" id="homeDateSubHeading">Thứ Tư, 18 tháng 11, 2026</div>
                         </h2>
-                        <p class="text-muted mb-0" id="refreshStatusLine">Dữ liệu được làm mới lúc --:--:--  16 tháng 11, 2026</p>
+                        <p class="text-muted mb-0" id="refreshStatusLine">Dữ liệu được làm mới lúc --:--:--  18 tháng 11, 2026</p>
                     </div>
                     <div class="d-flex flex-column align-items-end gap-1">
                         <span class="badge bg-success px-3 py-1.5 rounded-pill fs-6"><i class="fa-solid fa-signal me-1"></i> Trạng thái Repo: Hoạt động</span>
@@ -1001,83 +1012,55 @@
                     </div>
                 </div>
 
-                <!-- BỐ CỤC LƯỚI HIỂN THỊ SỐ LƯỢNG APP: 2 CỘT TRÊN MOBILE (col-6) VÀ 3 CỘT TRÊN MÀN HÌNH LỚN (col-lg-4) -->
-                <div class="row g-2 g-md-3 mb-4">
+                <!-- BỐ CỤC LƯỚI THỐNG KÊ (TIÊU ĐỀ 1 DÒNG, TRÀN SANG PHẢI, ICON GÓC DƯỚI) -->
+                <div class="row g-2 g-md-3 mb-4" id="dashboardStatsGrid">
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-info" style="border-left: 5px solid #0dcaf0 !important;" role="button" onclick="switchToTabDirect('tweak-jailbreak', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">Tweak Jailbreak iOS</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statTweaksCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-wand-magic-sparkles stat-grid-icon text-info opacity-50 flex-shrink-0"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-4 col-lg-4">
-                        <div class="card card-custom stat-grid-card border-start border-4 border-success" style="border-left: 5px solid #198754 !important;" role="button" onclick="switchToTabDirect('app-jailbreak', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">APP Jailbreak</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statAppsCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-mobile-screen-button stat-grid-icon text-success opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-tweak" title="Tweak Jailbreak iOS">Tweak Jailbreak iOS</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statTweaksCount">0</h3>
+                            <i class="fa-solid fa-wand-magic-sparkles stat-grid-icon text-info"></i>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-warning" style="border-left: 5px solid #ffc107 !important;" role="button" onclick="switchToTabDirect('tin-tuc', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">Tin tức mới</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statNewsCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-newspaper stat-grid-icon text-warning opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-news" title="Tin tức mới">Tin tức mới</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statNewsCount">0</h3>
+                            <i class="fa-solid fa-newspaper stat-grid-icon text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-4">
+                        <div class="card card-custom stat-grid-card border-start border-4 border-success" style="border-left: 5px solid #198754 !important;" role="button" onclick="switchToTabDirect('app-jailbreak', event)">
+                            <h6 class="text-muted stat-grid-title" id="statLabel-app" title="APP Jailbreak">APP Jailbreak</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statAppsCount">0</h3>
+                            <i class="fa-solid fa-mobile-screen-button stat-grid-icon text-success"></i>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-primary" style="border-left: 5px solid #0d6efd !important;" role="button" onclick="switchToTabDirect('app-ios', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">APP (Dành cho ios)</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statAppIosCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-file-zipper stat-grid-icon text-primary opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-appios" title="APP (Dành cho ios)">APP (Dành cho ios)</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statAppIosCount">0</h3>
+                            <i class="fa-solid fa-file-zipper stat-grid-icon text-primary"></i>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-secondary" style="border-left: 5px solid #6c757d !important;" role="button" onclick="switchToTabDirect('app-apk', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">APP (Dành cho APK)</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statAppApkCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-folder-open stat-grid-icon text-secondary opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-appapk" title="APP (Dành cho APK)">APP (Dành cho APK)</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statAppApkCount">0</h3>
+                            <i class="fa-solid fa-folder-open stat-grid-icon text-secondary"></i>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-danger" style="border-left: 5px solid #dc3545 !important;" role="button" onclick="switchToTabDirect('meo-cong-nghe', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">Mẹo & Hướng dẫn</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statTipsCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-lightbulb stat-grid-icon text-danger opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-tip" title="Mẹo & Hướng dẫn">Mẹo & Hướng dẫn</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statTipsCount">0</h3>
+                            <i class="fa-solid fa-lightbulb stat-grid-icon text-danger"></i>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-4">
                         <div class="card card-custom stat-grid-card border-start border-4 border-dark" style="border-left: 5px solid #212529 !important;" role="button" onclick="switchToTabDirect('nang-suat', event)">
-                            <div class="d-flex justify-content-between align-items-center gap-2">
-                                <div>
-                                    <h6 class="text-muted mb-1 stat-grid-title">Năng suất</h6>
-                                    <h3 class="fw-bold mb-0 stat-grid-count" id="statProdCount">0</h3>
-                                </div>
-                                <i class="fa-solid fa-chart-line stat-grid-icon text-dark opacity-50 flex-shrink-0"></i>
-                            </div>
+                            <h6 class="text-muted stat-grid-title" id="statLabel-prod" title="Năng suất">Năng suất</h6>
+                            <h3 class="fw-bold stat-grid-count" id="statProdCount">0</h3>
+                            <i class="fa-solid fa-chart-line stat-grid-icon text-dark"></i>
                         </div>
                     </div>
                 </div>
@@ -1151,8 +1134,8 @@
             <div id="tweak-jailbreak" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý Tweak Jailbreak iOS</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tweak.json</code> <br> Lưu file .deb vào <code>debs/</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-tweak">Quản lý Tweak Jailbreak iOS</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/1-Tweak.json</code> <br> Lưu file .deb vào <code>debs/</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tweak')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1206,7 +1189,7 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tweak.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/1-Tweak.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tweak')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="tweakJsonOutput" class="form-control json-editor" rows="15"></textarea>
@@ -1217,8 +1200,8 @@
             <div id="tin-tuc" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý Tin tức mới</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Tintucmoi.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-news">Quản lý Tin tức mới</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/2-Tintucmoi.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('news')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1258,7 +1241,7 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Tintucmoi.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/2-Tintucmoi.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('news')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="newsJsonOutput" class="form-control json-editor" rows="15"></textarea>
@@ -1269,8 +1252,8 @@
             <div id="app-jailbreak" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý APP Jailbreak</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appjailbreak.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-app">Quản lý APP Jailbreak</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/3-Appjailbreak.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('app')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1310,19 +1293,19 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appjailbreak.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/3-Appjailbreak.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('app')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="appJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
-            <!-- TAB 4: APP (Dành cho ios) -> Đọc từ Tabs/Appios.json -->
+            <!-- TAB 4: APP (Dành cho ios) -> Đọc từ Tabs/4-Appios.json -->
             <div id="app-ios" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý APP (Dành cho ios)</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appios.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-appios">Quản lý APP (Dành cho ios)</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/4-Appios.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('appios')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1362,19 +1345,19 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appios.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/4-Appios.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('appios')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="appiosJsonOutput" class="form-control json-editor" rows="15"></textarea>
                 </div>
             </div>
 
-            <!-- TAB 5: APP (Dành cho APK) -> Đọc từ Tabs/Appapk.json -->
+            <!-- TAB 5: APP (Dành cho APK) -> Đọc từ Tabs/5-Appapk.json -->
             <div id="app-apk" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý APP (Dành cho APK)</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Appapk.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-appapk">Quản lý APP (Dành cho APK)</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/5-Appapk.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('appapk')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1414,7 +1397,7 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Appapk.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/5-Appapk.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('appapk')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="appapkJsonOutput" class="form-control json-editor" rows="15"></textarea>
@@ -1425,8 +1408,8 @@
             <div id="meo-cong-nghe" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý Mẹo & Hướng dẫn</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Meo.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-tip">Quản lý Mẹo & Hướng dẫn</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/6-Meo.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('tip')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1466,7 +1449,7 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Meo.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/6-Meo.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('tip')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="tipJsonOutput" class="form-control json-editor" rows="15"></textarea>
@@ -1477,8 +1460,8 @@
             <div id="nang-suat" class="tab-content-item">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
                     <div>
-                        <h2 class="fw-bold mb-1">Quản lý Năng suất</h2>
-                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/Nangsuat.json</code></p>
+                        <h2 class="fw-bold mb-1" id="heading-prod">Quản lý Năng suất</h2>
+                        <p class="text-muted mb-0">Đọc và ghi dữ liệu từ <code>../Tabs/7-Nangsuat.json</code></p>
                     </div>
                     <div>
                         <button class="btn btn-outline-secondary me-2 rounded-3 fw-semibold" onclick="exportJSON('prod')"><i class="fa-solid fa-file-export me-2"></i>Tải JSON</button>
@@ -1518,7 +1501,7 @@
                 </div>
                 <div class="card card-custom p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/Nangsuat.json</h5>
+                        <h5 class="fw-bold mb-0"><i class="fa-solid fa-code text-warning me-2"></i>Ghi đè trực tiếp ../Tabs/7-Nangsuat.json</h5>
                         <button class="btn btn-sm btn-success btn-appstore-glass-solid" onclick="saveDirectJSON('prod')"><i class="fa-solid fa-floppy-disk me-1"></i> Lưu JSON cục bộ</button>
                     </div>
                     <textarea id="prodJsonOutput" class="form-control json-editor" rows="15"></textarea>
@@ -1764,13 +1747,11 @@
                                 </div>
                             </div>
 
-                            <!-- GIAO DIỆN ĐỘNG QUẢN LÝ ĐA LINK TẢI (downloadLinks) VỚI Ô THAY ĐỔI TÊN NÚT BẤM -->
                             <div class="col-12 border-top pt-3 mt-2">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <label class="form-label fw-semibold text-primary mb-0"><i class="fa-solid fa-download me-1"></i> Danh sách Đa Link Tải (downloadLinks)</label>
                                 </div>
                                 
-                                <!-- Ô NHẬP TÊN NÚT BẤM TẢI & NÚT THÊM PHIÊN BẢN NẰM BÊN PHẢI -->
                                 <div class="row g-2 align-items-center mb-2">
                                     <div class="col-md-9">
                                         <label class="form-label fw-semibold small mb-1">Tên nút bấm tải & cài đặt ngoài trang chủ (downloadButtonLabel)</label>
@@ -1789,7 +1770,6 @@
                                 <div class="form-text text-muted small mb-3">Tùy chọn thêm số lượng phiên bản tải tùy ý (Tiêu đề, Mô tả và URL tương ứng).</div>
                                 
                                 <div id="downloadLinksDynamicContainer" class="d-flex flex-column gap-3">
-                                    <!-- Các dòng input được thêm động ở đây -->
                                 </div>
                             </div>
                         </div>
@@ -1893,20 +1873,6 @@
         const sidebarBackdrop = document.getElementById('sidebarBackdrop');
         const backToTopBtn = document.getElementById('backToTopBtn');
 
-        // TỰ ĐỘNG NGẮT XUỐNG DÒNG CHO CÁC MỤC TRONG MENU NẾU DÀI QUÁ 5 TỪ
-        function formatMenuItemsWordWrap() {
-            document.querySelectorAll('#sidebar .menu-text').forEach(el => {
-                const text = el.textContent.trim();
-                const words = text.split(/\s+/).filter(Boolean);
-                if (words.length > 5) {
-                    const firstLine = words.slice(0, 5).join(' ');
-                    const restLines = words.slice(5).join(' ');
-                    el.innerHTML = `${firstLine}<br>${restLines}`;
-                }
-            });
-        }
-
-        // TỰ ĐỘNG THU GỌN/GIÃN CHIỀU CAO Ô TEXTAREA KHỚP VỚI ĐỘ DÀI NỘI DUNG
         function autoExpandTextarea(el) {
             if (!el) return;
             if (el.dataset.manualResized === "true") return;
@@ -2293,10 +2259,10 @@
                 document.documentElement.setAttribute('data-bs-theme', savedTheme);
                 updateThemeIcon(savedTheme);
             } else {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const initialTheme = prefersDark ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-bs-theme', initialTheme);
-                updateThemeIcon(initialTheme);
+                const currentHour = new Date().getHours();
+                const autoTheme = (currentHour >= 18 || currentHour < 6) ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-bs-theme', autoTheme);
+                updateThemeIcon(autoTheme);
             }
         }
 
@@ -2327,7 +2293,6 @@
 
         document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
-            formatMenuItemsWordWrap();
             updateHeaderDateTime();
             initCustomResizeGrips();
 
@@ -2404,7 +2369,6 @@
             const year = now.getFullYear();
 
             const customDateFormatted = `${dayOfWeek}, ${day} tháng ${month}, ${year}`;
-            const dateOnlyFormatted = `${day} tháng ${month}, ${year}`;
             
             const headingEl = document.getElementById('homeTitleHeading');
             if (headingEl) {
@@ -2433,16 +2397,30 @@
             }
         }
 
-        // ĐƯỜNG DẪN CÁC TỆP JSON (appapk lấy từ Tabs/Appapk.json)
-        let jsonPaths = {
-            tweak: "../Tabs/Tweak.json",
-            news: "../Tabs/Tintucmoi.json",
-            app: "../Tabs/Appjailbreak.json",
-            appios: "../Tabs/Appios.json",
-            appapk: "../Tabs/Appapk.json",
-            tip: "../Tabs/Meo.json",
-            prod: "../Tabs/Nangsuat.json"
-        };
+        const tabsConfig = [
+            { key: 'tweak',  order: 1, path: '../Tabs/1-Tweak.json',        defaultLabel: 'Tweak Jailbreak iOS', tabId: 'tweak-jailbreak' },
+            { key: 'news',   order: 2, path: '../Tabs/2-Tintucmoi.json',    defaultLabel: 'Tin tức mới',         tabId: 'tin-tuc' },
+            { key: 'app',    order: 3, path: '../Tabs/3-Appjailbreak.json', defaultLabel: 'APP Jailbreak',       tabId: 'app-jailbreak' },
+            { key: 'appios', order: 4, path: '../Tabs/4-Appios.json',       defaultLabel: 'APP (Dành cho ios)',  tabId: 'app-ios' },
+            { key: 'appapk', order: 5, path: '../Tabs/5-Appapk.json',       defaultLabel: 'APP (Dành cho APK)',  tabId: 'app-apk' },
+            { key: 'tip',    order: 6, path: '../Tabs/6-Meo.json',          defaultLabel: 'Mẹo & Hướng dẫn',     tabId: 'meo-cong-nghe' },
+            { key: 'prod',   order: 7, path: '../Tabs/7-Nangsuat.json',     defaultLabel: 'Năng suất',           tabId: 'nang-suat' }
+        ];
+
+        tabsConfig.sort((a, b) => {
+            const numA = parseInt((a.path.match(/(\d+)[^\/]*$/) || [0, a.order])[1], 10);
+            const numB = parseInt((b.path.match(/(\d+)[^\/]*$/) || [0, b.order])[1], 10);
+            return numA - numB;
+        });
+
+        let jsonPaths = {};
+        let dynamicCategoryLabels = {};
+        let rawJsonWrapperMeta = {};
+
+        tabsConfig.forEach(cfg => {
+            jsonPaths[cfg.key] = cfg.path;
+            dynamicCategoryLabels[cfg.key] = cfg.defaultLabel;
+        });
 
         let dbData = {
             tweak: [],
@@ -2725,6 +2703,16 @@
             enforceInitialAuth();
         }
 
+        function buildOutputPayload(key) {
+            const meta = rawJsonWrapperMeta[key];
+            if (meta && meta.isWrappedObject) {
+                const clonedObj = { ...meta.originalObject };
+                clonedObj[meta.arrayKey] = dbData[key];
+                return clonedObj;
+            }
+            return dbData[key];
+        }
+
         async function pushAllDataToGitHubServer() {
             const token = await getGitHubToken();
             if (!token) return;
@@ -2737,9 +2725,10 @@
             }
 
             try {
-                for (const key of Object.keys(jsonPaths)) {
+                for (const cfg of tabsConfig) {
+                    const key = cfg.key;
                     const filePath = jsonPaths[key].replace(/^\.\.\//, ""); 
-                    const contentData = dbData[key];
+                    const contentData = buildOutputPayload(key);
                     const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filePath}`;
 
                     let fileSha = "";
@@ -2798,9 +2787,56 @@
             showCustomAlert("Đối với file nén .deb, hãy tải lên qua Git client để tránh lỗi băng thông API!");
         }
 
+        function parseFlexibleJson(parsedData, key, defaultLabel) {
+            let fetchedList = [];
+            let resolvedLabel = defaultLabel;
+            rawJsonWrapperMeta[key] = { isWrappedObject: false };
+
+            if (Array.isArray(parsedData)) {
+                fetchedList = parsedData;
+            } else if (parsedData && typeof parsedData === 'object') {
+                if (typeof parsedData.nameTabs === 'string' && parsedData.nameTabs.trim() !== '') {
+                    resolvedLabel = parsedData.nameTabs.trim();
+                }
+                const possibleArrayKey = Object.keys(parsedData).find(k => Array.isArray(parsedData[k]));
+                if (possibleArrayKey) {
+                    fetchedList = parsedData[possibleArrayKey];
+                    rawJsonWrapperMeta[key] = {
+                        isWrappedObject: true,
+                        arrayKey: possibleArrayKey,
+                        originalObject: parsedData
+                    };
+                }
+            }
+
+            dynamicCategoryLabels[key] = resolvedLabel;
+            return fetchedList;
+        }
+
+        function syncCategoryLabelsUI(cfg) {
+            const label = dynamicCategoryLabels[cfg.key] || cfg.defaultLabel;
+
+            const menuEl = document.getElementById(`menuLabel-${cfg.key}`);
+            if (menuEl) {
+                menuEl.textContent = label;
+            }
+
+            const statEl = document.getElementById(`statLabel-${cfg.key}`);
+            if (statEl) {
+                statEl.textContent = label;
+                statEl.title = label;
+            }
+
+            const headingEl = document.getElementById(`heading-${cfg.key}`);
+            if (headingEl) {
+                headingEl.textContent = `Quản lý ${label}`;
+            }
+        }
+
         async function loadAllData() {
             updateHeaderDateTime();
-            for (const key of Object.keys(jsonPaths)) {
+            for (const cfg of tabsConfig) {
+                const key = cfg.key;
                 let fetchedList = [];
 
                 try {
@@ -2812,9 +2848,7 @@
                         const rawText = await response.text();
                         try {
                             const parsedData = JSON.parse(rawText);
-                            if (Array.isArray(parsedData)) {
-                                fetchedList = parsedData;
-                            }
+                            fetchedList = parseFlexibleJson(parsedData, key, cfg.defaultLabel);
                         } catch (parseErr) {
                             console.warn(`Lỗi cú pháp JSON ở file ${jsonPaths[key]}:`, parseErr);
                         }
@@ -2824,6 +2858,7 @@
                 }
 
                 dbData[key] = fetchedList;
+                syncCategoryLabelsUI(cfg);
                 
                 loadHistory(key);
                 renderTable(key);
@@ -2866,20 +2901,12 @@
             if (!container) return;
 
             let allRecords = [];
-            const labels = {
-                tweak: "Tweak Jailbreak iOS",
-                news: "Tin tức mới",
-                app: "APP Jailbreak",
-                appios: "APP (Dành cho ios)",
-                appapk: "APP (Dành cho APK)",
-                tip: "Mẹo & Hướng dẫn",
-                prod: "Năng suất"
-            };
-
-            Object.keys(historyData).forEach(key => {
+            tabsConfig.forEach(cfg => {
+                const key = cfg.key;
+                const label = `${dynamicCategoryLabels[key] || cfg.defaultLabel}`;
                 if (historyData[key] && historyData[key].length > 0) {
                     historyData[key].forEach(item => {
-                        allRecords.push({ cat: labels[key] || key, text: item });
+                        allRecords.push({ cat: label, text: item });
                     });
                 }
             });
@@ -2898,6 +2925,33 @@
             }
         }
 
+        function animateCounter(elementId, targetValue) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            if (targetValue === 0) {
+                el.innerText = "0";
+                return;
+            }
+            let duration = 1200;
+            let startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                let progress = Math.min((timestamp - startTime) / duration, 1);
+                let current = Math.floor(progress * targetValue);
+                el.innerText = current;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    el.innerText = targetValue;
+                    el.classList.remove('counter-bounce');
+                    void el.offsetWidth;
+                    el.classList.add('counter-bounce');
+                }
+            }
+            window.requestAnimationFrame(step);
+        }
+
         function updateCountBadge(type) {
             const badge = document.getElementById('countBadge-' + type);
             if (badge) badge.innerText = dbData[type].length;
@@ -2906,13 +2960,13 @@
         }
 
         function renderRepoStats() {
-            document.getElementById('statTweaksCount').innerText = dbData.tweak.length;
-            document.getElementById('statAppsCount').innerText = dbData.app.length;
-            document.getElementById('statNewsCount').innerText = dbData.news.length;
-            document.getElementById('statAppIosCount').innerText = dbData.appios.length;
-            document.getElementById('statAppApkCount').innerText = dbData.appapk.length;
-            document.getElementById('statTipsCount').innerText = dbData.tip.length;
-            document.getElementById('statProdCount').innerText = dbData.prod.length;
+            animateCounter('statTweaksCount', dbData.tweak.length);
+            animateCounter('statNewsCount', dbData.news.length);
+            animateCounter('statAppsCount', dbData.app.length);
+            animateCounter('statAppIosCount', dbData.appios.length);
+            animateCounter('statAppApkCount', dbData.appapk.length);
+            animateCounter('statTipsCount', dbData.tip.length);
+            animateCounter('statProdCount', dbData.prod.length);
         }
 
         function renderSubmenuList(type) {
@@ -2965,7 +3019,7 @@
                 const titleText = item.name || item.title || 'Không có tên';
                 const col2Text = item.category || item.version || 'N/A';
                 const devText = item.dev || item.author || 'KPazz';
-                const dateText = item.publishDate || item.date || '16/11/2026';
+                const dateText = item.publishDate || item.date || '18/11/2026';
                 
                 let highlightsArray = [];
                 if (Array.isArray(item.highlights)) {
@@ -3027,7 +3081,7 @@
             document.getElementById('prevName').innerText = item.name || item.title || 'Không có tên';
             document.getElementById('prevVersion').innerText = item.version || item.category || 'N/A';
             document.getElementById('prevDev').innerText = item.dev || item.author || 'KPazz Store';
-            document.getElementById('prevDate').innerText = item.publishDate || item.date || '16/11/2026';
+            document.getElementById('prevDate').innerText = item.publishDate || item.date || '18/11/2026';
             
             const dlLinksContainer = document.getElementById('prevDownloadLinksContainer');
             const dlLinksList = document.getElementById('prevDownloadLinksList');
@@ -3162,7 +3216,7 @@
         function updateJSONOutput(type) {
             const textarea = document.getElementById(type + 'JsonOutput');
             if (textarea) {
-                textarea.value = JSON.stringify(dbData[type], null, 4);
+                textarea.value = JSON.stringify(buildOutputPayload(type), null, 4);
             }
         }
 
@@ -3174,12 +3228,19 @@
             }
             try {
                 const parsed = JSON.parse(textarea.value);
-                if (!Array.isArray(parsed)) { 
-                    showCustomAlert('Dữ liệu JSON phải là Mảng chứa các đối tượng phân tách bởi dấu phẩy!'); 
-                    return; 
+                const cfg = tabsConfig.find(c => c.key === type);
+                const defaultLabel = cfg ? cfg.defaultLabel : type;
+
+                if (Array.isArray(parsed)) {
+                    dbData[type] = parsed;
+                    rawJsonWrapperMeta[type] = { isWrappedObject: false };
+                } else if (parsed && typeof parsed === 'object') {
+                    dbData[type] = parseFlexibleJson(parsed, type, defaultLabel);
+                    if (cfg) syncCategoryLabelsUI(cfg);
+                } else {
+                    showCustomAlert('Dữ liệu JSON phải là Mảng hoặc Đối tượng chứa danh sách hợp lệ!');
+                    return;
                 }
-                
-                dbData[type] = parsed;
 
                 renderTable(type);
                 renderSubmenuList(type);
@@ -3393,16 +3454,7 @@
         }
 
         function getSectionDisplayName(type) {
-            const names = {
-                tweak: "Tweak Jailbreak iOS",
-                news: "Tin tức mới",
-                app: "APP Jailbreak",
-                appios: "APP (Dành cho ios)",
-                appapk: "APP (Dành cho APK)",
-                tip: "Mẹo & Hướng dẫn",
-                prod: "Năng suất"
-            };
-            return names[type] || "Mục";
+            return dynamicCategoryLabels[type] || "Mục";
         }
 
         function openGenericModal(type, itemName = "") {
@@ -3449,21 +3501,7 @@
             if (itemName) {
                 titleEl.innerText = `Chỉnh sửa ${sectionName}: ${itemName}`;
             } else {
-                if (type === 'news') {
-                    titleEl.innerText = "Thêm Tin Tức Mới";
-                } else if (type === 'app') {
-                    titleEl.innerText = "Thêm App Jailbreak";
-                } else if (type === 'appios') {
-                    titleEl.innerText = "Thêm App iOS";
-                } else if (type === 'appapk') {
-                    titleEl.innerText = "Thêm App APK";
-                } else if (type === 'tip') {
-                    titleEl.innerText = "Thêm Mẹo & Hướng Dẫn";
-                } else if (type === 'prod') {
-                    titleEl.innerText = "Thêm Công Cụ Năng Suất";
-                } else {
-                    titleEl.innerText = "Thêm Mục Mới";
-                }
+                titleEl.innerText = `Thêm ${sectionName}`;
             }
 
             labelName.innerText = "Tiêu đề (*)";
@@ -3580,6 +3618,9 @@
             const downloadLinksArr = collectDownloadLinksFromUI();
             const downloadButtonLabelVal = document.getElementById('gDownloadButtonLabel').value.trim();
 
+            const now = new Date();
+            const todayFormatted = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+
             let newItem = {
                 name: name,
                 version: document.getElementById('gVersion').value.trim() || "1.0.0",
@@ -3588,7 +3629,7 @@
                 systemRequirements: document.getElementById('gSysReq').value.trim() || "",
                 description: document.getElementById('gDesc').value.trim() || "",
                 img: imgInputVal,
-                publishDate: "16/11/2026",
+                publishDate: (index >= 0 && dbData[type][index]?.publishDate) ? dbData[type][index].publishDate : todayFormatted,
                 isApp: document.getElementById('gIsApp').checked,
                 noDownload: document.getElementById('gNoDownload').checked,
                 downloadLink: document.getElementById('gDownloadLink').value.trim(),
@@ -3638,7 +3679,7 @@
         }
 
         function exportJSON(type) {
-            const dataToExport = dbData[type];
+            const dataToExport = buildOutputPayload(type);
             const fileName = jsonPaths[type].split('/').pop();
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToExport, null, 4));
             const dl = document.createElement('a');
@@ -3653,20 +3694,26 @@
             const tbody = document.getElementById('repoFilesTableBody');
             if (!tbody) return;
             
+            const baseFiles = [
+                { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "18/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "18/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "Art/", size: "120.0 KB", date: "18/11/2026" },
+                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "18/11/2026" },
+                { type: "Tệp XML", format: "XML", path: "sitemap.xml", size: "1.2 KB", date: "18/11/2026" }
+            ];
+
+            const jsonEntries = tabsConfig.map(cfg => ({
+                type: "Tệp JSON",
+                format: "JSON",
+                path: cfg.path,
+                size: `${(JSON.stringify(buildOutputPayload(cfg.key)).length / 1024).toFixed(1)} KB`,
+                date: "18/11/2026"
+            }));
+
             const allFilesAndDirs = [
-                { type: "Thư mục", format: "DIR", path: "kp/", size: "12.5 KB", date: "16/11/2026" },
-                { type: "Thư mục", format: "DIR", path: "debs/", size: "45.2 MB", date: "16/11/2026" },
-                { type: "Thư mục", format: "DIR", path: "Art/", size: "120.0 KB", date: "16/11/2026" },
-                { type: "Thư mục", format: "DIR", path: "../Tabs/", size: "14.2 KB", date: "16/11/2026" },
-                { type: "Tệp XML", format: "XML", path: "sitemap.xml", size: "1.2 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tweak.json", size: "2.4 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Tintucmoi.json", size: "3.1 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appjailbreak.json", size: "2.0 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appios.json", size: "1.9 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Appapk.json", size: "1.8 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Meo.json", size: "1.5 KB", date: "16/11/2026" },
-                { type: "Tệp JSON", format: "JSON", path: "../Tabs/Nangsuat.json", size: "1.9 KB", date: "16/11/2026" },
-                { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "16/11/2026" }
+                ...baseFiles,
+                ...jsonEntries,
+                { type: "Tệp Web", format: "HTML", path: "index.html", size: "8.5 KB", date: "18/11/2026" }
             ];
 
             tbody.innerHTML = '';
