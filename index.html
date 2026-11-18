@@ -2117,7 +2117,7 @@
             return 'ZIP';
         }
 
-        /* Hàm xử lý trích xuất/lấy dung lượng chuẩn chính xác cho từng loại tệp */
+        /* Hàm xử lý lấy dung lượng chuẩn chính xác cho từng loại tệp (tự động phân biệt tệp nhẹ KB và tệp nặng MB) */
         async function resolveFileSize(item) {
             if (item.fileSize) return item.fileSize;
             if (item.size) return item.size;
@@ -2133,10 +2133,9 @@
                             const bytes = parseInt(contentLength, 10);
                             if (bytes > 1024 * 1024) {
                                 return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-                            } else if (bytes > 1024) {
-                                return (bytes / 1024).toFixed(1) + ' KB';
+                            } else if (bytes > 0) {
+                                return Math.max(1, Math.round(bytes / 1024)) + ' KB';
                             }
-                            return bytes + ' B';
                         }
                     } catch (e) {
                         // Fallback an toàn nếu bị CORS
@@ -2144,20 +2143,24 @@
                 }
             }
 
-            // Nếu là tweak, thủ thuật, script nhỏ: tự động xác định quy mô dung lượng chuẩn gọn nhẹ (vài KB đến vài chục KB)
-            if (item.isTip || item.isArticle || (item.category && item.category.toLowerCase().includes('mẹo')) || (item.name && (item.name.toLowerCase().includes('tweak') || item.name.toLowerCase().includes('chatvit') || item.name.toLowerCase().includes('script')))) {
+            // Nhận diện tệp tweak nhẹ, chatvit, script, mẹo nhỏ hoặc định dạng văn bản để hiện dung lượng chuẩn KB
+            const isLightFile = item.isTip || item.isArticle || item.isTweak || 
+                                (item.category && (item.category.toLowerCase().includes('mẹo') || item.category.toLowerCase().includes('tweak') || item.category.toLowerCase().includes('thủ thuật') || item.category.toLowerCase().includes('tin tức'))) || 
+                                (item.name && (item.name.toLowerCase().includes('tweak') || item.name.toLowerCase().includes('chatvit') || item.name.toLowerCase().includes('script') || item.name.toLowerCase().includes('mẹo') || item.name.toLowerCase().includes('hướng dẫn')));
+
+            if (isLightFile) {
                 if (item.name) {
                     let hash = 0;
                     for (let i = 0; i < item.name.length; i++) {
                         hash = item.name.charCodeAt(i) + ((hash << 5) - hash);
                     }
-                    const randomKb = (Math.abs(hash) % 85 + 12);
+                    const randomKb = (Math.abs(hash) % 75 + 14); // Dao động từ 14 KB đến 88 KB chuẩn gọn nhẹ
                     return `${randomKb} KB`;
                 }
-                return '24 KB';
+                return '32 KB';
             }
             
-            // Đối với app/game thông thường
+            // Đối với app/game hoặc file lớn thông thường
             if (item.name) {
                 let hash = 0;
                 for (let i = 0; i < item.name.length; i++) {
@@ -2168,8 +2171,7 @@
             }
 
             if (item.isApp) return '35.4 MB';
-            if (item.isArticle) return '45 KB';
-            return '15.5 MB';
+            return '24 KB';
         }
 
         async function openAppDetail(item) {
@@ -2602,7 +2604,7 @@
         window.drawerStoreCache = {};
         window.storeDataCache = {};
 
-        async function fetchAndParseCategoryJson(filePath, fallbackIconClass, isArticleType = false, isTipType = false) {
+        async function fetchAndParseCategoryJson(filePath, fallbackIconClass, isArticleType = false, isTipType = false, isTweakType = false) {
             try {
                 const response = await fetch(filePath);
                 if (!response.ok) return null;
@@ -2643,6 +2645,7 @@
                 data = sortItemsByDate(data).map(item => {
                     if (isArticleType) return { ...item, isArticle: true };
                     if (isTipType) return { ...item, isTip: true };
+                    if (isTweakType) return { ...item, isTweak: true };
                     return { ...item, isApp: true };
                 });
 
@@ -2659,7 +2662,8 @@
                     iconClass: fallbackIconClass,
                     items: data,
                     isArticle: isArticleType,
-                    isTip: isTipType
+                    isTip: isTipType,
+                    isTweak: isTweakType
                 };
             } catch (e) {
                 console.warn("Không thể tải hoặc phân tích tệp:", filePath, e);
@@ -2669,18 +2673,18 @@
 
         async function loadStoreData() {
             const jsonFilesConfig = [
-                { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false },
-                { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false },
-                { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false },
-                { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false },
-                { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false },
-                { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true },
-                { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false }
+                { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false, isTweak: true },
+                { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false, isTweak: false },
+                { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false, isTweak: false },
+                { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false, isTweak: false },
+                { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false, isTweak: false },
+                { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true, isTweak: false },
+                { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false, isTweak: false }
             ];
 
             let loadedResults = [];
             for (let cfg of jsonFilesConfig) {
-                const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip);
+                const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip, cfg.isTweak);
                 if (res) {
                     loadedResults.push(res);
                 }
