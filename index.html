@@ -634,40 +634,103 @@
             border-radius: 0.5rem !important;
         }
 
-        /* CARD Ô NHỎ DẠNG ICON Ở TRÊN, TÊN Ở DƯỚI (CHO MỤC NĂNG SUẤT/TIỆN ÍCH) */
-        .home-grid-icon-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 0.75rem 0.5rem;
-            border-radius: 1.15rem;
-            cursor: pointer;
-            width: 105px;
-            flex-shrink: 0;
+        /* ================= APP STORE STYLE 2-ROW SO LE ICON CARD ================= */
+        .appstore-grid-card-box {
+            position: relative;
+            width: 100%;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 0; 
         }
-        .home-grid-icon-wrap {
-            width: 3.75rem;
-            height: 3.75rem;
-            border-radius: 1rem;
+        .appstore-grid-card-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Hiệu ứng nền mờ hoà trộn mượt mà, chiều cao rút ngắn đúng vạch đỏ, mép trên fade-in & KHÔNG CÓ VẠCH KẺ NGANG */
+        .appstore-grid-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(4, 10, 16, 0.65) 0%, rgba(4, 10, 16, 0.88) 45%, rgba(2, 6, 10, 0.98) 100%);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
+        }
+        .dark .appstore-grid-card-overlay {
+            background: linear-gradient(180deg, rgba(2, 6, 10, 0.7) 0%, rgba(2, 6, 10, 0.9) 45%, rgba(1, 3, 5, 0.99) 100%);
+            backdrop-filter: blur(28px) saturate(220%);
+            -webkit-backdrop-filter: blur(28px) saturate(220%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, black 35%, black 100%);
+        }
+        .appstore-icon-item {
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.25s ease;
             flex-shrink: 0;
-            padding: 0.15rem;
-            background-color: rgba(0, 0, 0, 0.15);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 4.75rem;
+            height: 4.75rem;
         }
-        .dark .home-grid-icon-wrap {
-            background-color: rgba(0, 0, 0, 0.35);
+        .appstore-icon-item:hover {
+            transform: scale(1.06);
         }
-        .home-grid-icon-file {
+        .appstore-icon-wrap {
+            width: 4.75rem;
+            height: 4.75rem;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .appstore-icon-img {
+            width: 100%;
+            height: 100%;
             aspect-ratio: 1 / 1 !important;
             object-fit: cover !important;
-            width: 100% !important;
-            height: 100% !important;
-            border-radius: 0.85rem !important;
+            border-radius: 1.1rem !important;
+        }
+        .staggered-row-offset {
+            margin-left: -2.6rem;
+        }
+
+        /* Thẻ nhãn góc trên trái card to kiểu App Store gồm 2 dòng (Dòng 1: Cập Nhật, Dòng 2: Thời gian) */
+        .appstore-top-left-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 6px 14px 6px 12px;
+            border-bottom-right-radius: 1.1rem;
+            color: #ffffff;
+            z-index: 25;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.22);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        .appstore-top-left-badge .badge-sub-date {
+            font-size: 8px;
+            font-weight: 600;
+            opacity: 0.92;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            margin-top: 1px;
         }
 
         .account-modal-card {
@@ -940,7 +1003,7 @@
                         <i class="fa-solid fa-calendar-day text-sm"></i>
                         <span>Hôm Nay!</span>
                     </span>
-                    <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Ba, 17 tháng 11, 2026</span>
+                    <span id="currentDateText" class="text-gray-700 dark:text-gray-300 font-semibold">Thứ Tư, 18 tháng 11, 2026</span>
                 </div>
             </div>
         </div>
@@ -976,19 +1039,37 @@
         </div>
     </div>
 
-    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ ==================== -->
+    <!-- ==================== POPUP CHỌN PHIÊN BẢN TẢI VỀ (KIỂU APP STORE) ==================== -->
     <div id="downloadVersionsModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[65] hidden items-center justify-center p-4">
-        <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none">
-            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
-                <div>
-                    <h3 class="font-extrabold text-base text-gray-900 dark:text-white tracking-tight">Chọn phiên bản tải về</h3>
-                    <p id="downloadVersionsSubtitle" class="text-[11px] text-uptoAccent font-semibold mt-0.5 truncate">Chọn gói cài đặt phù hợp với thiết bị</p>
-                </div>
-                <button id="downloadVersionsCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+        <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[85vh] overflow-hidden border-none animate-pop-in">
+            <button id="downloadVersionsCloseBtn" class="absolute top-4 left-4 w-7 h-7 rounded-full bg-black/20 dark:bg-white/20 flex items-center justify-center text-gray-700 dark:text-gray-200 text-sm hover:opacity-85 transition active:scale-90 z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center pb-3 pt-1 border-b border-gray-200/60 dark:border-white/10 relative">
+                <h3 class="font-extrabold text-sm text-gray-900 dark:text-white tracking-tight">Kpazz Store</h3>
             </div>
-            <div id="downloadVersionsList" class="overflow-y-auto no-scrollbar space-y-2.5 pt-3.5 pb-1"></div>
+
+            <div class="py-4 space-y-4 flex flex-col items-center text-center">
+                <img id="popupAppStoreIcon" src="" alt="App Icon" class="w-16 h-16 rounded-2xl object-cover shadow-lg border border-white/20">
+                <div>
+                    <h4 id="popupAppStoreName" class="font-extrabold text-base text-gray-900 dark:text-white leading-tight">Tên Ứng Dụng</h4>
+                    <p id="popupAppStoreDeveloper" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Nhà phát triển</p>
+                    <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-1">Tải Miễn Phí</p>
+                </div>
+            </div>
+
+            <div class="py-2.5 px-3 bg-gray-100/80 dark:bg-black/30 rounded-2xl mb-4 border border-gray-200/60 dark:border-white/10 flex items-center justify-between text-left">
+                <div>
+                    <p class="text-xs font-extrabold text-gray-900 dark:text-white">Tải Ứng Dụng về?</p>
+                    <p class="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5">Thiết bị của bạn và lưu trong thư mục Download</p>
+                </div>
+                <div class="w-7 h-7 rounded-full bg-uptoAccent/20 text-uptoAccent flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-apple"></i>
+                </div>
+            </div>
+
+            <div id="downloadVersionsList" class="overflow-y-auto no-scrollbar space-y-2.5 pb-2 flex-1"></div>
         </div>
     </div>
 
@@ -1045,9 +1126,16 @@
     <div id="appDetailModal" class="fixed inset-0 bg-black/65 backdrop-blur-md z-50 hidden items-center justify-center p-2.5 sm:p-4">
         <div id="appDetailCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl w-full max-w-md md:max-w-xl shadow-2xl relative max-h-[92vh] flex flex-col overflow-hidden">
             
-            <button id="appDetailCloseBtn" class="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-black/45 hover:bg-black/65 text-white backdrop-blur-md flex items-center justify-center text-lg z-30 shadow-md transition active:scale-90">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+            <!-- Nút Chia sẻ và Đóng (×) ở góc trên bên phải popup chi tiết -->
+            <div class="absolute top-3.5 right-3.5 z-30 flex items-center space-x-2">
+                <button id="appDetailShareBtn" class="h-9 px-3.5 rounded-full bg-black/45 hover:bg-black/65 text-white backdrop-blur-md flex items-center justify-center space-x-1.5 text-xs font-bold shadow-md transition active:scale-90">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <span>Chia sẻ</span>
+                </button>
+                <button id="appDetailCloseBtn" class="w-9 h-9 rounded-full bg-black/45 hover:bg-black/65 text-white backdrop-blur-md flex items-center justify-center text-lg shadow-md transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
             <div id="appDetailScrollBody" class="overflow-y-auto no-scrollbar space-y-5 pb-28">
                 
@@ -1175,7 +1263,7 @@
                                 </div>
                                 <div class="min-w-0">
                                     <p class="text-[10px] text-gray-500 dark:text-gray-400">Ngày đăng</p>
-                                    <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">17/11/2026</p>
+                                    <p id="detailPublishDateExtra" class="font-bold text-gray-800 dark:text-gray-200 truncate">18/11/2026</p>
                                 </div>
                             </div>
                         </div>
@@ -1237,7 +1325,7 @@
                 <a id="stickyDownloadLink" href="#" target="_blank" class="w-full rounded-2xl flex items-center justify-between shadow-2xl active:scale-98 transition pointer-events-auto block border-none sticky-download-glow-bounce">
                     <div class="text-left">
                         <h4 id="stickyTitleText" class="font-extrabold text-base leading-tight slide-to-unlock-text">Tải & Cài đặt bản mới nhất</h4>
-                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 17/11/2026 - KPazz @2026</p>
+                        <p id="stickySubText" class="text-[10px] text-gray-700 dark:text-cyan-100 opacity-95 mt-0.5 font-semibold">Nội dung an toàn, được phát hành 18/11/2026 - KPazz @2026</p>
                     </div>
                     <div class="w-10 h-10 rounded-xl bg-[#00a8e8]/20 dark:bg-white/10 flex items-center justify-center text-[#00a8e8] dark:text-white shadow-inner flex-shrink-0 font-bold">
                         <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
@@ -1590,8 +1678,11 @@
             return { type: 'img', url: item.img };
         }
 
-        function applyAmbientColorToSection(imgUrl, targetSectionEl) {
-            if (!imgUrl || !targetSectionEl) return;
+        function getDominantColorFromImg(imgUrl, callback) {
+            if (!imgUrl) {
+                callback('#00baa3');
+                return;
+            }
             const img = new Image();
             img.crossOrigin = "Anonymous";
             img.src = imgUrl;
@@ -1613,12 +1704,22 @@
                     r = Math.floor(r / count);
                     g = Math.floor(g / count);
                     b = Math.floor(b / count);
-                    targetSectionEl.style.setProperty(
-                        '--screenshots-ambient-bg',
-                        `radial-gradient(circle at center, rgba(${r},${g},${b},0.62) 0%, rgba(${Math.min(255, r+30)},${Math.min(255, g+30)},${Math.min(255, b+30)},0.25) 70%, transparent 100%)`
-                    );
-                } catch (e) {}
+                    callback(`rgb(${r}, ${g}, ${b})`);
+                } catch (e) {
+                    callback('#00baa3');
+                }
             };
+            img.onerror = () => callback('#00baa3');
+        }
+
+        function applyAmbientColorToSection(imgUrl, targetSectionEl) {
+            if (!imgUrl || !targetSectionEl) return;
+            getDominantColorFromImg(imgUrl, (colorRgb) => {
+                targetSectionEl.style.setProperty(
+                    '--screenshots-ambient-bg',
+                    `radial-gradient(circle at center, ${colorRgb.replace(')', ', 0.62)')} 0%, rgba(0, 168, 232, 0.25) 70%, transparent 100%)`
+                );
+            });
         }
 
         /* ================= LIGHTBOX MEDIA LOGIC ================= */
@@ -1687,12 +1788,14 @@
             lightboxSlider.querySelectorAll('video').forEach(v => v.pause());
         });
 
-        /* ================= MULTI-LINK DOWNLOAD MODAL LOGIC ================= */
+        /* ================= POPUP TẢI VỀ (KIỂU APP STORE XÁC NHẬN CÀI ĐẶT) ================= */
         const downloadVersionsModal = document.getElementById('downloadVersionsModal');
         const downloadVersionsCard = document.getElementById('downloadVersionsCard');
         const downloadVersionsCloseBtn = document.getElementById('downloadVersionsCloseBtn');
         const downloadVersionsList = document.getElementById('downloadVersionsList');
-        const downloadVersionsSubtitle = document.getElementById('downloadVersionsSubtitle');
+        const popupAppStoreIcon = document.getElementById('popupAppStoreIcon');
+        const popupAppStoreName = document.getElementById('popupAppStoreName');
+        const popupAppStoreDeveloper = document.getElementById('popupAppStoreDeveloper');
 
         function getDownloadOptions(item) {
             if (!item) return [];
@@ -1708,7 +1811,7 @@
                     }
                     return {
                         version: entry.version || entry.name || entry.title || `Phiên bản ${idx + 1}`,
-                        desc: entry.desc || entry.description || entry.note || 'Nhấn để tải xuống gói cài đặt này',
+                        desc: entry.desc || entry.description || entry.note || 'Cài đặt gói ứng dụng này',
                         url: entry.url || entry.link || entry.href || '#'
                     };
                 });
@@ -1725,22 +1828,23 @@
 
         function openDownloadVersionsModal(item, options) {
             if (!downloadVersionsList) return;
-            downloadVersionsSubtitle.textContent = `${item.name || 'Ứng dụng'} • Có ${options.length} phiên bản tải`;
+            if (popupAppStoreIcon) popupAppStoreIcon.src = item.img || '';
+            if (popupAppStoreName) popupAppStoreName.textContent = item.name || 'Ứng dụng';
+            if (popupAppStoreDeveloper) popupAppStoreDeveloper.textContent = item.dev || 'KPazz Studio';
+
             let html = '';
             options.forEach(opt => {
                 html += `
-                    <a href="${opt.url}" target="_blank" rel="noopener noreferrer"
-                       class="w-full bg-blue-50/90 hover:bg-[#00a8e8] dark:bg-white/5 dark:hover:bg-[#00a8e8] text-gray-900 dark:text-white hover:text-white rounded-2xl p-3.5 flex items-center justify-between transition shadow-sm border border-gray-200/70 dark:border-uptoAccent/20 group active:scale-98">
-                        <div class="min-w-0 flex-1 pr-3 text-left">
-                            <div class="flex items-center space-x-2">
-                                <span class="font-extrabold text-xs sm:text-sm truncate">${opt.version}</span>
-                            </div>
-                            <p class="text-[11px] text-gray-600 dark:text-gray-300 group-hover:text-cyan-50 mt-0.5 leading-snug line-clamp-2">${opt.desc}</p>
+                    <div class="space-y-2 pt-1 w-full">
+                        <div class="text-left px-1">
+                            <p class="text-xs font-bold text-gray-800 dark:text-gray-200">${opt.version}</p>
+                            <p class="text-[10px] text-gray-500 truncate">${opt.desc}</p>
                         </div>
-                        <div class="w-9 h-9 rounded-xl bg-[#00a8e8] group-hover:bg-white text-white group-hover:text-[#00a8e8] flex items-center justify-center flex-shrink-0 shadow transition">
-                            <i class="fa-solid fa-download text-sm"></i>
-                        </div>
-                    </a>
+                        <a href="${opt.url}" target="_blank" rel="noopener noreferrer"
+                           class="w-full bg-[#00a8e8] hover:bg-[#0091ca] text-white font-extrabold py-3 rounded-2xl flex items-center justify-center text-sm shadow-lg transition active:scale-98 uppercase tracking-wide">
+                            Cài đặt
+                        </a>
+                    </div>
                 `;
             });
             downloadVersionsList.innerHTML = html;
@@ -1873,7 +1977,7 @@
             let buildHtml = (items) => {
                 let innerHtml = '';
                 items.forEach(item => {
-                    const itemViews = getStoredViews(item);
+                    const authorName = item.dev || 'KPazz';
                     let rawVersion = item.version || 'v1.0.0';
                     const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                     const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
@@ -1889,9 +1993,8 @@
                                 <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
                                 <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                     <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                    <div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white">
-                                        <i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i>
-                                        <span class="font-extrabold text-[9px]">${itemViews}</span>
+                                    <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
+                                        <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1929,31 +2032,22 @@
                 if (topBtnWrap) topBtnWrap.style.display = 'flex';
                 topBtn.style.display = 'inline-flex';
                 stickyLink.style.display = 'flex';
-                if (downloadOptions.length > 1) {
-                    topBtn.href = 'javascript:void(0)';
-                    topBtn.removeAttribute('target');
-                    topBtn.onclick = (e) => {
-                        e.preventDefault();
-                        incrementAndGetDownloads(item);
-                        openDownloadVersionsModal(item, downloadOptions);
-                    };
+                
+                topBtn.href = 'javascript:void(0)';
+                topBtn.removeAttribute('target');
+                topBtn.onclick = (e) => {
+                    e.preventDefault();
+                    incrementAndGetDownloads(item);
+                    openDownloadVersionsModal(item, downloadOptions);
+                };
 
-                    stickyLink.href = 'javascript:void(0)';
-                    stickyLink.removeAttribute('target');
-                    stickyLink.onclick = (e) => {
-                        e.preventDefault();
-                        incrementAndGetDownloads(item);
-                        openDownloadVersionsModal(item, downloadOptions);
-                    };
-                } else {
-                    topBtn.href = downloadOptions[0].url;
-                    topBtn.setAttribute('target', '_blank');
-                    topBtn.onclick = () => incrementAndGetDownloads(item);
-
-                    stickyLink.href = downloadOptions[0].url;
-                    stickyLink.setAttribute('target', '_blank');
-                    stickyLink.onclick = () => incrementAndGetDownloads(item);
-                }
+                stickyLink.href = 'javascript:void(0)';
+                stickyLink.removeAttribute('target');
+                stickyLink.onclick = (e) => {
+                    e.preventDefault();
+                    incrementAndGetDownloads(item);
+                    openDownloadVersionsModal(item, downloadOptions);
+                };
             } else {
                 if (topBtnWrap) topBtnWrap.style.display = 'none';
                 topBtn.href = '#';
@@ -1986,6 +2080,23 @@
         const appDetailScrollBody = document.getElementById('appDetailScrollBody');
         const appDetailModal = document.getElementById('appDetailModal');
         const appDetailCloseBtn = document.getElementById('appDetailCloseBtn');
+        const appDetailShareBtn = document.getElementById('appDetailShareBtn');
+
+        if (appDetailShareBtn) {
+            appDetailShareBtn.onclick = (e) => {
+                e.preventDefault();
+                if (navigator.share) {
+                    navigator.share({
+                        title: currentOpenItem?.name || 'KPazz Store',
+                        text: `Khám phá ngay ${currentOpenItem?.name || 'nội dung này'} trên KPazz Store!`,
+                        url: window.location.href
+                    }).catch(() => {});
+                } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Đã sao chép liên kết vào bộ nhớ tạm!');
+                }
+            };
+        }
 
         function openAppDetail(item) {
             if (!item) return;
@@ -2010,7 +2121,7 @@
                 detailTopBannerImg.src = bannerSrc;
             }
 
-            const publishDateStr = item.publishDate || '17/11/2026';
+            const publishDateStr = item.publishDate || '18/11/2026';
             if (detailPublishDate) detailPublishDate.textContent = publishDateStr;
 
             if (item.category) {
@@ -2247,12 +2358,12 @@
 
             let html = '';
             items.forEach((item, index) => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
+                const publishDateStr = item.publishDate || '18/11/2026';
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 5 ? rawVersion.substring(0, 5) : rawVersion;
-                const viewsMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></div>`;
-                const downloadsMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></div>`;
+                
+                const dateMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-700 dark:text-gray-300"><i class="fa-regular fa-calendar text-uptoAccent text-[9px]"></i><span class="text-[9px]">${publishDateStr}</span></div>`;
+                const versionMarkup = item.isApp ? `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-code-branch text-uptoAccent text-[9px]"></i><span class="text-[9px]">${versionText}</span></div>` : '';
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
                 const truncatedDesc = truncateByWords(descText, 6);
 
@@ -2267,8 +2378,8 @@
                             <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[45px]">${versionText}</span>
                                 <div class="flex items-center space-x-2 font-bold">
-                                    ${viewsMarkup}
-                                    ${item.isApp ? downloadsMarkup : ''}
+                                    ${dateMarkup}
+                                    ${versionMarkup}
                                 </div>
                             </div>
                         </div>
@@ -2318,6 +2429,33 @@
                 return new Date(parts[2], parts[1] - 1, parts[0]);
             }
             return new Date(dateStr);
+        }
+
+        function getAdaptiveBadgeInfo(publishDateStr, item) {
+            const now = new Date();
+            let pubDate = parseDate(publishDateStr);
+
+            if (isNaN(pubDate.getTime()) || pubDate.getFullYear() < 2000) {
+                pubDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            }
+
+            const diffYears = now.getFullYear() - pubDate.getFullYear();
+            const diffMonths = diffYears * 12 + (now.getMonth() - pubDate.getMonth());
+
+            let line2 = 'Mới Cập Nhật';
+
+            if (diffMonths === 0 && now.getFullYear() === pubDate.getFullYear()) {
+                line2 = 'Mới Cập Nhật';
+            } else if (diffMonths > 0 && diffMonths < 12 && diffYears === 0) {
+                line2 = `${diffMonths} Tháng Trước`;
+            } else if (diffYears > 0 || diffMonths >= 12) {
+                const totalYears = Math.max(1, diffYears);
+                line2 = `${totalYears} Năm Trước`;
+            } else {
+                line2 = 'Cập Nhật Cách Đây';
+            }
+
+            return { line1: 'CẬP NHẬT', line2: line2 };
         }
 
         function sortItemsByDate(items) {
@@ -2573,13 +2711,13 @@
                 if (headerTitleText.includes('tweak')) {
                     renderTweakSectionCustom(uniqueId, items);
                 } else if (headerTitleText.includes('năng suất') || headerTitleText.includes('tiện ích')) {
-                    renderGridTwoRowsScrollSection(uniqueId, items, headerTitleText);
+                    renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
                 } else if (headerTitleText.includes('app') || headerTitleText.includes('ứng dụng') || headerTitleText.includes('apk') || headerTitleText.includes('ios')) {
                     renderAppMixedSection(uniqueId, items, headerTitleText);
                 } else if (headerTitleText.includes('mẹo') || headerTitleText.includes('thủ thuật') || headerTitleText.includes('tin tức') || headerTitleText.includes('sự kiện')) {
                     renderTipBigCardSection(uniqueId, items, headerTitleText);
                 } else {
-                    renderGridTwoRowsScrollSection(uniqueId, items, headerTitleText);
+                    renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
                 }
             });
 
@@ -2623,11 +2761,17 @@
                     ? (typeof topItem.highlights[0] === 'string' ? topItem.highlights[0] : topItem.highlights[0].text)
                     : (topItem.highlightTitle || topItem.dev || 'Trợ lý AI và tính năng tuyệt vời');
                 const topJsonEscaped = JSON.stringify(topItem).replace(/'/g, "&#39;");
+                const topBadgeId = `badge_top_${Math.random().toString(36).substr(2, 9)}`;
+                const badgeInfo = getAdaptiveBadgeInfo(topItem.publishDate, topItem);
 
                 topBannerEl.innerHTML = `
                     <div class="app-card-clickable featured-banner-unique-card"
                          data-app-json='${topJsonEscaped}'>
-                        <img src="${topItem.img}" alt="${topItem.name}" class="featured-banner-unique-bg">
+                        <div id="${topBadgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                            <span>${badgeInfo.line1}</span>
+                            <span class="badge-sub-date">${badgeInfo.line2}</span>
+                        </div>
+                        <img src="${topItem.img}" alt="${topItem.name}" class="featured-banner-unique-bg" onload="updateBadgeColorFromImg(this, '${topBadgeId}')">
                         
                         <div class="featured-banner-unique-glass-overlay">
                             <div class="flex items-center justify-between space-x-3 w-full">
@@ -2659,7 +2803,7 @@
                 listItems.forEach((item) => {
                     const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
                     const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
-                    const itemDownloads = getStoredDownloads(item);
+                    const itemVersion = item.version || '';
                     const itemDesc = (item.highlights && item.highlights.length > 0)
                         ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text)
                         : (item.highlightTitle || item.category || item.dev || '');
@@ -2679,7 +2823,7 @@
                                     <span>Tải Về</span>
                                 </button>
                                 <span class="text-[8px] mt-1 font-semibold featured-download-sub-outline">Miễn phí</span>
-                                <span class="text-[7.5px] font-medium featured-download-sub-outline">${itemDownloads} Lượt đã tải</span>
+                                <span class="text-[7.5px] font-medium featured-download-sub-outline">${item.isApp && itemVersion ? itemVersion : ''}</span>
                             </div>
                         `;
                     }
@@ -2730,7 +2874,15 @@
             }
         }
 
-        /* 1. MỤC TWEAK: Card nhỏ 2 hàng cuộn ngang */
+        function updateBadgeColorFromImg(imgEl, badgeId) {
+            const badgeEl = document.getElementById(badgeId);
+            if (!badgeEl) return;
+            getDominantColorFromImg(imgEl.src, (colorRgb) => {
+                badgeEl.style.backgroundColor = colorRgb;
+            });
+        }
+
+        /* 1. MỤC TWEAK */
         function renderTweakSectionCustom(uniqueId, items) {
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
@@ -2739,8 +2891,7 @@
 
             let innerHtml = '';
             items.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
+                const authorName = item.dev || 'KPazz';
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
@@ -2758,9 +2909,8 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
+                                <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
+                                    <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                 </div>
                             </div>
                         </div>
@@ -2778,7 +2928,88 @@
             bindCardClickEvents(wrapper);
         }
 
-        /* 2. MỤC APP IOS & APK: 1 hàng tối đa 5 card to tự động chuyển sau 3.5s */
+        /* 2. MỤC TIỆN ÍCH & NĂNG SUẤT (Chiều cao rút gọn đúng vạch đỏ, fade mờ phía trên & KHÔNG CÓ VẠCH KẺ NGANG) */
+        function renderAppStoreTwoRowsGridSection(uniqueId, items, labelType) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
+
+            let appPool = (globalAllItems && globalAllItems.length > 0)
+                ? globalAllItems.filter(item => item.isApp && item.img)
+                : items.filter(item => item.isApp && item.img);
+
+            if (appPool.length === 0) appPool = items;
+
+            let shuffledApps = [...appPool].sort(() => 0.5 - Math.random());
+            let selectedApps = shuffledApps.slice(0, 16);
+
+            if (countText) countText.textContent = `${selectedApps.length} - ${labelType}`;
+
+            const creativeThemes = [
+                { sub: "THỬ NGAY NỘI DUNG MỚI", main: "Công Cụ Tuyệt Vời Để Thiết Kế Đồ Họa" },
+                { sub: "NÂNG TẤM HIỆU SUẤT", main: "Ứng Dụng Hỗ Trợ Làm Việc Năng Suất" },
+                { sub: "KHÁM PHÁ TIỆN ÍCH HÀNG ĐẦU", main: "Trải Nghiệm Mượt Mà Mỗi Ngày" },
+                { sub: "BỘ SƯU TẬP ĐẶC BIỆT", main: "Công Cụ Hữu Ích Cho Điện Thoại" },
+                { sub: "XU HƯỚNG TỐT NHẤT", main: "Top Ứng Dụng Không Thể Thiếu" }
+            ];
+            const chosenTheme = creativeThemes[Math.floor(Math.random() * creativeThemes.length)];
+
+            const randomBgItem = selectedApps[Math.floor(Math.random() * selectedApps.length)];
+            const bgMedia = getPrimaryMediaSrc(randomBgItem);
+
+            let midIndex = Math.ceil(selectedApps.length / 2);
+            let row1Apps = selectedApps.slice(0, midIndex);
+            let row2Apps = selectedApps.slice(midIndex);
+
+            let buildRowHtml = (rowApps) => {
+                let html = '';
+                rowApps.forEach(item => {
+                    const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                    html += `
+                        <div class="app-card-clickable appstore-icon-item" data-app-json='${itemJsonEscaped}'>
+                            <div class="appstore-icon-wrap">
+                                <img src="${item.img}" class="appstore-icon-img img-ratio-1-1" alt="${item.name}">
+                            </div>
+                        </div>
+                    `;
+                });
+                return html;
+            };
+
+            let row1Html = buildRowHtml(row1Apps);
+            let row2Html = buildRowHtml(row2Apps);
+
+            wrapper.innerHTML = `
+                <div class="px-3.5">
+                    <div class="appstore-grid-card-box relative overflow-hidden h-[310px] sm:h-[335px] flex flex-col justify-between">
+                        <img src="${bgMedia.url}" alt="Background" class="appstore-grid-card-bg">
+                        <!-- Nền mờ hoà trộn mượt mà, chiều cao rút gọn đến vạch đỏ và hoàn toàn không có vạch kẻ ngang -->
+                        <div class="appstore-grid-card-overlay absolute inset-0 pointer-events-none"></div>
+
+                        <div class="relative z-10 flex flex-col justify-between h-full pt-3 pb-4">
+                            <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab w-full">
+                                <div class="flex flex-col space-y-3 pl-4 pr-4" style="min-width: max-content;" data-scroll-speed="75">
+                                    <div class="flex space-x-3 pl-2 pr-2">
+                                        ${row1Html}
+                                    </div>
+                                    <div class="flex space-x-3 staggered-row-offset pl-2 pr-2">
+                                        ${row2Html}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="px-5 pt-1.5">
+                                <p class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-cyan-300/90">${chosenTheme.sub}</p>
+                                <h3 class="text-xl sm:text-2xl font-extrabold text-white leading-snug tracking-tight mt-0.5">${chosenTheme.main}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            bindCardClickEvents(wrapper);
+        }
+
+        /* 3. MỤC APP IOS & APK */
         function renderAppMixedSection(uniqueId, items, labelType) {
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
@@ -2789,24 +3020,26 @@
             const bottomItems = items.slice(5);
 
             let topHtml = '';
-            topItems.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
-                const publishDateStr = item.publishDate || 'Mới';
+            topItems.forEach((item, itemIdx) => {
+                const itemVersion = item.version || '';
+                const publishDateStr = item.publishDate || '18/11/2026';
                 const authorStr = item.dev || 'KPazz';
                 const descText = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || '');
                 const media = getPrimaryMediaSrc(item);
                 const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                const badgeId = `badge_mixed_${uniqueId}_${itemIdx}`;
+                const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
                 topHtml += `
                     <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
                          data-app-json='${itemJsonEscaped}'>
-                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
-                        <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
-                            <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
-                            <span>Mới cập nhật: ${publishDateStr}</span>
+                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                            <span>${badgeInfo.line1}</span>
+                            <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
+                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
+                        
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
@@ -2825,14 +3058,14 @@
                                             <span>Tải Về</span>
                                         </button>
                                         <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
-                                        <span class="text-[7.5px] text-gray-300 font-medium">${itemDownloads} Lượt đã tải</span>
+                                        <span class="text-[7.5px] text-gray-300 font-medium">${item.isApp && itemVersion ? itemVersion : ''}</span>
                                     </div>
                                 ` : ''}
                             </div>
                             <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
-                                <div class="flex items-center space-x-2 font-bold text-white">
-                                    <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
-                                    ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-200">
+                                    <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
+                                    <span class="font-extrabold">${publishDateStr}</span>
                                 </div>
                                 <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorStr}</span>
                             </div>
@@ -2843,8 +3076,7 @@
 
             let bottomHtml = '';
             bottomItems.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
+                const authorName = item.dev || 'KPazz';
                 let rawVersion = item.version || 'v1.0.0';
                 const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
                 const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
@@ -2862,9 +3094,8 @@
                             <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
                             <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
                                 <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-white px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1.5 font-bold text-gray-900 dark:text-white">
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-eye text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemViews}</span></span>
-                                    <span class="flex items-center space-x-0.5"><i class="fa-solid fa-download text-uptoAccent text-[9px]"></i><span class="text-[9px]">${itemDownloads}</span></span>
+                                <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
+                                    <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                 </div>
                             </div>
                         </div>
@@ -2891,7 +3122,7 @@
             initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
         }
 
-        /* 3. MỤC THỦ THUẬT, MẸO HAY & TIN TỨC: 1 hàng card to bắt dính tự động chuyển sau 3.5s */
+        /* 4. MỤC THỦ THUẬT, MẸO HAY & TIN TỨC */
         function renderTipBigCardSection(uniqueId, items, labelType) {
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
@@ -2901,25 +3132,25 @@
             const tipItems = items.slice(0, 8);
             let bannerHtml = '';
 
-            tipItems.forEach(item => {
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
+            tipItems.forEach((item, itemIdx) => {
+                const itemVersion = item.version || '';
+                const publishDateStr = item.publishDate || '18/11/2026';
                 const authorName = item.dev || 'KPazz';
                 const descText = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || '');
-                const publishDateText = item.publishDate || 'Mới';
                 const media = getPrimaryMediaSrc(item);
                 const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                const badgeId = `badge_tip_${uniqueId}_${itemIdx}`;
+                const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
                 bannerHtml += `
                     <div class="app-card-clickable big-auto-card snap-center flex-none w-[82vw] sm:w-[44vw] md:w-[30vw] lg:w-[23vw] max-w-[300px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-xl border border-white/15 group"
                          data-app-json='${itemJsonEscaped}'>
-                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}">
-
-                        <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 flex items-center space-x-1.5 text-[9px] text-gray-200 font-semibold shadow-md">
-                            <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
-                            <span>Mới cập nhật: ${publishDateText}</span>
+                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                            <span>${badgeInfo.line1}</span>
+                            <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
+                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
 
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
@@ -2940,15 +3171,15 @@
                                             <span>Tải Về</span>
                                         </button>
                                         <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
-                                        <span class="text-[7.5px] text-gray-300 font-medium">${itemDownloads} Lượt đã tải</span>
+                                        <span class="text-[7.5px] text-gray-300 font-medium">${item.isApp && itemVersion ? itemVersion : ''}</span>
                                     </div>
                                 ` : ''}
                             </div>
 
                             <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
-                                <div class="flex items-center space-x-2 font-bold text-white">
-                                    <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
-                                    ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-200">
+                                    <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
+                                    <span class="font-extrabold">${publishDateStr}</span>
                                 </div>
                                 <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorName}</span>
                             </div>
@@ -2965,43 +3196,6 @@
             `;
             bindCardClickEvents(wrapper);
             initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
-        }
-
-        /* 4. MỤC NĂNG SUẤT & TIỆN ÍCH: Card ô nhỏ icon nằm ở trên, tên ở dưới (2 hàng cuộn ngang) */
-        function renderGridTwoRowsScrollSection(uniqueId, items, labelType) {
-            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
-            const countText = document.getElementById(`count_${uniqueId}`);
-            if (!wrapper) return;
-            if (countText) countText.textContent = `${items.length} - ${labelType}`;
-
-            let innerHtml = '';
-            items.forEach(item => {
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 3);
-                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
-
-                innerHtml += `
-                    <div class="app-card-clickable home-grid-icon-box glass-panel border-none"
-                         data-app-json='${itemJsonEscaped}'>
-                        <div class="home-grid-icon-wrap">
-                            <img src="${item.img}" class="home-grid-icon-file img-ratio-1-1" alt="${item.name}">
-                        </div>
-                        <div class="w-full mt-2 space-y-0.5">
-                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[9px] text-gray-500 dark:text-gray-400 truncate leading-tight">${truncatedDesc}</p>
-                        </div>
-                    </div>
-                `;
-            });
-
-            wrapper.innerHTML = `
-                <div class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5" data-scroll-speed="40">
-                    <div class="grid grid-rows-2 grid-flow-col gap-x-3 gap-y-3 pr-3.5" style="min-width: max-content;">
-                        ${innerHtml}
-                    </div>
-                </div>
-            `;
-            bindCardClickEvents(wrapper);
         }
 
         function initSectionAutoSlide(containerId) {
@@ -3089,27 +3283,25 @@
             let slidesHtml = '';
             sortedHeroItems.forEach((item, idx) => {
                 const isActive = idx === 0 ? 'active-card' : '';
-                const itemViews = getStoredViews(item);
-                const itemDownloads = getStoredDownloads(item);
-                const publishDateStr = item.publishDate || '17/11/2026';
+                const publishDateStr = item.publishDate || '18/11/2026';
                 const authorStr = item.dev || 'KPazz Studio';
                 const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
                 
                 const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover">`;
+                let mediaHtml = `<img src="${media.url}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover" onload="updateBadgeColorFromImg(this, 'badge_hero_${idx}')">`;
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                const badgeInfo = getAdaptiveBadgeInfo(publishDateStr, item);
 
                 slidesHtml += `
                     <div class="hero-card ${isActive} app-card-clickable snap-center flex-none w-[80vw] sm:w-[58vw] md:w-[42vw] lg:w-[32vw] max-w-[360px] rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between group"
                          data-app-json='${itemJsonEscaped}'>
+                        <div id="badge_hero_${idx}" class="appstore-top-left-badge" style="background-color: #00baa3;">
+                            <span>${badgeInfo.line1}</span>
+                            <span class="badge-sub-date">${badgeInfo.line2}</span>
+                        </div>
                         <div class="relative h-64 sm:h-72 w-full">
                             ${mediaHtml}
                             
-                            <div class="absolute top-3 left-3 z-20 bg-black/55 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 flex items-center space-x-1.5 text-[10px] text-white font-semibold shadow-md">
-                                <i class="fa-regular fa-calendar-check text-uptoAccent"></i>
-                                <span>Mới cập nhật: ${publishDateStr}</span>
-                            </div>
-
                             <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
                                 <div class="flex items-center space-x-3 mb-1">
                                     <div class="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-md p-0.5 flex items-center justify-center flex-shrink-0 shadow-md overflow-hidden border border-white/25">
@@ -3122,9 +3314,9 @@
                                 </div>
 
                                 <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
-                                    <div class="flex items-center space-x-2 font-bold text-white">
-                                        <span class="flex items-center space-x-1"><i class="fa-solid fa-eye text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemViews}</span></span>
-                                        ${item.isApp ? `<span class="flex items-center space-x-1"><i class="fa-solid fa-download text-uptoAccent text-[10px]"></i><span class="font-extrabold">${itemDownloads}</span></span>` : ''}
+                                    <div class="flex items-center space-x-1.5 font-bold text-gray-200">
+                                        <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
+                                        <span class="font-extrabold">${publishDateStr}</span>
                                     </div>
                                     <span class="text-uptoAccent font-bold truncate max-w-[140px]">&bull; ${authorStr}</span>
                                 </div>
@@ -3314,6 +3506,8 @@
         loginCloseBtn.addEventListener('click', () => closeModalWithBounce(loginModal, loginCard));
         setupBackdropClose(loginModal, loginCard);
 
+        openRegisterDialog = () => {};
+
         openRegisterBtn.addEventListener('click', () => {
             closeModalWithBounce(loginModal, loginCard, () => openModalWithBounce(registerModal, registerCard));
         });
@@ -3400,6 +3594,9 @@
 
         drawerCloseBtn.addEventListener('click', closeDrawer);
         drawerBackdrop.addEventListener('click', closeDrawer);
+
+        document.getElementById('drawerYearText').textContent = new Date().getFullYear();
+        document.getElementById('footerYearText').textContent = new Date().getFullYear();
 
         document.addEventListener('DOMContentLoaded', () => {
             loadStoreData();
