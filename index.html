@@ -124,7 +124,6 @@
         }
 
         /* ================= TÙY CHỈNH MÀU NAVBAR & MENU Ở CHẾ ĐỘ SÁNG ================= */
-        /* 1. Navbar: Toàn bộ chữ và icon trong navbar chính là màu đen, ngoại trừ logo icon KPazz và phần "Hôm Nay!" giữ màu xanh */
         html:not(.dark) header#mainHeader span:not(#currentDateText):not(.text-uptoAccent):not(.text-\[\#14b8a6\]),
         html:not(.dark) header#mainHeader i:not(#themeIcon):not(.fa-solid.fa-house):not(.fa-solid.fa-bars):not(.fa-solid.fa-magnifying-glass):not(.fa-regular.fa-circle-user):not(.fa-solid.fa-calendar-day):not(.fa-solid.fa-clock-rotate-left),
         html:not(.dark) header#mainHeader button,
@@ -132,7 +131,6 @@
             color: #0f172a !important;
         }
 
-        /* Giữ nguyên màu xanh ngọc cho icon cạnh chữ KPazz và phần "Hôm Nay!" (cả icon và text) trong navbar ở chế độ sáng */
         html:not(.dark) header#mainHeader svg.text-uptoAccent,
         html:not(.dark) header#mainHeader span.text-uptoAccent,
         html:not(.dark) header#mainHeader .text-\[\#14b8a6\],
@@ -142,7 +140,6 @@
             fill: #14b8a6 !important;
         }
 
-        /* Các nút icon menu, search, history, theme trong navbar ở chế độ sáng */
         html:not(.dark) header#mainHeader #hamburgerBtn,
         html:not(.dark) header#mainHeader #searchOpenBtn,
         html:not(.dark) header#mainHeader #profileOpenBtn,
@@ -152,17 +149,14 @@
             color: #0f172a !important;
         }
 
-        /* Ngày tháng trong navbar ở chế độ sáng */
         html:not(.dark) header#mainHeader #currentDateText {
             color: #475569 !important;
         }
 
-        /* Nút chuyển đổi giao diện (themeIcon) giữ màu vàng cam đặc trưng */
         html:not(.dark) header#mainHeader #themeIcon {
             color: #f59e0b !important;
         }
 
-        /* 2. Menu (Sidebar): Ở chế độ sáng, text và icon trong menu chuyển sang màu đen (trừ mục đang active & nút Trang chủ) */
         html:not(.dark) #sidebarDrawer nav a:not(.drawer-main-item),
         html:not(.dark) #sidebarDrawer nav div:not(.drawer-cat-active) span:not(.drawer-green-badge):not(.drawer-green-btn),
         html:not(.dark) #sidebarDrawer nav div:not(.drawer-cat-active) i:not(.drawer-active-icon):not(.drawer-auth-icon):not(.drawer-green-btn),
@@ -173,7 +167,6 @@
             color: #0f172a !important;
         }
 
-        /* Mục Trang chủ trong menu: nền xanh lá mặc định; chữ & icon luôn màu trắng ở cả chế độ sáng và tối */
         #sidebarDrawer a.drawer-main-item {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
             color: #ffffff !important;
@@ -187,7 +180,6 @@
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
         }
-        /* Khi chọn tiêu đề mục khác bên dưới: nền nút Trang chủ chuyển sang màu cam, chữ & icon vẫn trắng */
         #sidebarDrawer a.drawer-main-item.is-orange,
         html:not(.dark) #sidebarDrawer a.drawer-main-item.is-orange {
             background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
@@ -195,7 +187,6 @@
             -webkit-text-fill-color: #ffffff !important;
         }
 
-        /* Tiêu đề mục khi được ấn chọn: nền màu xanh giống nút Trang chủ và chữ + icon chuyển sang trắng */
         #sidebarDrawer .drawer-cat-header.drawer-cat-active,
         html:not(.dark) #sidebarDrawer .drawer-cat-header.drawer-cat-active {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
@@ -214,7 +205,6 @@
             fill: #14b8a6 !important;
         }
 
-        /* Nút Đăng nhập / Đăng ký & Nút Lịch sử: chữ và icon luôn màu trắng ở cả chế độ sáng và tối */
         #sidebarDrawer .drawer-auth-login-btn,
         #sidebarDrawer .drawer-auth-login-btn *,
         #sidebarDrawer .drawer-auth-register-btn,
@@ -231,12 +221,10 @@
             -webkit-text-fill-color: #ffffff !important;
         }
         
-        /* Tiêu đề KPazz đầu menu ở chế độ sáng */
         html:not(.dark) #sidebarDrawer div span.text-gray-900 {
             color: #0f172a !important;
         }
 
-        /* Nút Xem lịch sử tải và xem: kiểu màu tím/indigo khác biệt */
         .drawer-history-btn {
             background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             color: #ffffff !important;
@@ -251,7 +239,6 @@
             box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35);
         }
 
-        /* CSS riêng cho nút/nhãn "Đã xem", "Đã tải" trong popup Lịch sử tải và xem */
         .history-status-badge {
             background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: #ffffff;
@@ -272,7 +259,6 @@
             box-shadow: 0 3px 12px rgba(248, 113, 113, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
         }
 
-        /* Số lượng đếm trong list & nút Xem tất cả: nền xanh lá, chữ & icon luôn trắng */
         .drawer-green-badge,
         .drawer-green-btn,
         .drawer-green-btn span,
@@ -1139,7 +1125,7 @@
             opacity: 1 !important;
         }
 
-        /* ================= ĐỒNG MÀU NỀN MENU (HEADER KPazz, LIST, THÔNG TIN LIÊN HỆ) & KHỐI MẠNG XÃ HỘI TỐI HƠN CHÚT ================= */
+        /* ================= ĐỒNG MÀU NỀN MENU ================= */
         .drawer-main-panel {
             background: #eef1f5 !important;
             backdrop-filter: none !important;
@@ -1180,7 +1166,6 @@
             -webkit-backdrop-filter: none !important;
         }
 
-        /* Ô search thu gọn & 2 nút Đăng nhập/Đăng ký chuyển tiếp mượt mà, ăn khớp và không đè nhau */
         .drawer-sticky-search {
             flex: 1 1 auto;
             max-width: 240px;
@@ -1218,7 +1203,6 @@
             pointer-events: auto;
         }
 
-        /* List mở ra của tiêu đề mục: ở chế độ tối làm sáng hơn tí để nổi bật dễ nhìn */
         .drawer-submenu-container {
             background: #dfe4ec !important;
             backdrop-filter: none !important;
@@ -1416,7 +1400,7 @@
         <div class="json-loader-card">
             <div class="json-spinner-ring"></div>
             <p class="json-loading-title">Đang tải dữ liệu...</p>
-            <p class="json-loading-sub">Đang đọc dữ liệu JSON từ hệ thống</p>
+            <p class="json-loading-sub">Đang đọc dữ liệu. Vui lòng đợi!!!</p>
         </div>
     </div>
 
@@ -3476,6 +3460,16 @@
         window.drawerStoreCache = {};
         window.storeDataCache = {};
 
+        function extractPathOrderPrefix(filePath) {
+            if (!filePath || typeof filePath !== 'string') return 999;
+            const fileName = filePath.split('/').pop() || '';
+            const match = fileName.match(/^(\d{1,2})-/);
+            if (!match || !match[1]) return 999;
+            const num = parseInt(match[1], 10);
+            if (isNaN(num) || num < 0 || num > 90) return 999;
+            return num;
+        }
+
         async function fetchAndParseCategoryJson(filePath, fallbackIconClass, isArticleType = false, isTipType = false, isTweakType = false) {
             try {
                 const response = await fetch(filePath);
@@ -3533,11 +3527,7 @@
                     return { ...item, isApp: true };
                 });
 
-                let sortNumber = 999;
-                const matchNum = filePath.match(/(\d+)[^\/]*$/);
-                if (matchNum && matchNum[1]) {
-                    sortNumber = parseInt(matchNum[1], 10);
-                }
+                const sortNumber = extractPathOrderPrefix(filePath);
 
                 return {
                     filePath: filePath,
@@ -3560,18 +3550,25 @@
             try {
                 const jsonFilesConfig = [
                     { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false, isTweak: true },
-                    { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false, isTweak: false },
-                    { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false, isTweak: false },
-                    { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false, isTweak: false },
-                    { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false, isTweak: false },
-                    { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true, isTweak: false },
-                    { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false, isTweak: false }
+                    { path: 'Tabs/2-Shortcut.json', icon: 'fa-solid fa-bolt', isArticle: false, isTip: true, isTweak: false, isShortcut: true },
+                    { path: 'Tabs/3-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false, isTweak: false },
+                    { path: 'Tabs/4-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/5-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/6-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/7-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true, isTweak: false },
+                    { path: 'Tabs/8-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false, isTweak: false }
                 ];
 
                 let loadedResults = [];
                 for (let cfg of jsonFilesConfig) {
                     const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip, cfg.isTweak);
                     if (res) {
+                        if (cfg.isShortcut) {
+                            res.isShortcut = true;
+                            if (res.categoryName === "Danh mục") {
+                                res.categoryName = "Phím tắt Shortcut";
+                            }
+                        }
                         loadedResults.push(res);
                     }
                 }
@@ -3605,6 +3602,8 @@
                     `;
                 }
                 if (dynamicSectionsContainer) dynamicSectionsContainer.innerHTML = '';
+
+                let shortcutSectionData = null;
 
                 for (let i = 0; i < loadedResults.length; i++) {
                     const result = loadedResults[i];
@@ -3659,23 +3658,28 @@
                         `;
                     }
 
+                    if (dynamicSectionsContainer && i === 1) {
+                        dynamicSectionsContainer.innerHTML += `
+                            <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
+                                <div id="featuredBottomListCard"></div>
+                                <div class="space-y-2">
+                                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
+                                    <div id="featuredTopBannerCard"></div>
+                                </div>
+                            </section>
+                        `;
+                    }
+
+                    if (result.isShortcut) {
+                        shortcutSectionData = { uniqueId, catName, items, countLabelId };
+                        continue;
+                    }
+
                     if (dynamicSectionsContainer) {
                         let sectionBodyHtml = `
                             <div id="${containerId}" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="35"></div>
                             <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
                         `;
-
-                        if (i === 1) {
-                            dynamicSectionsContainer.innerHTML += `
-                                <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
-                                    <div id="featuredBottomListCard"></div>
-                                    <div class="space-y-2">
-                                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
-                                        <div id="featuredTopBannerCard"></div>
-                                    </div>
-                                </section>
-                            `;
-                        }
 
                         dynamicSectionsContainer.innerHTML += `
                             <section class="space-y-2.5 pt-0 mt-0">
@@ -3691,6 +3695,40 @@
                                 </div>
                             </section>
                         `;
+                    }
+                }
+
+                if (dynamicSectionsContainer && !document.getElementById('featuredTwoCardsSection')) {
+                    dynamicSectionsContainer.insertAdjacentHTML('beforeend', `
+                        <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
+                            <div id="featuredBottomListCard"></div>
+                            <div class="space-y-2">
+                                <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
+                                <div id="featuredTopBannerCard"></div>
+                            </div>
+                        </section>
+                    `);
+                }
+
+                if (shortcutSectionData && dynamicSectionsContainer) {
+                    const { uniqueId, catName, items, countLabelId } = shortcutSectionData;
+                    const shortcutSectionHtml = `
+                        <section id="shortcutStaggeredSection" class="space-y-2.5 pt-1 mt-1">
+                            <div class="flex items-center justify-between px-3.5">
+                                <a href="javascript:void(0)" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="section-title text-gray-900 dark:text-white">
+                                    <span>${catName}</span>
+                                    <i class="fa-solid fa-chevron-right section-arrow"></i>
+                                </a>
+                                <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - mục</span>
+                            </div>
+                            <div id="section_wrapper_${uniqueId}"></div>
+                        </section>
+                    `;
+                    const featuredSection = document.getElementById('featuredTwoCardsSection');
+                    if (featuredSection) {
+                        featuredSection.insertAdjacentHTML('afterend', shortcutSectionHtml);
+                    } else {
+                        dynamicSectionsContainer.insertAdjacentHTML('beforeend', shortcutSectionHtml);
                     }
                 }
 
@@ -3736,7 +3774,9 @@
                     const sectionHeader = sectionWrapper ? sectionWrapper.previousElementSibling : null;
                     const headerTitleText = sectionHeader ? sectionHeader.textContent.toLowerCase() : '';
 
-                    if (headerTitleText.includes('tweak')) {
+                    if (sectionWrapper && sectionWrapper.closest('#shortcutStaggeredSection')) {
+                        renderShortcutThreeRowsStaggeredSection(uniqueId, items);
+                    } else if (headerTitleText.includes('tweak')) {
                         renderTweakSectionCustom(uniqueId, items);
                     } else if (headerTitleText.includes('năng suất') || headerTitleText.includes('tiện ích')) {
                         renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
@@ -3920,6 +3960,34 @@
             });
         }
 
+        function buildSmallTweakCardHtml(item) {
+            const authorName = item.dev || 'KPazz';
+            let rawVersion = item.version || 'v1.0.0';
+            const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+            const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+            const truncatedDesc = truncateByWords(descText, 6);
+            const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+
+            return `
+                <div class="app-card-clickable home-tweak-item-box glass-panel"
+                     data-app-json='${itemJsonEscaped}'>
+                    <div class="home-tweak-img-wrap card-icon-glow">
+                        <img src="${getIconSrc(item.img)}" class="home-tweak-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                    </div>
+                    <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
+                        <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
+                        <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
+                        <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                            <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
+                            <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
+                                <span class="truncate text-[9px]">&bull; ${authorName}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         /* 1. MỤC TWEAK */
         function renderTweakSectionCustom(uniqueId, items) {
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
@@ -3927,39 +3995,68 @@
             if (!wrapper) return;
             if (countText) countText.textContent = `${items.length} - mục`;
 
-            let innerHtml = '';
-            items.forEach(item => {
-                const authorName = item.dev || 'KPazz';
-                let rawVersion = item.version || 'v1.0.0';
-                const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
-                const truncatedDesc = truncateByWords(descText, 6);
-                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+            let baseItems = items.length > 0 ? [...items] : [];
+            while (baseItems.length > 0 && baseItems.length < 8) {
+                baseItems = [...baseItems, ...items];
+            }
+            const halfItems = baseItems;
+            const doubledItems = [...halfItems, ...halfItems];
 
-                innerHtml += `
-                    <div class="app-card-clickable home-tweak-item-box glass-panel"
-                         data-app-json='${itemJsonEscaped}'>
-                        <div class="home-tweak-img-wrap card-icon-glow">
-                            <img src="${getIconSrc(item.img)}" class="home-tweak-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
-                            <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
-                            <p class="text-[10px] text-gray-600 dark:text-gray-400 line-clamp-3 leading-tight">${truncatedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${versionText}</span>
-                                <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
-                                    <span class="truncate text-[9px]">&bull; ${authorName}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+            let innerHtml = '';
+            doubledItems.forEach(item => {
+                innerHtml += buildSmallTweakCardHtml(item);
             });
 
             wrapper.innerHTML = `
-                <div class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5" data-scroll-speed="40">
+                <div class="auto-scroll-container flex overflow-x-auto no-scrollbar pb-3 cursor-grab pl-3.5" data-scroll-speed="40" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
                     <div class="grid grid-rows-2 grid-flow-col gap-x-4 gap-y-3 pr-3.5" style="min-width: max-content;">
                         ${innerHtml}
+                    </div>
+                </div>
+            `;
+            applyImageFallbacksInContainer(wrapper);
+            bindCardClickEvents(wrapper);
+        }
+
+        /* MỤC SHORTCUT: 3 HÀNG SO LE, CẢ 3 DÒNG CÙNG 1 HƯỚNG CUỘN CHẬM RÃI, DÒNG 1 & 3 AUTO CUỘN */
+        function renderShortcutThreeRowsStaggeredSection(uniqueId, items) {
+            const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+            const countText = document.getElementById(`count_${uniqueId}`);
+            if (!wrapper) return;
+            if (countText) countText.textContent = `${items.length} - mục`;
+
+            const baseList = items.length > 0 ? items : (globalAllItems.length > 0 ? globalAllItems : []);
+            const row1Items = baseList.filter((_, idx) => idx % 3 === 0);
+            const row2Items = baseList.filter((_, idx) => idx % 3 === 1);
+            const row3Items = baseList.filter((_, idx) => idx % 3 === 2);
+
+            const r1 = row1Items.length > 0 ? row1Items : baseList;
+            const r2 = row2Items.length > 0 ? row2Items : baseList;
+            const r3 = row3Items.length > 0 ? row3Items : baseList;
+
+            const buildScrollingRowTrack = (arr, extraOffsetClass = '') => {
+                let singleHalf = [...arr];
+                while (singleHalf.length > 0 && singleHalf.length < 6) {
+                    singleHalf = [...singleHalf, ...arr];
+                }
+                const doubled = [...singleHalf, ...singleHalf];
+                return `
+                    <div class="flex space-x-3 ${extraOffsetClass} pr-3.5" style="min-width: max-content;">
+                        ${doubled.map(it => buildSmallTweakCardHtml(it)).join('')}
+                    </div>
+                `;
+            };
+
+            wrapper.innerHTML = `
+                <div class="space-y-2.5 pb-3">
+                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="22" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
+                        ${buildScrollingRowTrack(r1, 'pl-0')}
+                    </div>
+                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="26" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
+                        ${buildScrollingRowTrack(r2, 'pl-12')}
+                    </div>
+                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="24" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
+                        ${buildScrollingRowTrack(r3, 'pl-6')}
                     </div>
                 </div>
             `;
@@ -4025,7 +4122,7 @@
                         <div class="appstore-grid-card-overlay absolute inset-0 pointer-events-none"></div>
 
                         <div class="relative z-10 flex flex-col justify-between h-full py-0">
-                            <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab w-full pt-4 pb-2" data-scroll-speed="160">
+                            <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab w-full pt-4 pb-2" data-scroll-speed="45" data-scroll-dir="1">
                                 <div class="flex flex-col space-y-3 pl-4 pr-4" style="min-width: max-content;">
                                     <div class="flex space-x-3 pl-2 pr-2">
                                         ${row1Html}
@@ -4321,111 +4418,117 @@
 
             let sortedHeroItems = [...allItems].slice(0, 7);
 
-            let slidesHtml = '';
+            let html = '';
+            let dotsHtml = '';
             sortedHeroItems.forEach((item, idx) => {
-                const isActive = idx === 0 ? 'active-card' : '';
+                const itemVersion = item.version || '';
                 const publishDateStr = item.publishDate || '18/11/2026';
-                const authorStr = item.dev || 'KPazz Studio';
-                const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
-                
+                const authorName = item.dev || 'KPazz';
+                const descText = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || '');
                 const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${getBannerSrc(media.url, item.img)}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover" onload="updateBadgeColorFromImg(this, 'badge_hero_${idx}')">`;
+                const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
-                const badgeInfo = getAdaptiveBadgeInfo(publishDateStr, item);
+                const badgeId = `badge_hero_${idx}`;
+                const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
-                slidesHtml += `
-                    <div class="hero-card ${isActive} app-card-clickable snap-center flex-none w-[80vw] sm:w-[58vw] md:w-[42vw] lg:w-[32vw] max-w-[360px] rounded-3xl overflow-hidden relative cursor-pointer shadow-2xl border-none flex flex-col justify-between group"
+                html += `
+                    <div class="app-card-clickable hero-card snap-center flex-none w-[82vw] sm:w-[68vw] md:w-[60vw] lg:w-[48vw] max-w-[600px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-2xl border-none group"
                          data-app-json='${itemJsonEscaped}'>
-                        <div id="badge_hero_${idx}" class="appstore-top-left-badge" style="background-color: #0096c7;">
+                        <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
-                        <div class="relative h-64 sm:h-72 w-full">
-                            ${mediaHtml}
-                            
-                            <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
-                                <div class="flex items-center space-x-3 mb-1">
-                                    <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
+                        <img src="${getBannerSrc(media.url, item.img)}" alt="${item.name}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onload="updateBadgeColorFromImg(this, '${badgeId}')">
+
+                        <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-4 flex flex-col justify-end z-10 text-white">
+                            <div class="flex items-center justify-between space-x-2.5">
+                                <div class="flex items-center space-x-3 min-w-0 flex-1">
+                                    <div class="w-11 h-11 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
                                         <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <h3 class="font-extrabold text-sm sm:text-base text-white truncate drop-shadow">${item.name}</h3>
-                                        <p class="line-clamp-2 text-[11px] text-gray-200 leading-tight mt-0.5 opacity-95">${highlightDesc}</p>
+                                        <h2 class="text-base sm:text-lg font-extrabold text-white drop-shadow leading-tight truncate">${item.name}</h2>
+                                        <p class="text-[11px] text-gray-200 line-clamp-2 leading-tight mt-0.5 opacity-95">${descText}</p>
                                     </div>
                                 </div>
 
-                                <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
-                                    <div class="flex items-center space-x-1.5 font-bold text-gray-200">
-                                        <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
-                                        <span class="font-extrabold">${publishDateStr}</span>
+                                ${showDownloadBtn ? `
+                                    <div class="flex flex-col items-center flex-shrink-0 z-20">
+                                        <button type="button" class="btn-direct-download appstore-get-btn-home">
+                                            <i class="fa-solid fa-cloud-arrow-down text-[10px]"></i>
+                                            <span>Tải Xuống</span>
+                                        </button>
+                                        <span class="text-[8px] text-gray-200 mt-1 font-semibold">Miễn phí</span>
+                                        <span class="text-[7.5px] text-gray-300 font-medium">${item.isApp && itemVersion ? itemVersion : ''}</span>
                                     </div>
-                                    <span class="text-uptoAccent font-bold truncate max-w-[140px]">&bull; ${authorStr}</span>
+                                ` : ''}
+                            </div>
+
+                            <div class="flex items-center justify-between pt-1.5 mt-1 text-[10px] text-gray-200">
+                                <div class="flex items-center space-x-1.5 font-bold text-gray-200">
+                                    <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
+                                    <span class="font-extrabold">${publishDateStr}</span>
                                 </div>
+                                <span class="text-uptoAccent font-bold truncate max-w-[140px]">&bull; ${authorName}</span>
                             </div>
                         </div>
                     </div>
                 `;
+                dotsHtml += `<span class="hero-dot w-1.5 h-1.5 rounded-full bg-gray-400/50 dark:bg-gray-600 transition-all duration-300 cursor-pointer" data-index="${idx}"></span>`;
             });
 
-            heroSlider.innerHTML = slidesHtml;
+            heroSlider.innerHTML = html;
+            heroDotsContainer.innerHTML = dotsHtml;
             applyImageFallbacksInContainer(heroSlider);
             bindCardClickEvents(heroSlider);
 
-            if (heroDotsContainer && sortedHeroItems.length) {
-                let dotsHtml = '';
-                sortedHeroItems.forEach((_, idx) => {
-                    dotsHtml += `<span class="hero-dot rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer shadow-sm" style="width: 5px; height: 5px;" data-slide-idx="${idx}"></span>`;
-                });
-                heroDotsContainer.innerHTML = dotsHtml;
-            }
+            const heroCards = heroSlider.querySelectorAll('.hero-card');
+            const heroDots = heroDotsContainer.querySelectorAll('.hero-dot');
+            let currentSlideIndex = 0;
+            let slideInterval;
 
-            const cards = heroSlider.querySelectorAll('.hero-card');
-            let currentIndex = 0;
-            let autoSlideTimer;
+            function updateHeroCardDepth() {
+                const sliderRect = heroSlider.getBoundingClientRect();
+                const sliderCenter = sliderRect.left + sliderRect.width / 2;
 
-            function updateSliderPosition() {
-                cards.forEach((card, idx) => {
-                    const isActive = idx === currentIndex;
-                    card.classList.toggle('active-card', isActive);
-                    
-                    const offset = idx - currentIndex;
-                    const absOffset = Math.abs(offset);
+                heroCards.forEach((card, idx) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardCenter = cardRect.left + cardRect.width / 2;
+                    const distance = Math.abs(sliderCenter - cardCenter);
+                    const maxDistance = cardRect.width * 1.1;
 
-                    if (isActive) {
-                        card.style.zIndex = '30';
-                        card.style.transform = 'translate3d(0, 0, 0) scale(1) rotateY(0deg)';
-                        card.style.opacity = '1';
-                        card.style.boxShadow = '0 22px 40px -10px rgba(0,0,0,0.5)';
-                    } else {
-                        card.style.zIndex = Math.max(1, 25 - absOffset * 5);
-                        const translateX = offset * 14; 
-                        const rotateY = offset > 0 ? -16 : 16; 
-                        const scale = Math.max(0.74, 1 - absOffset * 0.08);
-                        const opacity = Math.max(0.4, 1 - absOffset * 0.22);
-                        
-                        card.style.transform = `translate3d(${translateX}px, ${absOffset * 6}px, 0) scale(${scale}) rotateY(${rotateY}deg)`;
-                        card.style.opacity = opacity;
-                        card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
-                    }
-                });
+                    let ratio = Math.min(distance / maxDistance, 1);
+                    let scale = 1 - (ratio * 0.14);
+                    let opacity = 1 - (ratio * 0.35);
+                    let zIndex = Math.round((1 - ratio) * 20) + 1;
+                    let rotateY = (cardCenter < sliderCenter ? 1 : -1) * (ratio * 8);
 
-                const dots = heroDotsContainer ? heroDotsContainer.querySelectorAll('.hero-dot') : [];
-                dots.forEach((dot, idx) => {
-                    if (idx === currentIndex) {
-                        dot.style.backgroundColor = '#00f2fe';
-                        dot.style.width = '14px';
-                        dot.style.height = '5px';
-                    } else {
-                        dot.style.backgroundColor = '';
-                        dot.style.width = '5px';
-                        dot.style.height = '5px';
+                    card.style.transform = `perspective(1000px) scale(${scale}) rotateY(${rotateY}deg)`;
+                    card.style.opacity = opacity;
+                    card.style.zIndex = zIndex;
+
+                    if (ratio < 0.25) {
+                        currentSlideIndex = idx;
+                        heroDots.forEach((d, dIdx) => {
+                            if (dIdx === idx) {
+                                d.classList.add('bg-uptoAccent', 'w-5');
+                                d.classList.remove('bg-gray-400/50', 'dark:bg-gray-600', 'w-1.5');
+                            } else {
+                                d.classList.remove('bg-uptoAccent', 'w-5');
+                                d.classList.add('bg-gray-400/50', 'dark:bg-gray-600', 'w-1.5');
+                            }
+                        });
                     }
                 });
             }
+
+            heroSlider.addEventListener('scroll', () => {
+                requestAnimationFrame(updateHeroCardDepth);
+            }, { passive: true });
 
             function goToSlide(index) {
-                currentIndex = (index + cards.length) % cards.length;
-                const targetCard = cards[currentIndex];
+                currentSlideIndex = (index + heroCards.length) % heroCards.length;
+                const targetCard = heroCards[currentSlideIndex];
                 if (targetCard) {
                     const scrollLeftPos = targetCard.offsetLeft - heroSlider.offsetLeft - (heroSlider.clientWidth / 2) + (targetCard.clientWidth / 2);
                     heroSlider.scrollTo({
@@ -4433,131 +4536,177 @@
                         behavior: 'smooth'
                     });
                 }
-                updateSliderPosition();
-            }
-
-            if (heroDotsContainer) {
-                heroDotsContainer.querySelectorAll('.hero-dot').forEach(dot => {
-                    dot.addEventListener('click', () => {
-                        const slideIdx = parseInt(dot.getAttribute('data-slide-idx'), 10);
-                        stopAutoSlide();
-                        goToSlide(slideIdx);
-                        startAutoSlide();
-                    });
-                });
             }
 
             function startAutoSlide() {
-                autoSlideTimer = setInterval(() => {
-                    goToSlide(currentIndex + 1);
-                }, 4000);
+                slideInterval = setInterval(() => {
+                    goToSlide(currentSlideIndex + 1);
+                }, 3800);
             }
 
             function stopAutoSlide() {
-                clearInterval(autoSlideTimer);
+                clearInterval(slideInterval);
             }
 
-            heroSlider.addEventListener('scroll', () => {
-                const center = heroSlider.scrollLeft + (heroSlider.clientWidth / 2);
-                let closestIdx = 0;
-                let minDist = Infinity;
-
-                cards.forEach((card, idx) => {
-                    const cardCenter = (card.offsetLeft - heroSlider.offsetLeft) + (card.clientWidth / 2);
-                    const dist = Math.abs(center - cardCenter);
-                    if (dist < minDist) {
-                        minDist = dist;
-                        closestIdx = idx;
-                    }
+            heroDots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => {
+                    stopAutoSlide();
+                    goToSlide(idx);
+                    startAutoSlide();
                 });
-
-                if (closestIdx !== currentIndex) {
-                    currentIndex = closestIdx;
-                    updateSliderPosition();
-                }
             });
 
             heroSlider.addEventListener('touchstart', stopAutoSlide, { passive: true });
             heroSlider.addEventListener('touchend', startAutoSlide, { passive: true });
-            heroSlider.addEventListener('mouseenter', stopAutoSlide);
-            heroSlider.addEventListener('mouseleave', startAutoSlide);
+            heroSlider.addEventListener('mousedown', stopAutoSlide);
+            heroSlider.addEventListener('mouseup', startAutoSlide);
 
-            setTimeout(() => goToSlide(0), 150);
-            startAutoSlide();
+            setTimeout(() => {
+                updateHeroCardDepth();
+                startAutoSlide();
+            }, 100);
         }
 
         function initAutoScrollSections() {
-            const containers = document.querySelectorAll('.auto-scroll-container');
-            containers.forEach(container => {
-                if (container.dataset.autoScrollInitialized === 'true') return;
-                container.dataset.autoScrollInitialized = 'true';
+            const scrollContainers = document.querySelectorAll('.auto-scroll-container');
+            scrollContainers.forEach(container => {
+                if (container.dataset.autoScrollBound === 'true') return;
+                container.dataset.autoScrollBound = 'true';
 
-                const speed = parseFloat(container.getAttribute('data-scroll-speed')) || 35;
-                let direction = parseInt(container.getAttribute('data-scroll-dir')) || 1;
+                let isDown = false;
+                let startX;
+                let scrollLeftStart;
+                let animationFrameId = null;
                 let isPaused = false;
-                let pauseTimeout;
                 let lastTimestamp = null;
 
-                const pauseAutoScroll = () => {
-                    isPaused = true;
-                    clearTimeout(pauseTimeout);
-                    pauseTimeout = setTimeout(() => {
-                        isPaused = false;
-                        lastTimestamp = null;
-                    }, 3000);
-                };
+                const isInfiniteLoop = container.getAttribute('data-infinite-loop') === 'true';
+                const isPreDoubled = container.getAttribute('data-pre-doubled') === 'true';
+                const baseSpeed = parseFloat(container.getAttribute('data-scroll-speed')) || 38;
+                let direction = parseInt(container.getAttribute('data-scroll-dir')) || 1;
+                let virtualScrollPos = container.scrollLeft || 0;
 
-                container.addEventListener('touchstart', pauseAutoScroll, { passive: true });
-                container.addEventListener('touchmove', pauseAutoScroll, { passive: true });
-                container.addEventListener('mousedown', pauseAutoScroll);
-                container.addEventListener('wheel', pauseAutoScroll, { passive: true });
-
-                const indicatorContainer = container.nextElementSibling;
-                let progressBar = null;
-                if (indicatorContainer && indicatorContainer.classList.contains('section-scroll-indicator')) {
-                    indicatorContainer.innerHTML = `<div class="w-16 h-1 bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden"><div class="section-progress-fill h-full bg-uptoAccent rounded-full transition-all duration-100" style="width: 25%"></div></div>`;
-                    progressBar = indicatorContainer.querySelector('.section-progress-fill');
+                if (isInfiniteLoop && !isPreDoubled) {
+                    const scrollWrapper = container.firstElementChild;
+                    if (scrollWrapper) {
+                        scrollWrapper.innerHTML += scrollWrapper.innerHTML;
+                    }
                 }
 
-                function step(timestamp) {
+                function getHalfWidth() {
+                    const scrollWrapper = container.firstElementChild;
+                    if (scrollWrapper && scrollWrapper.scrollWidth > 0) {
+                        return scrollWrapper.scrollWidth / 2;
+                    }
+                    return container.scrollWidth / 2;
+                }
+
+                if (direction === -1 && !isInfiniteLoop) {
+                    setTimeout(() => {
+                        virtualScrollPos = container.scrollWidth - container.clientWidth;
+                        container.scrollLeft = virtualScrollPos;
+                    }, 100);
+                }
+
+                function scrollStep(timestamp) {
                     if (!lastTimestamp) lastTimestamp = timestamp;
-                    const dt = (timestamp - lastTimestamp) / 1000;
+                    const deltaTime = (timestamp - lastTimestamp) / 1000;
                     lastTimestamp = timestamp;
 
-                    if (!isPaused && container.offsetParent !== null) {
+                    if (!isPaused && !isDown) {
                         const maxScroll = container.scrollWidth - container.clientWidth;
-                        if (maxScroll > 0) {
-                            container.scrollLeft += direction * speed * dt;
-                            if (container.scrollLeft >= maxScroll - 1) {
-                                direction = -1;
-                            } else if (container.scrollLeft <= 1) {
-                                direction = 1;
+                        if (maxScroll > 2) {
+                            const moveDelta = baseSpeed * Math.min(deltaTime, 0.05) * direction;
+                            virtualScrollPos += moveDelta;
+
+                            if (isInfiniteLoop) {
+                                const halfWidth = getHalfWidth();
+                                if (halfWidth > 0) {
+                                    if (virtualScrollPos >= halfWidth) {
+                                        virtualScrollPos -= halfWidth;
+                                    } else if (virtualScrollPos < 0) {
+                                        virtualScrollPos += halfWidth;
+                                    }
+                                }
+                            } else {
+                                if (virtualScrollPos >= maxScroll) {
+                                    virtualScrollPos = maxScroll;
+                                    direction = -1;
+                                } else if (virtualScrollPos <= 0) {
+                                    virtualScrollPos = 0;
+                                    direction = 1;
+                                }
                             }
-                            if (progressBar) {
-                                const ratio = Math.min(100, Math.max(20, (container.scrollLeft / maxScroll) * 100));
-                                progressBar.style.width = ratio + '%';
-                            }
+                            container.scrollLeft = virtualScrollPos;
+                        } else {
+                            virtualScrollPos = container.scrollLeft;
                         }
+                    } else {
+                        virtualScrollPos = container.scrollLeft;
                     }
-                    requestAnimationFrame(step);
+                    animationFrameId = requestAnimationFrame(scrollStep);
                 }
-                requestAnimationFrame(step);
+
+                container.addEventListener('touchstart', () => {
+                    isPaused = true;
+                }, { passive: true });
+                container.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        virtualScrollPos = container.scrollLeft;
+                        isPaused = false;
+                        lastTimestamp = null;
+                    }, 1000);
+                }, { passive: true });
+
+                container.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    isPaused = true;
+                    container.classList.add('cursor-grabbing');
+                    startX = e.pageX - container.offsetLeft;
+                    scrollLeftStart = container.scrollLeft;
+                });
+                container.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    virtualScrollPos = container.scrollLeft;
+                    isPaused = false;
+                    lastTimestamp = null;
+                    container.classList.remove('cursor-grabbing');
+                });
+                container.addEventListener('mouseup', () => {
+                    isDown = false;
+                    virtualScrollPos = container.scrollLeft;
+                    isPaused = false;
+                    lastTimestamp = null;
+                    container.classList.remove('cursor-grabbing');
+                });
+                container.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - container.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    container.scrollLeft = scrollLeftStart - walk;
+                    virtualScrollPos = container.scrollLeft;
+                });
+
+                animationFrameId = requestAnimationFrame(scrollStep);
             });
         }
 
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const drawerCloseBtn = document.getElementById('drawerCloseBtn');
 
+        function openDrawer() {
+            sidebarDrawer.classList.remove('-translate-x-full');
+            drawerBackdrop.classList.remove('hidden');
+            requestAnimationFrame(syncDrawerStickyAuth);
+        }
+
         function closeDrawer() {
             sidebarDrawer.classList.add('-translate-x-full');
             drawerBackdrop.classList.add('hidden');
         }
 
-        hamburgerBtn.addEventListener('click', () => {
-            sidebarDrawer.classList.remove('-translate-x-full');
-            drawerBackdrop.classList.remove('hidden');
-            requestAnimationFrame(syncDrawerStickyAuth);
-        });
+        hamburgerBtn.addEventListener('click', openDrawer);
         drawerCloseBtn.addEventListener('click', closeDrawer);
         drawerBackdrop.addEventListener('click', closeDrawer);
 
@@ -4575,84 +4724,96 @@
             setTimeout(() => searchInput.focus(), 100);
         });
 
-        searchCloseBtn.addEventListener('click', () => closeModalWithBounce(searchModal, searchBoxContainer, resetSearchModal));
+        searchCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(searchModal, searchBoxContainer, resetSearchModal);
+        });
+
         setupBackdropClose(searchModal, searchBoxContainer, resetSearchModal);
 
-        function highlightText(text, query) {
-            if (!query || !text) return text;
-            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+        function highlightKeyword(text, keyword) {
+            if (!keyword) return text;
+            const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
             return text.replace(regex, '<mark>$1</mark>');
         }
 
         searchInput.addEventListener('input', (e) => {
-            const rawQuery = e.target.value.trim();
-            const query = rawQuery.toLowerCase();
+            const query = e.target.value.trim().toLowerCase();
             if (!query) {
                 searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
                 return;
             }
 
-            const matchedItems = globalAllItems.filter(item => 
+            const matched = globalAllItems.filter(item => 
                 (item.name && item.name.toLowerCase().includes(query)) || 
-                (item.dev && item.dev.toLowerCase().includes(query)) || 
                 (item.category && item.category.toLowerCase().includes(query)) ||
+                (item.dev && item.dev.toLowerCase().includes(query)) ||
                 (item.highlightTitle && item.highlightTitle.toLowerCase().includes(query)) ||
-                (item.highlights && item.highlights.some(h => (typeof h === 'string' ? h : h.text || '').toLowerCase().includes(query)))
+                (item.highlights && item.highlights.some(h => {
+                    const txt = typeof h === 'string' ? h : h.text;
+                    return txt && txt.toLowerCase().includes(query);
+                }))
             );
 
-            if (!matchedItems.length) {
-                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả phù hợp cho "${rawQuery}"</p>`;
+            if (matched.length === 0) {
+                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả phù hợp cho "${e.target.value}"</p>`;
                 return;
             }
 
-            let html = '';
-            matchedItems.forEach((item, idx) => {
-                const isTipOrArticle = item.isArticle || item.isTip || item.noDownload;
-                const badgeClass = isTipOrArticle ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300' : 'bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300';
-                const badgeText = isTipOrArticle ? 'Mẹo / Tin tức' : (item.version || 'v1.0');
-                const authorName = item.dev || 'KPazz';
+            let html = `<p class="text-[11px] font-bold text-uptoAccent mb-2 px-1">Tìm thấy ${matched.length} kết quả khớp nội dung:</p>`;
+            matched.forEach(item => {
+                let highlightedName = highlightKeyword(item.name, query);
+                let highlightedDev = highlightKeyword(item.dev || '', query);
+                let matchedSnippet = '';
                 
-                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || '');
-                const truncatedDesc = truncateByWords(descText, 12);
+                if (item.highlights) {
+                    const foundHighlight = item.highlights.find(h => {
+                        const txt = typeof h === 'string' ? h : h.text;
+                        return txt && txt.toLowerCase().includes(query);
+                    });
+                    if (foundHighlight) {
+                        const txt = typeof foundHighlight === 'string' ? foundHighlight : foundHighlight.text;
+                        matchedSnippet = `<p class="text-[10px] text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">...${highlightKeyword(txt, query)}...</p>`;
+                    }
+                }
 
-                const highlightedTitle = highlightText(item.name, rawQuery);
-                const highlightedDev = highlightText(authorName, rawQuery);
-                const highlightedDesc = highlightText(truncatedDesc, rawQuery);
-
-                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+                const publishDateStr = item.publishDate || '18/11/2026';
+                const versionText = item.version || 'v1.0.0';
+                const dateMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-700 dark:text-gray-300"><i class="fa-regular fa-calendar text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${publishDateStr}</span></div>`;
+                const versionMarkup = item.isApp ? `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-code-branch text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${versionText}</span></div>` : '';
 
                 html += `
-                    <div class="search-result-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl cursor-pointer transition hover:border-uptoAccent/40" data-app-json='${itemJsonEscaped}'>
-                        <div class="w-12 h-12 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center overflow-hidden flex-shrink-0 border-none card-icon-glow">
-                            <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
-                        </div>
-                        <div class="min-w-0 flex-1 space-y-0.5">
-                            <h5 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${highlightedTitle}</h5>
-                            <p class="text-[11px] text-gray-600 dark:text-gray-300 truncate leading-tight">${highlightedDesc}</p>
-                            <div class="flex items-center space-x-2 text-[11px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
-                                <span class="${badgeClass} px-1.5 py-0.5 rounded font-extrabold text-[10px]">${badgeText}</span>
-                                <span class="text-uptoAccent font-bold truncate">&bull; ${highlightedDev}</span>
+                    <div class="popup-card-item-custom glass-panel app-card-clickable flex-col !items-stretch" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
+                        <div class="flex items-center">
+                            <div class="popup-card-imgbox-custom card-icon-glow">
+                                <img src="${getIconSrc(item.img)}" class="popup-card-img-custom img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                            </div>
+                            <div class="min-w-0 flex-1 space-y-0.5 ml-3">
+                                <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${highlightedName}</h5>
+                                <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium">
+                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${highlightedDev}</span>
+                                    <div class="flex items-center space-x-2.5 font-bold">
+                                        ${dateMarkup}
+                                        ${versionMarkup}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        ${matchedSnippet}
                     </div>
                 `;
             });
-
             searchResults.innerHTML = html;
             applyImageFallbacksInContainer(searchResults);
 
-            searchResults.querySelectorAll('.search-result-card-clickable').forEach(card => {
+            searchResults.querySelectorAll('.app-card-clickable').forEach(card => {
                 card.onclick = () => {
                     const rawJson = card.getAttribute('data-app-json');
                     if (rawJson) {
-                        try {
-                            const itemObj = JSON.parse(rawJson);
-                            closeModalWithBounce(searchModal, searchBoxContainer, () => {
-                                resetSearchModal();
-                                openAppDetail(itemObj);
-                            });
-                        } catch (err) {}
+                        const itemObj = JSON.parse(rawJson);
+                        closeModalWithBounce(searchModal, searchBoxContainer, () => {
+                            resetSearchModal();
+                            openAppDetail(itemObj);
+                        });
                     }
                 };
             });
@@ -4660,28 +4821,41 @@
 
         const profileOpenBtn = document.getElementById('profileOpenBtn');
         const loginCloseBtn = document.getElementById('loginCloseBtn');
-        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const registerModal = document.getElementById('registerModal');
         const registerCard = document.getElementById('registerCard');
         const registerCloseBtn = document.getElementById('registerCloseBtn');
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const backToLoginBtn = document.getElementById('backToLoginBtn');
 
-        profileOpenBtn.addEventListener('click', () => openModalWithBounce(loginModal, loginCard));
-        loginCloseBtn.addEventListener('click', () => closeModalWithBounce(loginModal, loginCard));
+        profileOpenBtn.addEventListener('click', () => {
+            openModalWithBounce(loginModal, loginCard);
+        });
+
+        loginCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(loginModal, loginCard);
+        });
         setupBackdropClose(loginModal, loginCard);
 
         openRegisterBtn.addEventListener('click', () => {
-            closeModalWithBounce(loginModal, loginCard, () => openModalWithBounce(registerModal, registerCard));
+            closeModalWithBounce(loginModal, loginCard, () => {
+                openModalWithBounce(registerModal, registerCard);
+            });
         });
-
-        registerCloseBtn.addEventListener('click', () => closeModalWithBounce(registerModal, registerCard));
-        setupBackdropClose(registerModal, registerCard);
 
         backToLoginBtn.addEventListener('click', () => {
-            closeModalWithBounce(registerModal, registerCard, () => openModalWithBounce(loginModal, loginCard));
+            closeModalWithBounce(registerModal, registerCard, () => {
+                openModalWithBounce(loginModal, loginCard);
+            });
         });
 
-        loadStoreData();
+        registerCloseBtn.addEventListener('click', () => {
+            closeModalWithBounce(registerModal, registerCard);
+        });
+        setupBackdropClose(registerModal, registerCard);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStoreData();
+        });
     </script>
 </body>
 </html>

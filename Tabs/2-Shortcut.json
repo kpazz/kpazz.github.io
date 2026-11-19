@@ -1,0 +1,222 @@
+{
+    "nameTabs": "Shortcut cho ios",
+    "items": [
+        {
+            "name": "AI Chat VIP",
+            "version": "1.0.0",
+            "dev": "Ravand <Ravand0010@gmail.com>",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png",
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "3DGlassierTouch",
+            "version": "2.0",
+            "dev": "b4db1r3",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "OmniCar",
+            "version": "1.0.3",
+            "dev": "OmniCar <omnicartweak@gmail.com>",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "The power of CarPlay.",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "OmniCar",
+            "version": "1.0.4",
+            "dev": "OmniCar <omnicartweak@gmail.com>",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Sức mạnh của CarPlay.",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "AVPhotos",
+            "version": "1.0.1",
+            "dev": "MiRO",
+            "category": "Tweaks",
+            "systemRequirements": "firmware (>=14.0), mobilesubstrate",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.1 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "PiP cho video trong photos.app",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "AIM Pro",
+            "version": "1.1.3k",
+            "dev": "alimaulana",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Màn hình khóa ngày và thời gian theo phong cách iOS 16",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "3DTools",
+            "version": "1.0.6k",
+            "dev": "smokin1337",
+            "category": "Tweaks",
+            "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "AVLock",
+            "version": "1.0.4",
+            "dev": "gilshahar7",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Thêm nút khóa định hướng vào trình phát video iOS gốc",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        },
+        {
+            "name": "Ainsworth",
+            "version": "1.6k",
+            "dev": "Dave van Wijk",
+            "category": "Tweaks",
+            "systemRequirements": "mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
+            "img": "./Art/imgicon.png",
+            "publishDate": "02/11/2026",
+            "isApp": false,
+            "noDownload": false,
+            "downloadLink": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
+            "video": "",
+            "gif": "",
+            "highlightTitle": "Phiên bản 1.6k - Cập nhật mới",
+            "screenshots": [
+                "./Art/imgbanner.png"
+            ],
+            "highlights": [
+                {
+                    "text": "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!",
+                    "img": "./Art/imgbanner.png"
+                }
+            ]
+        }
+    ]
+}
