@@ -37,10 +37,96 @@
     </script>
 
     <style>
+        /* ================= HIỆU ỨNG LOAD TRANG ĐỌC DỮ LIỆU JSON (SÁNG / TỐI LINH HOẠT) ================= */
+        #jsonLoadingOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #0f172a;
+            transition: opacity 0.35s ease, visibility 0.35s ease, background-color 0.25s ease, color 0.25s ease;
+        }
+
+        html.dark #jsonLoadingOverlay {
+            background-color: #06131a;
+            color: #f8fafc;
+        }
+
+        #jsonLoadingOverlay.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .json-loader-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 2rem;
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        html.dark .json-loader-card {
+            background: rgba(12, 28, 36, 0.85);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55), inset 0 1px 2px rgba(0, 242, 254, 0.25);
+        }
+
+        .json-spinner-ring {
+            width: 42px;
+            height: 42px;
+            border-radius: 9999px;
+            border: 3px solid rgba(20, 184, 166, 0.2);
+            border-top-color: #14b8a6;
+            animation: jsonSpin 0.85s linear infinite;
+        }
+
+        html.dark .json-spinner-ring {
+            border-color: rgba(0, 242, 254, 0.2);
+            border-top-color: #00f2fe;
+        }
+
+        .json-loading-title {
+            margin-top: 0.85rem;
+            font-size: 0.875rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+        }
+
+        html.dark .json-loading-title {
+            color: #ffffff;
+        }
+
+        .json-loading-sub {
+            margin-top: 0.25rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        html.dark .json-loading-sub {
+            color: #94a3b8;
+        }
+
+        @keyframes jsonSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         /* ================= TÙY CHỈNH MÀU NAVBAR & MENU Ở CHẾ ĐỘ SÁNG ================= */
         /* 1. Navbar: Toàn bộ chữ và icon trong navbar chính là màu đen, ngoại trừ logo icon KPazz và phần "Hôm Nay!" giữ màu xanh */
         html:not(.dark) header#mainHeader span:not(#currentDateText):not(.text-uptoAccent):not(.text-\[\#14b8a6\]),
-        html:not(.dark) header#mainHeader i:not(#themeIcon):not(.fa-solid.fa-house):not(.fa-solid.fa-bars):not(.fa-solid.fa-magnifying-glass):not(.fa-regular.fa-circle-user):not(.fa-solid.fa-calendar-day),
+        html:not(.dark) header#mainHeader i:not(#themeIcon):not(.fa-solid.fa-house):not(.fa-solid.fa-bars):not(.fa-solid.fa-magnifying-glass):not(.fa-regular.fa-circle-user):not(.fa-solid.fa-calendar-day):not(.fa-solid.fa-clock-rotate-left),
         html:not(.dark) header#mainHeader button,
         html:not(.dark) header#mainHeader a span:not(.text-uptoAccent) {
             color: #0f172a !important;
@@ -56,13 +142,13 @@
             fill: #14b8a6 !important;
         }
 
-        /* Các nút icon menu, search, profile, theme trong navbar ở chế độ sáng */
+        /* Các nút icon menu, search, history, theme trong navbar ở chế độ sáng */
         html:not(.dark) header#mainHeader #hamburgerBtn,
         html:not(.dark) header#mainHeader #searchOpenBtn,
         html:not(.dark) header#mainHeader #profileOpenBtn,
         html:not(.dark) header#mainHeader #collapsedMenuBtn,
         html:not(.dark) header#mainHeader #collapsedSearchBtn,
-        html:not(.dark) header#mainHeader #collapsedProfileBtn {
+        html:not(.dark) header#mainHeader #collapsedHistoryBtn {
             color: #0f172a !important;
         }
 
@@ -76,27 +162,141 @@
             color: #f59e0b !important;
         }
 
-        /* 2. Menu (Sidebar): Ở chế độ sáng, text và icon trong menu chuyển sang màu đen */
-        html:not(.dark) #sidebarDrawer nav a,
-        html:not(.dark) #sidebarDrawer nav div span,
-        html:not(.dark) #sidebarDrawer nav div i:not(.drawer-active-icon),
-        html:not(.dark) #sidebarDrawer .drawer-main-action span,
-        html:not(.dark) #sidebarDrawer .drawer-main-action i {
+        /* 2. Menu (Sidebar): Ở chế độ sáng, text và icon trong menu chuyển sang màu đen (trừ mục đang active & nút Trang chủ) */
+        html:not(.dark) #sidebarDrawer nav a:not(.drawer-main-item),
+        html:not(.dark) #sidebarDrawer nav div:not(.drawer-cat-active) span:not(.drawer-green-badge):not(.drawer-green-btn),
+        html:not(.dark) #sidebarDrawer nav div:not(.drawer-cat-active) i:not(.drawer-active-icon):not(.drawer-auth-icon):not(.drawer-green-btn),
+        html:not(.dark) #sidebarDrawer .drawer-cat-header:not(.drawer-cat-active) .drawer-main-action span,
+        html:not(.dark) #sidebarDrawer .drawer-cat-header:not(.drawer-cat-active) .drawer-main-action i,
+        html:not(.dark) #sidebarDrawer .drawer-contact-header .drawer-main-action span,
+        html:not(.dark) #sidebarDrawer .drawer-contact-header .drawer-main-action i {
             color: #0f172a !important;
         }
 
-        /* Riêng mục đang được chọn (active) trong menu và logo icon cạnh chữ KPazz trong menu luôn giữ màu xanh ngọc `#14b8a6` */
-        html:not(.dark) #sidebarDrawer svg.text-uptoAccent,
+        /* Mục Trang chủ trong menu: nền xanh lá mặc định; chữ & icon luôn màu trắng ở cả chế độ sáng và tối */
+        #sidebarDrawer a.drawer-main-item {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        #sidebarDrawer a.drawer-main-item span,
+        #sidebarDrawer a.drawer-main-item i,
         html:not(.dark) #sidebarDrawer a.drawer-main-item,
         html:not(.dark) #sidebarDrawer a.drawer-main-item span,
         html:not(.dark) #sidebarDrawer a.drawer-main-item i {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        /* Khi chọn tiêu đề mục khác bên dưới: nền nút Trang chủ chuyển sang màu cam, chữ & icon vẫn trắng */
+        #sidebarDrawer a.drawer-main-item.is-orange,
+        html:not(.dark) #sidebarDrawer a.drawer-main-item.is-orange {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        /* Tiêu đề mục khi được ấn chọn: nền màu xanh giống nút Trang chủ và chữ + icon chuyển sang trắng */
+        #sidebarDrawer .drawer-cat-header.drawer-cat-active,
+        html:not(.dark) #sidebarDrawer .drawer-cat-header.drawer-cat-active {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.28);
+        }
+        #sidebarDrawer .drawer-cat-header.drawer-cat-active *,
+        html:not(.dark) #sidebarDrawer .drawer-cat-header.drawer-cat-active * {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+
+        html:not(.dark) #sidebarDrawer svg.text-uptoAccent {
             color: #14b8a6 !important;
             fill: #14b8a6 !important;
+        }
+
+        /* Nút Đăng nhập / Đăng ký & Nút Lịch sử: chữ và icon luôn màu trắng ở cả chế độ sáng và tối */
+        #sidebarDrawer .drawer-auth-login-btn,
+        #sidebarDrawer .drawer-auth-login-btn *,
+        #sidebarDrawer .drawer-auth-register-btn,
+        #sidebarDrawer .drawer-auth-register-btn *,
+        #sidebarDrawer .drawer-history-btn,
+        #sidebarDrawer .drawer-history-btn *,
+        html:not(.dark) #sidebarDrawer .drawer-auth-login-btn,
+        html:not(.dark) #sidebarDrawer .drawer-auth-login-btn *,
+        html:not(.dark) #sidebarDrawer .drawer-auth-register-btn,
+        html:not(.dark) #sidebarDrawer .drawer-auth-register-btn *,
+        html:not(.dark) #sidebarDrawer .drawer-history-btn,
+        html:not(.dark) #sidebarDrawer .drawer-history-btn * {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
         }
         
         /* Tiêu đề KPazz đầu menu ở chế độ sáng */
         html:not(.dark) #sidebarDrawer div span.text-gray-900 {
             color: #0f172a !important;
+        }
+
+        /* Nút Xem lịch sử tải và xem: kiểu màu tím/indigo khác biệt */
+        .drawer-history-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: #ffffff !important;
+            font-size: 0.85rem;
+            padding: 0.625rem 0.875rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+        }
+        .dark .drawer-history-btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #4338ca 100%);
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(124, 58, 237, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+        }
+
+        /* CSS riêng cho nút/nhãn "Đã xem", "Đã tải" trong popup Lịch sử tải và xem */
+        .history-status-badge {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            font-size: 0.625rem;
+            font-weight: 800;
+            line-height: 1;
+            padding: 0.35rem 0.6rem;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+            box-shadow: 0 3px 10px rgba(239, 68, 68, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+        }
+        .dark .history-status-badge {
+            background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+            color: #ffffff;
+            -webkit-text-fill-color: #ffffff;
+            box-shadow: 0 3px 12px rgba(248, 113, 113, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Số lượng đếm trong list & nút Xem tất cả: nền xanh lá, chữ & icon luôn trắng */
+        .drawer-green-badge,
+        .drawer-green-btn,
+        .drawer-green-btn span,
+        .drawer-green-btn i,
+        #sidebarDrawer .drawer-green-badge,
+        #sidebarDrawer .drawer-green-btn,
+        #sidebarDrawer .drawer-green-btn *,
+        html:not(.dark) #sidebarDrawer .drawer-green-badge,
+        html:not(.dark) #sidebarDrawer .drawer-green-btn,
+        html:not(.dark) #sidebarDrawer .drawer-green-btn *,
+        html:not(.dark) #sidebarDrawer nav div .drawer-green-btn span,
+        html:not(.dark) #sidebarDrawer nav div .drawer-green-btn i {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            border: none !important;
+        }
+        .drawer-green-btn span,
+        .drawer-green-btn i,
+        #sidebarDrawer .drawer-green-btn span,
+        #sidebarDrawer .drawer-green-btn i,
+        html:not(.dark) #sidebarDrawer .drawer-green-btn span,
+        html:not(.dark) #sidebarDrawer .drawer-green-btn i {
+            background: transparent !important;
         }
 
         /* ================= HIỆU ỨNG PHÁT SÁNG & BO GÓC CHUẨN ICON IOS ================= */
@@ -939,38 +1139,144 @@
             opacity: 1 !important;
         }
 
+        /* ================= ĐỒNG MÀU NỀN MENU (HEADER KPazz, LIST, THÔNG TIN LIÊN HỆ) & KHỐI MẠNG XÃ HỘI TỐI HƠN CHÚT ================= */
         .drawer-main-panel {
-            background: rgba(255, 255, 255, 0.88) !important;
-            backdrop-filter: blur(40px) saturate(240%) !important;
-            -webkit-backdrop-filter: blur(40px) saturate(240%) !important;
+            background: #eef1f5 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             border-top-right-radius: 2rem !important;
             border-bottom-right-radius: 2rem !important;
             border: none !important;
-            box-shadow: 15px 0 50px rgba(0, 0, 0, 0.2), inset -1.5px 0 3px rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 15px 0 40px rgba(0, 0, 0, 0.14) !important;
+        }
+        html:not(.dark) .drawer-main-panel {
+            background: #eef1f5 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: 15px 0 40px rgba(0, 0, 0, 0.14) !important;
+        }
+        #sidebarDrawer > div:first-child > div.sticky {
+            background: #eef1f5 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        html:not(.dark) #sidebarDrawer > div:first-child > div.sticky {
+            background: #eef1f5 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
         }
         .dark .drawer-main-panel {
-            background: rgba(6, 18, 25, 0.86) !important;
-            backdrop-filter: blur(45px) saturate(260%) !important;
-            -webkit-backdrop-filter: blur(45px) saturate(260%) !important;
+            background: #091820 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
             border-top-right-radius: 2rem !important;
             border-bottom-right-radius: 2rem !important;
             border: none !important;
-            box-shadow: 15px 0 60px rgba(0, 0, 0, 0.9), inset -1.5px 0 3px rgba(0, 242, 254, 0.4) !important;
+            box-shadow: 15px 0 60px rgba(0, 0, 0, 0.9) !important;
+        }
+        .dark #sidebarDrawer > div:first-child > div.sticky {
+            background: #091820 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
         }
 
+        /* Ô search thu gọn & 2 nút Đăng nhập/Đăng ký chuyển tiếp mượt mà, ăn khớp và không đè nhau */
+        .drawer-sticky-search {
+            flex: 1 1 auto;
+            max-width: 240px;
+            min-width: 0;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+            overflow: hidden;
+            transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .drawer-sticky-search.is-hidden {
+            flex: 0 0 0px;
+            max-width: 0px;
+            opacity: 0;
+            transform: translateX(-10px) scale(0.95);
+            pointer-events: none;
+        }
+
+        .drawer-sticky-auth {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            max-width: 0px;
+            opacity: 0;
+            transform: translateX(10px) scale(0.95);
+            pointer-events: none;
+            overflow: hidden;
+            transition: max-width 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .drawer-sticky-auth.is-visible {
+            max-width: 220px;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* List mở ra của tiêu đề mục: ở chế độ tối làm sáng hơn tí để nổi bật dễ nhìn */
         .drawer-submenu-container {
-            background: rgba(255, 255, 255, 0.9) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border-radius: 14px;
+            background: #dfe4ec !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 16px;
             padding: 10px;
             margin-top: 6px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+            box-shadow: none !important;
             border: none !important;
         }
         .dark .drawer-submenu-container {
-            background: rgba(10, 28, 38, 0.75) !important;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(0, 242, 254, 0.3);
+            background: #102735 !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        }
+        .dark .drawer-submenu-search-input {
+            background: rgba(255, 255, 255, 0.12) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        .dark .drawer-submenu-search-input::placeholder {
+            color: #cbd5e1 !important;
+        }
+
+        .drawer-auth-login-btn {
+            background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+        }
+        .drawer-auth-login-btn i,
+        .drawer-auth-login-btn span {
+            color: #ffffff !important;
+        }
+
+        .drawer-auth-register-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.32), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+        }
+        .drawer-auth-register-btn i,
+        .drawer-auth-register-btn span {
+            color: #ffffff !important;
+        }
+
+        .drawer-contact-glass-card {
+            background: #dfe4ec !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 16px;
+            padding: 8px;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .dark .drawer-contact-glass-card {
+            background: #050e14 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
             border: none !important;
         }
 
@@ -1105,6 +1411,66 @@
 </head>
 <body class="bg-uptoBg text-white dark:bg-uptoBg dark:text-white antialiased pb-24">
 
+    <!-- ==================== OVERLAY ĐANG ĐỌC DỮ LIỆU JSON ==================== -->
+    <div id="jsonLoadingOverlay" aria-live="polite" aria-busy="true">
+        <div class="json-loader-card">
+            <div class="json-spinner-ring"></div>
+            <p class="json-loading-title">Đang tải dữ liệu...</p>
+            <p class="json-loading-sub">Đang đọc dữ liệu JSON từ hệ thống</p>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP THÔNG BÁO CẬP NHẬT NỘI DUNG MỚI ==================== -->
+    <div id="siteUpdatePopupModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[68] hidden items-center justify-center p-4">
+        <div id="siteUpdatePopupCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none animate-pop-in">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-sm text-gray-900 dark:text-white tracking-tight">Có cập nhật mới</h3>
+                        <p id="siteUpdatePopupTime" class="text-[10px] text-gray-500 dark:text-gray-400 font-semibold"></p>
+                    </div>
+                </div>
+                <button id="siteUpdatePopupCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="siteUpdatePopupChangesList" class="overflow-y-auto no-scrollbar space-y-2 py-3.5 flex-1 text-xs"></div>
+
+            <div class="pt-3 border-t border-gray-200/60 dark:border-white/10 flex flex-col space-y-2">
+                <button type="button" id="openUpdateHistoryFromPopupBtn" class="w-full bg-gradient-to-r from-[#00b4d8] to-[#0077b6] hover:opacity-95 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center space-x-2 shadow-md transition active:scale-95">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Xem lịch sử cập nhật</span>
+                </button>
+                <button type="button" id="siteUpdatePopupConfirmBtn" class="w-full bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/15 text-gray-800 dark:text-gray-200 font-bold py-2 rounded-xl text-xs transition active:scale-95">
+                    Đã hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP LỊCH SỬ CẬP NHẬT (TỐI ĐA 10 LẦN) ==================== -->
+    <div id="updateHistoryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[73] hidden items-center justify-center p-4">
+        <div id="updateHistoryCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none animate-pop-in">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-clock-rotate-left text-[#14b8a6] dark:text-uptoAccent"></i>
+                    <div>
+                        <h3 class="font-extrabold text-sm text-gray-900 dark:text-white tracking-tight">Lịch sử cập nhật</h3>
+                        <p class="text-[10px] text-gray-500 dark:text-gray-400">Lưu tối đa 10 lần cập nhật gần nhất</p>
+                    </div>
+                </div>
+                <button id="updateHistoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="updateHistoryList" class="overflow-y-auto no-scrollbar space-y-2.5 py-3 flex-1"></div>
+        </div>
+    </div>
+
     <!-- ==================== HEADER ==================== -->
     <header id="mainHeader" class="text-gray-900 dark:text-white shadow-md border-none">
         <div class="header-inner-content">
@@ -1155,8 +1521,8 @@
             <button id="collapsedSearchBtn" aria-label="Search" class="text-xl p-2 hover:opacity-80 active:scale-90 transition">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-            <button id="collapsedProfileBtn" aria-label="Account" class="text-2xl p-2 hover:opacity-80 active:scale-90 transition">
-                <i class="fa-regular fa-circle-user"></i>
+            <button id="collapsedHistoryBtn" aria-label="Lịch sử" class="text-xl p-2 hover:opacity-80 active:scale-90 transition">
+                <i class="fa-solid fa-clock-rotate-left"></i>
             </button>
         </div>
     </header>
@@ -1184,7 +1550,7 @@
         <div id="downloadVersionsCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[85vh] overflow-hidden border-none animate-pop-in">
             
             <div class="absolute top-0 inset-x-0 h-32 overflow-hidden pointer-events-none z-0 opacity-35 dark:opacity-25">
-                <img id="popupBannerBgImg" src="" alt="" class="w-full h-full object-cover blur-sm">
+                <img id="popupBannerBgImg" src="Art/imgbanner.png" onerror="this.onerror=null; this.src='Art/imgbanner.jpg';" alt="" class="w-full h-full object-cover blur-sm">
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-white dark:via-[#0a1a22]/60 dark:to-[#0a1a22]"></div>
             </div>
 
@@ -1197,7 +1563,7 @@
             </div>
 
             <div class="py-4 space-y-3 flex flex-col items-center text-center relative z-10">
-                <img id="popupAppStoreIcon" src="" alt="App Icon" class="w-16 h-16 rounded-[22.5%] object-cover shadow-lg card-icon-glow">
+                <img id="popupAppStoreIcon" src="Art/imgicon.png" onerror="this.onerror=null; this.src='Art/imgicon.jpg';" alt="App Icon" class="w-16 h-16 rounded-[22.5%] object-cover shadow-lg card-icon-glow">
                 <div>
                     <h4 id="popupAppStoreName" class="font-extrabold text-base text-gray-900 dark:text-white leading-tight">Tên Ứng Dụng</h4>
                     <p id="popupAppStoreDeveloper" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Nhà phát triển</p>
@@ -1286,7 +1652,7 @@
                 
                 <div class="relative w-full">
                     <div id="detailTopBannerWrap" class="relative w-full h-56 sm:h-64 overflow-hidden">
-                        <img id="detailTopBannerImg" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="App Banner Artwork" class="w-full h-full object-cover popup-top-banner-blend">
+                        <img id="detailTopBannerImg" src="Art/imgbanner.png" onerror="this.onerror=null; this.src='Art/imgbanner.jpg';" alt="App Banner Artwork" class="w-full h-full object-cover popup-top-banner-blend">
                         <div class="popup-top-banner-blur-bottom absolute inset-x-0 bottom-0 h-20 pointer-events-none"></div>
                         <div class="absolute top-3.5 left-3.5 z-20 bg-black/45 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] sm:text-[11px] font-bold text-gray-200 uppercase tracking-tight flex items-center space-x-1.5 flex-wrap max-w-[78%]">
                             <span>KPAZZ</span>
@@ -1300,7 +1666,7 @@
                     <div class="px-4 sm:px-5 -mt-12 relative z-20 space-y-4">
                         <div class="flex items-center justify-between space-x-3">
                             <div class="flex items-start space-x-3.5 min-w-0 flex-1">
-                                <img id="detailAppIcon" src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=200&q=80" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-[22.5%] img-ratio-1-1 shadow-xl flex-shrink-0 object-cover card-icon-glow">
+                                <img id="detailAppIcon" src="Art/imgicon.png" onerror="this.onerror=null; this.src='Art/imgicon.jpg';" alt="App Icon" class="w-20 h-20 sm:w-22 sm:h-22 rounded-[22.5%] img-ratio-1-1 shadow-xl flex-shrink-0 object-cover card-icon-glow">
                                 <div class="flex-1 min-w-0 pr-1 pt-1">
                                     <h2 id="detailAppName" class="text-lg sm:text-xl font-extrabold text-gray-900 dark:text-white leading-tight tracking-tight truncate">Tên Ứng Dụng</h2>
                                     <p id="detailAppVersion" class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-bold truncate">1.2.3RC2</p>
@@ -1587,18 +1953,46 @@
     <!-- SIDEBAR DRAWER MENU -->
     <div id="sidebarDrawer" class="fixed inset-y-0 left-0 w-80 drawer-main-panel text-gray-900 dark:text-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto no-scrollbar border-none">
         <div>
-            <div class="p-4 border-none flex items-center justify-between sticky top-0 bg-white/70 dark:bg-[#06131a]/70 backdrop-blur-xl z-10">
-                <div class="flex items-center space-x-2">
+            <div id="drawerTopHeader" class="p-4 border-none flex items-center justify-between gap-2 sticky top-0 z-10">
+                <div class="flex flex-col items-center justify-center flex-shrink-0">
                     <svg class="w-6 h-6 text-uptoAccent fill-current" viewBox="0 0 24 24">
                         <path d="M12 2L2 7.5l10 5.5 10-5.5L12 2zm0 8.5L4 6.1v4.8l8 4.4 8-4.4V6.1l-8 4.4zM2 12.5l10 5.5 10-5.5v2.8l-10 5.5-10-5.5v-2.8z"/>
                     </svg>
-                    <span class="text-lg font-bold tracking-tight text-gray-900 dark:text-white">KPazz</span>
+                    <span class="text-sm font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight mt-0.5 whitespace-nowrap">KPazz</span>
                 </div>
-                <button id="drawerCloseBtn" class="hover:text-uptoAccent text-xl p-1"><i class="fa-solid fa-xmark"></i></button>
+                <div class="flex items-center justify-end gap-1.5 flex-1 min-w-0">
+                    <div id="drawerStickySearchWrap" class="drawer-sticky-search relative flex items-center">
+                        <i class="fa-solid fa-magnifying-glass text-[11px] text-gray-500 dark:text-gray-400 absolute left-3 pointer-events-none"></i>
+                        <input type="text" id="drawerQuickSearchInput" placeholder="Tìm kiếm..." onclick="closeDrawer(); openModalWithBounce(searchModal, searchBoxContainer); setTimeout(() => { searchInput.value = this.value; searchInput.dispatchEvent(new Event('input')); searchInput.focus(); }, 100);" oninput="searchInput.value = this.value; searchInput.dispatchEvent(new Event('input'));" class="w-full min-w-0 flex-1 pl-8 pr-3 py-1.5 rounded-xl bg-black/5 dark:bg-white/10 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent transition">
+                    </div>
+                    <div id="drawerStickyAuthRow" class="drawer-sticky-auth" aria-hidden="true">
+                        <button type="button" onclick="closeDrawer(); openModalWithBounce(loginModal, loginCard);" class="drawer-auth-login-btn flex items-center space-x-1 px-2.5 py-1.5 rounded-lg transition font-bold text-[11px] active:scale-95 whitespace-nowrap">
+                            <i class="fa-solid fa-right-to-bracket drawer-auth-icon text-[11px]"></i><span>Đăng nhập</span>
+                        </button>
+                        <button type="button" onclick="closeDrawer(); openModalWithBounce(registerModal, registerCard);" class="drawer-auth-register-btn flex items-center space-x-1 px-2.5 py-1.5 rounded-lg transition font-bold text-[11px] active:scale-95 whitespace-nowrap">
+                            <i class="fa-solid fa-user-plus drawer-auth-icon text-[11px]"></i><span>Đăng ký</span>
+                        </button>
+                    </div>
+                    <button id="drawerCloseBtn" class="hover:text-uptoAccent text-xl p-1 flex-shrink-0"><i class="fa-solid fa-xmark"></i></button>
+                </div>
             </div>
             
             <nav id="drawerNavContainer" class="p-3 space-y-2 text-sm">
-                <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/10 text-uptoAccent font-bold transition border-none shadow-sm">
+                <div id="drawerAuthRow" class="grid grid-cols-2 gap-2 pb-1">
+                    <button type="button" onclick="closeDrawer(); openModalWithBounce(loginModal, loginCard);" class="drawer-auth-login-btn flex items-center justify-center space-x-1.5 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                        <i class="fa-solid fa-right-to-bracket drawer-auth-icon text-sm"></i><span>Đăng nhập</span>
+                    </button>
+                    <button type="button" onclick="closeDrawer(); openModalWithBounce(registerModal, registerCard);" class="drawer-auth-register-btn flex items-center justify-center space-x-1.5 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                        <i class="fa-solid fa-user-plus drawer-auth-icon text-sm"></i><span>Đăng ký</span>
+                    </button>
+                </div>
+                <div class="mb-20 pb-11">
+                    <button type="button" onclick="openActivityHistoryModal();" class="drawer-history-btn w-full flex items-center justify-center space-x-2 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                        <i class="fa-solid fa-clock-rotate-left text-sm"></i>
+                        <span>Xem lịch sử tải và xem</span>
+                    </button>
+                </div>
+                <a href="#" id="drawerHomeBtn" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg font-bold transition border-none shadow-sm">
                     <i class="fa-solid fa-house w-5 text-center drawer-active-icon"></i><span>Trang chủ</span>
                 </a>
             </nav>
@@ -1608,6 +2002,22 @@
         </div>
     </div>
     <div id="drawerBackdrop" class="fixed inset-0 bg-black/60 z-40 hidden"></div>
+
+    <!-- ==================== POPUP LỊCH SỬ TẢI VÀ XEM ==================== -->
+    <div id="activityHistoryModal" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[72] hidden items-center justify-center p-4">
+        <div id="activityHistoryCard" class="glass-panel text-gray-900 dark:text-white rounded-3xl p-5 w-full max-w-sm md:max-w-md shadow-2xl relative flex flex-col max-h-[82vh] overflow-hidden border-none animate-pop-in">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-200/60 dark:border-white/10">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-clock-rotate-left text-[#14b8a6] dark:text-uptoAccent"></i>
+                    <h3 class="font-extrabold text-sm text-gray-900 dark:text-white tracking-tight">Lịch sử tải và xem</h3>
+                </div>
+                <button id="activityHistoryCloseBtn" class="w-8 h-8 rounded-full bg-gray-200/80 dark:bg-gray-800/80 flex items-center justify-center text-gray-700 dark:text-gray-200 text-base hover:opacity-85 transition active:scale-90">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="activityHistoryList" class="overflow-y-auto no-scrollbar space-y-2.5 py-3 flex-1"></div>
+        </div>
+    </div>
 
     <!-- ==================== MAIN CONTENT ==================== -->
     <main class="max-w-md md:max-w-5xl lg:max-w-7xl mx-auto pt-0.5 space-y-3">
@@ -1665,6 +2075,285 @@
         let currentMediaList = [];
         let isNoDownloadItem = false;
 
+        const PLACEHOLDER_ICON = 'Art/imgicon.png';
+        const PLACEHOLDER_BANNER = 'Art/imgbanner.png';
+        const ACTIVITY_HISTORY_KEY = 'kpazz_activity_history_v1';
+        const CONTENT_SNAPSHOT_KEY = 'kpazz_content_snapshot_v1';
+        const UPDATE_HISTORY_KEY = 'kpazz_update_history_v1';
+        const MAX_UPDATE_HISTORY = 10;
+
+        function formatNowVn() {
+            return new Date().toLocaleString('vi-VN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function getUpdateHistory() {
+            try {
+                const raw = localStorage.getItem(UPDATE_HISTORY_KEY);
+                const list = raw ? JSON.parse(raw) : [];
+                return Array.isArray(list) ? list.slice(0, MAX_UPDATE_HISTORY) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveUpdateHistoryEntry(changes) {
+            if (!Array.isArray(changes) || changes.length === 0) return;
+            try {
+                let list = getUpdateHistory();
+                const entry = {
+                    time: formatNowVn(),
+                    changes: changes
+                };
+                list.unshift(entry);
+                if (list.length > MAX_UPDATE_HISTORY) {
+                    list = list.slice(0, MAX_UPDATE_HISTORY);
+                }
+                localStorage.setItem(UPDATE_HISTORY_KEY, JSON.stringify(list));
+            } catch (e) {}
+        }
+
+        function detectContentChanges(loadedResults) {
+            const currentSnapshot = {};
+            loadedResults.forEach(res => {
+                const map = {};
+                (res.items || []).forEach(it => {
+                    if (it && it.name) {
+                        map[it.name] = {
+                            version: it.version || '',
+                            publishDate: it.publishDate || '',
+                            category: it.category || res.categoryName || ''
+                        };
+                    }
+                });
+                currentSnapshot[res.categoryName] = map;
+            });
+
+            let prevSnapshot = null;
+            try {
+                const raw = localStorage.getItem(CONTENT_SNAPSHOT_KEY);
+                if (raw) prevSnapshot = JSON.parse(raw);
+            } catch (e) {}
+
+            localStorage.setItem(CONTENT_SNAPSHOT_KEY, JSON.stringify(currentSnapshot));
+
+            if (!prevSnapshot || typeof prevSnapshot !== 'object') {
+                return [];
+            }
+
+            const changes = [];
+            Object.keys(currentSnapshot).forEach(catName => {
+                const curCat = currentSnapshot[catName] || {};
+                const oldCat = prevSnapshot[catName];
+
+                if (!oldCat) {
+                    const count = Object.keys(curCat).length;
+                    changes.push(`Mở chuyên mục mới "${catName}"${count > 0 ? ` (${count} mục)` : ''}`);
+                    return;
+                }
+
+                Object.keys(curCat).forEach(itemName => {
+                    const curItem = curCat[itemName];
+                    const oldItem = oldCat[itemName];
+                    if (!oldItem) {
+                        changes.push(`Thêm mới "${itemName}" trong ${catName}`);
+                    } else if (curItem.version && curItem.version !== oldItem.version) {
+                        changes.push(`Cập nhật "${itemName}" lên bản ${curItem.version}`);
+                    } else if (curItem.publishDate && curItem.publishDate !== oldItem.publishDate) {
+                        changes.push(`Cập nhật nội dung "${itemName}" trong ${catName}`);
+                    }
+                });
+            });
+
+            return changes.slice(0, 15);
+        }
+
+        const siteUpdatePopupModal = document.getElementById('siteUpdatePopupModal');
+        const siteUpdatePopupCard = document.getElementById('siteUpdatePopupCard');
+        const siteUpdatePopupCloseBtn = document.getElementById('siteUpdatePopupCloseBtn');
+        const siteUpdatePopupConfirmBtn = document.getElementById('siteUpdatePopupConfirmBtn');
+        const siteUpdatePopupTime = document.getElementById('siteUpdatePopupTime');
+        const siteUpdatePopupChangesList = document.getElementById('siteUpdatePopupChangesList');
+        const openUpdateHistoryFromPopupBtn = document.getElementById('openUpdateHistoryFromPopupBtn');
+
+        const updateHistoryModal = document.getElementById('updateHistoryModal');
+        const updateHistoryCard = document.getElementById('updateHistoryCard');
+        const updateHistoryCloseBtn = document.getElementById('updateHistoryCloseBtn');
+        const updateHistoryList = document.getElementById('updateHistoryList');
+
+        function openUpdateHistoryModal() {
+            if (!updateHistoryModal || !updateHistoryCard || !updateHistoryList) return;
+            const list = getUpdateHistory();
+            if (list.length === 0) {
+                updateHistoryList.innerHTML = '<p class="text-xs text-gray-500 dark:text-gray-400 text-center py-6">Chưa có lịch sử cập nhật nào được ghi nhận.</p>';
+            } else {
+                updateHistoryList.innerHTML = list.map((rec, idx) => `
+                    <div class="p-3 rounded-2xl bg-black/5 dark:bg-white/5 space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-extrabold text-[#14b8a6] dark:text-uptoAccent">#${idx + 1} &bull; ${rec.time}</span>
+                            <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400">${rec.changes.length} thay đổi</span>
+                        </div>
+                        <ul class="space-y-1 text-xs text-gray-800 dark:text-gray-200">
+                            ${rec.changes.map(c => `<li class="flex items-start space-x-1.5"><span class="text-emerald-500 font-bold">&bull;</span><span>${c}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                `).join('');
+            }
+            openModalWithBounce(updateHistoryModal, updateHistoryCard);
+        }
+
+        function showContentUpdatePopupIfChanged(changes) {
+            if (!Array.isArray(changes) || changes.length === 0) return;
+            saveUpdateHistoryEntry(changes);
+            if (!siteUpdatePopupModal || !siteUpdatePopupCard || !siteUpdatePopupChangesList) return;
+            if (siteUpdatePopupTime) siteUpdatePopupTime.textContent = `Cập nhật lúc ${formatNowVn()}`;
+            siteUpdatePopupChangesList.innerHTML = changes.map(c => `
+                <div class="flex items-start space-x-2 p-2.5 rounded-xl bg-black/5 dark:bg-white/5">
+                    <i class="fa-solid fa-circle-check text-emerald-500 text-xs mt-0.5 flex-shrink-0"></i>
+                    <span class="font-semibold text-gray-800 dark:text-gray-200 leading-snug">${c}</span>
+                </div>
+            `).join('');
+            openModalWithBounce(siteUpdatePopupModal, siteUpdatePopupCard);
+        }
+
+        if (siteUpdatePopupCloseBtn && siteUpdatePopupModal && siteUpdatePopupCard) {
+            siteUpdatePopupCloseBtn.addEventListener('click', () => closeModalWithBounce(siteUpdatePopupModal, siteUpdatePopupCard));
+            setupBackdropClose(siteUpdatePopupModal, siteUpdatePopupCard);
+        }
+        if (siteUpdatePopupConfirmBtn && siteUpdatePopupModal && siteUpdatePopupCard) {
+            siteUpdatePopupConfirmBtn.addEventListener('click', () => closeModalWithBounce(siteUpdatePopupModal, siteUpdatePopupCard));
+        }
+        if (openUpdateHistoryFromPopupBtn && siteUpdatePopupModal && siteUpdatePopupCard) {
+            openUpdateHistoryFromPopupBtn.addEventListener('click', () => {
+                closeModalWithBounce(siteUpdatePopupModal, siteUpdatePopupCard, () => openUpdateHistoryModal());
+            });
+        }
+        if (updateHistoryCloseBtn && updateHistoryModal && updateHistoryCard) {
+            updateHistoryCloseBtn.addEventListener('click', () => closeModalWithBounce(updateHistoryModal, updateHistoryCard));
+            setupBackdropClose(updateHistoryModal, updateHistoryCard);
+        }
+
+        function recordActivityHistory(item, actionType = 'view') {
+            if (!item || !item.name) return;
+            try {
+                const raw = localStorage.getItem(ACTIVITY_HISTORY_KEY);
+                let list = raw ? JSON.parse(raw) : [];
+                if (!Array.isArray(list)) list = [];
+                const entry = {
+                    name: item.name,
+                    dev: item.dev || 'KPazz',
+                    img: getIconSrc(item.img),
+                    action: actionType === 'download' ? 'Đã tải' : 'Đã xem',
+                    time: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' })
+                };
+                list = list.filter(x => !(x.name === entry.name && x.action === entry.action));
+                list.unshift(entry);
+                if (list.length > 30) list = list.slice(0, 30);
+                localStorage.setItem(ACTIVITY_HISTORY_KEY, JSON.stringify(list));
+            } catch (e) {}
+        }
+
+        function getActivityHistory() {
+            try {
+                const raw = localStorage.getItem(ACTIVITY_HISTORY_KEY);
+                const list = raw ? JSON.parse(raw) : [];
+                return Array.isArray(list) ? list : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        const activityHistoryModal = document.getElementById('activityHistoryModal');
+        const activityHistoryCard = document.getElementById('activityHistoryCard');
+        const activityHistoryCloseBtn = document.getElementById('activityHistoryCloseBtn');
+        const activityHistoryList = document.getElementById('activityHistoryList');
+
+        function openActivityHistoryModal() {
+            if (!activityHistoryModal || !activityHistoryCard || !activityHistoryList) return;
+            const historyItems = getActivityHistory();
+            if (historyItems.length === 0) {
+                activityHistoryList.innerHTML = '<p class="text-xs text-gray-500 dark:text-gray-400 text-center py-6">Chưa có lịch sử tải hoặc xem nào.</p>';
+            } else {
+                activityHistoryList.innerHTML = historyItems.map((h, idx) => `
+                    <div onclick="openHistoryItemByIndex(${idx})" class="flex items-center justify-between p-2.5 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-uptoAccent/10 cursor-pointer transition">
+                        <div class="flex items-center space-x-3 min-w-0 flex-1">
+                            <img src="${getIconSrc(h.img)}" onerror="this.onerror=null;this.src='${PLACEHOLDER_ICON}';" alt="${h.name}" class="w-10 h-10 rounded-[22.5%] object-cover flex-shrink-0 card-icon-glow">
+                            <div class="min-w-0 flex-1">
+                                <p class="text-xs font-extrabold text-gray-900 dark:text-white truncate">${h.name}</p>
+                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${h.dev} &bull; ${h.time}</p>
+                            </div>
+                        </div>
+                        <span class="history-status-badge">${h.action}</span>
+                    </div>
+                `).join('');
+            }
+            closeDrawer();
+            openModalWithBounce(activityHistoryModal, activityHistoryCard);
+        }
+
+        function openHistoryItemByIndex(idx) {
+            const historyItems = getActivityHistory();
+            const target = historyItems[idx];
+            if (!target) return;
+            const matched = globalAllItems.find(it => it.name === target.name);
+            closeModalWithBounce(activityHistoryModal, activityHistoryCard, () => {
+                if (matched) openAppDetail(matched);
+            });
+        }
+
+        if (activityHistoryCloseBtn && activityHistoryModal && activityHistoryCard) {
+            activityHistoryCloseBtn.addEventListener('click', () => closeModalWithBounce(activityHistoryModal, activityHistoryCard));
+            setupBackdropClose(activityHistoryModal, activityHistoryCard);
+        }
+
+        function getIconSrc(src) {
+            return (src && String(src).trim() !== '') ? src : PLACEHOLDER_ICON;
+        }
+
+        function getBannerSrc(src, fallbackIcon) {
+            if (src && String(src).trim() !== '') return src;
+            if (fallbackIcon && String(fallbackIcon).trim() !== '') return fallbackIcon;
+            return PLACEHOLDER_BANNER;
+        }
+
+        function bindImageFallback(imgEl, kind = 'icon') {
+            if (!imgEl) return;
+            imgEl.onerror = function () {
+                this.onerror = null;
+                this.src = kind === 'banner' ? PLACEHOLDER_BANNER : PLACEHOLDER_ICON;
+            };
+        }
+
+        function applyImageFallbacksInContainer(root = document) {
+            root.querySelectorAll('img').forEach(img => {
+                const srcVal = (img.getAttribute('src') || '').trim();
+                const isBanner = img.classList.contains('img-ratio-16-9') ||
+                    img.classList.contains('featured-banner-unique-bg') ||
+                    img.classList.contains('appstore-grid-card-bg') ||
+                    img.id === 'detailTopBannerImg' ||
+                    img.id === 'popupBannerBgImg';
+                if (!srcVal) {
+                    img.src = isBanner ? PLACEHOLDER_BANNER : PLACEHOLDER_ICON;
+                }
+                bindImageFallback(img, isBanner ? 'banner' : 'icon');
+            });
+        }
+
+        function setJsonLoadingState(isLoading) {
+            const overlay = document.getElementById('jsonLoadingOverlay');
+            if (!overlay) return;
+            if (isLoading) {
+                overlay.classList.remove('is-hidden');
+            } else {
+                overlay.classList.add('is-hidden');
+            }
+        }
+
         function updateDateHeader() {
             const dateEl = document.getElementById('currentDateText');
             const yearEl = document.getElementById('footerYearText');
@@ -1719,7 +2408,7 @@
         const mainHeader = document.getElementById('mainHeader');
         const collapsedMenuBtn = document.getElementById('collapsedMenuBtn');
         const collapsedSearchBtn = document.getElementById('collapsedSearchBtn');
-        const collapsedProfileBtn = document.getElementById('collapsedProfileBtn');
+        const collapsedHistoryBtn = document.getElementById('collapsedHistoryBtn');
 
         let lastScrollY = window.scrollY;
         let touchStartY = 0;
@@ -1763,17 +2452,38 @@
 
         const sidebarDrawer = document.getElementById('sidebarDrawer');
         const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerStickyAuthRow = document.getElementById('drawerStickyAuthRow');
+        const drawerStickySearchWrap = document.getElementById('drawerStickySearchWrap');
         const searchModal = document.getElementById('searchModal');
         const searchBoxContainer = document.getElementById('searchBoxContainer');
         const searchInput = document.getElementById('searchInput');
         const loginModal = document.getElementById('loginModal');
         const loginCard = document.getElementById('loginCard');
 
+        function syncDrawerStickyAuth() {
+            const authRow = document.getElementById('drawerAuthRow');
+            const topHeader = document.getElementById('drawerTopHeader');
+            if (!authRow || !topHeader || !drawerStickyAuthRow) return;
+            const authBottom = authRow.getBoundingClientRect().bottom;
+            const headerBottom = topHeader.getBoundingClientRect().bottom;
+            const scrolledPast = authBottom <= headerBottom;
+            drawerStickyAuthRow.classList.toggle('is-visible', scrolledPast);
+            drawerStickyAuthRow.setAttribute('aria-hidden', scrolledPast ? 'false' : 'true');
+            if (drawerStickySearchWrap) {
+                drawerStickySearchWrap.classList.toggle('is-hidden', scrolledPast);
+            }
+        }
+
+        if (sidebarDrawer) {
+            sidebarDrawer.addEventListener('scroll', syncDrawerStickyAuth, { passive: true });
+        }
+
         if (collapsedMenuBtn) {
             collapsedMenuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 sidebarDrawer.classList.remove('-translate-x-full');
                 drawerBackdrop.classList.remove('hidden');
+                requestAnimationFrame(syncDrawerStickyAuth);
             });
         }
 
@@ -1785,10 +2495,10 @@
             });
         }
 
-        if (collapsedProfileBtn) {
-            collapsedProfileBtn.addEventListener('click', (e) => {
+        if (collapsedHistoryBtn) {
+            collapsedHistoryBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                openModalWithBounce(loginModal, loginCard);
+                openActivityHistoryModal();
             });
         }
 
@@ -1826,10 +2536,10 @@
         }
 
         function getPrimaryMediaSrc(item) {
-            if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0) {
+            if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0 && String(item.screenshots[0]).trim() !== '') {
                 return { type: 'img', url: item.screenshots[0] };
             }
-            return { type: 'img', url: item.img };
+            return { type: 'img', url: getBannerSrc('', item.img) };
         }
 
         function getDominantColorFromImg(imgUrl, callback) {
@@ -1901,13 +2611,14 @@
                 } else {
                     slidesHtml += `
                         <div class="lightbox-slide w-full h-full flex-none flex items-center justify-center p-2">
-                            <img src="${media.url}" class="zoomable-img" alt="Zoomable media" ondblclick="toggleImageZoom(this)">
+                            <img src="${getBannerSrc(media.url, '')}" class="zoomable-img" alt="Zoomable media" ondblclick="toggleImageZoom(this)">
                         </div>
                     `;
                 }
             });
 
             lightboxSlider.innerHTML = slidesHtml;
+            applyImageFallbacksInContainer(lightboxSlider);
             lightboxCounter.textContent = `${startIndex + 1} / ${currentMediaList.length}`;
 
             mediaLightboxModal.classList.remove('hidden');
@@ -1983,11 +2694,17 @@
 
         function openDownloadVersionsModal(item, options) {
             if (!downloadVersionsList) return;
-            if (popupAppStoreIcon) popupAppStoreIcon.src = item.img || '';
+            recordActivityHistory(item, 'download');
+            if (popupAppStoreIcon) {
+                popupAppStoreIcon.src = getIconSrc(item.img);
+                bindImageFallback(popupAppStoreIcon, 'icon');
+            }
             if (popupAppStoreName) popupAppStoreName.textContent = item.name || 'Ứng dụng';
             if (popupAppStoreDeveloper) popupAppStoreDeveloper.textContent = item.dev || 'KPazz Studio';
             if (popupBannerBgImg) {
-                popupBannerBgImg.src = (item.screenshots && item.screenshots[0]) || item.img || '';
+                const rawBanner = (item.screenshots && item.screenshots[0]) || '';
+                popupBannerBgImg.src = getBannerSrc(rawBanner, item.img);
+                bindImageFallback(popupBannerBgImg, 'banner');
             }
 
             let html = '';
@@ -2114,7 +2831,7 @@
                     innerHtml += `
                         <div class="rec-item-card glass-panel app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                             <div class="rec-item-card-img-wrap card-icon-glow">
-                                <img src="${item.img}" class="rec-item-card-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                                <img src="${getIconSrc(item.img)}" class="rec-item-card-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                             </div>
                             <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                                 <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -2134,6 +2851,9 @@
 
             container1.innerHTML = buildHtml(recItems1);
             container2.innerHTML = buildHtml(recItems2);
+
+            applyImageFallbacksInContainer(container1);
+            applyImageFallbacksInContainer(container2);
 
             bindCardClickEvents(container1);
             bindCardClickEvents(container2);
@@ -2303,6 +3023,7 @@
 
         async function openAppDetail(item) {
             if (!item) return;
+            recordActivityHistory(item, 'view');
             currentOpenItem = item;
             isNoDownloadItem = item.noDownload;
             currentMediaList = [];
@@ -2315,9 +3036,8 @@
                 detailAppDeveloper.textContent = item.dev;
                 if (detailDevInfoExtra) detailDevInfoExtra.textContent = item.dev;
             }
-            if (item.img) {
-                detailAppIcon.src = item.img;
-            }
+            detailAppIcon.src = getIconSrc(item.img);
+            bindImageFallback(detailAppIcon, 'icon');
 
             if (detailPopupFileFormat) {
                 detailPopupFileFormat.textContent = detectFileFormat(item);
@@ -2345,8 +3065,9 @@
             }
 
             if (detailTopBannerImg) {
-                const bannerSrc = (item.screenshots && item.screenshots[0]) || item.img;
-                detailTopBannerImg.src = bannerSrc;
+                const rawBanner = (item.screenshots && item.screenshots[0]) || '';
+                detailTopBannerImg.src = getBannerSrc(rawBanner, item.img);
+                bindImageFallback(detailTopBannerImg, 'banner');
             }
 
             const publishDateStr = item.publishDate || '18/11/2026';
@@ -2409,23 +3130,25 @@
                     `;
                 }
             } else if (gifUrl) {
-                currentMediaList.push({ type: 'image', url: gifUrl });
+                const resolvedGif = getBannerSrc(gifUrl, item.img);
+                currentMediaList.push({ type: 'image', url: resolvedGif });
                 const gifIdx = currentMediaList.length - 1;
                 scHtml += `
                     <div onclick="openMediaLightbox(${gifIdx})" class="flex-shrink-0 w-auto rounded-2xl overflow-hidden glass-panel shadow-md relative group cursor-pointer flex justify-center bg-black">
-                        <img src="${gifUrl}" class="video-container-fixed object-cover" alt="GIF Media">
+                        <img src="${resolvedGif}" class="video-container-fixed object-cover" alt="GIF Media">
                     </div>
                 `;
             }
 
             if (item.screenshots && Array.isArray(item.screenshots) && item.screenshots.length > 0) {
                 item.screenshots.forEach(imgUrl => {
-                    currentMediaList.push({ type: 'image', url: imgUrl });
+                    const resolvedSc = getBannerSrc(imgUrl, item.img);
+                    currentMediaList.push({ type: 'image', url: resolvedSc });
                     const imgIdx = currentMediaList.length - 1;
 
                     scHtml += `
                         <div onclick="openMediaLightbox(${imgIdx})" class="flex-shrink-0 w-64 rounded-2xl overflow-hidden glass-panel shadow-md cursor-pointer hover:opacity-95 transition">
-                            <img src="${imgUrl}" class="w-full img-ratio-16-9 object-cover" alt="Screenshot">
+                            <img src="${resolvedSc}" class="w-full img-ratio-16-9 object-cover" alt="Screenshot">
                         </div>
                     `;
                 });
@@ -2437,7 +3160,8 @@
             if (scHtml !== '') {
                 screenshotsSection.classList.remove('hidden');
                 screenshotsContainer.innerHTML = `<div class="flex space-x-3 pr-4 sm:pr-5" style="min-width: max-content;">${scHtml}</div>`;
-                const firstAmbientImg = (item.screenshots && item.screenshots[0]) || gifUrl || item.img;
+                applyImageFallbacksInContainer(screenshotsContainer);
+                const firstAmbientImg = getBannerSrc((item.screenshots && item.screenshots[0]) || gifUrl || '', item.img);
                 if (firstAmbientImg) {
                     applyAmbientColorToSection(firstAmbientImg, screenshotsSection);
                 }
@@ -2471,7 +3195,7 @@
                     let highlightsHtml = '';
                     item.highlights.forEach(h => {
                         let text = typeof h === 'string' ? h : (h.text || '');
-                        let img = (typeof h === 'object' && h.img) ? h.img : null;
+                        let img = (typeof h === 'object' && h.img) ? getBannerSrc(h.img, item.img) : null;
                         
                         let hImgIdx = -1;
                         if (img) {
@@ -2494,6 +3218,7 @@
                         `;
                     });
                     detailHighlightsList.innerHTML = highlightsHtml;
+                    applyImageFallbacksInContainer(detailHighlightsList);
                 }
             }
 
@@ -2591,7 +3316,7 @@
                 html += `
                     <div class="popup-card-item-custom glass-panel app-card-clickable" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                         <div class="popup-card-imgbox-custom card-icon-glow">
-                            <img src="${item.img}" class="popup-card-img-custom img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                            <img src="${getIconSrc(item.img)}" class="popup-card-img-custom img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5 sm:ml-2.5 w-full">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -2608,6 +3333,7 @@
                 `;
             });
             categoryItemList.innerHTML = html;
+            applyImageFallbacksInContainer(categoryItemList);
             bindCardClickEvents(categoryItemList);
         }
 
@@ -2692,38 +3418,57 @@
         }
 
         function selectDrawerItem(targetEl) {
-            const allItems = document.querySelectorAll('.drawer-main-item');
-            allItems.forEach(item => {
-                item.classList.remove('bg-uptoAccent/15', 'dark:bg-white/10', 'text-uptoAccent', 'font-bold');
-                item.classList.add('text-gray-800', 'dark:text-gray-200', 'font-semibold');
-            });
-
-            if (targetEl) {
-                targetEl.classList.remove('text-gray-800', 'dark:text-gray-200', 'font-semibold');
-                targetEl.classList.add('bg-uptoAccent/15', 'dark:bg-white/10', 'text-uptoAccent', 'font-bold');
+            const homeBtn = document.getElementById('drawerHomeBtn') || document.querySelector('#sidebarDrawer a.drawer-main-item');
+            if (homeBtn && (!targetEl || targetEl === homeBtn)) {
+                homeBtn.classList.remove('is-orange');
             }
         }
 
         function toggleDrawerSubmenu(targetListId, targetChevronId) {
             const allSubmenus = document.querySelectorAll('.drawer-submenu');
-            
+            const allCatHeaders = document.querySelectorAll('.drawer-cat-header');
+            const homeBtn = document.getElementById('drawerHomeBtn') || document.querySelector('#sidebarDrawer a.drawer-main-item');
+
             allSubmenus.forEach(sub => {
                 if (sub.id !== targetListId) {
                     sub.classList.remove('open');
                 }
             });
 
+            allCatHeaders.forEach(hdr => {
+                const hdrTarget = hdr.getAttribute('data-target-sub');
+                if (hdrTarget !== targetListId) {
+                    hdr.classList.remove('drawer-cat-active');
+                    const chv = hdr.querySelector('.fa-chevron-down');
+                    if (chv) chv.classList.remove('rotate-180');
+                }
+            });
+
+            let hasAnyOpen = false;
+
             if (targetListId && targetChevronId) {
                 const listEl = document.getElementById(targetListId);
                 const chevronEl = document.getElementById(targetChevronId);
+                const headerEl = document.querySelector(`.drawer-cat-header[data-target-sub="${targetListId}"]`);
                 if (listEl && chevronEl) {
                     if (listEl.classList.contains('open')) {
                         listEl.classList.remove('open');
                         chevronEl.classList.remove('rotate-180');
+                        if (headerEl) headerEl.classList.remove('drawer-cat-active');
                     } else {
                         listEl.classList.add('open');
                         chevronEl.classList.add('rotate-180');
+                        if (headerEl) headerEl.classList.add('drawer-cat-active');
+                        hasAnyOpen = true;
                     }
+                }
+            }
+
+            if (homeBtn) {
+                if (hasAnyOpen) {
+                    homeBtn.classList.add('is-orange');
+                } else {
+                    homeBtn.classList.remove('is-orange');
                 }
             }
         }
@@ -2811,152 +3556,205 @@
         }
 
         async function loadStoreData() {
-            const jsonFilesConfig = [
-                { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false, isTweak: true },
-                { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false, isTweak: false },
-                { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false, isTweak: false },
-                { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false, isTweak: false },
-                { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false, isTweak: false },
-                { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true, isTweak: false },
-                { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false, isTweak: false }
-            ];
+            setJsonLoadingState(true);
+            try {
+                const jsonFilesConfig = [
+                    { path: 'Tabs/1-Tweak.json', icon: 'fa-solid fa-shapes', isArticle: false, isTip: false, isTweak: true },
+                    { path: 'Tabs/2-Tintucmoi.json', icon: 'fa-solid fa-newspaper', isArticle: true, isTip: false, isTweak: false },
+                    { path: 'Tabs/3-Appjailbreak.json', icon: 'fa-solid fa-mobile-retro', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/4-Appios.json', icon: 'fa-solid fa-file-arrow-down', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/5-Appapk.json', icon: 'fa-brands fa-android', isArticle: false, isTip: false, isTweak: false },
+                    { path: 'Tabs/6-Meo.json', icon: 'fa-solid fa-lightbulb', isArticle: false, isTip: true, isTweak: false },
+                    { path: 'Tabs/7-Nangsuat.json', icon: 'fa-solid fa-gauge-high', isArticle: false, isTip: false, isTweak: false }
+                ];
 
-            let loadedResults = [];
-            for (let cfg of jsonFilesConfig) {
-                const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip, cfg.isTweak);
-                if (res) {
-                    loadedResults.push(res);
+                let loadedResults = [];
+                for (let cfg of jsonFilesConfig) {
+                    const res = await fetchAndParseCategoryJson(cfg.path, cfg.icon, cfg.isArticle, cfg.isTip, cfg.isTweak);
+                    if (res) {
+                        loadedResults.push(res);
+                    }
                 }
-            }
 
-            loadedResults.sort((a, b) => a.sortNumber - b.sortNumber);
+                loadedResults.sort((a, b) => a.sortNumber - b.sortNumber);
+                const detectedChanges = detectContentChanges(loadedResults);
 
-            let allLoadedItems = [];
-            const drawerNavContainer = document.getElementById('drawerNavContainer');
-            const dynamicSectionsContainer = document.getElementById('dynamicSectionsContainer');
+                let allLoadedItems = [];
+                const drawerNavContainer = document.getElementById('drawerNavContainer');
+                const dynamicSectionsContainer = document.getElementById('dynamicSectionsContainer');
 
-            if (drawerNavContainer) {
-                drawerNavContainer.innerHTML = `
-                    <a href="#" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-uptoAccent/15 dark:bg-white/10 text-uptoAccent font-bold transition border-none shadow-sm">
-                        <i class="fa-solid fa-house w-5 text-center drawer-active-icon"></i><span>Trang chủ</span>
-                    </a>
-                `;
-            }
-            if (dynamicSectionsContainer) dynamicSectionsContainer.innerHTML = '';
+                if (drawerNavContainer) {
+                    drawerNavContainer.innerHTML = `
+                        <div id="drawerAuthRow" class="grid grid-cols-2 gap-2 pb-1">
+                            <button type="button" onclick="closeDrawer(); openModalWithBounce(loginModal, loginCard);" class="drawer-auth-login-btn flex items-center justify-center space-x-1.5 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                                <i class="fa-solid fa-right-to-bracket drawer-auth-icon text-sm"></i><span>Đăng nhập</span>
+                            </button>
+                            <button type="button" onclick="closeDrawer(); openModalWithBounce(registerModal, registerCard);" class="drawer-auth-register-btn flex items-center justify-center space-x-1.5 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                                <i class="fa-solid fa-user-plus drawer-auth-icon text-sm"></i><span>Đăng ký</span>
+                            </button>
+                        </div>
+                        <div class="mb-20 pb-11">
+                            <button type="button" onclick="openActivityHistoryModal();" class="drawer-history-btn w-full flex items-center justify-center space-x-2 px-3.5 py-2.5 rounded-xl transition font-bold text-sm active:scale-95">
+                                <i class="fa-solid fa-clock-rotate-left text-sm"></i>
+                                <span>Xem lịch sử tải và xem</span>
+                            </button>
+                        </div>
+                        <a href="#" id="drawerHomeBtn" onclick="selectDrawerItem(this); toggleDrawerSubmenu(null, null); closeDrawer(); window.scrollTo({top: 0, behavior: 'smooth'});" class="drawer-main-item flex items-center space-x-3 px-3 py-2.5 rounded-lg font-bold transition border-none shadow-sm">
+                            <i class="fa-solid fa-house w-5 text-center drawer-active-icon"></i><span>Trang chủ</span>
+                        </a>
+                    `;
+                }
+                if (dynamicSectionsContainer) dynamicSectionsContainer.innerHTML = '';
 
-            for (let i = 0; i < loadedResults.length; i++) {
-                const result = loadedResults[i];
-                const catName = result.categoryName;
-                const iconCls = result.iconClass;
-                const items = result.items;
-                const uniqueId = `cat_sec_${i}`;
-                const listId = `subList_${uniqueId}`;
-                const chevronId = `chevron_${uniqueId}`;
-                const countLabelId = `count_${uniqueId}`;
-                const containerId = `container_${uniqueId}`;
+                for (let i = 0; i < loadedResults.length; i++) {
+                    const result = loadedResults[i];
+                    const catName = result.categoryName;
+                    const iconCls = result.iconClass;
+                    const items = result.items;
+                    const uniqueId = `cat_sec_${i}`;
+                    const listId = `subList_${uniqueId}`;
+                    const chevronId = `chevron_${uniqueId}`;
+                    const countLabelId = `count_${uniqueId}`;
+                    const containerId = `container_${uniqueId}`;
 
-                window.storeDataCache[uniqueId] = items;
-                allLoadedItems.push(...items);
+                    window.storeDataCache[uniqueId] = items;
+                    allLoadedItems.push(...items);
+
+                    if (drawerNavContainer) {
+                        drawerNavContainer.innerHTML += `
+                            <div class="space-y-1">
+                                <div data-target-sub="${uniqueId}" class="drawer-cat-header w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('${uniqueId}', '${chevronId}')">
+                                    <span class="drawer-main-action flex items-center space-x-3 flex-1">
+                                        <i class="${iconCls} w-5 text-center"></i><span>${catName}</span>
+                                    </span>
+                                    <i id="${chevronId}" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
+                                </div>
+                                <div id="${uniqueId}" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300">
+                                    <div class="drawer-submenu-container space-y-2">
+                                        <div class="flex items-center justify-between px-0.5">
+                                            <span class="drawer-green-badge text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
+                                                ${items.length} - mục
+                                            </span>
+                                            <button onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="drawer-green-btn px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1 shadow-sm" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">
+                                                <span style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;">Xem tất cả</span>
+                                                <i class="fa-solid fa-arrow-right text-[8px]" style="color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;"></i>
+                                            </button>
+                                        </div>
+                                        <div class="relative px-0.5">
+                                            <input type="text" id="search_${uniqueId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenuDynamic('${uniqueId}')" class="drawer-submenu-search-input w-full bg-white/95 dark:bg-white/10 border-none text-gray-900 dark:text-white rounded-lg py-1.5 pl-7 pr-2.5 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-sm">
+                                            <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 dark:text-gray-300 text-[10px]"></i>
+                                        </div>
+                                        <div id="${listId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
+                                            ${items.map((item, idx) => `
+                                                <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
+                                                   data-item-name="${item.name.toLowerCase()}"
+                                                   onclick="closeDrawer(); openAppDetail(window.storeDataCache['${uniqueId}'][${idx}]);">
+                                                    &bull; ${item.name}
+                                                </a>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    if (dynamicSectionsContainer) {
+                        let sectionBodyHtml = `
+                            <div id="${containerId}" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="35"></div>
+                            <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
+                        `;
+
+                        if (i === 1) {
+                            dynamicSectionsContainer.innerHTML += `
+                                <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
+                                    <div id="featuredBottomListCard"></div>
+                                    <div class="space-y-2">
+                                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
+                                        <div id="featuredTopBannerCard"></div>
+                                    </div>
+                                </section>
+                            `;
+                        }
+
+                        dynamicSectionsContainer.innerHTML += `
+                            <section class="space-y-2.5 pt-0 mt-0">
+                                <div class="flex items-center justify-between px-3.5">
+                                    <a href="javascript:void(0)" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="section-title text-gray-900 dark:text-white">
+                                        <span>${catName}</span>
+                                        <i class="fa-solid fa-chevron-right section-arrow"></i>
+                                    </a>
+                                    <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - mục</span>
+                                </div>
+                                <div id="section_wrapper_${uniqueId}">
+                                    ${sectionBodyHtml}
+                                </div>
+                            </section>
+                        `;
+                    }
+                }
 
                 if (drawerNavContainer) {
                     drawerNavContainer.innerHTML += `
-                        <div class="space-y-1">
-                            <div class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-gray-900 dark:text-gray-200 hover:bg-black/5 dark:hover:bg-white/10 transition font-bold cursor-pointer" onclick="toggleDrawerSubmenu('${uniqueId}', '${chevronId}')">
+                        <div class="space-y-1.5 pt-0.5">
+                            <div class="drawer-contact-header w-full flex items-center px-3 py-2 text-gray-900 dark:text-gray-200 font-bold">
                                 <span class="drawer-main-action flex items-center space-x-3 flex-1">
-                                    <i class="${iconCls} w-5 text-center"></i><span>${catName}</span>
+                                    <i class="fa-solid fa-headset w-5 text-center"></i><span>Thông tin liên hệ</span>
                                 </span>
-                                <i id="${chevronId}" class="fa-solid fa-chevron-down text-xs p-1 transition-transform duration-300"></i>
                             </div>
-                            <div id="${uniqueId}" class="drawer-submenu pl-2 pr-2 text-xs text-gray-800 dark:text-gray-300">
-                                <div class="drawer-submenu-container space-y-2">
-                                    <div class="flex items-center justify-between px-0.5">
-                                        <span class="text-[10px] font-extrabold bg-uptoAccent/20 text-uptoAccent px-2 py-0.5 rounded-full border border-uptoAccent/30">
-                                            ${items.length} - mục
-                                        </span>
-                                        <button onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="bg-[#00b4d8]/25 hover:bg-[#00b4d8] text-[#00b4d8] hover:text-white border border-[#00b4d8]/30 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold transition duration-200 active:scale-95 flex items-center space-x-1">
-                                            <span>Xem tất cả</span>
-                                            <i class="fa-solid fa-arrow-right text-[8px]"></i>
-                                        </button>
-                                    </div>
-                                    <div class="relative px-0.5">
-                                        <input type="text" id="search_${uniqueId}" placeholder="Tìm trong mục..." oninput="filterDrawerSubmenuDynamic('${uniqueId}')" class="w-full bg-white/95 dark:bg-black/40 border-none text-gray-900 dark:text-white rounded-lg py-1.5 pl-7 pr-2.5 text-[11px] font-medium focus:outline-none focus:ring-1 focus:ring-uptoAccent shadow-sm">
-                                        <i class="fa-solid fa-magnifying-glass absolute left-2.5 top-3 text-gray-500 text-[10px]"></i>
-                                    </div>
-                                    <div id="${listId}" class="space-y-1 max-h-40 overflow-y-auto no-scrollbar pr-1">
-                                        ${items.map((item, idx) => `
-                                            <a href="javascript:void(0)" class="drawer-sub-item block py-1.5 px-2.5 rounded-lg hover:bg-uptoAccent/10 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px] active:scale-98"
-                                               data-item-name="${item.name.toLowerCase()}"
-                                               onclick="closeDrawer(); openAppDetail(window.storeDataCache['${uniqueId}'][${idx}]);">
-                                                &bull; ${item.name}
-                                            </a>
-                                        `).join('')}
-                                    </div>
-                                </div>
+                            <div class="drawer-contact-glass-card space-y-0.5 text-xs text-gray-800 dark:text-gray-300">
+                                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2.5 py-2 px-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px]">
+                                    <i class="fa-brands fa-facebook w-4 text-center"></i><span>Facebook</span>
+                                </a>
+                                <a href="https://m.me" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2.5 py-2 px-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px]">
+                                    <i class="fa-brands fa-facebook-messenger w-4 text-center"></i><span>Messenger</span>
+                                </a>
+                                <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2.5 py-2 px-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px]">
+                                    <i class="fa-brands fa-telegram w-4 text-center"></i><span>Telegram</span>
+                                </a>
+                                <a href="https://zalo.me" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2.5 py-2 px-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px]">
+                                    <i class="fa-solid fa-comment-dots w-4 text-center"></i><span>Zalo</span>
+                                </a>
+                                <a href="mailto:contact@kpazz.github.io" class="flex items-center space-x-2.5 py-2 px-2.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition text-gray-900 dark:text-gray-200 font-bold text-[12px]">
+                                    <i class="fa-solid fa-envelope w-4 text-center"></i><span>Email</span>
+                                </a>
                             </div>
                         </div>
                     `;
                 }
 
-                if (dynamicSectionsContainer) {
-                    let sectionBodyHtml = `
-                        <div id="${containerId}" class="auto-scroll-container flex space-x-3 overflow-x-auto no-scrollbar pb-4 cursor-grab pl-3.5" data-scroll-speed="35"></div>
-                        <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
-                    `;
+                syncDrawerStickyAuth();
 
-                    if (i === 1) {
-                        dynamicSectionsContainer.innerHTML += `
-                            <section id="featuredTwoCardsSection" class="px-3.5 space-y-4 my-3">
-                                <div id="featuredBottomListCard"></div>
-                                <div class="space-y-2">
-                                    <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 px-1">Chúng tôi đề xuất cho bạn!</h3>
-                                    <div id="featuredTopBannerCard"></div>
-                                </div>
-                            </section>
-                        `;
+                globalAllItems = sortItemsByDate([...allLoadedItems]);
+
+                initDynamicHeroSlider(globalAllItems);
+                renderFeaturedTwoCards(globalAllItems);
+
+                Object.keys(window.storeDataCache).forEach(uniqueId => {
+                    const items = window.storeDataCache[uniqueId];
+                    const sectionWrapper = document.getElementById(`section_wrapper_${uniqueId}`);
+                    const sectionHeader = sectionWrapper ? sectionWrapper.previousElementSibling : null;
+                    const headerTitleText = sectionHeader ? sectionHeader.textContent.toLowerCase() : '';
+
+                    if (headerTitleText.includes('tweak')) {
+                        renderTweakSectionCustom(uniqueId, items);
+                    } else if (headerTitleText.includes('năng suất') || headerTitleText.includes('tiện ích')) {
+                        renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
+                    } else if (headerTitleText.includes('app') || headerTitleText.includes('ứng dụng') || headerTitleText.includes('apk') || headerTitleText.includes('ios')) {
+                        renderAppMixedSection(uniqueId, items, headerTitleText);
+                    } else if (headerTitleText.includes('mẹo') || headerTitleText.includes('thủ thuật') || headerTitleText.includes('tin tức') || headerTitleText.includes('sự kiện')) {
+                        renderTipBigCardSection(uniqueId, items, headerTitleText);
+                    } else {
+                        renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
                     }
+                });
 
-                    dynamicSectionsContainer.innerHTML += `
-                        <section class="space-y-2.5 pt-0 mt-0">
-                            <div class="flex items-center justify-between px-3.5">
-                                <a href="javascript:void(0)" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="section-title text-gray-900 dark:text-white">
-                                    <span>${catName}</span>
-                                    <i class="fa-solid fa-chevron-right section-arrow"></i>
-                                </a>
-                                <span id="${countLabelId}" onclick="openCategoryModal('${catName}', window.storeDataCache['${uniqueId}'] || [])" class="text-[11px] font-bold text-gray-400 cursor-pointer hover:text-uptoAccent transition">${items.length} - mục</span>
-                            </div>
-                            <div id="section_wrapper_${uniqueId}">
-                                ${sectionBodyHtml}
-                            </div>
-                        </section>
-                    `;
-                }
+                applyImageFallbacksInContainer(document);
+                initAutoScrollSections();
+                showContentUpdatePopupIfChanged(detectedChanges);
+            } finally {
+                setJsonLoadingState(false);
             }
-
-            globalAllItems = sortItemsByDate([...allLoadedItems]);
-
-            initDynamicHeroSlider(globalAllItems);
-            renderFeaturedTwoCards(globalAllItems);
-
-            Object.keys(window.storeDataCache).forEach(uniqueId => {
-                const items = window.storeDataCache[uniqueId];
-                const sectionWrapper = document.getElementById(`section_wrapper_${uniqueId}`);
-                const sectionHeader = sectionWrapper ? sectionWrapper.previousElementSibling : null;
-                const headerTitleText = sectionHeader ? sectionHeader.textContent.toLowerCase() : '';
-
-                if (headerTitleText.includes('tweak')) {
-                    renderTweakSectionCustom(uniqueId, items);
-                } else if (headerTitleText.includes('năng suất') || headerTitleText.includes('tiện ích')) {
-                    renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
-                } else if (headerTitleText.includes('app') || headerTitleText.includes('ứng dụng') || headerTitleText.includes('apk') || headerTitleText.includes('ios')) {
-                    renderAppMixedSection(uniqueId, items, headerTitleText);
-                } else if (headerTitleText.includes('mẹo') || headerTitleText.includes('thủ thuật') || headerTitleText.includes('tin tức') || headerTitleText.includes('sự kiện')) {
-                    renderTipBigCardSection(uniqueId, items, headerTitleText);
-                } else {
-                    renderAppStoreTwoRowsGridSection(uniqueId, items, headerTitleText);
-                }
-            });
-
-            initAutoScrollSections();
         }
 
         function filterDrawerSubmenuDynamic(uniqueId) {
@@ -3006,13 +3804,13 @@
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
-                        <img src="${topItem.img}" alt="${topItem.name}" class="featured-banner-unique-bg" onload="updateBadgeColorFromImg(this, '${topBadgeId}')">
+                        <img src="${getBannerSrc((topItem.screenshots && topItem.screenshots[0]) || '', topItem.img)}" alt="${topItem.name}" class="featured-banner-unique-bg" onload="updateBadgeColorFromImg(this, '${topBadgeId}')">
                         
                         <div class="featured-banner-unique-glass-overlay">
                             <div class="flex items-center justify-between space-x-3 w-full">
                                 <div class="flex items-center space-x-3 min-w-0 flex-1">
                                     <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-[22.5%] flex items-center justify-center overflow-hidden flex-shrink-0 bg-transparent card-icon-glow">
-                                        <img src="${topItem.img}" alt="${topItem.name}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]">
+                                        <img src="${getIconSrc(topItem.img)}" alt="${topItem.name}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]">
                                     </div>
                                     <div class="min-w-0 flex-1 space-y-0.5">
                                         <div class="flex items-center space-x-2">
@@ -3030,6 +3828,7 @@
                         </div>
                     </div>
                 `;
+                applyImageFallbacksInContainer(topBannerEl);
                 bindCardClickEvents(topBannerEl);
             }
 
@@ -3068,7 +3867,7 @@
                              data-app-json='${itemJsonEscaped}'>
                             <div class="flex items-center space-x-2.5 min-w-0 flex-1 pr-2">
                                 <div class="w-11 h-11 flex-shrink-0 rounded-[22.5%] card-icon-glow">
-                                    <img src="${item.img}" alt="${item.name}" class="w-11 h-11 img-ratio-1-1 object-cover rounded-[22.5%]">
+                                    <img src="${getIconSrc(item.img)}" alt="${item.name}" class="w-11 h-11 img-ratio-1-1 object-cover rounded-[22.5%]">
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <h5 class="font-extrabold text-xs featured-card-title-theme truncate leading-snug group-hover:text-uptoAccent transition">
@@ -3091,7 +3890,7 @@
 
                 bottomListEl.innerHTML = `
                     <div class="relative rounded-[26px] p-4 sm:p-5 shadow-2xl overflow-hidden border-none">
-                        <img src="${randomBgMedia.url}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="${getBannerSrc(randomBgMedia.url, randomBgItem.img)}" alt="Card Background" class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute inset-0 meitu-overlay-blur-custom"></div>
 
                         <div class="relative z-10 space-y-3.5">
@@ -3107,6 +3906,7 @@
                         </div>
                     </div>
                 `;
+                applyImageFallbacksInContainer(bottomListEl);
                 bindCardClickEvents(bottomListEl);
             }
         }
@@ -3140,7 +3940,7 @@
                     <div class="app-card-clickable home-tweak-item-box glass-panel"
                          data-app-json='${itemJsonEscaped}'>
                         <div class="home-tweak-img-wrap card-icon-glow">
-                            <img src="${item.img}" class="home-tweak-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                            <img src="${getIconSrc(item.img)}" class="home-tweak-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -3163,6 +3963,7 @@
                     </div>
                 </div>
             `;
+            applyImageFallbacksInContainer(wrapper);
             bindCardClickEvents(wrapper);
         }
 
@@ -3173,8 +3974,8 @@
             if (!wrapper) return;
 
             let appPool = (globalAllItems && globalAllItems.length > 0)
-                ? globalAllItems.filter(item => item.isApp && item.img)
-                : items.filter(item => item.isApp && item.img);
+                ? globalAllItems.filter(item => item.isApp)
+                : items.filter(item => item.isApp);
 
             if (appPool.length === 0) appPool = items;
 
@@ -3206,7 +4007,7 @@
                     html += `
                         <div class="app-card-clickable appstore-icon-item" data-app-json='${itemJsonEscaped}'>
                             <div class="appstore-icon-wrap card-icon-glow">
-                                <img src="${item.img}" class="appstore-icon-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                                <img src="${getIconSrc(item.img)}" class="appstore-icon-img img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                             </div>
                         </div>
                     `;
@@ -3220,7 +4021,7 @@
             wrapper.innerHTML = `
                 <div class="px-3.5">
                     <div class="appstore-grid-card-box relative overflow-hidden h-[310px] sm:h-[335px] flex flex-col justify-between">
-                        <img src="${bgMedia.url}" alt="Background" class="appstore-grid-card-bg">
+                        <img src="${getBannerSrc(bgMedia.url, randomBgItem.img)}" alt="Background" class="appstore-grid-card-bg">
                         <div class="appstore-grid-card-overlay absolute inset-0 pointer-events-none"></div>
 
                         <div class="relative z-10 flex flex-col justify-between h-full py-0">
@@ -3243,6 +4044,7 @@
                     </div>
                 </div>
             `;
+            applyImageFallbacksInContainer(wrapper);
             bindCardClickEvents(wrapper);
         }
 
@@ -3275,13 +4077,13 @@
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
-                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
+                        <img src="${getBannerSrc(media.url, item.img)}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
                         
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
                                     <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
+                                        <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
@@ -3324,7 +4126,7 @@
                     <div class="app-card-clickable home-apk-item-box glass-panel"
                          data-app-json='${itemJsonEscaped}'>
                         <div class="home-apk-img-wrap card-icon-glow">
-                            <img src="${item.img}" class="home-apk-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
+                            <img src="${getIconSrc(item.img)}" class="home-apk-img-file img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                         </div>
                         <div class="min-w-0 flex-1 space-y-0.5 ml-2.5">
                             <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${item.name}</h5>
@@ -3355,6 +4157,7 @@
                 <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
                 ${bottomSectionHtml}
             `;
+            applyImageFallbacksInContainer(wrapper);
             bindCardClickEvents(wrapper);
             initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
         }
@@ -3387,13 +4190,13 @@
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
-                        <img src="${media.url}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
+                        <img src="${getBannerSrc(media.url, item.img)}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt="${item.name}" onload="updateBadgeColorFromImg(this, '${badgeId}')">
 
                         <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
                                 <div class="flex items-center space-x-2.5 min-w-0 flex-1">
                                     <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
+                                        <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
@@ -3431,6 +4234,7 @@
                 </div>
                 <div class="section-scroll-indicator flex items-center justify-center space-x-1 pt-1"></div>
             `;
+            applyImageFallbacksInContainer(wrapper);
             bindCardClickEvents(wrapper);
             initSectionAutoSlide(`bigAutoSlider_${uniqueId}`);
         }
@@ -3525,7 +4329,7 @@
                 const highlightDesc = (item.highlights && item.highlights[0]) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || 'Khám phá ngay tính năng nổi bật.');
                 
                 const media = getPrimaryMediaSrc(item);
-                let mediaHtml = `<img src="${media.url}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover" onload="updateBadgeColorFromImg(this, 'badge_hero_${idx}')">`;
+                let mediaHtml = `<img src="${getBannerSrc(media.url, item.img)}" alt="${item.name}" class="w-full h-full img-ratio-16-9 object-cover" onload="updateBadgeColorFromImg(this, 'badge_hero_${idx}')">`;
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
                 const badgeInfo = getAdaptiveBadgeInfo(publishDateStr, item);
 
@@ -3542,7 +4346,7 @@
                             <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3.5 px-4 flex flex-col justify-end z-10 text-white">
                                 <div class="flex items-center space-x-3 mb-1">
                                     <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
-                                        <img src="${item.img}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
+                                        <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <h3 class="font-extrabold text-sm sm:text-base text-white truncate drop-shadow">${item.name}</h3>
@@ -3564,6 +4368,7 @@
             });
 
             heroSlider.innerHTML = slidesHtml;
+            applyImageFallbacksInContainer(heroSlider);
             bindCardClickEvents(heroSlider);
 
             if (heroDotsContainer && sortedHeroItems.length) {
@@ -3599,158 +4404,168 @@
                         const opacity = Math.max(0.4, 1 - absOffset * 0.22);
                         
                         card.style.transform = `translate3d(${translateX}px, ${absOffset * 6}px, 0) scale(${scale}) rotateY(${rotateY}deg)`;
-                        card.style.opacity = opacity.toString();
-                        card.style.boxShadow = '0 10px 20px -5px rgba(0,0,0,0.3)';
+                        card.style.opacity = opacity;
+                        card.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
                     }
                 });
 
-                const heroDots = heroDotsContainer.querySelectorAll('.hero-dot');
-                heroDots.forEach((dot, idx) => {
+                const dots = heroDotsContainer ? heroDotsContainer.querySelectorAll('.hero-dot') : [];
+                dots.forEach((dot, idx) => {
                     if (idx === currentIndex) {
-                        dot.className = 'hero-dot w-6 h-2 rounded-full bg-uptoAccent transition-all duration-300 cursor-pointer shadow-md';
-                        dot.style.width = '24px';
-                        dot.style.height = '6px';
+                        dot.style.backgroundColor = '#00f2fe';
+                        dot.style.width = '14px';
+                        dot.style.height = '5px';
                     } else {
-                        dot.className = 'hero-dot rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300 cursor-pointer shadow-sm';
+                        dot.style.backgroundColor = '';
                         dot.style.width = '5px';
                         dot.style.height = '5px';
                     }
                 });
+            }
 
-                const activeCard = cards[currentIndex];
-                if (activeCard) {
-                    const scrollLeftPos = activeCard.offsetLeft - (heroSlider.clientWidth / 2) + (activeCard.clientWidth / 2);
+            function goToSlide(index) {
+                currentIndex = (index + cards.length) % cards.length;
+                const targetCard = cards[currentIndex];
+                if (targetCard) {
+                    const scrollLeftPos = targetCard.offsetLeft - heroSlider.offsetLeft - (heroSlider.clientWidth / 2) + (targetCard.clientWidth / 2);
                     heroSlider.scrollTo({
                         left: scrollLeftPos,
                         behavior: 'smooth'
                     });
                 }
-            }
-
-            function autoNext() {
-                currentIndex = (currentIndex + 1) % cards.length;
                 updateSliderPosition();
-                resetAutoSlide();
             }
 
-            function startAutoSlide() { 
-                autoSlideTimer = setTimeout(autoNext, 3500); 
-            }
-            function stopAutoSlide() { clearTimeout(autoSlideTimer); }
-            function resetAutoSlide() {
-                stopAutoSlide();
-                startAutoSlide();
-            }
-
-            heroDotsContainer.querySelectorAll('.hero-dot').forEach((dot, idx) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = idx;
-                    updateSliderPosition();
-                    resetAutoSlide();
+            if (heroDotsContainer) {
+                heroDotsContainer.querySelectorAll('.hero-dot').forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        const slideIdx = parseInt(dot.getAttribute('data-slide-idx'), 10);
+                        stopAutoSlide();
+                        goToSlide(slideIdx);
+                        startAutoSlide();
+                    });
                 });
+            }
+
+            function startAutoSlide() {
+                autoSlideTimer = setInterval(() => {
+                    goToSlide(currentIndex + 1);
+                }, 4000);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(autoSlideTimer);
+            }
+
+            heroSlider.addEventListener('scroll', () => {
+                const center = heroSlider.scrollLeft + (heroSlider.clientWidth / 2);
+                let closestIdx = 0;
+                let minDist = Infinity;
+
+                cards.forEach((card, idx) => {
+                    const cardCenter = (card.offsetLeft - heroSlider.offsetLeft) + (card.clientWidth / 2);
+                    const dist = Math.abs(center - cardCenter);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closestIdx = idx;
+                    }
+                });
+
+                if (closestIdx !== currentIndex) {
+                    currentIndex = closestIdx;
+                    updateSliderPosition();
+                }
             });
 
             heroSlider.addEventListener('touchstart', stopAutoSlide, { passive: true });
             heroSlider.addEventListener('touchend', startAutoSlide, { passive: true });
+            heroSlider.addEventListener('mouseenter', stopAutoSlide);
+            heroSlider.addEventListener('mouseleave', startAutoSlide);
 
-            setTimeout(() => {
-                updateSliderPosition();
-                startAutoSlide();
-            }, 300);
+            setTimeout(() => goToSlide(0), 150);
+            startAutoSlide();
         }
 
         function initAutoScrollSections() {
-            const scrollContainers = document.querySelectorAll('.auto-scroll-container');
-            
-            scrollContainers.forEach(container => {
-                const speed = parseInt(container.getAttribute('data-scroll-speed')) || 40;
-                const pxPerSecond = 1000 / speed;
-                let customDir = parseInt(container.getAttribute('data-scroll-dir')) || 1;
+            const containers = document.querySelectorAll('.auto-scroll-container');
+            containers.forEach(container => {
+                if (container.dataset.autoScrollInitialized === 'true') return;
+                container.dataset.autoScrollInitialized = 'true';
+
+                const speed = parseFloat(container.getAttribute('data-scroll-speed')) || 35;
+                let direction = parseInt(container.getAttribute('data-scroll-dir')) || 1;
                 let isPaused = false;
-                let scrollDirection = customDir;
-                let exactScrollPos = container.scrollLeft;
+                let pauseTimeout;
                 let lastTimestamp = null;
 
-                const indicatorEl = container.parentElement.querySelector('.section-scroll-indicator');
-                const itemCount = container.querySelectorAll('.app-card-clickable, .rec-item-card, .flex-shrink-0').length;
-                if (indicatorEl && itemCount > 0) {
-                    let dotsHtml = '';
-                    const totalDots = Math.min(itemCount, 8);
-                    for (let i = 0; i < totalDots; i++) {
-                        dotsHtml += `<span class="section-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300"></span>`;
-                    }
-                    indicatorEl.innerHTML = dotsHtml;
-                }
-
-                const updateDots = () => {
-                    if (!indicatorEl) return;
-                    const dots = indicatorEl.querySelectorAll('.section-dot');
-                    if (!dots.length) return;
-                    const maxScroll = container.scrollWidth - container.clientWidth;
-                    if (maxScroll <= 0) return;
-                    const progress = container.scrollLeft / maxScroll;
-                    const activeIndex = Math.min(Math.floor(progress * dots.length), dots.length - 1);
-                    
-                    dots.forEach((dot, idx) => {
-                        if (idx === activeIndex) {
-                            dot.className = 'section-dot w-4 h-1.5 rounded-full bg-uptoAccent transition-all duration-300';
-                        } else {
-                            dot.className = 'section-dot w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-600/60 transition-all duration-300';
-                        }
-                    });
+                const pauseAutoScroll = () => {
+                    isPaused = true;
+                    clearTimeout(pauseTimeout);
+                    pauseTimeout = setTimeout(() => {
+                        isPaused = false;
+                        lastTimestamp = null;
+                    }, 3000);
                 };
 
-                container.addEventListener('scroll', () => {
-                    if (isPaused) {
-                        exactScrollPos = container.scrollLeft;
-                    }
-                    updateDots();
-                }, { passive: true });
+                container.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+                container.addEventListener('touchmove', pauseAutoScroll, { passive: true });
+                container.addEventListener('mousedown', pauseAutoScroll);
+                container.addEventListener('wheel', pauseAutoScroll, { passive: true });
+
+                const indicatorContainer = container.nextElementSibling;
+                let progressBar = null;
+                if (indicatorContainer && indicatorContainer.classList.contains('section-scroll-indicator')) {
+                    indicatorContainer.innerHTML = `<div class="w-16 h-1 bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden"><div class="section-progress-fill h-full bg-uptoAccent rounded-full transition-all duration-100" style="width: 25%"></div></div>`;
+                    progressBar = indicatorContainer.querySelector('.section-progress-fill');
+                }
 
                 function step(timestamp) {
                     if (!lastTimestamp) lastTimestamp = timestamp;
-                    const deltaSec = (timestamp - lastTimestamp) / 1000;
+                    const dt = (timestamp - lastTimestamp) / 1000;
                     lastTimestamp = timestamp;
 
-                    if (!isPaused && deltaSec > 0 && deltaSec < 0.2) {
+                    if (!isPaused && container.offsetParent !== null) {
                         const maxScroll = container.scrollWidth - container.clientWidth;
                         if (maxScroll > 0) {
-                            exactScrollPos += scrollDirection * pxPerSecond * deltaSec;
-                            if (exactScrollPos >= maxScroll) {
-                                exactScrollPos = maxScroll;
-                                scrollDirection = -1;
-                            } else if (exactScrollPos <= 0) {
-                                exactScrollPos = 0;
-                                scrollDirection = 1;
+                            container.scrollLeft += direction * speed * dt;
+                            if (container.scrollLeft >= maxScroll - 1) {
+                                direction = -1;
+                            } else if (container.scrollLeft <= 1) {
+                                direction = 1;
                             }
-                            container.scrollLeft = exactScrollPos;
+                            if (progressBar) {
+                                const ratio = Math.min(100, Math.max(20, (container.scrollLeft / maxScroll) * 100));
+                                progressBar.style.width = ratio + '%';
+                            }
                         }
-                    } else if (isPaused) {
-                        exactScrollPos = container.scrollLeft;
                     }
-
                     requestAnimationFrame(step);
                 }
-
                 requestAnimationFrame(step);
-
-                container.addEventListener('mouseenter', () => { isPaused = true; });
-                container.addEventListener('mouseleave', () => { 
-                    exactScrollPos = container.scrollLeft;
-                    isPaused = false; 
-                });
-                container.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
-                container.addEventListener('touchend', () => { 
-                    exactScrollPos = container.scrollLeft;
-                    isPaused = false; 
-                }, { passive: true });
             });
         }
 
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+        function closeDrawer() {
+            sidebarDrawer.classList.add('-translate-x-full');
+            drawerBackdrop.classList.add('hidden');
+        }
+
+        hamburgerBtn.addEventListener('click', () => {
+            sidebarDrawer.classList.remove('-translate-x-full');
+            drawerBackdrop.classList.remove('hidden');
+            requestAnimationFrame(syncDrawerStickyAuth);
+        });
+        drawerCloseBtn.addEventListener('click', closeDrawer);
+        drawerBackdrop.addEventListener('click', closeDrawer);
+
         const searchOpenBtn = document.getElementById('searchOpenBtn');
         const searchCloseBtn = document.getElementById('searchCloseBtn');
+        const searchResults = document.getElementById('searchResults');
 
-        const resetSearch = () => {
+        const resetSearchModal = () => {
             searchInput.value = '';
             searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
         };
@@ -3760,23 +4575,100 @@
             setTimeout(() => searchInput.focus(), 100);
         });
 
-        searchCloseBtn.addEventListener('click', () => closeModalWithBounce(searchModal, searchBoxContainer, resetSearch));
-        setupBackdropClose(searchModal, searchBoxContainer, resetSearch);
+        searchCloseBtn.addEventListener('click', () => closeModalWithBounce(searchModal, searchBoxContainer, resetSearchModal));
+        setupBackdropClose(searchModal, searchBoxContainer, resetSearchModal);
+
+        function highlightText(text, query) {
+            if (!query || !text) return text;
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const rawQuery = e.target.value.trim();
+            const query = rawQuery.toLowerCase();
+            if (!query) {
+                searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
+                return;
+            }
+
+            const matchedItems = globalAllItems.filter(item => 
+                (item.name && item.name.toLowerCase().includes(query)) || 
+                (item.dev && item.dev.toLowerCase().includes(query)) || 
+                (item.category && item.category.toLowerCase().includes(query)) ||
+                (item.highlightTitle && item.highlightTitle.toLowerCase().includes(query)) ||
+                (item.highlights && item.highlights.some(h => (typeof h === 'string' ? h : h.text || '').toLowerCase().includes(query)))
+            );
+
+            if (!matchedItems.length) {
+                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả phù hợp cho "${rawQuery}"</p>`;
+                return;
+            }
+
+            let html = '';
+            matchedItems.forEach((item, idx) => {
+                const isTipOrArticle = item.isArticle || item.isTip || item.noDownload;
+                const badgeClass = isTipOrArticle ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-300' : 'bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300';
+                const badgeText = isTipOrArticle ? 'Mẹo / Tin tức' : (item.version || 'v1.0');
+                const authorName = item.dev || 'KPazz';
+                
+                const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || '');
+                const truncatedDesc = truncateByWords(descText, 12);
+
+                const highlightedTitle = highlightText(item.name, rawQuery);
+                const highlightedDev = highlightText(authorName, rawQuery);
+                const highlightedDesc = highlightText(truncatedDesc, rawQuery);
+
+                const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
+
+                html += `
+                    <div class="search-result-card-clickable flex items-center space-x-3 glass-panel p-2.5 rounded-2xl cursor-pointer transition hover:border-uptoAccent/40" data-app-json='${itemJsonEscaped}'>
+                        <div class="w-12 h-12 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center overflow-hidden flex-shrink-0 border-none card-icon-glow">
+                            <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
+                        </div>
+                        <div class="min-w-0 flex-1 space-y-0.5">
+                            <h5 class="font-extrabold text-sm text-gray-900 dark:text-white truncate">${highlightedTitle}</h5>
+                            <p class="text-[11px] text-gray-600 dark:text-gray-300 truncate leading-tight">${highlightedDesc}</p>
+                            <div class="flex items-center space-x-2 text-[11px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                <span class="${badgeClass} px-1.5 py-0.5 rounded font-extrabold text-[10px]">${badgeText}</span>
+                                <span class="text-uptoAccent font-bold truncate">&bull; ${highlightedDev}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            searchResults.innerHTML = html;
+            applyImageFallbacksInContainer(searchResults);
+
+            searchResults.querySelectorAll('.search-result-card-clickable').forEach(card => {
+                card.onclick = () => {
+                    const rawJson = card.getAttribute('data-app-json');
+                    if (rawJson) {
+                        try {
+                            const itemObj = JSON.parse(rawJson);
+                            closeModalWithBounce(searchModal, searchBoxContainer, () => {
+                                resetSearchModal();
+                                openAppDetail(itemObj);
+                            });
+                        } catch (err) {}
+                    }
+                };
+            });
+        });
 
         const profileOpenBtn = document.getElementById('profileOpenBtn');
         const loginCloseBtn = document.getElementById('loginCloseBtn');
-        
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const registerModal = document.getElementById('registerModal');
         const registerCard = document.getElementById('registerCard');
         const registerCloseBtn = document.getElementById('registerCloseBtn');
-        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const backToLoginBtn = document.getElementById('backToLoginBtn');
 
         profileOpenBtn.addEventListener('click', () => openModalWithBounce(loginModal, loginCard));
         loginCloseBtn.addEventListener('click', () => closeModalWithBounce(loginModal, loginCard));
         setupBackdropClose(loginModal, loginCard);
-
-        openRegisterDialog = () => {};
 
         openRegisterBtn.addEventListener('click', () => {
             closeModalWithBounce(loginModal, loginCard, () => openModalWithBounce(registerModal, registerCard));
@@ -3789,90 +4681,7 @@
             closeModalWithBounce(registerModal, registerCard, () => openModalWithBounce(loginModal, loginCard));
         });
 
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim().toLowerCase();
-            if (!query) {
-                searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
-                return;
-            }
-
-            const appCards = document.querySelectorAll('.app-card-clickable');
-            let matchedApps = [];
-
-            appCards.forEach(card => {
-                const rawJson = card.getAttribute('data-app-json') || card.getAttribute('data-hero-json');
-                if (rawJson) {
-                    try {
-                        const item = JSON.parse(rawJson);
-                        if ((item.name && item.name.toLowerCase().includes(query)) || (item.dev && item.dev.toLowerCase().includes(query))) {
-                            if (!matchedApps.some(a => a.name === item.name)) {
-                                matchedApps.push(item);
-                            }
-                        }
-                    } catch(err) {}
-                }
-            });
-
-            if (matchedApps.length === 0) {
-                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả nào cho "${query}"</p>`;
-            } else {
-                let html = `<p class="text-xs text-uptoAccent font-bold mb-2">Tìm thấy ${matchedApps.length} kết quả:</p>`;
-                matchedApps.forEach((app, idx) => {
-                    const regex = new RegExp(`(${query})`, 'gi');
-                    const highlightedName = app.name.replace(regex, '<mark>$1</mark>');
-                    
-                    html += `
-                        <div class="search-result-item p-2.5 rounded-xl glass-panel cursor-pointer hover:opacity-90 transition flex items-center space-x-3"
-                             data-search-idx="${idx}">
-                            <div class="w-10 h-10 flex-shrink-0 rounded-[22.5%] card-icon-glow">
-                                <img src="${app.img}" class="w-10 h-10 img-ratio-1-1 object-cover rounded-[22.5%]" alt="icon">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h4 class="text-xs font-bold text-gray-900 dark:text-white truncate">${highlightedName}</h4>
-                                <p class="text-[10px] text-gray-500 dark:text-gray-400 truncate">${app.dev || 'KPazz Application'}</p>
-                            </div>
-                            <i class="fa-solid fa-chevron-right text-xs text-uptoAccent"></i>
-                        </div>
-                    `;
-                });
-
-                searchResults.innerHTML = html;
-
-                document.querySelectorAll('.search-result-item').forEach(itemEl => {
-                    itemEl.addEventListener('click', () => {
-                        const idx = itemEl.getAttribute('data-search-idx');
-                        const targetApp = matchedApps[idx];
-                        closeModalWithBounce(searchModal, searchBoxContainer, () => {
-                            resetSearch();
-                            openAppDetail(targetApp);
-                        });
-                    });
-                });
-            }
-        });
-
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-
-        hamburgerBtn.addEventListener('click', () => {
-            sidebarDrawer.classList.remove('-translate-x-full');
-            drawerBackdrop.classList.remove('hidden');
-        });
-
-        function closeDrawer() {
-            sidebarDrawer.classList.add('-translate-x-full');
-            drawerBackdrop.classList.add('hidden');
-        }
-
-        drawerCloseBtn.addEventListener('click', closeDrawer);
-        drawerBackdrop.addEventListener('click', closeDrawer);
-
-        document.getElementById('drawerYearText').textContent = new Date().getFullYear();
-        document.getElementById('footerYearText').textContent = new Date().getFullYear();
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadStoreData();
-        });
+        loadStoreData();
     </script>
 </body>
 </html>
