@@ -407,6 +407,20 @@
             overflow-x: hidden !important;
         }
 
+        /* Card trong mục Shortcut liền mạch như mục Tweak, không tạo đường kẻ chia dòng */
+        #shortcutStaggeredSection .home-tweak-item-box.glass-panel {
+            background: rgba(241, 245, 249, 0.78) !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+        .dark #shortcutStaggeredSection .home-tweak-item-box.glass-panel {
+            background: rgba(12, 28, 36, 0.85) !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
         #appDetailCard {
             border: none !important;
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 1.5px 3px rgba(255, 255, 255, 0.4) !important;
@@ -4018,7 +4032,7 @@
             bindCardClickEvents(wrapper);
         }
 
-        /* MỤC SHORTCUT: 3 HÀNG SO LE, CẢ 3 DÒNG CÙNG 1 HƯỚNG CUỘN CHẬM RÃI, DÒNG 1 & 3 AUTO CUỘN */
+        /* MỤC SHORTCUT: 3 DÒNG APP SOLE NHAU, DÃN CÁCH DÒNG NHƯ TWEAK (gap-y-3 / gap-x-4), KHÔNG ĐƯỜNG KẺ CHIA DÒNG VÀ CUỘN CÙNG HƯỚNG */
         function renderShortcutThreeRowsStaggeredSection(uniqueId, items) {
             const wrapper = document.getElementById(`section_wrapper_${uniqueId}`);
             const countText = document.getElementById(`count_${uniqueId}`);
@@ -4041,22 +4055,22 @@
                 }
                 const doubled = [...singleHalf, ...singleHalf];
                 return `
-                    <div class="flex space-x-3 ${extraOffsetClass} pr-3.5" style="min-width: max-content;">
+                    <div class="flex space-x-4 ${extraOffsetClass} pr-3.5" style="min-width: max-content;">
                         ${doubled.map(it => buildSmallTweakCardHtml(it)).join('')}
                     </div>
                 `;
             };
 
             wrapper.innerHTML = `
-                <div class="space-y-2.5 pb-3">
-                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="22" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
+                <div class="space-y-3 pb-3">
+                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="24" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
                         ${buildScrollingRowTrack(r1, 'pl-0')}
                     </div>
-                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="26" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
-                        ${buildScrollingRowTrack(r2, 'pl-12')}
+                    <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="24" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
+                        ${buildScrollingRowTrack(r2, 'pl-14')}
                     </div>
                     <div class="auto-scroll-container flex overflow-x-auto no-scrollbar cursor-grab pl-3.5" data-scroll-speed="24" data-scroll-dir="1" data-infinite-loop="true" data-pre-doubled="true">
-                        ${buildScrollingRowTrack(r3, 'pl-6')}
+                        ${buildScrollingRowTrack(r3, 'pl-7')}
                     </div>
                 </div>
             `;
@@ -4416,11 +4430,11 @@
             const heroDotsContainer = document.getElementById('heroDots');
             if (!heroSlider || !allItems.length) return;
 
-            let sortedHeroItems = [...allItems].slice(0, 7);
-
-            let html = '';
+            let heroItems = sortItemsByDate([...allItems]).slice(0, 6);
+            let cardsHtml = '';
             let dotsHtml = '';
-            sortedHeroItems.forEach((item, idx) => {
+
+            heroItems.forEach((item, index) => {
                 const itemVersion = item.version || '';
                 const publishDateStr = item.publishDate || '18/11/2026';
                 const authorName = item.dev || 'KPazz';
@@ -4428,26 +4442,27 @@
                 const media = getPrimaryMediaSrc(item);
                 const showDownloadBtn = !(item.isArticle || item.isTip || item.noDownload);
                 const itemJsonEscaped = JSON.stringify(item).replace(/'/g, "&#39;");
-                const badgeId = `badge_hero_${idx}`;
+                const badgeId = `badge_hero_${index}`;
                 const badgeInfo = getAdaptiveBadgeInfo(item.publishDate, item);
 
-                html += `
-                    <div class="app-card-clickable hero-card snap-center flex-none w-[82vw] sm:w-[68vw] md:w-[60vw] lg:w-[48vw] max-w-[600px] h-72 sm:h-80 rounded-3xl relative overflow-hidden cursor-pointer shadow-2xl border-none group"
+                cardsHtml += `
+                    <div class="app-card-clickable hero-card snap-center flex-none w-[82vw] sm:w-[68vw] md:w-[60vw] lg:w-[48vw] max-w-[600px] h-64 sm:h-72 rounded-3xl overflow-hidden cursor-pointer shadow-xl border-none"
+                         data-index="${index}"
                          data-app-json='${itemJsonEscaped}'>
                         <div id="${badgeId}" class="appstore-top-left-badge" style="background-color: #0096c7;">
                             <span>${badgeInfo.line1}</span>
                             <span class="badge-sub-date">${badgeInfo.line2}</span>
                         </div>
-                        <img src="${getBannerSrc(media.url, item.img)}" alt="${item.name}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onload="updateBadgeColorFromImg(this, '${badgeId}')">
-
-                        <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-4 flex flex-col justify-end z-10 text-white">
+                        <img src="${getBannerSrc(media.url, item.img)}" alt="${item.name}" class="w-full h-full object-cover" onload="updateBadgeColorFromImg(this, '${badgeId}')">
+                        
+                        <div class="meitu-overlay-blur-light absolute inset-x-0 bottom-0 pt-7 pb-3 px-3.5 flex flex-col justify-end z-10 text-white">
                             <div class="flex items-center justify-between space-x-2.5">
-                                <div class="flex items-center space-x-3 min-w-0 flex-1">
-                                    <div class="w-11 h-11 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
+                                <div class="flex items-center space-x-2.5 min-w-0 flex-1">
+                                    <div class="w-10 h-10 rounded-[22.5%] bg-transparent p-0 flex items-center justify-center flex-shrink-0 overflow-hidden border-none card-icon-glow">
                                         <img src="${getIconSrc(item.img)}" class="w-full h-full img-ratio-1-1 object-cover rounded-[22.5%]" alt="${item.name}">
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <h2 class="text-base sm:text-lg font-extrabold text-white drop-shadow leading-tight truncate">${item.name}</h2>
+                                        <h4 class="font-extrabold text-sm text-white truncate drop-shadow">${item.name}</h4>
                                         <p class="text-[11px] text-gray-200 line-clamp-2 leading-tight mt-0.5 opacity-95">${descText}</p>
                                     </div>
                                 </div>
@@ -4469,244 +4484,260 @@
                                     <i class="fa-regular fa-calendar text-uptoAccent text-[10px]"></i>
                                     <span class="font-extrabold">${publishDateStr}</span>
                                 </div>
-                                <span class="text-uptoAccent font-bold truncate max-w-[140px]">&bull; ${authorName}</span>
+                                <span class="text-uptoAccent font-bold truncate max-w-[120px]">&bull; ${authorName}</span>
                             </div>
                         </div>
                     </div>
                 `;
-                dotsHtml += `<span class="hero-dot w-1.5 h-1.5 rounded-full bg-gray-400/50 dark:bg-gray-600 transition-all duration-300 cursor-pointer" data-index="${idx}"></span>`;
+                dotsHtml += `<span class="hero-dot transition-all duration-300 ${index === 0 ? 'w-5 h-1.5 rounded-full bg-uptoAccent' : 'w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600'}"></span>`;
             });
 
-            heroSlider.innerHTML = html;
+            heroSlider.innerHTML = cardsHtml;
             heroDotsContainer.innerHTML = dotsHtml;
             applyImageFallbacksInContainer(heroSlider);
+
             bindCardClickEvents(heroSlider);
+            setupHeroFanEffect();
+        }
 
-            const heroCards = heroSlider.querySelectorAll('.hero-card');
-            const heroDots = heroDotsContainer.querySelectorAll('.hero-dot');
-            let currentSlideIndex = 0;
-            let slideInterval;
+        function setupHeroFanEffect() {
+            const heroSlider = document.getElementById('heroSlider');
+            const heroCards = document.querySelectorAll('.hero-card');
+            const heroDots = document.querySelectorAll('.hero-dot');
+            if (!heroCards.length) return;
 
-            function updateHeroCardDepth() {
+            let heroCurrentIndex = 0;
+            let heroAutoSlideTimer;
+
+            function updateHeroEffects() {
                 const sliderRect = heroSlider.getBoundingClientRect();
                 const sliderCenter = sliderRect.left + sliderRect.width / 2;
 
-                heroCards.forEach((card, idx) => {
+                let closestIndex = 0;
+                let minDiff = Infinity;
+
+                heroCards.forEach((card, index) => {
                     const cardRect = card.getBoundingClientRect();
                     const cardCenter = cardRect.left + cardRect.width / 2;
-                    const distance = Math.abs(sliderCenter - cardCenter);
-                    const maxDistance = cardRect.width * 1.1;
+                    const offset = cardCenter - sliderCenter;
+                    const diff = Math.abs(offset);
 
-                    let ratio = Math.min(distance / maxDistance, 1);
-                    let scale = 1 - (ratio * 0.14);
-                    let opacity = 1 - (ratio * 0.35);
-                    let zIndex = Math.round((1 - ratio) * 20) + 1;
-                    let rotateY = (cardCenter < sliderCenter ? 1 : -1) * (ratio * 8);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closestIndex = index;
+                    }
 
-                    card.style.transform = `perspective(1000px) scale(${scale}) rotateY(${rotateY}deg)`;
+                    const normalizedOffset = offset / (cardRect.width * 0.72);
+                    const clampedOffset = Math.max(-1.5, Math.min(1.5, normalizedOffset));
+                    const absNorm = Math.abs(clampedOffset);
+
+                    const scale = 1 - absNorm * 0.14;
+                    const rotateZ = clampedOffset * 6;
+                    const translateY = absNorm * 14;
+                    const opacity = Math.max(0.55, 1 - absNorm * 0.35);
+                    const zIndex = Math.round(30 - absNorm * 15);
+
+                    card.style.transform = `translateY(${translateY}px) scale(${scale}) rotate(${rotateZ}deg)`;
                     card.style.opacity = opacity;
                     card.style.zIndex = zIndex;
+                });
 
-                    if (ratio < 0.25) {
-                        currentSlideIndex = idx;
-                        heroDots.forEach((d, dIdx) => {
-                            if (dIdx === idx) {
-                                d.classList.add('bg-uptoAccent', 'w-5');
-                                d.classList.remove('bg-gray-400/50', 'dark:bg-gray-600', 'w-1.5');
-                            } else {
-                                d.classList.remove('bg-uptoAccent', 'w-5');
-                                d.classList.add('bg-gray-400/50', 'dark:bg-gray-600', 'w-1.5');
-                            }
-                        });
+                heroCurrentIndex = closestIndex;
+
+                heroDots.forEach((dot, idx) => {
+                    if (idx === closestIndex) {
+                        dot.className = "hero-dot w-5 h-1.5 rounded-full bg-uptoAccent transition-all duration-300";
+                    } else {
+                        dot.className = "hero-dot w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-600 transition-all duration-300";
                     }
                 });
             }
 
             heroSlider.addEventListener('scroll', () => {
-                requestAnimationFrame(updateHeroCardDepth);
-            }, { passive: true });
+                requestAnimationFrame(updateHeroEffects);
+            });
 
-            function goToSlide(index) {
-                currentSlideIndex = (index + heroCards.length) % heroCards.length;
-                const targetCard = heroCards[currentSlideIndex];
-                if (targetCard) {
-                    const scrollLeftPos = targetCard.offsetLeft - heroSlider.offsetLeft - (heroSlider.clientWidth / 2) + (targetCard.clientWidth / 2);
-                    heroSlider.scrollTo({
-                        left: scrollLeftPos,
-                        behavior: 'smooth'
-                    });
-                }
+            function goToHeroCard(index) {
+                const targetCard = heroCards[index];
+                if (!targetCard) return;
+                const scrollLeftPos = targetCard.offsetLeft - heroSlider.offsetLeft - (heroSlider.clientWidth / 2) + (targetCard.clientWidth / 2);
+                heroSlider.scrollTo({
+                    left: scrollLeftPos,
+                    behavior: 'smooth'
+                });
             }
 
-            function startAutoSlide() {
-                slideInterval = setInterval(() => {
-                    goToSlide(currentSlideIndex + 1);
+            function startHeroAutoSlide() {
+                heroAutoSlideTimer = setInterval(() => {
+                    const nextIdx = (heroCurrentIndex + 1) % heroCards.length;
+                    goToHeroCard(nextIdx);
                 }, 3800);
             }
 
-            function stopAutoSlide() {
-                clearInterval(slideInterval);
+            function stopHeroAutoSlide() {
+                clearInterval(heroAutoSlideTimer);
             }
 
-            heroDots.forEach((dot, idx) => {
-                dot.addEventListener('click', () => {
-                    stopAutoSlide();
-                    goToSlide(idx);
-                    startAutoSlide();
-                });
-            });
-
-            heroSlider.addEventListener('touchstart', stopAutoSlide, { passive: true });
-            heroSlider.addEventListener('touchend', startAutoSlide, { passive: true });
-            heroSlider.addEventListener('mousedown', stopAutoSlide);
-            heroSlider.addEventListener('mouseup', startAutoSlide);
+            heroSlider.addEventListener('touchstart', stopHeroAutoSlide, { passive: true });
+            heroSlider.addEventListener('touchend', startHeroAutoSlide, { passive: true });
+            heroSlider.addEventListener('mouseenter', stopHeroAutoSlide);
+            heroSlider.addEventListener('mouseleave', startHeroAutoSlide);
 
             setTimeout(() => {
-                updateHeroCardDepth();
-                startAutoSlide();
-            }, 100);
+                goToHeroCard(0);
+                updateHeroEffects();
+                startHeroAutoSlide();
+            }, 150);
         }
 
         function initAutoScrollSections() {
-            const scrollContainers = document.querySelectorAll('.auto-scroll-container');
-            scrollContainers.forEach(container => {
-                if (container.dataset.autoScrollBound === 'true') return;
-                container.dataset.autoScrollBound = 'true';
+            const containers = document.querySelectorAll('.auto-scroll-container');
+            containers.forEach(container => {
+                if (container.dataset.autoScrollInitialized === 'true') return;
+                container.dataset.autoScrollInitialized = 'true';
 
-                let isDown = false;
-                let startX;
-                let scrollLeftStart;
-                let animationFrameId = null;
+                const isInfinite = container.dataset.infiniteLoop === 'true';
+                const isPreDoubled = container.dataset.preDoubled === 'true';
+                const speed = parseFloat(container.dataset.scrollSpeed) || 35;
+                let direction = parseInt(container.dataset.scrollDir) || 1;
                 let isPaused = false;
-                let lastTimestamp = null;
+                let lastTime = null;
+                let floatScrollPos = 0;
 
-                const isInfiniteLoop = container.getAttribute('data-infinite-loop') === 'true';
-                const isPreDoubled = container.getAttribute('data-pre-doubled') === 'true';
-                const baseSpeed = parseFloat(container.getAttribute('data-scroll-speed')) || 38;
-                let direction = parseInt(container.getAttribute('data-scroll-dir')) || 1;
-                let virtualScrollPos = container.scrollLeft || 0;
-
-                if (isInfiniteLoop && !isPreDoubled) {
-                    const scrollWrapper = container.firstElementChild;
-                    if (scrollWrapper) {
-                        scrollWrapper.innerHTML += scrollWrapper.innerHTML;
+                if (isInfinite && !isPreDoubled) {
+                    const innerTrack = container.firstElementChild;
+                    if (innerTrack) {
+                        const originalChildren = Array.from(innerTrack.children);
+                        originalChildren.forEach(child => {
+                            const clone = child.cloneNode(true);
+                            innerTrack.appendChild(clone);
+                        });
+                        bindCardClickEvents(container);
                     }
                 }
 
-                function getHalfWidth() {
-                    const scrollWrapper = container.firstElementChild;
-                    if (scrollWrapper && scrollWrapper.scrollWidth > 0) {
-                        return scrollWrapper.scrollWidth / 2;
-                    }
-                    return container.scrollWidth / 2;
+                const sectionParent = container.parentElement;
+                let indicatorContainer = sectionParent ? sectionParent.querySelector('.section-scroll-indicator') : null;
+                let progressBarFill = null;
+
+                if (indicatorContainer && !isInfinite) {
+                    indicatorContainer.innerHTML = `
+                        <div class="w-16 h-1 bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden">
+                            <div class="progress-bar-fill h-full bg-uptoAccent rounded-full transition-all duration-75" style="width: 15%"></div>
+                        </div>
+                    `;
+                    progressBarFill = indicatorContainer.querySelector('.progress-bar-fill');
                 }
 
-                if (direction === -1 && !isInfiniteLoop) {
+                if (isInfinite) {
                     setTimeout(() => {
-                        virtualScrollPos = container.scrollWidth - container.clientWidth;
-                        container.scrollLeft = virtualScrollPos;
-                    }, 100);
+                        const halfWidth = container.scrollWidth / 2;
+                        if (halfWidth > 0) {
+                            if (direction === -1) {
+                                container.scrollLeft = halfWidth;
+                                floatScrollPos = halfWidth;
+                            } else {
+                                container.scrollLeft = 0;
+                                floatScrollPos = 0;
+                            }
+                        }
+                    }, 80);
                 }
 
-                function scrollStep(timestamp) {
-                    if (!lastTimestamp) lastTimestamp = timestamp;
-                    const deltaTime = (timestamp - lastTimestamp) / 1000;
-                    lastTimestamp = timestamp;
+                function updateProgressBar() {
+                    if (!progressBarFill) return;
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+                    if (maxScroll <= 0) {
+                        progressBarFill.style.width = '100%';
+                        return;
+                    }
+                    const percentage = Math.max(12, Math.min(100, ((container.scrollLeft / maxScroll) * 88) + 12));
+                    progressBarFill.style.width = `${percentage}%`;
+                }
 
-                    if (!isPaused && !isDown) {
-                        const maxScroll = container.scrollWidth - container.clientWidth;
-                        if (maxScroll > 2) {
-                            const moveDelta = baseSpeed * Math.min(deltaTime, 0.05) * direction;
-                            virtualScrollPos += moveDelta;
+                function animateScroll(timestamp) {
+                    if (!lastTime) lastTime = timestamp;
+                    const deltaTime = (timestamp - lastTime) / 1000;
+                    lastTime = timestamp;
 
-                            if (isInfiniteLoop) {
-                                const halfWidth = getHalfWidth();
-                                if (halfWidth > 0) {
-                                    if (virtualScrollPos >= halfWidth) {
-                                        virtualScrollPos -= halfWidth;
-                                    } else if (virtualScrollPos < 0) {
-                                        virtualScrollPos += halfWidth;
-                                    }
-                                }
-                            } else {
-                                if (virtualScrollPos >= maxScroll) {
-                                    virtualScrollPos = maxScroll;
+                    if (!isPaused) {
+                        const halfWidth = container.scrollWidth / 2;
+
+                        if (isInfinite && halfWidth > 10) {
+                            floatScrollPos += speed * deltaTime * direction;
+
+                            if (direction === 1 && floatScrollPos >= halfWidth) {
+                                floatScrollPos -= halfWidth;
+                            } else if (direction === -1 && floatScrollPos <= 0) {
+                                floatScrollPos += halfWidth;
+                            }
+                            container.scrollLeft = floatScrollPos;
+                        } else {
+                            const maxScroll = container.scrollWidth - container.clientWidth;
+                            if (maxScroll > 10) {
+                                floatScrollPos += speed * deltaTime * direction;
+                                if (floatScrollPos >= maxScroll) {
+                                    floatScrollPos = maxScroll;
                                     direction = -1;
-                                } else if (virtualScrollPos <= 0) {
-                                    virtualScrollPos = 0;
+                                } else if (floatScrollPos <= 0) {
+                                    floatScrollPos = 0;
                                     direction = 1;
                                 }
+                                container.scrollLeft = floatScrollPos;
+                                updateProgressBar();
                             }
-                            container.scrollLeft = virtualScrollPos;
-                        } else {
-                            virtualScrollPos = container.scrollLeft;
                         }
                     } else {
-                        virtualScrollPos = container.scrollLeft;
+                        floatScrollPos = container.scrollLeft;
                     }
-                    animationFrameId = requestAnimationFrame(scrollStep);
+                    requestAnimationFrame(animateScroll);
                 }
 
-                container.addEventListener('touchstart', () => {
-                    isPaused = true;
-                }, { passive: true });
+                container.addEventListener('touchstart', () => { isPaused = true; }, { passive: true });
                 container.addEventListener('touchend', () => {
-                    setTimeout(() => {
-                        virtualScrollPos = container.scrollLeft;
-                        isPaused = false;
-                        lastTimestamp = null;
-                    }, 1000);
+                    floatScrollPos = container.scrollLeft;
+                    setTimeout(() => { isPaused = false; lastTime = null; }, 900);
+                }, { passive: true });
+                container.addEventListener('mouseenter', () => { isPaused = true; });
+                container.addEventListener('mouseleave', () => {
+                    floatScrollPos = container.scrollLeft;
+                    isPaused = false;
+                    lastTime = null;
+                });
+                container.addEventListener('scroll', () => {
+                    if (isPaused) {
+                        const halfWidth = container.scrollWidth / 2;
+                        if (isInfinite && halfWidth > 10) {
+                            if (container.scrollLeft >= halfWidth) {
+                                container.scrollLeft -= halfWidth;
+                            } else if (container.scrollLeft <= 1) {
+                                container.scrollLeft += halfWidth;
+                            }
+                        }
+                        floatScrollPos = container.scrollLeft;
+                        updateProgressBar();
+                    }
                 }, { passive: true });
 
-                container.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    isPaused = true;
-                    container.classList.add('cursor-grabbing');
-                    startX = e.pageX - container.offsetLeft;
-                    scrollLeftStart = container.scrollLeft;
-                });
-                container.addEventListener('mouseleave', () => {
-                    isDown = false;
-                    virtualScrollPos = container.scrollLeft;
-                    isPaused = false;
-                    lastTimestamp = null;
-                    container.classList.remove('cursor-grabbing');
-                });
-                container.addEventListener('mouseup', () => {
-                    isDown = false;
-                    virtualScrollPos = container.scrollLeft;
-                    isPaused = false;
-                    lastTimestamp = null;
-                    container.classList.remove('cursor-grabbing');
-                });
-                container.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - container.offsetLeft;
-                    const walk = (x - startX) * 1.5;
-                    container.scrollLeft = scrollLeftStart - walk;
-                    virtualScrollPos = container.scrollLeft;
-                });
-
-                animationFrameId = requestAnimationFrame(scrollStep);
+                requestAnimationFrame(animateScroll);
             });
         }
 
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const drawerCloseBtn = document.getElementById('drawerCloseBtn');
 
-        function openDrawer() {
+        hamburgerBtn.addEventListener('click', () => {
             sidebarDrawer.classList.remove('-translate-x-full');
             drawerBackdrop.classList.remove('hidden');
             requestAnimationFrame(syncDrawerStickyAuth);
-        }
+        });
 
         function closeDrawer() {
             sidebarDrawer.classList.add('-translate-x-full');
             drawerBackdrop.classList.add('hidden');
+            if (drawerStickyAuthRow) drawerStickyAuthRow.classList.remove('is-visible');
+            if (drawerStickySearchWrap) drawerStickySearchWrap.classList.remove('is-hidden');
         }
-
-        hamburgerBtn.addEventListener('click', openDrawer);
         drawerCloseBtn.addEventListener('click', closeDrawer);
         drawerBackdrop.addEventListener('click', closeDrawer);
 
@@ -4724,116 +4755,93 @@
             setTimeout(() => searchInput.focus(), 100);
         });
 
-        searchCloseBtn.addEventListener('click', () => {
-            closeModalWithBounce(searchModal, searchBoxContainer, resetSearchModal);
-        });
-
+        searchCloseBtn.addEventListener('click', () => closeModalWithBounce(searchModal, searchBoxContainer, resetSearchModal));
         setupBackdropClose(searchModal, searchBoxContainer, resetSearchModal);
 
-        function highlightKeyword(text, keyword) {
-            if (!keyword) return text;
-            const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        function highlightKeyword(text, query) {
+            if (!text || !query) return text;
+            const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escapedQuery})`, 'gi');
             return text.replace(regex, '<mark>$1</mark>');
         }
 
         searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim().toLowerCase();
+            const query = e.target.value.trim();
             if (!query) {
-                searchResults.innerHTML = '<p class="text-xs text-gray-400 text-center py-4">Nhập từ khóa để tìm kiếm nội dung trên trang...</p>';
+                resetSearchModal();
                 return;
             }
-
-            const matched = globalAllItems.filter(item => 
-                (item.name && item.name.toLowerCase().includes(query)) || 
-                (item.category && item.category.toLowerCase().includes(query)) ||
-                (item.dev && item.dev.toLowerCase().includes(query)) ||
-                (item.highlightTitle && item.highlightTitle.toLowerCase().includes(query)) ||
+            const lowerQuery = query.toLowerCase();
+            const matches = globalAllItems.filter(item => 
+                (item.name && item.name.toLowerCase().includes(lowerQuery)) || 
+                (item.dev && item.dev.toLowerCase().includes(lowerQuery)) || 
+                (item.category && item.category.toLowerCase().includes(lowerQuery)) ||
+                (item.highlightTitle && item.highlightTitle.toLowerCase().includes(lowerQuery)) ||
                 (item.highlights && item.highlights.some(h => {
-                    const txt = typeof h === 'string' ? h : h.text;
-                    return txt && txt.toLowerCase().includes(query);
+                    const text = typeof h === 'string' ? h : (h.text || '');
+                    return text.toLowerCase().includes(lowerQuery);
                 }))
             );
 
-            if (matched.length === 0) {
-                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy kết quả phù hợp cho "${e.target.value}"</p>`;
-                return;
-            }
+            if (matches.length === 0) {
+                searchResults.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Không tìm thấy nội dung nào phù hợp với "<span class="text-uptoAccent">${query}</span>"</p>`;
+            } else {
+                let html = `<p class="text-[11px] font-bold text-gray-500 dark:text-gray-400 px-1 mb-1">Tìm thấy ${matches.length} - mục:</p>`;
+                matches.forEach(item => {
+                    const authorName = item.dev || 'KPazz';
+                    let rawVersion = item.version || 'v1.0.0';
+                    const versionText = rawVersion.length > 6 ? rawVersion.substring(0, 6) + '...' : rawVersion;
+                    
+                    const descText = (item.highlights && item.highlights.length > 0) ? (typeof item.highlights[0] === 'string' ? item.highlights[0] : item.highlights[0].text) : (item.highlightTitle || item.category || item.dev || '');
+                    const truncatedDesc = truncateByWords(descText, 6);
 
-            let html = `<p class="text-[11px] font-bold text-uptoAccent mb-2 px-1">Tìm thấy ${matched.length} kết quả khớp nội dung:</p>`;
-            matched.forEach(item => {
-                let highlightedName = highlightKeyword(item.name, query);
-                let highlightedDev = highlightKeyword(item.dev || '', query);
-                let matchedSnippet = '';
-                
-                if (item.highlights) {
-                    const foundHighlight = item.highlights.find(h => {
-                        const txt = typeof h === 'string' ? h : h.text;
-                        return txt && txt.toLowerCase().includes(query);
-                    });
-                    if (foundHighlight) {
-                        const txt = typeof foundHighlight === 'string' ? foundHighlight : foundHighlight.text;
-                        matchedSnippet = `<p class="text-[10px] text-gray-700 dark:text-gray-300 mt-1 line-clamp-2">...${highlightKeyword(txt, query)}...</p>`;
-                    }
-                }
-
-                const publishDateStr = item.publishDate || '18/11/2026';
-                const versionText = item.version || 'v1.0.0';
-                const dateMarkup = `<div class="flex items-center space-x-1 font-bold text-gray-700 dark:text-gray-300"><i class="fa-regular fa-calendar text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${publishDateStr}</span></div>`;
-                const versionMarkup = item.isApp ? `<div class="flex items-center space-x-1 font-bold text-gray-900 dark:text-white"><i class="fa-solid fa-code-branch text-[#14b8a6] dark:text-uptoAccent text-[9px]"></i><span class="text-[9px]">${versionText}</span></div>` : '';
-
-                html += `
-                    <div class="popup-card-item-custom glass-panel app-card-clickable flex-col !items-stretch" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
-                        <div class="flex items-center">
+                    html += `
+                        <div class="popup-card-item-custom glass-panel app-card-clickable w-full" data-app-json='${JSON.stringify(item).replace(/'/g, "&#39;")}'>
                             <div class="popup-card-imgbox-custom card-icon-glow">
                                 <img src="${getIconSrc(item.img)}" class="popup-card-img-custom img-ratio-1-1 rounded-[22.5%] object-cover" alt="${item.name}">
                             </div>
-                            <div class="min-w-0 flex-1 space-y-0.5 ml-3">
-                                <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${highlightedName}</h5>
-                                <div class="flex items-center justify-between text-[10px] text-gray-500 dark:text-gray-400 font-medium">
-                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px]">${highlightedDev}</span>
-                                    <div class="flex items-center space-x-2.5 font-bold">
-                                        ${dateMarkup}
-                                        ${versionMarkup}
+                            <div class="min-w-0 flex-1 space-y-0.5 ml-2.5 w-full">
+                                <h5 class="font-extrabold text-xs text-gray-900 dark:text-white truncate">${highlightKeyword(item.name, query)}</h5>
+                                <p class="text-[10px] text-gray-600 dark:text-gray-400 truncate leading-tight">${highlightKeyword(truncatedDesc, query)}</p>
+                                <div class="flex items-center space-x-2 text-[10px] text-gray-500 dark:text-gray-400 font-medium pt-0.5">
+                                    <span class="bg-blue-50 dark:bg-gray-800 text-uptoBlueBtn dark:text-cyan-300 px-1.5 py-0.2 rounded font-extrabold text-[9px] truncate max-w-[55px]">${versionText}</span>
+                                    <div class="flex items-center space-x-1 font-bold text-uptoAccent truncate max-w-[110px]">
+                                        <span class="truncate text-[9px]">&bull; ${authorName}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        ${matchedSnippet}
-                    </div>
-                `;
-            });
-            searchResults.innerHTML = html;
-            applyImageFallbacksInContainer(searchResults);
-
-            searchResults.querySelectorAll('.app-card-clickable').forEach(card => {
-                card.onclick = () => {
-                    const rawJson = card.getAttribute('data-app-json');
-                    if (rawJson) {
-                        const itemObj = JSON.parse(rawJson);
-                        closeModalWithBounce(searchModal, searchBoxContainer, () => {
-                            resetSearchModal();
-                            openAppDetail(itemObj);
-                        });
-                    }
-                };
-            });
+                    `;
+                });
+                searchResults.innerHTML = html;
+                applyImageFallbacksInContainer(searchResults);
+                
+                searchResults.querySelectorAll('.app-card-clickable').forEach(card => {
+                    card.onclick = () => {
+                        const rawJson = card.getAttribute('data-app-json');
+                        if (rawJson) {
+                            const itemObj = JSON.parse(rawJson);
+                            closeModalWithBounce(searchModal, searchBoxContainer, () => {
+                                openAppDetail(itemObj);
+                            });
+                        }
+                    };
+                });
+            }
         });
 
         const profileOpenBtn = document.getElementById('profileOpenBtn');
         const loginCloseBtn = document.getElementById('loginCloseBtn');
+        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const registerModal = document.getElementById('registerModal');
         const registerCard = document.getElementById('registerCard');
         const registerCloseBtn = document.getElementById('registerCloseBtn');
-        const openRegisterBtn = document.getElementById('openRegisterBtn');
         const backToLoginBtn = document.getElementById('backToLoginBtn');
 
         profileOpenBtn.addEventListener('click', () => {
             openModalWithBounce(loginModal, loginCard);
         });
-
-        loginCloseBtn.addEventListener('click', () => {
-            closeModalWithBounce(loginModal, loginCard);
-        });
+        loginCloseBtn.addEventListener('click', () => closeModalWithBounce(loginModal, loginCard));
         setupBackdropClose(loginModal, loginCard);
 
         openRegisterBtn.addEventListener('click', () => {
@@ -4842,20 +4850,16 @@
             });
         });
 
+        registerCloseBtn.addEventListener('click', () => closeModalWithBounce(registerModal, registerCard));
+        setupBackdropClose(registerModal, registerCard);
+
         backToLoginBtn.addEventListener('click', () => {
             closeModalWithBounce(registerModal, registerCard, () => {
                 openModalWithBounce(loginModal, loginCard);
             });
         });
 
-        registerCloseBtn.addEventListener('click', () => {
-            closeModalWithBounce(registerModal, registerCard);
-        });
-        setupBackdropClose(registerModal, registerCard);
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadStoreData();
-        });
+        loadStoreData();
     </script>
 </body>
 </html>
