@@ -137,6 +137,11 @@
     </footer>
 
     <script>
+        // Khai báo tên các tệp .html nằm trong thư mục Tabs/ (bắt buộc cho host tĩnh như GitHub Pages)
+        const KNOWN_TAB_FILES = [
+            "Appios.html"
+        ];
+
         function isNotFoundPage(html) {
             if (!html) return true;
             const upper = html.toUpperCase();
@@ -184,7 +189,20 @@
             return { dir: "Tabs/", listingHtml: "" };
         }
 
-        async function discoverHtmlInTabs(listingHtml) {
+        async function loadManifestFiles(tabsDir) {
+            for (const manifestName of ["manifest.json", "tabs.json"]) {
+                try {
+                    const res = await fetch(tabsDir + manifestName, { cache: "no-store" });
+                    if (!res.ok) continue;
+                    const data = await res.json();
+                    const list = Array.isArray(data) ? data : (Array.isArray(data.files) ? data.files : []);
+                    if (list.length) return list;
+                } catch (_) {}
+            }
+            return [];
+        }
+
+        async function discoverHtmlInTabs(tabsDir, listingHtml) {
             const foundMap = new Map();
 
             const addFile = (name) => {
@@ -195,6 +213,11 @@
                     foundMap.set(key, clean);
                 }
             };
+
+            KNOWN_TAB_FILES.forEach(addFile);
+
+            const manifestFiles = await loadManifestFiles(tabsDir);
+            manifestFiles.forEach(addFile);
 
             if (listingHtml) {
                 const doc = new DOMParser().parseFromString(listingHtml, "text/html");
@@ -333,11 +356,11 @@
             const loadingStatus = document.getElementById("loading-status");
 
             const { dir: tabsDir, listingHtml } = await resolveTabsDir();
-            const files = await discoverHtmlInTabs(listingHtml);
+            const files = await discoverHtmlInTabs(tabsDir, listingHtml);
 
             if (!files.length) {
                 loadingStatus.style.color = "#ff6b6b";
-                loadingStatus.textContent = "Không tìm thấy tệp .html nào trong thư mục Tabs/ (Hãy chạy qua web server như Live Server có bật liệt kê thư mục).";
+                loadingStatus.textContent = "Không tìm thấy tệp .html nào trong thư mục Tabs/ (Hãy khai báo tên tệp trong KNOWN_TAB_FILES khi chạy trên GitHub Pages).";
                 return;
             }
 
