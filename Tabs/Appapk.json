@@ -1,5 +1,8 @@
 {
     "nameTabs": "APP (Dành Cho APK)",
+    "Card" : "To,Nhỏ",
+    "autoslide" : "Yes,Yes",
+    "NumberSlot" : "7",
     "items": [
         {
             "name": "TikTok",

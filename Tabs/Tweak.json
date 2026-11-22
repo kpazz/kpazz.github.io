@@ -1,5 +1,8 @@
 {
     "nameTabs": "Tweak jailbreak ios",
+    "Card" : "Nhỏ",
+    "autoslide" : "Yes",
+    "NumberSlot" : "1",
     "items": [
         {
             "name": "AI Chat VIP",

@@ -1,5 +1,8 @@
 {
     "nameTabs": "App Jailbreak",
+    "Card" : "To",
+    "autoslide" : "Yes",
+    "NumberSlot" : "5",
     "items": [
         {
             "name": "Dopamin",
