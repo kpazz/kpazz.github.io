@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,8 +31,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Tabs/manifest.json tabs/manifest.json 2>/dev/null || true
+          git status --short
+          git add -A Tabs/manifest.json tabs/manifest.json 2>/dev/null || true
           if ! git diff --staged --quiet; then
             git commit -m "chore: update Tabs manifest.json"
-            git push
+            git push origin HEAD:main
+          else
+            echo "Không có thay đổi trên manifest.json"
           fi
