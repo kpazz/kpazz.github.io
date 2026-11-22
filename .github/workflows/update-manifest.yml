@@ -31,8 +31,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f "Tabs/manifest.json" ]; then
+            git add -f Tabs/manifest.json
+          elif [ -f "tabs/manifest.json" ]; then
+            git add -f tabs/manifest.json
+          fi
           git status --short
-          git add -A Tabs/manifest.json tabs/manifest.json 2>/dev/null || true
           if ! git diff --staged --quiet; then
             git commit -m "chore: update Tabs manifest.json"
             git push origin HEAD:main
