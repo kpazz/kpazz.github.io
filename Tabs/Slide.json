@@ -1,0 +1,30 @@
+{
+  "sliderConfig": {
+    "slotsection": 1,
+    "autoplay": true,
+    "autoplayInterval": 4000,
+    "slideType": "smooth",
+    "slideSpeed": 3000,
+    "marqueeSpeed": 38,
+    "loop": true,
+    "_speedGuide": {
+      "snap": "slideSpeed: 420 (ms) - Trượt ngang bắt dính từng trang/card",
+      "smooth": "slideSpeed: 850 (ms) - Trượt ngang mượt có gia tốc",
+      "fade": "slideSpeed: 700 (ms) - Làm mờ dần qua lại",
+      "scroll": "slideSpeed: 1600 - 3000 (ms) - Cuộn ngang dài có vòng lặp",
+      "marquee": "marqueeSpeed: 38 (px/giây) - Cuộn đều liên tục theo vòng lặp vô hạn",
+      "zoom": "slideSpeed: 750 (ms) - Phóng nhẹ/thu nhẹ khi chuyển",
+      "slide": "slideSpeed: 300 (ms) - Trượt ngang tốc độ cao, dứt khoát",
+      "instant": "slideSpeed: 0 (ms) - Nhảy chuyển ngay lập tức"
+    },
+    "_slideTypeNote": {
+      "snap": "Trượt ngang bắt dính từng card",
+      "smooth": "Trượt ngang mượt mà có gia tốc ",
+      "fade": "làm mờ dần (fade) các card",
+      "scroll": "cuộn ngang có vòng lặp",
+      "marquee": "Cuộn từ từ đều đặn liên tục theo vòng lặp vô hạn (dùng marqueeSpeed: px/giây)",
+      "zoom": "Phóng nhẹ/thu nhẹ khi chuyển",
+      "slide": "Trượt ngang tốc độ cao, dứt khoát",
+      "instant": "Nhảy chuyển ngay lập tức"
+    }
+  }

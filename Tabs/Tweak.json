@@ -1,225 +1,536 @@
 {
-    "nameTabs": "Tweak jailbreak ios",
-    "Card" : "Nhỏ",
-    "autoslide" : "Yes",
-    "NumberSlot" : "1",
-    "items": [
+  "nameTabs": "Tweak jailbreak ios",
+  "sectionTitle": "Tweak jailbreak ios",
+  "sectionSubtitle": "Tweak Tinh chỉnh cài trên Sileo, Zebra,.. cho iPhone & iPad Jailbreak",
+  "Card": "Nhỏ",
+  "autoslide": "Yes",
+  "NumberSlot": "1",
+  "sliderConfig": {
+    "slotsection": 3,
+    "autoplay": true,
+    "autoplayInterval": 3800,
+    "slideType": "snap",
+    "slideSpeed": 1200,
+    "marqueeSpeed": 10,
+    "loop": true,
+    "_speedGuide": {
+      "snap": "slideSpeed: 420 (ms) - Trượt ngang bắt dính từng trang/card",
+      "smooth": "slideSpeed: 850 (ms) - Trượt ngang mượt có gia tốc",
+      "fade": "slideSpeed: 700 (ms) - Làm mờ dần qua lại",
+      "scroll": "slideSpeed: 1600 (ms) - Cuộn ngang dài có vòng lặp",
+      "marquee": "marqueeSpeed: 38 (px/giây) - Cuộn đều liên tục theo vòng lặp vô hạn",
+      "zoom": "slideSpeed: 750 (ms) - Phóng nhẹ/thu nhẹ khi chuyển",
+      "slide": "slideSpeed: 300 (ms) - Trượt ngang tốc độ cao, dứt khoát",
+      "instant": "slideSpeed: 0 (ms) - Nhảy chuyển ngay lập tức"
+    },
+    "_slideTypeNote": {
+      "snap": "Trượt ngang bắt dính từng card",
+      "smooth": "Trượt ngang mượt mà có gia tốc ",
+      "fade": "làm mờ dần (fade) các card",
+      "scroll": "cuộn ngang có vòng lặp",
+      "marquee": "Cuộn từ từ đều đặn liên tục theo vòng lặp vô hạn (dùng marqueeSpeed: px/giây)",
+      "zoom": "Phóng nhẹ/thu nhẹ khi chuyển",
+      "slide": "Trượt ngang tốc độ cao, dứt khoát",
+      "instant": "Nhảy chuyển ngay lập tức"
+    }
+  },
+  "items": [
+    {
+      "name": "AI Chat VIP",
+      "appName": "AI Chat VIP",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "AI Chat VIP",
+      "version": "1.0.0",
+      "dev": "Ravand <Ravand0010@gmail.com>",
+      "author": "Ravand <Ravand0010@gmail.com>",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon AI Chat VIP",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "AI Chat VIP",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
+      "buttonUrl": "debs/xyz.cypwn.aichatvip_1.0.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
         {
-            "name": "AI Chat VIP",
-            "version": "1.0.0",
-            "dev": "Ravand <Ravand0010@gmail.com>",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.cypwn.aichatvip_1.0.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png",
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "3DGlassierTouch",
-            "version": "2.0",
-            "dev": "b4db1r3",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "OmniCar",
-            "version": "1.0.3",
-            "dev": "OmniCar <omnicartweak@gmail.com>",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "The power of CarPlay.",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "OmniCar",
-            "version": "1.0.4",
-            "dev": "OmniCar <omnicartweak@gmail.com>",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Sức mạnh của CarPlay.",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "AVPhotos",
-            "version": "1.0.1",
-            "dev": "MiRO",
-            "category": "Tweaks",
-            "systemRequirements": "firmware (>=14.0), mobilesubstrate",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.1 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "PiP cho video trong photos.app",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "AIM Pro",
-            "version": "1.1.3k",
-            "dev": "alimaulana",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Màn hình khóa ngày và thời gian theo phong cách iOS 16",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "3DTools",
-            "version": "1.0.6k",
-            "dev": "smokin1337",
-            "category": "Tweaks",
-            "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "AVLock",
-            "version": "1.0.4",
-            "dev": "gilshahar7",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Thêm nút khóa định hướng vào trình phát video iOS gốc",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
-        },
-        {
-            "name": "Ainsworth",
-            "version": "1.6k",
-            "dev": "Dave van Wijk",
-            "category": "Tweaks",
-            "systemRequirements": "mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
-            "img": "./Art/imgicon.png",
-            "publishDate": "02/11/2026",
-            "isApp": false,
-            "noDownload": false,
-            "downloadLink": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
-            "video": "",
-            "gif": "",
-            "highlightTitle": "Phiên bản 1.6k - Cập nhật mới",
-            "screenshots": [
-                "./Art/imgbanner.png"
-            ],
-            "highlights": [
-                {
-                    "text": "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!",
-                    "img": "./Art/imgbanner.png"
-                }
-            ]
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.0.0)",
+          "url": "debs/xyz.cypwn.aichatvip_1.0.deb"
         }
-    ]
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+      "fullDescription": "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)\n\nYêu cầu hệ thống: mobilesubstrate",
+      "highlightTitle": "Phiên bản 1.0.0 - Cập nhật mới",
+      "changelog": "• Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+      "screenshots": [
+        "./Art/imgbanner.png",
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png",
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "3DGlassierTouch",
+      "appName": "3DGlassierTouch",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "3DGlassierTouch",
+      "version": "2.0",
+      "dev": "b4db1r3",
+      "author": "b4db1r3",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon 3DGlassierTouch",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "3DGlassierTouch",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v2.0)",
+          "url": "debs/xyz.3dglassiertouch_2.0_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.",
+      "fullDescription": "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.\n\nYêu cầu hệ thống: mobilesubstrate, com.mrgcgamer.libgcuniversal, org.thebigboss.libcolorpicker, preferenceloader",
+      "highlightTitle": "Phiên bản 2.0 - Cập nhật mới",
+      "changelog": "• 3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "3DGlassierTouch nâng cao trải nghiệm iOS của bạn bằng cách tự động tùy chỉnh các menu ngữ cảnh 3D.",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "OmniCar",
+      "appName": "OmniCar",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "OmniCar",
+      "version": "1.0.3",
+      "dev": "OmniCar <omnicartweak@gmail.com>",
+      "author": "OmniCar <omnicartweak@gmail.com>",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon OmniCar",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "OmniCar",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
+      "buttonUrl": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB rootless (v1.0.3)",
+          "url": "debs/OmniCar_1.0.3_rootless_8b9bc78.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "The power of CarPlay.",
+      "fullDescription": "The power of CarPlay.\n\nYêu cầu hệ thống: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+      "highlightTitle": "Phiên bản 1.0.3 - Cập nhật mới",
+      "changelog": "• The power of CarPlay.",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "The power of CarPlay.",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "OmniCar",
+      "appName": "OmniCar",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "OmniCar",
+      "version": "1.0.4",
+      "dev": "OmniCar <omnicartweak@gmail.com>",
+      "author": "OmniCar <omnicartweak@gmail.com>",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon OmniCar",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "OmniCar",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
+      "buttonUrl": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB arm64 (v1.0.4)",
+          "url": "debs/com.anlai.omnicar_1.0.4_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Sức mạnh của CarPlay.",
+      "fullDescription": "Sức mạnh của CarPlay.\n\nYêu cầu hệ thống: mobilesubstrate (>= 0.9.5000), preferenceloader, firmware (>= 15.0)",
+      "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+      "changelog": "• Sức mạnh của CarPlay.",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Sức mạnh của CarPlay.",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "AVPhotos",
+      "appName": "AVPhotos",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "AVPhotos",
+      "version": "1.0.1",
+      "dev": "MiRO",
+      "author": "MiRO",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "firmware (>=14.0), mobilesubstrate",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon AVPhotos",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "AVPhotos",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.0.1)",
+          "url": "debs/xyz.MiRO.avphotos_1.0.1_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "PiP cho video trong photos.app",
+      "fullDescription": "PiP cho video trong photos.app\n\nYêu cầu hệ thống: firmware (>=14.0), mobilesubstrate",
+      "highlightTitle": "Phiên bản 1.0.1 - Cập nhật mới",
+      "changelog": "• PiP cho video trong photos.app",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "PiP cho video trong photos.app",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "AIM Pro",
+      "appName": "AIM Pro",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "AIM Pro",
+      "version": "1.1.3k",
+      "dev": "alimaulana",
+      "author": "alimaulana",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon AIM Pro",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "AIM Pro",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.1.3k)",
+          "url": "debs/xyz.alimaulana.aimpro_1.1.3k_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Màn hình khóa ngày và thời gian theo phong cách iOS 16",
+      "fullDescription": "Màn hình khóa ngày và thời gian theo phong cách iOS 16\n\nYêu cầu hệ thống: mobilesubstrate, firmware (>= 14.0), preferenceloader, ws.hbang.common (>= 2.0), com.spark.libsparkcolourpicker",
+      "highlightTitle": "Phiên bản 1.1.3k - Cập nhật mới",
+      "changelog": "• Màn hình khóa ngày và thời gian theo phong cách iOS 16",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Màn hình khóa ngày và thời gian theo phong cách iOS 16",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "3DTools",
+      "appName": "3DTools",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "3DTools",
+      "version": "1.0.6k",
+      "dev": "smokin1337",
+      "author": "smokin1337",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon 3DTools",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "3DTools",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.0.6k)",
+          "url": "debs/xyz.smokin1337.3dtools_1.0.6k_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!",
+      "fullDescription": "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!\n\nYêu cầu hệ thống: firmware (>= 12.0), mobilesubstrate, preferenceloader, org.thebigboss.libcolorpicker, xyz.cypwn.xinam1ne",
+      "highlightTitle": "Phiên bản 1.0.6k - Cập nhật mới",
+      "changelog": "• Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Thêm các công cụ hữu ích vào menu cảm ứng 3D của bạn!",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "AVLock",
+      "appName": "AVLock",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "AVLock",
+      "version": "1.0.4",
+      "dev": "gilshahar7",
+      "author": "gilshahar7",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon AVLock",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "AVLock",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.0.4)",
+          "url": "debs/xyz.gilshahar7.avlock_1.0.4_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Thêm nút khóa định hướng vào trình phát video iOS gốc",
+      "fullDescription": "Thêm nút khóa định hướng vào trình phát video iOS gốc\n\nYêu cầu hệ thống: mobilesubstrate, cy+cpu.arm64v8 | oldabi-xina | oldabi",
+      "highlightTitle": "Phiên bản 1.0.4 - Cập nhật mới",
+      "changelog": "• Thêm nút khóa định hướng vào trình phát video iOS gốc",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Thêm nút khóa định hướng vào trình phát video iOS gốc",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    },
+    {
+      "name": "Ainsworth",
+      "appName": "Ainsworth",
+      "tag": "TWEAK CHO IPHONE & IPAD JAILBREAK",
+      "title": "Ainsworth",
+      "version": "1.6k",
+      "dev": "Dave van Wijk",
+      "author": "Dave van Wijk",
+      "category": "Tweaks",
+      "genre": "Tweaks",
+      "systemRequirements": "mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
+      "img": "./Art/imgicon.png",
+      "icon": "./Art/imgicon.png",
+      "iconAlt": "Icon Ainsworth",
+      "banner": "./Art/imgbanner.png",
+      "bannerAlt": "Ainsworth",
+      "publishDate": "02/11/2026",
+      "releaseDate": "02/11/2026",
+      "fileFormat": "DEB",
+      "fileSize": "",
+      "isApp": true,
+      "noDownload": false,
+      "downloadLink": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
+      "buttonUrl": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb",
+      "downloadPickerTitle": "Chọn link tải",
+      "downloadPickerSubtitle": "Chọn 1 trong các link tải bên dưới",
+      "downloadOptionPrefix": "Link tải",
+      "useVersionInPicker": false,
+      "downloads": [
+        {
+          "label": "Link tải 1",
+          "note": "Gói DEB (v1.6k)",
+          "url": "debs/xyz.Wijk.ainsworth_1.6k_iphoneos-arm64.deb"
+        }
+      ],
+      "video": "",
+      "videoUrl": "",
+      "gif": "",
+      "description": "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!",
+      "fullDescription": "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!\n\nYêu cầu hệ thống: mobilesubstrate, com.spark.libsparkapplist, ws.hbang.common (>= 1.11), com.muirey03.libimagepicker, com.spark.libsparkcolourpicker, preferenceloader, xyz.cypwn.davevancrack",
+      "highlightTitle": "Phiên bản 1.6k - Cập nhật mới",
+      "changelog": "• Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!",
+      "screenshots": [
+        "./Art/imgbanner.png"
+      ],
+      "gallery": [
+        "./Art/imgbanner.png"
+      ],
+      "highlights": [
+        {
+          "text": "Trải Nghiệm Kết Nối Mà Bạn Xứng Đáng Có Được!",
+          "img": "./Art/imgbanner.png"
+        }
+      ]
+    }
+  ]
 }

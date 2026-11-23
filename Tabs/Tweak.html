@@ -1,0 +1,3635 @@
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    .tweak-game-section {
+        --slide-speed: 650ms;
+        --sec-text-color: #000000;
+        --dot-inactive-color: rgba(0, 0, 0, 0.25);
+        --dot-active-color: #000000;
+        --tweak-card-bg: #FFFFFF;
+        --tweak-card-text: #111111;
+        --tweak-card-kicker: #7E7E84;
+        --tweak-card-sub: #76767C;
+        --tweak-card-ver: #8E8E93;
+        --tweak-card-row-hover: rgba(0, 0, 0, 0.035);
+        --tweak-card-btn-bg: #EFEFF4;
+        --tweak-card-btn-hover: #E2E2EA;
+        --tweak-card-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+        background-color: transparent;
+        color: var(--sec-text-color);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: clamp(14px, 3.5vw, 28px) clamp(14px, 4vw, 24px);
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    .tweak-game-section.is-dark-bg {
+        --sec-text-color: #FFFFFF;
+        --dot-inactive-color: rgba(255, 255, 255, 0.3);
+        --dot-active-color: #FFFFFF;
+        --tweak-card-bg: #16181D;
+        --tweak-card-text: #F5F5F7;
+        --tweak-card-kicker: #98989F;
+        --tweak-card-sub: #A1A1A6;
+        --tweak-card-ver: #8E8E93;
+        --tweak-card-row-hover: rgba(255, 255, 255, 0.05);
+        --tweak-card-btn-bg: rgba(255, 255, 255, 0.14);
+        --tweak-card-btn-hover: rgba(255, 255, 255, 0.22);
+        --tweak-card-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .tweak-game-section *,
+    .tweak-game-section *::before,
+    .tweak-game-section *::after {
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .tweak-section-header {
+        width: 100%;
+        margin-bottom: 12px;
+        padding-left: 2px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .tweak-section-header h2 {
+        font-size: clamp(21px, 5.6vw, 28px);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        color: var(--sec-text-color);
+        margin: 0 0 3px 0;
+    }
+
+    .tweak-section-header p {
+        font-size: clamp(13.5px, 3.8vw, 16px);
+        font-weight: 400;
+        line-height: 1.35;
+        letter-spacing: -0.012em;
+        color: var(--sec-text-color);
+        margin: 0;
+    }
+
+    .tweak-card-slider {
+        display: flex;
+        flex-direction: row;
+        gap: 14px;
+        width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+    }
+
+    .tweak-card-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tweak-card-slider.slide-type-smooth,
+    .tweak-card-slider.slide-type-scroll,
+    .tweak-card-slider.slide-type-marquee,
+    .tweak-card-slider.slide-type-zoom,
+    .tweak-card-slider.slide-type-slide,
+    .tweak-card-slider.slide-type-instant {
+        scroll-snap-type: none;
+    }
+
+    .tweak-card-slider.slide-type-marquee {
+        scroll-behavior: auto !important;
+        overflow: hidden !important;
+    }
+
+    .tweak-game-card {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        scroll-snap-align: start;
+        background-color: var(--tweak-card-bg);
+        color: var(--tweak-card-text);
+        border-radius: clamp(20px, 4.8vw, 26px);
+        padding: clamp(18px, 4.5vw, 24px) clamp(16px, 4.2vw, 22px) clamp(16px, 4vw, 22px);
+        overflow: hidden;
+        box-shadow: var(--tweak-card-shadow);
+        border: none;
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity var(--slide-speed) ease,
+                    background-color 0.25s ease,
+                    color 0.25s ease,
+                    box-shadow 0.25s ease;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        cursor: pointer;
+    }
+
+    @media (hover: hover) {
+        .tweak-game-card:hover {
+            transform: scale(0.975);
+        }
+    }
+
+    .tweak-game-card.is-pressed {
+        transform: scale(0.975) !important;
+    }
+
+    .tweak-card-slider.slide-type-fade {
+        position: relative;
+        display: block;
+        overflow: visible;
+    }
+
+    .tweak-card-slider.slide-type-fade .tweak-game-card {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @media (min-width: 640px) {
+        .tweak-card-slider:not(.slide-type-fade).has-multiple .tweak-game-card {
+            flex: 0 0 calc(92% - 7px);
+        }
+    }
+
+    @media (min-width: 900px) {
+        .tweak-card-slider:not(.slide-type-fade).has-multiple .tweak-game-card {
+            flex: 0 0 calc(68% - 7px);
+        }
+    }
+
+    #tabs-container .tweak-card-slider:not(.slide-type-fade).has-multiple .tweak-game-card {
+        flex: 0 0 82%;
+        max-width: 82%;
+    }
+
+    @media (min-width: 640px) {
+        #tabs-container .tweak-card-slider:not(.slide-type-fade).has-multiple .tweak-game-card {
+            flex: 0 0 calc(80% - 7px);
+            max-width: calc(80% - 7px);
+        }
+    }
+
+    @media (min-width: 900px) {
+        #tabs-container .tweak-card-slider:not(.slide-type-fade).has-multiple .tweak-game-card {
+            flex: 0 0 calc(62% - 7px);
+            max-width: calc(62% - 7px);
+        }
+    }
+
+    .tweak-col-head {
+        margin-bottom: 16px;
+        padding: 0 2px;
+    }
+
+    .tweak-col-kicker {
+        font-size: clamp(10.5px, 2.8vw, 12px);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--tweak-card-kicker);
+        margin-bottom: 4px;
+        transition: color 0.25s ease;
+    }
+
+    .tweak-col-title {
+        font-size: clamp(22px, 6vw, 28px);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        color: var(--tweak-card-text);
+        margin: 0;
+        white-space: pre-line;
+        transition: color 0.25s ease;
+    }
+
+    .tweak-col-pages-scroll {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .tweak-col-pages-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tweak-col-pages-scroll.slide-type-smooth,
+    .tweak-col-pages-scroll.slide-type-scroll,
+    .tweak-col-pages-scroll.slide-type-marquee,
+    .tweak-col-pages-scroll.slide-type-zoom,
+    .tweak-col-pages-scroll.slide-type-slide,
+    .tweak-col-pages-scroll.slide-type-instant {
+        scroll-snap-type: none !important;
+    }
+
+    .tweak-col-pages-scroll.slide-type-marquee {
+        scroll-behavior: auto !important;
+        overflow: hidden !important;
+        display: block;
+    }
+
+    .tweak-marquee-track {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 12px;
+        width: max-content;
+        will-change: transform;
+    }
+
+    .tweak-col-pages-scroll.slide-type-fade {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        scroll-snap-type: none !important;
+    }
+
+    .tweak-col-pages-scroll.slide-type-fade .tweak-col-page {
+        display: flex;
+        flex: 0 0 100%;
+        width: 100%;
+        min-width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--slide-speed) ease;
+    }
+
+    .tweak-col-pages-scroll.slide-type-fade .tweak-col-page:not(.is-active) {
+        opacity: 0.35;
+    }
+
+    .tweak-col-pages-scroll.slide-type-zoom .tweak-col-page {
+        transition: transform var(--slide-speed) cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity var(--slide-speed) ease;
+    }
+
+    .tweak-col-pages-scroll.slide-type-zoom .tweak-col-page.is-zooming {
+        transform: scale(0.965);
+        opacity: 0.78;
+    }
+
+    .tweak-col-page {
+        flex: 0 0 calc(100% - 26px);
+        width: calc(100% - 26px);
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .tweak-col-pages-scroll.slide-type-marquee .tweak-col-page {
+        flex: 0 0 280px;
+        width: 280px;
+    }
+
+    .tweak-col-app-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 4px 2px;
+        border-radius: 14px;
+        transition: background-color 0.15s ease;
+    }
+
+    .tweak-col-app-row:hover {
+        background-color: var(--tweak-card-row-hover);
+    }
+
+    .tweak-col-app-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .tweak-col-app-icon {
+        width: clamp(44px, 11.2vw, 52px);
+        height: clamp(44px, 11.2vw, 52px);
+        border-radius: 12px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .tweak-col-app-text {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .tweak-col-app-name {
+        font-size: clamp(14px, 3.7vw, 15.5px);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
+        color: var(--tweak-card-text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.25s ease;
+    }
+
+    .tweak-col-app-sub {
+        font-size: clamp(12px, 3.2vw, 13.5px);
+        font-weight: 400;
+        line-height: 1.3;
+        color: var(--tweak-card-sub);
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.25s ease;
+    }
+
+    .tweak-col-app-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .tweak-col-action-btn {
+        background-color: var(--tweak-card-btn-bg);
+        color: #0A84FF;
+        font-size: clamp(12.5px, 3.4vw, 14px);
+        font-weight: 700;
+        line-height: 1;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tweak-col-action-btn:hover {
+        background-color: var(--tweak-card-btn-hover);
+    }
+
+    .tweak-col-action-btn:active {
+        transform: scale(0.95);
+    }
+
+    .tweak-col-cloud-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 32px;
+        background-color: var(--tweak-card-btn-bg);
+        color: #0A84FF;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tweak-col-cloud-btn:hover {
+        background-color: var(--tweak-card-btn-hover);
+    }
+
+    .tweak-col-cloud-btn:active {
+        transform: scale(0.95);
+    }
+
+    .tweak-col-cloud-btn svg {
+        width: 19px;
+        height: 19px;
+    }
+
+    .tweak-col-ver-note {
+        font-size: 9px;
+        font-weight: 600;
+        color: var(--tweak-card-ver);
+        margin-top: 3px;
+        line-height: 1.1;
+        transition: color 0.25s ease;
+    }
+
+    .tweak-slider-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        margin-top: 12px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .tweak-slider-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background-color: var(--dot-inactive-color);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: width 0.2s ease, background-color 0.2s ease;
+    }
+
+    .tweak-slider-dot.active {
+        width: 18px;
+        background-color: var(--dot-active-color);
+    }
+
+    .tweak-popup-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.78);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        z-index: 9999;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .tweak-popup-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .tweak-popup-backdrop *,
+    .tweak-popup-backdrop *::before,
+    .tweak-popup-backdrop *::after {
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .tweak-popup-modal {
+        position: relative;
+        width: 100%;
+        max-width: 440px;
+        max-height: 92vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        background: #050607;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 26px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9);
+        transform: translateY(22px) scale(0.95);
+        opacity: 0;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.24s ease;
+    }
+
+    .tweak-popup-modal::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tweak-popup-backdrop.is-open .tweak-popup-modal {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    .tweak-popup-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(12px);
+        background: rgba(34, 34, 38, 0.94);
+        color: #FFFFFF;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: none;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
+        z-index: 10002;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .tweak-popup-toast.is-visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    .tweak-version-picker-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.68);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        z-index: 10001;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    .tweak-version-picker-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .tweak-version-picker-backdrop *,
+    .tweak-version-picker-backdrop *::before,
+    .tweak-version-picker-backdrop *::after {
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+
+    .tweak-version-picker-modal {
+        width: 100%;
+        max-width: 390px;
+        max-height: 82vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        background: rgba(22, 24, 29, 0.96);
+        color: #FFFFFF;
+        border: none;
+        border-radius: 24px;
+        padding: 16px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
+        transform: translateY(16px) scale(0.96);
+        opacity: 0;
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity 0.22s ease;
+    }
+
+    .tweak-version-picker-modal::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tweak-version-picker-backdrop.is-open .tweak-version-picker-modal {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    .tweak-version-picker-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .tweak-version-picker-app {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+    }
+
+    .tweak-version-picker-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: none;
+    }
+
+    .tweak-version-picker-title {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #FFFFFF;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-version-picker-sub {
+        font-size: 12px;
+        color: #98989F;
+        margin: 2px 0 0 0;
+    }
+
+    .tweak-version-picker-close {
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        border: none;
+        background: rgba(255, 255, 255, 0.12);
+        color: #FFFFFF;
+        font-size: 16px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .tweak-version-picker-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .tweak-version-picker-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tweak-rec-search-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        margin-bottom: 10px;
+        background: rgba(22, 24, 29, 0.96);
+        padding-bottom: 2px;
+    }
+
+    .tweak-rec-search-wrap svg {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        color: #8E8E93;
+        pointer-events: none;
+    }
+
+    .tweak-rec-search-input {
+        width: 100%;
+        height: 38px;
+        padding: 0 12px 0 34px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: #FFFFFF;
+        font-size: 16px;
+        line-height: 1.2;
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation;
+        outline: none;
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .tweak-rec-search-input::placeholder {
+        color: #8E8E93;
+        font-size: 14px;
+    }
+
+    .tweak-rec-search-input:focus {
+        background: rgba(255, 255, 255, 0.12);
+    }
+
+    .tweak-version-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        padding: 11px 13px;
+        border-radius: 14px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        color: #FFFFFF;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tweak-version-option:hover {
+        background: rgba(10, 132, 255, 0.18);
+    }
+
+    .tweak-version-option-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .tweak-version-option-name {
+        font-size: 14px;
+        font-weight: 700;
+        color: #FFFFFF;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-version-option-meta {
+        font-size: 11.5px;
+        color: #98989F;
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-version-option-cta {
+        background: #0A84FF;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 6px 12px;
+        border-radius: 999px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    .tweak-version-picker-empty {
+        font-size: 13px;
+        color: #98989F;
+        text-align: center;
+        padding: 14px 8px;
+        margin: 0;
+    }
+
+    .tweak-popup-sticky-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 14px;
+        background: rgba(24, 24, 26, 0.78);
+        backdrop-filter: blur(22px) saturate(165%);
+        -webkit-backdrop-filter: blur(22px) saturate(165%);
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.14);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-16px);
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0.5s linear;
+        margin-bottom: -54px;
+    }
+
+    .tweak-popup-sticky-bar.is-visible {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+
+    .tweak-popup-sticky-bar #tweak-popup-sticky-download {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.64);
+        transform-origin: right center;
+        will-change: transform, opacity;
+        box-shadow: 0 6px 18px rgba(10, 132, 255, 0.38);
+        transition: opacity 0.46s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+                    transform 0.68s cubic-bezier(0.28, 1.42, 0.52, 1) 0.12s,
+                    box-shadow 0.46s ease 0.12s,
+                    background-color 0.15s ease;
+    }
+
+    .tweak-popup-sticky-bar.is-visible #tweak-popup-sticky-download {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    .tweak-popup-sticky-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: none;
+    }
+
+    .tweak-popup-sticky-text {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .tweak-popup-sticky-title {
+        font-size: 13.5px;
+        font-weight: 700;
+        line-height: 1.15;
+        color: #FFFFFF;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-popup-sticky-sub {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #98989F;
+        margin-top: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-store-hero {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 11.4;
+        overflow: hidden;
+        background: #050607;
+    }
+
+    .tweak-store-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .tweak-store-hero::before {
+        content: "";
+        position: absolute;
+        left: -16px;
+        right: -16px;
+        bottom: -16px;
+        height: 62%;
+        backdrop-filter: blur(28px) saturate(165%);
+        -webkit-backdrop-filter: blur(28px) saturate(165%);
+        -webkit-mask-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.85) 55%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        mask-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0.85) 55%,
+            rgba(0, 0, 0, 0) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .tweak-store-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(5, 6, 7, 0.25) 0%,
+            rgba(5, 6, 7, 0) 32%,
+            rgba(5, 6, 7, 0.28) 60%,
+            rgba(5, 6, 7, 0.78) 84%,
+            rgba(5, 6, 7, 0.98) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .tweak-popup-body-glass {
+        position: relative;
+        z-index: 2;
+        background: linear-gradient(
+            to bottom,
+            rgba(5, 6, 7, 0.52) 0%,
+            rgba(5, 6, 7, 0.82) 48px,
+            rgba(5, 6, 7, 0.96) 110px,
+            #050607 160px
+        );
+        backdrop-filter: blur(24px) saturate(155%);
+        -webkit-backdrop-filter: blur(24px) saturate(155%);
+        box-shadow: 0 -24px 36px 12px rgba(5, 6, 7, 0.72);
+    }
+
+    .tweak-store-topbar {
+        position: absolute;
+        top: 18px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+    }
+
+    .tweak-store-circle-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 0.5px solid rgba(255, 255, 255, 0.16);
+        background: rgba(34, 37, 42, 0.62);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        color: #FFFFFF;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tweak-store-circle-btn:hover {
+        background: rgba(60, 64, 70, 0.85);
+    }
+
+    .tweak-store-circle-btn:active {
+        transform: scale(0.94);
+    }
+
+    .tweak-store-circle-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .tweak-store-head {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 4px 12px 14px 16px;
+    }
+
+    .tweak-store-icon {
+        width: 84px;
+        height: 84px;
+        border-radius: 19px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: none;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .tweak-store-main-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .tweak-store-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    .tweak-store-subtitle {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1.35;
+        color: #98989F;
+        margin: 3px 0 10px 0;
+    }
+
+    .tweak-store-action-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .tweak-store-meta-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .tweak-store-genre-badge {
+        font-size: 12px;
+        font-weight: 600;
+        color: #98989F;
+        line-height: 1.25;
+    }
+
+    .tweak-store-btn-download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #0A84FF;
+        color: #FFFFFF;
+        font-size: 13.5px;
+        font-weight: 700;
+        line-height: 1;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+        margin-left: auto;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tweak-store-btn-download svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .tweak-store-btn-download:hover {
+        background: #2492FF;
+    }
+
+    .tweak-store-btn-download:active {
+        transform: scale(0.96);
+    }
+
+    .tweak-store-version-badge {
+        font-size: 12px;
+        color: #8E8E93;
+    }
+
+    .tweak-store-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+        padding: 10px 6px;
+    }
+
+    .tweak-store-metric {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2px 6px;
+        min-width: 0;
+    }
+
+    .tweak-store-metric:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 12%;
+        height: 76%;
+        width: 0.5px;
+        background: rgba(255, 255, 255, 0.14);
+    }
+
+    .tweak-store-metric-top {
+        font-size: 9.5px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #8E8E93;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .tweak-store-metric-val {
+        font-size: 15px;
+        font-weight: 700;
+        color: #98989F;
+        margin: 4px 0 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .tweak-store-metric-sub {
+        font-size: 10.5px;
+        color: #8E8E93;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
+
+    .tweak-popup-gallery-wrap {
+        padding: 14px 0 4px;
+    }
+
+    .tweak-popup-gallery {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+    }
+
+    .tweak-popup-gallery::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tweak-popup-gallery-item {
+        flex: 0 0 72%;
+        aspect-ratio: 16 / 10;
+        border-radius: 14px;
+        overflow: hidden;
+        border: none;
+        background: #141715;
+    }
+
+    .tweak-popup-gallery-item img,
+    .tweak-popup-gallery-item video,
+    .tweak-popup-gallery-item iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border: none;
+    }
+
+    .tweak-store-section {
+        padding: 16px;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .tweak-store-section:last-child {
+        border-bottom: none;
+    }
+
+    .tweak-store-section-heading {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.015em;
+        color: #FFFFFF;
+        margin: 0 0 8px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .tweak-rec-heading-trigger {
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.15s ease;
+    }
+
+    .tweak-rec-heading-trigger:hover {
+        opacity: 0.85;
+    }
+
+    .tweak-store-section-heading span.chevron {
+        color: #8E8E93;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .tweak-changelog-version-inline {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: #8E8E93;
+        margin: 0 0 8px 0;
+    }
+
+    .tweak-store-section-text {
+        font-size: 13.5px;
+        font-weight: 400;
+        line-height: 1.48;
+        color: rgba(255, 255, 255, 0.86);
+        margin: 0;
+        white-space: pre-line;
+    }
+
+    .tweak-inline-content-img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: 14px;
+        margin: 10px 0;
+        border: none;
+        background: #141715;
+    }
+
+    .tweak-desc-link {
+        color: #FF6B4A;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .tweak-desc-link:hover {
+        text-decoration: underline;
+    }
+
+    .tweak-info-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tweak-info-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 11px 0;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+        font-size: 13.5px;
+    }
+
+    .tweak-info-row:last-child {
+        border-bottom: none;
+        padding-bottom: 2px;
+    }
+
+    .tweak-info-label {
+        color: #8E8E93;
+        flex-shrink: 0;
+    }
+
+    .tweak-info-value {
+        color: #FFFFFF;
+        font-weight: 700;
+        text-align: right;
+        word-break: break-word;
+    }
+
+    .tweak-info-link {
+        color: #0A84FF;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .tweak-info-report-note {
+        margin-top: 12px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        color: #98989F;
+    }
+
+    .tweak-report-messenger {
+        color: #2E9BFF;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .tweak-report-messenger:hover {
+        text-decoration: underline;
+    }
+
+    .tweak-report-zalo {
+        color: #00B8FF;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .tweak-report-zalo:hover {
+        text-decoration: underline;
+    }
+
+    .tweak-rec-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .tweak-rec-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 8px 10px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+    }
+
+    .tweak-rec-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    .tweak-rec-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .tweak-rec-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 13px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: none;
+    }
+
+    .tweak-rec-meta {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .tweak-rec-name {
+        font-size: 14.5px;
+        font-weight: 600;
+        line-height: 1.25;
+        color: #FFFFFF;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-rec-desc {
+        font-size: 12.5px;
+        line-height: 1.3;
+        color: #98989F;
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .tweak-rec-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .tweak-rec-btn {
+        background: rgba(255, 255, 255, 0.16);
+        color: #0A84FF;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1;
+        padding: 7px 14px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color 0.15s ease;
+    }
+
+    .tweak-rec-btn:hover {
+        background: rgba(255, 255, 255, 0.24);
+    }
+
+    .tweak-rec-sub {
+        font-size: 9px;
+        color: #8E8E93;
+        margin-top: 3px;
+    }
+</style>
+
+<section class="tweak-game-section" id="tweak-game-section-main">
+    <div class="tweak-section-header" id="tweak-section-header-trigger">
+        <h2 id="tweak-sec-title"></h2>
+        <p id="tweak-sec-subtitle"></p>
+    </div>
+
+    <div class="tweak-card-slider" id="tweak-card-slider"></div>
+    <div class="tweak-slider-dots" id="tweak-slider-dots"></div>
+</section>
+
+<div class="tweak-popup-toast" id="tweak-popup-toast" role="status" aria-live="polite"></div>
+
+<div class="tweak-version-picker-backdrop" id="tweak-version-picker-popup" aria-hidden="true">
+    <div class="tweak-version-picker-modal" role="dialog" aria-modal="true" aria-labelledby="tweak-version-picker-title">
+        <div class="tweak-version-picker-head">
+            <div class="tweak-version-picker-app">
+                <img class="tweak-version-picker-icon" id="tweak-version-picker-icon" src="" alt="">
+                <div style="min-width:0;">
+                    <h4 class="tweak-version-picker-title" id="tweak-version-picker-title">Chọn link tải</h4>
+                    <p class="tweak-version-picker-sub" id="tweak-version-picker-sub"></p>
+                </div>
+            </div>
+            <button class="tweak-version-picker-close" id="tweak-version-picker-close" type="button" aria-label="Đóng">×</button>
+        </div>
+        <div class="tweak-version-picker-list" id="tweak-version-picker-list"></div>
+    </div>
+</div>
+
+<div class="tweak-version-picker-backdrop" id="tweak-rec-all-popup" aria-hidden="true">
+    <div class="tweak-version-picker-modal" role="dialog" aria-modal="true" aria-labelledby="tweak-rec-all-title">
+        <div class="tweak-version-picker-head">
+            <div style="min-width:0;">
+                <h4 class="tweak-version-picker-title" id="tweak-rec-all-title">Tất cả đề xuất</h4>
+                <p class="tweak-version-picker-sub" id="tweak-rec-all-sub"></p>
+            </div>
+            <button class="tweak-version-picker-close" id="tweak-rec-all-close" type="button" aria-label="Đóng">×</button>
+        </div>
+        <div class="tweak-rec-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="m20 20-3.5-3.5"/>
+            </svg>
+            <input class="tweak-rec-search-input" id="tweak-rec-all-search" type="search" placeholder="Tìm ứng dụng hoặc nội dung..." autocomplete="off">
+        </div>
+        <div class="tweak-rec-list" id="tweak-rec-all-list"></div>
+    </div>
+</div>
+
+<div class="tweak-popup-backdrop" id="tweak-card-popup" aria-hidden="true">
+    <div class="tweak-popup-modal" id="tweak-popup-modal" role="dialog" aria-modal="true" aria-labelledby="tweak-popup-title">
+        <div class="tweak-popup-sticky-bar" id="tweak-popup-sticky-bar">
+            <button class="tweak-store-circle-btn" id="tweak-popup-sticky-close" type="button" aria-label="Quay lại">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m15 18-6-6 6-6"/>
+                </svg>
+            </button>
+            <img class="tweak-popup-sticky-icon" id="tweak-popup-sticky-icon" src="" alt="">
+            <div class="tweak-popup-sticky-text">
+                <span class="tweak-popup-sticky-title" id="tweak-popup-sticky-title"></span>
+                <span class="tweak-popup-sticky-sub" id="tweak-popup-sticky-sub"></span>
+            </div>
+            <button class="tweak-store-btn-download" id="tweak-popup-sticky-download" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
+                    <path d="M12 10.5v5.5"/>
+                    <path d="m9.5 13.5 2.5 2.5 2.5-2.5"/>
+                </svg>
+                <span>Tải Xuống</span>
+            </button>
+        </div>
+
+        <div class="tweak-store-hero">
+            <img id="tweak-popup-banner" src="" alt="">
+            <div class="tweak-store-topbar">
+                <button class="tweak-store-circle-btn" id="tweak-popup-close" type="button" aria-label="Quay lại">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m15 18-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="tweak-store-circle-btn" id="tweak-popup-share" type="button" aria-label="Chia sẻ liên kết">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v12"/>
+                        <path d="m16 7-4-4-4 4"/>
+                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="tweak-popup-body-glass">
+            <div class="tweak-store-head">
+                <img class="tweak-store-icon" id="tweak-popup-icon" src="" alt="">
+                <div class="tweak-store-main-info">
+                    <h3 class="tweak-store-title" id="tweak-popup-title"></h3>
+                    <p class="tweak-store-subtitle" id="tweak-popup-subtitle"></p>
+                    <div class="tweak-store-action-row" id="tweak-popup-action-row">
+                        <div class="tweak-store-meta-stack">
+                            <span class="tweak-store-genre-badge" id="tweak-popup-genre-badge"></span>
+                            <span class="tweak-store-version-badge" id="tweak-popup-version"></span>
+                        </div>
+                        <button class="tweak-store-btn-download" id="tweak-popup-download" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
+                                <path d="M12 10.5v5.5"/>
+                                <path d="m9.5 13.5 2.5 2.5 2.5-2.5"/>
+                            </svg>
+                            <span>Tải Xuống</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tweak-store-metrics">
+                <div class="tweak-store-metric">
+                    <span class="tweak-store-metric-top">TÁC GIẢ</span>
+                    <span class="tweak-store-metric-val" id="tweak-popup-author"></span>
+                    <span class="tweak-store-metric-sub" id="tweak-popup-genre"></span>
+                </div>
+                <div class="tweak-store-metric">
+                    <span class="tweak-store-metric-top">NGÀY ĐĂNG</span>
+                    <span class="tweak-store-metric-val" id="tweak-popup-date"></span>
+                    <span class="tweak-store-metric-sub">Cập nhật</span>
+                </div>
+                <div class="tweak-store-metric">
+                    <span class="tweak-store-metric-top">ĐỊNH DẠNG</span>
+                    <span class="tweak-store-metric-val" id="tweak-popup-format"></span>
+                    <span class="tweak-store-metric-sub">Tệp tải</span>
+                </div>
+                <div class="tweak-store-metric">
+                    <span class="tweak-store-metric-top">DUNG LƯỢNG</span>
+                    <span class="tweak-store-metric-val" id="tweak-popup-size"></span>
+                    <span class="tweak-store-metric-sub">Tệp tải</span>
+                </div>
+            </div>
+
+            <div class="tweak-popup-gallery-wrap">
+                <div class="tweak-popup-gallery" id="tweak-popup-gallery"></div>
+            </div>
+
+            <div class="tweak-store-section" id="tweak-popup-changelog-section">
+                <h4 class="tweak-store-section-heading">Có gì mới?</h4>
+                <span class="tweak-changelog-version-inline" id="tweak-popup-changelog-version"></span>
+                <p class="tweak-store-section-text" id="tweak-popup-changelog"></p>
+            </div>
+
+            <div class="tweak-store-section">
+                <h4 class="tweak-store-section-heading" id="tweak-popup-desc-heading">Mô tả</h4>
+                <p class="tweak-store-section-text" id="tweak-popup-desc"></p>
+            </div>
+
+            <div class="tweak-store-section">
+                <h4 class="tweak-store-section-heading">Thông Tin</h4>
+                <div class="tweak-info-list">
+                    <div class="tweak-info-row">
+                        <span class="tweak-info-label">Nhà cung cấp</span>
+                        <span class="tweak-info-value" id="tweak-info-provider"></span>
+                    </div>
+                    <div class="tweak-info-row">
+                        <span class="tweak-info-label">Kích cỡ</span>
+                        <span class="tweak-info-value" id="tweak-info-size"></span>
+                    </div>
+                    <div class="tweak-info-row">
+                        <span class="tweak-info-label">Danh mục</span>
+                        <span class="tweak-info-value" id="tweak-info-genre"></span>
+                    </div>
+                    <div class="tweak-info-row">
+                        <span class="tweak-info-label">Định dạng</span>
+                        <span class="tweak-info-value" id="tweak-info-format"></span>
+                    </div>
+                    <div class="tweak-info-row">
+                        <span class="tweak-info-label">Ngày đăng</span>
+                        <span class="tweak-info-value" id="tweak-info-date"></span>
+                    </div>
+                    <div class="tweak-info-row" id="tweak-info-version-row">
+                        <span class="tweak-info-label">Phiên bản</span>
+                        <span class="tweak-info-value" id="tweak-info-version"></span>
+                    </div>
+                </div>
+                <p class="tweak-info-report-note">Báo cáo sự cố qua <a class="tweak-report-messenger" href="https://m.me/ktads" target="_blank" rel="noopener noreferrer">Facebook Messenger</a> và <a class="tweak-report-zalo" href="https://zalo.me/0374113767" target="_blank" rel="noopener noreferrer">Zalo</a>.</p>
+            </div>
+
+            <div class="tweak-store-section" id="tweak-rec-author-section">
+                <h4 class="tweak-store-section-heading tweak-rec-heading-trigger" id="tweak-rec-author-trigger">
+                    <span id="tweak-rec-author-heading">Ứng Dụng Khác</span>
+                    <span class="chevron">›</span>
+                </h4>
+                <div class="tweak-rec-list" id="tweak-rec-author-list"></div>
+            </div>
+
+            <div class="tweak-store-section" id="tweak-rec-like-section">
+                <h4 class="tweak-store-section-heading tweak-rec-heading-trigger" id="tweak-rec-like-trigger">
+                    <span id="tweak-rec-like-heading">Có Thể Bạn Cũng Thích</span>
+                    <span class="chevron">›</span>
+                </h4>
+                <div class="tweak-rec-list" id="tweak-rec-like-list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const CANDIDATE_URLS = ["Tabs/Tweak.json", "Tweak.json"];
+        const TWEAK_JSON_URLS = ["Tabs/Tweak.json", "Tweak.json"];
+        const EXTRA_JSON_URLS = ["Tabs/Tweak.json", "Tweak.json", "Tabs/Appios.json", "Appios.json", "Tabs/Apps.json", "Apps.json"];
+        /*
+         * slideType hỗ trợ (tất cả đều có vòng lặp mặc định loop !== false):
+         * - "snap"    : Trượt ngang bắt dính từng trang/card (mặc định speed: 420ms, set bằng "slideSpeed": 420)
+         * - "smooth"  : Trượt ngang mượt có gia tốc (mặc định speed: 850ms, set bằng "slideSpeed": 850)
+         * - "fade"    : Mờ dần qua lại (mặc định speed: 700ms, set bằng "slideSpeed": 700)
+         * - "scroll"  : Cuộn ngang dài có vòng lặp (mặc định speed: 1600ms, set bằng "slideSpeed": 1600)
+         * - "marquee" : Cuộn đều liên tục vòng lặp vô hạn (mặc định speed: 38 px/s, set bằng "marqueeSpeed": 38 hoặc "slideSpeed")
+         * - "zoom"    : Phóng nhẹ/thu nhẹ khi chuyển (mặc định speed: 750ms, set bằng "slideSpeed": 750)
+         * - "slide"   : Trượt nhanh dứt khoát (mặc định speed: 300ms, set bằng "slideSpeed": 300)
+         * - "instant" : Nhảy chuyển ngay lập tức (mặc định speed: 0ms, set bằng "slideSpeed": 0)
+         */
+        const ALLOWED_SLIDE_TYPES = new Set(["snap", "smooth", "fade", "scroll", "marquee", "zoom", "slide", "instant"]);
+        const DEFAULT_SLIDE_SPEED_BY_TYPE = {
+            snap: 420,
+            smooth: 850,
+            fade: 700,
+            scroll: 1600,
+            marquee: 1200,
+            zoom: 750,
+            slide: 300,
+            instant: 0
+        };
+        const DEFAULT_MARQUEE_PX_PER_SEC = 38;
+        const TOUCH_RESUME_DELAY_MS = 4500;
+        let tweakAutoplayTimer = null;
+        let tweakMarqueeRafId = null;
+        let tweakSliderResumeTimer = null;
+        let tweakPopupGalleryTimer = null;
+        let tweakPopupGalleryRafId = null;
+        let tweakPopupGalleryResumeTimer = null;
+        let tweakToastTimer = null;
+        let tweakCurrentSliderConfig = {};
+        let tweakCurrentSectionEntries = [];
+        let tweakAllItemsPool = [];
+        let tweakItemsPool = [];
+        let tweakCurrentPopupIsApp = true;
+        let tweakCurrentAllAuthorEntries = [];
+        let tweakCurrentAllLikeEntries = [];
+        let tweakActiveRecModalEntries = [];
+        let tweakActiveSlideMode = "snap";
+        let tweakModeGeneration = 0;
+        const tweakInnerCleanupRegistry = new Set();
+
+        function lockSlideMode(nextMode) {
+            tweakModeGeneration += 1;
+            tweakActiveSlideMode = resolveSlideType(nextMode);
+            if (tweakAutoplayTimer) {
+                clearInterval(tweakAutoplayTimer);
+                tweakAutoplayTimer = null;
+            }
+            if (tweakMarqueeRafId) {
+                cancelAnimationFrame(tweakMarqueeRafId);
+                tweakMarqueeRafId = null;
+            }
+            if (tweakSliderResumeTimer) {
+                clearTimeout(tweakSliderResumeTimer);
+                tweakSliderResumeTimer = null;
+            }
+            return tweakModeGeneration;
+        }
+
+        function isModeStillActive(expectedMode, expectedGen) {
+            return tweakActiveSlideMode === expectedMode && tweakModeGeneration === expectedGen;
+        }
+
+        function registerInnerEngineCleanup(fn) {
+            if (typeof fn === "function") {
+                tweakInnerCleanupRegistry.add(fn);
+            }
+        }
+
+        function runInnerEnginesCleanup() {
+            tweakInnerCleanupRegistry.forEach((fn) => {
+                try { fn(); } catch (_) {}
+            });
+            tweakInnerCleanupRegistry.clear();
+        }
+
+        function resolveSlideSpeed(config, slideType) {
+            const type = resolveSlideType(slideType);
+            if (config && config.slideSpeed !== undefined && config.slideSpeed !== null && config.slideSpeed !== "") {
+                const parsed = Number(config.slideSpeed);
+                if (!Number.isNaN(parsed) && parsed >= 0) return parsed;
+            }
+            return DEFAULT_SLIDE_SPEED_BY_TYPE[type] ?? 650;
+        }
+
+        function resolveMarqueeSpeed(config) {
+            if (config && config.marqueeSpeed !== undefined && config.marqueeSpeed !== null && config.marqueeSpeed !== "") {
+                const parsed = Number(config.marqueeSpeed);
+                if (!Number.isNaN(parsed) && parsed > 0) return parsed;
+            }
+            if (config && config.slideSpeed !== undefined && config.slideSpeed !== null && config.slideSpeed !== "") {
+                const fromSlideSpeed = Number(config.slideSpeed);
+                if (!Number.isNaN(fromSlideSpeed) && fromSlideSpeed > 0) {
+                    return fromSlideSpeed > 150 ? Math.max(12, Math.round(fromSlideSpeed / 25)) : fromSlideSpeed;
+                }
+            }
+            return DEFAULT_MARQUEE_PX_PER_SEC;
+        }
+
+        function resolveAssetSrc(rawSrc, fallbackSvg) {
+            const clean = String(rawSrc || "").trim();
+            if (!clean) return fallbackSvg;
+            if (/^(?:https?:\/\/|data:|blob:|\/)/i.test(clean)) return clean;
+
+            const pathname = window.location.pathname || "/";
+            const isInsideTabsFolder = /\/tabs\/[^/]*$/i.test(pathname);
+            if (isInsideTabsFolder) {
+                return clean;
+            }
+
+            const stripped = clean.replace(/^\.\//, "");
+            if (/^tabs\//i.test(stripped)) {
+                return stripped;
+            }
+            return `Tabs/${stripped}`;
+        }
+
+        function bindImageFallback(imgEl, fallbackSrc) {
+            if (!imgEl || !fallbackSrc) return;
+            imgEl.addEventListener("error", () => {
+                if (imgEl.src !== fallbackSrc) {
+                    imgEl.src = fallbackSrc;
+                }
+            }, { once: true });
+        }
+
+        function parseCssColor(rawColor) {
+            if (!rawColor || typeof rawColor !== "string") return null;
+            const trimmed = rawColor.trim().toLowerCase();
+            if (trimmed === "transparent" || trimmed === "rgba(0, 0, 0, 0)") {
+                return { r: 0, g: 0, b: 0, a: 0 };
+            }
+            const rgbaMatch = trimmed.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/);
+            if (rgbaMatch) {
+                return {
+                    r: Math.min(255, Math.max(0, Number(rgbaMatch[1]))),
+                    g: Math.min(255, Math.max(0, Number(rgbaMatch[2]))),
+                    b: Math.min(255, Math.max(0, Number(rgbaMatch[3]))),
+                    a: rgbaMatch[4] !== undefined ? Math.min(1, Math.max(0, Number(rgbaMatch[4]))) : 1
+                };
+            }
+            return null;
+        }
+
+        function detectSectionBackgroundDark(sectionEl) {
+            if (!sectionEl) return false;
+
+            const themeAttr = (
+                sectionEl.getAttribute("data-theme") ||
+                document.documentElement.getAttribute("data-theme") ||
+                document.body.getAttribute("data-theme") ||
+                ""
+            ).toLowerCase();
+            if (themeAttr.includes("dark")) return true;
+            if (themeAttr.includes("light")) return false;
+
+            const classStr = `${sectionEl.className || ""} ${document.body.className || ""} ${document.documentElement.className || ""}`.toLowerCase();
+            if (/\b(dark|dark-mode|theme-dark|bg-dark)\b/.test(classStr)) return true;
+            if (/\b(light|light-mode|theme-light|bg-light|bg-white)\b/.test(classStr)) return false;
+
+            let rComp = 255;
+            let gComp = 255;
+            let bComp = 255;
+
+            const chain = [];
+            let el = sectionEl;
+            while (el && el !== document.documentElement) {
+                chain.push(el);
+                el = el.parentElement;
+            }
+            chain.push(document.documentElement);
+
+            for (let i = chain.length - 1; i >= 0; i--) {
+                const parsed = parseCssColor(window.getComputedStyle(chain[i]).backgroundColor);
+                if (parsed && parsed.a > 0) {
+                    const alpha = parsed.a;
+                    rComp = parsed.r * alpha + rComp * (1 - alpha);
+                    gComp = parsed.g * alpha + gComp * (1 - alpha);
+                    bComp = parsed.b * alpha + bComp * (1 - alpha);
+                }
+            }
+
+            const luminance = (0.2126 * rComp + 0.7152 * gComp + 0.0722 * bComp) / 255;
+            return luminance < 0.45;
+        }
+
+        function syncSectionContrastColors(sectionEl) {
+            if (!sectionEl) return;
+            const isDark = detectSectionBackgroundDark(sectionEl);
+            sectionEl.classList.toggle("is-dark-bg", isDark);
+        }
+
+        function svgToDataUrl(svgString) {
+            return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgString.trim());
+        }
+
+        function createGameBannerSvg(seed = 0) {
+            const palettes = [
+                { glow: "#3a5938", mid: "#1d2f20", accent: "#8cc63f", beard: "#ff8c24" },
+                { glow: "#28466b", mid: "#142236", accent: "#4ea8de", beard: "#f4a261" },
+                { glow: "#5a2b4d", mid: "#281323", accent: "#e056fd", beard: "#ff9f1c" }
+            ];
+            const p = palettes[seed % palettes.length];
+
+            return svgToDataUrl(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 870" width="800" height="870">
+                <defs>
+                    <radialGradient id="tweakCaveGlow" cx="62%" cy="26%" r="68%">
+                        <stop offset="0%" stop-color="${p.glow}"/>
+                        <stop offset="55%" stop-color="${p.mid}"/>
+                        <stop offset="100%" stop-color="#0a0e0b"/>
+                    </radialGradient>
+                    <linearGradient id="tweakArmorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#9aa7b2"/>
+                        <stop offset="55%" stop-color="#5a6570"/>
+                        <stop offset="100%" stop-color="#2c333a"/>
+                    </linearGradient>
+                    <linearGradient id="tweakBeardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="${p.beard}"/>
+                        <stop offset="100%" stop-color="#7c2804"/>
+                    </linearGradient>
+                    <linearGradient id="tweakBugShell" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="${p.accent}"/>
+                        <stop offset="100%" stop-color="#1d2b15"/>
+                    </linearGradient>
+                </defs>
+                <rect width="800" height="870" fill="url(#tweakCaveGlow)"/>
+                <path d="M0 0 L800 0 L800 220 Q610 150 430 210 Q220 270 0 160 Z" fill="#121e15" opacity="0.75"/>
+                <circle cx="660" cy="185" r="190" fill="${p.beard}" opacity="0.1"/>
+                <path d="M-40 240 Q120 170 250 280 Q330 350 290 470 Q230 560 90 540 L-40 500 Z" fill="url(#tweakBugShell)"/>
+                <circle cx="215" cy="315" r="24" fill="#182210"/>
+                <circle cx="222" cy="310" r="10" fill="#ffdf4d"/>
+                <path d="M185 385 Q285 380 345 455 Q290 465 215 435 Z" fill="#e8d5a7"/>
+                <path d="M475 430 Q630 360 820 410 L820 690 L430 690 Z" fill="url(#tweakArmorGrad)"/>
+                <ellipse cx="665" cy="255" rx="92" ry="86" fill="#e59b78"/>
+                <path d="M575 275 Q545 365 605 430 Q675 465 755 415 Q795 365 765 280 Q715 310 668 288 Q620 310 575 275 Z" fill="url(#tweakBeardGrad)"/>
+                <g transform="translate(360, 445) rotate(-14)">
+                    <rect x="0" y="28" width="440" height="105" rx="14" fill="#6d7780" stroke="#1d2226" stroke-width="5"/>
+                    <rect x="215" y="70" width="115" height="22" rx="4" fill="#f2b705"/>
+                </g>
+            </svg>
+            `);
+        }
+
+        function createGameIconSvg(seed = 0) {
+            const icons = [
+                { bg: "#4b2d1b", title: "DEEP ROCK", sub: "SURVIVOR", accent: "#f7b71d" },
+                { bg: "#1b364b", title: "STARFIELD", sub: "OUTPOST", accent: "#72efdd" },
+                { bg: "#3d1b4b", title: "NEBULA", sub: "ORBIT OPS", accent: "#ff70a6" }
+            ];
+            const ic = icons[seed % icons.length];
+
+            return svgToDataUrl(`
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+                <rect width="240" height="240" fill="${ic.bg}"/>
+                <circle cx="120" cy="92" r="44" fill="#e69d7a"/>
+                <path d="M78 105 Q120 135 162 105 Q155 152 120 162 Q85 152 78 105 Z" fill="#e06d24"/>
+                <rect x="0" y="162" width="240" height="78" fill="rgba(10, 12, 11, 0.88)"/>
+                <text x="120" y="192" text-anchor="middle" fill="${ic.accent}" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="1.4">${ic.title}</text>
+                <text x="120" y="220" text-anchor="middle" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="2">${ic.sub}</text>
+            </svg>
+            `);
+        }
+
+        function escapeHtmlText(str) {
+            return String(str || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function formatShortLinkLabel(rawUrl) {
+            try {
+                const parsed = new URL(rawUrl);
+                let host = parsed.hostname.replace(/^www\./i, "");
+                const parts = host.split(".").filter(Boolean);
+                if (parts.length === 2) {
+                    return parts[0];
+                }
+                return host;
+            } catch (_) {
+                const cleaned = String(rawUrl || "").replace(/^https?:\/\//i, "").split("/")[0];
+                return cleaned || rawUrl;
+            }
+        }
+
+        function isDirectImageUrl(rawUrl) {
+            const clean = String(rawUrl || "").split(/[?#]/)[0];
+            return /\.(?:jpe?g|png|webp|gif|avif|bmp|svg)$/i.test(clean);
+        }
+
+        function renderDescriptionWithShortLinks(containerEl, rawText, allowInlineImages = false) {
+            if (!containerEl) return;
+            const text = String(rawText || "");
+            const tokenRegex = allowInlineImages
+                ? /(\{\{\s*(?:img|image)\s*:\s*[^}\s]+\s*\}\}|https?:\/\/[^\s<]+)/gi
+                : /(https?:\/\/[^\s<]+)/gi;
+
+            let lastIndex = 0;
+            let html = "";
+            let match;
+
+            while ((match = tokenRegex.exec(text)) !== null) {
+                const matchedToken = match[0];
+                const start = match.index;
+                html += escapeHtmlText(text.slice(lastIndex, start));
+
+                const tagMatch = allowInlineImages
+                    ? matchedToken.match(/^\{\{\s*(?:img|image)\s*:\s*([^}\s]+)\s*\}\}$/i)
+                    : null;
+
+                if (tagMatch) {
+                    const imgUrl = tagMatch[1].trim();
+                    if (/^https?:\/\//i.test(imgUrl) || /^data:image\//i.test(imgUrl) || /^\//i.test(imgUrl)) {
+                        html += `<img class="tweak-inline-content-img" src="${escapeHtmlText(imgUrl)}" alt="Ảnh nội dung" loading="lazy">`;
+                    } else {
+                        html += escapeHtmlText(matchedToken);
+                    }
+                } else {
+                    let cleanUrl = matchedToken;
+                    let trailing = "";
+                    const trailMatch = cleanUrl.match(/([.,!?;:]+)$/);
+                    if (trailMatch) {
+                        trailing = trailMatch[1];
+                        cleanUrl = cleanUrl.slice(0, -trailing.length);
+                    }
+
+                    if (allowInlineImages && isDirectImageUrl(cleanUrl)) {
+                        html += `<img class="tweak-inline-content-img" src="${escapeHtmlText(cleanUrl)}" alt="Ảnh nội dung" loading="lazy">${escapeHtmlText(trailing)}`;
+                    } else {
+                        const label = formatShortLinkLabel(cleanUrl);
+                        html += `<a class="tweak-desc-link" href="${escapeHtmlText(cleanUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtmlText(label)}</a>${escapeHtmlText(trailing)}`;
+                    }
+                }
+
+                lastIndex = start + matchedToken.length;
+            }
+
+            html += escapeHtmlText(text.slice(lastIndex));
+            containerEl.innerHTML = html;
+        }
+
+        function extractDownloadOptions(item) {
+            if (!item || typeof item !== "object") return [];
+            const rawList =
+                item.downloads ||
+                item.versions ||
+                item.downloadLinks ||
+                item.links ||
+                item.mirrors ||
+                item.downloadOptions ||
+                item.options;
+
+            const prefix = String(
+                item.downloadOptionPrefix ||
+                item.optionPrefix ||
+                tweakCurrentSliderConfig.downloadOptionPrefix ||
+                "Link tải"
+            ).trim();
+            const useVersionText = item.useVersionInPicker === true && isAppEntry(item);
+
+            const options = [];
+            if (Array.isArray(rawList)) {
+                rawList.forEach((entry, idx) => {
+                    const defaultName = `${prefix} ${idx + 1}`;
+                    if (typeof entry === "string" && entry.trim() && entry.trim() !== "#") {
+                        const label = useVersionText && item.version && idx === 0
+                            ? String(item.version).trim()
+                            : defaultName;
+                        options.push({
+                            label,
+                            meta: [item.fileFormat, item.fileSize].filter(Boolean).join(" • "),
+                            url: entry.trim()
+                        });
+                    } else if (entry && typeof entry === "object") {
+                        const url = String(entry.url || entry.link || entry.href || entry.downloadUrl || "").trim();
+                        if (!url || url === "#") return;
+                        const explicitLabel = entry.label || entry.name || entry.title;
+                        const label = explicitLabel
+                            ? String(explicitLabel).trim()
+                            : (useVersionText && entry.version
+                                ? String(entry.version).trim()
+                                : defaultName);
+                        const metaParts = [
+                            entry.note || entry.desc || entry.description || "",
+                            (!useVersionText && entry.version && isAppEntry(item)) ? String(entry.version).trim() : "",
+                            entry.format || entry.fileFormat || item.fileFormat || "",
+                            entry.size || entry.fileSize || item.fileSize || ""
+                        ].filter((x) => x && String(x).trim());
+                        options.push({
+                            label,
+                            meta: metaParts.join(" • "),
+                            url
+                        });
+                    }
+                });
+            }
+
+            if (options.length > 0) return options;
+
+            const singleUrl = String(item.buttonUrl || item.downloadUrl || item.url || "").trim();
+            if (singleUrl && singleUrl !== "#") {
+                const singleLabel = useVersionText && item.version
+                    ? String(item.version).trim()
+                    : `${prefix} 1`;
+                return [{
+                    label: singleLabel,
+                    meta: [item.fileFormat, item.fileSize].filter(Boolean).join(" • ") || "Tải trực tiếp",
+                    url: singleUrl
+                }];
+            }
+
+            return [];
+        }
+
+        function closeVersionPickerPopup() {
+            const pickerBackdrop = document.getElementById("tweak-version-picker-popup");
+            if (!pickerBackdrop) return;
+            pickerBackdrop.classList.remove("is-open");
+            pickerBackdrop.setAttribute("aria-hidden", "true");
+        }
+
+        function normalizeSearchText(str) {
+            return String(str || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/đ/g, "d")
+                .trim();
+        }
+
+        function filterRecModalList(rawKeyword) {
+            const listEl = document.getElementById("tweak-rec-all-list");
+            const subEl = document.getElementById("tweak-rec-all-sub");
+            if (!listEl) return;
+
+            const keyword = normalizeSearchText(rawKeyword);
+            const filtered = !keyword
+                ? tweakActiveRecModalEntries
+                : tweakActiveRecModalEntries.filter(({ item }) => {
+                    const haystack = normalizeSearchText(
+                        [
+                            item.appName,
+                            item.title,
+                            item.description,
+                            item.genre,
+                            item.author,
+                            item.tag
+                        ].filter(Boolean).join(" ")
+                    );
+                    return haystack.includes(keyword);
+                });
+
+            if (subEl) {
+                subEl.textContent = keyword
+                    ? `Tìm thấy ${filtered.length} / ${tweakActiveRecModalEntries.length} nội dung`
+                    : `${tweakActiveRecModalEntries.length} nội dung`;
+            }
+
+            renderRecommendationList(
+                listEl,
+                filtered,
+                keyword ? "Không tìm thấy nội dung phù hợp." : "Chưa có nội dung phù hợp."
+            );
+        }
+
+        function closeAllRecPopup() {
+            const recBackdrop = document.getElementById("tweak-rec-all-popup");
+            if (!recBackdrop) return;
+            recBackdrop.classList.remove("is-open");
+            recBackdrop.setAttribute("aria-hidden", "true");
+        }
+
+        function openAllRecPopup(headingTitle, entries) {
+            const recBackdrop = document.getElementById("tweak-rec-all-popup");
+            const titleEl = document.getElementById("tweak-rec-all-title");
+            const searchInput = document.getElementById("tweak-rec-all-search");
+            if (!recBackdrop) return;
+
+            tweakActiveRecModalEntries = Array.isArray(entries) ? entries : [];
+
+            if (titleEl) {
+                titleEl.textContent = headingTitle || "Tất cả đề xuất";
+            }
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+            filterRecModalList("");
+            recBackdrop.classList.add("is-open");
+            recBackdrop.setAttribute("aria-hidden", "false");
+        }
+
+        function openVersionPickerPopup(item, iconSrc, seedIndex = 0) {
+            const pickerBackdrop = document.getElementById("tweak-version-picker-popup");
+            const listEl = document.getElementById("tweak-version-picker-list");
+            const titleEl = document.getElementById("tweak-version-picker-title");
+            const subEl = document.getElementById("tweak-version-picker-sub");
+            const iconEl = document.getElementById("tweak-version-picker-icon");
+            if (!pickerBackdrop || !listEl) return;
+
+            const appName = (item && (item.appName || item.title)) || "Ứng dụng";
+            const fallbackIcon = createGameIconSvg(seedIndex);
+            const resolvedIcon = resolveAssetSrc(
+                (iconSrc && iconSrc.trim()) || (item && (item.icon || item.img)),
+                fallbackIcon
+            );
+            const options = extractDownloadOptions(item);
+
+            const customTitle = (item && item.downloadPickerTitle) || tweakCurrentSliderConfig.downloadPickerTitle;
+            const customSub = (item && item.downloadPickerSubtitle) || tweakCurrentSliderConfig.downloadPickerSubtitle;
+
+            if (iconEl) {
+                iconEl.src = resolvedIcon;
+                iconEl.alt = appName;
+                bindImageFallback(iconEl, fallbackIcon);
+            }
+            if (titleEl) {
+                titleEl.textContent = (customTitle && String(customTitle).trim()) || `${appName} — Chọn link tải`;
+            }
+            if (subEl) {
+                if (customSub && String(customSub).trim()) {
+                    subEl.textContent = String(customSub).trim();
+                } else {
+                    subEl.textContent = options.length > 1
+                        ? `${appName} • Chọn 1 trong ${options.length} link tải`
+                        : `${appName} • Xác nhận để tải xuống`;
+                }
+            }
+
+            listEl.innerHTML = "";
+
+            if (!options.length) {
+                const emptyP = document.createElement("p");
+                emptyP.className = "tweak-version-picker-empty";
+                emptyP.textContent = "Chưa có liên kết tải cho mục này.";
+                listEl.appendChild(emptyP);
+            } else {
+                options.forEach((opt) => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "tweak-version-option";
+                    btn.innerHTML = `
+                        <span class="tweak-version-option-info">
+                            <span class="tweak-version-option-name">${opt.label}</span>
+                            ${opt.meta ? `<span class="tweak-version-option-meta">${opt.meta}</span>` : ``}
+                        </span>
+                        <span class="tweak-version-option-cta">Tải</span>
+                    `;
+                    btn.addEventListener("click", () => {
+                        window.open(opt.url, "_blank", "noopener,noreferrer");
+                        closeVersionPickerPopup();
+                    });
+                    listEl.appendChild(btn);
+                });
+            }
+
+            pickerBackdrop.classList.add("is-open");
+            pickerBackdrop.setAttribute("aria-hidden", "false");
+        }
+
+        (function initVersionPickerEvents() {
+            const pickerBackdrop = document.getElementById("tweak-version-picker-popup");
+            const closeBtn = document.getElementById("tweak-version-picker-close");
+            if (pickerBackdrop && closeBtn) {
+                closeBtn.addEventListener("click", closeVersionPickerPopup);
+                pickerBackdrop.addEventListener("click", (e) => {
+                    if (e.target === pickerBackdrop) closeVersionPickerPopup();
+                });
+            }
+
+            const recBackdrop = document.getElementById("tweak-rec-all-popup");
+            const recCloseBtn = document.getElementById("tweak-rec-all-close");
+            const recSearchInput = document.getElementById("tweak-rec-all-search");
+            if (recBackdrop && recCloseBtn) {
+                recCloseBtn.addEventListener("click", closeAllRecPopup);
+                recBackdrop.addEventListener("click", (e) => {
+                    if (e.target === recBackdrop) closeAllRecPopup();
+                });
+            }
+            if (recSearchInput) {
+                recSearchInput.addEventListener("input", (e) => {
+                    filterRecModalList(e.target.value);
+                });
+            }
+
+            const sectionHeaderTrigger = document.getElementById("tweak-section-header-trigger");
+            if (sectionHeaderTrigger) {
+                sectionHeaderTrigger.addEventListener("click", () => {
+                    const titleEl = document.getElementById("tweak-sec-title");
+                    openAllRecPopup((titleEl && titleEl.textContent) || "Tất cả nội dung", tweakCurrentSectionEntries);
+                });
+            }
+
+            const authorTrigger = document.getElementById("tweak-rec-author-trigger");
+            if (authorTrigger) {
+                authorTrigger.addEventListener("click", () => {
+                    const h = document.getElementById("tweak-rec-author-heading");
+                    openAllRecPopup(h ? h.textContent : "Ứng Dụng Khác", tweakCurrentAllAuthorEntries);
+                });
+            }
+
+            const likeTrigger = document.getElementById("tweak-rec-like-trigger");
+            if (likeTrigger) {
+                likeTrigger.addEventListener("click", () => {
+                    const h = document.getElementById("tweak-rec-like-heading");
+                    openAllRecPopup(h ? h.textContent : "Có Thể Bạn Cũng Thích", tweakCurrentAllLikeEntries);
+                });
+            }
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (recBackdrop && recBackdrop.classList.contains("is-open")) {
+                        closeAllRecPopup();
+                        return;
+                    }
+                    if (pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
+                        closeVersionPickerPopup();
+                    }
+                }
+            });
+        })();
+
+        function showPopupToast(message) {
+            const toast = document.getElementById("tweak-popup-toast");
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add("is-visible");
+            clearTimeout(tweakToastTimer);
+            tweakToastTimer = setTimeout(() => {
+                toast.classList.remove("is-visible");
+            }, 2200);
+        }
+
+        function resolveItemShareUrl(item) {
+            const opts = extractDownloadOptions(item);
+            if (opts.length > 0) {
+                try {
+                    return new URL(opts[0].url, window.location.href).href;
+                } catch (_) {
+                    return opts[0].url;
+                }
+            }
+            const slug = encodeURIComponent((item && (item.appName || item.title)) || "item");
+            const base = window.location.href.split("#")[0];
+            return `${base}#${slug}`;
+        }
+
+        async function shareCurrentItem(item) {
+            const title = (item && (item.appName || item.title)) || "Ứng dụng";
+            const text = (item && item.description) || title;
+            const url = resolveItemShareUrl(item);
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({ title, text, url });
+                    return;
+                } catch (err) {
+                    if (err && err.name === "AbortError") return;
+                }
+            }
+
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(url);
+                } else {
+                    const tmp = document.createElement("textarea");
+                    tmp.value = url;
+                    document.body.appendChild(tmp);
+                    tmp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tmp);
+                }
+                showPopupToast("Đã sao chép liên kết");
+            } catch (_) {
+                showPopupToast(url);
+            }
+        }
+
+        function toEmbedVideoUrl(rawUrl) {
+            const url = String(rawUrl || "").trim();
+            if (!url) return "";
+            const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+            if (ytMatch) {
+                return `https://www.youtube.com/embed/${ytMatch[1]}`;
+            }
+            const vimeoMatch = url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+            if (vimeoMatch) {
+                return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+            }
+            return url;
+        }
+
+        function isIframeVideoUrl(rawUrl) {
+            const url = String(rawUrl || "").trim();
+            return /(?:youtube\.com|youtu\.be|vimeo\.com|player\.vimeo\.com)/i.test(url);
+        }
+
+        function buildMediaEntryHtml(entry, idx) {
+            if (entry && typeof entry === "object" && entry.type === "video" && entry.src) {
+                if (isIframeVideoUrl(entry.src)) {
+                    const embedSrc = toEmbedVideoUrl(entry.src);
+                    return `<iframe src="${embedSrc}" title="Video ${idx + 1}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+                }
+                return `<video src="${entry.src}" controls playsinline preload="metadata"></video>`;
+            }
+            const rawImgSrc = typeof entry === "string" ? entry : (entry && entry.src) || "";
+            const fallbackBanner = createGameBannerSvg(idx);
+            const imgSrc = resolveAssetSrc(rawImgSrc, fallbackBanner);
+            return `<img src="${imgSrc}" alt="Ảnh ${idx + 1}" onerror="if(this.src!==decodeURIComponent('${encodeURIComponent(fallbackBanner)}')){this.src=decodeURIComponent('${encodeURIComponent(fallbackBanner)}');}">`;
+        }
+
+        function isAppEntry(item) {
+            if (!item || typeof item !== "object") return false;
+            if (typeof item.isApp === "boolean") return item.isApp;
+            return true;
+        }
+
+        function shuffleArray(arr) {
+            const copy = arr.slice();
+            for (let i = copy.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copy[i], copy[j]] = [copy[j], copy[i]];
+            }
+            return copy;
+        }
+
+        function extractItemsFromJson(json) {
+            if (!json) return [];
+            if (Array.isArray(json)) return json;
+            if (Array.isArray(json.apps)) return json.apps;
+            if (Array.isArray(json.tweaks)) return json.tweaks;
+            if (Array.isArray(json.items)) return json.items;
+            if (Array.isArray(json.cards)) return json.cards;
+            if (json.card && typeof json.card === "object") return [json.card];
+            return [];
+        }
+
+        async function loadTweakJsonPool() {
+            const seen = new Set();
+            const list = [];
+            for (const url of TWEAK_JSON_URLS) {
+                try {
+                    const res = await fetch(url, { cache: "no-store" });
+                    if (!res.ok) continue;
+                    const json = await res.json();
+                    if (json && typeof json === "object" && !Array.isArray(json) && json.sliderConfig && typeof json.sliderConfig === "object") {
+                        tweakCurrentSliderConfig = { ...json.sliderConfig, ...tweakCurrentSliderConfig };
+                    }
+                    const rawItems = extractItemsFromJson(json);
+                    rawItems.forEach((it, idx) => {
+                        if (!it || typeof it !== "object") return;
+                        const name = it.appName || it.title || it.name || `Tweak ${idx + 1}`;
+                        const key = `${name}__${idx}`;
+                        if (!seen.has(key)) {
+                            seen.add(key);
+                            list.push({
+                                item: {
+                                    ...it,
+                                    appName: it.appName || it.title || it.name || "",
+                                    description: it.description || it.subtitle || it.genre || "",
+                                    isApp: typeof it.isApp === "boolean" ? it.isApp : true
+                                },
+                                seedIndex: idx
+                            });
+                        }
+                    });
+                    if (list.length > 0) break;
+                } catch (_) {}
+            }
+            tweakItemsPool = list;
+            return list;
+        }
+
+        async function loadAllItemsPool(currentCards) {
+            const seen = new Set();
+            const pool = [];
+
+            const addItems = (list) => {
+                if (!Array.isArray(list)) return;
+                list.forEach((it, idx) => {
+                    if (!it || typeof it !== "object") return;
+                    const key = `${it.appName || it.title || ""}__${isAppEntry(it) ? "app" : "nonapp"}__${idx}`;
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        pool.push({ item: it, seedIndex: idx });
+                    }
+                });
+            };
+
+            addItems(currentCards);
+            addItems(tweakItemsPool.map((t) => t.item));
+
+            for (const url of EXTRA_JSON_URLS) {
+                try {
+                    const res = await fetch(url, { cache: "no-store" });
+                    if (!res.ok) continue;
+                    const json = await res.json();
+                    const list = extractItemsFromJson(json);
+                    list.forEach((it, idx) => {
+                        const itemName = it.appName || it.title || it.name || "";
+                        const exists = pool.some(
+                            (entry) =>
+                                (entry.item.appName || entry.item.title) === itemName &&
+                                isAppEntry(entry.item) === isAppEntry(it)
+                        );
+                        if (!exists) {
+                            pool.push({ item: it, seedIndex: pool.length + idx });
+                        }
+                    });
+                } catch (_) {}
+            }
+
+            tweakAllItemsPool = pool;
+        }
+
+        function renderRecommendationList(containerEl, entries, emptyMessage) {
+            containerEl.innerHTML = "";
+            if (!entries.length) {
+                containerEl.innerHTML = `<p class="tweak-store-section-text" style="color:#8E8E93;">${emptyMessage}</p>`;
+                return;
+            }
+
+            entries.forEach(({ item, seedIndex }) => {
+                const fallbackBanner = createGameBannerSvg(seedIndex);
+                const fallbackIcon = createGameIconSvg(seedIndex);
+                const bSrc = resolveAssetSrc(item.banner, fallbackBanner);
+                const iSrc = resolveAssetSrc(item.icon || item.img, fallbackIcon);
+                const name = item.appName || item.title || "Nội dung";
+                const desc = item.description || item.genre || "";
+                const itemIsApp = isAppEntry(item);
+                const subText = itemIsApp
+                    ? ((item.version && String(item.version).trim()) || "APP")
+                    : "";
+
+                const row = document.createElement("div");
+                row.className = "tweak-rec-item";
+                row.innerHTML = `
+                    <div class="tweak-rec-left">
+                        <img class="tweak-rec-icon" src="${iSrc}" alt="${item.iconAlt || name}">
+                        <div class="tweak-rec-meta">
+                            <span class="tweak-rec-name">${name}</span>
+                            <span class="tweak-rec-desc">${desc}</span>
+                        </div>
+                    </div>
+                    <div class="tweak-rec-right">
+                        ${itemIsApp ? `<button class="tweak-rec-btn" type="button">Tải Về</button>` : ``}
+                        ${subText ? `<span class="tweak-rec-sub">${subText}</span>` : ``}
+                    </div>
+                `;
+
+                bindImageFallback(row.querySelector(".tweak-rec-icon"), fallbackIcon);
+
+                const recBtn = row.querySelector(".tweak-rec-btn");
+                if (recBtn) {
+                    recBtn.addEventListener("click", (e) => {
+                        e.stopPropagation();
+                        openVersionPickerPopup(item, iSrc, seedIndex);
+                    });
+                }
+
+                row.addEventListener("click", () => {
+                    closeAllRecPopup();
+                    openCardPopup(item, bSrc, iSrc, seedIndex);
+                });
+
+                containerEl.appendChild(row);
+            });
+        }
+
+        function populateRecommendations(currentItem) {
+            const authorSection = document.getElementById("tweak-rec-author-section");
+            const authorHeading = document.getElementById("tweak-rec-author-heading");
+            const authorListEl = document.getElementById("tweak-rec-author-list");
+            const likeHeading = document.getElementById("tweak-rec-like-heading");
+            const likeListEl = document.getElementById("tweak-rec-like-list");
+
+            const currentName = currentItem.appName || currentItem.title || "";
+            const currentAuthor = (currentItem.author && currentItem.author.trim()) || "";
+            const targetIsApp = isAppEntry(currentItem);
+
+            const matchingPool = tweakAllItemsPool.filter(({ item }) => isAppEntry(item) === targetIsApp);
+
+            const allSameAuthorItems = matchingPool.filter(({ item }) => {
+                const name = item.appName || item.title || "";
+                const auth = (item.author && item.author.trim()) || "";
+                return name !== currentName && currentAuthor && auth === currentAuthor;
+            });
+            tweakCurrentAllAuthorEntries = allSameAuthorItems;
+
+            const sameAuthorItems = shuffleArray(allSameAuthorItems).slice(0, 3);
+
+            if (currentAuthor && sameAuthorItems.length > 0) {
+                authorSection.style.display = "";
+                authorHeading.textContent = targetIsApp
+                    ? `Ứng Dụng Khác Của ${currentAuthor}`
+                    : `Nội Dung Khác Của ${currentAuthor}`;
+                renderRecommendationList(
+                    authorListEl,
+                    sameAuthorItems,
+                    targetIsApp ? "Chưa có đề xuất APP phù hợp." : "Chưa có nội dung liên quan phù hợp."
+                );
+            } else {
+                authorSection.style.display = "none";
+            }
+
+            const usedNames = new Set([currentName, ...sameAuthorItems.map((e) => e.item.appName || e.item.title || "")]);
+            const allOtherItems = matchingPool.filter(({ item }) => {
+                const name = item.appName || item.title || "";
+                return name !== currentName;
+            });
+            tweakCurrentAllLikeEntries = allOtherItems;
+
+            const otherItems = shuffleArray(
+                matchingPool.filter(({ item }) => {
+                    const name = item.appName || item.title || "";
+                    return !usedNames.has(name);
+                })
+            ).slice(0, 3);
+
+            if (likeHeading) {
+                likeHeading.textContent = targetIsApp ? "Có Thể Bạn Cũng Thích" : "Nội Dung Liên Quan";
+            }
+            renderRecommendationList(
+                likeListEl,
+                otherItems,
+                targetIsApp ? "Chưa có đề xuất APP phù hợp." : "Chưa có nội dung không phải APP phù hợp."
+            );
+        }
+
+        function stopPopupGalleryAutoplay() {
+            if (tweakPopupGalleryTimer) {
+                clearInterval(tweakPopupGalleryTimer);
+                tweakPopupGalleryTimer = null;
+            }
+            if (tweakPopupGalleryRafId) {
+                cancelAnimationFrame(tweakPopupGalleryRafId);
+                tweakPopupGalleryRafId = null;
+            }
+            if (tweakPopupGalleryResumeTimer) {
+                clearTimeout(tweakPopupGalleryResumeTimer);
+                tweakPopupGalleryResumeTimer = null;
+            }
+        }
+
+        function bindHoldAndSwipePause(targetEl, getState, setState, getTimer, setTimer) {
+            const pauseNow = () => {
+                const st = getState();
+                st.isHolding = true;
+                st.isResumeDelayed = false;
+                const existingTimer = getTimer();
+                if (existingTimer) {
+                    clearTimeout(existingTimer);
+                    setTimer(null);
+                }
+            };
+
+            const delayResume = () => {
+                const st = getState();
+                st.isHolding = false;
+                st.isResumeDelayed = true;
+                const existingTimer = getTimer();
+                if (existingTimer) {
+                    clearTimeout(existingTimer);
+                }
+                const nextTimer = setTimeout(() => {
+                    st.isResumeDelayed = false;
+                    setTimer(null);
+                }, TOUCH_RESUME_DELAY_MS);
+                setTimer(nextTimer);
+            };
+
+            targetEl.addEventListener("mouseenter", () => {
+                getState().isHovering = true;
+            });
+            targetEl.addEventListener("mouseleave", () => {
+                getState().isHovering = false;
+            });
+            targetEl.addEventListener("pointerdown", pauseNow, { passive: true });
+            targetEl.addEventListener("pointerup", delayResume, { passive: true });
+            targetEl.addEventListener("pointercancel", delayResume, { passive: true });
+            targetEl.addEventListener("touchstart", pauseNow, { passive: true });
+            targetEl.addEventListener("touchmove", pauseNow, { passive: true });
+            targetEl.addEventListener("touchend", delayResume, { passive: true });
+            targetEl.addEventListener("touchcancel", delayResume, { passive: true });
+            targetEl.addEventListener("scroll", () => {
+                if (getState().isHolding) {
+                    pauseNow();
+                } else {
+                    delayResume();
+                }
+            }, { passive: true });
+        }
+
+        function setupPopupGallery(galleryEl, mediaList, config) {
+            stopPopupGalleryAutoplay();
+            galleryEl.innerHTML = "";
+            if (!Array.isArray(mediaList) || mediaList.length === 0) return;
+
+            mediaList.forEach((entry, idx) => {
+                const itemEl = document.createElement("div");
+                itemEl.className = "tweak-popup-gallery-item";
+                itemEl.innerHTML = buildMediaEntryHtml(entry, idx);
+                galleryEl.appendChild(itemEl);
+            });
+
+            if (mediaList.length <= 1) return;
+
+            const autoplay = config.autoplay !== false;
+            if (!autoplay) return;
+
+            const slideType = resolveSlideType(config.slideType);
+            const expectedGen = tweakModeGeneration;
+            const slideSpeed = resolveSlideSpeed(config, slideType);
+            const marqueeSpeedPxPerSec = resolveMarqueeSpeed(config);
+            const loop = config.loop !== false;
+            const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
+
+            const pauseState = {
+                isHolding: false,
+                isHovering: false,
+                isResumeDelayed: false
+            };
+            const isPaused = () => pauseState.isHolding || pauseState.isHovering || pauseState.isResumeDelayed;
+
+            bindHoldAndSwipePause(
+                galleryEl,
+                () => pauseState,
+                (next) => { Object.assign(pauseState, next); },
+                () => tweakPopupGalleryResumeTimer,
+                (t) => { tweakPopupGalleryResumeTimer = t; }
+            );
+
+            if (slideType === "marquee") {
+                galleryEl.style.scrollBehavior = "auto";
+                galleryEl.style.scrollSnapType = "none";
+                galleryEl.style.overflow = "hidden";
+
+                const track = document.createElement("div");
+                track.className = "tweak-marquee-track";
+                const origItems = Array.from(galleryEl.children);
+                origItems.forEach((origItem) => {
+                    origItem.style.flex = "0 0 240px";
+                    origItem.style.flexShrink = "0";
+                    track.appendChild(origItem);
+                });
+                mediaList.forEach((entry, idx) => {
+                    const clone = document.createElement("div");
+                    clone.className = "tweak-popup-gallery-item";
+                    clone.style.flex = "0 0 240px";
+                    clone.style.flexShrink = "0";
+                    clone.innerHTML = buildMediaEntryHtml(entry, idx);
+                    track.appendChild(clone);
+                });
+                galleryEl.appendChild(track);
+
+                let offsetPx = 0;
+                let lastTime = performance.now();
+                function tick(now) {
+                    if (!isModeStillActive("marquee", expectedGen)) {
+                        tweakPopupGalleryRafId = null;
+                        return;
+                    }
+                    const dt = Math.min((now - lastTime) / 1000, 0.1);
+                    lastTime = now;
+                    if (!isPaused()) {
+                        const cycleWidth = track.scrollWidth / 2;
+                        if (cycleWidth > 1) {
+                            offsetPx += marqueeSpeedPxPerSec * dt;
+                            if (offsetPx >= cycleWidth) {
+                                offsetPx -= cycleWidth;
+                            }
+                            track.style.transform = `translate3d(${-offsetPx}px, 0, 0)`;
+                        }
+                    }
+                    tweakPopupGalleryRafId = requestAnimationFrame(tick);
+                }
+                tweakPopupGalleryRafId = requestAnimationFrame(tick);
+                return;
+            }
+
+            let idx = 0;
+            tweakPopupGalleryTimer = setInterval(() => {
+                if (!isModeStillActive(slideType, expectedGen) || isPaused()) return;
+                const items = Array.from(galleryEl.children);
+                if (items.length <= 1) return;
+                if (loop) {
+                    idx = (idx + 1) % items.length;
+                } else if (idx < items.length - 1) {
+                    idx += 1;
+                } else {
+                    return;
+                }
+                const target = items[idx];
+                animateHorizontalScroll(galleryEl, target.offsetLeft - galleryEl.offsetLeft, slideSpeed);
+            }, autoplayInterval);
+        }
+
+        function setStickyDownloadVisible(stickyBar, stickyDownloadBtn, shouldShow) {
+            if (!stickyBar) return;
+            if (stickyDownloadBtn) {
+                stickyDownloadBtn.style.display = tweakCurrentPopupIsApp ? "" : "none";
+            }
+            const nextVisible = Boolean(tweakCurrentPopupIsApp && shouldShow);
+            const currentlyVisible = stickyBar.classList.contains("is-visible");
+            if (nextVisible === currentlyVisible) return;
+
+            if (nextVisible) {
+                stickyBar.style.visibility = "visible";
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        stickyBar.classList.add("is-visible");
+                    });
+                });
+            } else {
+                stickyBar.classList.remove("is-visible");
+            }
+        }
+
+        function updateStickyDownloadBar() {
+            const modal = document.getElementById("tweak-popup-modal");
+            const downloadBtn = document.getElementById("tweak-popup-download");
+            const stickyBar = document.getElementById("tweak-popup-sticky-bar");
+            const stickyDownloadBtn = document.getElementById("tweak-popup-sticky-download");
+            if (!modal || !stickyBar) return;
+
+            if (!tweakCurrentPopupIsApp || !downloadBtn) {
+                setStickyDownloadVisible(stickyBar, stickyDownloadBtn, false);
+                return;
+            }
+
+            const modalRect = modal.getBoundingClientRect();
+            const btnRect = downloadBtn.getBoundingClientRect();
+            const passedTop = btnRect.bottom < modalRect.top + 48;
+            setStickyDownloadVisible(stickyBar, stickyDownloadBtn, passedTop);
+        }
+
+        function openCardPopup(item, bannerSrc, iconSrc, index = 0) {
+            const backdrop = document.getElementById("tweak-card-popup");
+            const modal = document.getElementById("tweak-popup-modal");
+            if (!backdrop || !modal) return;
+
+            tweakCurrentPopupIsApp = isAppEntry(item);
+
+            const fallbackBanner = createGameBannerSvg(index);
+            const fallbackIcon = createGameIconSvg(index);
+            const resolvedBanner = resolveAssetSrc(bannerSrc || (item && item.banner), fallbackBanner);
+            const resolvedIcon = resolveAssetSrc(iconSrc || (item && (item.icon || item.img)), fallbackIcon);
+
+            const bannerEl = document.getElementById("tweak-popup-banner");
+            const iconEl = document.getElementById("tweak-popup-icon");
+            const stickyIconEl = document.getElementById("tweak-popup-sticky-icon");
+
+            bannerEl.src = resolvedBanner;
+            bannerEl.alt = item.bannerAlt || item.appName || "";
+            bindImageFallback(bannerEl, fallbackBanner);
+
+            iconEl.src = resolvedIcon;
+            iconEl.alt = item.iconAlt || item.appName || "";
+            bindImageFallback(iconEl, fallbackIcon);
+
+            stickyIconEl.src = resolvedIcon;
+            bindImageFallback(stickyIconEl, fallbackIcon);
+
+            const authorText = (item.author && item.author.trim()) || "Đang cập nhật";
+            const genreText = (item.genre && item.genre.trim()) || (tweakCurrentPopupIsApp ? "Ứng dụng" : "Nội dung");
+            const dateText = (item.releaseDate && item.releaseDate.trim()) || "Đang cập nhật";
+            const formatText = (item.fileFormat && item.fileFormat.trim()) || "Đang cập nhật";
+            const sizeText = (item.fileSize && item.fileSize.trim()) || "Đang cập nhật";
+            const versionText = tweakCurrentPopupIsApp
+                ? ((item.version && String(item.version).trim()) || "Phiên bản")
+                : "";
+
+            const resolvedTitle = item.appName || item.title || "";
+            const resolvedSubtitle = item.description || "";
+
+            document.getElementById("tweak-popup-title").textContent = resolvedTitle;
+            document.getElementById("tweak-popup-subtitle").textContent = resolvedSubtitle;
+            document.getElementById("tweak-popup-sticky-title").textContent = resolvedTitle;
+            document.getElementById("tweak-popup-sticky-sub").textContent = resolvedSubtitle;
+
+            const genreBadgeEl = document.getElementById("tweak-popup-genre-badge");
+            if (genreBadgeEl) {
+                genreBadgeEl.textContent = genreText;
+                genreBadgeEl.style.display = genreText ? "" : "none";
+            }
+
+            const versionBadgeEl = document.getElementById("tweak-popup-version");
+            if (versionBadgeEl) {
+                versionBadgeEl.textContent = versionText;
+                versionBadgeEl.style.display = tweakCurrentPopupIsApp && versionText ? "" : "none";
+            }
+
+            const downloadBtn = document.getElementById("tweak-popup-download");
+            if (downloadBtn) {
+                downloadBtn.style.display = tweakCurrentPopupIsApp ? "" : "none";
+            }
+
+            document.getElementById("tweak-popup-author").textContent = authorText;
+            document.getElementById("tweak-popup-genre").textContent = genreText;
+            document.getElementById("tweak-popup-date").textContent = dateText;
+            document.getElementById("tweak-popup-format").textContent = formatText;
+            document.getElementById("tweak-popup-size").textContent = sizeText;
+
+            const changelogSectionEl = document.getElementById("tweak-popup-changelog-section");
+            const changelogTextEl = document.getElementById("tweak-popup-changelog");
+            const changelogVersionEl = document.getElementById("tweak-popup-changelog-version");
+            if (changelogSectionEl) {
+                changelogSectionEl.style.display = tweakCurrentPopupIsApp ? "" : "none";
+            }
+            if (changelogTextEl) {
+                changelogTextEl.textContent = tweakCurrentPopupIsApp
+                    ? ((item.changelog && item.changelog.trim()) || "Chưa có ghi chú cập nhật mới.")
+                    : "";
+            }
+            if (changelogVersionEl) {
+                changelogVersionEl.textContent = tweakCurrentPopupIsApp && versionText ? versionText : "";
+                changelogVersionEl.style.display = tweakCurrentPopupIsApp && versionText ? "" : "none";
+            }
+
+            const descHeadingEl = document.getElementById("tweak-popup-desc-heading");
+            if (descHeadingEl) {
+                descHeadingEl.textContent = tweakCurrentPopupIsApp ? "Mô tả" : "Nội dung";
+            }
+
+            const descText = (item.fullDescription && item.fullDescription.trim())
+                || (item.description && item.description.trim())
+                || "Đang cập nhật mô tả.";
+            renderDescriptionWithShortLinks(document.getElementById("tweak-popup-desc"), descText, !tweakCurrentPopupIsApp);
+
+            document.getElementById("tweak-info-provider").textContent = authorText;
+            document.getElementById("tweak-info-size").textContent = sizeText;
+            document.getElementById("tweak-info-genre").textContent = genreText;
+            document.getElementById("tweak-info-format").textContent = formatText;
+            document.getElementById("tweak-info-date").textContent = dateText;
+
+            const infoVersionRow = document.getElementById("tweak-info-version-row");
+            const infoVersionEl = document.getElementById("tweak-info-version");
+            if (infoVersionRow) {
+                infoVersionRow.style.display = tweakCurrentPopupIsApp ? "" : "none";
+            }
+            if (infoVersionEl) {
+                infoVersionEl.textContent = tweakCurrentPopupIsApp ? versionText : "";
+            }
+
+            const baseGallery = Array.isArray(item.gallery) && item.gallery.length > 0
+                ? item.gallery.filter(Boolean)
+                : [resolvedBanner, createGameBannerSvg(index + 1), createGameBannerSvg(index + 2)];
+            const rawVideo = (item.videoUrl && item.videoUrl.trim()) || (item.video && item.video.trim()) || "";
+            const galleryMedia = rawVideo
+                ? [{ type: "video", src: rawVideo }, ...baseGallery]
+                : baseGallery;
+            setupPopupGallery(document.getElementById("tweak-popup-gallery"), galleryMedia, tweakCurrentSliderConfig);
+
+            populateRecommendations(item);
+
+            const triggerDownload = () => {
+                if (tweakCurrentPopupIsApp) {
+                    openVersionPickerPopup(item, resolvedIcon, index);
+                }
+            };
+
+            document.getElementById("tweak-popup-download").onclick = triggerDownload;
+            document.getElementById("tweak-popup-sticky-download").onclick = triggerDownload;
+            document.getElementById("tweak-popup-share").onclick = () => shareCurrentItem(item);
+
+            const stickyBar = document.getElementById("tweak-popup-sticky-bar");
+            if (stickyBar) {
+                stickyBar.classList.remove("is-visible");
+                stickyBar.style.visibility = "hidden";
+            }
+
+            modal.scrollTop = 0;
+            backdrop.classList.add("is-open");
+            backdrop.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+            requestAnimationFrame(updateStickyDownloadBar);
+        }
+
+        function closeCardPopup() {
+            const backdrop = document.getElementById("tweak-card-popup");
+            if (!backdrop) return;
+            closeAllRecPopup();
+            closeVersionPickerPopup();
+            stopPopupGalleryAutoplay();
+            backdrop.classList.remove("is-open");
+            backdrop.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+
+        (function initPopupEvents() {
+            const backdrop = document.getElementById("tweak-card-popup");
+            const modal = document.getElementById("tweak-popup-modal");
+            const closeBtn = document.getElementById("tweak-popup-close");
+            const stickyCloseBtn = document.getElementById("tweak-popup-sticky-close");
+            if (!backdrop || !closeBtn) return;
+
+            closeBtn.addEventListener("click", closeCardPopup);
+            if (stickyCloseBtn) {
+                stickyCloseBtn.addEventListener("click", closeCardPopup);
+            }
+            if (modal) {
+                modal.addEventListener("scroll", updateStickyDownloadBar, { passive: true });
+            }
+            backdrop.addEventListener("click", (e) => {
+                if (e.target === backdrop) closeCardPopup();
+            });
+            document.addEventListener("keydown", (e) => {
+                const recBackdrop = document.getElementById("tweak-rec-all-popup");
+                if (e.key === "Escape" && recBackdrop && recBackdrop.classList.contains("is-open")) {
+                    closeAllRecPopup();
+                    return;
+                }
+                const pickerBackdrop = document.getElementById("tweak-version-picker-popup");
+                if (e.key === "Escape" && pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
+                    closeVersionPickerPopup();
+                    return;
+                }
+                if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
+                    closeCardPopup();
+                }
+            });
+        })();
+
+        function attachCardBounceEffect(card) {
+            const press = () => card.classList.add("is-pressed");
+            const release = () => card.classList.remove("is-pressed");
+
+            card.addEventListener("pointerdown", press);
+            card.addEventListener("pointerup", release);
+            card.addEventListener("pointercancel", release);
+            card.addEventListener("pointerleave", release);
+            window.addEventListener("pointerup", release, { passive: true });
+            window.addEventListener("pointercancel", release, { passive: true });
+
+            card.addEventListener("touchstart", press, { passive: true });
+            card.addEventListener("touchend", release, { passive: true });
+            card.addEventListener("touchcancel", release, { passive: true });
+            window.addEventListener("touchend", release, { passive: true });
+            window.addEventListener("touchcancel", release, { passive: true });
+        }
+
+        function resolveCardTweakList(item) {
+            if (Array.isArray(item.tweaks) && item.tweaks.length > 0) {
+                return item.tweaks;
+            }
+            if (Array.isArray(item.items) && item.items.length > 0) {
+                return item.items;
+            }
+            if (Array.isArray(item.apps) && item.apps.length > 0) {
+                return item.apps;
+            }
+            if (tweakItemsPool.length > 0) {
+                return tweakItemsPool.map((t) => t.item);
+            }
+            return [];
+        }
+
+        function buildTweakRowElement(tweakItem, idx, cardIndex) {
+            const name = tweakItem.appName || tweakItem.title || tweakItem.name || `Tweak ${idx + 1}`;
+            const sub = tweakItem.description || tweakItem.subtitle || tweakItem.genre || "";
+            const fallbackIcon = createGameIconSvg(cardIndex * 5 + idx);
+            const fallbackBanner = createGameBannerSvg(cardIndex * 5 + idx);
+            const iconSrc = resolveAssetSrc(tweakItem.icon || tweakItem.img, fallbackIcon);
+            const bannerSrc = resolveAssetSrc(tweakItem.banner, fallbackBanner);
+            const actionLabel = (tweakItem.actionLabel || tweakItem.buttonText || "Mở").trim();
+            const isCloudAction = tweakItem.actionType === "cloud" || actionLabel.toLowerCase() === "cloud";
+            const verText = (tweakItem.version && String(tweakItem.version).trim()) || "";
+
+            const row = document.createElement("div");
+            row.className = "tweak-col-app-row";
+            row.innerHTML = `
+                <div class="tweak-col-app-left">
+                    <img class="tweak-col-app-icon" src="${iconSrc}" alt="${tweakItem.iconAlt || name}">
+                    <div class="tweak-col-app-text">
+                        <span class="tweak-col-app-name">${name}</span>
+                        <span class="tweak-col-app-sub">${sub}</span>
+                    </div>
+                </div>
+                <div class="tweak-col-app-right">
+                    ${isCloudAction ? `
+                    <button class="tweak-col-cloud-btn" type="button" aria-label="Tải ${name}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
+                            <path d="M12 10.5v5.5"/>
+                            <path d="m9.5 13.5 2.5 2.5 2.5-2.5"/>
+                        </svg>
+                    </button>` : `
+                    <button class="tweak-col-action-btn" type="button">${actionLabel}</button>`}
+                    ${verText ? `<span class="tweak-col-ver-note">${verText}</span>` : ``}
+                </div>
+            `;
+
+            bindImageFallback(row.querySelector(".tweak-col-app-icon"), fallbackIcon);
+
+            const actionBtn = row.querySelector(".tweak-col-action-btn, .tweak-col-cloud-btn");
+            if (actionBtn) {
+                actionBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    openVersionPickerPopup(tweakItem, iconSrc, cardIndex * 5 + idx);
+                });
+            }
+
+            row.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openCardPopup(tweakItem, bannerSrc, iconSrc, cardIndex * 5 + idx);
+            });
+
+            return row;
+        }
+
+        function attachInnerPagesAutoplay(pagesScrollEl, pageCount, config, activeMode, activeGen) {
+            if (!pagesScrollEl || pageCount <= 1) return;
+            const autoplay = config.autoplay !== false;
+            if (!autoplay) return;
+
+            const slideType = resolveSlideType(activeMode || config.slideType);
+            const slideSpeed = resolveSlideSpeed(config, slideType);
+            const marqueeSpeedPxPerSec = resolveMarqueeSpeed(config);
+            const loop = config.loop !== false;
+            const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
+
+            pagesScrollEl.style.setProperty("--slide-speed", `${slideSpeed}ms`);
+            pagesScrollEl.classList.remove(
+                "slide-type-snap",
+                "slide-type-smooth",
+                "slide-type-fade",
+                "slide-type-scroll",
+                "slide-type-marquee",
+                "slide-type-zoom",
+                "slide-type-slide",
+                "slide-type-instant"
+            );
+            pagesScrollEl.classList.add(`slide-type-${slideType}`);
+
+            let resumeTimer = null;
+            let innerInterval = null;
+            let innerRaf = null;
+            let stopped = false;
+            const pauseState = { isHolding: false, isHovering: false, isResumeDelayed: false };
+            const isPaused = () => pauseState.isHolding || pauseState.isHovering || pauseState.isResumeDelayed;
+
+            const cleanupInner = () => {
+                stopped = true;
+                if (innerInterval) {
+                    clearInterval(innerInterval);
+                    innerInterval = null;
+                }
+                if (innerRaf) {
+                    cancelAnimationFrame(innerRaf);
+                    innerRaf = null;
+                }
+                if (resumeTimer) {
+                    clearTimeout(resumeTimer);
+                    resumeTimer = null;
+                }
+            };
+            registerInnerEngineCleanup(cleanupInner);
+
+            bindHoldAndSwipePause(
+                pagesScrollEl,
+                () => pauseState,
+                (next) => { Object.assign(pauseState, next); },
+                () => resumeTimer,
+                (t) => { resumeTimer = t; }
+            );
+
+            if (slideType === "marquee") {
+                pagesScrollEl.style.scrollBehavior = "auto";
+                pagesScrollEl.style.scrollSnapType = "none";
+                pagesScrollEl.style.overflow = "hidden";
+
+                const track = document.createElement("div");
+                track.className = "tweak-marquee-track";
+
+                const origPages = Array.from(pagesScrollEl.children);
+                origPages.forEach((p) => {
+                    p.style.flex = "0 0 280px";
+                    p.style.width = "280px";
+                    p.style.flexShrink = "0";
+                    track.appendChild(p);
+                });
+
+                origPages.forEach((p) => {
+                    const clone = p.cloneNode(true);
+                    clone.style.flex = "0 0 280px";
+                    clone.style.width = "280px";
+                    clone.style.flexShrink = "0";
+                    clone.querySelectorAll(".tweak-col-app-row").forEach((row, rIdx) => {
+                        const actionBtn = row.querySelector(".tweak-col-action-btn, .tweak-col-cloud-btn");
+                        if (actionBtn) {
+                            actionBtn.addEventListener("click", (e) => {
+                                e.stopPropagation();
+                                const nameEl = row.querySelector(".tweak-col-app-name");
+                                const found = tweakItemsPool.find((t) => (t.item.appName || t.item.title) === (nameEl && nameEl.textContent));
+                                openVersionPickerPopup(found ? found.item : {}, row.querySelector("img") && row.querySelector("img").src, rIdx);
+                            });
+                        }
+                        row.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            const nameEl = row.querySelector(".tweak-col-app-name");
+                            const found = tweakItemsPool.find((t) => (t.item.appName || t.item.title) === (nameEl && nameEl.textContent));
+                            const targetItem = found ? found.item : {};
+                            openCardPopup(targetItem, targetItem.banner, row.querySelector("img") && row.querySelector("img").src, rIdx);
+                        });
+                    });
+                    track.appendChild(clone);
+                });
+
+                pagesScrollEl.innerHTML = "";
+                pagesScrollEl.appendChild(track);
+
+                let offsetPx = 0;
+                let lastTime = performance.now();
+
+                function tickMarquee(now) {
+                    if (stopped || !isModeStillActive("marquee", activeGen)) {
+                        innerRaf = null;
+                        return;
+                    }
+                    const dt = Math.min((now - lastTime) / 1000, 0.1);
+                    lastTime = now;
+                    if (!isPaused()) {
+                        const cycleWidth = track.scrollWidth / 2;
+                        if (cycleWidth > 1) {
+                            offsetPx += marqueeSpeedPxPerSec * dt;
+                            if (offsetPx >= cycleWidth) {
+                                offsetPx -= cycleWidth;
+                            }
+                            track.style.transform = `translate3d(${-offsetPx}px, 0, 0)`;
+                        }
+                    }
+                    innerRaf = requestAnimationFrame(tickMarquee);
+                }
+                innerRaf = requestAnimationFrame(tickMarquee);
+                return;
+            }
+
+            let pageIdx = 0;
+            const pages = Array.from(pagesScrollEl.children);
+
+            if (slideType === "fade") {
+                pages.forEach((p, idx) => {
+                    p.style.opacity = "1";
+                    p.classList.toggle("is-active", idx === 0);
+                });
+                innerInterval = setInterval(() => {
+                    if (stopped || !isModeStillActive(slideType, activeGen) || isPaused()) return;
+                    if (loop) {
+                        pageIdx = (pageIdx + 1) % pages.length;
+                    } else if (pageIdx < pages.length - 1) {
+                        pageIdx += 1;
+                    } else {
+                        return;
+                    }
+                    pages.forEach((p, idx) => {
+                        p.classList.toggle("is-active", idx === pageIdx);
+                        p.style.opacity = idx === pageIdx ? "1" : "0.35";
+                    });
+                    const activePage = pages[pageIdx];
+                    if (activePage) {
+                        animateHorizontalScroll(pagesScrollEl, activePage.offsetLeft - pagesScrollEl.offsetLeft, slideSpeed);
+                    }
+                }, autoplayInterval);
+                return;
+            }
+
+            pagesScrollEl.addEventListener("scroll", () => {
+                if (!isModeStillActive(slideType, activeGen)) return;
+                let closest = 0;
+                let minDiff = Infinity;
+                pages.forEach((p, idx) => {
+                    const diff = Math.abs(p.offsetLeft - pagesScrollEl.offsetLeft - pagesScrollEl.scrollLeft);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closest = idx;
+                    }
+                });
+                pageIdx = closest;
+            }, { passive: true });
+
+            innerInterval = setInterval(() => {
+                if (stopped || !isModeStillActive(slideType, activeGen) || isPaused()) return;
+                if (pages.length <= 1) return;
+                if (loop) {
+                    pageIdx = (pageIdx + 1) % pages.length;
+                } else if (pageIdx < pages.length - 1) {
+                    pageIdx += 1;
+                } else {
+                    return;
+                }
+                const target = pages[pageIdx];
+                if (target) {
+                    const targetLeft = target.offsetLeft - pagesScrollEl.offsetLeft;
+                    if (slideType === "instant" || slideSpeed <= 0) {
+                        pagesScrollEl.scrollLeft = targetLeft;
+                    } else if (slideType === "zoom") {
+                        pages.forEach((p) => p.classList.add("is-zooming"));
+                        animateHorizontalScroll(pagesScrollEl, targetLeft, slideSpeed);
+                        setTimeout(() => {
+                            pages.forEach((p) => p.classList.remove("is-zooming"));
+                        }, Math.min(slideSpeed, 600));
+                    } else {
+                        animateHorizontalScroll(pagesScrollEl, targetLeft, slideSpeed);
+                    }
+                }
+            }, autoplayInterval);
+        }
+
+        function buildCardElement(item, index, activeMode, activeGen) {
+            const card = document.createElement("div");
+            card.className = "tweak-game-card";
+
+            const kickerText = "TWEAK CHO IPHONE & IPAD JAILBREAK";
+            const headlineText = "Tweak Tinh chỉnh cài trên Sileo, Zebra,..";
+            const tweakList = resolveCardTweakList(item);
+
+            const pages = [];
+            for (let i = 0; i < tweakList.length; i += 5) {
+                pages.push(tweakList.slice(i, i + 5));
+            }
+            if (pages.length === 0) {
+                pages.push([]);
+            }
+
+            card.innerHTML = `
+                <div class="tweak-col-head">
+                    <div class="tweak-col-kicker">${kickerText}</div>
+                    <h1 class="tweak-col-title">${headlineText}</h1>
+                </div>
+                <div class="tweak-col-pages-scroll"></div>
+            `;
+
+            const pagesScrollEl = card.querySelector(".tweak-col-pages-scroll");
+            pages.forEach((group, pIdx) => {
+                const pageEl = document.createElement("div");
+                pageEl.className = "tweak-col-page";
+                group.forEach((tw, tIdx) => {
+                    pageEl.appendChild(buildTweakRowElement(tw, pIdx * 5 + tIdx, index));
+                });
+                pagesScrollEl.appendChild(pageEl);
+            });
+
+            attachInnerPagesAutoplay(pagesScrollEl, pages.length, tweakCurrentSliderConfig, activeMode, activeGen);
+
+            if (pagesScrollEl) {
+                ["pointerdown", "touchstart", "touchmove", "wheel"].forEach((evName) => {
+                    pagesScrollEl.addEventListener(evName, (e) => {
+                        e.stopPropagation();
+                    }, { passive: true });
+                });
+            }
+
+            card.addEventListener("click", () => {
+                if (tweakList.length > 0) {
+                    const first = tweakList[0];
+                    const bSrc = resolveAssetSrc(first.banner, createGameBannerSvg(index));
+                    const iSrc = resolveAssetSrc(first.icon || first.img, createGameIconSvg(index));
+                    openCardPopup(first, bSrc, iSrc, index);
+                } else {
+                    const bSrc = resolveAssetSrc(item.banner, createGameBannerSvg(index));
+                    const iSrc = resolveAssetSrc(item.icon || item.img, createGameIconSvg(index));
+                    openCardPopup(item, bSrc, iSrc, index);
+                }
+            });
+
+            attachCardBounceEffect(card);
+            return card;
+        }
+
+        function animateHorizontalScroll(sliderEl, targetLeft, durationMs) {
+            const startLeft = sliderEl.scrollLeft;
+            const maxScroll = Math.max(0, sliderEl.scrollWidth - sliderEl.clientWidth);
+            const clampedTarget = Math.max(0, Math.min(targetLeft, maxScroll));
+            const distance = clampedTarget - startLeft;
+            if (Math.abs(distance) < 1 || durationMs <= 0) {
+                sliderEl.scrollLeft = clampedTarget;
+                return;
+            }
+
+            if (sliderEl._tweakScrollRafId) {
+                cancelAnimationFrame(sliderEl._tweakScrollRafId);
+                sliderEl._tweakScrollRafId = null;
+            }
+
+            const startTime = performance.now();
+            const prevBehavior = sliderEl.style.scrollBehavior;
+            const prevSnapType = sliderEl.style.scrollSnapType;
+            sliderEl.style.scrollBehavior = "auto";
+            sliderEl.style.scrollSnapType = "none";
+
+            function finish() {
+                sliderEl.style.scrollBehavior = prevBehavior;
+                sliderEl.style.scrollSnapType = prevSnapType;
+                sliderEl._tweakScrollRafId = null;
+            }
+
+            function step(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / durationMs, 1);
+                const ease = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                sliderEl.scrollLeft = startLeft + distance * ease;
+
+                if (progress < 1) {
+                    sliderEl._tweakScrollRafId = requestAnimationFrame(step);
+                } else {
+                    sliderEl.scrollLeft = clampedTarget;
+                    finish();
+                }
+            }
+
+            sliderEl._tweakScrollRafId = requestAnimationFrame(step);
+        }
+
+        function resolveSlideType(rawType) {
+            const cleaned = String(rawType || "snap").trim().toLowerCase();
+            return ALLOWED_SLIDE_TYPES.has(cleaned) ? cleaned : "snap";
+        }
+
+        function setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, config, activeMode, activeGen) {
+            const slideType = resolveSlideType(activeMode || config.slideType);
+
+            dotsEl.innerHTML = "";
+            const count = cardsData.length;
+
+            const slideSpeed = resolveSlideSpeed(config, slideType);
+            const marqueeSpeedPxPerSec = resolveMarqueeSpeed(config);
+            const autoplay = config.autoplay !== false;
+            const loop = config.loop !== false;
+            const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
+
+            sectionEl.style.setProperty("--slide-speed", `${slideSpeed}ms`);
+            sliderEl.classList.remove(
+                "slide-type-snap",
+                "slide-type-smooth",
+                "slide-type-fade",
+                "slide-type-scroll",
+                "slide-type-marquee",
+                "slide-type-zoom",
+                "slide-type-slide",
+                "slide-type-instant"
+            );
+            sliderEl.classList.add(`slide-type-${slideType}`);
+
+            let currentIndex = 0;
+            const pauseState = {
+                isHolding: false,
+                isHovering: false,
+                isResumeDelayed: false
+            };
+            const dots = [];
+            const cards = Array.from(sliderEl.children);
+
+            const isPaused = () => pauseState.isHolding || pauseState.isHovering || pauseState.isResumeDelayed;
+
+            bindHoldAndSwipePause(
+                sliderEl,
+                () => pauseState,
+                (next) => { Object.assign(pauseState, next); },
+                () => tweakSliderResumeTimer,
+                (t) => { tweakSliderResumeTimer = t; }
+            );
+
+            if (slideType === "marquee") {
+                dotsEl.style.display = "none";
+                sliderEl.style.scrollBehavior = "auto";
+                sliderEl.style.scrollSnapType = "none";
+                sliderEl.style.overflow = "hidden";
+
+                if (count > 1) {
+                    const track = document.createElement("div");
+                    track.className = "tweak-marquee-track";
+
+                    cards.forEach((origCard) => {
+                        origCard.style.flex = "0 0 320px";
+                        origCard.style.width = "320px";
+                        origCard.style.maxWidth = "320px";
+                        origCard.style.flexShrink = "0";
+                        track.appendChild(origCard);
+                    });
+
+                    cardsData.forEach((item, idx) => {
+                        const clone = buildCardElement(item, idx, slideType, activeGen);
+                        clone.dataset.clone = "true";
+                        clone.style.flex = "0 0 320px";
+                        clone.style.width = "320px";
+                        clone.style.maxWidth = "320px";
+                        clone.style.flexShrink = "0";
+                        track.appendChild(clone);
+                    });
+
+                    sliderEl.innerHTML = "";
+                    sliderEl.appendChild(track);
+
+                    let offsetPx = 0;
+                    let lastTime = performance.now();
+
+                    function tickMarquee(now) {
+                        if (!isModeStillActive("marquee", activeGen)) {
+                            tweakMarqueeRafId = null;
+                            return;
+                        }
+                        const dt = Math.min((now - lastTime) / 1000, 0.1);
+                        lastTime = now;
+
+                        if (autoplay && !isPaused()) {
+                            const cycleWidth = track.scrollWidth / 2;
+                            if (cycleWidth > 1) {
+                                offsetPx += marqueeSpeedPxPerSec * dt;
+                                if (offsetPx >= cycleWidth) {
+                                    offsetPx -= cycleWidth;
+                                }
+                                track.style.transform = `translate3d(${-offsetPx}px, 0, 0)`;
+                            }
+                        }
+
+                        tweakMarqueeRafId = requestAnimationFrame(tickMarquee);
+                    }
+
+                    tweakMarqueeRafId = requestAnimationFrame(tickMarquee);
+                }
+                return;
+            }
+
+            if (count <= 1) return;
+
+            dotsEl.style.display = "";
+
+            function applyActiveState(index, useAnimation = true) {
+                if (!isModeStillActive(slideType, activeGen)) return;
+                if (loop) {
+                    currentIndex = ((index % count) + count) % count;
+                } else {
+                    currentIndex = Math.max(0, Math.min(index, count - 1));
+                }
+
+                if (slideType === "fade") {
+                    cards.forEach((c, idx) => {
+                        c.classList.toggle("is-active", idx === currentIndex);
+                        c.style.opacity = idx === currentIndex ? "1" : "0.35";
+                    });
+                    const targetCard = cards[currentIndex];
+                    if (targetCard) {
+                        const targetLeft = targetCard.offsetLeft - sliderEl.offsetLeft;
+                        if (!useAnimation || slideSpeed <= 0) {
+                            sliderEl.scrollLeft = targetLeft;
+                        } else {
+                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
+                        }
+                    }
+                } else {
+                    const targetCard = cards[currentIndex];
+                    if (targetCard) {
+                        const targetLeft = targetCard.offsetLeft - sliderEl.offsetLeft;
+                        if (!useAnimation || slideType === "instant" || slideSpeed <= 0) {
+                            sliderEl.scrollLeft = targetLeft;
+                        } else {
+                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
+                        }
+                    }
+                }
+
+                dots.forEach((d, idx) => d.classList.toggle("active", idx === currentIndex));
+            }
+
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement("button");
+                dot.type = "button";
+                dot.className = "tweak-slider-dot" + (i === 0 ? " active" : "");
+                dot.setAttribute("aria-label", `Slide ${i + 1}`);
+                dot.addEventListener("click", () => {
+                    if (!isModeStillActive(slideType, activeGen)) return;
+                    applyActiveState(i, true);
+                    restartAutoplay();
+                });
+                dotsEl.appendChild(dot);
+                dots.push(dot);
+            }
+
+            if (slideType === "fade") {
+                applyActiveState(0, false);
+            } else {
+                sliderEl.addEventListener("scroll", () => {
+                    if (!isModeStillActive(slideType, activeGen)) return;
+                    const currentScroll = sliderEl.scrollLeft;
+                    let closestIdx = 0;
+                    let minDiff = Infinity;
+
+                    cards.forEach((c, idx) => {
+                        const diff = Math.abs(c.offsetLeft - sliderEl.offsetLeft - currentScroll);
+                        if (diff < minDiff) {
+                            minDiff = diff;
+                            closestIdx = idx;
+                        }
+                    });
+
+                    currentIndex = closestIdx;
+                    dots.forEach((d, idx) => d.classList.toggle("active", idx === closestIdx));
+                }, { passive: true });
+            }
+
+            function startAutoplay() {
+                if (!autoplay || count <= 1 || !isModeStillActive(slideType, activeGen)) return;
+                clearInterval(tweakAutoplayTimer);
+                tweakAutoplayTimer = setInterval(() => {
+                    if (!isModeStillActive(slideType, activeGen) || isPaused()) return;
+                    if (!loop && currentIndex >= count - 1) return;
+                    applyActiveState(currentIndex + 1, true);
+                }, autoplayInterval);
+            }
+
+            function restartAutoplay() {
+                startAutoplay();
+            }
+
+            startAutoplay();
+        }
+
+        async function renderJsonToDom(d) {
+            runInnerEnginesCleanup();
+            const sectionEl = document.getElementById("tweak-game-section-main");
+            syncSectionContrastColors(sectionEl);
+            document.getElementById("tweak-sec-title").textContent = "";
+            document.getElementById("tweak-sec-subtitle").textContent = "";
+
+            const config = d.sliderConfig || {};
+            tweakCurrentSliderConfig = { ...tweakCurrentSliderConfig, ...config };
+            const selectedMode = resolveSlideType(tweakCurrentSliderConfig.slideType);
+            const activeGen = lockSlideMode(selectedMode);
+
+            await loadTweakJsonPool();
+
+            const sliderEl = document.getElementById("tweak-card-slider");
+            const dotsEl = document.getElementById("tweak-slider-dots");
+            const rawCards = Array.isArray(d.cards) ? d.cards : (d.card ? [d.card] : []);
+            const firstCard = rawCards[0] || {};
+            const mergedTweaks = rawCards.reduce((acc, c) => {
+                const list = Array.isArray(c.tweaks) ? c.tweaks : (Array.isArray(c.items) ? c.items : (Array.isArray(c.apps) ? c.apps : []));
+                return acc.concat(list);
+            }, []);
+            const cardsData = (mergedTweaks.length > 0 || tweakItemsPool.length > 0)
+                ? [{
+                    ...firstCard,
+                    tag: "TWEAK CHO IPHONE & IPAD JAILBREAK",
+                    title: "Tweak Tinh chỉnh cài trên Sileo, Zebra,..",
+                    tweaks: mergedTweaks.length > 0 ? mergedTweaks : tweakItemsPool.map((t) => t.item)
+                }]
+                : rawCards;
+
+            tweakCurrentSectionEntries = cardsData.map((it, idx) => ({ item: it, seedIndex: idx }));
+
+            await loadAllItemsPool(cardsData);
+
+            sliderEl.innerHTML = "";
+            sliderEl.classList.toggle("has-multiple", cardsData.length > 1);
+
+            cardsData.forEach((item, idx) => {
+                sliderEl.appendChild(buildCardElement(item, idx, selectedMode, activeGen));
+            });
+
+            setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, tweakCurrentSliderConfig, selectedMode, activeGen);
+            syncSectionContrastColors(sectionEl);
+        }
+
+        async function initTweakSlider() {
+            const sectionEl = document.getElementById("tweak-game-section-main");
+            syncSectionContrastColors(sectionEl);
+
+            if (typeof MutationObserver !== "undefined" && sectionEl) {
+                const observer = new MutationObserver(() => {
+                    syncSectionContrastColors(sectionEl);
+                });
+                observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                observer.observe(document.body, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                if (sectionEl.parentElement) {
+                    observer.observe(sectionEl.parentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                }
+            }
+
+            for (const url of CANDIDATE_URLS) {
+                try {
+                    const res = await fetch(url, { cache: "no-store" });
+                    if (!res.ok) continue;
+                    const json = await res.json();
+                    await renderJsonToDom(json);
+                    return;
+                } catch (_) {}
+            }
+
+            const fallbackTweaks = await loadTweakJsonPool();
+            if (fallbackTweaks.length > 0) {
+                await renderJsonToDom({
+                    sectionTitle: "",
+                    sectionSubtitle: "",
+                    cards: [{
+                        tag: "TWEAK CHO IPHONE & IPAD JAILBREAK",
+                        title: "Tweak Tinh chỉnh cài trên Sileo, Zebra,..",
+                        tweaks: fallbackTweaks.map((t) => t.item)
+                    }]
+                });
+                return;
+            }
+
+            document.getElementById("tweak-sec-title").textContent = "";
+            document.getElementById("tweak-sec-subtitle").textContent = "";
+            syncSectionContrastColors(sectionEl);
+        }
+
+        initTweakSlider();
+    })();
+</script>

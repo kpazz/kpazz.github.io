@@ -6,8 +6,11 @@
 <style>
     .ios-game-section {
         --slide-speed: 650ms;
-        background-color: #000000;
-        color: #FFFFFF;
+        --sec-text-color: #000000;
+        --dot-inactive-color: rgba(0, 0, 0, 0.25);
+        --dot-active-color: #000000;
+        background-color: transparent;
+        color: var(--sec-text-color);
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
         width: 100%;
         max-width: 100%;
@@ -17,6 +20,12 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-rendering: optimizeLegibility;
+    }
+
+    .ios-game-section.is-dark-bg {
+        --sec-text-color: #FFFFFF;
+        --dot-inactive-color: rgba(255, 255, 255, 0.3);
+        --dot-active-color: #FFFFFF;
     }
 
     .ios-game-section *,
@@ -30,6 +39,9 @@
         width: 100%;
         margin-bottom: 12px;
         padding-left: 2px;
+        cursor: pointer;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .ios-section-header h2 {
@@ -37,7 +49,7 @@
         font-weight: 700;
         line-height: 1.2;
         letter-spacing: -0.025em;
-        color: #FFFFFF;
+        color: var(--sec-text-color);
         margin: 0 0 3px 0;
     }
 
@@ -46,16 +58,19 @@
         font-weight: 400;
         line-height: 1.35;
         letter-spacing: -0.012em;
-        color: #8E8E93;
+        color: var(--sec-text-color);
         margin: 0;
     }
 
-    /* Khung slide mặc định: snap / smooth / scroll / marquee */
+    /* Khung slide mặc định: snap / smooth / scroll / marquee / zoom / slide / instant */
     .ios-card-slider {
         display: flex;
         flex-direction: row;
         gap: 14px;
         width: 100%;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
@@ -70,8 +85,26 @@
 
     .ios-card-slider.slide-type-smooth,
     .ios-card-slider.slide-type-scroll,
+    .ios-card-slider.slide-type-marquee,
+    .ios-card-slider.slide-type-zoom,
+    .ios-card-slider.slide-type-slide,
+    .ios-card-slider.slide-type-instant {
+        scroll-snap-type: none !important;
+    }
+
     .ios-card-slider.slide-type-marquee {
-        scroll-snap-type: none;
+        scroll-behavior: auto !important;
+        overflow: hidden !important;
+        display: block;
+    }
+
+    .ios-marquee-track {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 14px;
+        width: max-content;
+        will-change: transform;
     }
 
     .ios-game-card {
@@ -82,8 +115,8 @@
         background-color: #1D211E;
         border-radius: clamp(16px, 4.2vw, 22px);
         overflow: hidden;
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: none;
+        border: none;
         transform: scale(1);
         transform-origin: center center;
         transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
@@ -106,47 +139,77 @@
     /* Kiểu slide chuyển mờ dần (fade) */
     .ios-card-slider.slide-type-fade {
         position: relative;
-        display: block;
+        display: flex;
+        flex-direction: row;
         overflow: hidden;
+        scroll-snap-type: none !important;
     }
 
     .ios-card-slider.slide-type-fade .ios-game-card {
-        display: none;
-        opacity: 0;
+        display: block;
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--slide-speed) ease;
     }
 
-    .ios-card-slider.slide-type-fade .ios-game-card.is-active {
-        display: block;
-        opacity: 1;
+    .ios-card-slider.slide-type-fade .ios-game-card:not(.is-active) {
+        opacity: 0.35;
+    }
+
+    /* Kiểu slide zoom: card đang chuyển thu nhẹ tạm thời rồi trở về 1 */
+    .ios-card-slider.slide-type-zoom .ios-game-card {
+        transition: transform var(--slide-speed) cubic-bezier(0.22, 1, 0.36, 1),
+                    opacity var(--slide-speed) ease;
+    }
+
+    .ios-card-slider.slide-type-zoom .ios-game-card.is-zooming {
+        transform: scale(0.965);
+        opacity: 0.78;
+    }
+
+    /* Kiểu slide slide: chuyển ngang dứt khoát */
+    .ios-card-slider.slide-type-slide .ios-game-card {
+        transition: transform var(--slide-speed) cubic-bezier(0.25, 0.8, 0.25, 1),
+                    opacity var(--slide-speed) ease;
+    }
+
+    /* Kiểu slide instant: không hiệu ứng chuyển */
+    .ios-card-slider.slide-type-instant,
+    .ios-card-slider.slide-type-instant .ios-game-card {
+        scroll-behavior: auto !important;
+        transition: none !important;
     }
 
     @media (min-width: 640px) {
-        .ios-card-slider:not(.slide-type-fade).has-multiple .ios-game-card {
+        .ios-card-slider:not(.slide-type-fade):not(.slide-type-marquee).has-multiple .ios-game-card {
             flex: 0 0 calc(92% - 7px);
         }
     }
 
     @media (min-width: 900px) {
-        .ios-card-slider:not(.slide-type-fade).has-multiple .ios-game-card {
+        .ios-card-slider:not(.slide-type-fade):not(.slide-type-marquee).has-multiple .ios-game-card {
             flex: 0 0 calc(68% - 7px);
         }
     }
 
     /* Khi nhúng vào index.html: hé card kế tiếp giống ảnh trang chủ */
-    #tabs-container .ios-card-slider:not(.slide-type-fade).has-multiple .ios-game-card {
+    #tabs-container .ios-card-slider:not(.slide-type-fade):not(.slide-type-marquee).has-multiple .ios-game-card {
         flex: 0 0 82%;
         max-width: 82%;
     }
 
     @media (min-width: 640px) {
-        #tabs-container .ios-card-slider:not(.slide-type-fade).has-multiple .ios-game-card {
+        #tabs-container .ios-card-slider:not(.slide-type-fade):not(.slide-type-marquee).has-multiple .ios-game-card {
             flex: 0 0 calc(80% - 7px);
             max-width: calc(80% - 7px);
         }
     }
 
     @media (min-width: 900px) {
-        #tabs-container .ios-card-slider:not(.slide-type-fade).has-multiple .ios-game-card {
+        #tabs-container .ios-card-slider:not(.slide-type-fade):not(.slide-type-marquee).has-multiple .ios-game-card {
             flex: 0 0 calc(62% - 7px);
             max-width: calc(62% - 7px);
         }
@@ -160,6 +223,7 @@
         max-height: 580px;
         overflow: hidden;
         background-color: #16241B;
+        border: none;
     }
 
     .ios-card-hero img.hero-img {
@@ -168,6 +232,7 @@
         object-fit: cover;
         object-position: center;
         display: block;
+        border: none;
     }
 
     .ios-card-hero::after {
@@ -264,6 +329,7 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
+        border: none;
     }
 
     .ios-app-left {
@@ -280,7 +346,7 @@
         border-radius: 11px;
         object-fit: cover;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: none;
     }
 
     .ios-app-text {
@@ -361,13 +427,15 @@
         align-items: center;
         gap: 7px;
         margin-top: 12px;
+        background-color: transparent;
+        border: none;
     }
 
     .ios-slider-dot {
         width: 7px;
         height: 7px;
         border-radius: 999px;
-        background-color: rgba(255, 255, 255, 0.28);
+        background-color: var(--dot-inactive-color);
         border: none;
         padding: 0;
         cursor: pointer;
@@ -376,7 +444,7 @@
 
     .ios-slider-dot.active {
         width: 18px;
-        background-color: #FFFFFF;
+        background-color: var(--dot-active-color);
     }
 
     /* Popup bố cục App Store */
@@ -421,7 +489,7 @@
         scrollbar-width: none;
         background: #050607;
         color: #FFFFFF;
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        border: none;
         border-radius: 26px;
         box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9);
         transform: translateY(22px) scale(0.95);
@@ -450,7 +518,7 @@
         font-weight: 600;
         padding: 9px 16px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: none;
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
         z-index: 10002;
         opacity: 0;
@@ -504,7 +572,7 @@
         scrollbar-width: none;
         background: rgba(22, 24, 29, 0.96);
         color: #FFFFFF;
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        border: none;
         border-radius: 24px;
         padding: 16px;
         box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
@@ -544,7 +612,7 @@
         border-radius: 10px;
         object-fit: cover;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: none;
     }
 
     .ios-version-picker-title {
@@ -590,6 +658,51 @@
         gap: 8px;
     }
 
+    .ios-rec-search-wrap {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        margin-bottom: 10px;
+        background: rgba(22, 24, 29, 0.96);
+        padding-bottom: 2px;
+    }
+
+    .ios-rec-search-wrap svg {
+        position: absolute;
+        left: 11px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        color: #8E8E93;
+        pointer-events: none;
+    }
+
+    .ios-rec-search-input {
+        width: 100%;
+        height: 38px;
+        padding: 0 12px 0 34px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: #FFFFFF;
+        font-size: 16px;
+        line-height: 1.2;
+        -webkit-text-size-adjust: 100%;
+        touch-action: manipulation;
+        outline: none;
+        transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .ios-rec-search-input::placeholder {
+        color: #8E8E93;
+        font-size: 14px;
+    }
+
+    .ios-rec-search-input:focus {
+        background: rgba(255, 255, 255, 0.12);
+    }
+
     .ios-version-option {
         display: flex;
         align-items: center;
@@ -598,7 +711,7 @@
         width: 100%;
         padding: 11px 13px;
         border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: none;
         background: rgba(255, 255, 255, 0.05);
         color: #FFFFFF;
         text-align: left;
@@ -608,7 +721,6 @@
 
     .ios-version-option:hover {
         background: rgba(10, 132, 255, 0.18);
-        border-color: rgba(10, 132, 255, 0.55);
     }
 
     .ios-version-option-info {
@@ -704,11 +816,40 @@
     }
 
     .ios-popup-sticky-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 7px;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
         object-fit: cover;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        flex-shrink: 0;
+        border: none;
+    }
+
+    .ios-popup-sticky-text {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+    }
+
+    .ios-popup-sticky-title {
+        font-size: 13.5px;
+        font-weight: 700;
+        line-height: 1.15;
+        color: #FFFFFF;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ios-popup-sticky-sub {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.2;
+        color: #98989F;
+        margin-top: 1px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     /* Banner đầu trang hòa trộn mờ liền mạch xuống nền bên dưới */
@@ -785,7 +926,7 @@
 
     .ios-store-topbar {
         position: absolute;
-        top: 12px;
+        top: 18px;
         left: 12px;
         right: 12px;
         display: flex;
@@ -838,7 +979,7 @@
         border-radius: 19px;
         object-fit: cover;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.16);
+        border: none;
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
     }
 
@@ -870,6 +1011,21 @@
         justify-content: space-between;
         gap: 10px;
         width: 100%;
+    }
+
+    .ios-store-meta-stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    .ios-store-genre-badge {
+        font-size: 12px;
+        font-weight: 600;
+        color: #98989F;
+        line-height: 1.25;
     }
 
     .ios-store-btn-download {
@@ -973,7 +1129,7 @@
 
     /* List ảnh & video cuộn ngang bên trên dòng cập nhật mới */
     .ios-popup-gallery-wrap {
-        padding: 14px 16px 4px;
+        padding: 14px 0 4px;
     }
 
     .ios-popup-gallery {
@@ -990,12 +1146,16 @@
         display: none;
     }
 
+    .ios-popup-gallery .ios-marquee-track {
+        gap: 10px;
+    }
+
     .ios-popup-gallery-item {
         flex: 0 0 72%;
         aspect-ratio: 16 / 10;
         border-radius: 14px;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: none;
         background: #141715;
     }
 
@@ -1032,6 +1192,16 @@
         gap: 8px;
     }
 
+    .ios-rec-heading-trigger {
+        cursor: pointer;
+        user-select: none;
+        transition: opacity 0.15s ease;
+    }
+
+    .ios-rec-heading-trigger:hover {
+        opacity: 0.85;
+    }
+
     .ios-store-section-heading span.chevron {
         color: #8E8E93;
         font-size: 18px;
@@ -1041,9 +1211,9 @@
     .ios-changelog-version-inline {
         display: block;
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         color: #8E8E93;
-        margin-top: 8px;
+        margin: 0 0 8px 0;
     }
 
     .ios-store-section-text {
@@ -1062,7 +1232,7 @@
         height: auto;
         border-radius: 14px;
         margin: 10px 0;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: none;
         background: #141715;
     }
 
@@ -1103,18 +1273,47 @@
     }
 
     .ios-info-value {
-        color: rgba(255, 255, 255, 0.88);
+        color: #FFFFFF;
+        font-weight: 700;
         text-align: right;
         word-break: break-word;
     }
 
     .ios-info-link {
         color: #0A84FF;
+        font-weight: 700;
         text-decoration: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
         cursor: pointer;
+    }
+
+    .ios-info-report-note {
+        margin-top: 12px;
+        font-size: 12.5px;
+        line-height: 1.45;
+        color: #98989F;
+    }
+
+    .ios-report-messenger {
+        color: #2E9BFF;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .ios-report-messenger:hover {
+        text-decoration: underline;
+    }
+
+    .ios-report-zalo {
+        color: #00B8FF;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .ios-report-zalo:hover {
+        text-decoration: underline;
     }
 
     /* Danh sách đề xuất giống ảnh */
@@ -1133,7 +1332,7 @@
         padding: 8px 10px;
         border-radius: 14px;
         background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        border: none;
         cursor: pointer;
         transition: background-color 0.15s ease;
     }
@@ -1156,7 +1355,7 @@
         border-radius: 13px;
         object-fit: cover;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        border: none;
     }
 
     .ios-rec-meta {
@@ -1218,7 +1417,7 @@
 </style>
 
 <section class="ios-game-section" id="ios-game-section-main">
-    <div class="ios-section-header">
+    <div class="ios-section-header" id="ios-section-header-trigger">
         <h2 id="sec-title"></h2>
         <p id="sec-subtitle"></p>
     </div>
@@ -1245,6 +1444,26 @@
     </div>
 </div>
 
+<div class="ios-version-picker-backdrop" id="ios-rec-all-popup" aria-hidden="true">
+    <div class="ios-version-picker-modal" role="dialog" aria-modal="true" aria-labelledby="ios-rec-all-title">
+        <div class="ios-version-picker-head">
+            <div style="min-width:0;">
+                <h4 class="ios-version-picker-title" id="ios-rec-all-title">Tất cả đề xuất</h4>
+                <p class="ios-version-picker-sub" id="ios-rec-all-sub"></p>
+            </div>
+            <button class="ios-version-picker-close" id="ios-rec-all-close" type="button" aria-label="Đóng">×</button>
+        </div>
+        <div class="ios-rec-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="m20 20-3.5-3.5"/>
+            </svg>
+            <input class="ios-rec-search-input" id="ios-rec-all-search" type="search" placeholder="Tìm ứng dụng hoặc nội dung..." autocomplete="off">
+        </div>
+        <div class="ios-rec-list" id="ios-rec-all-list"></div>
+    </div>
+</div>
+
 <div class="ios-popup-backdrop" id="ios-card-popup" aria-hidden="true">
     <div class="ios-popup-modal" id="ios-popup-modal" role="dialog" aria-modal="true" aria-labelledby="ios-popup-title">
         <div class="ios-popup-sticky-bar" id="ios-popup-sticky-bar">
@@ -1254,6 +1473,10 @@
                 </svg>
             </button>
             <img class="ios-popup-sticky-icon" id="ios-popup-sticky-icon" src="" alt="">
+            <div class="ios-popup-sticky-text">
+                <span class="ios-popup-sticky-title" id="ios-popup-sticky-title"></span>
+                <span class="ios-popup-sticky-sub" id="ios-popup-sticky-sub"></span>
+            </div>
             <button class="ios-store-btn-download" id="ios-popup-sticky-download" type="button">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
@@ -1289,7 +1512,10 @@
                     <h3 class="ios-store-title" id="ios-popup-title"></h3>
                     <p class="ios-store-subtitle" id="ios-popup-subtitle"></p>
                     <div class="ios-store-action-row" id="ios-popup-action-row">
-                        <span class="ios-store-version-badge" id="ios-popup-version"></span>
+                        <div class="ios-store-meta-stack">
+                            <span class="ios-store-genre-badge" id="ios-popup-genre-badge"></span>
+                            <span class="ios-store-version-badge" id="ios-popup-version"></span>
+                        </div>
                         <button class="ios-store-btn-download" id="ios-popup-download" type="button">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
@@ -1331,8 +1557,8 @@
 
             <div class="ios-store-section" id="ios-popup-changelog-section">
                 <h4 class="ios-store-section-heading">Có gì mới?</h4>
-                <p class="ios-store-section-text" id="ios-popup-changelog"></p>
                 <span class="ios-changelog-version-inline" id="ios-popup-changelog-version"></span>
+                <p class="ios-store-section-text" id="ios-popup-changelog"></p>
             </div>
 
             <div class="ios-store-section">
@@ -1367,15 +1593,12 @@
                         <span class="ios-info-label">Phiên bản</span>
                         <span class="ios-info-value" id="ios-info-version"></span>
                     </div>
-                    <div class="ios-info-row">
-                        <span class="ios-info-label">Liên kết tải</span>
-                        <a class="ios-info-link" id="ios-info-url" href="#" target="_blank" rel="noopener noreferrer">Mở liên kết</a>
-                    </div>
                 </div>
+                <p class="ios-info-report-note">Báo cáo sự cố qua <a class="ios-report-messenger" href="https://m.me/ktads" target="_blank" rel="noopener noreferrer">Facebook Messenger</a> và <a class="ios-report-zalo" href="https://zalo.me/0374113767" target="_blank" rel="noopener noreferrer">Zalo</a>.</p>
             </div>
 
             <div class="ios-store-section" id="ios-rec-author-section">
-                <h4 class="ios-store-section-heading">
+                <h4 class="ios-store-section-heading ios-rec-heading-trigger" id="ios-rec-author-trigger">
                     <span id="ios-rec-author-heading">Ứng Dụng Khác</span>
                     <span class="chevron">›</span>
                 </h4>
@@ -1383,7 +1606,7 @@
             </div>
 
             <div class="ios-store-section" id="ios-rec-like-section">
-                <h4 class="ios-store-section-heading">
+                <h4 class="ios-store-section-heading ios-rec-heading-trigger" id="ios-rec-like-trigger">
                     <span id="ios-rec-like-heading">Có Thể Bạn Cũng Thích</span>
                     <span class="chevron">›</span>
                 </h4>
@@ -1397,7 +1620,29 @@
     (function () {
         const CANDIDATE_URLS = ["Tabs/Appios.json", "Appios.json"];
         const EXTRA_JSON_URLS = ["Tabs/Appios.json", "Appios.json", "Tabs/Apps.json", "Apps.json"];
-        const ALLOWED_SLIDE_TYPES = new Set(["snap", "smooth", "fade", "scroll", "marquee"]);
+        /*
+         * slideType hỗ trợ (tất cả đều có vòng lặp mặc định loop !== false):
+         * - "snap"    : Trượt ngang bắt dính từng card (mặc định speed: 420ms, set bằng "slideSpeed": 420)
+         * - "smooth"  : Trượt ngang mượt có gia tốc (mặc định speed: 850ms, set bằng "slideSpeed": 850)
+         * - "fade"    : Mờ dần qua lại (mặc định speed: 700ms, set bằng "slideSpeed": 700)
+         * - "scroll"  : Cuộn ngang dài có vòng lặp (mặc định speed: 1600ms, set bằng "slideSpeed": 1600)
+         * - "marquee" : Cuộn đều liên tục vòng lặp vô hạn (mặc định speed: 38 px/s, set bằng "marqueeSpeed": 38 hoặc "slideSpeed")
+         * - "zoom"    : Phóng nhẹ/thu nhẹ khi chuyển (mặc định speed: 750ms, set bằng "slideSpeed": 750)
+         * - "slide"   : Trượt nhanh dứt khoát (mặc định speed: 300ms, set bằng "slideSpeed": 300)
+         * - "instant" : Nhảy chuyển ngay lập tức (mặc định speed: 0ms, set bằng "slideSpeed": 0)
+         */
+        const ALLOWED_SLIDE_TYPES = new Set(["snap", "smooth", "fade", "scroll", "marquee", "zoom", "slide", "instant"]);
+        const DEFAULT_SLIDE_SPEED_BY_TYPE = {
+            snap: 420,
+            smooth: 850,
+            fade: 700,
+            scroll: 1600,
+            marquee: 1200,
+            zoom: 750,
+            slide: 300,
+            instant: 0
+        };
+        const DEFAULT_MARQUEE_PX_PER_SEC = 38;
         const TOUCH_RESUME_DELAY_MS = 4500;
         let autoplayTimer = null;
         let marqueeRafId = null;
@@ -1407,8 +1652,152 @@
         let popupGalleryResumeTimer = null;
         let toastTimer = null;
         let currentSliderConfig = {};
+        let currentSectionEntries = [];
         let allItemsPool = [];
         let currentPopupIsApp = true;
+        let currentAllAuthorEntries = [];
+        let currentAllLikeEntries = [];
+        let activeRecModalEntries = [];
+        let activeSlideMode = "snap";
+        let modeGeneration = 0;
+
+        function lockSlideMode(nextMode) {
+            modeGeneration += 1;
+            activeSlideMode = resolveSlideType(nextMode);
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+            if (marqueeRafId) {
+                cancelAnimationFrame(marqueeRafId);
+                marqueeRafId = null;
+            }
+            if (sliderResumeTimer) {
+                clearTimeout(sliderResumeTimer);
+                sliderResumeTimer = null;
+            }
+            return modeGeneration;
+        }
+
+        function isModeStillActive(expectedMode, expectedGen) {
+            return activeSlideMode === expectedMode && modeGeneration === expectedGen;
+        }
+
+        function resolveSlideSpeed(config, slideType) {
+            const type = resolveSlideType(slideType);
+            if (config && config.slideSpeed !== undefined && config.slideSpeed !== null && config.slideSpeed !== "") {
+                const parsed = Number(config.slideSpeed);
+                if (!Number.isNaN(parsed) && parsed >= 0) return parsed;
+            }
+            return DEFAULT_SLIDE_SPEED_BY_TYPE[type] ?? 650;
+        }
+
+        function resolveMarqueeSpeed(config) {
+            if (config && config.marqueeSpeed !== undefined && config.marqueeSpeed !== null && config.marqueeSpeed !== "") {
+                const parsed = Number(config.marqueeSpeed);
+                if (!Number.isNaN(parsed) && parsed > 0) return parsed;
+            }
+            if (config && config.slideSpeed !== undefined && config.slideSpeed !== null && config.slideSpeed !== "") {
+                const fromSlideSpeed = Number(config.slideSpeed);
+                if (!Number.isNaN(fromSlideSpeed) && fromSlideSpeed > 0) {
+                    return fromSlideSpeed > 150 ? Math.max(12, Math.round(fromSlideSpeed / 25)) : fromSlideSpeed;
+                }
+            }
+            return DEFAULT_MARQUEE_PX_PER_SEC;
+        }
+
+        function resolveAssetSrc(rawSrc, fallbackSvg) {
+            const clean = String(rawSrc || "").trim();
+            if (!clean) return fallbackSvg;
+            if (/^(?:https?:\/\/|data:|blob:|\/)/i.test(clean)) return clean;
+
+            const pathname = window.location.pathname || "/";
+            const isInsideTabsFolder = /\/tabs\/[^/]*$/i.test(pathname);
+            if (isInsideTabsFolder) {
+                return clean;
+            }
+
+            const stripped = clean.replace(/^\.\//, "");
+            if (/^tabs\//i.test(stripped)) {
+                return stripped;
+            }
+            return `Tabs/${stripped}`;
+        }
+
+        function bindImageFallback(imgEl, fallbackSrc) {
+            if (!imgEl || !fallbackSrc) return;
+            imgEl.addEventListener("error", () => {
+                if (imgEl.src !== fallbackSrc) {
+                    imgEl.src = fallbackSrc;
+                }
+            }, { once: true });
+        }
+
+        function parseCssColor(rawColor) {
+            if (!rawColor || typeof rawColor !== "string") return null;
+            const trimmed = rawColor.trim().toLowerCase();
+            if (trimmed === "transparent" || trimmed === "rgba(0, 0, 0, 0)") {
+                return { r: 0, g: 0, b: 0, a: 0 };
+            }
+            const rgbaMatch = trimmed.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,\s*([\d.]+))?\s*\)$/);
+            if (rgbaMatch) {
+                return {
+                    r: Math.min(255, Math.max(0, Number(rgbaMatch[1]))),
+                    g: Math.min(255, Math.max(0, Number(rgbaMatch[2]))),
+                    b: Math.min(255, Math.max(0, Number(rgbaMatch[3]))),
+                    a: rgbaMatch[4] !== undefined ? Math.min(1, Math.max(0, Number(rgbaMatch[4]))) : 1
+                };
+            }
+            return null;
+        }
+
+        function detectSectionBackgroundDark(sectionEl) {
+            if (!sectionEl) return false;
+
+            const themeAttr = (
+                sectionEl.getAttribute("data-theme") ||
+                document.documentElement.getAttribute("data-theme") ||
+                document.body.getAttribute("data-theme") ||
+                ""
+            ).toLowerCase();
+            if (themeAttr.includes("dark")) return true;
+            if (themeAttr.includes("light")) return false;
+
+            const classStr = `${sectionEl.className || ""} ${document.body.className || ""} ${document.documentElement.className || ""}`.toLowerCase();
+            if (/\b(dark|dark-mode|theme-dark|bg-dark)\b/.test(classStr)) return true;
+            if (/\b(light|light-mode|theme-light|bg-light|bg-white)\b/.test(classStr)) return false;
+
+            let rComp = 255;
+            let gComp = 255;
+            let bComp = 255;
+
+            const chain = [];
+            let el = sectionEl;
+            while (el && el !== document.documentElement) {
+                chain.push(el);
+                el = el.parentElement;
+            }
+            chain.push(document.documentElement);
+
+            for (let i = chain.length - 1; i >= 0; i--) {
+                const parsed = parseCssColor(window.getComputedStyle(chain[i]).backgroundColor);
+                if (parsed && parsed.a > 0) {
+                    const alpha = parsed.a;
+                    rComp = parsed.r * alpha + rComp * (1 - alpha);
+                    gComp = parsed.g * alpha + gComp * (1 - alpha);
+                    bComp = parsed.b * alpha + bComp * (1 - alpha);
+                }
+            }
+
+            const luminance = (0.2126 * rComp + 0.7152 * gComp + 0.0722 * bComp) / 255;
+            return luminance < 0.45;
+        }
+
+        function syncSectionContrastColors(sectionEl) {
+            if (!sectionEl) return;
+            const isDark = detectSectionBackgroundDark(sectionEl);
+            sectionEl.classList.toggle("is-dark-bg", isDark);
+        }
 
         function svgToDataUrl(svgString) {
             return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgString.trim());
@@ -1862,6 +2251,77 @@
             pickerBackdrop.setAttribute("aria-hidden", "true");
         }
 
+        function normalizeSearchText(str) {
+            return String(str || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/đ/g, "d")
+                .trim();
+        }
+
+        function filterRecModalList(rawKeyword) {
+            const listEl = document.getElementById("ios-rec-all-list");
+            const subEl = document.getElementById("ios-rec-all-sub");
+            if (!listEl) return;
+
+            const keyword = normalizeSearchText(rawKeyword);
+            const filtered = !keyword
+                ? activeRecModalEntries
+                : activeRecModalEntries.filter(({ item }) => {
+                    const haystack = normalizeSearchText(
+                        [
+                            item.appName,
+                            item.title,
+                            item.description,
+                            item.genre,
+                            item.author,
+                            item.tag
+                        ].filter(Boolean).join(" ")
+                    );
+                    return haystack.includes(keyword);
+                });
+
+            if (subEl) {
+                subEl.textContent = keyword
+                    ? `Tìm thấy ${filtered.length} / ${activeRecModalEntries.length} nội dung`
+                    : `${activeRecModalEntries.length} nội dung`;
+            }
+
+            renderRecommendationList(
+                listEl,
+                filtered,
+                keyword ? "Không tìm thấy nội dung phù hợp." : "Chưa có nội dung phù hợp."
+            );
+        }
+
+        function closeAllRecPopup() {
+            const recBackdrop = document.getElementById("ios-rec-all-popup");
+            if (!recBackdrop) return;
+            recBackdrop.classList.remove("is-open");
+            recBackdrop.setAttribute("aria-hidden", "true");
+        }
+
+        function openAllRecPopup(headingTitle, entries) {
+            const recBackdrop = document.getElementById("ios-rec-all-popup");
+            const titleEl = document.getElementById("ios-rec-all-title");
+            const searchInput = document.getElementById("ios-rec-all-search");
+            if (!recBackdrop) return;
+
+            activeRecModalEntries = Array.isArray(entries) ? entries : [];
+
+            if (titleEl) {
+                titleEl.textContent = headingTitle || "Tất cả đề xuất";
+            }
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+            filterRecModalList("");
+            recBackdrop.classList.add("is-open");
+            recBackdrop.setAttribute("aria-hidden", "false");
+        }
+
         function openVersionPickerPopup(item, iconSrc, seedIndex = 0) {
             const pickerBackdrop = document.getElementById("ios-version-picker-popup");
             const listEl = document.getElementById("ios-version-picker-list");
@@ -1871,7 +2331,11 @@
             if (!pickerBackdrop || !listEl) return;
 
             const appName = (item && (item.appName || item.title)) || "Ứng dụng";
-            const resolvedIcon = (iconSrc && iconSrc.trim()) || (item && item.icon && item.icon.trim()) || createGameIconSvg(seedIndex);
+            const fallbackIcon = createGameIconSvg(seedIndex);
+            const resolvedIcon = resolveAssetSrc(
+                (iconSrc && iconSrc.trim()) || (item && (item.icon || item.img)),
+                fallbackIcon
+            );
             const options = extractDownloadOptions(item);
 
             const customTitle = (item && item.downloadPickerTitle) || currentSliderConfig.downloadPickerTitle;
@@ -1880,6 +2344,7 @@
             if (iconEl) {
                 iconEl.src = resolvedIcon;
                 iconEl.alt = appName;
+                bindImageFallback(iconEl, fallbackIcon);
             }
             if (titleEl) {
                 titleEl.textContent = (customTitle && String(customTitle).trim()) || `${appName} — Chọn link tải`;
@@ -1928,15 +2393,61 @@
         (function initVersionPickerEvents() {
             const pickerBackdrop = document.getElementById("ios-version-picker-popup");
             const closeBtn = document.getElementById("ios-version-picker-close");
-            if (!pickerBackdrop || !closeBtn) return;
+            if (pickerBackdrop && closeBtn) {
+                closeBtn.addEventListener("click", closeVersionPickerPopup);
+                pickerBackdrop.addEventListener("click", (e) => {
+                    if (e.target === pickerBackdrop) closeVersionPickerPopup();
+                });
+            }
 
-            closeBtn.addEventListener("click", closeVersionPickerPopup);
-            pickerBackdrop.addEventListener("click", (e) => {
-                if (e.target === pickerBackdrop) closeVersionPickerPopup();
-            });
+            const recBackdrop = document.getElementById("ios-rec-all-popup");
+            const recCloseBtn = document.getElementById("ios-rec-all-close");
+            const recSearchInput = document.getElementById("ios-rec-all-search");
+            if (recBackdrop && recCloseBtn) {
+                recCloseBtn.addEventListener("click", closeAllRecPopup);
+                recBackdrop.addEventListener("click", (e) => {
+                    if (e.target === recBackdrop) closeAllRecPopup();
+                });
+            }
+            if (recSearchInput) {
+                recSearchInput.addEventListener("input", (e) => {
+                    filterRecModalList(e.target.value);
+                });
+            }
+
+            const sectionHeaderTrigger = document.getElementById("ios-section-header-trigger");
+            if (sectionHeaderTrigger) {
+                sectionHeaderTrigger.addEventListener("click", () => {
+                    const titleEl = document.getElementById("sec-title");
+                    openAllRecPopup((titleEl && titleEl.textContent) || "Tất cả nội dung", currentSectionEntries);
+                });
+            }
+
+            const authorTrigger = document.getElementById("ios-rec-author-trigger");
+            if (authorTrigger) {
+                authorTrigger.addEventListener("click", () => {
+                    const h = document.getElementById("ios-rec-author-heading");
+                    openAllRecPopup(h ? h.textContent : "Ứng Dụng Khác", currentAllAuthorEntries);
+                });
+            }
+
+            const likeTrigger = document.getElementById("ios-rec-like-trigger");
+            if (likeTrigger) {
+                likeTrigger.addEventListener("click", () => {
+                    const h = document.getElementById("ios-rec-like-heading");
+                    openAllRecPopup(h ? h.textContent : "Có Thể Bạn Cũng Thích", currentAllLikeEntries);
+                });
+            }
+
             document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && pickerBackdrop.classList.contains("is-open")) {
-                    closeVersionPickerPopup();
+                if (e.key === "Escape") {
+                    if (recBackdrop && recBackdrop.classList.contains("is-open")) {
+                        closeAllRecPopup();
+                        return;
+                    }
+                    if (pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
+                        closeVersionPickerPopup();
+                    }
                 }
             });
         })();
@@ -2024,8 +2535,10 @@
                 }
                 return `<video src="${entry.src}" controls playsinline preload="metadata"></video>`;
             }
-            const imgSrc = typeof entry === "string" ? entry : (entry && entry.src) || "";
-            return `<img src="${imgSrc}" alt="Ảnh ${idx + 1}">`;
+            const rawImgSrc = typeof entry === "string" ? entry : (entry && entry.src) || "";
+            const fallbackBanner = createGameBannerSvg(idx);
+            const imgSrc = resolveAssetSrc(rawImgSrc, fallbackBanner);
+            return `<img src="${imgSrc}" alt="Ảnh ${idx + 1}" onerror="if(this.src!==decodeURIComponent('${encodeURIComponent(fallbackBanner)}')){this.src=decodeURIComponent('${encodeURIComponent(fallbackBanner)}');}">`;
         }
 
         function isAppEntry(item) {
@@ -2091,8 +2604,10 @@
             }
 
             entries.forEach(({ item, seedIndex }) => {
-                const bSrc = (item.banner && item.banner.trim()) || createGameBannerSvg(seedIndex);
-                const iSrc = (item.icon && item.icon.trim()) || createGameIconSvg(seedIndex);
+                const fallbackBanner = createGameBannerSvg(seedIndex);
+                const fallbackIcon = createGameIconSvg(seedIndex);
+                const bSrc = resolveAssetSrc(item.banner, fallbackBanner);
+                const iSrc = resolveAssetSrc(item.icon || item.img, fallbackIcon);
                 const name = item.appName || item.title || "Nội dung";
                 const desc = item.description || item.genre || "";
                 const itemIsApp = isAppEntry(item);
@@ -2111,10 +2626,12 @@
                         </div>
                     </div>
                     <div class="ios-rec-right">
-                        ${itemIsApp ? `<button class="ios-rec-btn" type="button">Tải</button>` : ``}
+                        ${itemIsApp ? `<button class="ios-rec-btn" type="button">Tải Về</button>` : ``}
                         ${subText ? `<span class="ios-rec-sub">${subText}</span>` : ``}
                     </div>
                 `;
+
+                bindImageFallback(row.querySelector(".ios-rec-icon"), fallbackIcon);
 
                 const recBtn = row.querySelector(".ios-rec-btn");
                 if (recBtn) {
@@ -2125,6 +2642,7 @@
                 }
 
                 row.addEventListener("click", () => {
+                    closeAllRecPopup();
                     openCardPopup(item, bSrc, iSrc, seedIndex);
                 });
 
@@ -2145,13 +2663,14 @@
 
             const matchingPool = allItemsPool.filter(({ item }) => isAppEntry(item) === targetIsApp);
 
-            const sameAuthorItems = shuffleArray(
-                matchingPool.filter(({ item }) => {
-                    const name = item.appName || item.title || "";
-                    const auth = (item.author && item.author.trim()) || "";
-                    return name !== currentName && currentAuthor && auth === currentAuthor;
-                })
-            ).slice(0, 3);
+            const allSameAuthorItems = matchingPool.filter(({ item }) => {
+                const name = item.appName || item.title || "";
+                const auth = (item.author && item.author.trim()) || "";
+                return name !== currentName && currentAuthor && auth === currentAuthor;
+            });
+            currentAllAuthorEntries = allSameAuthorItems;
+
+            const sameAuthorItems = shuffleArray(allSameAuthorItems).slice(0, 3);
 
             if (currentAuthor && sameAuthorItems.length > 0) {
                 authorSection.style.display = "";
@@ -2168,6 +2687,12 @@
             }
 
             const usedNames = new Set([currentName, ...sameAuthorItems.map((e) => e.item.appName || e.item.title || "")]);
+            const allOtherItems = matchingPool.filter(({ item }) => {
+                const name = item.appName || item.title || "";
+                return name !== currentName;
+            });
+            currentAllLikeEntries = allOtherItems;
+
             const otherItems = shuffleArray(
                 matchingPool.filter(({ item }) => {
                     const name = item.appName || item.title || "";
@@ -2252,6 +2777,9 @@
         function setupPopupGallery(galleryEl, mediaList, config) {
             stopPopupGalleryAutoplay();
             galleryEl.innerHTML = "";
+            galleryEl.style.scrollBehavior = "";
+            galleryEl.style.scrollSnapType = "";
+            galleryEl.style.overflow = "";
             if (!Array.isArray(mediaList) || mediaList.length === 0) return;
 
             mediaList.forEach((entry, idx) => {
@@ -2267,8 +2795,9 @@
             if (!autoplay) return;
 
             const slideType = resolveSlideType(config.slideType);
-            const slideSpeed = Number(config.slideSpeed) > 0 ? Number(config.slideSpeed) : 650;
-            const marqueeSpeedPxPerSec = Number(config.marqueeSpeed) > 0 ? Number(config.marqueeSpeed) : 38;
+            const expectedGen = modeGeneration;
+            const slideSpeed = resolveSlideSpeed(config, slideType);
+            const marqueeSpeedPxPerSec = resolveMarqueeSpeed(config);
             const loop = config.loop !== false;
             const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
 
@@ -2288,24 +2817,45 @@
             );
 
             if (slideType === "marquee") {
+                galleryEl.style.scrollBehavior = "auto";
+                galleryEl.style.scrollSnapType = "none";
+                galleryEl.style.overflow = "hidden";
+
+                const track = document.createElement("div");
+                track.className = "ios-marquee-track";
+                const origItems = Array.from(galleryEl.children);
+                origItems.forEach((origItem) => {
+                    origItem.style.flex = "0 0 240px";
+                    origItem.style.flexShrink = "0";
+                    track.appendChild(origItem);
+                });
                 mediaList.forEach((entry, idx) => {
                     const clone = document.createElement("div");
                     clone.className = "ios-popup-gallery-item";
+                    clone.style.flex = "0 0 240px";
+                    clone.style.flexShrink = "0";
                     clone.innerHTML = buildMediaEntryHtml(entry, idx);
-                    galleryEl.appendChild(clone);
+                    track.appendChild(clone);
                 });
+                galleryEl.appendChild(track);
 
+                let offsetPx = 0;
                 let lastTime = performance.now();
                 function tick(now) {
-                    const dt = (now - lastTime) / 1000;
+                    if (!isModeStillActive("marquee", expectedGen)) {
+                        popupGalleryRafId = null;
+                        return;
+                    }
+                    const dt = Math.min((now - lastTime) / 1000, 0.1);
                     lastTime = now;
                     if (!isPaused()) {
-                        const cycleWidth = galleryEl.scrollWidth / 2;
-                        if (cycleWidth > 0) {
-                            galleryEl.scrollLeft += marqueeSpeedPxPerSec * dt;
-                            if (galleryEl.scrollLeft >= cycleWidth) {
-                                galleryEl.scrollLeft -= cycleWidth;
+                        const cycleWidth = track.scrollWidth / 2;
+                        if (cycleWidth > 1) {
+                            offsetPx += marqueeSpeedPxPerSec * dt;
+                            if (offsetPx >= cycleWidth) {
+                                offsetPx -= cycleWidth;
                             }
+                            track.style.transform = `translate3d(${-offsetPx}px, 0, 0)`;
                         }
                     }
                     popupGalleryRafId = requestAnimationFrame(tick);
@@ -2316,7 +2866,7 @@
 
             let idx = 0;
             popupGalleryTimer = setInterval(() => {
-                if (isPaused()) return;
+                if (!isModeStillActive(slideType, expectedGen) || isPaused()) return;
                 const items = Array.from(galleryEl.children);
                 if (items.length <= 1) return;
                 if (loop) {
@@ -2377,11 +2927,25 @@
 
             currentPopupIsApp = isAppEntry(item);
 
-            document.getElementById("ios-popup-banner").src = bannerSrc;
-            document.getElementById("ios-popup-banner").alt = item.bannerAlt || item.appName || "";
-            document.getElementById("ios-popup-icon").src = iconSrc;
-            document.getElementById("ios-popup-icon").alt = item.iconAlt || item.appName || "";
-            document.getElementById("ios-popup-sticky-icon").src = iconSrc;
+            const fallbackBanner = createGameBannerSvg(index);
+            const fallbackIcon = createGameIconSvg(index);
+            const resolvedBanner = resolveAssetSrc(bannerSrc || (item && item.banner), fallbackBanner);
+            const resolvedIcon = resolveAssetSrc(iconSrc || (item && (item.icon || item.img)), fallbackIcon);
+
+            const bannerEl = document.getElementById("ios-popup-banner");
+            const iconEl = document.getElementById("ios-popup-icon");
+            const stickyIconEl = document.getElementById("ios-popup-sticky-icon");
+
+            bannerEl.src = resolvedBanner;
+            bannerEl.alt = item.bannerAlt || item.appName || "";
+            bindImageFallback(bannerEl, fallbackBanner);
+
+            iconEl.src = resolvedIcon;
+            iconEl.alt = item.iconAlt || item.appName || "";
+            bindImageFallback(iconEl, fallbackIcon);
+
+            stickyIconEl.src = resolvedIcon;
+            bindImageFallback(stickyIconEl, fallbackIcon);
 
             const authorText = (item.author && item.author.trim()) || "Đang cập nhật";
             const genreText = (item.genre && item.genre.trim()) || (currentPopupIsApp ? "Ứng dụng" : "Nội dung");
@@ -2392,8 +2956,19 @@
                 ? ((item.version && String(item.version).trim()) || "Phiên bản")
                 : "";
 
-            document.getElementById("ios-popup-title").textContent = item.appName || item.title || "";
-            document.getElementById("ios-popup-subtitle").textContent = item.description || "";
+            const resolvedTitle = item.appName || item.title || "";
+            const resolvedSubtitle = item.description || "";
+
+            document.getElementById("ios-popup-title").textContent = resolvedTitle;
+            document.getElementById("ios-popup-subtitle").textContent = resolvedSubtitle;
+            document.getElementById("ios-popup-sticky-title").textContent = resolvedTitle;
+            document.getElementById("ios-popup-sticky-sub").textContent = resolvedSubtitle;
+
+            const genreBadgeEl = document.getElementById("ios-popup-genre-badge");
+            if (genreBadgeEl) {
+                genreBadgeEl.textContent = genreText;
+                genreBadgeEl.style.display = genreText ? "" : "none";
+            }
 
             const versionBadgeEl = document.getElementById("ios-popup-version");
             if (versionBadgeEl) {
@@ -2453,20 +3028,9 @@
                 infoVersionEl.textContent = currentPopupIsApp ? versionText : "";
             }
 
-            const downloadOptions = extractDownloadOptions(item);
-            const infoUrlEl = document.getElementById("ios-info-url");
-            const infoUrlRow = infoUrlEl ? infoUrlEl.closest(".ios-info-row") : null;
-            const hasValidUrl = downloadOptions.length > 0;
-            if (infoUrlRow) {
-                infoUrlRow.style.display = currentPopupIsApp ? "" : "none";
-            }
-            if (infoUrlEl) {
-                infoUrlEl.href = hasValidUrl ? downloadOptions[0].url : "#";
-            }
-
             const baseGallery = Array.isArray(item.gallery) && item.gallery.length > 0
                 ? item.gallery.filter(Boolean)
-                : [bannerSrc, createGameBannerSvg(index + 1), createGameBannerSvg(index + 2)];
+                : [resolvedBanner, createGameBannerSvg(index + 1), createGameBannerSvg(index + 2)];
             const rawVideo = (item.videoUrl && item.videoUrl.trim()) || (item.video && item.video.trim()) || "";
             const galleryMedia = rawVideo
                 ? [{ type: "video", src: rawVideo }, ...baseGallery]
@@ -2477,7 +3041,7 @@
 
             const triggerDownload = () => {
                 if (currentPopupIsApp) {
-                    openVersionPickerPopup(item, iconSrc, index);
+                    openVersionPickerPopup(item, resolvedIcon, index);
                 }
             };
 
@@ -2501,6 +3065,7 @@
         function closeCardPopup() {
             const backdrop = document.getElementById("ios-card-popup");
             if (!backdrop) return;
+            closeAllRecPopup();
             closeVersionPickerPopup();
             stopPopupGalleryAutoplay();
             backdrop.classList.remove("is-open");
@@ -2526,6 +3091,11 @@
                 if (e.target === backdrop) closeCardPopup();
             });
             document.addEventListener("keydown", (e) => {
+                const recBackdrop = document.getElementById("ios-rec-all-popup");
+                if (e.key === "Escape" && recBackdrop && recBackdrop.classList.contains("is-open")) {
+                    closeAllRecPopup();
+                    return;
+                }
                 const pickerBackdrop = document.getElementById("ios-version-picker-popup");
                 if (e.key === "Escape" && pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
                     closeVersionPickerPopup();
@@ -2559,8 +3129,10 @@
             const card = document.createElement("div");
             card.className = "ios-game-card";
 
-            const bannerSrc = (item.banner && item.banner.trim()) || createGameBannerSvg(index);
-            const iconSrc = (item.icon && item.icon.trim()) || createGameIconSvg(index);
+            const fallbackBanner = createGameBannerSvg(index);
+            const fallbackIcon = createGameIconSvg(index);
+            const bannerSrc = resolveAssetSrc(item.banner, fallbackBanner);
+            const iconSrc = resolveAssetSrc(item.icon || item.img, fallbackIcon);
             const showDownload = isAppEntry(item);
             const versionText = showDownload
                 ? ((item.version && String(item.version).trim()) || "Phiên bản")
@@ -2605,7 +3177,10 @@
             `;
 
             const heroImg = card.querySelector(".hero-img");
+            const appIconImg = card.querySelector(".ios-app-icon");
             const updateBadge = card.querySelector(".ios-card-update-badge");
+            bindImageFallback(heroImg, fallbackBanner);
+            bindImageFallback(appIconImg, fallbackIcon);
             if (heroImg && updateBadge) {
                 applyBannerDominantColorToBadge(heroImg, updateBadge, index);
             }
@@ -2628,30 +3203,48 @@
 
         function animateHorizontalScroll(sliderEl, targetLeft, durationMs) {
             const startLeft = sliderEl.scrollLeft;
-            const distance = targetLeft - startLeft;
+            const maxScroll = Math.max(0, sliderEl.scrollWidth - sliderEl.clientWidth);
+            const clampedTarget = Math.max(0, Math.min(targetLeft, maxScroll));
+            const distance = clampedTarget - startLeft;
             if (Math.abs(distance) < 1 || durationMs <= 0) {
-                sliderEl.scrollLeft = targetLeft;
+                sliderEl.scrollLeft = clampedTarget;
                 return;
+            }
+
+            if (sliderEl._iosScrollRafId) {
+                cancelAnimationFrame(sliderEl._iosScrollRafId);
+                sliderEl._iosScrollRafId = null;
             }
 
             const startTime = performance.now();
             const prevBehavior = sliderEl.style.scrollBehavior;
+            const prevSnapType = sliderEl.style.scrollSnapType;
             sliderEl.style.scrollBehavior = "auto";
+            sliderEl.style.scrollSnapType = "none";
+
+            function finish() {
+                sliderEl.style.scrollBehavior = prevBehavior;
+                sliderEl.style.scrollSnapType = prevSnapType;
+                sliderEl._iosScrollRafId = null;
+            }
 
             function step(now) {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / durationMs, 1);
-                const ease = 1 - Math.pow(1 - progress, 3);
+                const ease = progress < 0.5
+                    ? 4 * progress * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 3) / 2;
                 sliderEl.scrollLeft = startLeft + distance * ease;
 
                 if (progress < 1) {
-                    requestAnimationFrame(step);
+                    sliderEl._iosScrollRafId = requestAnimationFrame(step);
                 } else {
-                    sliderEl.style.scrollBehavior = prevBehavior;
+                    sliderEl.scrollLeft = clampedTarget;
+                    finish();
                 }
             }
 
-            requestAnimationFrame(step);
+            sliderEl._iosScrollRafId = requestAnimationFrame(step);
         }
 
         function resolveSlideType(rawType) {
@@ -2659,27 +3252,17 @@
             return ALLOWED_SLIDE_TYPES.has(cleaned) ? cleaned : "snap";
         }
 
-        function setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, config) {
-            if (autoplayTimer) {
-                clearInterval(autoplayTimer);
-                autoplayTimer = null;
-            }
-            if (marqueeRafId) {
-                cancelAnimationFrame(marqueeRafId);
-                marqueeRafId = null;
-            }
-            if (sliderResumeTimer) {
-                clearTimeout(sliderResumeTimer);
-                sliderResumeTimer = null;
-            }
+        function setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, config, activeMode, activeGen) {
+            const slideType = resolveSlideType(activeMode || config.slideType);
 
             dotsEl.innerHTML = "";
-            const count = cardsData.length;
-            if (count <= 1) return;
+            sliderEl.style.scrollBehavior = "";
+            sliderEl.style.scrollSnapType = "";
+            sliderEl.style.overflow = "";
 
-            const slideType = resolveSlideType(config.slideType);
-            const slideSpeed = Number(config.slideSpeed) > 0 ? Number(config.slideSpeed) : 650;
-            const marqueeSpeedPxPerSec = Number(config.marqueeSpeed) > 0 ? Number(config.marqueeSpeed) : 38;
+            const count = cardsData.length;
+            const slideSpeed = resolveSlideSpeed(config, slideType);
+            const marqueeSpeedPxPerSec = resolveMarqueeSpeed(config);
             const autoplay = config.autoplay !== false;
             const loop = config.loop !== false;
             const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
@@ -2690,7 +3273,10 @@
                 "slide-type-smooth",
                 "slide-type-fade",
                 "slide-type-scroll",
-                "slide-type-marquee"
+                "slide-type-marquee",
+                "slide-type-zoom",
+                "slide-type-slide",
+                "slide-type-instant"
             );
             sliderEl.classList.add(`slide-type-${slideType}`);
 
@@ -2715,42 +3301,75 @@
 
             if (slideType === "marquee") {
                 dotsEl.style.display = "none";
-                const originalCount = cards.length;
-                cards.forEach((origCard, idx) => {
-                    const clone = buildCardElement(cardsData[idx], idx);
-                    clone.dataset.clone = "true";
-                    sliderEl.appendChild(clone);
-                });
-
-                let lastTime = performance.now();
                 sliderEl.style.scrollBehavior = "auto";
+                sliderEl.style.scrollSnapType = "none";
+                sliderEl.style.overflow = "hidden";
 
-                function tickMarquee(now) {
-                    const dt = (now - lastTime) / 1000;
-                    lastTime = now;
+                if (count > 1) {
+                    const track = document.createElement("div");
+                    track.className = "ios-marquee-track";
 
-                    if (autoplay && !isPaused()) {
-                        const cycleWidth = sliderEl.scrollWidth / 2;
-                        if (cycleWidth > 0) {
-                            sliderEl.scrollLeft += marqueeSpeedPxPerSec * dt;
-                            if (sliderEl.scrollLeft >= cycleWidth) {
-                                sliderEl.scrollLeft -= cycleWidth;
+                    const isDesktop = window.matchMedia("(min-width: 900px)").matches;
+                    const isTablet = window.matchMedia("(min-width: 640px)").matches;
+                    const cardWidthPx = isDesktop ? 420 : (isTablet ? 360 : 310);
+
+                    cards.forEach((origCard) => {
+                        origCard.style.flex = `0 0 ${cardWidthPx}px`;
+                        origCard.style.width = `${cardWidthPx}px`;
+                        origCard.style.maxWidth = `${cardWidthPx}px`;
+                        origCard.style.flexShrink = "0";
+                        track.appendChild(origCard);
+                    });
+
+                    cardsData.forEach((item, idx) => {
+                        const clone = buildCardElement(item, idx);
+                        clone.dataset.clone = "true";
+                        clone.style.flex = `0 0 ${cardWidthPx}px`;
+                        clone.style.width = `${cardWidthPx}px`;
+                        clone.style.maxWidth = `${cardWidthPx}px`;
+                        clone.style.flexShrink = "0";
+                        track.appendChild(clone);
+                    });
+
+                    sliderEl.innerHTML = "";
+                    sliderEl.appendChild(track);
+
+                    let offsetPx = 0;
+                    let lastTime = performance.now();
+
+                    function tickMarquee(now) {
+                        if (!isModeStillActive("marquee", activeGen)) {
+                            marqueeRafId = null;
+                            return;
+                        }
+                        const dt = Math.min((now - lastTime) / 1000, 0.1);
+                        lastTime = now;
+
+                        if (autoplay && !isPaused()) {
+                            const cycleWidth = track.scrollWidth / 2;
+                            if (cycleWidth > 1) {
+                                offsetPx += marqueeSpeedPxPerSec * dt;
+                                if (offsetPx >= cycleWidth) {
+                                    offsetPx -= cycleWidth;
+                                }
+                                track.style.transform = `translate3d(${-offsetPx}px, 0, 0)`;
                             }
                         }
+
+                        marqueeRafId = requestAnimationFrame(tickMarquee);
                     }
 
-                    marqueeRafId = requestAnimationFrame(tickMarquee);
-                }
-
-                if (originalCount > 1) {
                     marqueeRafId = requestAnimationFrame(tickMarquee);
                 }
                 return;
             }
 
+            if (count <= 1) return;
+
             dotsEl.style.display = "";
 
             function applyActiveState(index, useAnimation = true) {
+                if (!isModeStillActive(slideType, activeGen)) return;
                 if (loop) {
                     currentIndex = ((index % count) + count) % count;
                 } else {
@@ -2760,15 +3379,31 @@
                 if (slideType === "fade") {
                     cards.forEach((c, idx) => {
                         c.classList.toggle("is-active", idx === currentIndex);
+                        c.style.opacity = idx === currentIndex ? "1" : "0.35";
                     });
+                    const targetCard = cards[currentIndex];
+                    if (targetCard) {
+                        const targetLeft = targetCard.offsetLeft - sliderEl.offsetLeft;
+                        if (!useAnimation || slideSpeed <= 0) {
+                            sliderEl.scrollLeft = targetLeft;
+                        } else {
+                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
+                        }
+                    }
                 } else {
                     const targetCard = cards[currentIndex];
                     if (targetCard) {
                         const targetLeft = targetCard.offsetLeft - sliderEl.offsetLeft;
-                        if (useAnimation) {
-                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
-                        } else {
+                        if (!useAnimation || slideType === "instant" || slideSpeed <= 0) {
                             sliderEl.scrollLeft = targetLeft;
+                        } else if (slideType === "zoom") {
+                            cards.forEach((c) => c.classList.add("is-zooming"));
+                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
+                            setTimeout(() => {
+                                cards.forEach((c) => c.classList.remove("is-zooming"));
+                            }, Math.min(slideSpeed, 600));
+                        } else {
+                            animateHorizontalScroll(sliderEl, targetLeft, slideSpeed);
                         }
                     }
                 }
@@ -2782,6 +3417,7 @@
                 dot.className = "ios-slider-dot" + (i === 0 ? " active" : "");
                 dot.setAttribute("aria-label", `Slide ${i + 1}`);
                 dot.addEventListener("click", () => {
+                    if (!isModeStillActive(slideType, activeGen)) return;
                     applyActiveState(i, true);
                     restartAutoplay();
                 });
@@ -2793,6 +3429,7 @@
                 applyActiveState(0, false);
             } else {
                 sliderEl.addEventListener("scroll", () => {
+                    if (!isModeStillActive(slideType, activeGen)) return;
                     const currentScroll = sliderEl.scrollLeft;
                     let closestIdx = 0;
                     let minDiff = Infinity;
@@ -2811,10 +3448,10 @@
             }
 
             function startAutoplay() {
-                if (!autoplay || count <= 1) return;
+                if (!autoplay || count <= 1 || !isModeStillActive(slideType, activeGen)) return;
                 clearInterval(autoplayTimer);
                 autoplayTimer = setInterval(() => {
-                    if (isPaused()) return;
+                    if (!isModeStillActive(slideType, activeGen) || isPaused()) return;
                     if (!loop && currentIndex >= count - 1) return;
                     applyActiveState(currentIndex + 1, true);
                 }, autoplayInterval);
@@ -2829,14 +3466,19 @@
 
         function renderJsonToDom(d) {
             const sectionEl = document.getElementById("ios-game-section-main");
+            syncSectionContrastColors(sectionEl);
             document.getElementById("sec-title").textContent = d.sectionTitle || "";
             document.getElementById("sec-subtitle").textContent = d.sectionSubtitle || "";
+
+            const config = d.sliderConfig || {};
+            currentSliderConfig = { ...currentSliderConfig, ...config };
+            const selectedMode = resolveSlideType(currentSliderConfig.slideType);
+            const activeGen = lockSlideMode(selectedMode);
 
             const sliderEl = document.getElementById("ios-card-slider");
             const dotsEl = document.getElementById("ios-slider-dots");
             const cardsData = Array.isArray(d.cards) ? d.cards : (d.card ? [d.card] : []);
-            const config = d.sliderConfig || {};
-            currentSliderConfig = config;
+            currentSectionEntries = cardsData.map((it, idx) => ({ item: it, seedIndex: idx }));
 
             loadAllItemsPool(cardsData);
 
@@ -2847,10 +3489,25 @@
                 sliderEl.appendChild(buildCardElement(item, idx));
             });
 
-            setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, config);
+            setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, currentSliderConfig, selectedMode, activeGen);
+            syncSectionContrastColors(sectionEl);
         }
 
         async function initAppiosSlider() {
+            const sectionEl = document.getElementById("ios-game-section-main");
+            syncSectionContrastColors(sectionEl);
+
+            if (typeof MutationObserver !== "undefined" && sectionEl) {
+                const observer = new MutationObserver(() => {
+                    syncSectionContrastColors(sectionEl);
+                });
+                observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                observer.observe(document.body, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                if (sectionEl.parentElement) {
+                    observer.observe(sectionEl.parentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                }
+            }
+
             for (const url of CANDIDATE_URLS) {
                 try {
                     const res = await fetch(url, { cache: "no-store" });
@@ -2863,6 +3520,7 @@
 
             document.getElementById("sec-title").textContent = "Không tải được Appios.json";
             document.getElementById("sec-subtitle").textContent = "Hãy kiểm tra file Appios.json và chạy qua web server.";
+            syncSectionContrastColors(sectionEl);
         }
 
         initAppiosSlider();
