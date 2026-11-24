@@ -1588,6 +1588,10 @@
                         <span class="tweak-info-label">Phiên bản</span>
                         <span class="tweak-info-value" id="tweak-info-version"></span>
                     </div>
+                    <div class="tweak-info-row" id="tweak-info-requirement-row">
+                        <span class="tweak-info-label">Yêu cầu hệ thống</span>
+                        <span class="tweak-info-value" id="tweak-info-requirement"></span>
+                    </div>
                 </div>
                 <p class="tweak-info-report-note">Báo cáo sự cố qua <a class="tweak-report-messenger" href="https://m.me/ktads" target="_blank" rel="noopener noreferrer">Facebook Messenger</a> và <a class="tweak-report-zalo" href="https://zalo.me/0374113767" target="_blank" rel="noopener noreferrer">Zalo</a>.</p>
             </div>
@@ -1909,6 +1913,24 @@
         function isDirectImageUrl(rawUrl) {
             const clean = String(rawUrl || "").split(/[?#]/)[0];
             return /\.(?:jpe?g|png|webp|gif|avif|bmp|svg)$/i.test(clean);
+        }
+
+        function extractSystemReqFromText(rawText) {
+            const text = String(rawText || "");
+            if (!text.trim()) return { cleanedText: text, extractedReq: "" };
+
+            const reqPattern = /(?:^|\r?\n)[ \t]*(?:[•\-*▪▸►●◆■]|\d+[.)])?[ \t]*(?:yêu\s*cầu\s*(?:hệ\s*thống|thiết\s*bị|cấu\s*hình|ios|android|os)?|hệ\s*điều\s*hành|cấu\s*hình\s*yêu\s*cầu|tương\s*thích(?:\s*ios)?|hỗ\s*trợ(?:\s*ios)?|system\s*requirements?|requirements?)[ \t]*[:：\-–][ \t]*([^\r\n]+)/i;
+            const match = text.match(reqPattern);
+            if (!match) return { cleanedText: text, extractedReq: "" };
+
+            const extractedReq = String(match[1] || "").trim();
+            let cleanedText = text.replace(match[0], (idx) => (idx === 0 || text[idx - 1] === "\n" ? "\n" : " "));
+            cleanedText = cleanedText
+                .replace(/\n{3,}/g, "\n\n")
+                .replace(/^\n+|\n+$/g, "")
+                .trim();
+
+            return { cleanedText, extractedReq };
         }
 
         function renderDescriptionWithShortLinks(containerEl, rawText, allowInlineImages = false) {
@@ -2845,10 +2867,23 @@
                 descHeadingEl.textContent = tweakCurrentPopupIsApp ? "Mô tả" : "Nội dung";
             }
 
-            const descText = (item.fullDescription && item.fullDescription.trim())
+            const rawDescText = (item.fullDescription && item.fullDescription.trim())
                 || (item.description && item.description.trim())
                 || "Đang cập nhật mô tả.";
-            renderDescriptionWithShortLinks(document.getElementById("tweak-popup-desc"), descText, !tweakCurrentPopupIsApp);
+            const { cleanedText: descText, extractedReq } = extractSystemReqFromText(rawDescText);
+            const finalDescText = descText || "Đang cập nhật mô tả.";
+            renderDescriptionWithShortLinks(document.getElementById("tweak-popup-desc"), finalDescText, !tweakCurrentPopupIsApp);
+
+            const explicitReq = String(
+                item.systemRequirement ||
+                item.osRequirement ||
+                item.requirements ||
+                item.requirement ||
+                item.iosVersion ||
+                item.minOs ||
+                ""
+            ).trim();
+            const requirementText = explicitReq || extractedReq || "Đang cập nhật";
 
             document.getElementById("tweak-info-provider").textContent = authorText;
             document.getElementById("tweak-info-size").textContent = sizeText;
@@ -2863,6 +2898,11 @@
             }
             if (infoVersionEl) {
                 infoVersionEl.textContent = tweakCurrentPopupIsApp ? versionText : "";
+            }
+
+            const infoRequirementEl = document.getElementById("tweak-info-requirement");
+            if (infoRequirementEl) {
+                infoRequirementEl.textContent = requirementText;
             }
 
             const baseGallery = Array.isArray(item.gallery) && item.gallery.length > 0
@@ -2985,7 +3025,7 @@
             const fallbackBanner = createGameBannerSvg(cardIndex * 5 + idx);
             const iconSrc = resolveAssetSrc(tweakItem.icon || tweakItem.img, fallbackIcon);
             const bannerSrc = resolveAssetSrc(tweakItem.banner, fallbackBanner);
-            const actionLabel = (tweakItem.actionLabel || tweakItem.buttonText || "Mở").trim();
+            const actionLabel = (tweakItem.actionLabel || tweakItem.buttonText || "Cài Đặt").trim();
             const isCloudAction = tweakItem.actionType === "cloud" || actionLabel.toLowerCase() === "cloud";
             const verText = (tweakItem.version && String(tweakItem.version).trim()) || "";
 

@@ -62,43 +62,81 @@
             background: rgba(15, 23, 42, 0.12);
         }
 
-        body.light-theme .search-results-dropdown,
-        body.light-theme .activity-history-panel {
+        body.light-theme .activity-history-panel,
+        body.light-theme .kpazz-modal-card,
+        body.light-theme .notify-suggest-tooltip,
+        body.light-theme .kpazz-search-overlay,
+        body.light-theme .kpazz-drawer-menu {
             background: linear-gradient(
                 145deg,
-                rgba(255, 255, 255, 0.92) 0%,
-                rgba(248, 250, 252, 0.96) 55%,
-                rgba(255, 255, 255, 0.9) 100%
+                rgba(255, 255, 255, 0.96) 0%,
+                rgba(248, 250, 252, 0.98) 55%,
+                rgba(255, 255, 255, 0.94) 100%
             );
             border: 1px solid rgba(15, 23, 42, 0.14);
             color: #111318;
             box-shadow: 0 20px 52px rgba(15, 23, 42, 0.18);
         }
 
-        body.light-theme .search-result-meta,
-        body.light-theme .search-empty-msg,
-        body.light-theme .activity-item-meta {
+        body.light-theme .activity-item-meta,
+        body.light-theme .kpazz-modal-meta,
+        body.light-theme .notify-tooltip-sub,
+        body.light-theme .card-sheet-sub,
+        body.light-theme .card-spec-sub,
+        body.light-theme .drawer-section-sub,
+        body.light-theme .drawer-child-sub {
             color: #475569;
             border-bottom-color: rgba(15, 23, 42, 0.08);
         }
 
-        body.light-theme .search-result-item,
-        body.light-theme .search-result-title,
         body.light-theme .activity-panel-title,
-        body.light-theme .activity-item-name {
+        body.light-theme .activity-item-name,
+        body.light-theme .kpazz-modal-title,
+        body.light-theme .notify-tooltip-title,
+        body.light-theme .card-sheet-title,
+        body.light-theme .card-spec-val,
+        body.light-theme .drawer-brand-title,
+        body.light-theme .drawer-section-title,
+        body.light-theme .drawer-child-title {
             color: #111318;
         }
 
-        body.light-theme .search-result-item:hover {
+        body.light-theme .notify-suggest-tooltip:hover {
             background: rgba(15, 23, 42, 0.06);
         }
 
-        body.light-theme .search-result-desc {
+        body.light-theme .card-sheet-desc {
             color: #334155;
         }
 
-        body.light-theme .activity-item {
-            background: rgba(15, 23, 42, 0.04);
+        body.light-theme .activity-item,
+        body.light-theme .kpazz-auth-tabs,
+        body.light-theme .kpazz-input,
+        body.light-theme .card-specs-strip,
+        body.light-theme .kpazz-search-input-wrap,
+        body.light-theme .search-history-chip,
+        body.light-theme .search-history-clear-btn,
+        body.light-theme .drawer-section-item,
+        body.light-theme .drawer-child-item,
+        body.light-theme .popup-suggest-card,
+        body.light-theme .drawer-auth-btn {
+            background: rgba(15, 23, 42, 0.05);
+            color: #111318;
+            border-color: rgba(15, 23, 42, 0.12);
+        }
+
+        body.light-theme .drawer-top-bar {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.92));
+            border-bottom-color: rgba(15, 23, 42, 0.1);
+        }
+
+        body.light-theme .kpazz-search-input {
+            color: #111318;
+        }
+
+        body.light-theme .kpazz-auth-tab.active {
+            background: #ffffff;
+            color: #111318;
         }
 
         body.light-theme main,
@@ -114,8 +152,20 @@
             color: #475569;
         }
 
-        /* ================= LỚP NỀN LIQUID GLASS iOS 27 KHI MỞ SEARCH ================= */
-        .search-backdrop {
+        /* ================= ICON TRONG NÚT BẤM ================= */
+        .btn-left-icon {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ================= LỚP NỀN LIQUID GLASS iOS 27 KHI MỞ POPUP ================= */
+        .popup-backdrop {
             position: fixed;
             inset: 0;
             z-index: 950;
@@ -131,13 +181,286 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.5s ease;
+            transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.5s ease, backdrop-filter 0.35s ease, background 0.35s ease;
         }
 
-        .search-backdrop.active {
+        .popup-backdrop.active {
             opacity: 1;
             visibility: visible;
             pointer-events: auto;
+        }
+
+        .popup-backdrop.drawer-backdrop-deep {
+            z-index: 1032;
+            background: rgba(4, 6, 10, 0.72);
+            backdrop-filter: blur(36px) saturate(180%) brightness(0.72);
+            -webkit-backdrop-filter: blur(36px) saturate(180%) brightness(0.72);
+        }
+
+        /* Đảm bảo popup card của từng section (như #tweak-card-popup.is-open) luôn nổi trên backdrop khi mở */
+        #tabs-container [id$='card-popup'].is-open,
+        #tabs-container [id$='card-popup'].active,
+        #tabs-container [id$='card-popup'].open,
+        #tabs-container .tweak-popup-backdrop.is-open,
+        #tabs-container [class*='popup-backdrop'].is-open,
+        #tabs-container [class*='popup-backdrop'].active,
+        #tabs-container [class*='popup-backdrop'].open,
+        #tabs-container [class*='card-popup'].is-open,
+        #tabs-container [class*='card-popup'].active,
+        #tabs-container [class*='card-popup'].open {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 1040 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+        }
+
+        /* ================= MENU DRAWER LIQUID GLASS ================= */
+        .kpazz-drawer-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: min(340px, 86vw);
+            height: 100vh;
+            z-index: 1035;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            background: linear-gradient(
+                160deg,
+                rgba(26, 29, 40, 0.96) 0%,
+                rgba(13, 15, 21, 0.98) 100%
+            );
+            backdrop-filter: blur(30px) saturate(210%);
+            -webkit-backdrop-filter: blur(30px) saturate(210%);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 20px 0 60px rgba(0, 0, 0, 0.78);
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease, visibility 0.38s ease;
+        }
+
+        .kpazz-drawer-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .drawer-top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 14px 16px;
+            background: linear-gradient(180deg, rgba(24, 27, 38, 0.98), rgba(16, 18, 26, 0.94));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            flex-shrink: 0;
+        }
+
+        .drawer-brand-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .drawer-brand-title {
+            font-size: 1.08rem;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+        }
+
+        .drawer-clear-cache-btn {
+            border: none;
+            border-radius: 12px;
+            padding: 7px 11px;
+            background: linear-gradient(135deg, #ff453a, #ff6b6b);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        }
+
+        .drawer-clear-cache-btn:active {
+            transform: scale(0.95);
+        }
+
+        .drawer-auth-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            padding: 10px 14px 4px;
+            flex-shrink: 0;
+        }
+
+        .drawer-auth-btn {
+            border-radius: 12px;
+            padding: 8px 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .drawer-auth-btn:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .drawer-auth-btn.primary {
+            background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+            border-color: transparent;
+            color: #ffffff;
+        }
+
+        .drawer-auth-btn:active {
+            transform: scale(0.97);
+        }
+
+        .drawer-sections-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 14px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .drawer-group-block {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .drawer-section-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 11px 13px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .drawer-section-item:hover {
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .drawer-section-item:active {
+            transform: scale(0.99);
+        }
+
+        .drawer-section-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .drawer-section-sub {
+            font-size: 0.73rem;
+            color: #9aa5b1;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .drawer-section-count {
+            font-weight: 600;
+            color: #38bdf8;
+            flex-shrink: 0;
+        }
+
+        .drawer-chevron {
+            font-size: 0.85rem;
+            opacity: 0.65;
+            transition: transform 0.24s ease;
+            flex-shrink: 0;
+        }
+
+        .drawer-section-item.expanded .drawer-chevron {
+            transform: rotate(90deg);
+        }
+
+        .drawer-children-list {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding-left: 10px;
+        }
+
+        .drawer-children-list.open {
+            display: flex;
+        }
+
+        .drawer-child-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .drawer-child-item:hover {
+            background: rgba(255, 255, 255, 0.11);
+        }
+
+        .drawer-child-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .drawer-child-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .drawer-child-title {
+            font-size: 0.84rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .drawer-child-sub {
+            font-size: 0.72rem;
+            opacity: 0.7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* ================= NAVBAR LIQUID GLASS ================= */
@@ -181,14 +504,6 @@
                 box-shadow 1.65s cubic-bezier(0.22, 1, 0.36, 1),
                 border-color 1.65s cubic-bezier(0.22, 1, 0.36, 1),
                 gap 1.65s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .site-header.search-open {
-            background: transparent !important;
-            border-color: transparent !important;
-            box-shadow: none !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
         }
 
         .site-header.scrolled {
@@ -320,12 +635,6 @@
                 opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .site-header.search-open .nav-left,
-        .site-header.search-open .nav-right {
-            opacity: 0;
-            pointer-events: none;
-        }
-
         .nav-icon-btn:hover {
             background: rgba(255, 255, 255, 0.16);
         }
@@ -401,108 +710,283 @@
 
         .notify-badge {
             position: absolute;
-            top: 8px;
-            right: 9px;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
+            top: 0px;
+            right: -1px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 4px;
+            border-radius: 999px;
             background-color: #ff453a;
-            box-shadow: 0 0 0 1.5px rgba(20, 20, 22, 0.9);
+            border: 1.5px solid #ff3b30;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 14px;
+            text-align: center;
+            box-sizing: border-box;
+            box-shadow: 0 0 0 1.5px rgba(255, 69, 58, 0.45);
         }
 
-        /* ================= KHUNG SEARCH ================= */
-        .search-expand-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 28px;
+        /* ================= OVERLAY TÌM KIẾM LIQUID GLASS ================= */
+        .kpazz-search-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -46%) scale(0.96);
+            width: calc(100% - 28px);
+            max-width: 580px;
+            max-height: 76vh;
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 0 14px;
+            flex-direction: column;
+            border-radius: 24px;
+            padding: 16px;
             box-sizing: border-box;
-            background: rgba(26, 28, 36, 0.86);
-            backdrop-filter: blur(32px) saturate(190%);
-            -webkit-backdrop-filter: blur(32px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.22);
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.16) 0%,
+                rgba(18, 20, 28, 0.94) 55%,
+                rgba(255, 255, 255, 0.08) 100%
+            );
+            backdrop-filter: blur(30px) saturate(210%);
+            -webkit-backdrop-filter: blur(30px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.26);
             box-shadow:
-                0 12px 32px rgba(0, 0, 0, 0.55),
-                inset 0 1px 1px rgba(255, 255, 255, 0.28);
-            z-index: 25;
-
+                0 24px 64px rgba(0, 0, 0, 0.78),
+                inset 0 1px 1px rgba(255, 255, 255, 0.42);
+            z-index: 1030;
             opacity: 0;
-            transform: scaleX(0.88);
-            transform-origin: left center;
             pointer-events: none;
             visibility: hidden;
-            transition:
-                width 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0.42s ease;
+            transition: opacity 0.28s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.36s ease;
         }
 
-        .site-header:not(.compact-left).search-open .search-expand-bar {
-            position: fixed;
-            top: 12px;
-            left: 14px;
-            right: 14px;
-            width: auto;
-            max-width: 720px;
-            height: 52px;
-            margin: 0 auto;
-            border-radius: 26px;
-            transform: none;
-            z-index: 1010;
-        }
-
-        .site-header.compact-left.search-open .search-expand-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: auto;
-            width: calc(100vw - 28px);
-            max-width: calc(100vw - 28px);
-            height: 100%;
-            margin: 0;
-            border-radius: 28px;
-        }
-
-        .site-header.search-open .search-expand-bar {
+        .kpazz-search-overlay.active {
             opacity: 1;
-            transform: scaleX(1);
+            transform: translate(-50%, -50%) scale(1);
             pointer-events: auto;
             visibility: visible;
         }
 
-        .search-expand-icon {
-            width: 18px;
-            height: 18px;
-            color: #c7c7cc;
+        .kpazz-search-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .kpazz-search-input-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 13px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        .kpazz-search-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .kpazz-search-history-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+            min-height: 0;
+        }
+
+        .kpazz-search-history-bar:empty {
+            display: none;
+        }
+
+        .search-history-label {
+            font-size: 0.73rem;
+            color: #9aa5b1;
+            margin-right: 2px;
+        }
+
+        .search-history-chip {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            color: inherit;
+            font-size: 0.76rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .search-history-chip:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .search-history-clear-btn {
+            border: 1px solid rgba(255, 69, 58, 0.35);
+            background: rgba(255, 69, 58, 0.14);
+            color: #ff6b6b;
+            font-size: 0.74rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            margin-left: auto;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .search-history-clear-btn:hover {
+            background: rgba(255, 69, 58, 0.25);
+        }
+
+        .search-history-clear-btn:active {
+            transform: scale(0.95);
+        }
+
+        .kpazz-search-results {
+            overflow-y: auto;
+            max-height: calc(76vh - 118px);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .search-result-row {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 9px 11px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .search-result-row:hover {
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .search-result-row:active {
+            transform: scale(0.99);
+        }
+
+        .search-result-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: rgba(255, 255, 255, 0.08);
             flex-shrink: 0;
         }
 
-        .search-expand-input {
+        .search-result-info {
             flex: 1;
             min-width: 0;
-            height: 38px;
-            border: none;
-            outline: none;
-            background: transparent;
+        }
+
+        .search-result-title {
+            font-size: 0.92rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .search-result-desc {
+            font-size: 0.77rem;
+            color: #cbd5e1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+
+        .search-result-ver {
+            font-size: 0.73rem;
+            color: #94a3b8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+
+        .search-result-tag {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.14);
+            padding: 3px 8px;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        /* ================= TOOLTIP ĐỀ XUẤT DƯỚI CHUÔNG KHI RING ================= */
+        .notify-suggest-tooltip {
+            position: fixed;
+            top: 74px;
+            right: 16px;
+            width: min(320px, calc(100vw - 32px));
+            border-radius: 18px;
+            padding: 11px 13px;
+            box-sizing: border-box;
+            background: rgba(24, 26, 36, 0.92);
+            backdrop-filter: blur(26px) saturate(195%);
+            -webkit-backdrop-filter: blur(26px) saturate(195%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
             color: #ffffff;
-            font-size: 16px;
-            font-family: inherit;
+            z-index: 1008;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-8px) scale(0.97);
+            transition: opacity 0.28s ease, transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.34s ease, background-color 0.2s ease;
         }
 
-        .search-expand-input::placeholder {
+        .notify-suggest-tooltip.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .notify-suggest-tooltip:hover {
+            background: rgba(34, 38, 52, 0.96);
+        }
+
+        .notify-tooltip-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+
+        .notify-tooltip-title {
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin: 0 0 3px 0;
+            line-height: 1.3;
+        }
+
+        .notify-tooltip-sub {
+            font-size: 0.78rem;
             color: #b0b3b8;
-            font-size: 15px;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .search-close-btn {
+        .modal-close-btn {
             width: 32px;
             height: 32px;
             border: none;
@@ -517,200 +1001,53 @@
             transition: background-color 0.2s ease, transform 0.15s ease;
         }
 
-        .search-close-btn:hover {
+        .modal-close-btn:hover {
             background: rgba(255, 255, 255, 0.24);
         }
 
-        .search-close-btn:active {
+        .modal-close-btn:active {
             transform: scale(0.92);
         }
 
-        /* ================= LỊCH SỬ TÌM KIẾM ================= */
-        .search-history-below {
-            position: fixed;
-            top: 76px;
-            left: 14px;
-            right: 14px;
-            width: auto;
-            max-width: 720px;
-            margin: 0 auto;
-            border-radius: 20px;
-            padding: 12px 14px;
-            box-sizing: border-box;
-            background: rgba(24, 26, 34, 0.84);
-            backdrop-filter: blur(30px) saturate(190%);
-            -webkit-backdrop-filter: blur(30px) saturate(190%);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow:
-                0 14px 36px rgba(0, 0, 0, 0.52),
-                inset 0 1px 1px rgba(255, 255, 255, 0.2);
-            z-index: 1005;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: translateY(-6px);
-            transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.32s ease;
-        }
-
-        .search-history-below.active {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        .search-history-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            color: #d1d5db;
-            padding: 0 4px 8px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 8px;
-        }
-
-        .search-history-clear-btn {
+        .panel-action-btn {
             border: none;
             background: transparent;
             color: #38bdf8;
             font-size: 13px;
             cursor: pointer;
             padding: 2px 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .search-history-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .search-history-chip {
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            background: rgba(255, 255, 255, 0.1);
-            color: #f5f5f7;
-            border-radius: 999px;
-            padding: 6px 14px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        .search-history-chip:hover {
-            background: rgba(255, 255, 255, 0.18);
-        }
-
-        /* ================= KẾT QUẢ TÌM KIẾM ================= */
-        .search-results-dropdown {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -46%) scale(0.96);
-            width: calc(100% - 28px);
-            max-width: 720px;
-            max-height: 68vh;
-            overflow-y: auto;
-            border-radius: 24px;
-            padding: 14px;
-            box-sizing: border-box;
-            background: linear-gradient(
-                145deg,
-                rgba(255, 255, 255, 0.15) 0%,
-                rgba(20, 22, 30, 0.88) 50%,
-                rgba(255, 255, 255, 0.08) 100%
-            );
-            backdrop-filter: blur(30px) saturate(210%);
-            -webkit-backdrop-filter: blur(30px) saturate(210%);
-            border: 1px solid rgba(255, 255, 255, 0.26);
-            box-shadow:
-                0 24px 64px rgba(0, 0, 0, 0.72),
-                inset 0 1px 1px rgba(255, 255, 255, 0.42);
-            z-index: 999;
-
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-            transition:
-                opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0.42s ease;
-        }
-
-        .search-results-dropdown.active {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-            visibility: visible;
-        }
-
-        .search-result-meta {
+        .panel-action-btn.is-pill-btn {
+            border: 1px solid rgba(255, 69, 58, 0.35);
+            background: rgba(255, 69, 58, 0.14);
+            color: #ff6b6b;
             font-size: 12px;
-            color: #b0b3b8;
-            padding: 4px 8px 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-            margin-bottom: 8px;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 10px;
-            border-radius: 16px;
-            text-decoration: none;
-            color: #ffffff;
-            transition: background-color 0.2s ease;
-        }
-
-        .search-result-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .search-result-thumb {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            object-fit: cover;
-            background: rgba(255, 255, 255, 0.08);
-            flex-shrink: 0;
-        }
-
-        .search-result-body {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .search-result-title {
-            font-size: 0.95rem;
             font-weight: 600;
-            color: #ffffff;
-            margin: 0 0 3px 0;
+            padding: 5px 11px;
+            border-radius: 999px;
+            transition: background-color 0.2s ease, transform 0.15s ease;
         }
 
-        .search-result-sub {
-            font-size: 0.8rem;
-            color: #38bdf8;
-            margin: 0 0 4px 0;
+        .panel-action-btn.is-pill-btn:hover {
+            background: rgba(255, 69, 58, 0.25);
         }
 
-        .search-result-desc {
-            font-size: 0.82rem;
-            color: #c7c7cc;
-            margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .panel-action-btn.is-pill-btn:active {
+            transform: scale(0.95);
         }
 
-        .search-empty-msg {
+        .panel-empty-msg {
             padding: 20px 12px;
             text-align: center;
             color: #b0b3b8;
             font-size: 0.92rem;
         }
 
-        /* ================= BẢNG LỊCH SỬ ĐÃ XEM & ĐÃ TẢI ================= */
+        /* ================= BẢNG LỊCH SỬ ĐÃ XEM & ĐÃ TẢI / THÔNG BÁO ================= */
         .activity-history-panel {
             position: fixed;
             top: 50%;
@@ -735,7 +1072,7 @@
             box-shadow:
                 0 24px 64px rgba(0, 0, 0, 0.75),
                 inset 0 1px 1px rgba(255, 255, 255, 0.42);
-            z-index: 1002;
+            z-index: 1020;
             opacity: 0;
             pointer-events: none;
             visibility: hidden;
@@ -788,6 +1125,39 @@
             display: flex;
             flex-direction: column;
             gap: 3px;
+            cursor: pointer;
+            overflow: hidden;
+            max-height: 120px;
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            transition:
+                background-color 0.2s ease,
+                opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                max-height 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+                margin-bottom 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+                padding 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .activity-item.removing {
+            opacity: 0;
+            transform: translateX(26px) scale(0.95);
+            max-height: 0px;
+            margin-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            pointer-events: none;
+        }
+
+        .activity-item:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .activity-item-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
         }
 
         .activity-item-name {
@@ -797,10 +1167,174 @@
             word-break: break-word;
         }
 
+        .activity-suggest-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #38bdf8;
+            flex-shrink: 0;
+        }
+
         .activity-item-meta {
             font-size: 0.76rem;
             color: #a1a1a6;
             word-break: break-all;
+        }
+
+        /* ================= POPUP TÀI KHOẢN ================= */
+        .kpazz-modal-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -46%) scale(0.96);
+            width: calc(100% - 24px);
+            max-width: 540px;
+            max-height: 86vh;
+            overflow-y: auto;
+            border-radius: 28px;
+            padding: 0;
+            box-sizing: border-box;
+            background: linear-gradient(
+                160deg,
+                rgba(28, 31, 42, 0.96) 0%,
+                rgba(14, 16, 22, 0.98) 100%
+            );
+            backdrop-filter: blur(32px) saturate(210%);
+            -webkit-backdrop-filter: blur(32px) saturate(210%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.85);
+            z-index: 1050;
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+            transition: opacity 0.28s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.36s ease;
+        }
+
+        .kpazz-modal-card.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+            visibility: visible;
+        }
+
+        .kpazz-modal-card.auth-card-pad {
+            max-width: 460px;
+            padding: 18px;
+        }
+
+        .kpazz-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            margin-bottom: 14px;
+        }
+
+        .kpazz-modal-title {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .kpazz-modal-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 16px;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(135deg, #0a84ff, #5e5ce6);
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .kpazz-auth-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 14px;
+        }
+
+        .kpazz-auth-tab {
+            border: none;
+            border-radius: 10px;
+            padding: 8px 10px;
+            background: transparent;
+            color: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            opacity: 0.72;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .kpazz-auth-tab.active {
+            background: rgba(255, 255, 255, 0.18);
+            opacity: 1;
+        }
+
+        .kpazz-auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .kpazz-auth-extra-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            font-size: 0.82rem;
+        }
+
+        .kpazz-remember-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .kpazz-link-btn {
+            border: none;
+            background: transparent;
+            color: #38bdf8;
+            font-size: 0.82rem;
+            cursor: pointer;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .kpazz-input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.07);
+            color: #ffffff;
+            font-size: 0.92rem;
+            outline: none;
+        }
+
+        .kpazz-auth-status {
+            font-size: 0.82rem;
+            color: #38bdf8;
+            min-height: 18px;
         }
 
         /* ================= NỘI DUNG CHÍNH ================= */
@@ -826,6 +1360,8 @@
             max-width: 100%;
             box-sizing: border-box;
             display: block;
+            position: relative;
+            overflow-x: clip;
         }
 
         .status-msg {
@@ -856,7 +1392,48 @@
 </head>
 <body>
 
-    <div class="search-backdrop" id="search-backdrop"></div>
+    <div class="popup-backdrop" id="popup-backdrop"></div>
+
+    <!-- MENU DRAWER KHI ẤN ICON MENU -->
+    <aside class="kpazz-drawer-menu" id="kpazz-drawer-menu" aria-label="Menu điều hướng">
+        <div class="drawer-top-bar">
+            <div class="drawer-brand-group">
+                <div class="brand-logo" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <span class="drawer-brand-title">Kpazz</span>
+            </div>
+            <button type="button" class="drawer-clear-cache-btn" id="btn-clear-cache-reload">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                <span>Xoá cache</span>
+            </button>
+        </div>
+        <div class="drawer-auth-row">
+            <button type="button" class="drawer-auth-btn" id="drawer-btn-register">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                <span>Đăng ký</span>
+            </button>
+            <button type="button" class="drawer-auth-btn primary" id="drawer-btn-login">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span>Đăng nhập</span>
+            </button>
+        </div>
+        <div class="drawer-sections-list" id="drawer-sections-list"></div>
+    </aside>
 
     <div class="navbar-wrapper">
         <header class="site-header" id="main-navbar">
@@ -900,7 +1477,7 @@
                         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                         <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                     </svg>
-                    <span class="notify-badge"></span>
+                    <span class="notify-badge" id="notify-count-badge">0</span>
                 </button>
 
                 <button class="nav-icon-btn" id="btn-account" type="button" aria-label="Tài khoản">
@@ -910,38 +1487,46 @@
                     </svg>
                 </button>
             </div>
-
-            <div class="search-expand-bar" id="search-expand-bar" role="search">
-                <svg class="search-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="7"></circle>
-                    <line x1="20" y1="20" x2="16.35" y2="16.35"></line>
-                </svg>
-                <input
-                    type="text"
-                    id="navbar-search-input"
-                    class="search-expand-input"
-                    placeholder="Tìm từ khóa, tiêu đề, tác giả, nội dung..."
-                    autocomplete="off"
-                >
-                <button type="button" class="search-close-btn" id="btn-search-close" aria-label="Đóng tìm kiếm">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-            </div>
         </header>
     </div>
 
-    <div class="search-history-below" id="search-history-below"></div>
-    <div class="search-results-dropdown" id="search-results-dropdown"></div>
+    <!-- OVERLAY TÌM KIẾM DỮ LIỆU JSON TRONG THƯ MỤC TABS -->
+    <div class="kpazz-search-overlay" id="kpazz-search-overlay" role="dialog" aria-modal="true" aria-label="Tìm kiếm nội dung">
+        <div class="kpazz-search-top">
+            <div class="kpazz-search-input-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.7; flex-shrink: 0;">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="20" y1="20" x2="16.35" y2="16.35"></line>
+                </svg>
+                <input type="search" class="kpazz-search-input" id="kpazz-search-input" placeholder="Tìm ứng dụng, tweak, mô tả..." autocomplete="off">
+            </div>
+            <button type="button" class="modal-close-btn" id="btn-search-close" aria-label="Đóng tìm kiếm">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="kpazz-search-history-bar" id="kpazz-search-history-bar"></div>
+        <div class="kpazz-search-results" id="kpazz-search-results"></div>
+    </div>
+
+    <div class="notify-suggest-tooltip" id="notify-suggest-tooltip" role="button" tabindex="0"></div>
 
     <div class="activity-history-panel" id="activity-history-panel">
         <div class="activity-panel-header">
-            <h3 class="activity-panel-title">Lịch sử đã xem &amp; đã tải</h3>
+            <h3 class="activity-panel-title" id="activity-panel-title">Lịch sử đã xem &amp; đã tải</h3>
             <div class="activity-panel-actions">
-                <button type="button" class="search-history-clear-btn" id="btn-clear-activity-history">Xóa</button>
-                <button type="button" class="search-close-btn" id="btn-activity-close" aria-label="Đóng lịch sử">
+                <button type="button" class="panel-action-btn" id="btn-clear-activity-history">
+                    <svg class="btn-left-icon" viewBox="0 0 24 24">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                        <path d="M10 11v6"></path>
+                        <path d="M14 11v6"></path>
+                    </svg>
+                    <span>Xóa</span>
+                </button>
+                <button type="button" class="modal-close-btn" id="btn-activity-close" aria-label="Đóng bảng">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -952,9 +1537,86 @@
         <div id="activity-history-content"></div>
     </div>
 
+    <!-- POPUP TÀI KHOẢN (ĐĂNG NHẬP & ĐĂNG KÝ TÁCH RIÊNG) -->
+    <div class="kpazz-modal-card auth-card-pad" id="account-auth-popup" role="dialog" aria-modal="true">
+        <div class="kpazz-modal-header">
+            <h3 class="kpazz-modal-title" id="auth-popup-heading">Đăng nhập tài khoản</h3>
+            <button type="button" class="modal-close-btn" id="btn-auth-popup-close" aria-label="Đóng tài khoản">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="kpazz-auth-tabs" role="tablist">
+            <button type="button" class="kpazz-auth-tab active" id="tab-btn-login" role="tab" aria-selected="true">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span>Đăng nhập</span>
+            </button>
+            <button type="button" class="kpazz-auth-tab" id="tab-btn-register" role="tab" aria-selected="false">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                <span>Đăng ký</span>
+            </button>
+        </div>
+
+        <form class="kpazz-auth-form" id="form-login-view">
+            <input type="text" class="kpazz-input" id="login-username" placeholder="Tên đăng nhập hoặc Số điện thoại" required>
+            <input type="password" class="kpazz-input" id="login-password" placeholder="Mật khẩu" required>
+            <div class="kpazz-auth-extra-row">
+                <label class="kpazz-remember-label">
+                    <input type="checkbox" id="login-remember-check">
+                    <span>Ghi nhớ tài khoản</span>
+                </label>
+                <button type="button" class="kpazz-link-btn" id="btn-forgot-password">
+                    <svg class="btn-left-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Quên mật khẩu?</span>
+                </button>
+            </div>
+            <button type="submit" class="kpazz-modal-btn">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10 17 15 12 10 7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span>Đăng nhập</span>
+            </button>
+            <div class="kpazz-auth-status" id="login-status-msg"></div>
+        </form>
+
+        <form class="kpazz-auth-form" id="form-register-view" style="display: none;">
+            <input type="text" class="kpazz-input" id="register-username" placeholder="Tên tài khoản mới" required>
+            <input type="tel" class="kpazz-input" id="register-phone" placeholder="Số điện thoại" required>
+            <input type="password" class="kpazz-input" id="register-password" placeholder="Mật khẩu (tối thiểu 6 ký tự)" required>
+            <button type="submit" class="kpazz-modal-btn">
+                <svg class="btn-left-icon" viewBox="0 0 24 24">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+                <span>Đăng ký tài khoản</span>
+            </button>
+            <div class="kpazz-auth-status" id="register-status-msg"></div>
+        </form>
+    </div>
+
     <main>
         <div id="tabs-container">
-            <p class="status-msg" id="loading-status">Đang tải nội dung từ thư mục Tabs...</p>
+            <p class="status-msg" id="loading-status">Đang tải nội dung...</p>
         </div>
     </main>
 
@@ -966,11 +1628,1289 @@
         let CURRENT_TABS_DIR = "Tabs/";
         let DISCOVERED_TAB_FILES = [];
         let CACHED_JSON_ENTRIES = null;
+        let CACHED_JSON_RAW_BY_URL = new Map();
+        let INFLIGHT_JSON_PROMISE = null;
+        let PANEL_MODE = "history"; // "history" | "recent-updates"
 
-        const SEARCH_HISTORY_KEY = "kpazz_search_history_v1";
         const VIEWED_HISTORY_KEY = "kpazz_viewed_history_v1";
         const DOWNLOAD_HISTORY_KEY = "kpazz_download_history_v1";
+        const SEARCH_HISTORY_KEY = "kpazz_search_history_v1";
         const THEME_OVERRIDE_KEY = "kpazz_theme_override_v1";
+        const AUTH_USERS_KEY = "kpazz_auth_users_v1";
+        const AUTH_SESSION_KEY = "kpazz_auth_session_v1";
+        const AUTH_REMEMBER_KEY = "kpazz_auth_remember_v1";
+        const NOTIFY_SEEN_KEYS_KEY = "kpazz_notify_seen_keys_v1";
+        const NOTIFY_DISMISSED_KEYS_KEY = "kpazz_notify_dismissed_keys_v1";
+        const TOOLTIP_SUGGESTIONS_KEY = "kpazz_tooltip_suggestions_v1";
+
+        const ITEM_STORE = new Map();
+        function saveItemRef(item) {
+            if (!item) return "";
+            const key = `item_${ITEM_STORE.size + 1}_${Math.random().toString(36).slice(2, 7)}`;
+            ITEM_STORE.set(key, item);
+            return key;
+        }
+        function getItemRef(key) {
+            return ITEM_STORE.get(key) || null;
+        }
+
+        function withFreshQuery(url) {
+            if (!url || typeof url !== "string") return url;
+            if (/^(?:data:|blob:|javascript:|mailto:|tel:|#)/i.test(url)) return url;
+            const sep = url.includes("?") ? "&" : "?";
+            return `${url}${sep}_t=${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+        }
+
+        function fetchFresh(url, options = {}) {
+            return fetch(withFreshQuery(url), {
+                ...options,
+                cache: "no-store"
+            });
+        }
+
+        async function fetchWithTimeout(url, timeoutMs = 2500) {
+            const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+            const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+            try {
+                return await fetchFresh(url, controller ? { signal: controller.signal } : {});
+            } finally {
+                if (timer) clearTimeout(timer);
+            }
+        }
+
+        function invalidateJsonCache() {
+            CACHED_JSON_ENTRIES = null;
+            CACHED_JSON_RAW_BY_URL = new Map();
+            INFLIGHT_JSON_PROMISE = null;
+        }
+
+        /* ================= NHẬN DẠNG POPUP CARD THEO CẤU TRÚC SECTION TWEAK ================= */
+        function getAllOpenSectionPopups() {
+            const tabsContainer = document.getElementById("tabs-container");
+            if (!tabsContainer) return [];
+            const selector =
+                "[id$='card-popup'], .tweak-popup-backdrop, .tweak-version-picker-backdrop, [class*='popup-backdrop'], [class*='card-popup']";
+            return Array.from(tabsContainer.querySelectorAll(selector)).filter(el => {
+                if (el.classList.contains("is-open") || el.classList.contains("active") || el.classList.contains("open")) {
+                    return true;
+                }
+                const st = window.getComputedStyle(el);
+                const rect = el.getBoundingClientRect();
+                return (
+                    (st.position === "fixed" || st.position === "absolute") &&
+                    parseFloat(st.opacity || "1") > 0.05 &&
+                    st.visibility !== "hidden" &&
+                    st.display !== "none" &&
+                    rect.width > 120 &&
+                    rect.height > 120
+                );
+            });
+        }
+
+        function hasAnySectionPopupOpen() {
+            return getAllOpenSectionPopups().length > 0;
+        }
+
+        function enforceVisibleSectionPopups() {
+            getAllOpenSectionPopups().forEach(pop => {
+                pop.style.position = "fixed";
+                pop.style.inset = "0";
+                pop.style.zIndex = pop.classList.contains("tweak-version-picker-backdrop") ? "1055" : "1040";
+                pop.style.opacity = "1";
+                pop.style.visibility = "visible";
+                pop.style.pointerEvents = "auto";
+            });
+        }
+
+        function updateBackdropState() {
+            const backdrop = document.getElementById("popup-backdrop");
+            if (!backdrop) return;
+            const panel = document.getElementById("activity-history-panel");
+            const authPopup = document.getElementById("account-auth-popup");
+            const searchOverlay = document.getElementById("kpazz-search-overlay");
+            const drawerMenu = document.getElementById("kpazz-drawer-menu");
+
+            enforceVisibleSectionPopups();
+
+            const isDrawerOpen = Boolean(drawerMenu && drawerMenu.classList.contains("active"));
+            backdrop.classList.toggle("drawer-backdrop-deep", isDrawerOpen);
+
+            const anyActive =
+                (panel && panel.classList.contains("active")) ||
+                (authPopup && authPopup.classList.contains("active")) ||
+                (searchOverlay && searchOverlay.classList.contains("active")) ||
+                isDrawerOpen ||
+                hasAnySectionPopupOpen();
+
+            backdrop.classList.toggle("active", Boolean(anyActive));
+        }
+
+        function getItemIdentityKey(item) {
+            if (!item) return "";
+            const raw = item.rawData && typeof item.rawData === "object" ? item.rawData : item;
+            const title = String(raw.appName || item.title || raw.title || raw.name || "").trim().toLowerCase();
+            const ver = String(raw.version || item.version || "").trim().toLowerCase();
+            const dt = String(raw.releaseDate || item.dateText || raw.updatedAt || raw.date || "").trim().toLowerCase();
+            const src = String(item.sourceFile || "").trim().toLowerCase();
+            return `${src}|${title}|${ver}|${dt}`;
+        }
+
+        function setBellBadgeCount(count) {
+            const badge = document.getElementById("notify-count-badge");
+            if (!badge) return;
+            const safeCount = Math.max(0, Number(count) || 0);
+            badge.textContent = safeCount > 99 ? "99+" : String(safeCount);
+            badge.classList.remove("is-zero");
+        }
+
+        function recordTooltipSuggestion(item) {
+            if (!item || !item.title) return;
+            const list = readJsonStorage(TOOLTIP_SUGGESTIONS_KEY, []);
+            const key = getItemIdentityKey(item);
+            if (!key) return;
+
+            const dismissedSet = new Set(readJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, []));
+            if (dismissedSet.has(key)) {
+                dismissedSet.delete(key);
+                writeJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, Array.from(dismissedSet));
+            }
+
+            const filtered = list.filter(x => getItemIdentityKey(x.item || x) !== key);
+            filtered.unshift({
+                ...item,
+                isFromTooltip: true,
+                dateText: item.dateText || new Date().toLocaleDateString("vi-VN"),
+                tooltipTime: new Date().toLocaleString("vi-VN")
+            });
+            writeJsonStorage(TOOLTIP_SUGGESTIONS_KEY, filtered.slice(0, 30));
+        }
+
+        async function getNotificationFeedEntries(forceRefresh = false) {
+            const entries = await loadAllJsonEntriesFromTabs(forceRefresh);
+            const nowMs = Date.now();
+            const oneMonthMs = 30 * 24 * 60 * 60 * 1000;
+            const dismissedSet = new Set(readJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, []));
+
+            const recentMonthItems = entries
+                .filter(entry => !/slide\.json$/i.test(entry.sourceFile || ""))
+                .map(entry => ({ entry, ts: parseItemTimestamp(entry.dateText || entry.updatedAt) }))
+                .filter(({ ts }) => !Number.isNaN(ts) && ts <= nowMs + 86400000 && (nowMs - ts) <= oneMonthMs)
+                .sort((a, b) => b.ts - a.ts)
+                .map(({ entry }) => entry);
+
+            const tooltipItems = readJsonStorage(TOOLTIP_SUGGESTIONS_KEY, []);
+            const tooltipKeySet = new Set(tooltipItems.map(t => getItemIdentityKey(t)));
+            const mergedMap = new Map();
+
+            recentMonthItems.forEach(item => {
+                const k = getItemIdentityKey(item);
+                if (k && !dismissedSet.has(k) && !mergedMap.has(k)) {
+                    mergedMap.set(k, { ...item, isFromTooltip: tooltipKeySet.has(k) });
+                }
+            });
+
+            tooltipItems.forEach(item => {
+                const k = getItemIdentityKey(item);
+                if (k && !dismissedSet.has(k) && !mergedMap.has(k)) {
+                    mergedMap.set(k, { ...item, isFromTooltip: true });
+                }
+            });
+
+            return Array.from(mergedMap.values());
+        }
+
+        async function refreshUnreadNewUpdatesBadge(forceRefresh = false) {
+            const feedItems = await getNotificationFeedEntries(forceRefresh);
+            const seenSet = new Set(readJsonStorage(NOTIFY_SEEN_KEYS_KEY, []));
+            const unreadUpdatesCount = feedItems.filter(item => !seenSet.has(getItemIdentityKey(item))).length;
+            const tooltipCount = readJsonStorage(TOOLTIP_SUGGESTIONS_KEY, []).filter(t => {
+                const k = getItemIdentityKey(t);
+                const dismissedSet = new Set(readJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, []));
+                return k && !dismissedSet.has(k);
+            }).length;
+            setBellBadgeCount(unreadUpdatesCount + tooltipCount);
+            return feedItems;
+        }
+
+        async function markAllRecentUpdatesSeenAndResetBadge(forceRefresh = true) {
+            const feedItems = await getNotificationFeedEntries(forceRefresh);
+            const seenSet = new Set(readJsonStorage(NOTIFY_SEEN_KEYS_KEY, []));
+            feedItems.forEach(item => {
+                const k = getItemIdentityKey(item);
+                if (k) seenSet.add(k);
+            });
+            writeJsonStorage(NOTIFY_SEEN_KEYS_KEY, Array.from(seenSet).slice(-300));
+            setBellBadgeCount(0);
+            return feedItems;
+        }
+
+        /* ================= DÙNG CHÍNH POPUP CARD CỦA SECTION HTML (THEO CẤU TRÚC TWEAK POPUP) ================= */
+        function findSectionElementForItem(item) {
+            const tabsContainer = document.getElementById("tabs-container");
+            if (!tabsContainer) return null;
+            const sections = Array.from(tabsContainer.querySelectorAll("section.tab-section"));
+            if (!sections.length) return null;
+
+            const srcFile = String(item?.sourceFile || "").trim().toLowerCase();
+            if (srcFile) {
+                const baseJson = srcFile.split("/").pop().replace(/\.json$/i, "").toLowerCase();
+                for (const sec of sections) {
+                    const secSource = String(sec.dataset.sourceFile || "").toLowerCase();
+                    const secTabFile = String(sec.dataset.tabFile || "").toLowerCase();
+                    const secMatchedJson = String(sec.dataset.matchedJson || "").toLowerCase();
+                    if (
+                        secMatchedJson.includes(srcFile) ||
+                        (baseJson && (secTabFile.startsWith(baseJson + ".") || secSource.includes("/" + baseJson)))
+                    ) {
+                        return sec;
+                    }
+                }
+            }
+
+            const raw = item?.rawData && typeof item.rawData === "object" ? item.rawData : item;
+            const targetTitle = String(raw?.appName || item?.title || raw?.title || raw?.name || "").trim().toLowerCase();
+            if (targetTitle) {
+                for (const sec of sections) {
+                    const cards = Array.from(
+                        sec.querySelectorAll(".tweak-col-app-row, .tweak-game-card, article, .card, .app-card, .tweak-card, .item-card, .grid-item, [data-title], [data-name]")
+                    );
+                    for (const c of cards) {
+                        if (c.closest("[id$='card-popup'], .tweak-popup-backdrop, .tweak-version-picker-backdrop, [class*='popup-backdrop'], [class*='card-popup']")) continue;
+                        const attrT = String(c.dataset.title || c.dataset.name || "").trim().toLowerCase();
+                        const txt = String(c.textContent || "").toLowerCase();
+                        if ((attrT && attrT === targetTitle) || txt.includes(targetTitle)) {
+                            return sec;
+                        }
+                    }
+                }
+            }
+
+            return sections[0];
+        }
+
+        function findPopupRootInSection(sectionEl) {
+            if (!sectionEl) return null;
+            return (
+                sectionEl.querySelector("[id$='card-popup']") ||
+                sectionEl.querySelector(".tweak-popup-backdrop") ||
+                sectionEl.querySelector("[class*='popup-backdrop']") ||
+                sectionEl.querySelector("[class*='card-popup']") ||
+                null
+            );
+        }
+
+        function findMatchingCardInSection(sectionEl, item) {
+            if (!sectionEl || !item) return null;
+            const raw = item.rawData && typeof item.rawData === "object" ? item.rawData : item;
+            const targetTitle = String(raw.appName || item.title || raw.title || raw.name || "").trim().toLowerCase();
+            if (!targetTitle) return null;
+
+            const candidates = Array.from(
+                sectionEl.querySelectorAll(".tweak-col-app-row, .tweak-game-card, article, .card, .app-card, .tweak-card, .item-card, .grid-item, [data-title], [data-name]")
+            ).filter(el => !el.closest("[id$='card-popup'], .tweak-popup-backdrop, .tweak-version-picker-backdrop, [class*='popup-backdrop'], [class*='card-popup']"));
+
+            for (const el of candidates) {
+                const attrTitle = String(el.dataset.title || el.dataset.name || "").trim().toLowerCase();
+                if (attrTitle && attrTitle === targetTitle) return el;
+            }
+
+            for (const el of candidates) {
+                const heading = el.querySelector(".tweak-col-app-name, h1, h2, h3, h4, .title, .app-name, .card-title, .name");
+                const hText = String(heading?.textContent || "").trim().toLowerCase();
+                if (hText && hText === targetTitle) return el;
+            }
+
+            for (const el of candidates) {
+                const text = String(el.textContent || "").toLowerCase();
+                if (text.includes(targetTitle)) return el;
+            }
+
+            return candidates[0] || null;
+        }
+
+        function resetPopupElementState(pop) {
+            if (!pop) return;
+            pop.classList.remove("is-open", "active", "open");
+            pop.setAttribute("aria-hidden", "true");
+            pop.style.position = "";
+            pop.style.inset = "";
+            pop.style.zIndex = "";
+            pop.style.opacity = "";
+            pop.style.visibility = "";
+            pop.style.pointerEvents = "";
+            pop.style.display = "";
+            document.body.style.overflow = "";
+        }
+
+        function closeAllSectionCardPopups() {
+            const tabsContainer = document.getElementById("tabs-container");
+            if (tabsContainer) {
+                tabsContainer.querySelectorAll(
+                    "[id$='card-popup'], .tweak-popup-backdrop, .tweak-version-picker-backdrop, [class*='popup-backdrop'], [class*='card-popup']"
+                ).forEach(resetPopupElementState);
+            }
+            updateBackdropState();
+        }
+
+        function triggerNativeCardClick(cardEl) {
+            if (!cardEl) return false;
+            const clickable = cardEl.matches("button, a, [role='button']")
+                ? cardEl
+                : (cardEl.querySelector("button, a, [role='button']") || cardEl);
+
+            if (typeof clickable.click === "function") {
+                clickable.click();
+            } else {
+                clickable.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+            }
+            return true;
+        }
+
+        function closeTweakVersionPickerIfOpen(sectionEl) {
+            const tabsContainer = document.getElementById("tabs-container");
+            const pickers = [];
+            if (sectionEl) {
+                pickers.push(...sectionEl.querySelectorAll(".tweak-version-picker-backdrop"));
+            }
+            if (tabsContainer) {
+                pickers.push(...tabsContainer.querySelectorAll(".tweak-version-picker-backdrop"));
+            }
+            pickers.forEach(picker => {
+                resetPopupElementState(picker);
+            });
+        }
+
+        function hydratePopupFromSectionStructure(sectionEl, item) {
+            const popRoot = findPopupRootInSection(sectionEl);
+            if (!popRoot || !item) return;
+            const raw = item.rawData && typeof item.rawData === "object" ? item.rawData : item;
+
+            const titleVal = String(raw.appName || item.title || raw.title || raw.name || "").trim();
+            const subVal = String(raw.description || raw.subtitle || item.content || raw.genre || "").trim();
+            const authorVal = String(raw.author || item.author || "Đang cập nhật").trim();
+            const genreVal = String(raw.genre || item.category || "Ứng dụng").trim();
+            const dateVal = String(raw.releaseDate || item.dateText || "Đang cập nhật").trim();
+            const formatVal = String(raw.fileFormat || "Đang cập nhật").trim();
+            const sizeVal = String(raw.fileSize || item.size || "Đang cập nhật").trim();
+            const verVal = String(raw.version || item.version || "Phiên bản").trim();
+            const changelogVal = String(raw.changelog || "Chưa có ghi chú cập nhật mới.").trim();
+            const descVal = String(raw.fullDescription || raw.description || item.content || "Đang cập nhật mô tả.").trim();
+            const reqVal = String(
+                raw.systemRequirement || raw.osRequirement || raw.requirements || raw.requirement || raw.iosVersion || raw.minOs || "Đang cập nhật"
+            ).trim();
+            const iconVal = String(raw.icon || raw.img || item.icon || "").trim();
+            const bannerVal = String(raw.banner || iconVal).trim();
+
+            const setTextBySuffix = (suffix, val) => {
+                const el = popRoot.querySelector(`[id$='${suffix}']`);
+                if (el) el.textContent = val;
+            };
+            const setImgBySuffix = (suffix, val) => {
+                const img = popRoot.querySelector(`img[id$='${suffix}']`);
+                if (img && val) img.src = val;
+            };
+
+            setImgBySuffix("popup-banner", bannerVal);
+            setImgBySuffix("popup-icon", iconVal);
+            setImgBySuffix("popup-sticky-icon", iconVal);
+
+            setTextBySuffix("popup-title", titleVal);
+            setTextBySuffix("popup-subtitle", subVal);
+            setTextBySuffix("popup-sticky-title", titleVal);
+            setTextBySuffix("popup-sticky-sub", subVal);
+            setTextBySuffix("popup-genre-badge", genreVal);
+            setTextBySuffix("popup-version", verVal);
+
+            setTextBySuffix("popup-author", authorVal);
+            setTextBySuffix("popup-genre", genreVal);
+            setTextBySuffix("popup-date", dateVal);
+            setTextBySuffix("popup-format", formatVal);
+            setTextBySuffix("popup-size", sizeVal);
+
+            setTextBySuffix("popup-changelog-version", verVal);
+            setTextBySuffix("popup-changelog", changelogVal);
+            setTextBySuffix("popup-desc", descVal);
+
+            setTextBySuffix("info-provider", authorVal);
+            setTextBySuffix("info-size", sizeVal);
+            setTextBySuffix("info-genre", genreVal);
+            setTextBySuffix("info-format", formatVal);
+            setTextBySuffix("info-date", dateVal);
+            setTextBySuffix("info-version", verVal);
+            setTextBySuffix("info-requirement", reqVal);
+        }
+
+        async function openSectionCardPopup(item, options = {}) {
+            if (!item) return;
+
+            const entries = await loadAllJsonEntriesFromTabs(false);
+            const raw = item.rawData && typeof item.rawData === "object" ? item.rawData : item;
+            const targetTitle = String(raw.appName || item.title || raw.title || raw.name || "").trim().toLowerCase();
+            const matchedJsonEntry = targetTitle
+                ? (entries.find(e => String(e.title || "").trim().toLowerCase() === targetTitle) || item)
+                : item;
+
+            const sectionEl = findSectionElementForItem(matchedJsonEntry);
+            const matchedCard = findMatchingCardInSection(sectionEl, matchedJsonEntry);
+
+            if (matchedCard) {
+                triggerNativeCardClick(matchedCard);
+                setTimeout(() => {
+                    closeTweakVersionPickerIfOpen(sectionEl);
+                    const activePop = findPopupRootInSection(sectionEl);
+                    if (activePop) {
+                        hydratePopupFromSectionStructure(sectionEl, matchedJsonEntry);
+                        activePop.classList.add("is-open", "active", "open");
+                        activePop.setAttribute("aria-hidden", "false");
+                    }
+                    updateBackdropState();
+                }, 40);
+                setTimeout(() => {
+                    closeTweakVersionPickerIfOpen(sectionEl);
+                    updateBackdropState();
+                }, 140);
+            } else {
+                const popupRoot = findPopupRootInSection(sectionEl);
+                if (popupRoot) {
+                    closeTweakVersionPickerIfOpen(sectionEl);
+                    hydratePopupFromSectionStructure(sectionEl, matchedJsonEntry);
+                    popupRoot.classList.add("is-open", "active", "open");
+                    popupRoot.setAttribute("aria-hidden", "false");
+                    updateBackdropState();
+                }
+            }
+
+            if (options.trackView !== false) {
+                const mRaw = matchedJsonEntry.rawData && typeof matchedJsonEntry.rawData === "object" ? matchedJsonEntry.rawData : matchedJsonEntry;
+                const title = mRaw.appName || matchedJsonEntry.title || matchedJsonEntry.name || "Chi tiết nội dung";
+                const url = mRaw.buttonUrl || mRaw.downloadUrl || mRaw.url || matchedJsonEntry.link || "";
+                recordViewedItem(title, url, matchedJsonEntry);
+            }
+        }
+
+        window.openHomeCardPopup = openSectionCardPopup;
+        window.closeHomeCardPopup = closeAllSectionCardPopups;
+        function openItemDetailPopup(item, options = {}) {
+            openSectionCardPopup(item, options);
+        }
+        function closeItemDetailPopup() {
+            closeAllSectionCardPopups();
+        }
+
+        (function initSectionPopupObserver() {
+            const tabsContainer = document.getElementById("tabs-container");
+            if (!tabsContainer) return;
+
+            tabsContainer.addEventListener("click", (e) => {
+                const subPicker = e.target.closest(".tweak-version-picker-backdrop");
+                if (subPicker) {
+                    const subClose = e.target.closest(".tweak-version-picker-close");
+                    if (subClose || e.target === subPicker) {
+                        setTimeout(() => {
+                            resetPopupElementState(subPicker);
+                            updateBackdropState();
+                        }, 30);
+                        return;
+                    }
+                    setTimeout(() => updateBackdropState(), 35);
+                    return;
+                }
+
+                const popupContainer = e.target.closest("[id$='card-popup'], .tweak-popup-backdrop, [class*='popup-backdrop'], [class*='card-popup']");
+                if (popupContainer) {
+                    const closeBtn = e.target.closest("button, [role='button'], a");
+                    if (closeBtn) {
+                        const idAttr = String(closeBtn.id || "").toLowerCase();
+                        const aria = String(closeBtn.getAttribute("aria-label") || "").toLowerCase();
+                        const dataAttr = String(closeBtn.getAttribute("data-close") || closeBtn.getAttribute("data-dismiss") || closeBtn.getAttribute("data-action") || "").toLowerCase();
+                        const cls = String(closeBtn.className || "").toLowerCase();
+                        const txt = String(closeBtn.textContent || "").trim();
+                        const isBackOrClose =
+                            txt === "<" ||
+                            txt === "×" ||
+                            txt === "✕" ||
+                            /popup-close|sticky-close/.test(idAttr) ||
+                            /đóng|close|back|trở lại|quay lại|dismiss/i.test(aria) ||
+                            /đóng|close|back|trở lại|quay lại|dismiss/i.test(dataAttr) ||
+                            /(?:^|[\s_-])(close|back|dismiss)(?:$|[\s_-])/i.test(cls);
+
+                        if (isBackOrClose) {
+                            setTimeout(() => {
+                                resetPopupElementState(popupContainer);
+                                updateBackdropState();
+                            }, 30);
+                            return;
+                        }
+                    }
+
+                    if (e.target === popupContainer) {
+                        setTimeout(() => {
+                            resetPopupElementState(popupContainer);
+                            updateBackdropState();
+                        }, 30);
+                        return;
+                    }
+
+                    setTimeout(() => {
+                        updateBackdropState();
+                    }, 35);
+                    return;
+                }
+
+                const card = e.target.closest(".tweak-col-app-row, .tweak-game-card, article, .card, .app-card, .tweak-card, .item-card, .grid-item, [data-title], [data-name]");
+                if (!card) return;
+                const sectionEl = card.closest("section.tab-section");
+
+                setTimeout(() => {
+                    const activePop = findPopupRootInSection(sectionEl);
+                    if (activePop) {
+                        activePop.classList.add("is-open", "active", "open");
+                        activePop.setAttribute("aria-hidden", "false");
+                    }
+                    updateBackdropState();
+                }, 40);
+            });
+
+            const observer = new MutationObserver(() => {
+                updateBackdropState();
+            });
+            observer.observe(tabsContainer, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ["class", "aria-hidden", "style"]
+            });
+
+            const mainBackdrop = document.getElementById("popup-backdrop");
+            if (mainBackdrop) {
+                mainBackdrop.addEventListener("click", () => {
+                    const panel = document.getElementById("activity-history-panel");
+                    const authPopup = document.getElementById("account-auth-popup");
+                    const searchOverlay = document.getElementById("kpazz-search-overlay");
+                    const drawer = document.getElementById("kpazz-drawer-menu");
+
+                    if (panel) panel.classList.remove("active");
+                    if (authPopup) authPopup.classList.remove("active");
+                    if (searchOverlay) searchOverlay.classList.remove("active");
+                    if (drawer) drawer.classList.remove("active");
+                    closeAllSectionCardPopups();
+                });
+            }
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && hasAnySectionPopupOpen()) {
+                    closeAllSectionCardPopups();
+                }
+            });
+        })();
+
+        /* ================= MENU DRAWER & XOÁ CACHE LÀM MỚI ================= */
+        function extractFieldValue(obj, keys = []) {
+            if (!obj || typeof obj !== "object") return "";
+            for (const k of keys) {
+                const v = obj[k];
+                if (v === undefined || v === null) continue;
+                if (typeof v === "string" || typeof v === "number") {
+                    const s = String(v).trim();
+                    if (s) return s;
+                } else if (Array.isArray(v)) {
+                    const joined = v
+                        .map(x => (typeof x === "object" && x !== null ? (x.text || x.label || x.title || x.name || x.value || "") : String(x || "")))
+                        .map(s => s.trim())
+                        .filter(Boolean)
+                        .join("\n");
+                    if (joined) return joined;
+                } else if (typeof v === "object") {
+                    const nested = extractFieldValue(v, ["text", "label", "title", "name", "value", "description", "desc"]);
+                    if (nested) return nested;
+                }
+            }
+            for (const val of Object.values(obj)) {
+                if (val && typeof val === "object" && !Array.isArray(val)) {
+                    const found = extractFieldValue(val, keys);
+                    if (found) return found;
+                }
+            }
+            return "";
+        }
+
+        function truncateToFiveWords(text = "") {
+            const words = String(text || "")
+                .trim()
+                .replace(/\s+/g, " ")
+                .split(" ")
+                .filter(Boolean);
+            if (!words.length) return "";
+            if (words.length <= 5) return words.join(" ");
+            return `${words.slice(0, 5).join(" ")}...`;
+        }
+
+        function getJsonBaseKey(sourceFile = "") {
+            return String(sourceFile || "")
+                .split("/")
+                .pop()
+                .replace(/\.json$/i, "")
+                .trim()
+                .toLowerCase();
+        }
+
+        function findSectionSubtitleInNode(node) {
+            if (!node || typeof node !== "object") return "";
+            if (Array.isArray(node)) {
+                for (const item of node) {
+                    const found = findSectionSubtitleInNode(item);
+                    if (found) return found;
+                }
+                return "";
+            }
+            for (const key of ["sectionSubtitle", "sectionSubTitle", "section_subtitle", "subtitle"]) {
+                if (typeof node[key] === "string" && node[key].trim()) {
+                    return node[key].trim();
+                }
+            }
+            for (const val of Object.values(node)) {
+                if (val && typeof val === "object") {
+                    const found = findSectionSubtitleInNode(val);
+                    if (found) return found;
+                }
+            }
+            return "";
+        }
+
+        function collectSectionGroupsFromJson(node, sourceFile, tabsDir, currentTitle = "", currentSubtitle = "", out = []) {
+            if (!node || typeof node !== "object") return out;
+
+            if (Array.isArray(node)) {
+                node.forEach(item => collectSectionGroupsFromJson(item, sourceFile, tabsDir, currentTitle, currentSubtitle, out));
+                return out;
+            }
+
+            const nextTitle =
+                typeof node.sectionTitle === "string" && node.sectionTitle.trim()
+                    ? node.sectionTitle.trim()
+                    : currentTitle;
+
+            const rawSub = extractFieldValue(node, ["sectionSubtitle", "sectionSubTitle", "section_subtitle"]);
+            const nextSubtitle = rawSub ? String(rawSub).trim() : currentSubtitle;
+
+            const hasItemFields = Boolean(node.title || node.name || node.appName || node.tweakName);
+            if (hasItemFields && nextTitle) {
+                let group = out.find(g => g.title.toLowerCase() === nextTitle.toLowerCase() && g.sourceFile === sourceFile);
+                if (!group) {
+                    group = { title: nextTitle, subtitle: nextSubtitle, sourceFile, items: [] };
+                    out.push(group);
+                } else if (!group.subtitle && nextSubtitle) {
+                    group.subtitle = nextSubtitle;
+                }
+                const title = String(node.title || node.name || node.appName || node.tweakName || "").trim();
+                const author = extractFieldValue(node, ["author", "developer", "creator", "by", "vendor", "provider", "publisher"]) || "";
+                const version = extractFieldValue(node, ["version", "ver", "appVersion"]) || "";
+                const category = extractFieldValue(node, ["category", "type", "genre", "tab"]) || "";
+                const sizeText = extractFieldValue(node, ["size", "fileSize", "filesize", "appSize"]) || "";
+                const content = extractFieldValue(node, ["fullDescription", "longDescription", "details", "about", "notes", "description", "desc", "content", "subtitle", "summary"]) || "";
+                const link = node.url || node.link || node.download || node.downloadUrl || node.buttonUrl || node.ipa || node.deb || "#";
+                const rawIcon = extractFieldValue(node, ["icon", "image", "img", "thumbnail", "cover", "logo"]) || "";
+                const dateText = extractFieldValue(node, ["updatedAt", "updated_at", "lastUpdated", "releaseDate", "date", "createdAt", "time"]) || "";
+
+                const dup = group.items.some(it => it.title.toLowerCase() === title.toLowerCase());
+                if (title && !dup) {
+                    group.items.push({
+                        title,
+                        author: String(author),
+                        version: String(version),
+                        category: String(category),
+                        size: String(sizeText),
+                        content: String(content),
+                        link: String(link),
+                        icon: rawIcon ? resolveTabRelativeUrl(String(rawIcon), tabsDir) : "",
+                        dateText: String(dateText),
+                        sourceFile,
+                        rawData: node
+                    });
+                }
+            }
+
+            Object.values(node).forEach(val => {
+                if (val && typeof val === "object") {
+                    collectSectionGroupsFromJson(val, sourceFile, tabsDir, nextTitle, nextSubtitle, out);
+                }
+            });
+
+            return out;
+        }
+
+        async function getOrderedSectionGroupsFromTabs() {
+            await loadAllJsonEntriesFromTabs(false);
+            const tabsContainer = document.getElementById("tabs-container");
+            const orderedSections = tabsContainer
+                ? Array.from(tabsContainer.querySelectorAll("section.tab-section")).sort(
+                    (a, b) => (Number(a.style.order) || 999) - (Number(b.style.order) || 999)
+                )
+                : [];
+
+            const groups = [];
+            const seen = new Set();
+
+            const addGroup = (g, fallbackSubtitle) => {
+                const key = `${g.title.toLowerCase()}|${getJsonBaseKey(g.sourceFile)}`;
+                if (seen.has(key)) return;
+                seen.add(key);
+                groups.push({
+                    ...g,
+                    subtitle: g.subtitle || fallbackSubtitle || ""
+                });
+            };
+
+            orderedSections.forEach(sec => {
+                const baseKey = getJsonBaseKey(String(sec.dataset.sourceFile || "") || sec.dataset.tabFile || "");
+
+                for (const [url, rawJson] of CACHED_JSON_RAW_BY_URL.entries()) {
+                    const urlKey = getJsonBaseKey(url);
+                    if (baseKey && urlKey && (urlKey === baseKey || urlKey.startsWith(baseKey))) {
+                        const rootSub = findSectionSubtitleInNode(rawJson);
+                        collectSectionGroupsFromJson(rawJson, url, CURRENT_TABS_DIR, "", rootSub, []).forEach(g => addGroup(g, rootSub));
+                    }
+                }
+            });
+
+            if (!groups.length) {
+                for (const [url, rawJson] of CACHED_JSON_RAW_BY_URL.entries()) {
+                    const rootSub = findSectionSubtitleInNode(rawJson);
+                    collectSectionGroupsFromJson(rawJson, url, CURRENT_TABS_DIR, "", rootSub, []).forEach(g => addGroup(g, rootSub));
+                }
+            }
+
+            return groups;
+        }
+
+        (function initDrawerMenuAndCacheClear() {
+            const btnMenu = document.getElementById("btn-menu");
+            const drawer = document.getElementById("kpazz-drawer-menu");
+            const listEl = document.getElementById("drawer-sections-list");
+            const clearCacheBtn = document.getElementById("btn-clear-cache-reload");
+            const drawerBtnRegister = document.getElementById("drawer-btn-register");
+            const drawerBtnLogin = document.getElementById("drawer-btn-login");
+            const backdrop = document.getElementById("popup-backdrop");
+
+            if (!btnMenu || !drawer || !listEl) return;
+
+            async function renderDrawerSections() {
+                listEl.innerHTML = `<div class="panel-empty-msg">Đang tải danh sách mục...</div>`;
+                const sectionGroups = await getOrderedSectionGroupsFromTabs();
+                if (!sectionGroups.length) {
+                    listEl.innerHTML = `<div class="panel-empty-msg">Không tìm thấy sectionTitle trong JSON.</div>`;
+                    return;
+                }
+
+                listEl.innerHTML = sectionGroups.map((grp, gIdx) => {
+                    const childrenHtml = grp.items.map(it => {
+                        const refKey = saveItemRef(it);
+                        const sub = [it.author, it.version].map(x => String(x || "").trim()).filter(Boolean).join(" • ");
+                        const iconHtml = it.icon
+                            ? `<img class="drawer-child-icon" src="${escapeAttr(it.icon)}" alt="" loading="lazy">`
+                            : `<div class="drawer-child-icon" style="display:flex;align-items:center;justify-content:center;font-weight:700;color:#38bdf8;font-size:0.75rem;">${escapeHtml(it.title.charAt(0).toUpperCase())}</div>`;
+                        return `
+                            <div class="drawer-child-item" data-drawer-item-ref="${escapeAttr(refKey)}">
+                                ${iconHtml}
+                                <div class="drawer-child-info">
+                                    <div class="drawer-child-title">${escapeHtml(it.title)}</div>
+                                    ${sub ? `<div class="drawer-child-sub">${escapeHtml(sub)}</div>` : ""}
+                                </div>
+                            </div>
+                        `;
+                    }).join("");
+
+                    return `
+                        <div class="drawer-group-block">
+                            <div class="drawer-section-item" data-drawer-group="${gIdx}">
+                                <div>
+                                    <div class="drawer-section-title">${escapeHtml(grp.title)}</div>
+                                    <div class="drawer-section-sub">
+                                        <span class="drawer-section-count">${grp.items.length} mục</span>
+                                        ${grp.subtitle ? `<span>${escapeHtml(grp.subtitle)}</span>` : ""}
+                                    </div>
+                                </div>
+                                <span class="drawer-chevron">›</span>
+                            </div>
+                            <div class="drawer-children-list" data-drawer-children="${gIdx}">
+                                ${childrenHtml || `<div class="drawer-child-sub" style="padding:6px 8px;">Chưa có nội dung trong mục này.</div>`}
+                            </div>
+                        </div>
+                    `;
+                }).join("");
+
+                listEl.querySelectorAll(".drawer-section-item[data-drawer-group]").forEach(headerRow => {
+                    headerRow.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        const gIdx = headerRow.getAttribute("data-drawer-group");
+                        const childBox = listEl.querySelector(`.drawer-children-list[data-drawer-children="${gIdx}"]`);
+                        const isExpanded = headerRow.classList.toggle("expanded");
+                        if (childBox) {
+                            childBox.classList.toggle("open", isExpanded);
+                        }
+                    });
+                });
+
+                listEl.querySelectorAll(".drawer-child-item[data-drawer-item-ref]").forEach(childRow => {
+                    childRow.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        const ref = childRow.getAttribute("data-drawer-item-ref");
+                        const chosen = getItemRef(ref);
+                        closeDrawerMenu();
+                        if (chosen) {
+                            openSectionCardPopup(chosen);
+                        }
+                    });
+                });
+            }
+
+            function openDrawerMenu() {
+                const panel = document.getElementById("activity-history-panel");
+                const authPopup = document.getElementById("account-auth-popup");
+                const searchOverlay = document.getElementById("kpazz-search-overlay");
+                if (panel) panel.classList.remove("active");
+                if (authPopup) authPopup.classList.remove("active");
+                if (searchOverlay) searchOverlay.classList.remove("active");
+                closeAllSectionCardPopups();
+
+                drawer.classList.add("active");
+                updateBackdropState();
+                renderDrawerSections();
+            }
+
+            function closeDrawerMenu() {
+                drawer.classList.remove("active");
+                updateBackdropState();
+            }
+
+            const openAuthFromDrawer = (mode) => {
+                closeDrawerMenu();
+                if (typeof window.openKpazzAuthPopup === "function") {
+                    window.openKpazzAuthPopup(mode);
+                }
+            };
+
+            if (drawerBtnRegister) {
+                drawerBtnRegister.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    openAuthFromDrawer("register");
+                });
+            }
+
+            if (drawerBtnLogin) {
+                drawerBtnLogin.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    openAuthFromDrawer("login");
+                });
+            }
+
+            btnMenu.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (drawer.classList.contains("active")) {
+                    closeDrawerMenu();
+                } else {
+                    openDrawerMenu();
+                }
+            });
+
+            if (clearCacheBtn) {
+                clearCacheBtn.addEventListener("click", async (e) => {
+                    e.stopPropagation();
+                    invalidateJsonCache();
+                    try {
+                        if ("caches" in window && typeof caches.keys === "function") {
+                            const keys = await caches.keys();
+                            await Promise.all(keys.map(k => caches.delete(k)));
+                        }
+                    } catch (_) {}
+                    window.location.reload();
+                });
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener("click", (e) => {
+                    if (drawer.classList.contains("active")) {
+                        e.stopPropagation();
+                        closeDrawerMenu();
+                    }
+                });
+            }
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && drawer.classList.contains("active")) {
+                    closeDrawerMenu();
+                }
+            });
+        })();
+
+        /* ================= TÌM KIẾM DỮ LIỆU JSON TRONG THƯ MỤC TABS ================= */
+        (function initTabsJsonSearch() {
+            const btnSearch = document.getElementById("btn-search");
+            const searchOverlay = document.getElementById("kpazz-search-overlay");
+            const searchInput = document.getElementById("kpazz-search-input");
+            const historyBar = document.getElementById("kpazz-search-history-bar");
+            const resultsBox = document.getElementById("kpazz-search-results");
+            const btnClose = document.getElementById("btn-search-close");
+            const backdrop = document.getElementById("popup-backdrop");
+
+            if (!btnSearch || !searchOverlay || !searchInput || !resultsBox) return;
+
+            function recordSearchKeyword(term) {
+                const clean = String(term || "").trim();
+                if (!clean) return;
+                const list = readJsonStorage(SEARCH_HISTORY_KEY, []);
+                const filtered = list.filter(x => String(x).toLowerCase() !== clean.toLowerCase());
+                filtered.unshift(clean);
+                writeJsonStorage(SEARCH_HISTORY_KEY, filtered.slice(0, 10));
+            }
+
+            function clearSearchHistory() {
+                writeJsonStorage(SEARCH_HISTORY_KEY, []);
+            }
+
+            function renderSearchHistoryBar(items) {
+                if (!historyBar) return;
+                const list = readJsonStorage(SEARCH_HISTORY_KEY, []);
+                if (!list.length) {
+                    historyBar.innerHTML = "";
+                    return;
+                }
+
+                historyBar.innerHTML = `
+                    <span class="search-history-label">Đã tìm:</span>
+                    ${list.map(kw => `<button type="button" class="search-history-chip" data-search-kw="${escapeAttr(kw)}">${escapeHtml(kw)}</button>`).join("")}
+                    <button type="button" class="search-history-clear-btn" id="btn-clear-search-history">Xoá lịch sử</button>
+                `;
+
+                historyBar.querySelectorAll(".search-history-chip").forEach(chip => {
+                    chip.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        const kw = chip.getAttribute("data-search-kw") || "";
+                        searchInput.value = kw;
+                        renderSearchResults(items, kw);
+                    });
+                });
+
+                const clearHistoryBtn = historyBar.querySelector("#btn-clear-search-history");
+                if (clearHistoryBtn) {
+                    clearHistoryBtn.addEventListener("click", (ev) => {
+                        ev.stopPropagation();
+                        clearSearchHistory();
+                        renderSearchHistoryBar(items);
+                    });
+                }
+            }
+
+            function getDeduplicatedSearchItems(entries) {
+                const seen = new Set();
+                const list = [];
+                (entries || []).forEach(entry => {
+                    if (!entry || /slide\.json$/i.test(entry.sourceFile || "")) return;
+                    const title = String(entry.title || "").trim();
+                    if (!title || title === "Không có tiêu đề") return;
+                    const key = `${String(entry.sourceFile || "").toLowerCase()}|${title.toLowerCase()}`;
+                    if (seen.has(key)) return;
+                    seen.add(key);
+                    list.push(entry);
+                });
+                return list;
+            }
+
+            function renderSearchResults(items, keyword = "") {
+                renderSearchHistoryBar(items);
+                const q = String(keyword || "").trim().toLowerCase();
+                const filtered = q
+                    ? items.filter(it => {
+                        const hay = [
+                            it.title,
+                            it.author,
+                            it.category,
+                            it.version,
+                            it.content,
+                            it.sourceFile
+                        ].join(" ").toLowerCase();
+                        return hay.includes(q);
+                    })
+                    : items.slice(0, 20);
+
+                if (!filtered.length) {
+                    resultsBox.innerHTML = `<div class="panel-empty-msg">Không tìm thấy nội dung phù hợp với "${escapeHtml(keyword)}".</div>`;
+                    return;
+                }
+
+                resultsBox.innerHTML = filtered.slice(0, 35).map(item => {
+                    const refKey = saveItemRef(item);
+                    const sourceTag = String(item.sourceFile || "")
+                        .split("/")
+                        .pop()
+                        .replace(/\.json$/i, "");
+                    const shortDesc = truncateToFiveWords(item.content || item.author || "");
+                    const verText = String(item.version || "").trim() ? `Phiên bản: ${String(item.version).trim()}` : "";
+                    const iconHtml = item.icon
+                        ? `<img class="search-result-icon" src="${escapeAttr(item.icon)}" alt="" loading="lazy">`
+                        : `<div class="search-result-icon" style="display:flex;align-items:center;justify-content:center;font-weight:700;color:#38bdf8;">${escapeHtml(item.title.charAt(0).toUpperCase())}</div>`;
+
+                    return `
+                        <div class="search-result-row" data-search-ref="${escapeAttr(refKey)}">
+                            ${iconHtml}
+                            <div class="search-result-info">
+                                <div class="search-result-title">${escapeHtml(item.title)}</div>
+                                ${shortDesc ? `<div class="search-result-desc">${escapeHtml(shortDesc)}</div>` : ""}
+                                ${verText ? `<div class="search-result-ver">${escapeHtml(verText)}</div>` : ""}
+                            </div>
+                            ${sourceTag ? `<span class="search-result-tag">${escapeHtml(sourceTag)}</span>` : ""}
+                        </div>
+                    `;
+                }).join("");
+
+                resultsBox.querySelectorAll(".search-result-row[data-search-ref]").forEach(row => {
+                    row.addEventListener("click", (ev) => {
+                        ev.preventDefault();
+                        ev.stopPropagation();
+                        const ref = row.getAttribute("data-search-ref");
+                        const chosen = getItemRef(ref);
+                        if (searchInput.value.trim()) {
+                            recordSearchKeyword(searchInput.value.trim());
+                        } else if (chosen?.title) {
+                            recordSearchKeyword(chosen.title);
+                        }
+                        closeSearchOverlay();
+                        if (chosen) {
+                            setTimeout(() => {
+                                openSectionCardPopup(chosen);
+                            }, 20);
+                        }
+                    });
+                });
+            }
+
+            async function openSearchOverlay() {
+                const panel = document.getElementById("activity-history-panel");
+                const authPopup = document.getElementById("account-auth-popup");
+                const drawer = document.getElementById("kpazz-drawer-menu");
+                if (panel) panel.classList.remove("active");
+                if (authPopup) authPopup.classList.remove("active");
+                if (drawer) drawer.classList.remove("active");
+                closeAllSectionCardPopups();
+
+                searchOverlay.classList.add("active");
+                updateBackdropState();
+                resultsBox.innerHTML = `<div class="panel-empty-msg">Đang tải dữ liệu tìm kiếm...</div>`;
+
+                const entries = await loadAllJsonEntriesFromTabs(false);
+                const cleanItems = getDeduplicatedSearchItems(entries);
+                renderSearchResults(cleanItems, searchInput.value);
+
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 40);
+            }
+
+            function closeSearchOverlay() {
+                searchOverlay.classList.remove("active");
+                updateBackdropState();
+            }
+
+            btnSearch.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (searchOverlay.classList.contains("active")) {
+                    closeSearchOverlay();
+                } else {
+                    openSearchOverlay();
+                }
+            });
+
+            searchInput.addEventListener("input", async () => {
+                const entries = await loadAllJsonEntriesFromTabs(false);
+                const cleanItems = getDeduplicatedSearchItems(entries);
+                renderSearchResults(cleanItems, searchInput.value);
+            });
+
+            searchInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && searchInput.value.trim()) {
+                    recordSearchKeyword(searchInput.value.trim());
+                    renderSearchHistoryBar([]);
+                }
+            });
+
+            if (btnClose) {
+                btnClose.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    closeSearchOverlay();
+                });
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener("click", () => {
+                    if (searchOverlay.classList.contains("active")) {
+                        closeSearchOverlay();
+                    }
+                });
+            }
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && searchOverlay.classList.contains("active")) {
+                    closeSearchOverlay();
+                }
+            });
+        })();
+
+        (function initAccountAuthPopup() {
+            const btnAccount = document.getElementById("btn-account");
+            const authPopup = document.getElementById("account-auth-popup");
+            const btnClose = document.getElementById("btn-auth-popup-close");
+            const backdrop = document.getElementById("popup-backdrop");
+
+            const tabLogin = document.getElementById("tab-btn-login");
+            const tabRegister = document.getElementById("tab-btn-register");
+            const formLogin = document.getElementById("form-login-view");
+            const formRegister = document.getElementById("form-register-view");
+            const headingEl = document.getElementById("auth-popup-heading");
+            const loginStatus = document.getElementById("login-status-msg");
+            const registerStatus = document.getElementById("register-status-msg");
+            const rememberCheck = document.getElementById("login-remember-check");
+            const forgotBtn = document.getElementById("btn-forgot-password");
+
+            if (!btnAccount || !authPopup) return;
+
+            function switchAuthTab(mode) {
+                const isRegister = mode === "register";
+                if (tabLogin) {
+                    tabLogin.classList.toggle("active", !isRegister);
+                    tabLogin.setAttribute("aria-selected", String(!isRegister));
+                }
+                if (tabRegister) {
+                    tabRegister.classList.toggle("active", isRegister);
+                    tabRegister.setAttribute("aria-selected", String(isRegister));
+                }
+                if (formLogin) formLogin.style.display = isRegister ? "none" : "flex";
+                if (formRegister) formRegister.style.display = isRegister ? "flex" : "none";
+                if (headingEl) {
+                    headingEl.textContent = isRegister ? "Đăng ký tài khoản" : "Đăng nhập tài khoản";
+                }
+                if (loginStatus) loginStatus.textContent = "";
+                if (registerStatus) registerStatus.textContent = "";
+            }
+
+            function loadRememberedLogin() {
+                try {
+                    const raw = localStorage.getItem(AUTH_REMEMBER_KEY);
+                    if (!raw) return;
+                    const saved = JSON.parse(raw);
+                    const uInput = document.getElementById("login-username");
+                    const pInput = document.getElementById("login-password");
+                    if (saved && saved.username && uInput) uInput.value = saved.username;
+                    if (saved && saved.password && pInput) pInput.value = saved.password;
+                    if (rememberCheck) rememberCheck.checked = true;
+                } catch (_) {}
+            }
+
+            function openAuthPopup(initialMode = "login") {
+                switchAuthTab(initialMode);
+                loadRememberedLogin();
+                authPopup.classList.add("active");
+                updateBackdropState();
+            }
+
+            window.openKpazzAuthPopup = openAuthPopup;
+
+            function closeAuthPopup() {
+                authPopup.classList.remove("active");
+                updateBackdropState();
+            }
+
+            btnAccount.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (authPopup.classList.contains("active")) {
+                    closeAuthPopup();
+                } else {
+                    openAuthPopup("login");
+                }
+            });
+
+            if (tabLogin) tabLogin.addEventListener("click", () => switchAuthTab("login"));
+            if (tabRegister) tabRegister.addEventListener("click", () => switchAuthTab("register"));
+            if (btnClose) {
+                btnClose.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    closeAuthPopup();
+                });
+            }
+            if (backdrop) backdrop.addEventListener("click", () => closeAuthPopup());
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && authPopup.classList.contains("active")) {
+                    closeAuthPopup();
+                }
+            });
+
+            if (forgotBtn) {
+                forgotBtn.addEventListener("click", () => {
+                    const currentUser = (document.getElementById("login-username")?.value || "").trim();
+                    if (loginStatus) {
+                        loginStatus.textContent = currentUser
+                            ? `Đã gửi hướng dẫn khôi phục mật khẩu cho "${currentUser}".`
+                            : "Vui lòng nhập tên đăng nhập hoặc số điện thoại để khôi phục mật khẩu.";
+                    }
+                });
+            }
+
+            if (formLogin) {
+                formLogin.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const userVal = (document.getElementById("login-username")?.value || "").trim();
+                    const passVal = (document.getElementById("login-password")?.value || "").trim();
+                    if (!userVal || !passVal) return;
+
+                    const users = readJsonStorage(AUTH_USERS_KEY, []);
+                    const matched = users.find(
+                        u => (u.username.toLowerCase() === userVal.toLowerCase() || String(u.phone || "").toLowerCase() === userVal.toLowerCase()) && u.password === passVal
+                    );
+
+                    try {
+                        if (rememberCheck && rememberCheck.checked) {
+                            localStorage.setItem(AUTH_REMEMBER_KEY, JSON.stringify({ username: userVal, password: passVal }));
+                        } else {
+                            localStorage.removeItem(AUTH_REMEMBER_KEY);
+                        }
+                    } catch (_) {}
+
+                    if (matched) {
+                        writeJsonStorage(AUTH_SESSION_KEY, { username: matched.username, phone: matched.phone, loggedAt: new Date().toLocaleString("vi-VN") });
+                        if (loginStatus) loginStatus.textContent = `Đăng nhập thành công: ${matched.username}`;
+                    } else {
+                        writeJsonStorage(AUTH_SESSION_KEY, { username: userVal, phone: userVal, loggedAt: new Date().toLocaleString("vi-VN") });
+                        if (loginStatus) loginStatus.textContent = `Đã ghi nhận phiên đăng nhập: ${userVal}`;
+                    }
+                });
+            }
+
+            if (formRegister) {
+                formRegister.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    const uName = (document.getElementById("register-username")?.value || "").trim();
+                    const uPhone = (document.getElementById("register-phone")?.value || "").trim();
+                    const uPass = (document.getElementById("register-password")?.value || "").trim();
+                    if (!uName || !uPhone || !uPass) return;
+
+                    if (uPass.length < 6) {
+                        if (registerStatus) registerStatus.textContent = "Mật khẩu cần tối thiểu 6 ký tự.";
+                        return;
+                    }
+
+                    const users = readJsonStorage(AUTH_USERS_KEY, []);
+                    const exists = users.some(u => u.username.toLowerCase() === uName.toLowerCase() || String(u.phone || "") === uPhone);
+                    if (exists) {
+                        if (registerStatus) registerStatus.textContent = "Tên tài khoản hoặc Số điện thoại đã tồn tại.";
+                        return;
+                    }
+
+                    users.push({ username: uName, phone: uPhone, password: uPass });
+                    writeJsonStorage(AUTH_USERS_KEY, users);
+                    writeJsonStorage(AUTH_SESSION_KEY, { username: uName, phone: uPhone, loggedAt: new Date().toLocaleString("vi-VN") });
+                    if (registerStatus) registerStatus.textContent = `Đăng ký thành công tài khoản ${uName}!`;
+                });
+            }
+        })();
 
         (function initAutoPlus7AndManualTheme() {
             const brandToggle = document.getElementById("brand-theme-toggle");
@@ -1045,121 +2985,160 @@
             } catch (_) {}
         }
 
-        function recordSearchQuery(query) {
-            const cleaned = String(query || "").trim();
-            if (!cleaned) return;
-            const list = readJsonStorage(SEARCH_HISTORY_KEY, []).filter(
-                q => q.toLowerCase() !== cleaned.toLowerCase()
-            );
-            list.unshift(cleaned);
-            writeJsonStorage(SEARCH_HISTORY_KEY, list.slice(0, 12));
-        }
-
         function isDownloadTarget(nameOrUrl = "") {
             const lower = String(nameOrUrl).toLowerCase();
             return /\.(ipa|deb|apk|zip|rar|7z|tar|gz|pdf|mp3|mp4|dmg|exe|json)(\?|#|$)/i.test(lower) ||
                 /download|\/dl\/|get_deb|ipa/i.test(lower);
         }
 
-        function recordViewedItem(title, url = "") {
+        function recordViewedItem(title, url = "", fullItem = null) {
             const cleanTitle = String(title || "").trim();
             if (!cleanTitle) return;
             const timeStr = new Date().toLocaleString("vi-VN");
             const list = readJsonStorage(VIEWED_HISTORY_KEY, []);
+            const existing = list.find(item => item.title === cleanTitle);
+            const mergedItem = fullItem || existing?.item || { title: cleanTitle, link: String(url || "") };
             const filtered = list.filter(item => item.title !== cleanTitle);
-            filtered.unshift({ title: cleanTitle, url: String(url || ""), time: timeStr });
+            filtered.unshift({
+                title: cleanTitle,
+                url: String(url || mergedItem.link || ""),
+                time: timeStr,
+                item: mergedItem
+            });
             writeJsonStorage(VIEWED_HISTORY_KEY, filtered.slice(0, 25));
         }
 
-        function recordDownloadedItem(name, url = "") {
+        function recordDownloadedItem(name, url = "", fullItem = null) {
             const cleanName = String(name || "").trim();
             if (!cleanName) return;
             const timeStr = new Date().toLocaleString("vi-VN");
             const list = readJsonStorage(DOWNLOAD_HISTORY_KEY, []);
+            const existing = list.find(item => item.name === cleanName || item.url === url);
+            const mergedItem = fullItem || existing?.item || { title: cleanName, link: String(url || "") };
             const filtered = list.filter(item => item.name !== cleanName || item.url !== url);
-            filtered.unshift({ name: cleanName, url: String(url || ""), time: timeStr });
+            filtered.unshift({
+                name: cleanName,
+                url: String(url || mergedItem.link || ""),
+                time: timeStr,
+                item: mergedItem
+            });
             writeJsonStorage(DOWNLOAD_HISTORY_KEY, filtered.slice(0, 25));
         }
 
-        function renderSearchHistoryBelow() {
-            const box = document.getElementById("search-history-below");
-            const navbar = document.getElementById("main-navbar");
-            const searchInput = document.getElementById("navbar-search-input");
-            if (!box || !navbar || !searchInput) return;
+        function parseItemTimestamp(rawDate) {
+            if (!rawDate) return NaN;
+            if (typeof rawDate === "number") {
+                return rawDate < 1e12 ? rawDate * 1000 : rawDate;
+            }
+            const str = String(rawDate).trim();
+            if (!str) return NaN;
 
-            if (!navbar.classList.contains("search-open") || searchInput.value.trim()) {
-                box.classList.remove("active");
-                return;
+            const dmyMatch = str.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+            if (dmyMatch) {
+                const day = Number(dmyMatch[1]);
+                const month = Number(dmyMatch[2]) - 1;
+                const year = Number(dmyMatch[3]);
+                const hr = Number(dmyMatch[4] || 0);
+                const min = Number(dmyMatch[5] || 0);
+                const sec = Number(dmyMatch[6] || 0);
+                return new Date(year, month, day, hr, min, sec).getTime();
             }
 
-            const history = readJsonStorage(SEARCH_HISTORY_KEY, []);
-            if (!history.length) {
-                box.innerHTML = `
-                    <div class="search-history-head">
-                        <span>Lịch sử tìm kiếm</span>
-                    </div>
-                    <div class="search-empty-msg" style="padding: 10px 6px; font-size: 13px;">Chưa có từ khóa tìm kiếm nào.</div>
-                `;
-                box.classList.add("active");
-                return;
-            }
-
-            const chipsHtml = history.map(term =>
-                `<button type="button" class="search-history-chip" data-query="${escapeAttr(term)}">${escapeHtml(term)}</button>`
-            ).join("");
-
-            box.innerHTML = `
-                <div class="search-history-head">
-                    <span>Lịch sử tìm kiếm</span>
-                    <button type="button" class="search-history-clear-btn" id="btn-clear-search-history">Xóa</button>
-                </div>
-                <div class="search-history-chips">${chipsHtml}</div>
-            `;
-            box.classList.add("active");
-
-            box.querySelectorAll(".search-history-chip").forEach(chip => {
-                chip.addEventListener("click", () => {
-                    const q = chip.getAttribute("data-query") || "";
-                    searchInput.value = q;
-                    box.classList.remove("active");
-                    renderSearchResults(q, true);
-                });
-            });
-
-            const clearBtn = document.getElementById("btn-clear-search-history");
-            if (clearBtn) {
-                clearBtn.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    writeJsonStorage(SEARCH_HISTORY_KEY, []);
-                    renderSearchHistoryBelow();
-                });
-            }
+            const parsed = Date.parse(str);
+            return Number.isNaN(parsed) ? NaN : parsed;
         }
 
-        function renderActivityHistoryPanel() {
+        function renderActivityHistoryPanel(preloadedRecentItems = null) {
             const container = document.getElementById("activity-history-content");
+            const titleEl = document.getElementById("activity-panel-title");
+            const clearBtn = document.getElementById("btn-clear-activity-history");
             if (!container) return;
+
+            if (PANEL_MODE === "recent-updates") {
+                if (titleEl) titleEl.textContent = "Cập nhật mới nhất";
+                if (clearBtn) {
+                    clearBtn.style.display = "";
+                    clearBtn.classList.add("is-pill-btn");
+                }
+
+                const renderList = (recentItems) => {
+                    if (!recentItems.length) {
+                        container.innerHTML = `<div class="panel-empty-msg" style="padding: 14px; font-size: 13px;">Không có nội dung nào cập nhật trong vòng 1 tháng trở lại.</div>`;
+                        return;
+                    }
+
+                    container.innerHTML = `
+                        <div class="activity-section-label">Nội dung thông báo &amp; cập nhật (${recentItems.length})</div>
+                        ${recentItems.map(item => {
+                            const refKey = saveItemRef(item);
+                            const idKey = getItemIdentityKey(item);
+                            const suggestBadge = item.isFromTooltip
+                                ? `<span class="activity-suggest-badge">Đề xuất</span>`
+                                : "";
+                            return `
+                                <div class="activity-item" data-item-ref="${escapeAttr(refKey)}" data-notify-key="${escapeAttr(idKey)}">
+                                    <div class="activity-item-top">
+                                        <span class="activity-item-name">${escapeHtml(item.title)}</span>
+                                        ${suggestBadge}
+                                    </div>
+                                    <span class="activity-item-meta">${escapeHtml(item.dateText || item.tooltipTime || "")}</span>
+                                </div>
+                            `;
+                        }).join("")}
+                    `;
+
+                    container.querySelectorAll(".activity-item[data-item-ref]").forEach(el => {
+                        el.addEventListener("click", () => {
+                            const ref = el.getAttribute("data-item-ref");
+                            const data = getItemRef(ref);
+                            if (data) openSectionCardPopup(data);
+                        });
+                    });
+                };
+
+                if (Array.isArray(preloadedRecentItems)) {
+                    renderList(preloadedRecentItems);
+                } else {
+                    container.innerHTML = `<div class="panel-empty-msg" style="padding: 12px; font-size: 13px;">Đang tải các mục cập nhật gần nhất...</div>`;
+                    getNotificationFeedEntries(true).then(renderList);
+                }
+                return;
+            }
+
+            if (titleEl) titleEl.textContent = "Lịch sử đã xem & đã tải";
+            if (clearBtn) {
+                clearBtn.style.display = "";
+                clearBtn.classList.remove("is-pill-btn");
+            }
 
             const viewed = readJsonStorage(VIEWED_HISTORY_KEY, []);
             const downloaded = readJsonStorage(DOWNLOAD_HISTORY_KEY, []);
 
             const viewedHtml = viewed.length
-                ? viewed.map(v => `
-                    <div class="activity-item">
-                        <span class="activity-item-name">${escapeHtml(v.title)}</span>
-                        <span class="activity-item-meta">${escapeHtml(v.time)}${v.url ? ` • ${escapeHtml(v.url)}` : ""}</span>
-                    </div>
-                `).join("")
-                : `<div class="search-empty-msg" style="padding: 8px; font-size: 13px;">Chưa ghi nhận mục nào đã xem.</div>`;
+                ? viewed.map(v => {
+                    const payload = v.item || { title: v.title, link: v.url };
+                    const refKey = saveItemRef(payload);
+                    return `
+                        <div class="activity-item" data-item-ref="${escapeAttr(refKey)}">
+                            <span class="activity-item-name">${escapeHtml(v.title)}</span>
+                            <span class="activity-item-meta">${escapeHtml(v.time)}${v.url ? ` • ${escapeHtml(v.url)}` : ""}</span>
+                        </div>
+                    `;
+                }).join("")
+                : `<div class="panel-empty-msg" style="padding: 8px; font-size: 13px;">Chưa ghi nhận mục nào đã xem.</div>`;
 
             const downloadedHtml = downloaded.length
-                ? downloaded.map(d => `
-                    <div class="activity-item">
-                        <span class="activity-item-name">${escapeHtml(d.name)}</span>
-                        <span class="activity-item-meta">${escapeHtml(d.time)}${d.url ? ` • ${escapeHtml(d.url)}` : ""}</span>
-                    </div>
-                `).join("")
-                : `<div class="search-empty-msg" style="padding: 8px; font-size: 13px;">Chưa ghi nhận tệp hoặc mục nào đã tải.</div>`;
+                ? downloaded.map(d => {
+                    const payload = d.item || { title: d.name, link: d.url };
+                    const refKey = saveItemRef(payload);
+                    return `
+                        <div class="activity-item" data-item-ref="${escapeAttr(refKey)}">
+                            <span class="activity-item-name">${escapeHtml(d.name)}</span>
+                            <span class="activity-item-meta">${escapeHtml(d.time)}${d.url ? ` • ${escapeHtml(d.url)}` : ""}</span>
+                        </div>
+                    `;
+                }).join("")
+                : `<div class="panel-empty-msg" style="padding: 8px; font-size: 13px;">Chưa ghi nhận tệp hoặc mục nào đã tải.</div>`;
 
             container.innerHTML = `
                 <div class="activity-section-label">Mục đã xem (${viewed.length})</div>
@@ -1167,13 +3146,21 @@
                 <div class="activity-section-label">Đã tải (${downloaded.length})</div>
                 ${downloadedHtml}
             `;
+
+            container.querySelectorAll(".activity-item[data-item-ref]").forEach(el => {
+                el.addEventListener("click", () => {
+                    const ref = el.getAttribute("data-item-ref");
+                    const data = getItemRef(ref);
+                    if (data) openSectionCardPopup(data, { trackView: false });
+                });
+            });
         }
 
         (function initActivityTracker() {
             document.addEventListener("click", (e) => {
                 const linkOrBtn = e.target.closest("a, button");
                 if (!linkOrBtn) return;
-                if (linkOrBtn.closest("#main-navbar, #search-history-below, #activity-history-panel")) return;
+                if (linkOrBtn.closest("#main-navbar, #activity-history-panel, #account-auth-popup, #kpazz-search-overlay, #kpazz-drawer-menu")) return;
 
                 const href = linkOrBtn.getAttribute("href") || linkOrBtn.dataset.download || linkOrBtn.dataset.url || "";
                 const hasDownloadAttr = linkOrBtn.hasAttribute("download");
@@ -1186,9 +3173,9 @@
                 ).trim().replace(/\s+/g, " ").slice(0, 90);
 
                 if (hasDownloadAttr || isDownloadTarget(href) || /tải|download|install|ipa|deb/i.test(labelText)) {
-                    recordDownloadedItem(labelText || href || "Tệp tải xuống", href);
+                    recordDownloadedItem(labelText || href || "Tệp tải xuống", href, { title: labelText || href, link: href });
                 } else if (labelText && href && href !== "#") {
-                    recordViewedItem(labelText, href);
+                    recordViewedItem(labelText, href, { title: labelText, link: href });
                 }
             }, true);
         })();
@@ -1196,29 +3183,27 @@
         (function initHistoryPanelControls() {
             const btnHistory = document.getElementById("btn-history");
             const panel = document.getElementById("activity-history-panel");
-            const backdrop = document.getElementById("search-backdrop");
+            const backdrop = document.getElementById("popup-backdrop");
             const btnClose = document.getElementById("btn-activity-close");
             const btnClear = document.getElementById("btn-clear-activity-history");
 
             if (!btnHistory || !panel) return;
 
             function openHistoryPanel() {
+                PANEL_MODE = "history";
                 renderActivityHistoryPanel();
                 panel.classList.add("active");
-                if (backdrop) backdrop.classList.add("active");
+                updateBackdropState();
             }
 
             function closeHistoryPanel() {
                 panel.classList.remove("active");
-                const navbar = document.getElementById("main-navbar");
-                if (backdrop && (!navbar || !navbar.classList.contains("search-open"))) {
-                    backdrop.classList.remove("active");
-                }
+                updateBackdropState();
             }
 
             btnHistory.addEventListener("click", (e) => {
                 e.stopPropagation();
-                if (panel.classList.contains("active")) {
+                if (panel.classList.contains("active") && PANEL_MODE === "history") {
                     closeHistoryPanel();
                 } else {
                     openHistoryPanel();
@@ -1235,6 +3220,43 @@
             if (btnClear) {
                 btnClear.addEventListener("click", (e) => {
                     e.stopPropagation();
+                    if (PANEL_MODE === "recent-updates") {
+                        const container = document.getElementById("activity-history-content");
+                        const rows = container ? Array.from(container.querySelectorAll(".activity-item")) : [];
+                        const dismissedSet = new Set(readJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, []));
+
+                        rows.forEach(row => {
+                            const key = row.getAttribute("data-notify-key");
+                            if (key) dismissedSet.add(key);
+                        });
+
+                        writeJsonStorage(NOTIFY_DISMISSED_KEYS_KEY, Array.from(dismissedSet).slice(-500));
+                        writeJsonStorage(TOOLTIP_SUGGESTIONS_KEY, []);
+                        setBellBadgeCount(0);
+
+                        const tooltip = document.getElementById("notify-suggest-tooltip");
+                        if (tooltip) tooltip.classList.remove("active");
+
+                        if (!rows.length) {
+                            renderActivityHistoryPanel([]);
+                            return;
+                        }
+
+                        rows.forEach((row, index) => {
+                            setTimeout(() => {
+                                row.classList.add("removing");
+                            }, index * 65);
+                        });
+
+                        const totalDelay = rows.length * 65 + 340;
+                        setTimeout(() => {
+                            if (PANEL_MODE === "recent-updates") {
+                                renderActivityHistoryPanel([]);
+                            }
+                        }, totalDelay);
+                        return;
+                    }
+
                     writeJsonStorage(VIEWED_HISTORY_KEY, []);
                     writeJsonStorage(DOWNLOAD_HISTORY_KEY, []);
                     renderActivityHistoryPanel();
@@ -1290,9 +3312,13 @@
 
         (function initBellRingNotification() {
             const notifyBtn = document.getElementById("btn-notify");
+            const tooltip = document.getElementById("notify-suggest-tooltip");
+            const panel = document.getElementById("activity-history-panel");
             if (!notifyBtn) return;
 
             let audioCtx = null;
+            let tooltipHideTimer = null;
+            let currentSuggestedItem = null;
 
             function playRingRingSound() {
                 try {
@@ -1339,6 +3365,38 @@
                 } catch (_) {}
             }
 
+            async function showRandomSuggestionTooltip() {
+                if (!tooltip) return;
+                const entries = await loadAllJsonEntriesFromTabs(true);
+                const candidates = entries.filter(item => !/slide\.json$/i.test(item.sourceFile || ""));
+                if (!candidates.length) return;
+
+                const picked = candidates[Math.floor(Math.random() * candidates.length)];
+                currentSuggestedItem = picked;
+                recordTooltipSuggestion(picked);
+                await refreshUnreadNewUpdatesBadge(false);
+
+                const rect = notifyBtn.getBoundingClientRect();
+                const tipWidth = Math.min(320, window.innerWidth - 28);
+                const leftPos = Math.max(14, Math.min(window.innerWidth - tipWidth - 14, rect.right - tipWidth));
+                tooltip.style.top = `${Math.round(rect.bottom + 8)}px`;
+                tooltip.style.left = `${Math.round(leftPos)}px`;
+                tooltip.style.right = "auto";
+                tooltip.style.width = `${Math.round(tipWidth)}px`;
+
+                tooltip.innerHTML = `
+                    <span class="notify-tooltip-tag">Đề xuất ngẫu nhiên • Bấm để xem</span>
+                    <p class="notify-tooltip-title">${escapeHtml(picked.title)}</p>
+                    <p class="notify-tooltip-sub">${escapeHtml(picked.content || picked.author || "Xem chi tiết nội dung")}</p>
+                `;
+
+                tooltip.classList.add("active");
+                clearTimeout(tooltipHideTimer);
+                tooltipHideTimer = setTimeout(() => {
+                    tooltip.classList.remove("active");
+                }, 6500);
+            }
+
             function triggerBellRing(withSound = true) {
                 notifyBtn.classList.remove("ringing");
                 void notifyBtn.offsetWidth;
@@ -1348,43 +3406,86 @@
                     playRingRingSound();
                 }
 
+                showRandomSuggestionTooltip();
+
                 setTimeout(() => {
                     notifyBtn.classList.remove("ringing");
                 }, 1000);
+            }
+
+            if (tooltip) {
+                const openPicked = (e) => {
+                    e.stopPropagation();
+                    tooltip.classList.remove("active");
+                    if (currentSuggestedItem) {
+                        openSectionCardPopup(currentSuggestedItem);
+                    }
+                };
+                tooltip.addEventListener("click", openPicked);
+                tooltip.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") openPicked(e);
+                });
             }
 
             const intervalId = setInterval(() => {
                 triggerBellRing(true);
             }, 14000);
 
-            notifyBtn.addEventListener("click", (e) => {
+            notifyBtn.addEventListener("click", async (e) => {
                 e.stopPropagation();
                 triggerBellRing(true);
+
+                const feedItems = await markAllRecentUpdatesSeenAndResetBadge(true);
+
+                if (panel) {
+                    if (panel.classList.contains("active") && PANEL_MODE === "recent-updates") {
+                        panel.classList.remove("active");
+                        updateBackdropState();
+                    } else {
+                        PANEL_MODE = "recent-updates";
+                        renderActivityHistoryPanel(feedItems);
+                        panel.classList.add("active");
+                        updateBackdropState();
+                    }
+                }
+            });
+
+            document.addEventListener("click", (e) => {
+                if (tooltip && !tooltip.contains(e.target) && !notifyBtn.contains(e.target)) {
+                    tooltip.classList.remove("active");
+                }
             });
 
             window.addEventListener("beforeunload", () => clearInterval(intervalId));
         })();
 
-        function collectJsonSearchEntries(node, sourceFile, tabsDir, out = []) {
+        function collectJsonEntries(node, sourceFile, tabsDir, out = []) {
             if (!node || typeof node !== "object") return out;
 
             if (Array.isArray(node)) {
-                node.forEach(item => collectJsonSearchEntries(item, sourceFile, tabsDir, out));
+                node.forEach(item => collectJsonEntries(item, sourceFile, tabsDir, out));
                 return out;
             }
 
             const title =
                 node.title || node.name || node.appName || node.tweakName || node.heading || "";
             const author =
-                node.author || node.developer || node.creator || node.by || node.vendor || "";
+                extractFieldValue(node, ["author", "developer", "creator", "by", "vendor", "provider", "publisher"]) || "";
+            const version =
+                extractFieldValue(node, ["version", "ver", "appVersion"]) || "";
+            const category =
+                extractFieldValue(node, ["category", "type", "genre", "tab"]) || "";
+            const sizeText =
+                extractFieldValue(node, ["size", "fileSize", "filesize", "appSize"]) || "";
             const content =
-                node.description || node.desc || node.content || node.subtitle || node.summary || node.version || "";
+                extractFieldValue(node, ["fullDescription", "longDescription", "details", "about", "notes", "description", "desc", "content", "subtitle", "summary"]) || "";
             const link =
-                node.url || node.link || node.download || node.ipa || node.deb || "#";
+                node.url || node.link || node.download || node.downloadUrl || node.buttonUrl || node.ipa || node.deb || "#";
             const rawIcon =
-                node.icon || node.image || node.img || node.thumbnail || node.cover || "";
+                extractFieldValue(node, ["icon", "image", "img", "thumbnail", "cover", "logo"]) || "";
+            const dateText =
+                extractFieldValue(node, ["updatedAt", "updated_at", "lastUpdated", "releaseDate", "date", "createdAt", "time"]) || "";
 
-            const searchableBlob = JSON.stringify(node).toLowerCase();
             const hasMeaningfulField =
                 typeof title === "string" || typeof author === "string" || typeof content === "string";
 
@@ -1392,143 +3493,82 @@
                 out.push({
                     title: String(title || "Không có tiêu đề"),
                     author: String(author || ""),
+                    version: String(version || ""),
+                    category: String(category || ""),
+                    size: String(sizeText || ""),
                     content: String(content || ""),
                     link: String(link || "#"),
                     icon: rawIcon ? resolveTabRelativeUrl(String(rawIcon), tabsDir) : "",
+                    dateText: String(dateText || ""),
                     sourceFile,
-                    searchText: searchableBlob
+                    rawData: node
                 });
             }
 
             Object.values(node).forEach(val => {
                 if (val && typeof val === "object") {
-                    collectJsonSearchEntries(val, sourceFile, tabsDir, out);
+                    collectJsonEntries(val, sourceFile, tabsDir, out);
                 }
             });
 
             return out;
         }
 
-        async function loadAllJsonEntriesFromTabs() {
-            if (CACHED_JSON_ENTRIES) return CACHED_JSON_ENTRIES;
+        async function loadAllJsonEntriesFromTabs(forceRefresh = false) {
+            if (!forceRefresh && CACHED_JSON_ENTRIES) return CACHED_JSON_ENTRIES;
+            if (!forceRefresh && INFLIGHT_JSON_PROMISE) return INFLIGHT_JSON_PROMISE;
 
-            const candidateUrls = new Set();
-            const addUrl = (u) => {
-                if (!u) return;
-                candidateUrls.add(u);
-            };
+            const runFetch = async () => {
+                const candidateUrls = new Set();
+                const addUrl = (u) => {
+                    if (!u) return;
+                    candidateUrls.add(u);
+                };
 
-            DISCOVERED_TAB_FILES.forEach(file => {
-                getMatchedJsonUrlsForHtmlFile(CURRENT_TABS_DIR, file).forEach(addUrl);
-            });
+                DISCOVERED_TAB_FILES.forEach(file => {
+                    getMatchedJsonUrlsForHtmlFile(CURRENT_TABS_DIR, file).forEach(addUrl);
+                });
 
-            ["manifest.json", "tabs.json", "Appios.json", "Tweak.json"].forEach(name => {
-                addUrl(`${CURRENT_TABS_DIR}${name}`);
-            });
+                ["manifest.json", "Slide.json", "Appios.json", "Tweak.json"].forEach(name => {
+                    addUrl(`${CURRENT_TABS_DIR}${name}`);
+                });
 
-            if (listingHtmlCache) {
-                const jsonMatches = listingHtmlCache.match(/[A-Za-z0-9_\-\.%À-ỹ ]+\.json\b/gi) || [];
-                jsonMatches.forEach(m => addUrl(`${CURRENT_TABS_DIR}${m}`));
-            }
-
-            const entries = [];
-            for (const url of candidateUrls) {
-                try {
-                    const res = await fetch(url, { cache: "no-store" });
-                    if (!res.ok) continue;
-                    const data = await res.json();
-                    collectJsonSearchEntries(data, url, CURRENT_TABS_DIR, entries);
-                } catch (_) {}
-            }
-
-            CACHED_JSON_ENTRIES = entries;
-            return entries;
-        }
-
-        let searchSaveTimer = null;
-
-        function renderSearchResults(query, saveImmediate = false) {
-            const dropdown = document.getElementById("search-results-dropdown");
-            const historyBelow = document.getElementById("search-history-below");
-            const rawQuery = String(query || "");
-            const trimmed = rawQuery.trim().toLowerCase();
-
-            if (!trimmed) {
-                dropdown.classList.remove("active");
-                dropdown.innerHTML = "";
-                renderSearchHistoryBelow();
-                return;
-            }
-
-            if (historyBelow) {
-                historyBelow.classList.remove("active");
-            }
-
-            clearTimeout(searchSaveTimer);
-            if (saveImmediate) {
-                recordSearchQuery(rawQuery.trim());
-            } else {
-                searchSaveTimer = setTimeout(() => {
-                    recordSearchQuery(rawQuery.trim());
-                }, 650);
-            }
-
-            loadAllJsonEntriesFromTabs().then(entries => {
-                const terms = trimmed.split(/\s+/).filter(Boolean);
-                const matches = entries.filter(item =>
-                    terms.every(term => item.searchText.includes(term))
-                );
-
-                dropdown.classList.add("active");
-
-                if (!matches.length) {
-                    dropdown.innerHTML = `<div class="search-empty-msg">Không tìm thấy kết quả phù hợp với "<strong>${escapeHtml(rawQuery.trim())}</strong>" trong dữ liệu JSON của Tabs.</div>`;
-                    return;
+                if (listingHtmlCache) {
+                    const jsonMatches = listingHtmlCache.match(/[A-Za-z0-9_\-\.%À-ỹ ]+\.json\b/gi) || [];
+                    jsonMatches.forEach(m => addUrl(`${CURRENT_TABS_DIR}${m}`));
                 }
 
-                const topMatches = matches.slice(0, 25);
-                const htmlItems = topMatches.map(item => {
-                    const metaLine = [
-                        item.author ? `Tác giả: ${item.author}` : "",
-                        item.sourceFile ? item.sourceFile.split("/").pop() : ""
-                    ].filter(Boolean).join(" • ");
+                const urlsArray = Array.from(candidateUrls);
+                const entries = [];
+                const rawMap = new Map();
 
-                    const thumbHtml = item.icon
-                        ? `<img class="search-result-thumb" src="${escapeAttr(item.icon)}" alt="" onerror="this.style.display='none'">`
-                        : "";
-
-                    const hrefVal = item.link && item.link !== "#" ? escapeAttr(item.link) : "#";
-                    const targetAttr = hrefVal.startsWith("http") ? ` target="_blank" rel="noopener"` : "";
-
-                    return `
-                        <a class="search-result-item" href="${hrefVal}"${targetAttr} data-hist-title="${escapeAttr(item.title)}" data-hist-link="${hrefVal}">
-                            ${thumbHtml}
-                            <div class="search-result-body">
-                                <p class="search-result-title">${escapeHtml(item.title)}</p>
-                                ${metaLine ? `<p class="search-result-sub">${escapeHtml(metaLine)}</p>` : ""}
-                                ${item.content ? `<p class="search-result-desc">${escapeHtml(item.content)}</p>` : ""}
-                            </div>
-                        </a>
-                    `;
-                }).join("");
-
-                dropdown.innerHTML = `
-                    <div class="search-result-meta">Tìm thấy ${matches.length} kết quả cho "${escapeHtml(rawQuery.trim())}"</div>
-                    ${htmlItems}
-                `;
-
-                dropdown.querySelectorAll(".search-result-item").forEach(el => {
-                    el.addEventListener("click", () => {
-                        const t = el.getAttribute("data-hist-title") || "";
-                        const u = el.getAttribute("data-hist-link") || "";
-                        if (isDownloadTarget(u)) {
-                            recordDownloadedItem(t, u);
-                        } else {
-                            recordViewedItem(t, u);
+                const results = await Promise.all(
+                    urlsArray.map(async (url) => {
+                        try {
+                            const res = await fetchWithTimeout(url, 3500);
+                            if (!res.ok) return null;
+                            const data = await res.json();
+                            return { url, data };
+                        } catch (_) {
+                            return null;
                         }
-                    });
+                    })
+                );
+
+                results.forEach(item => {
+                    if (!item) return;
+                    rawMap.set(item.url, item.data);
+                    collectJsonEntries(item.data, item.url, CURRENT_TABS_DIR, entries);
                 });
-            });
+
+                CACHED_JSON_RAW_BY_URL = rawMap;
+                CACHED_JSON_ENTRIES = entries;
+                INFLIGHT_JSON_PROMISE = null;
+                return entries;
+            };
+
+            INFLIGHT_JSON_PROMISE = runFetch();
+            return INFLIGHT_JSON_PROMISE;
         }
 
         function escapeHtml(str) {
@@ -1543,91 +3583,19 @@
             return escapeHtml(str).replace(/'/g, "&#39;");
         }
 
-        (function initSearchExpandControls() {
-            const navbar = document.getElementById("main-navbar");
-            const btnSearch = document.getElementById("btn-search");
-            const btnClose = document.getElementById("btn-search-close");
-            const searchInput = document.getElementById("navbar-search-input");
-            const dropdown = document.getElementById("search-results-dropdown");
-            const historyBelow = document.getElementById("search-history-below");
-            const backdrop = document.getElementById("search-backdrop");
-
-            function openSearch() {
-                navbar.classList.add("search-open");
-                if (backdrop) backdrop.classList.add("active");
-                setTimeout(() => {
-                    searchInput.focus({ preventScroll: true });
-                    if (searchInput.value.trim()) {
-                        renderSearchResults(searchInput.value);
-                    } else {
-                        renderSearchHistoryBelow();
-                    }
-                }, 120);
-            }
-
-            function closeSearch() {
-                navbar.classList.remove("search-open");
-                dropdown.classList.remove("active");
-                if (historyBelow) historyBelow.classList.remove("active");
-                const historyPanel = document.getElementById("activity-history-panel");
-                if (backdrop && (!historyPanel || !historyPanel.classList.contains("active"))) {
-                    backdrop.classList.remove("active");
-                }
-                searchInput.blur();
-            }
-
-            btnSearch.addEventListener("click", (e) => {
-                e.stopPropagation();
-                if (navbar.classList.contains("search-open")) {
-                    searchInput.focus({ preventScroll: true });
-                    if (!searchInput.value.trim()) {
-                        renderSearchHistoryBelow();
-                    }
-                } else {
-                    openSearch();
-                }
-            });
-
-            searchInput.addEventListener("focus", () => {
-                if (!searchInput.value.trim()) {
-                    renderSearchHistoryBelow();
-                }
-            });
-
-            btnClose.addEventListener("click", (e) => {
-                e.stopPropagation();
-                searchInput.value = "";
-                closeSearch();
-            });
-
-            if (backdrop) {
-                backdrop.addEventListener("click", () => {
-                    closeSearch();
-                });
-            }
-
-            searchInput.addEventListener("input", (e) => {
-                renderSearchResults(e.target.value);
-            });
-
-            searchInput.addEventListener("keydown", (e) => {
-                if (e.key === "Enter" && searchInput.value.trim()) {
-                    renderSearchResults(searchInput.value, true);
-                }
-            });
-
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && navbar.classList.contains("search-open")) {
-                    closeSearch();
-                }
-            });
-        })();
-
-        // Khai báo tên các tệp .html nằm trong thư mục Tabs/ (bắt buộc cho host tĩnh như GitHub Pages)
+        // Khai báo tên các tệp .html nằm trong thư mục Tabs/
         const KNOWN_TAB_FILES = [
+            "Slide.html",
             "Appios.html",
             "Tweak.html"
         ];
+
+        // Thứ tự ưu tiên mặc định nếu tệp JSON chưa khai báo slotsection
+        const DEFAULT_SLOT_PRIORITY = {
+            "slide.html": 1,
+            "appios.html": 2,
+            "tweak.html": 3
+        };
 
         let listingHtmlCache = "";
 
@@ -1664,24 +3632,27 @@
         }
 
         async function resolveTabsDir() {
-            for (const dir of ["Tabs/", "tabs/"]) {
-                try {
-                    const res = await fetch(dir, { cache: "no-store" });
-                    if (res.ok) {
-                        const text = await res.text();
-                        if (!isNotFoundPage(text)) {
-                            return { dir, listingHtml: text };
+            const results = await Promise.all(
+                ["Tabs/", "tabs/"].map(async (dir) => {
+                    try {
+                        const res = await fetchWithTimeout(dir, 2500);
+                        if (res.ok) {
+                            const text = await res.text();
+                            if (!isNotFoundPage(text)) {
+                                return { dir, listingHtml: text };
+                            }
                         }
-                    }
-                } catch (_) {}
-            }
-            return { dir: "Tabs/", listingHtml: "" };
+                    } catch (_) {}
+                    return null;
+                })
+            );
+            return results.find(Boolean) || { dir: "Tabs/", listingHtml: "" };
         }
 
         async function loadManifestFiles(tabsDir) {
-            for (const manifestName of ["manifest.json", "tabs.json"]) {
+            for (const manifestName of ["manifest.json"]) {
                 try {
-                    const res = await fetch(tabsDir + manifestName, { cache: "no-store" });
+                    const res = await fetchWithTimeout(tabsDir + manifestName, 2500);
                     if (!res.ok) continue;
                     const data = await res.json();
                     const list = Array.isArray(data) ? data : (Array.isArray(data.files) ? data.files : []);
@@ -1721,12 +3692,14 @@
                 }
             }
 
-            return Array.from(foundMap.values()).sort((a, b) =>
-                a.localeCompare(b, "vi", { numeric: true, sensitivity: "base" })
-            );
+            return Array.from(foundMap.values()).sort((a, b) => {
+                const pA = DEFAULT_SLOT_PRIORITY[a.toLowerCase()] ?? 50;
+                const pB = DEFAULT_SLOT_PRIORITY[b.toLowerCase()] ?? 50;
+                if (pA !== pB) return pA - pB;
+                return a.localeCompare(b, "vi", { numeric: true, sensitivity: "base" });
+            });
         }
 
-        // Tạo danh sách tệp .json tương ứng trực tiếp với tên tệp .html (ưu tiên đúng tên tệp trước)
         function getMatchedJsonUrlsForHtmlFile(tabsDir, htmlFile) {
             const candidates = [];
             const seen = new Set();
@@ -1741,13 +3714,11 @@
             const baseName = String(htmlFile || "").replace(/\.html$/i, "");
             if (!baseName) return candidates;
 
-            // 1. Khớp tên tệp .json tương ứng trong thư mục Tabs
             addCand(`${tabsDir}${baseName}.json`);
             if (baseName.toLowerCase() !== baseName) {
                 addCand(`${tabsDir}${baseName.toLowerCase()}.json`);
             }
 
-            // 2. Fallback tìm trong listing HTML nếu tên tệp JSON có hoa/thường khác
             if (listingHtmlCache) {
                 const escapedBase = baseName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
                 const regex = new RegExp(`(?:^|[^A-Za-z0-9_\\-])(${escapedBase}\\.json)(?:$|[^A-Za-z0-9_\\-])`, "gi");
@@ -1788,18 +3759,28 @@
 
         async function readSlotSectionForTab(tabsDir, file) {
             const candidates = getMatchedJsonUrlsForHtmlFile(tabsDir, file);
-            for (const url of candidates) {
-                try {
-                    const res = await fetch(url, { cache: "no-store" });
-                    if (!res.ok) continue;
-                    const json = await res.json();
-                    const orderNum = extractOrderNumber1To100(json);
-                    if (Number.isFinite(orderNum)) {
-                        return { slotsection: orderNum, jsonFile: url };
-                    }
-                } catch (_) {}
-            }
-            return { slotsection: Number.POSITIVE_INFINITY, jsonFile: "" };
+            const checks = await Promise.all(
+                candidates.map(async (url) => {
+                    try {
+                        const res = await fetchWithTimeout(url, 3000);
+                        if (!res.ok) return null;
+                        const json = await res.json();
+                        const orderNum = extractOrderNumber1To100(json);
+                        if (Number.isFinite(orderNum)) {
+                            return { slotsection: orderNum, jsonFile: url };
+                        }
+                    } catch (_) {}
+                    return null;
+                })
+            );
+            const hit = checks.find(Boolean);
+            if (hit) return hit;
+
+            const fallbackPriority = DEFAULT_SLOT_PRIORITY[String(file || "").toLowerCase()];
+            return {
+                slotsection: Number.isFinite(fallbackPriority) ? fallbackPriority : Number.POSITIVE_INFINITY,
+                jsonFile: ""
+            };
         }
 
         function resolveTabRelativeUrl(rawUrl, tabsDir) {
@@ -1824,8 +3805,9 @@
         function rewriteRelativeAssetPathsInCode(code, tabsDir) {
             const escapedDir = tabsDir.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
             return code.replace(
-                /(["'])((?:\.\/)?(?:Art|debs|img|images|assets|icons|banners)\/[^"']+)\1/gi,
+                /(["'])((?:\.\/)?(?:[A-Za-z0-9_\-\.%À-ỹ]+\.json|(?:Art|debs|img|images|assets|icons|banners|slides|media)\/[^"']+))\1/gi,
                 (match, quote, relPath) => {
+                    if (/^(?:https?:|data:|blob:|\/|#)/i.test(relPath)) return match;
                     const clean = relPath.replace(/^\.\//, "");
                     if (new RegExp(`^${escapedDir}`, "i").test(clean)) {
                         return `${quote}${clean}${quote}`;
@@ -1835,9 +3817,38 @@
             );
         }
 
+        function scopeCssRules(cssText, scopeSelector) {
+            return cssText.replace(/(^|\})\s*([^{}@]+)\{/g, (match, brace, selectorGroup) => {
+                const trimmedGroup = selectorGroup.trim();
+                if (!trimmedGroup || trimmedGroup.startsWith("@") || /^(from|to|\d+%)$/i.test(trimmedGroup)) {
+                    return match;
+                }
+                const scopedSelectors = trimmedGroup
+                    .split(",")
+                    .map(sel => {
+                        const s = sel.trim();
+                        if (!s) return s;
+                        if (/^(html|body|:root)$/i.test(s)) {
+                            return scopeSelector;
+                        }
+                        if (/^(html|body)\s+/i.test(s)) {
+                            return s.replace(/^(html|body)\s+/i, `${scopeSelector} `);
+                        }
+                        if (s.startsWith(scopeSelector)) {
+                            return s;
+                        }
+                        return `${scopeSelector} ${s}`;
+                    })
+                    .join(", ");
+                return `${brace}\n${scopedSelectors} {`;
+            });
+        }
+
         function injectIsolatedHTML(targetEl, htmlString, prefix, tabsDir = "Tabs/") {
             const tempDoc = new DOMParser().parseFromString(htmlString, "text/html");
             const idMap = new Map();
+            const scopeClass = `scope-${prefix}`;
+            targetEl.classList.add(scopeClass);
 
             tempDoc.querySelectorAll("[id]").forEach(el => {
                 const oldId = el.getAttribute("id");
@@ -1869,9 +3880,10 @@
                         `#${newId}`
                     );
                 });
-                cssText = cssText.replace(/url\(\s*(['"]?)((?:\.\/)?(?:Art|debs|img|images|assets|icons|banners)\/[^'")]+)\1\s*\)/gi, (_, q, p) => {
+                cssText = cssText.replace(/url\(\s*(['"]?)((?:\.\/)?(?:Art|debs|img|images|assets|icons|banners|slides|media)\/[^'")]+)\1\s*\)/gi, (_, q, p) => {
                     return `url(${q}${resolveTabRelativeUrl(p, tabsDir)}${q})`;
                 });
+                cssText = scopeCssRules(cssText, `.${scopeClass}`);
                 styleEl.textContent = cssText;
             });
 
@@ -1910,7 +3922,41 @@
                     newScript.textContent = `
                         (() => {
                             try {
-                                ${code}
+                                const __origDocAddEvent = document.addEventListener.bind(document);
+                                const __origWinAddEvent = window.addEventListener.bind(window);
+                                const __scopedDoc = new Proxy(document, {
+                                    get(target, prop) {
+                                        if (prop === "addEventListener") {
+                                            return (type, listener, options) => {
+                                                if (type === "DOMContentLoaded" && typeof listener === "function") {
+                                                    setTimeout(() => listener.call(document, new Event("DOMContentLoaded")), 0);
+                                                    return;
+                                                }
+                                                return __origDocAddEvent(type, listener, options);
+                                            };
+                                        }
+                                        const val = target[prop];
+                                        return typeof val === "function" ? val.bind(target) : val;
+                                    }
+                                });
+                                const __scopedWin = new Proxy(window, {
+                                    get(target, prop) {
+                                        if (prop === "addEventListener") {
+                                            return (type, listener, options) => {
+                                                if ((type === "DOMContentLoaded" || type === "load") && typeof listener === "function") {
+                                                    setTimeout(() => listener.call(window, new Event(type)), 0);
+                                                    return;
+                                                }
+                                                return __origWinAddEvent(type, listener, options);
+                                            };
+                                        }
+                                        const val = target[prop];
+                                        return typeof val === "function" ? val.bind(target) : val;
+                                    }
+                                });
+                                ((document, window) => {
+                                    ${code}
+                                })(__scopedDoc, __scopedWin);
                             } catch (err) {
                                 console.warn("Lỗi thực thi script trong ${prefix}:", err);
                             }
@@ -1949,80 +3995,95 @@
             const tabsContainer = document.getElementById("tabs-container");
             const loadingStatus = document.getElementById("loading-status");
 
-            const { dir: tabsDir, listingHtml } = await resolveTabsDir();
-            CURRENT_TABS_DIR = tabsDir;
-            listingHtmlCache = listingHtml;
+            try {
+                invalidateJsonCache();
 
-            const files = await discoverHtmlInTabs(tabsDir, listingHtml);
-            DISCOVERED_TAB_FILES = files;
-            CACHED_JSON_ENTRIES = null;
+                const { dir: tabsDir, listingHtml } = await resolveTabsDir();
+                CURRENT_TABS_DIR = tabsDir;
+                listingHtmlCache = listingHtml;
 
-            if (!files.length) {
-                loadingStatus.style.color = "#ff6b6b";
-                loadingStatus.textContent = "Không tìm thấy tệp .html nào trong thư mục Tabs/ (Hãy khai báo tên tệp trong KNOWN_TAB_FILES khi chạy trên GitHub Pages).";
-                return;
-            }
+                const files = await discoverHtmlInTabs(tabsDir, listingHtml);
+                DISCOVERED_TAB_FILES = files;
 
-            loadingStatus.remove();
-
-            const fetchedList = await Promise.all(
-                files.map(async (file, originalIndex) => {
-                    try {
-                        const [res, metaInfo] = await Promise.all([
-                            fetch(tabsDir + encodeURIComponent(file), { cache: "no-store" }),
-                            readSlotSectionForTab(tabsDir, file)
-                        ]);
-                        if (!res.ok) return null;
-                        const html = await res.text();
-                        if (isNotFoundPage(html)) return null;
-                        return {
-                            file,
-                            html,
-                            slotsection: metaInfo.slotsection,
-                            jsonFile: metaInfo.jsonFile,
-                            originalIndex
-                        };
-                    } catch (err) {
-                        console.warn("Bỏ qua tệp lỗi:", file, err);
-                        return null;
+                if (!files.length) {
+                    if (loadingStatus) {
+                        loadingStatus.style.color = "#ff6b6b";
+                        loadingStatus.textContent = "Không tìm thấy tệp .html nào trong thư mục Tabs/ (Hãy khai báo tên tệp trong KNOWN_TAB_FILES khi chạy trên GitHub Pages).";
                     }
-                })
-            );
+                    return;
+                }
 
-            const sortedList = fetchedList
-                .filter(Boolean)
-                .sort((a, b) => {
-                    if (a.slotsection !== b.slotsection) {
-                        return a.slotsection - b.slotsection;
+                if (loadingStatus) {
+                    loadingStatus.remove();
+                }
+
+                const fetchedList = await Promise.all(
+                    files.map(async (file, originalIndex) => {
+                        try {
+                            const [res, metaInfo] = await Promise.all([
+                                fetchWithTimeout(tabsDir + encodeURIComponent(file), 4000),
+                                readSlotSectionForTab(tabsDir, file)
+                            ]);
+                            if (!res.ok) return null;
+                            const html = await res.text();
+                            if (isNotFoundPage(html)) return null;
+                            return {
+                                file,
+                                html,
+                                slotsection: metaInfo.slotsection,
+                                jsonFile: metaInfo.jsonFile,
+                                originalIndex
+                            };
+                        } catch (err) {
+                            console.warn("Bỏ qua tệp lỗi:", file, err);
+                            return null;
+                        }
+                    })
+                );
+
+                const sortedList = fetchedList
+                    .filter(Boolean)
+                    .sort((a, b) => {
+                        if (a.slotsection !== b.slotsection) {
+                            return a.slotsection - b.slotsection;
+                        }
+                        return a.originalIndex - b.originalIndex;
+                    });
+
+                sortedList.forEach((item, index) => {
+                    const sectionEl = document.createElement("section");
+                    sectionEl.className = "tab-section";
+                    sectionEl.dataset.sourceFile = tabsDir + item.file;
+                    sectionEl.dataset.tabFile = item.file;
+                    sectionEl.dataset.origIndex = String(item.originalIndex);
+                    if (item.jsonFile) {
+                        sectionEl.dataset.matchedJson = item.jsonFile;
                     }
-                    return a.originalIndex - b.originalIndex;
+                    if (Number.isFinite(item.slotsection)) {
+                        sectionEl.dataset.slotsection = String(item.slotsection);
+                        sectionEl.dataset.tabOrder = String(item.slotsection);
+                    } else {
+                        sectionEl.dataset.slotsection = "none";
+                    }
+                    tabsContainer.appendChild(sectionEl);
+                    injectIsolatedHTML(sectionEl, item.html, `tab${index}`, tabsDir);
                 });
 
-            sortedList.forEach((item, index) => {
-                const sectionEl = document.createElement("section");
-                sectionEl.className = "tab-section";
-                sectionEl.dataset.sourceFile = tabsDir + item.file;
-                sectionEl.dataset.tabFile = item.file;
-                sectionEl.dataset.origIndex = String(item.originalIndex);
-                if (item.jsonFile) {
-                    sectionEl.dataset.matchedJson = item.jsonFile;
+                sortSectionsBySlotSection(tabsContainer);
+                setTimeout(() => sortSectionsBySlotSection(tabsContainer), 180);
+                await refreshUnreadNewUpdatesBadge(true);
+            } catch (err) {
+                console.error("Lỗi tải nội dung Tabs:", err);
+                if (loadingStatus) {
+                    loadingStatus.style.color = "#ff6b6b";
+                    loadingStatus.textContent = "Không thể tải nội dung từ thư mục Tabs/. Vui lòng kiểm tra Console.";
                 }
-                if (Number.isFinite(item.slotsection)) {
-                    sectionEl.dataset.slotsection = String(item.slotsection);
-                    sectionEl.dataset.tabOrder = String(item.slotsection);
-                } else {
-                    sectionEl.dataset.slotsection = "none";
-                }
-                tabsContainer.appendChild(sectionEl);
-                injectIsolatedHTML(sectionEl, item.html, `tab${index}`, tabsDir);
-            });
-
-            sortSectionsBySlotSection(tabsContainer);
-            setTimeout(() => sortSectionsBySlotSection(tabsContainer), 250);
-            setTimeout(() => sortSectionsBySlotSection(tabsContainer), 900);
+            }
         }
 
-        document.addEventListener("DOMContentLoaded", loadAllTabsAsSections);
+        document.addEventListener("DOMContentLoaded", () => {
+            loadAllTabsAsSections();
+        });
     </script>
 
 </body>

@@ -4,13 +4,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    .slide-game-section {
-        --slide-speed: 650ms;
-        --sec-text-color: #000000;
-        --dot-inactive-color: rgba(0, 0, 0, 0.25);
-        --dot-active-color: #000000;
+    .kpsl-section {
+        --kpsl-speed: 650ms;
+        --kpsl-text-color: #000000;
+        --kpsl-dot-inactive: rgba(0, 0, 0, 0.25);
+        --kpsl-dot-active: #000000;
         background-color: transparent;
-        color: var(--sec-text-color);
+        color: var(--kpsl-text-color);
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
         width: 100%;
         max-width: 100%;
@@ -23,21 +23,21 @@
         text-rendering: optimizeLegibility;
     }
 
-    .slide-game-section.is-dark-bg {
-        --sec-text-color: #FFFFFF;
-        --dot-inactive-color: rgba(255, 255, 255, 0.3);
-        --dot-active-color: #FFFFFF;
+    .kpsl-section.kpsl-is-dark-bg {
+        --kpsl-text-color: #FFFFFF;
+        --kpsl-dot-inactive: rgba(255, 255, 255, 0.3);
+        --kpsl-dot-active: #FFFFFF;
     }
 
-    .slide-game-section *,
-    .slide-game-section *::before,
-    .slide-game-section *::after {
+    .kpsl-section *,
+    .kpsl-section *::before,
+    .kpsl-section *::after {
         box-sizing: border-box;
         font-family: inherit;
     }
 
-    /* Sân khấu slider 3D Coverflow 3 card giống ảnh */
-    .slide-coverflow-viewport {
+    /* Sân khấu slider 3D Coverflow 3 card */
+    .kpsl-viewport {
         position: relative;
         width: 100%;
         max-width: 960px;
@@ -48,7 +48,7 @@
         -webkit-user-select: none;
     }
 
-    .slide-card-slider {
+    .kpsl-slider {
         position: relative;
         width: 100%;
         height: clamp(350px, 68vw, 490px);
@@ -62,13 +62,13 @@
     }
 
     /* Chế độ marquee nếu bật trong slide.json */
-    .slide-card-slider.slide-type-marquee {
+    .kpsl-slider.kpsl-type-marquee {
         height: auto;
         overflow: hidden !important;
         display: block;
     }
 
-    .slide-marquee-track {
+    .kpsl-marquee-track {
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -77,12 +77,12 @@
         will-change: transform;
     }
 
-    /* Giao diện từng card giống mẫu: ảnh trên + nền trắng căn giữa chữ dưới */
-    .slide-game-card {
+    /* Giao diện từng card (mở rộng ngang mỗi bên thêm 5px => tổng +10px) */
+    .kpsl-card {
         position: absolute;
         left: 50%;
         top: 50%;
-        width: clamp(238px, 58vw, 336px);
+        width: clamp(248px, calc(58vw + 10px), 346px);
         background-color: #FFFFFF;
         border-radius: clamp(20px, 4.5vw, 26px);
         overflow: hidden;
@@ -94,14 +94,15 @@
         pointer-events: none;
         z-index: 1;
         transition:
-            transform var(--slide-speed) cubic-bezier(0.22, 1, 0.36, 1),
-            opacity var(--slide-speed) cubic-bezier(0.22, 1, 0.36, 1),
-            box-shadow var(--slide-speed) cubic-bezier(0.22, 1, 0.36, 1);
+            width var(--kpsl-speed) cubic-bezier(0.22, 1, 0.36, 1),
+            transform var(--kpsl-speed) cubic-bezier(0.22, 1, 0.36, 1),
+            opacity var(--kpsl-speed) cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow var(--kpsl-speed) cubic-bezier(0.22, 1, 0.36, 1);
         -webkit-tap-highlight-color: transparent;
         cursor: pointer;
     }
 
-    .slide-card-slider.slide-type-marquee .slide-game-card {
+    .kpsl-slider.kpsl-type-marquee .kpsl-card {
         position: relative;
         left: auto;
         top: auto;
@@ -110,8 +111,9 @@
         pointer-events: auto !important;
     }
 
-    /* Vị trí card chính giữa (nổi bật phía trước) */
-    .slide-game-card.is-center {
+    /* Card đang hiển thị ở giữa: thêm chiều ngang 20px mỗi bên (+40px) */
+    .kpsl-card.kpsl-is-center {
+        width: calc(clamp(248px, calc(58vw + 10px), 346px) + 40px);
         transform: translate3d(-50%, -50%, 0) scale(1);
         opacity: 1;
         pointer-events: auto;
@@ -119,13 +121,13 @@
         box-shadow: 0 28px 58px -12px rgba(15, 23, 42, 0.26), 0 10px 24px -8px rgba(15, 23, 42, 0.14);
     }
 
-    .slide-game-card.is-center.is-pressed {
+    .kpsl-card.kpsl-is-center.kpsl-is-pressed {
         transform: translate3d(-50%, -50%, 0) scale(0.975) !important;
     }
 
     /* Vị trí card bên trái */
-    .slide-game-card.is-prev {
-        transform: translate3d(calc(-50% - 56%), -50%, 0) scale(0.84);
+    .kpsl-card.kpsl-is-prev {
+        transform: translate3d(calc(-50% - 58%), -50%, 0) scale(0.84);
         opacity: 0.96;
         pointer-events: auto;
         z-index: 2;
@@ -133,8 +135,8 @@
     }
 
     /* Vị trí card bên phải */
-    .slide-game-card.is-next {
-        transform: translate3d(calc(-50% + 56%), -50%, 0) scale(0.84);
+    .kpsl-card.kpsl-is-next {
+        transform: translate3d(calc(-50% + 58%), -50%, 0) scale(0.84);
         opacity: 0.96;
         pointer-events: auto;
         z-index: 2;
@@ -142,35 +144,35 @@
     }
 
     @media (min-width: 640px) {
-        .slide-game-card.is-prev {
-            transform: translate3d(calc(-50% - 66%), -50%, 0) scale(0.85);
+        .kpsl-card.kpsl-is-prev {
+            transform: translate3d(calc(-50% - 68%), -50%, 0) scale(0.85);
         }
-        .slide-game-card.is-next {
-            transform: translate3d(calc(-50% + 66%), -50%, 0) scale(0.85);
+        .kpsl-card.kpsl-is-next {
+            transform: translate3d(calc(-50% + 68%), -50%, 0) scale(0.85);
         }
     }
 
     @media (min-width: 900px) {
-        .slide-game-card.is-prev {
-            transform: translate3d(calc(-50% - 72%), -50%, 0) scale(0.86);
+        .kpsl-card.kpsl-is-prev {
+            transform: translate3d(calc(-50% - 74%), -50%, 0) scale(0.86);
         }
-        .slide-game-card.is-next {
-            transform: translate3d(calc(-50% + 72%), -50%, 0) scale(0.86);
+        .kpsl-card.kpsl-is-next {
+            transform: translate3d(calc(-50% + 74%), -50%, 0) scale(0.86);
         }
     }
 
-    /* Kiểu instant: không hiệu ứng chuyển */
-    .slide-card-slider.slide-type-instant .slide-game-card {
+    /* Kiểu instant */
+    .kpsl-slider.kpsl-type-instant .kpsl-card {
         transition: none !important;
     }
 
-    /* Kiểu zoom: nhấn nhẹ nhịp thu phóng */
-    .slide-card-slider.slide-type-zoom .slide-game-card.is-center.is-zooming {
+    /* Kiểu zoom */
+    .kpsl-slider.kpsl-type-zoom .kpsl-card.kpsl-is-center.kpsl-is-zooming {
         transform: translate3d(-50%, -50%, 0) scale(0.95);
     }
 
     /* Phần ảnh trên cùng của card */
-    .slide-card-hero {
+    .kpsl-hero {
         position: relative;
         width: 100%;
         aspect-ratio: 1 / 0.96;
@@ -179,7 +181,7 @@
         border-radius: 0 0 18px 18px;
     }
 
-    .slide-card-hero img.hero-img {
+    .kpsl-hero img.kpsl-hero-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -189,7 +191,7 @@
     }
 
     /* Thẻ cập nhật góc trên trái ảnh banner card */
-    .slide-card-update-badge {
+    .kpsl-update-badge {
         position: absolute;
         top: 12px;
         left: 12px;
@@ -209,22 +211,22 @@
         transition: background-color 0.25s ease;
     }
 
-    .slide-card-update-label {
+    .kpsl-update-label {
         font-size: 9px;
         font-weight: 700;
         letter-spacing: 0.03em;
         color: rgba(255, 255, 255, 0.88);
     }
 
-    .slide-card-update-time {
+    .kpsl-update-time {
         font-size: 11.5px;
         font-weight: 800;
         color: #FFFFFF;
         margin-top: 2px;
     }
 
-    /* Phần nền trắng căn giữa chữ bên dưới giống ảnh */
-    .slide-card-body-white {
+    /* Phần nền trắng căn giữa chữ bên dưới */
+    .kpsl-body-white {
         width: 100%;
         background-color: #FFFFFF;
         padding: clamp(16px, 4vw, 22px) clamp(14px, 4vw, 22px) clamp(20px, 4.6vw, 26px);
@@ -235,7 +237,7 @@
         text-align: center;
     }
 
-    .slide-card-white-title {
+    .kpsl-white-title {
         font-size: clamp(17px, 4.4vw, 21px);
         font-weight: 700;
         line-height: 1.24;
@@ -249,7 +251,7 @@
         overflow: hidden;
     }
 
-    .slide-card-white-desc {
+    .kpsl-white-desc {
         font-size: clamp(13px, 3.4vw, 15px);
         font-weight: 400;
         line-height: 1.35;
@@ -263,14 +265,14 @@
         overflow: hidden;
     }
 
-    /* Ẩn mũi tên 2 bên và dòng dot bên dưới theo yêu cầu */
-    .slide-coverflow-nav,
-    .slide-slider-dots {
+    /* Ẩn mũi tên 2 bên và dòng dot bên dưới */
+    .kpsl-nav-btn,
+    .kpsl-dots {
         display: none !important;
     }
 
     /* Popup bố cục App Store */
-    .slide-popup-backdrop {
+    .kpsl-popup-backdrop {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.78);
@@ -289,20 +291,20 @@
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
     }
 
-    .slide-popup-backdrop.is-open {
+    .kpsl-popup-backdrop.kpsl-is-open {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
     }
 
-    .slide-popup-backdrop *,
-    .slide-popup-backdrop *::before,
-    .slide-popup-backdrop *::after {
+    .kpsl-popup-backdrop *,
+    .kpsl-popup-backdrop *::before,
+    .kpsl-popup-backdrop *::after {
         box-sizing: border-box;
         font-family: inherit;
     }
 
-    .slide-popup-modal {
+    .kpsl-popup-modal {
         position: relative;
         width: 100%;
         max-width: 440px;
@@ -320,16 +322,16 @@
                     opacity 0.24s ease;
     }
 
-    .slide-popup-modal::-webkit-scrollbar {
+    .kpsl-popup-modal::-webkit-scrollbar {
         display: none;
     }
 
-    .slide-popup-backdrop.is-open .slide-popup-modal {
+    .kpsl-popup-backdrop.kpsl-is-open .kpsl-popup-modal {
         transform: translateY(0) scale(1);
         opacity: 1;
     }
 
-    .slide-popup-toast {
+    .kpsl-toast {
         position: fixed;
         left: 50%;
         bottom: 24px;
@@ -348,13 +350,13 @@
         transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
-    .slide-popup-toast.is-visible {
+    .kpsl-toast.kpsl-is-visible {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
     }
 
     /* Popup chọn phiên bản / link tải */
-    .slide-version-picker-backdrop {
+    .kpsl-picker-backdrop {
         position: fixed;
         inset: 0;
         background: rgba(0, 0, 0, 0.68);
@@ -373,20 +375,20 @@
         font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
     }
 
-    .slide-version-picker-backdrop.is-open {
+    .kpsl-picker-backdrop.kpsl-is-open {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
     }
 
-    .slide-version-picker-backdrop *,
-    .slide-version-picker-backdrop *::before,
-    .slide-version-picker-backdrop *::after {
+    .kpsl-picker-backdrop *,
+    .kpsl-picker-backdrop *::before,
+    .kpsl-picker-backdrop *::after {
         box-sizing: border-box;
         font-family: inherit;
     }
 
-    .slide-version-picker-modal {
+    .kpsl-picker-modal {
         width: 100%;
         max-width: 390px;
         max-height: 82vh;
@@ -404,16 +406,16 @@
                     opacity 0.22s ease;
     }
 
-    .slide-version-picker-modal::-webkit-scrollbar {
+    .kpsl-picker-modal::-webkit-scrollbar {
         display: none;
     }
 
-    .slide-version-picker-backdrop.is-open .slide-version-picker-modal {
+    .kpsl-picker-backdrop.kpsl-is-open .kpsl-picker-modal {
         transform: translateY(0) scale(1);
         opacity: 1;
     }
 
-    .slide-version-picker-head {
+    .kpsl-picker-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -421,14 +423,14 @@
         margin-bottom: 12px;
     }
 
-    .slide-version-picker-app {
+    .kpsl-picker-app {
         display: flex;
         align-items: center;
         gap: 10px;
         min-width: 0;
     }
 
-    .slide-version-picker-icon {
+    .kpsl-picker-icon {
         width: 42px;
         height: 42px;
         border-radius: 10px;
@@ -437,7 +439,7 @@
         border: none;
     }
 
-    .slide-version-picker-title {
+    .kpsl-picker-title {
         font-size: 16px;
         font-weight: 700;
         line-height: 1.2;
@@ -448,13 +450,13 @@
         text-overflow: ellipsis;
     }
 
-    .slide-version-picker-sub {
+    .kpsl-picker-sub {
         font-size: 12px;
         color: #98989F;
         margin: 2px 0 0 0;
     }
 
-    .slide-version-picker-close {
+    .kpsl-picker-close {
         width: 30px;
         height: 30px;
         border-radius: 999px;
@@ -470,17 +472,17 @@
         flex-shrink: 0;
     }
 
-    .slide-version-picker-close:hover {
+    .kpsl-picker-close:hover {
         background: rgba(255, 255, 255, 0.2);
     }
 
-    .slide-version-picker-list {
+    .kpsl-picker-list {
         display: flex;
         flex-direction: column;
         gap: 8px;
     }
 
-    .slide-rec-search-wrap {
+    .kpsl-search-wrap {
         position: sticky;
         top: 0;
         z-index: 5;
@@ -489,7 +491,7 @@
         padding-bottom: 2px;
     }
 
-    .slide-rec-search-wrap svg {
+    .kpsl-search-wrap svg {
         position: absolute;
         left: 11px;
         top: 50%;
@@ -500,7 +502,7 @@
         pointer-events: none;
     }
 
-    .slide-rec-search-input {
+    .kpsl-search-input {
         width: 100%;
         height: 38px;
         padding: 0 12px 0 34px;
@@ -516,16 +518,16 @@
         transition: border-color 0.15s ease, background-color 0.15s ease;
     }
 
-    .slide-rec-search-input::placeholder {
+    .kpsl-search-input::placeholder {
         color: #8E8E93;
         font-size: 14px;
     }
 
-    .slide-rec-search-input:focus {
+    .kpsl-search-input:focus {
         background: rgba(255, 255, 255, 0.12);
     }
 
-    .slide-version-option {
+    .kpsl-version-option {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -541,18 +543,18 @@
         transition: background-color 0.15s ease, border-color 0.15s ease;
     }
 
-    .slide-version-option:hover {
+    .kpsl-version-option:hover {
         background: rgba(10, 132, 255, 0.18);
     }
 
-    .slide-version-option-info {
+    .kpsl-version-info {
         display: flex;
         flex-direction: column;
         min-width: 0;
         flex: 1;
     }
 
-    .slide-version-option-name {
+    .kpsl-version-name {
         font-size: 14px;
         font-weight: 700;
         color: #FFFFFF;
@@ -561,7 +563,7 @@
         text-overflow: ellipsis;
     }
 
-    .slide-version-option-meta {
+    .kpsl-version-meta {
         font-size: 11.5px;
         color: #98989F;
         margin-top: 2px;
@@ -570,7 +572,7 @@
         text-overflow: ellipsis;
     }
 
-    .slide-version-option-cta {
+    .kpsl-version-cta {
         background: #0A84FF;
         color: #FFFFFF;
         font-size: 12px;
@@ -581,7 +583,7 @@
         flex-shrink: 0;
     }
 
-    .slide-version-picker-empty {
+    .kpsl-picker-empty {
         font-size: 13px;
         color: #98989F;
         text-align: center;
@@ -589,8 +591,8 @@
         margin: 0;
     }
 
-    /* Thanh sticky trên cùng của popup khi cuộn qua nút tải */
-    .slide-popup-sticky-bar {
+    /* Thanh sticky trên cùng của popup */
+    .kpsl-sticky-bar {
         position: sticky;
         top: 0;
         z-index: 20;
@@ -613,14 +615,14 @@
         margin-bottom: -54px;
     }
 
-    .slide-popup-sticky-bar.is-visible {
+    .kpsl-sticky-bar.kpsl-is-visible {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
         transform: translateY(0);
     }
 
-    .slide-popup-sticky-bar #slide-popup-sticky-download {
+    .kpsl-sticky-bar .kpsl-sticky-dl-btn {
         opacity: 0;
         transform: translateY(-10px) scale(0.64);
         transform-origin: right center;
@@ -632,12 +634,12 @@
                     background-color 0.15s ease;
     }
 
-    .slide-popup-sticky-bar.is-visible #slide-popup-sticky-download {
+    .kpsl-sticky-bar.kpsl-is-visible .kpsl-sticky-dl-btn {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
 
-    .slide-popup-sticky-icon {
+    .kpsl-sticky-icon {
         width: 32px;
         height: 32px;
         border-radius: 8px;
@@ -646,14 +648,14 @@
         border: none;
     }
 
-    .slide-popup-sticky-text {
+    .kpsl-sticky-text {
         display: flex;
         flex-direction: column;
         min-width: 0;
         flex: 1;
     }
 
-    .slide-popup-sticky-title {
+    .kpsl-sticky-title {
         font-size: 13.5px;
         font-weight: 700;
         line-height: 1.15;
@@ -663,7 +665,7 @@
         text-overflow: ellipsis;
     }
 
-    .slide-popup-sticky-sub {
+    .kpsl-sticky-sub {
         font-size: 11px;
         font-weight: 400;
         line-height: 1.2;
@@ -674,8 +676,8 @@
         text-overflow: ellipsis;
     }
 
-    /* Banner đầu trang hòa trộn mờ liền mạch xuống nền bên dưới */
-    .slide-store-hero {
+    /* Banner đầu popup */
+    .kpsl-store-hero {
         position: relative;
         width: 100%;
         aspect-ratio: 16 / 11.4;
@@ -683,14 +685,14 @@
         background: #050607;
     }
 
-    .slide-store-hero img {
+    .kpsl-store-hero img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
     }
 
-    .slide-store-hero::before {
+    .kpsl-store-hero::before {
         content: "";
         position: absolute;
         left: -16px;
@@ -715,7 +717,7 @@
         pointer-events: none;
     }
 
-    .slide-store-hero::after {
+    .kpsl-store-hero::after {
         content: "";
         position: absolute;
         inset: 0;
@@ -731,7 +733,7 @@
         pointer-events: none;
     }
 
-    .slide-popup-body-glass {
+    .kpsl-popup-body-glass {
         position: relative;
         z-index: 2;
         background: linear-gradient(
@@ -746,7 +748,7 @@
         box-shadow: 0 -24px 36px 12px rgba(5, 6, 7, 0.72);
     }
 
-    .slide-store-topbar {
+    .kpsl-store-topbar {
         position: absolute;
         top: 18px;
         left: 12px;
@@ -757,7 +759,7 @@
         z-index: 2;
     }
 
-    .slide-store-circle-btn {
+    .kpsl-circle-btn {
         width: 34px;
         height: 34px;
         border-radius: 999px;
@@ -774,28 +776,28 @@
         transition: background-color 0.15s ease, transform 0.1s ease;
     }
 
-    .slide-store-circle-btn:hover {
+    .kpsl-circle-btn:hover {
         background: rgba(60, 64, 70, 0.85);
     }
 
-    .slide-store-circle-btn:active {
+    .kpsl-circle-btn:active {
         transform: scale(0.94);
     }
 
-    .slide-store-circle-btn svg {
+    .kpsl-circle-btn svg {
         width: 18px;
         height: 18px;
     }
 
-    /* Hàng icon + tên + mô tả ngắn + phiên bản / nút tải */
-    .slide-store-head {
+    /* Hàng icon + tên + mô tả ngắn + nút tải */
+    .kpsl-store-head {
         display: flex;
         align-items: flex-start;
         gap: 14px;
         padding: 4px 12px 14px 16px;
     }
 
-    .slide-store-icon {
+    .kpsl-store-icon {
         width: 84px;
         height: 84px;
         border-radius: 19px;
@@ -805,12 +807,12 @@
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
     }
 
-    .slide-store-main-info {
+    .kpsl-store-main {
         flex: 1;
         min-width: 0;
     }
 
-    .slide-store-title {
+    .kpsl-store-title {
         font-size: 20px;
         font-weight: 700;
         line-height: 1.2;
@@ -819,7 +821,7 @@
         margin: 0;
     }
 
-    .slide-store-subtitle {
+    .kpsl-store-subtitle {
         font-size: 13px;
         font-weight: 400;
         line-height: 1.35;
@@ -827,7 +829,7 @@
         margin: 3px 0 10px 0;
     }
 
-    .slide-store-action-row {
+    .kpsl-store-action-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -835,7 +837,7 @@
         width: 100%;
     }
 
-    .slide-store-meta-stack {
+    .kpsl-store-meta-stack {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -843,14 +845,14 @@
         min-width: 0;
     }
 
-    .slide-store-genre-badge {
+    .kpsl-genre-badge {
         font-size: 12px;
         font-weight: 600;
         color: #98989F;
         line-height: 1.25;
     }
 
-    .slide-store-btn-download {
+    .kpsl-btn-download {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -869,26 +871,26 @@
         transition: background-color 0.15s ease, transform 0.1s ease;
     }
 
-    .slide-store-btn-download svg {
+    .kpsl-btn-download svg {
         width: 17px;
         height: 17px;
     }
 
-    .slide-store-btn-download:hover {
+    .kpsl-btn-download:hover {
         background: #2492FF;
     }
 
-    .slide-store-btn-download:active {
+    .kpsl-btn-download:active {
         transform: scale(0.96);
     }
 
-    .slide-store-version-badge {
+    .kpsl-version-badge {
         font-size: 12px;
         color: #8E8E93;
     }
 
     /* Thanh chỉ số ngang (4 cột) */
-    .slide-store-metrics {
+    .kpsl-metrics {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         border-top: 0.5px solid rgba(255, 255, 255, 0.12);
@@ -896,7 +898,7 @@
         padding: 10px 6px;
     }
 
-    .slide-store-metric {
+    .kpsl-metric {
         position: relative;
         display: flex;
         flex-direction: column;
@@ -907,7 +909,7 @@
         min-width: 0;
     }
 
-    .slide-store-metric:not(:last-child)::after {
+    .kpsl-metric:not(:last-child)::after {
         content: "";
         position: absolute;
         right: 0;
@@ -917,7 +919,7 @@
         background: rgba(255, 255, 255, 0.14);
     }
 
-    .slide-store-metric-top {
+    .kpsl-metric-top {
         font-size: 9.5px;
         font-weight: 700;
         text-transform: uppercase;
@@ -929,7 +931,7 @@
         max-width: 100%;
     }
 
-    .slide-store-metric-val {
+    .kpsl-metric-val {
         font-size: 15px;
         font-weight: 700;
         color: #98989F;
@@ -940,7 +942,7 @@
         max-width: 100%;
     }
 
-    .slide-store-metric-sub {
+    .kpsl-metric-sub {
         font-size: 10.5px;
         color: #8E8E93;
         white-space: nowrap;
@@ -949,12 +951,12 @@
         max-width: 100%;
     }
 
-    /* List ảnh & video cuộn ngang bên trên dòng cập nhật mới */
-    .slide-popup-gallery-wrap {
+    /* List ảnh & video cuộn ngang */
+    .kpsl-gallery-wrap {
         padding: 14px 0 4px;
     }
 
-    .slide-popup-gallery {
+    .kpsl-gallery {
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -964,15 +966,15 @@
         padding-bottom: 4px;
     }
 
-    .slide-popup-gallery::-webkit-scrollbar {
+    .kpsl-gallery::-webkit-scrollbar {
         display: none;
     }
 
-    .slide-popup-gallery .slide-marquee-track {
+    .kpsl-gallery .kpsl-marquee-track {
         gap: 10px;
     }
 
-    .slide-popup-gallery-item {
+    .kpsl-gallery-item {
         flex: 0 0 72%;
         aspect-ratio: 16 / 10;
         border-radius: 14px;
@@ -981,9 +983,9 @@
         background: #141715;
     }
 
-    .slide-popup-gallery-item img,
-    .slide-popup-gallery-item video,
-    .slide-popup-gallery-item iframe {
+    .kpsl-gallery-item img,
+    .kpsl-gallery-item video,
+    .kpsl-gallery-item iframe {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -992,16 +994,16 @@
     }
 
     /* Các mục chi tiết bên dưới */
-    .slide-store-section {
+    .kpsl-detail-section {
         padding: 16px;
         border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
     }
 
-    .slide-store-section:last-child {
+    .kpsl-detail-section:last-child {
         border-bottom: none;
     }
 
-    .slide-store-section-heading {
+    .kpsl-detail-heading {
         font-size: 18px;
         font-weight: 700;
         line-height: 1.25;
@@ -1014,23 +1016,23 @@
         gap: 8px;
     }
 
-    .slide-rec-heading-trigger {
+    .kpsl-rec-trigger {
         cursor: pointer;
         user-select: none;
         transition: opacity 0.15s ease;
     }
 
-    .slide-rec-heading-trigger:hover {
+    .kpsl-rec-trigger:hover {
         opacity: 0.85;
     }
 
-    .slide-store-section-heading span.chevron {
+    .kpsl-detail-heading span.kpsl-chevron {
         color: #8E8E93;
         font-size: 18px;
         font-weight: 500;
     }
 
-    .slide-changelog-version-inline {
+    .kpsl-changelog-ver {
         display: block;
         font-size: 12px;
         font-weight: 600;
@@ -1038,7 +1040,7 @@
         margin: 0 0 8px 0;
     }
 
-    .slide-store-section-text {
+    .kpsl-detail-text {
         font-size: 13.5px;
         font-weight: 400;
         line-height: 1.48;
@@ -1047,7 +1049,7 @@
         white-space: pre-line;
     }
 
-    .slide-inline-content-img {
+    .kpsl-inline-img {
         display: block;
         width: 100%;
         max-width: 100%;
@@ -1058,23 +1060,23 @@
         background: #141715;
     }
 
-    .slide-desc-link {
+    .kpsl-desc-link {
         color: #FF6B4A;
         font-weight: 600;
         text-decoration: none;
     }
 
-    .slide-desc-link:hover {
+    .kpsl-desc-link:hover {
         text-decoration: underline;
     }
 
     /* Bảng Thông Tin */
-    .slide-info-list {
+    .kpsl-info-list {
         display: flex;
         flex-direction: column;
     }
 
-    .slide-info-row {
+    .kpsl-info-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1084,69 +1086,59 @@
         font-size: 13.5px;
     }
 
-    .slide-info-row:last-child {
+    .kpsl-info-row:last-child {
         border-bottom: none;
         padding-bottom: 2px;
     }
 
-    .slide-info-label {
+    .kpsl-info-label {
         color: #8E8E93;
         flex-shrink: 0;
     }
 
-    .slide-info-value {
+    .kpsl-info-value {
         color: #FFFFFF;
         font-weight: 700;
         text-align: right;
         word-break: break-word;
     }
 
-    .slide-info-link {
-        color: #0A84FF;
-        font-weight: 700;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        cursor: pointer;
-    }
-
-    .slide-info-report-note {
+    .kpsl-report-note {
         margin-top: 12px;
         font-size: 12.5px;
         line-height: 1.45;
         color: #98989F;
     }
 
-    .slide-report-messenger {
+    .kpsl-report-messenger {
         color: #2E9BFF;
         font-weight: 700;
         text-decoration: none;
     }
 
-    .slide-report-messenger:hover {
+    .kpsl-report-messenger:hover {
         text-decoration: underline;
     }
 
-    .slide-report-zalo {
+    .kpsl-report-zalo {
         color: #00B8FF;
         font-weight: 700;
         text-decoration: none;
     }
 
-    .slide-report-zalo:hover {
+    .kpsl-report-zalo:hover {
         text-decoration: underline;
     }
 
-    /* Danh sách đề xuất giống ảnh */
-    .slide-rec-list {
+    /* Danh sách đề xuất */
+    .kpsl-rec-list {
         display: flex;
         flex-direction: column;
         gap: 12px;
         margin-top: 8px;
     }
 
-    .slide-rec-item {
+    .kpsl-rec-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1159,11 +1151,11 @@
         transition: background-color 0.15s ease;
     }
 
-    .slide-rec-item:hover {
+    .kpsl-rec-item:hover {
         background: rgba(255, 255, 255, 0.08);
     }
 
-    .slide-rec-left {
+    .kpsl-rec-left {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -1171,7 +1163,7 @@
         flex: 1;
     }
 
-    .slide-rec-icon {
+    .kpsl-rec-icon {
         width: 54px;
         height: 54px;
         border-radius: 13px;
@@ -1180,13 +1172,13 @@
         border: none;
     }
 
-    .slide-rec-meta {
+    .kpsl-rec-meta {
         display: flex;
         flex-direction: column;
         min-width: 0;
     }
 
-    .slide-rec-name {
+    .kpsl-rec-name {
         font-size: 14.5px;
         font-weight: 600;
         line-height: 1.25;
@@ -1196,7 +1188,7 @@
         text-overflow: ellipsis;
     }
 
-    .slide-rec-desc {
+    .kpsl-rec-desc {
         font-size: 12.5px;
         line-height: 1.3;
         color: #98989F;
@@ -1206,14 +1198,14 @@
         text-overflow: ellipsis;
     }
 
-    .slide-rec-right {
+    .kpsl-rec-right {
         display: flex;
         flex-direction: column;
         align-items: center;
         flex-shrink: 0;
     }
 
-    .slide-rec-btn {
+    .kpsl-rec-btn {
         background: rgba(255, 255, 255, 0.16);
         color: #0A84FF;
         font-size: 13px;
@@ -1227,88 +1219,88 @@
         transition: background-color 0.15s ease;
     }
 
-    .slide-rec-btn:hover {
+    .kpsl-rec-btn:hover {
         background: rgba(255, 255, 255, 0.24);
     }
 
-    .slide-rec-sub {
+    .kpsl-rec-sub {
         font-size: 9px;
         color: #8E8E93;
         margin-top: 3px;
     }
 </style>
 
-<section class="slide-game-section" id="slide-game-section-main">
-    <div class="slide-coverflow-viewport" id="slide-coverflow-viewport">
-        <button class="slide-coverflow-nav prev" id="slide-coverflow-prev" type="button" aria-label="Slide trước">
+<section class="kpsl-section" id="kpsl-section-main">
+    <div class="kpsl-viewport" id="kpsl-viewport">
+        <button class="kpsl-nav-btn kpsl-nav-prev" id="kpsl-nav-prev" type="button" aria-label="Slide trước">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m15 18-6-6 6-6"/>
             </svg>
         </button>
 
-        <div class="slide-card-slider" id="slide-card-slider"></div>
+        <div class="kpsl-slider" id="kpsl-slider"></div>
 
-        <button class="slide-coverflow-nav next" id="slide-coverflow-next" type="button" aria-label="Slide tiếp theo">
+        <button class="kpsl-nav-btn kpsl-nav-next" id="kpsl-nav-next" type="button" aria-label="Slide tiếp theo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m9 18 6-6-6-6"/>
             </svg>
         </button>
     </div>
-    <div class="slide-slider-dots" id="slide-slider-dots"></div>
+    <div class="kpsl-dots" id="kpsl-dots"></div>
 </section>
 
-<div class="slide-popup-toast" id="slide-popup-toast" role="status" aria-live="polite"></div>
+<div class="kpsl-toast" id="kpsl-toast" role="status" aria-live="polite"></div>
 
-<div class="slide-version-picker-backdrop" id="slide-version-picker-popup" aria-hidden="true">
-    <div class="slide-version-picker-modal" role="dialog" aria-modal="true" aria-labelledby="slide-version-picker-title">
-        <div class="slide-version-picker-head">
-            <div class="slide-version-picker-app">
-                <img class="slide-version-picker-icon" id="slide-version-picker-icon" src="" alt="">
+<div class="kpsl-picker-backdrop" id="kpsl-version-picker-popup" aria-hidden="true">
+    <div class="kpsl-picker-modal" role="dialog" aria-modal="true" aria-labelledby="kpsl-version-picker-title">
+        <div class="kpsl-picker-head">
+            <div class="kpsl-picker-app">
+                <img class="kpsl-picker-icon" id="kpsl-version-picker-icon" src="" alt="">
                 <div style="min-width:0;">
-                    <h4 class="slide-version-picker-title" id="slide-version-picker-title">Chọn link tải</h4>
-                    <p class="slide-version-picker-sub" id="slide-version-picker-sub"></p>
+                    <h4 class="kpsl-picker-title" id="kpsl-version-picker-title">Chọn link tải</h4>
+                    <p class="kpsl-picker-sub" id="kpsl-version-picker-sub"></p>
                 </div>
             </div>
-            <button class="slide-version-picker-close" id="slide-version-picker-close" type="button" aria-label="Đóng">×</button>
+            <button class="kpsl-picker-close" id="kpsl-version-picker-close" type="button" aria-label="Đóng">×</button>
         </div>
-        <div class="slide-version-picker-list" id="slide-version-picker-list"></div>
+        <div class="kpsl-picker-list" id="kpsl-version-picker-list"></div>
     </div>
 </div>
 
-<div class="slide-version-picker-backdrop" id="slide-rec-all-popup" aria-hidden="true">
-    <div class="slide-version-picker-modal" role="dialog" aria-modal="true" aria-labelledby="slide-rec-all-title">
-        <div class="slide-version-picker-head">
+<div class="kpsl-picker-backdrop" id="kpsl-rec-all-popup" aria-hidden="true">
+    <div class="kpsl-picker-modal" role="dialog" aria-modal="true" aria-labelledby="kpsl-rec-all-title">
+        <div class="kpsl-picker-head">
             <div style="min-width:0;">
-                <h4 class="slide-version-picker-title" id="slide-rec-all-title">Tất cả đề xuất</h4>
-                <p class="slide-version-picker-sub" id="slide-rec-all-sub"></p>
+                <h4 class="kpsl-picker-title" id="kpsl-rec-all-title">Tất cả đề xuất</h4>
+                <p class="kpsl-picker-sub" id="kpsl-rec-all-sub"></p>
             </div>
-            <button class="slide-version-picker-close" id="slide-rec-all-close" type="button" aria-label="Đóng">×</button>
+            <button class="kpsl-picker-close" id="kpsl-rec-all-close" type="button" aria-label="Đóng">×</button>
         </div>
-        <div class="slide-rec-search-wrap">
+        <div class="kpsl-search-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="11" cy="11" r="7"/>
                 <path d="m20 20-3.5-3.5"/>
             </svg>
-            <input class="slide-rec-search-input" id="slide-rec-all-search" type="search" placeholder="Tìm ứng dụng hoặc nội dung..." autocomplete="off">
+            <input class="kpsl-search-input" id="kpsl-rec-all-search" type="search" placeholder="Tìm ứng dụng hoặc nội dung..." autocomplete="off">
         </div>
-        <div class="slide-rec-list" id="slide-rec-all-list"></div>
+        <div class="kpsl-rec-list" id="kpsl-rec-all-list"></div>
     </div>
 </div>
 
-<div class="slide-popup-backdrop" id="slide-card-popup" aria-hidden="true">
-    <div class="slide-popup-modal" id="slide-popup-modal" role="dialog" aria-modal="true" aria-labelledby="slide-popup-title">
-        <div class="slide-popup-sticky-bar" id="slide-popup-sticky-bar">
-            <button class="slide-store-circle-btn" id="slide-popup-sticky-close" type="button" aria-label="Quay lại">
+<div class="kpsl-popup-backdrop" id="kpsl-card-popup" aria-hidden="true">
+    <div class="kpsl-popup-modal" id="kpsl-popup-modal" role="dialog" aria-modal="true" aria-labelledby="kpsl-popup-title">
+        <div class="kpsl-sticky-bar" id="kpsl-popup-sticky-bar">
+            <button class="kpsl-circle-btn" id="kpsl-popup-sticky-close" type="button" aria-label="Quay lại">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m15 18-6-6 6-6"/>
                 </svg>
             </button>
-            <img class="slide-popup-sticky-icon" id="slide-popup-sticky-icon" src="" alt="">
-            <div class="slide-popup-sticky-text">
-                <span class="slide-popup-sticky-title" id="slide-popup-sticky-title"></span>
-                <span class="slide-popup-sticky-sub" id="slide-popup-sticky-sub"></span>
+            <img class="kpsl-sticky-icon" id="kpsl-popup-sticky-icon" src="" alt="">
+            <div class="kpsl-sticky-text">
+                <span class="kpsl-sticky-title" id="kpsl-popup-sticky-title"></span>
+                <span class="kpsl-sticky-sub" id="kpsl-popup-sticky-sub"></span>
             </div>
-            <button class="slide-store-btn-download" id="slide-popup-sticky-download" type="button">
+            <button class="kpsl-btn-download kpsl-sticky-dl-btn" id="kpsl-popup-sticky-download" type="button">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
                     <path d="M12 10.5v5.5"/>
@@ -1318,15 +1310,15 @@
             </button>
         </div>
 
-        <div class="slide-store-hero">
-            <img id="slide-popup-banner" src="" alt="">
-            <div class="slide-store-topbar">
-                <button class="slide-store-circle-btn" id="slide-popup-close" type="button" aria-label="Quay lại">
+        <div class="kpsl-store-hero">
+            <img id="kpsl-popup-banner" src="" alt="">
+            <div class="kpsl-store-topbar">
+                <button class="kpsl-circle-btn" id="kpsl-popup-close" type="button" aria-label="Quay lại">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m15 18-6-6 6-6"/>
                     </svg>
                 </button>
-                <button class="slide-store-circle-btn" id="slide-popup-share" type="button" aria-label="Chia sẻ liên kết">
+                <button class="kpsl-circle-btn" id="kpsl-popup-share" type="button" aria-label="Chia sẻ liên kết">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 3v12"/>
                         <path d="m16 7-4-4-4 4"/>
@@ -1336,18 +1328,18 @@
             </div>
         </div>
 
-        <div class="slide-popup-body-glass">
-            <div class="slide-store-head">
-                <img class="slide-store-icon" id="slide-popup-icon" src="" alt="">
-                <div class="slide-store-main-info">
-                    <h3 class="slide-store-title" id="slide-popup-title"></h3>
-                    <p class="slide-store-subtitle" id="slide-popup-subtitle"></p>
-                    <div class="slide-store-action-row" id="slide-popup-action-row">
-                        <div class="slide-store-meta-stack">
-                            <span class="slide-store-genre-badge" id="slide-popup-genre-badge"></span>
-                            <span class="slide-store-version-badge" id="slide-popup-version"></span>
+        <div class="kpsl-popup-body-glass">
+            <div class="kpsl-store-head">
+                <img class="kpsl-store-icon" id="kpsl-popup-icon" src="" alt="">
+                <div class="kpsl-store-main">
+                    <h3 class="kpsl-store-title" id="kpsl-popup-title"></h3>
+                    <p class="kpsl-store-subtitle" id="kpsl-popup-subtitle"></p>
+                    <div class="kpsl-store-action-row" id="kpsl-popup-action-row">
+                        <div class="kpsl-store-meta-stack">
+                            <span class="kpsl-genre-badge" id="kpsl-popup-genre-badge"></span>
+                            <span class="kpsl-version-badge" id="kpsl-popup-version"></span>
                         </div>
-                        <button class="slide-store-btn-download" id="slide-popup-download" type="button">
+                        <button class="kpsl-btn-download" id="kpsl-popup-download" type="button">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <path d="M17.5 18.5H7.2a4.2 4.2 0 0 1-.5-8.37 5.5 5.5 0 0 1 10.75-1.38A3.6 3.6 0 0 1 17.5 18.5Z"/>
                                 <path d="M12 10.5v5.5"/>
@@ -1359,89 +1351,89 @@
                 </div>
             </div>
 
-            <div class="slide-store-metrics">
-                <div class="slide-store-metric">
-                    <span class="slide-store-metric-top">TÁC GIẢ</span>
-                    <span class="slide-store-metric-val" id="slide-popup-author"></span>
-                    <span class="slide-store-metric-sub" id="slide-popup-genre"></span>
+            <div class="kpsl-metrics">
+                <div class="kpsl-metric">
+                    <span class="kpsl-metric-top">TÁC GIẢ</span>
+                    <span class="kpsl-metric-val" id="kpsl-popup-author"></span>
+                    <span class="kpsl-metric-sub" id="kpsl-popup-genre"></span>
                 </div>
-                <div class="slide-store-metric">
-                    <span class="slide-store-metric-top">NGÀY ĐĂNG</span>
-                    <span class="slide-store-metric-val" id="slide-popup-date"></span>
-                    <span class="slide-store-metric-sub">Cập nhật</span>
+                <div class="kpsl-metric">
+                    <span class="kpsl-metric-top">NGÀY ĐĂNG</span>
+                    <span class="kpsl-metric-val" id="kpsl-popup-date"></span>
+                    <span class="kpsl-metric-sub">Cập nhật</span>
                 </div>
-                <div class="slide-store-metric">
-                    <span class="slide-store-metric-top">ĐỊNH DẠNG</span>
-                    <span class="slide-store-metric-val" id="slide-popup-format"></span>
-                    <span class="slide-store-metric-sub">Tệp tải</span>
+                <div class="kpsl-metric">
+                    <span class="kpsl-metric-top">ĐỊNH DẠNG</span>
+                    <span class="kpsl-metric-val" id="kpsl-popup-format"></span>
+                    <span class="kpsl-metric-sub">Tệp tải</span>
                 </div>
-                <div class="slide-store-metric">
-                    <span class="slide-store-metric-top">DUNG LƯỢNG</span>
-                    <span class="slide-store-metric-val" id="slide-popup-size"></span>
-                    <span class="slide-store-metric-sub">Tệp tải</span>
+                <div class="kpsl-metric">
+                    <span class="kpsl-metric-top">DUNG LƯỢNG</span>
+                    <span class="kpsl-metric-val" id="kpsl-popup-size"></span>
+                    <span class="kpsl-metric-sub">Tệp tải</span>
                 </div>
             </div>
 
-            <div class="slide-popup-gallery-wrap">
-                <div class="slide-popup-gallery" id="slide-popup-gallery"></div>
+            <div class="kpsl-gallery-wrap">
+                <div class="kpsl-gallery" id="kpsl-popup-gallery"></div>
             </div>
 
-            <div class="slide-store-section" id="slide-popup-changelog-section">
-                <h4 class="slide-store-section-heading">Có gì mới?</h4>
-                <span class="slide-changelog-version-inline" id="slide-popup-changelog-version"></span>
-                <p class="slide-store-section-text" id="slide-popup-changelog"></p>
+            <div class="kpsl-detail-section" id="kpsl-popup-changelog-section">
+                <h4 class="kpsl-detail-heading">Có gì mới?</h4>
+                <span class="kpsl-changelog-ver" id="kpsl-popup-changelog-version"></span>
+                <p class="kpsl-detail-text" id="kpsl-popup-changelog"></p>
             </div>
 
-            <div class="slide-store-section">
-                <h4 class="slide-store-section-heading" id="slide-popup-desc-heading">Mô tả</h4>
-                <p class="slide-store-section-text" id="slide-popup-desc"></p>
+            <div class="kpsl-detail-section">
+                <h4 class="kpsl-detail-heading" id="kpsl-popup-desc-heading">Mô tả</h4>
+                <p class="kpsl-detail-text" id="kpsl-popup-desc"></p>
             </div>
 
-            <div class="slide-store-section">
-                <h4 class="slide-store-section-heading">Thông Tin</h4>
-                <div class="slide-info-list">
-                    <div class="slide-info-row">
-                        <span class="slide-info-label">Nhà cung cấp</span>
-                        <span class="slide-info-value" id="slide-info-provider"></span>
+            <div class="kpsl-detail-section">
+                <h4 class="kpsl-detail-heading">Thông Tin</h4>
+                <div class="kpsl-info-list">
+                    <div class="kpsl-info-row">
+                        <span class="kpsl-info-label">Nhà cung cấp</span>
+                        <span class="kpsl-info-value" id="kpsl-info-provider"></span>
                     </div>
-                    <div class="slide-info-row">
-                        <span class="slide-info-label">Kích cỡ</span>
-                        <span class="slide-info-value" id="slide-info-size"></span>
+                    <div class="kpsl-info-row">
+                        <span class="kpsl-info-label">Kích cỡ</span>
+                        <span class="kpsl-info-value" id="kpsl-info-size"></span>
                     </div>
-                    <div class="slide-info-row">
-                        <span class="slide-info-label">Danh mục</span>
-                        <span class="slide-info-value" id="slide-info-genre"></span>
+                    <div class="kpsl-info-row">
+                        <span class="kpsl-info-label">Danh mục</span>
+                        <span class="kpsl-info-value" id="kpsl-info-genre"></span>
                     </div>
-                    <div class="slide-info-row">
-                        <span class="slide-info-label">Định dạng</span>
-                        <span class="slide-info-value" id="slide-info-format"></span>
+                    <div class="kpsl-info-row">
+                        <span class="kpsl-info-label">Định dạng</span>
+                        <span class="kpsl-info-value" id="kpsl-info-format"></span>
                     </div>
-                    <div class="slide-info-row">
-                        <span class="slide-info-label">Ngày đăng</span>
-                        <span class="slide-info-value" id="slide-info-date"></span>
+                    <div class="kpsl-info-row">
+                        <span class="kpsl-info-label">Ngày đăng</span>
+                        <span class="kpsl-info-value" id="kpsl-info-date"></span>
                     </div>
-                    <div class="slide-info-row" id="slide-info-version-row">
-                        <span class="slide-info-label">Phiên bản</span>
-                        <span class="slide-info-value" id="slide-info-version"></span>
+                    <div class="kpsl-info-row" id="kpsl-info-version-row">
+                        <span class="kpsl-info-label">Phiên bản</span>
+                        <span class="kpsl-info-value" id="kpsl-info-version"></span>
                     </div>
                 </div>
-                <p class="slide-info-report-note">Báo cáo sự cố qua <a class="slide-report-messenger" href="https://m.me/ktads" target="_blank" rel="noopener noreferrer">Facebook Messenger</a> và <a class="slide-report-zalo" href="https://zalo.me/0374113767" target="_blank" rel="noopener noreferrer">Zalo</a>.</p>
+                <p class="kpsl-report-note">Báo cáo sự cố qua <a class="kpsl-report-messenger" href="https://m.me/ktads" target="_blank" rel="noopener noreferrer">Facebook Messenger</a> và <a class="kpsl-report-zalo" href="https://zalo.me/0374113767" target="_blank" rel="noopener noreferrer">Zalo</a>.</p>
             </div>
 
-            <div class="slide-store-section" id="slide-rec-author-section">
-                <h4 class="slide-store-section-heading slide-rec-heading-trigger" id="slide-rec-author-trigger">
-                    <span id="slide-rec-author-heading">Ứng Dụng Khác</span>
-                    <span class="chevron">›</span>
+            <div class="kpsl-detail-section" id="kpsl-rec-author-section">
+                <h4 class="kpsl-detail-heading kpsl-rec-trigger" id="kpsl-rec-author-trigger">
+                    <span id="kpsl-rec-author-heading">Ứng Dụng Khác</span>
+                    <span class="kpsl-chevron">›</span>
                 </h4>
-                <div class="slide-rec-list" id="slide-rec-author-list"></div>
+                <div class="kpsl-rec-list" id="kpsl-rec-author-list"></div>
             </div>
 
-            <div class="slide-store-section" id="slide-rec-like-section">
-                <h4 class="slide-store-section-heading slide-rec-heading-trigger" id="slide-rec-like-trigger">
-                    <span id="slide-rec-like-heading">Có Thể Bạn Cũng Thích</span>
-                    <span class="chevron">›</span>
+            <div class="kpsl-detail-section" id="kpsl-rec-like-section">
+                <h4 class="kpsl-detail-heading kpsl-rec-trigger" id="kpsl-rec-like-trigger">
+                    <span id="kpsl-rec-like-heading">Có Thể Bạn Cũng Thích</span>
+                    <span class="kpsl-chevron">›</span>
                 </h4>
-                <div class="slide-rec-list" id="slide-rec-like-list"></div>
+                <div class="kpsl-rec-list" id="kpsl-rec-like-list"></div>
             </div>
         </div>
     </div>
@@ -1449,7 +1441,7 @@
 
 <script>
     (function () {
-        const SLIDE_CONFIG_PATHS = ["Tabs/slide.json", "slide.json"];
+        const SLIDE_CONFIG_PATHS = ["Tabs/Slide.json", "Slide.json"];
         const CANDIDATE_URLS = ["Tabs/Appios.json", "Appios.json"];
         const EXTRA_JSON_URLS = ["Tabs/Appios.json", "Appios.json", "Tabs/Apps.json", "Apps.json"];
         const MAX_DISPLAY_CARDS = 8;
@@ -1483,9 +1475,75 @@
         let activeSlideMode = "snap";
         let slideModeGeneration = 0;
 
-        function getElBySlideOrLegacyId(slideId, legacyId) {
-            return document.getElementById(slideId) || (legacyId ? document.getElementById(legacyId) : null);
-        }
+        const elSectionMain = document.getElementById("kpsl-section-main");
+        const elViewport = document.getElementById("kpsl-viewport");
+        const elSlider = document.getElementById("kpsl-slider");
+        const elDots = document.getElementById("kpsl-dots");
+        const elToast = document.getElementById("kpsl-toast");
+
+        const elVersionPickerPopup = document.getElementById("kpsl-version-picker-popup");
+        const elVersionPickerIcon = document.getElementById("kpsl-version-picker-icon");
+        const elVersionPickerTitle = document.getElementById("kpsl-version-picker-title");
+        const elVersionPickerSub = document.getElementById("kpsl-version-picker-sub");
+        const elVersionPickerClose = document.getElementById("kpsl-version-picker-close");
+        const elVersionPickerList = document.getElementById("kpsl-version-picker-list");
+
+        const elRecAllPopup = document.getElementById("kpsl-rec-all-popup");
+        const elRecAllTitle = document.getElementById("kpsl-rec-all-title");
+        const elRecAllSub = document.getElementById("kpsl-rec-all-sub");
+        const elRecAllClose = document.getElementById("kpsl-rec-all-close");
+        const elRecAllSearch = document.getElementById("kpsl-rec-all-search");
+        const elRecAllList = document.getElementById("kpsl-rec-all-list");
+
+        const elCardPopup = document.getElementById("kpsl-card-popup");
+        const elPopupModal = document.getElementById("kpsl-popup-modal");
+        const elPopupStickyBar = document.getElementById("kpsl-popup-sticky-bar");
+        const elPopupStickyClose = document.getElementById("kpsl-popup-sticky-close");
+        const elPopupStickyIcon = document.getElementById("kpsl-popup-sticky-icon");
+        const elPopupStickyTitle = document.getElementById("kpsl-popup-sticky-title");
+        const elPopupStickySub = document.getElementById("kpsl-popup-sticky-sub");
+        const elPopupStickyDownload = document.getElementById("kpsl-popup-sticky-download");
+
+        const elPopupBanner = document.getElementById("kpsl-popup-banner");
+        const elPopupClose = document.getElementById("kpsl-popup-close");
+        const elPopupShare = document.getElementById("kpsl-popup-share");
+        const elPopupIcon = document.getElementById("kpsl-popup-icon");
+        const elPopupTitle = document.getElementById("kpsl-popup-title");
+        const elPopupSubtitle = document.getElementById("kpsl-popup-subtitle");
+        const elPopupGenreBadge = document.getElementById("kpsl-popup-genre-badge");
+        const elPopupVersion = document.getElementById("kpsl-popup-version");
+        const elPopupDownload = document.getElementById("kpsl-popup-download");
+
+        const elPopupAuthor = document.getElementById("kpsl-popup-author");
+        const elPopupGenre = document.getElementById("kpsl-popup-genre");
+        const elPopupDate = document.getElementById("kpsl-popup-date");
+        const elPopupFormat = document.getElementById("kpsl-popup-format");
+        const elPopupSize = document.getElementById("kpsl-popup-size");
+        const elPopupGallery = document.getElementById("kpsl-popup-gallery");
+
+        const elPopupChangelogSection = document.getElementById("kpsl-popup-changelog-section");
+        const elPopupChangelogVersion = document.getElementById("kpsl-popup-changelog-version");
+        const elPopupChangelog = document.getElementById("kpsl-popup-changelog");
+        const elPopupDescHeading = document.getElementById("kpsl-popup-desc-heading");
+        const elPopupDesc = document.getElementById("kpsl-popup-desc");
+
+        const elInfoProvider = document.getElementById("kpsl-info-provider");
+        const elInfoSize = document.getElementById("kpsl-info-size");
+        const elInfoGenre = document.getElementById("kpsl-info-genre");
+        const elInfoFormat = document.getElementById("kpsl-info-format");
+        const elInfoDate = document.getElementById("kpsl-info-date");
+        const elInfoVersionRow = document.getElementById("kpsl-info-version-row");
+        const elInfoVersion = document.getElementById("kpsl-info-version");
+
+        const elRecAuthorSection = document.getElementById("kpsl-rec-author-section");
+        const elRecAuthorTrigger = document.getElementById("kpsl-rec-author-trigger");
+        const elRecAuthorHeading = document.getElementById("kpsl-rec-author-heading");
+        const elRecAuthorList = document.getElementById("kpsl-rec-author-list");
+
+        const elRecLikeSection = document.getElementById("kpsl-rec-like-section");
+        const elRecLikeTrigger = document.getElementById("kpsl-rec-like-trigger");
+        const elRecLikeHeading = document.getElementById("kpsl-rec-like-heading");
+        const elRecLikeList = document.getElementById("kpsl-rec-like-list");
 
         function lockSlideMode(nextMode) {
             slideModeGeneration += 1;
@@ -1622,7 +1680,7 @@
         function syncSectionContrastColors(sectionEl) {
             if (!sectionEl) return;
             const isDark = detectSectionBackgroundDark(sectionEl);
-            sectionEl.classList.toggle("is-dark-bg", isDark);
+            sectionEl.classList.toggle("kpsl-is-dark-bg", isDark);
         }
 
         function svgToDataUrl(svgString) {
@@ -1640,35 +1698,35 @@
             return svgToDataUrl(`
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 870" width="800" height="870">
                 <defs>
-                    <radialGradient id="slideCaveGlow" cx="62%" cy="26%" r="68%">
+                    <radialGradient id="kpslCaveGlow" cx="62%" cy="26%" r="68%">
                         <stop offset="0%" stop-color="${p.glow}"/>
                         <stop offset="55%" stop-color="${p.mid}"/>
                         <stop offset="100%" stop-color="#0a0e0b"/>
                     </radialGradient>
-                    <linearGradient id="slideArmorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="kpslArmorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#9aa7b2"/>
                         <stop offset="55%" stop-color="#5a6570"/>
                         <stop offset="100%" stop-color="#2c333a"/>
                     </linearGradient>
-                    <linearGradient id="slideBeardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <linearGradient id="kpslBeardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                         <stop offset="0%" stop-color="${p.beard}"/>
                         <stop offset="100%" stop-color="#7c2804"/>
                     </linearGradient>
-                    <linearGradient id="slideBugShell" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <linearGradient id="kpslBugShell" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="${p.accent}"/>
                         <stop offset="100%" stop-color="#1d2b15"/>
                     </linearGradient>
                 </defs>
-                <rect width="800" height="870" fill="url(#slideCaveGlow)"/>
+                <rect width="800" height="870" fill="url(#kpslCaveGlow)"/>
                 <path d="M0 0 L800 0 L800 220 Q610 150 430 210 Q220 270 0 160 Z" fill="#121e15" opacity="0.75"/>
                 <circle cx="660" cy="185" r="190" fill="${p.beard}" opacity="0.1"/>
-                <path d="M-40 240 Q120 170 250 280 Q330 350 290 470 Q230 560 90 540 L-40 500 Z" fill="url(#slideBugShell)"/>
+                <path d="M-40 240 Q120 170 250 280 Q330 350 290 470 Q230 560 90 540 L-40 500 Z" fill="url(#kpslBugShell)"/>
                 <circle cx="215" cy="315" r="24" fill="#182210"/>
                 <circle cx="222" cy="310" r="10" fill="#ffdf4d"/>
                 <path d="M185 385 Q285 380 345 455 Q290 465 215 435 Z" fill="#e8d5a7"/>
-                <path d="M475 430 Q630 360 820 410 L820 690 L430 690 Z" fill="url(#slideArmorGrad)"/>
+                <path d="M475 430 Q630 360 820 410 L820 690 L430 690 Z" fill="url(#kpslArmorGrad)"/>
                 <ellipse cx="665" cy="255" rx="92" ry="86" fill="#e59b78"/>
-                <path d="M575 275 Q545 365 605 430 Q675 465 755 415 Q795 365 765 280 Q715 310 668 288 Q620 310 575 275 Z" fill="url(#slideBeardGrad)"/>
+                <path d="M575 275 Q545 365 605 430 Q675 465 755 415 Q795 365 765 280 Q715 310 668 288 Q620 310 575 275 Z" fill="url(#kpslBeardGrad)"/>
                 <g transform="translate(360, 445) rotate(-14)">
                     <rect x="0" y="28" width="440" height="105" rx="14" fill="#6d7780" stroke="#1d2226" stroke-width="5"/>
                     <rect x="215" y="70" width="115" height="22" rx="4" fill="#f2b705"/>
@@ -1749,7 +1807,7 @@
                 if (tagMatch) {
                     const imgUrl = tagMatch[1].trim();
                     if (/^https?:\/\//i.test(imgUrl) || /^data:image\//i.test(imgUrl) || /^\//i.test(imgUrl)) {
-                        html += `<img class="slide-inline-content-img" src="${escapeHtmlText(imgUrl)}" alt="Ảnh nội dung" loading="lazy">`;
+                        html += `<img class="kpsl-inline-img" src="${escapeHtmlText(imgUrl)}" alt="Ảnh nội dung" loading="lazy">`;
                     } else {
                         html += escapeHtmlText(matchedToken);
                     }
@@ -1763,10 +1821,10 @@
                     }
 
                     if (allowInlineImages && isDirectImageUrl(cleanUrl)) {
-                        html += `<img class="slide-inline-content-img" src="${escapeHtmlText(cleanUrl)}" alt="Ảnh nội dung" loading="lazy">${escapeHtmlText(trailing)}`;
+                        html += `<img class="kpsl-inline-img" src="${escapeHtmlText(cleanUrl)}" alt="Ảnh nội dung" loading="lazy">${escapeHtmlText(trailing)}`;
                     } else {
                         const label = formatShortLinkLabel(cleanUrl);
-                        html += `<a class="slide-desc-link" href="${escapeHtmlText(cleanUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtmlText(label)}</a>${escapeHtmlText(trailing)}`;
+                        html += `<a class="kpsl-desc-link" href="${escapeHtmlText(cleanUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtmlText(label)}</a>${escapeHtmlText(trailing)}`;
                     }
                 }
 
@@ -1851,8 +1909,8 @@
         }
 
         function paintBadgeWithRgb(badgeEl, r, g, b) {
-            const labelEl = badgeEl.querySelector(".slide-card-update-label");
-            const timeEl = badgeEl.querySelector(".slide-card-update-time");
+            const labelEl = badgeEl.querySelector(".kpsl-update-label");
+            const timeEl = badgeEl.querySelector(".kpsl-update-time");
 
             const maxC = Math.max(r, g, b);
             const minC = Math.min(r, g, b);
@@ -2076,10 +2134,9 @@
         }
 
         function closeVersionPickerPopup() {
-            const pickerBackdrop = getElBySlideOrLegacyId("slide-version-picker-popup", "ios-version-picker-popup");
-            if (!pickerBackdrop) return;
-            pickerBackdrop.classList.remove("is-open");
-            pickerBackdrop.setAttribute("aria-hidden", "true");
+            if (!elVersionPickerPopup) return;
+            elVersionPickerPopup.classList.remove("kpsl-is-open");
+            elVersionPickerPopup.setAttribute("aria-hidden", "true");
         }
 
         function normalizeSearchText(str) {
@@ -2092,9 +2149,7 @@
         }
 
         function filterRecModalList(rawKeyword) {
-            const listEl = getElBySlideOrLegacyId("slide-rec-all-list", "ios-rec-all-list");
-            const subEl = getElBySlideOrLegacyId("slide-rec-all-sub", "ios-rec-all-sub");
-            if (!listEl) return;
+            if (!elRecAllList) return;
 
             const keyword = normalizeSearchText(rawKeyword);
             const filtered = !keyword
@@ -2113,53 +2168,50 @@
                     return haystack.includes(keyword);
                 });
 
-            if (subEl) {
-                subEl.textContent = keyword
+            if (elRecAllSub) {
+                elRecAllSub.textContent = keyword
                     ? `Tìm thấy ${filtered.length} / ${activeSlideRecModalEntries.length} nội dung`
                     : `${activeSlideRecModalEntries.length} nội dung`;
             }
 
             renderRecommendationList(
-                listEl,
+                elRecAllList,
                 filtered,
                 keyword ? "Không tìm thấy nội dung phù hợp." : "Chưa có nội dung phù hợp."
             );
         }
 
         function closeAllRecPopup() {
-            const recBackdrop = getElBySlideOrLegacyId("slide-rec-all-popup", "ios-rec-all-popup");
-            if (!recBackdrop) return;
-            recBackdrop.classList.remove("is-open");
-            recBackdrop.setAttribute("aria-hidden", "true");
+            if (!elRecAllPopup) return;
+            elRecAllPopup.classList.remove("kpsl-is-open");
+            elRecAllPopup.setAttribute("aria-hidden", "true");
         }
 
         function openAllRecPopup(headingTitle, entries) {
-            const recBackdrop = getElBySlideOrLegacyId("slide-rec-all-popup", "ios-rec-all-popup");
-            const titleEl = getElBySlideOrLegacyId("slide-rec-all-title", "ios-rec-all-title");
-            const searchInput = getElBySlideOrLegacyId("slide-rec-all-search", "ios-rec-all-search");
-            if (!recBackdrop) return;
+            if (!elRecAllPopup) return;
+            if (elRecAllPopup.parentElement !== document.body) {
+                document.body.appendChild(elRecAllPopup);
+            }
 
             activeSlideRecModalEntries = Array.isArray(entries) ? entries : [];
 
-            if (titleEl) {
-                titleEl.textContent = headingTitle || "Tất cả đề xuất";
+            if (elRecAllTitle) {
+                elRecAllTitle.textContent = headingTitle || "Tất cả đề xuất";
             }
-            if (searchInput) {
-                searchInput.value = "";
+            if (elRecAllSearch) {
+                elRecAllSearch.value = "";
             }
 
             filterRecModalList("");
-            recBackdrop.classList.add("is-open");
-            recBackdrop.setAttribute("aria-hidden", "false");
+            elRecAllPopup.classList.add("kpsl-is-open");
+            elRecAllPopup.setAttribute("aria-hidden", "false");
         }
 
         function openVersionPickerPopup(item, iconSrc, seedIndex = 0) {
-            const pickerBackdrop = getElBySlideOrLegacyId("slide-version-picker-popup", "ios-version-picker-popup");
-            const listEl = getElBySlideOrLegacyId("slide-version-picker-list", "ios-version-picker-list");
-            const titleEl = getElBySlideOrLegacyId("slide-version-picker-title", "ios-version-picker-title");
-            const subEl = getElBySlideOrLegacyId("slide-version-picker-sub", "ios-version-picker-sub");
-            const iconEl = getElBySlideOrLegacyId("slide-version-picker-icon", "ios-version-picker-icon");
-            if (!pickerBackdrop || !listEl) return;
+            if (!elVersionPickerPopup || !elVersionPickerList) return;
+            if (elVersionPickerPopup.parentElement !== document.body) {
+                document.body.appendChild(elVersionPickerPopup);
+            }
 
             const appName = (item && (item.appName || item.title)) || "Ứng dụng";
             const fallbackIcon = createGameIconSvg(seedIndex);
@@ -2172,103 +2224,94 @@
             const customTitle = (item && item.downloadPickerTitle) || currentSlideConfig.downloadPickerTitle;
             const customSub = (item && item.downloadPickerSubtitle) || currentSlideConfig.downloadPickerSubtitle;
 
-            if (iconEl) {
-                iconEl.src = resolvedIcon;
-                iconEl.alt = appName;
-                bindImageFallback(iconEl, fallbackIcon);
+            if (elVersionPickerIcon) {
+                elVersionPickerIcon.src = resolvedIcon;
+                elVersionPickerIcon.alt = appName;
+                bindImageFallback(elVersionPickerIcon, fallbackIcon);
             }
-            if (titleEl) {
-                titleEl.textContent = (customTitle && String(customTitle).trim()) || `${appName} — Chọn link tải`;
+            if (elVersionPickerTitle) {
+                elVersionPickerTitle.textContent = (customTitle && String(customTitle).trim()) || `${appName} — Chọn link tải`;
             }
-            if (subEl) {
+            if (elVersionPickerSub) {
                 if (customSub && String(customSub).trim()) {
-                    subEl.textContent = String(customSub).trim();
+                    elVersionPickerSub.textContent = String(customSub).trim();
                 } else {
-                    subEl.textContent = options.length > 1
+                    elVersionPickerSub.textContent = options.length > 1
                         ? `${appName} • Chọn 1 trong ${options.length} link tải`
                         : `${appName} • Xác nhận để tải xuống`;
                 }
             }
 
-            listEl.innerHTML = "";
+            elVersionPickerList.innerHTML = "";
 
             if (!options.length) {
                 const emptyP = document.createElement("p");
-                emptyP.className = "slide-version-picker-empty";
+                emptyP.className = "kpsl-picker-empty";
                 emptyP.textContent = "Chưa có liên kết tải cho mục này.";
-                listEl.appendChild(emptyP);
+                elVersionPickerList.appendChild(emptyP);
             } else {
                 options.forEach((opt) => {
                     const btn = document.createElement("button");
                     btn.type = "button";
-                    btn.className = "slide-version-option";
+                    btn.className = "kpsl-version-option";
                     btn.innerHTML = `
-                        <span class="slide-version-option-info">
-                            <span class="slide-version-option-name">${opt.label}</span>
-                            ${opt.meta ? `<span class="slide-version-option-meta">${opt.meta}</span>` : ``}
+                        <span class="kpsl-version-info">
+                            <span class="kpsl-version-name">${opt.label}</span>
+                            ${opt.meta ? `<span class="kpsl-version-meta">${opt.meta}</span>` : ``}
                         </span>
-                        <span class="slide-version-option-cta">Tải</span>
+                        <span class="kpsl-version-cta">Tải</span>
                     `;
                     btn.addEventListener("click", () => {
                         window.open(opt.url, "_blank", "noopener,noreferrer");
                         closeVersionPickerPopup();
                     });
-                    listEl.appendChild(btn);
+                    elVersionPickerList.appendChild(btn);
                 });
             }
 
-            pickerBackdrop.classList.add("is-open");
-            pickerBackdrop.setAttribute("aria-hidden", "false");
+            elVersionPickerPopup.classList.add("kpsl-is-open");
+            elVersionPickerPopup.setAttribute("aria-hidden", "false");
         }
 
         (function initSlideVersionPickerEvents() {
-            const pickerBackdrop = getElBySlideOrLegacyId("slide-version-picker-popup", "ios-version-picker-popup");
-            const closeBtn = getElBySlideOrLegacyId("slide-version-picker-close", "ios-version-picker-close");
-            if (pickerBackdrop && closeBtn) {
-                closeBtn.addEventListener("click", closeVersionPickerPopup);
-                pickerBackdrop.addEventListener("click", (e) => {
-                    if (e.target === pickerBackdrop) closeVersionPickerPopup();
+            if (elVersionPickerPopup && elVersionPickerClose) {
+                elVersionPickerClose.addEventListener("click", closeVersionPickerPopup);
+                elVersionPickerPopup.addEventListener("click", (e) => {
+                    if (e.target === elVersionPickerPopup) closeVersionPickerPopup();
                 });
             }
 
-            const recBackdrop = getElBySlideOrLegacyId("slide-rec-all-popup", "ios-rec-all-popup");
-            const recCloseBtn = getElBySlideOrLegacyId("slide-rec-all-close", "ios-rec-all-close");
-            const recSearchInput = getElBySlideOrLegacyId("slide-rec-all-search", "ios-rec-all-search");
-            if (recBackdrop && recCloseBtn) {
-                recCloseBtn.addEventListener("click", closeAllRecPopup);
-                recBackdrop.addEventListener("click", (e) => {
-                    if (e.target === recBackdrop) closeAllRecPopup();
+            if (elRecAllPopup && elRecAllClose) {
+                elRecAllClose.addEventListener("click", closeAllRecPopup);
+                elRecAllPopup.addEventListener("click", (e) => {
+                    if (e.target === elRecAllPopup) closeAllRecPopup();
                 });
             }
-            if (recSearchInput) {
-                recSearchInput.addEventListener("input", (e) => {
+            if (elRecAllSearch) {
+                elRecAllSearch.addEventListener("input", (e) => {
                     filterRecModalList(e.target.value);
                 });
             }
 
-            const authorTrigger = getElBySlideOrLegacyId("slide-rec-author-trigger", "ios-rec-author-trigger");
-            if (authorTrigger) {
-                authorTrigger.addEventListener("click", () => {
-                    const h = getElBySlideOrLegacyId("slide-rec-author-heading", "ios-rec-author-heading");
-                    openAllRecPopup(h ? h.textContent : "Ứng Dụng Khác", currentAllSlideAuthorEntries);
+            if (elRecAuthorTrigger) {
+                elRecAuthorTrigger.addEventListener("click", () => {
+                    openAllRecPopup(elRecAuthorHeading ? elRecAuthorHeading.textContent : "Ứng Dụng Khác", currentAllSlideAuthorEntries);
                 });
             }
 
-            const likeTrigger = getElBySlideOrLegacyId("slide-rec-like-trigger", "ios-rec-like-trigger");
-            if (likeTrigger) {
-                likeTrigger.addEventListener("click", () => {
-                    const h = getElBySlideOrLegacyId("slide-rec-like-heading", "ios-rec-like-heading");
-                    openAllRecPopup(h ? h.textContent : "Có Thể Bạn Cũng Thích", currentAllSlideLikeEntries);
+            if (elRecLikeTrigger) {
+                elRecLikeTrigger.addEventListener("click", () => {
+                    openAllRecPopup(elRecLikeHeading ? elRecLikeHeading.textContent : "Có Thể Bạn Cũng Thích", currentAllSlideLikeEntries);
                 });
             }
 
             document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
-                    if (recBackdrop && recBackdrop.classList.contains("is-open")) {
+                    if (elRecAllPopup && elRecAllPopup.classList.contains("kpsl-is-open")) {
                         closeAllRecPopup();
                         return;
                     }
-                    if (pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
+                    if (elVersionPickerPopup && elVersionPickerPopup.classList.contains("kpsl-is-open")) {
                         closeVersionPickerPopup();
                     }
                 }
@@ -2276,13 +2319,15 @@
         })();
 
         function showPopupToast(message) {
-            const toast = getElBySlideOrLegacyId("slide-popup-toast", "ios-popup-toast");
-            if (!toast) return;
-            toast.textContent = message;
-            toast.classList.add("is-visible");
+            if (!elToast) return;
+            if (elToast.parentElement !== document.body) {
+                document.body.appendChild(elToast);
+            }
+            elToast.textContent = message;
+            elToast.classList.add("kpsl-is-visible");
             clearTimeout(slideToastTimer);
             slideToastTimer = setTimeout(() => {
-                toast.classList.remove("is-visible");
+                elToast.classList.remove("kpsl-is-visible");
             }, 2200);
         }
 
@@ -2488,9 +2533,10 @@
         }
 
         function renderRecommendationList(containerEl, entries, emptyMessage) {
+            if (!containerEl) return;
             containerEl.innerHTML = "";
             if (!entries.length) {
-                containerEl.innerHTML = `<p class="slide-store-section-text" style="color:#8E8E93;">${emptyMessage}</p>`;
+                containerEl.innerHTML = `<p class="kpsl-detail-text" style="color:#8E8E93;">${emptyMessage}</p>`;
                 return;
             }
 
@@ -2507,24 +2553,24 @@
                     : "";
 
                 const row = document.createElement("div");
-                row.className = "slide-rec-item";
+                row.className = "kpsl-rec-item";
                 row.innerHTML = `
-                    <div class="slide-rec-left">
-                        <img class="slide-rec-icon" src="${iSrc}" alt="${item.iconAlt || name}">
-                        <div class="slide-rec-meta">
-                            <span class="slide-rec-name">${name}</span>
-                            <span class="slide-rec-desc">${desc}</span>
+                    <div class="kpsl-rec-left">
+                        <img class="kpsl-rec-icon" src="${iSrc}" alt="${item.iconAlt || name}">
+                        <div class="kpsl-rec-meta">
+                            <span class="kpsl-rec-name">${name}</span>
+                            <span class="kpsl-rec-desc">${desc}</span>
                         </div>
                     </div>
-                    <div class="slide-rec-right">
-                        ${itemIsApp ? `<button class="slide-rec-btn" type="button">Tải Về</button>` : ``}
-                        ${subText ? `<span class="slide-rec-sub">${subText}</span>` : ``}
+                    <div class="kpsl-rec-right">
+                        ${itemIsApp ? `<button class="kpsl-rec-btn" type="button">Tải Về</button>` : ``}
+                        ${subText ? `<span class="kpsl-rec-sub">${subText}</span>` : ``}
                     </div>
                 `;
 
-                bindImageFallback(row.querySelector(".slide-rec-icon"), fallbackIcon);
+                bindImageFallback(row.querySelector(".kpsl-rec-icon"), fallbackIcon);
 
-                const recBtn = row.querySelector(".slide-rec-btn");
+                const recBtn = row.querySelector(".kpsl-rec-btn");
                 if (recBtn) {
                     recBtn.addEventListener("click", (e) => {
                         e.stopPropagation();
@@ -2542,12 +2588,6 @@
         }
 
         function populateRecommendations(currentItem) {
-            const authorSection = getElBySlideOrLegacyId("slide-rec-author-section", "ios-rec-author-section");
-            const authorHeading = getElBySlideOrLegacyId("slide-rec-author-heading", "ios-rec-author-heading");
-            const authorListEl = getElBySlideOrLegacyId("slide-rec-author-list", "ios-rec-author-list");
-            const likeHeading = getElBySlideOrLegacyId("slide-rec-like-heading", "ios-rec-like-heading");
-            const likeListEl = getElBySlideOrLegacyId("slide-rec-like-list", "ios-rec-like-list");
-
             const currentName = currentItem.appName || currentItem.title || "";
             const currentAuthor = (currentItem.author && currentItem.author.trim()) || "";
             const targetIsApp = isAppEntry(currentItem);
@@ -2563,18 +2603,22 @@
 
             const sameAuthorItems = shuffleArray(allSameAuthorItems).slice(0, 3);
 
-            if (currentAuthor && sameAuthorItems.length > 0) {
-                authorSection.style.display = "";
-                authorHeading.textContent = targetIsApp
-                    ? `Ứng Dụng Khác Của ${currentAuthor}`
-                    : `Nội Dung Khác Của ${currentAuthor}`;
-                renderRecommendationList(
-                    authorListEl,
-                    sameAuthorItems,
-                    targetIsApp ? "Chưa có đề xuất APP phù hợp." : "Chưa có nội dung liên quan phù hợp."
-                );
-            } else {
-                authorSection.style.display = "none";
+            if (elRecAuthorSection) {
+                if (currentAuthor && sameAuthorItems.length > 0) {
+                    elRecAuthorSection.style.display = "";
+                    if (elRecAuthorHeading) {
+                        elRecAuthorHeading.textContent = targetIsApp
+                            ? `Ứng Dụng Khác Của ${currentAuthor}`
+                            : `Nội Dung Khác Của ${currentAuthor}`;
+                    }
+                    renderRecommendationList(
+                        elRecAuthorList,
+                        sameAuthorItems,
+                        targetIsApp ? "Chưa có đề xuất APP phù hợp." : "Chưa có nội dung liên quan phù hợp."
+                    );
+                } else {
+                    elRecAuthorSection.style.display = "none";
+                }
             }
 
             const usedNames = new Set([currentName, ...sameAuthorItems.map((e) => e.item.appName || e.item.title || "")]);
@@ -2591,11 +2635,11 @@
                 })
             ).slice(0, 3);
 
-            if (likeHeading) {
-                likeHeading.textContent = targetIsApp ? "Có Thể Bạn Cũng Thích" : "Nội Dung Liên Quan";
+            if (elRecLikeHeading) {
+                elRecLikeHeading.textContent = targetIsApp ? "Có Thể Bạn Cũng Thích" : "Nội Dung Liên Quan";
             }
             renderRecommendationList(
-                likeListEl,
+                elRecLikeList,
                 otherItems,
                 targetIsApp ? "Chưa có đề xuất APP phù hợp." : "Chưa có nội dung không phải APP phù hợp."
             );
@@ -2675,9 +2719,9 @@
                 return;
             }
 
-            if (sliderEl._slideScrollRafId) {
-                cancelAnimationFrame(sliderEl._slideScrollRafId);
-                sliderEl._slideScrollRafId = null;
+            if (sliderEl._kpslScrollRafId) {
+                cancelAnimationFrame(sliderEl._kpslScrollRafId);
+                sliderEl._kpslScrollRafId = null;
             }
 
             const startTime = performance.now();
@@ -2689,7 +2733,7 @@
             function finish() {
                 sliderEl.style.scrollBehavior = prevBehavior;
                 sliderEl.style.scrollSnapType = prevSnapType;
-                sliderEl._slideScrollRafId = null;
+                sliderEl._kpslScrollRafId = null;
             }
 
             function step(now) {
@@ -2701,18 +2745,19 @@
                 sliderEl.scrollLeft = startLeft + distance * ease;
 
                 if (progress < 1) {
-                    sliderEl._slideScrollRafId = requestAnimationFrame(step);
+                    sliderEl._kpslScrollRafId = requestAnimationFrame(step);
                 } else {
                     sliderEl.scrollLeft = clampedTarget;
                     finish();
                 }
             }
 
-            sliderEl._slideScrollRafId = requestAnimationFrame(step);
+            sliderEl._kpslScrollRafId = requestAnimationFrame(step);
         }
 
         function setupPopupGallery(galleryEl, mediaList, config) {
             stopPopupGalleryAutoplay();
+            if (!galleryEl) return;
             galleryEl.innerHTML = "";
             galleryEl.style.scrollBehavior = "";
             galleryEl.style.scrollSnapType = "";
@@ -2721,7 +2766,7 @@
 
             mediaList.forEach((entry, idx) => {
                 const itemEl = document.createElement("div");
-                itemEl.className = "slide-popup-gallery-item";
+                itemEl.className = "kpsl-gallery-item";
                 itemEl.innerHTML = buildMediaEntryHtml(entry, idx);
                 galleryEl.appendChild(itemEl);
             });
@@ -2759,7 +2804,7 @@
                 galleryEl.style.overflow = "hidden";
 
                 const track = document.createElement("div");
-                track.className = "slide-marquee-track";
+                track.className = "kpsl-marquee-track";
                 const origItems = Array.from(galleryEl.children);
                 origItems.forEach((origItem) => {
                     origItem.style.flex = "0 0 240px";
@@ -2768,7 +2813,7 @@
                 });
                 mediaList.forEach((entry, idx) => {
                     const clone = document.createElement("div");
-                    clone.className = "slide-popup-gallery-item";
+                    clone.className = "kpsl-gallery-item";
                     clone.style.flex = "0 0 240px";
                     clone.style.flexShrink = "0";
                     clone.innerHTML = buildMediaEntryHtml(entry, idx);
@@ -2824,43 +2869,40 @@
                 stickyDownloadBtn.style.display = currentSlidePopupIsApp ? "" : "none";
             }
             const nextVisible = Boolean(currentSlidePopupIsApp && shouldShow);
-            const currentlyVisible = stickyBar.classList.contains("is-visible");
+            const currentlyVisible = stickyBar.classList.contains("kpsl-is-visible");
             if (nextVisible === currentlyVisible) return;
 
             if (nextVisible) {
                 stickyBar.style.visibility = "visible";
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        stickyBar.classList.add("is-visible");
+                        stickyBar.classList.add("kpsl-is-visible");
                     });
                 });
             } else {
-                stickyBar.classList.remove("is-visible");
+                stickyBar.classList.remove("kpsl-is-visible");
             }
         }
 
         function updateStickyDownloadBar() {
-            const modal = getElBySlideOrLegacyId("slide-popup-modal", "ios-popup-modal");
-            const downloadBtn = getElBySlideOrLegacyId("slide-popup-download", "ios-popup-download");
-            const stickyBar = getElBySlideOrLegacyId("slide-popup-sticky-bar", "ios-popup-sticky-bar");
-            const stickyDownloadBtn = getElBySlideOrLegacyId("slide-popup-sticky-download", "ios-popup-sticky-download");
-            if (!modal || !stickyBar) return;
+            if (!elPopupModal || !elPopupStickyBar) return;
 
-            if (!currentSlidePopupIsApp || !downloadBtn) {
-                setStickyDownloadVisible(stickyBar, stickyDownloadBtn, false);
+            if (!currentSlidePopupIsApp || !elPopupDownload) {
+                setStickyDownloadVisible(elPopupStickyBar, elPopupStickyDownload, false);
                 return;
             }
 
-            const modalRect = modal.getBoundingClientRect();
-            const btnRect = downloadBtn.getBoundingClientRect();
+            const modalRect = elPopupModal.getBoundingClientRect();
+            const btnRect = elPopupDownload.getBoundingClientRect();
             const passedTop = btnRect.bottom < modalRect.top + 48;
-            setStickyDownloadVisible(stickyBar, stickyDownloadBtn, passedTop);
+            setStickyDownloadVisible(elPopupStickyBar, elPopupStickyDownload, passedTop);
         }
 
         function openSlideCardPopup(item, bannerSrc, iconSrc, index = 0) {
-            const backdrop = getElBySlideOrLegacyId("slide-card-popup", "ios-card-popup");
-            const modal = getElBySlideOrLegacyId("slide-popup-modal", "ios-popup-modal");
-            if (!backdrop || !modal) return;
+            if (!elCardPopup || !elPopupModal) return;
+            if (elCardPopup.parentElement !== document.body) {
+                document.body.appendChild(elCardPopup);
+            }
 
             currentSlidePopupIsApp = isAppEntry(item);
 
@@ -2869,20 +2911,22 @@
             const resolvedBanner = resolveAssetSrc(bannerSrc || (item && item.banner), fallbackBanner);
             const resolvedIcon = resolveAssetSrc(iconSrc || (item && (item.icon || item.img)), fallbackIcon);
 
-            const bannerEl = getElBySlideOrLegacyId("slide-popup-banner", "ios-popup-banner");
-            const iconEl = getElBySlideOrLegacyId("slide-popup-icon", "ios-popup-icon");
-            const stickyIconEl = getElBySlideOrLegacyId("slide-popup-sticky-icon", "ios-popup-sticky-icon");
+            if (elPopupBanner) {
+                elPopupBanner.src = resolvedBanner;
+                elPopupBanner.alt = item.bannerAlt || item.appName || "";
+                bindImageFallback(elPopupBanner, fallbackBanner);
+            }
 
-            bannerEl.src = resolvedBanner;
-            bannerEl.alt = item.bannerAlt || item.appName || "";
-            bindImageFallback(bannerEl, fallbackBanner);
+            if (elPopupIcon) {
+                elPopupIcon.src = resolvedIcon;
+                elPopupIcon.alt = item.iconAlt || item.appName || "";
+                bindImageFallback(elPopupIcon, fallbackIcon);
+            }
 
-            iconEl.src = resolvedIcon;
-            iconEl.alt = item.iconAlt || item.appName || "";
-            bindImageFallback(iconEl, fallbackIcon);
-
-            stickyIconEl.src = resolvedIcon;
-            bindImageFallback(stickyIconEl, fallbackIcon);
+            if (elPopupStickyIcon) {
+                elPopupStickyIcon.src = resolvedIcon;
+                bindImageFallback(elPopupStickyIcon, fallbackIcon);
+            }
 
             const authorText = (item.author && item.author.trim()) || "Đang cập nhật";
             const genreText = (item.genre && item.genre.trim()) || (currentSlidePopupIsApp ? "Ứng dụng" : "Nội dung");
@@ -2896,77 +2940,64 @@
             const resolvedTitle = item.appName || item.title || "";
             const resolvedSubtitle = item.description || "";
 
-            getElBySlideOrLegacyId("slide-popup-title", "ios-popup-title").textContent = resolvedTitle;
-            getElBySlideOrLegacyId("slide-popup-subtitle", "ios-popup-subtitle").textContent = resolvedSubtitle;
-            getElBySlideOrLegacyId("slide-popup-sticky-title", "ios-popup-sticky-title").textContent = resolvedTitle;
-            getElBySlideOrLegacyId("slide-popup-sticky-sub", "ios-popup-sticky-sub").textContent = resolvedSubtitle;
+            if (elPopupTitle) elPopupTitle.textContent = resolvedTitle;
+            if (elPopupSubtitle) elPopupSubtitle.textContent = resolvedSubtitle;
+            if (elPopupStickyTitle) elPopupStickyTitle.textContent = resolvedTitle;
+            if (elPopupStickySub) elPopupStickySub.textContent = resolvedSubtitle;
 
-            const genreBadgeEl = getElBySlideOrLegacyId("slide-popup-genre-badge", "ios-popup-genre-badge");
-            if (genreBadgeEl) {
-                genreBadgeEl.textContent = genreText;
-                genreBadgeEl.style.display = genreText ? "" : "none";
+            if (elPopupGenreBadge) {
+                elPopupGenreBadge.textContent = genreText;
+                elPopupGenreBadge.style.display = genreText ? "" : "none";
             }
 
-            const versionBadgeEl = getElBySlideOrLegacyId("slide-popup-version", "ios-popup-version");
-            if (versionBadgeEl) {
-                versionBadgeEl.textContent = versionText;
-                versionBadgeEl.style.display = currentSlidePopupIsApp && versionText ? "" : "none";
+            if (elPopupVersion) {
+                elPopupVersion.textContent = versionText;
+                elPopupVersion.style.display = currentSlidePopupIsApp && versionText ? "" : "none";
             }
 
-            const downloadBtn = getElBySlideOrLegacyId("slide-popup-download", "ios-popup-download");
-            if (downloadBtn) {
-                downloadBtn.style.display = currentSlidePopupIsApp ? "" : "none";
+            if (elPopupDownload) {
+                elPopupDownload.style.display = currentSlidePopupIsApp ? "" : "none";
             }
 
-            getElBySlideOrLegacyId("slide-popup-author", "ios-popup-author").textContent = authorText;
-            getElBySlideOrLegacyId("slide-popup-genre", "ios-popup-genre").textContent = genreText;
-            getElBySlideOrLegacyId("slide-popup-date", "ios-popup-date").textContent = dateText;
-            getElBySlideOrLegacyId("slide-popup-format", "ios-popup-format").textContent = formatText;
-            getElBySlideOrLegacyId("slide-popup-size", "ios-popup-size").textContent = sizeText;
+            if (elPopupAuthor) elPopupAuthor.textContent = authorText;
+            if (elPopupGenre) elPopupGenre.textContent = genreText;
+            if (elPopupDate) elPopupDate.textContent = dateText;
+            if (elPopupFormat) elPopupFormat.textContent = formatText;
+            if (elPopupSize) elPopupSize.textContent = sizeText;
 
-            const changelogSectionEl = getElBySlideOrLegacyId("slide-popup-changelog-section", "ios-popup-changelog-section");
-            const changelogTextEl = getElBySlideOrLegacyId("slide-popup-changelog", "ios-popup-changelog");
-            const changelogVersionEl = getElBySlideOrLegacyId("slide-popup-changelog-version", "ios-popup-changelog-version");
-            if (changelogSectionEl) {
-                changelogSectionEl.style.display = currentSlidePopupIsApp ? "" : "none";
+            if (elPopupChangelogSection) {
+                elPopupChangelogSection.style.display = currentSlidePopupIsApp ? "" : "none";
             }
-            if (changelogTextEl) {
-                changelogTextEl.textContent = currentSlidePopupIsApp
+            if (elPopupChangelog) {
+                elPopupChangelog.textContent = currentSlidePopupIsApp
                     ? ((item.changelog && item.changelog.trim()) || "Chưa có ghi chú cập nhật mới.")
                     : "";
             }
-            if (changelogVersionEl) {
-                changelogVersionEl.textContent = currentSlidePopupIsApp && versionText ? versionText : "";
-                changelogVersionEl.style.display = currentSlidePopupIsApp && versionText ? "" : "none";
+            if (elPopupChangelogVersion) {
+                elPopupChangelogVersion.textContent = currentSlidePopupIsApp && versionText ? versionText : "";
+                elPopupChangelogVersion.style.display = currentSlidePopupIsApp && versionText ? "" : "none";
             }
 
-            const descHeadingEl = getElBySlideOrLegacyId("slide-popup-desc-heading", "ios-popup-desc-heading");
-            if (descHeadingEl) {
-                descHeadingEl.textContent = currentSlidePopupIsApp ? "Mô tả" : "Nội dung";
+            if (elPopupDescHeading) {
+                elPopupDescHeading.textContent = currentSlidePopupIsApp ? "Mô tả" : "Nội dung";
             }
 
             const descText = (item.fullDescription && item.fullDescription.trim())
                 || (item.description && item.description.trim())
                 || "Đang cập nhật mô tả.";
-            renderDescriptionWithShortLinks(
-                getElBySlideOrLegacyId("slide-popup-desc", "ios-popup-desc"),
-                descText,
-                !currentSlidePopupIsApp
-            );
+            renderDescriptionWithShortLinks(elPopupDesc, descText, !currentSlidePopupIsApp);
 
-            getElBySlideOrLegacyId("slide-info-provider", "ios-info-provider").textContent = authorText;
-            getElBySlideOrLegacyId("slide-info-size", "ios-info-size").textContent = sizeText;
-            getElBySlideOrLegacyId("slide-info-genre", "ios-info-genre").textContent = genreText;
-            getElBySlideOrLegacyId("slide-info-format", "ios-info-format").textContent = formatText;
-            getElBySlideOrLegacyId("slide-info-date", "ios-info-date").textContent = dateText;
+            if (elInfoProvider) elInfoProvider.textContent = authorText;
+            if (elInfoSize) elInfoSize.textContent = sizeText;
+            if (elInfoGenre) elInfoGenre.textContent = genreText;
+            if (elInfoFormat) elInfoFormat.textContent = formatText;
+            if (elInfoDate) elInfoDate.textContent = dateText;
 
-            const infoVersionRow = getElBySlideOrLegacyId("slide-info-version-row", "ios-info-version-row");
-            const infoVersionEl = getElBySlideOrLegacyId("slide-info-version", "ios-info-version");
-            if (infoVersionRow) {
-                infoVersionRow.style.display = currentSlidePopupIsApp ? "" : "none";
+            if (elInfoVersionRow) {
+                elInfoVersionRow.style.display = currentSlidePopupIsApp ? "" : "none";
             }
-            if (infoVersionEl) {
-                infoVersionEl.textContent = currentSlidePopupIsApp ? versionText : "";
+            if (elInfoVersion) {
+                elInfoVersion.textContent = currentSlidePopupIsApp ? versionText : "";
             }
 
             const baseGallery = Array.isArray(item.gallery) && item.gallery.length > 0
@@ -2976,11 +3007,7 @@
             const galleryMedia = rawVideo
                 ? [{ type: "video", src: rawVideo }, ...baseGallery]
                 : baseGallery;
-            setupPopupGallery(
-                getElBySlideOrLegacyId("slide-popup-gallery", "ios-popup-gallery"),
-                galleryMedia,
-                currentSlideConfig
-            );
+            setupPopupGallery(elPopupGallery, galleryMedia, currentSlideConfig);
 
             populateRecommendations(item);
 
@@ -2990,71 +3017,63 @@
                 }
             };
 
-            getElBySlideOrLegacyId("slide-popup-download", "ios-popup-download").onclick = triggerDownload;
-            getElBySlideOrLegacyId("slide-popup-sticky-download", "ios-popup-sticky-download").onclick = triggerDownload;
-            getElBySlideOrLegacyId("slide-popup-share", "ios-popup-share").onclick = () => shareCurrentItem(item);
+            if (elPopupDownload) elPopupDownload.onclick = triggerDownload;
+            if (elPopupStickyDownload) elPopupStickyDownload.onclick = triggerDownload;
+            if (elPopupShare) elPopupShare.onclick = () => shareCurrentItem(item);
 
-            const stickyBar = getElBySlideOrLegacyId("slide-popup-sticky-bar", "ios-popup-sticky-bar");
-            if (stickyBar) {
-                stickyBar.classList.remove("is-visible");
-                stickyBar.style.visibility = "hidden";
+            if (elPopupStickyBar) {
+                elPopupStickyBar.classList.remove("kpsl-is-visible");
+                elPopupStickyBar.style.visibility = "hidden";
             }
 
-            modal.scrollTop = 0;
-            backdrop.classList.add("is-open");
-            backdrop.setAttribute("aria-hidden", "false");
+            elPopupModal.scrollTop = 0;
+            elCardPopup.classList.add("kpsl-is-open");
+            elCardPopup.setAttribute("aria-hidden", "false");
             document.body.style.overflow = "hidden";
             requestAnimationFrame(updateStickyDownloadBar);
         }
 
         function closeSlideCardPopup() {
-            const backdrop = getElBySlideOrLegacyId("slide-card-popup", "ios-card-popup");
-            if (!backdrop) return;
+            if (!elCardPopup) return;
             closeAllRecPopup();
             closeVersionPickerPopup();
             stopPopupGalleryAutoplay();
-            backdrop.classList.remove("is-open");
-            backdrop.setAttribute("aria-hidden", "true");
+            elCardPopup.classList.remove("kpsl-is-open");
+            elCardPopup.setAttribute("aria-hidden", "true");
             document.body.style.overflow = "";
         }
 
         (function initSlidePopupEvents() {
-            const backdrop = getElBySlideOrLegacyId("slide-card-popup", "ios-card-popup");
-            const modal = getElBySlideOrLegacyId("slide-popup-modal", "ios-popup-modal");
-            const closeBtn = getElBySlideOrLegacyId("slide-popup-close", "ios-popup-close");
-            const stickyCloseBtn = getElBySlideOrLegacyId("slide-popup-sticky-close", "ios-popup-sticky-close");
-            if (!backdrop || !closeBtn) return;
+            if (!elCardPopup || !elPopupClose) return;
 
-            closeBtn.addEventListener("click", closeSlideCardPopup);
-            if (stickyCloseBtn) {
-                stickyCloseBtn.addEventListener("click", closeSlideCardPopup);
+            elPopupClose.addEventListener("click", closeSlideCardPopup);
+            if (elPopupStickyClose) {
+                elPopupStickyClose.addEventListener("click", closeSlideCardPopup);
             }
-            if (modal) {
-                modal.addEventListener("scroll", updateStickyDownloadBar, { passive: true });
+            if (elPopupModal) {
+                elPopupModal.addEventListener("scroll", updateStickyDownloadBar, { passive: true });
             }
-            backdrop.addEventListener("click", (e) => {
-                if (e.target === backdrop) closeSlideCardPopup();
+            elCardPopup.addEventListener("click", (e) => {
+                if (e.target === elCardPopup) closeSlideCardPopup();
             });
             document.addEventListener("keydown", (e) => {
-                const recBackdrop = getElBySlideOrLegacyId("slide-rec-all-popup", "ios-rec-all-popup");
-                if (e.key === "Escape" && recBackdrop && recBackdrop.classList.contains("is-open")) {
+                if (e.key === "Escape" && elRecAllPopup && elRecAllPopup.classList.contains("kpsl-is-open")) {
                     closeAllRecPopup();
                     return;
                 }
-                const pickerBackdrop = getElBySlideOrLegacyId("slide-version-picker-popup", "ios-version-picker-popup");
-                if (e.key === "Escape" && pickerBackdrop && pickerBackdrop.classList.contains("is-open")) {
+                if (e.key === "Escape" && elVersionPickerPopup && elVersionPickerPopup.classList.contains("kpsl-is-open")) {
                     closeVersionPickerPopup();
                     return;
                 }
-                if (e.key === "Escape" && backdrop.classList.contains("is-open")) {
+                if (e.key === "Escape" && elCardPopup.classList.contains("kpsl-is-open")) {
                     closeSlideCardPopup();
                 }
             });
         })();
 
         function attachCardBounceEffect(card) {
-            const press = () => card.classList.add("is-pressed");
-            const release = () => card.classList.remove("is-pressed");
+            const press = () => card.classList.add("kpsl-is-pressed");
+            const release = () => card.classList.remove("kpsl-is-pressed");
 
             card.addEventListener("pointerdown", press);
             card.addEventListener("pointerup", release);
@@ -3072,7 +3091,7 @@
 
         function buildCardElement(item, index) {
             const card = document.createElement("div");
-            card.className = "slide-game-card";
+            card.className = "kpsl-card";
             card.dataset.cardIndex = String(index);
 
             const fallbackBanner = createGameBannerSvg(index);
@@ -3084,22 +3103,22 @@
             const displayDesc = String(item.description || "").trim();
 
             card.innerHTML = `
-                <div class="slide-card-hero">
+                <div class="kpsl-hero">
                     ${relativeUpdateText ? `
-                    <div class="slide-card-update-badge">
-                        <span class="slide-card-update-label">Cập nhật</span>
-                        <span class="slide-card-update-time">${relativeUpdateText}</span>
+                    <div class="kpsl-update-badge">
+                        <span class="kpsl-update-label">Cập nhật</span>
+                        <span class="kpsl-update-time">${relativeUpdateText}</span>
                     </div>` : ``}
-                    <img class="hero-img" src="${bannerSrc}" alt="${item.bannerAlt || displayTitle}">
+                    <img class="kpsl-hero-img" src="${bannerSrc}" alt="${item.bannerAlt || displayTitle}">
                 </div>
-                <div class="slide-card-body-white">
-                    <h3 class="slide-card-white-title">${escapeHtmlText(displayTitle)}</h3>
-                    <p class="slide-card-white-desc">${escapeHtmlText(displayDesc)}</p>
+                <div class="kpsl-body-white">
+                    <h3 class="kpsl-white-title">${escapeHtmlText(displayTitle)}</h3>
+                    <p class="kpsl-white-desc">${escapeHtmlText(displayDesc)}</p>
                 </div>
             `;
 
-            const heroImg = card.querySelector(".hero-img");
-            const updateBadge = card.querySelector(".slide-card-update-badge");
+            const heroImg = card.querySelector(".kpsl-hero-img");
+            const updateBadge = card.querySelector(".kpsl-update-badge");
             bindImageFallback(heroImg, fallbackBanner);
             if (heroImg && updateBadge) {
                 applyBannerDominantColorToBadge(heroImg, updateBadge, index);
@@ -3116,10 +3135,10 @@
         }
 
         function setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, config, activeMode, activeGen) {
+            if (!sectionEl || !sliderEl) return;
             const slideType = resolveSlideType(activeMode || config.slideType);
-            const viewportEl = getElBySlideOrLegacyId("slide-coverflow-viewport", "ios-coverflow-viewport");
 
-            dotsEl.innerHTML = "";
+            if (dotsEl) dotsEl.innerHTML = "";
             sliderEl.style.overflow = "";
 
             const count = cardsData.length;
@@ -3129,18 +3148,18 @@
             const loop = config.loop !== false;
             const autoplayInterval = Number(config.autoplayInterval) >= 1000 ? Number(config.autoplayInterval) : 4000;
 
-            sectionEl.style.setProperty("--slide-speed", `${slideSpeed}ms`);
+            sectionEl.style.setProperty("--kpsl-speed", `${slideSpeed}ms`);
             sliderEl.classList.remove(
-                "slide-type-snap",
-                "slide-type-smooth",
-                "slide-type-fade",
-                "slide-type-scroll",
-                "slide-type-marquee",
-                "slide-type-zoom",
-                "slide-type-slide",
-                "slide-type-instant"
+                "kpsl-type-snap",
+                "kpsl-type-smooth",
+                "kpsl-type-fade",
+                "kpsl-type-scroll",
+                "kpsl-type-marquee",
+                "kpsl-type-zoom",
+                "kpsl-type-slide",
+                "kpsl-type-instant"
             );
-            sliderEl.classList.add(`slide-type-${slideType}`);
+            sliderEl.classList.add(`kpsl-type-${slideType}`);
 
             let currentIndex = 0;
             const pauseState = {
@@ -3152,9 +3171,9 @@
 
             const isPaused = () => pauseState.isHolding || pauseState.isHovering || pauseState.isResumeDelayed;
 
-            if (viewportEl) {
+            if (elViewport) {
                 bindHoldAndSwipePause(
-                    viewportEl,
+                    elViewport,
                     () => pauseState,
                     (next) => { Object.assign(pauseState, next); },
                     () => slideResumeTimer,
@@ -3167,8 +3186,8 @@
 
                 if (count > 1) {
                     const track = document.createElement("div");
-                    track.className = "slide-marquee-track";
-                    const cardWidthPx = 280;
+                    track.className = "kpsl-marquee-track";
+                    const cardWidthPx = 290;
 
                     cards.forEach((origCard) => {
                         origCard.style.flex = `0 0 ${cardWidthPx}px`;
@@ -3242,17 +3261,17 @@
                     : -1;
 
                 cards.forEach((c, idx) => {
-                    c.classList.remove("is-center", "is-prev", "is-next", "is-zooming");
+                    c.classList.remove("kpsl-is-center", "kpsl-is-prev", "kpsl-is-next", "kpsl-is-zooming");
                     if (idx === currentIndex) {
-                        c.classList.add("is-center");
+                        c.classList.add("kpsl-is-center");
                         if (slideType === "zoom") {
-                            c.classList.add("is-zooming");
-                            setTimeout(() => c.classList.remove("is-zooming"), Math.min(slideSpeed, 450));
+                            c.classList.add("kpsl-is-zooming");
+                            setTimeout(() => c.classList.remove("kpsl-is-zooming"), Math.min(slideSpeed, 450));
                         }
                     } else if (idx === prevIndex) {
-                        c.classList.add("is-prev");
+                        c.classList.add("kpsl-is-prev");
                     } else if (idx === nextIndex) {
-                        c.classList.add("is-next");
+                        c.classList.add("kpsl-is-next");
                     }
                 });
             }
@@ -3260,34 +3279,34 @@
             cards.forEach((c) => {
                 c.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    if (c.classList.contains("is-prev")) {
+                    if (c.classList.contains("kpsl-is-prev")) {
                         applyCoverflowState(currentIndex - 1);
                         restartAutoplay();
                         return;
                     }
-                    if (c.classList.contains("is-next")) {
+                    if (c.classList.contains("kpsl-is-next")) {
                         applyCoverflowState(currentIndex + 1);
                         restartAutoplay();
                         return;
                     }
-                    if (c.classList.contains("is-center") && c._openDetail) {
+                    if (c.classList.contains("kpsl-is-center") && c._openDetail) {
                         c._openDetail();
                     }
                 });
             });
 
-            if (viewportEl && count > 1) {
+            if (elViewport && count > 1) {
                 let swipeStartX = 0;
                 let swipeStartY = 0;
                 let isSwiping = false;
 
-                viewportEl.addEventListener("pointerdown", (e) => {
+                elViewport.addEventListener("pointerdown", (e) => {
                     swipeStartX = e.clientX;
                     swipeStartY = e.clientY;
                     isSwiping = true;
                 }, { passive: true });
 
-                viewportEl.addEventListener("pointerup", (e) => {
+                elViewport.addEventListener("pointerup", (e) => {
                     if (!isSwiping) return;
                     isSwiping = false;
                     const dx = e.clientX - swipeStartX;
@@ -3339,45 +3358,42 @@
         }
 
         async function renderSlideJsonToDom(d, slideCfg, extraUrls = []) {
-            const sectionEl = getElBySlideOrLegacyId("slide-game-section-main", "ios-game-section-main");
-            syncSectionContrastColors(sectionEl);
+            if (!elSectionMain || !elSlider) return;
+            syncSectionContrastColors(elSectionMain);
 
             const config = { ...(d.sliderConfig || {}), ...(slideCfg || {}) };
             currentSlideConfig = { ...currentSlideConfig, ...config };
             const selectedMode = resolveSlideType(currentSlideConfig.slideType);
             const activeGen = lockSlideMode(selectedMode);
 
-            const sliderEl = getElBySlideOrLegacyId("slide-card-slider", "ios-card-slider");
-            const dotsEl = getElBySlideOrLegacyId("slide-slider-dots", "ios-slider-dots");
             const initialCards = extractCardsFromJson(d);
 
             const latestEntries = await collectLatestItemsFromJsons(initialCards, extraUrls);
             currentSlideEntries = latestEntries;
             const cardsData = latestEntries.map((entry) => entry.item);
 
-            sliderEl.innerHTML = "";
-            sliderEl.classList.toggle("has-multiple", cardsData.length > 1);
+            elSlider.innerHTML = "";
+            elSlider.classList.toggle("kpsl-has-multiple", cardsData.length > 1);
 
             latestEntries.forEach(({ item, seedIndex }) => {
-                sliderEl.appendChild(buildCardElement(item, seedIndex));
+                elSlider.appendChild(buildCardElement(item, seedIndex));
             });
 
-            setupSliderController(sectionEl, sliderEl, dotsEl, cardsData, currentSlideConfig, selectedMode, activeGen);
-            syncSectionContrastColors(sectionEl);
+            setupSliderController(elSectionMain, elSlider, elDots, cardsData, currentSlideConfig, selectedMode, activeGen);
+            syncSectionContrastColors(elSectionMain);
         }
 
         async function initSlideSlider() {
-            const sectionEl = getElBySlideOrLegacyId("slide-game-section-main", "ios-game-section-main");
-            syncSectionContrastColors(sectionEl);
+            syncSectionContrastColors(elSectionMain);
 
-            if (typeof MutationObserver !== "undefined" && sectionEl) {
+            if (typeof MutationObserver !== "undefined" && elSectionMain) {
                 const observer = new MutationObserver(() => {
-                    syncSectionContrastColors(sectionEl);
+                    syncSectionContrastColors(elSectionMain);
                 });
                 observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
                 observer.observe(document.body, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
-                if (sectionEl.parentElement) {
-                    observer.observe(sectionEl.parentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
+                if (elSectionMain.parentElement) {
+                    observer.observe(elSectionMain.parentElement, { attributes: true, attributeFilter: ["class", "style", "data-theme"] });
                 }
             }
 
@@ -3394,7 +3410,7 @@
             }
 
             await renderSlideJsonToDom({}, slideCfg, CANDIDATE_URLS);
-            syncSectionContrastColors(sectionEl);
+            syncSectionContrastColors(elSectionMain);
         }
 
         initSlideSlider();

@@ -6,7 +6,7 @@
   "autoslide": "Yes",
   "NumberSlot": "1",
   "sliderConfig": {
-    "slotsection": 3,
+    "slotsection": 2,
     "autoplay": true,
     "autoplayInterval": 3800,
     "slideType": "snap",

@@ -2,7 +2,7 @@
   "sectionTitle": "APP Dành Cho ios",
   "sectionSubtitle": "Những APP hỗ trợ nền tảng ios (iphone & ipad)",
   "sliderConfig": {
-    "slotsection": 2,
+    "slotsection": 3,
     "autoplay": true,
     "autoplayInterval": 4000,
     "slideType": "smooth",
