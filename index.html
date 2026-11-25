@@ -814,7 +814,7 @@
       overflow: hidden;
     }
 
-    /* ==================== CSS RIÊNG: SEARCH ==================== */
+    /* ==================== CSS RIÊNG: SEARCH & LỊCH SỬ TỔNG HỢP ==================== */
     #searchPanel {
       position: fixed;
       top: 60px;
@@ -886,8 +886,8 @@
     #searchHistoryBox {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      padding: 8px 10px;
+      gap: 8px;
+      padding: 9px 10px;
       border-radius: 12px;
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-color);
@@ -906,6 +906,32 @@
       font-size: 0.76rem;
       font-weight: 700;
       color: var(--text-muted);
+    }
+
+    #searchHistoryTabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .search-history-tab {
+      height: 26px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-surface);
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .search-history-tab.is-active {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-text);
     }
 
     #searchClearHistoryBtn {
@@ -943,6 +969,65 @@
 
     .search-history-chip:hover {
       background-color: var(--bg-hover);
+    }
+
+    .search-history-item-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 170px;
+      overflow-y: auto;
+    }
+
+    .search-history-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 10px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-history-item-row:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .search-history-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .search-history-item-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: var(--bg-elevated);
+    }
+
+    .search-history-item-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-history-item-sub {
+      font-size: 0.69rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     #searchResultBox {
@@ -1248,15 +1333,43 @@
       color: var(--text-primary);
     }
 
-    #menubarSearchContainer {
+    #menubarHeaderCenterSlot {
       position: relative;
       flex: 1;
       min-width: 0;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #menubarSearchContainer {
+      position: relative;
+      width: 100%;
+      height: 34px;
       display: flex;
       align-items: center;
       border-radius: 12px;
       border: 1px solid var(--border-color);
       background-color: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0) scale(1);
+      transition:
+        opacity 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.74s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+    }
+
+    #menubarFixedHeader.is-auth-in-header #menubarSearchContainer {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(-9px) scale(0.95);
+      pointer-events: none;
     }
 
     #menubarSearchIcon {
@@ -1281,6 +1394,63 @@
     #menubarSearchContainer:focus-within {
       border-color: var(--accent);
       background-color: color-mix(in srgb, var(--bg-surface) 82%, transparent);
+    }
+
+    #menubarHeaderAuthSlot {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(9px) scale(0.95);
+      pointer-events: none;
+      transition:
+        opacity 0.74s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.74s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #menubarFixedHeader.is-auth-in-header #menubarHeaderAuthSlot {
+      opacity: 1;
+      filter: blur(0px);
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .menubar-header-auth-btn {
+      height: 34px;
+      padding: 0 8px;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    #menubarHeaderRegisterBtn {
+      background-color: color-mix(in srgb, var(--bg-elevated) 86%, transparent);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    #menubarHeaderRegisterBtn:hover {
+      background-color: var(--bg-hover);
+    }
+
+    #menubarHeaderLoginBtn {
+      background-color: var(--accent);
+      color: var(--accent-text);
+      border: 1px solid var(--accent);
+    }
+
+    #menubarHeaderLoginBtn:hover {
+      background-color: var(--accent-hover);
     }
 
     #menubarCloseBtn {
@@ -1391,13 +1561,30 @@
       line-height: 1.25;
     }
 
+    #menubarContactCard {
+      margin-top: 4px;
+      padding: 12px;
+      border-radius: 16px;
+      background-color: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    #menubarContactTitle {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.25;
+      padding: 0 2px;
+    }
+
     .menubar-bottom-contact-row {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-top: 4px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border-color);
     }
 
     .menubar-contact-link {
@@ -1407,7 +1594,7 @@
       width: 100%;
       padding: 8px 12px;
       border-radius: 12px;
-      background-color: color-mix(in srgb, var(--bg-surface) 78%, transparent);
+      background-color: color-mix(in srgb, var(--bg-surface) 84%, transparent);
       border: 1px solid var(--border-color);
       color: var(--accent);
       font-size: 0.84rem;
@@ -1418,6 +1605,16 @@
 
     .menubar-contact-link:hover {
       background-color: var(--bg-hover);
+    }
+
+    #menubarCopyrightFooter {
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      text-align: center;
     }
 
     .menubar-json-desc {
@@ -1638,29 +1835,17 @@
       z-index: 48;
       pointer-events: none;
       transition: none !important;
-      animation: slideheroLiftTiltFreeFall 1.75s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+      animation: slideheroSlideLaunchLeft 0.68s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    @keyframes slideheroLiftTiltFreeFall {
+    @keyframes slideheroSlideLaunchLeft {
       0% {
         opacity: 1;
-        transform: translate3d(0px, 0px, 0px) rotate(0deg) scale(1);
-      }
-      22% {
-        opacity: 1;
-        transform: translate3d(-4px, -34px, 0px) rotate(-2deg) scale(1.015);
-      }
-      44% {
-        opacity: 0.98;
-        transform: translate3d(-24px, -24px, 0px) rotate(-14deg) scale(0.99);
-      }
-      72% {
-        opacity: 0.82;
-        transform: translate3d(-66px, 95px, 0px) rotate(-25deg) scale(0.94);
+        transform: translate3d(0px, 0px, 0px) scale(1);
       }
       100% {
         opacity: 0;
-        transform: translate3d(-112px, 310px, 0px) rotate(-36deg) scale(0.88);
+        transform: translate3d(-122%, 0px, 0px) scale(1.04);
       }
     }
 
@@ -2244,6 +2429,7 @@
       overflow-y: auto;
       scroll-behavior: smooth;
       box-shadow: 0 -10px 36px rgba(0, 0, 0, 0.35);
+      padding-top: 0;
       padding-bottom: 32px;
       transform: translateY(52px) scale(0.975);
       opacity: 0;
@@ -2453,6 +2639,7 @@
     #popupDetailHeroBannerWrap {
       position: relative;
       margin-top: -59px;
+      top: 0;
       height: 224px;
       overflow: hidden;
       background-color: var(--bg-surface);
@@ -2559,7 +2746,7 @@
 
     #popupDetailActionRow {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 12px;
       margin-top: 12px;
@@ -2567,7 +2754,27 @@
     }
 
     #popupDetailVersionBadge {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
       font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 0;
+      flex: 1;
+    }
+
+    .popup-detail-author-line {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .popup-detail-version-line {
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--text-muted);
       white-space: nowrap;
@@ -2866,11 +3073,14 @@
       white-space: pre-line;
     }
 
-    #popupDetailFullDesc img {
+    #popupDetailFullDesc img,
+    #popupDetailChangelog img {
       max-width: 100%;
       border-radius: 12px;
       margin: 10px 0;
       display: block;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-elevated);
     }
 
     #popupDetailFullDesc a {
@@ -3456,15 +3666,6 @@
       cursor: pointer;
       color: var(--text-secondary);
     }
-
-    #copyrightFooter {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border-color);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      line-height: 1.45;
-    }
   </style>
 </head>
 <body>
@@ -3498,7 +3699,7 @@
         </svg>
       </button>
 
-      <button id="navbarHistoryBtn" class="navbar-action-btn" type="button" aria-label="Lịch sử tìm kiếm" title="Lịch sử tìm kiếm">
+      <button id="navbarHistoryBtn" class="navbar-action-btn" type="button" aria-label="Lịch sử tìm kiếm, xem và tải" title="Lịch sử tìm kiếm, xem &amp; tải">
         <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
           <polyline points="3 3 3 8 8 8"/>
@@ -3549,7 +3750,7 @@
   <div id="tabTooltipToast" role="status" aria-live="polite" aria-hidden="true"></div>
 
   <!-- ==================== HTML RIÊNG: SEARCH ==================== -->
-  <section id="searchPanel" aria-label="Tìm kiếm riêng Kpazz">
+  <section id="searchPanel" aria-label="Tìm kiếm và lịch sử Kpazz">
     <div id="searchInputRow">
       <div id="searchBoxWrapper">
         <svg id="searchInputIcon" class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3562,8 +3763,12 @@
     </div>
     <div id="searchHistoryBox">
       <div id="searchHistoryHead">
-        <span>Lịch sử tìm kiếm</span>
-        <button id="searchClearHistoryBtn" type="button">Xoá lịch sử tìm</button>
+        <div id="searchHistoryTabs" role="tablist" aria-label="Loại lịch sử">
+          <button class="search-history-tab is-active" type="button" data-hist-tab="search">Lịch sử tìm</button>
+          <button class="search-history-tab" type="button" data-hist-tab="viewed">Lịch sử xem</button>
+          <button class="search-history-tab" type="button" data-hist-tab="downloaded">Lịch sử tải</button>
+        </div>
+        <button id="searchClearHistoryBtn" type="button">Xoá lịch sử</button>
       </div>
       <div id="searchHistoryChips"></div>
     </div>
@@ -3643,12 +3848,19 @@
         <span id="menubarBrandText">KPazz</span>
       </div>
 
-      <div id="menubarSearchContainer">
-        <svg id="menubarSearchIcon" class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"/>
-          <line x1="16.5" y1="16.5" x2="21" y2="21"/>
-        </svg>
-        <input id="menubarSearchField" type="search" placeholder="Tìm kiếm..." aria-label="Tìm kiếm trong menubar" />
+      <div id="menubarHeaderCenterSlot">
+        <div id="menubarSearchContainer">
+          <svg id="menubarSearchIcon" class="ui-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"/>
+          </svg>
+          <input id="menubarSearchField" type="search" placeholder="Tìm kiếm..." aria-label="Tìm kiếm trong menubar" />
+        </div>
+
+        <div id="menubarHeaderAuthSlot" aria-hidden="true">
+          <button id="menubarHeaderRegisterBtn" class="menubar-header-auth-btn" type="button">Đăng ký</button>
+          <button id="menubarHeaderLoginBtn" class="menubar-header-auth-btn" type="button">Đăng nhập</button>
+        </div>
       </div>
 
       <button id="menubarCloseBtn" type="button" aria-label="Đóng menu" title="Đóng menu">
@@ -3684,23 +3896,23 @@
 
     <div id="menubarJsonSections" aria-label="Danh sách section JSON trên trang chủ">
       <div id="menubarJsonList"></div>
-      <div id="menubarBottomContactRow" class="menubar-bottom-contact-row" aria-label="Thông tin liên hệ">
-        <a class="menubar-contact-link" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-          <span>Facebook</span>
-          <span>&gt;</span>
-        </a>
-        <a class="menubar-contact-link" href="https://m.me" target="_blank" rel="noopener noreferrer">
-          <span>Mess</span>
-          <span>&gt;</span>
-        </a>
-        <a class="menubar-contact-link" href="https://zalo.me" target="_blank" rel="noopener noreferrer">
-          <span>Zalo</span>
-          <span>&gt;</span>
-        </a>
-        <a class="menubar-contact-link" href="mailto:support@kpazz.vn" target="_blank" rel="noopener noreferrer">
-          <span>Mail</span>
-          <span>&gt;</span>
-        </a>
+      <div id="menubarContactCard" aria-label="Thông tin liên hệ">
+        <div id="menubarContactTitle">Thông tin liên hệ</div>
+        <div id="menubarBottomContactRow" class="menubar-bottom-contact-row">
+          <a class="menubar-contact-link" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <span>Facebook</span>
+          </a>
+          <a class="menubar-contact-link" href="https://m.me" target="_blank" rel="noopener noreferrer">
+            <span>Mess</span>
+          </a>
+          <a class="menubar-contact-link" href="https://zalo.me" target="_blank" rel="noopener noreferrer">
+            <span>Zalo</span>
+          </a>
+          <a class="menubar-contact-link" href="mailto:support@kpazz.vn" target="_blank" rel="noopener noreferrer">
+            <span>Mail</span>
+          </a>
+        </div>
+        <footer id="menubarCopyrightFooter"></footer>
       </div>
     </div>
   </aside>
@@ -3750,7 +3962,6 @@
       <div id="tweakHeader" role="button" tabindex="0" title="Xem toàn bộ nội dung Tweak jailbreak ios">
         <div id="tweakTitleRow">
           <h2 id="tweakTitle"></h2>
-          <span id="tweakTitleChevron" aria-hidden="true">&gt;</span>
         </div>
         <p id="tweakSubtitle"></p>
       </div>
@@ -3818,7 +4029,7 @@
           <h3 id="popupDetailAppName"></h3>
           <p id="popupDetailSubtitle"></p>
           <div id="popupDetailActionRow">
-            <span id="popupDetailVersionBadge"></span>
+            <div id="popupDetailVersionBadge"></div>
             <div id="popupDetailPrimaryWrap">
               <button id="popupDetailPrimaryBtn" type="button">
                 <span class="popup-btn-top-row">
@@ -3838,24 +4049,24 @@
 
       <div id="popupDetailMetaStrip">
         <div class="popup-detail-meta-item">
-          <span id="popupDetailMetaRatingLabel" class="popup-detail-meta-label">XẾP HẠNG</span>
-          <span id="popupDetailMetaRatingVal" class="popup-detail-meta-val">-</span>
-          <span id="popupDetailMetaRatingSub" class="popup-detail-meta-sub">★★★★★</span>
-        </div>
-        <div class="popup-detail-meta-item">
-          <span class="popup-detail-meta-label">ĐỘ TUỔI</span>
-          <span id="popupDetailMetaAgeVal" class="popup-detail-meta-val">16+</span>
-          <span id="popupDetailMetaAgeSub" class="popup-detail-meta-sub">Tuổi</span>
-        </div>
-        <div class="popup-detail-meta-item">
-          <span class="popup-detail-meta-label">BXH</span>
+          <span id="popupDetailMetaRankLabel" class="popup-detail-meta-label">BẢNG XẾP HẠNG</span>
           <span id="popupDetailMetaRankVal" class="popup-detail-meta-val">#1</span>
           <span id="popupDetailMetaRankSub" class="popup-detail-meta-sub">-</span>
         </div>
         <div class="popup-detail-meta-item">
-          <span class="popup-detail-meta-label">NHÀ PHÁT TRIỂN</span>
-          <span id="popupDetailMetaAuthorVal" class="popup-detail-meta-val">-</span>
-          <span id="popupDetailMetaAuthorSub" class="popup-detail-meta-sub">Tác giả</span>
+          <span id="popupDetailMetaDateLabel" class="popup-detail-meta-label">NGÀY ĐĂNG</span>
+          <span id="popupDetailMetaDateVal" class="popup-detail-meta-val">-</span>
+          <span id="popupDetailMetaDateSub" class="popup-detail-meta-sub">Ngày đăng</span>
+        </div>
+        <div class="popup-detail-meta-item">
+          <span id="popupDetailMetaTypeLabel" class="popup-detail-meta-label">LOẠI FILE</span>
+          <span id="popupDetailMetaTypeVal" class="popup-detail-meta-val">-</span>
+          <span id="popupDetailMetaTypeSub" class="popup-detail-meta-sub">Định dạng</span>
+        </div>
+        <div class="popup-detail-meta-item">
+          <span id="popupDetailMetaSizeLabel" class="popup-detail-meta-label">DUNG LƯỢNG FILE</span>
+          <span id="popupDetailMetaSizeVal" class="popup-detail-meta-val">-</span>
+          <span id="popupDetailMetaSizeSub" class="popup-detail-meta-sub">Dung lượng</span>
         </div>
       </div>
 
@@ -3896,7 +4107,6 @@
             <div id="popupDetailDevName">-</div>
             <div id="popupDetailDevSub">Nhà phát triển</div>
           </div>
-          <span class="popup-detail-block-meta">&gt;</span>
         </div>
       </div>
 
@@ -3948,7 +4158,7 @@
 
       <div id="popupDetailRelatedBlock" class="popup-detail-block">
         <div class="popup-detail-block-head">
-          <h4 id="popupDetailRelatedTitle" class="popup-detail-block-title">Có Thể Bạn Cũng Thích &gt;</h4>
+          <h4 id="popupDetailRelatedTitle" class="popup-detail-block-title">Có Thể Bạn Cũng Thích</h4>
         </div>
         <div id="popupDetailRelatedList"></div>
       </div>
@@ -3993,7 +4203,6 @@
         <span id="themeStatusBadge">Đang tải trạng thái...</span>
         <button id="themeResetAutoBtn" type="button">Tự động theo giờ</button>
       </div>
-      <footer id="copyrightFooter"></footer>
     </section>
   </main>
 
@@ -4014,9 +4223,9 @@
       }, { passive: false });
     })();
 
-    /* ==================== BẢN QUYỀN THEO NĂM HIỆN TẠI ==================== */
+    /* ==================== BẢN QUYỀN THEO NĂM HIỆN TẠI (ĐẶT Ở CUỐI MENU) ==================== */
     (() => {
-      const footerEl = document.getElementById("copyrightFooter");
+      const footerEl = document.getElementById("menubarCopyrightFooter");
       if (footerEl) {
         const currentYear = new Date().getFullYear();
         footerEl.textContent = `© ${currentYear} Kpazz. Bản quyền thuộc về Kpazz.`;
@@ -4035,10 +4244,7 @@
     }
 
     function formatVersionBadgeText(version) {
-      const raw = String(version || "").trim();
-      if (!raw) return "";
-      if (/^v/i.test(raw)) return raw;
-      return `v${raw}`;
+      return String(version || "").trim();
     }
 
     function setButtonLabelWithCloud(btnEl, text, isDownload = true, versionSubEl = null, version = "") {
@@ -4842,9 +5048,11 @@
       };
     })();
 
-    /* ==================== JS RIÊNG: SEARCH TOÀN BỘ JSON + LỊCH SỬ TÌM ==================== */
+    /* ==================== JS RIÊNG: SEARCH TOÀN BỘ JSON + LỊCH SỬ TÌM, XEM, TẢI ==================== */
     const searchController = (() => {
       const HISTORY_KEY = "kpazz_search_history_v1";
+      const VIEWED_KEY = "kpazz_viewed_history_v1";
+      const DOWNLOADED_KEY = "kpazz_downloaded_history_v1";
       const TABS_FOLDER = "Tabs";
       const KNOWN_TAB_FILES = [
         "Appios.json",
@@ -4862,6 +5070,7 @@
       const input = document.getElementById("searchField");
       const closeBtn = document.getElementById("searchCloseBtn");
       const historyBox = document.getElementById("searchHistoryBox");
+      const historyTabs = Array.from(document.querySelectorAll("#searchHistoryTabs .search-history-tab"));
       const historyChipsEl = document.getElementById("searchHistoryChips");
       const clearHistoryBtn = document.getElementById("searchClearHistoryBtn");
       const resultBox = document.getElementById("searchResultBox");
@@ -4870,6 +5079,9 @@
 
       let allJsonItems = [];
       let searchHistory = [];
+      let viewedHistory = [];
+      let downloadedHistory = [];
+      let activeHistoryTab = "search";
 
       function escapeHtml(val = "") {
         return String(val)
@@ -4879,20 +5091,30 @@
           .replace(/"/g, "&quot;");
       }
 
-      function loadHistory() {
+      function readListStorage(key) {
         try {
-          const raw = localStorage.getItem(HISTORY_KEY);
+          const raw = localStorage.getItem(key);
           const parsed = raw ? JSON.parse(raw) : [];
-          searchHistory = Array.isArray(parsed) ? parsed.slice(0, 10) : [];
+          return Array.isArray(parsed) ? parsed.slice(0, 15) : [];
         } catch (_) {
-          searchHistory = [];
+          return [];
         }
       }
 
-      function saveHistory() {
+      function writeListStorage(key, arr) {
         try {
-          localStorage.setItem(HISTORY_KEY, JSON.stringify(searchHistory.slice(0, 10)));
+          localStorage.setItem(key, JSON.stringify(arr.slice(0, 15)));
         } catch (_) {}
+      }
+
+      function loadAllHistories() {
+        searchHistory = readListStorage(HISTORY_KEY);
+        viewedHistory = readListStorage(VIEWED_KEY);
+        downloadedHistory = readListStorage(DOWNLOADED_KEY);
+      }
+
+      function saveHistory() {
+        writeListStorage(HISTORY_KEY, searchHistory);
       }
 
       function addToHistory(term) {
@@ -4900,17 +5122,135 @@
         if (!clean) return;
         searchHistory = [clean, ...searchHistory.filter((x) => x.toLowerCase() !== clean.toLowerCase())].slice(0, 10);
         saveHistory();
+        if (activeHistoryTab === "search") {
+          renderHistory();
+        }
+      }
+
+      function recordItemHistory(targetKey, item, extraSub = "") {
+        if (!item || typeof item !== "object") return;
+        const title = String(item.appName || item.name || item.title || "").replace(/\n/g, " ").trim();
+        if (!title) return;
+        const icon = String(item.icon || item.img || item.banner || "").trim();
+        const subParts = [
+          extraSub,
+          item.version ? formatVersionBadgeText(item.version) : "",
+          item.genre || item.category || item.author || ""
+        ].filter(Boolean);
+        const sub = subParts.join(" • ");
+
+        const entry = {
+          title,
+          icon,
+          sub,
+          item
+        };
+
+        const listRef = targetKey === DOWNLOADED_KEY ? downloadedHistory : viewedHistory;
+        const nextList = [
+          entry,
+          ...listRef.filter((x) => String(x?.title || "").toLowerCase() !== title.toLowerCase())
+        ].slice(0, 15);
+
+        if (targetKey === DOWNLOADED_KEY) {
+          downloadedHistory = nextList;
+        } else {
+          viewedHistory = nextList;
+        }
+        writeListStorage(targetKey, nextList);
+
+        if (
+          (targetKey === DOWNLOADED_KEY && activeHistoryTab === "downloaded") ||
+          (targetKey === VIEWED_KEY && activeHistoryTab === "viewed")
+        ) {
+          renderHistory();
+        }
+      }
+
+      function recordViewedItem(item) {
+        recordItemHistory(VIEWED_KEY, item, "Đã xem");
+      }
+
+      function recordDownloadedItem(item, linkLabel = "") {
+        recordItemHistory(DOWNLOADED_KEY, item, linkLabel || "Đã tải");
+      }
+
+      function clearCurrentHistoryTab() {
+        if (activeHistoryTab === "downloaded") {
+          downloadedHistory = [];
+          writeListStorage(DOWNLOADED_KEY, []);
+        } else if (activeHistoryTab === "viewed") {
+          viewedHistory = [];
+          writeListStorage(VIEWED_KEY, []);
+        } else {
+          searchHistory = [];
+          saveHistory();
+        }
         renderHistory();
       }
 
-      function clearHistory() {
-        searchHistory = [];
-        saveHistory();
-        renderHistory();
+      function syncHistoryTabUI() {
+        historyTabs.forEach((btn) => {
+          btn.classList.toggle("is-active", btn.getAttribute("data-hist-tab") === activeHistoryTab);
+        });
+      }
+
+      function renderItemHistoryList(entries, emptyMessage) {
+        if (!entries.length) {
+          historyChipsEl.innerHTML = `<span style="font-size:0.76rem;color:var(--text-muted);">${escapeHtml(emptyMessage)}</span>`;
+          return;
+        }
+
+        historyChipsEl.innerHTML = `
+          <div class="search-history-item-list" style="width:100%;">
+            ${entries.map((entry, idx) => `
+              <div class="search-history-item-row" data-hist-item-idx="${idx}">
+                <div class="search-history-item-left">
+                  ${entry.icon ? `<img class="search-history-item-icon" src="${escapeHtml(entry.icon)}" alt="${escapeHtml(entry.title)}" loading="lazy" />` : ""}
+                  <div style="min-width:0;flex:1;">
+                    <div class="search-history-item-title">${escapeHtml(entry.title)}</div>
+                    ${entry.sub ? `<div class="search-history-item-sub">${escapeHtml(entry.sub)}</div>` : ""}
+                  </div>
+                </div>
+                <span class="popup-detail-pill-btn">Mở</span>
+              </div>
+            `).join("")}
+          </div>
+        `;
+
+        Array.from(historyChipsEl.querySelectorAll(".search-history-item-row")).forEach((row) => {
+          row.addEventListener("click", () => {
+            const idx = Number(row.getAttribute("data-hist-item-idx"));
+            const chosenEntry = entries[idx];
+            if (!chosenEntry || !chosenEntry.item) return;
+            close();
+            popupDetailController.open(chosenEntry.item, {
+              onStateChange: (open) => {
+                appiosController.setPopupOpen(open);
+                tweakController.setPopupOpen(open);
+              },
+              allCards: allJsonItems,
+              featuredCards: allJsonItems,
+              relatedCards: allJsonItems.filter((x) => x !== chosenEntry.item)
+            });
+          });
+        });
       }
 
       function renderHistory() {
         if (!historyChipsEl) return;
+        syncHistoryTabUI();
+
+        if (activeHistoryTab === "viewed") {
+          renderItemHistoryList(viewedHistory, "Chưa có lịch sử xem nào.");
+          return;
+        }
+
+        if (activeHistoryTab === "downloaded") {
+          renderItemHistoryList(downloadedHistory, "Chưa có lịch sử tải nào.");
+          return;
+        }
+
         if (!searchHistory.length) {
           historyChipsEl.innerHTML = `<span style="font-size:0.76rem;color:var(--text-muted);">Chưa có lịch sử tìm kiếm.</span>`;
           return;
@@ -4927,6 +5267,12 @@
             runSearch(kw, false);
           });
         });
+      }
+
+      function setHistoryTab(tabName) {
+        if (!["search", "viewed", "downloaded"].includes(tabName)) return;
+        activeHistoryTab = tabName;
+        renderHistory();
       }
 
       async function ensureAllJsonLoaded() {
@@ -5075,6 +5421,10 @@
         if (historyBox) {
           historyBox.classList.toggle("is-highlighted", focusHistory);
         }
+        if (focusHistory && activeHistoryTab === "search") {
+          activeHistoryTab = "viewed";
+        }
+        renderHistory();
         bellController.syncTooltipDestination();
         ensureAllJsonLoaded().then(() => {
           if (input.value.trim()) {
@@ -5115,13 +5465,21 @@
       }
 
       function init() {
-        loadHistory();
+        loadAllHistories();
         renderHistory();
+
+        historyTabs.forEach((tabBtn) => {
+          tabBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const tabName = tabBtn.getAttribute("data-hist-tab");
+            setHistoryTab(tabName);
+          });
+        });
 
         closeBtn.addEventListener("click", close);
         clearHistoryBtn.addEventListener("click", (event) => {
           event.stopPropagation();
-          clearHistory();
+          clearCurrentHistoryTab();
         });
 
         input.addEventListener("input", () => {
@@ -5136,7 +5494,15 @@
         });
       }
 
-      return { init, open, close, toggle, isOpen };
+      return {
+        init,
+        open,
+        close,
+        toggle,
+        isOpen,
+        recordViewedItem,
+        recordDownloadedItem
+      };
     })();
 
     /* ==================== JS RIÊNG: ACCOUNT ==================== */
@@ -5149,6 +5515,7 @@
       const toggleAuthBtn = document.getElementById("accountToggleAuthBtn");
       const toggleAuthLabel = document.getElementById("accountToggleAuthLabel");
       const menubarLoginLabel = document.getElementById("menubarLoginLabel");
+      const headerLoginBtn = document.getElementById("menubarHeaderLoginBtn");
       const profileBtn = document.getElementById("accountProfileBtn");
       const savedBtn = document.getElementById("accountSavedBtn");
       const settingsBtn = document.getElementById("accountSettingsBtn");
@@ -5169,6 +5536,9 @@
         }
         if (menubarLoginLabel) {
           menubarLoginLabel.textContent = loggedIn ? "Đăng xuất" : "Đăng nhập";
+        }
+        if (headerLoginBtn) {
+          headerLoginBtn.textContent = loggedIn ? "Đăng xuất" : "Đăng nhập";
         }
       }
 
@@ -5237,10 +5607,14 @@
     /* ==================== JS RIÊNG: MENUBAR + LIST TIÊU ĐỀ JSON + LIÊN HỆ DƯỚI CÙNG ==================== */
     const menubarController = (() => {
       const panel = document.getElementById("menubarPanel");
+      const fixedHeader = document.getElementById("menubarFixedHeader");
+      const authGroup = document.getElementById("menubarAuthGroup");
       const backdrop = document.getElementById("menubarBackdrop");
       const closeBtn = document.getElementById("menubarCloseBtn");
       const registerBtn = document.getElementById("menubarRegisterBtn");
       const loginBtn = document.getElementById("menubarLoginBtn");
+      const headerRegisterBtn = document.getElementById("menubarHeaderRegisterBtn");
+      const headerLoginBtn = document.getElementById("menubarHeaderLoginBtn");
       const menubarSearchInput = document.getElementById("menubarSearchField");
       const jsonListContainer = document.getElementById("menubarJsonList");
 
@@ -5253,6 +5627,14 @@
           .replace(/</g, "&lt;")
           .replace(/>/g, "&gt;")
           .replace(/"/g, "&quot;");
+      }
+
+      function syncHeaderAuthState() {
+        if (!panel || !fixedHeader || !authGroup) return;
+        const headerRect = fixedHeader.getBoundingClientRect();
+        const authRect = authGroup.getBoundingClientRect();
+        const scrolledPastAuth = authRect.bottom <= headerRect.bottom + 2;
+        fixedHeader.classList.toggle("is-auth-in-header", scrolledPastAuth);
       }
 
       function registerHomeSection(key, sectionObj) {
@@ -5351,7 +5733,6 @@
                   ${sec.description ? `<div class="menubar-json-desc">${escapeHtml(sec.description)}</div>` : ""}
                   <span class="menubar-json-count">${count} mục</span>
                 </div>
-                <span class="menubar-json-arrow">&gt;</span>
               </button>
               <div class="menubar-json-drawer">
                 <div class="menubar-json-drawer-inner">
@@ -5405,6 +5786,7 @@
         backdrop.classList.add("is-visible");
         panel.setAttribute("aria-hidden", "false");
         backdrop.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(syncHeaderAuthState);
       }
 
       function close() {
@@ -5412,11 +5794,16 @@
         backdrop.classList.remove("is-visible");
         panel.setAttribute("aria-hidden", "true");
         backdrop.setAttribute("aria-hidden", "true");
+        if (fixedHeader) {
+          fixedHeader.classList.remove("is-auth-in-header");
+        }
       }
 
       function init() {
         closeBtn.addEventListener("click", close);
         backdrop.addEventListener("click", close);
+        panel.addEventListener("scroll", syncHeaderAuthState, { passive: true });
+        window.addEventListener("resize", syncHeaderAuthState, { passive: true });
 
         menubarSearchInput.addEventListener("keydown", (event) => {
           if (event.key === "Enter") {
@@ -5428,10 +5815,17 @@
           }
         });
 
-        registerBtn.addEventListener("click", () => alert("Mở trang Đăng ký KPazz."));
-        loginBtn.addEventListener("click", () => {
-          accountController.toggleLoggedIn();
-        });
+        const handleRegisterClick = () => alert("Mở trang Đăng ký KPazz.");
+        const handleLoginClick = () => accountController.toggleLoggedIn();
+
+        registerBtn.addEventListener("click", handleRegisterClick);
+        loginBtn.addEventListener("click", handleLoginClick);
+        if (headerRegisterBtn) {
+          headerRegisterBtn.addEventListener("click", handleRegisterClick);
+        }
+        if (headerLoginBtn) {
+          headerLoginBtn.addEventListener("click", handleLoginClick);
+        }
       }
 
       return { init, open, close, setHomeSections, registerHomeSection };
@@ -5583,7 +5977,7 @@
       const autoToggleBtn = document.getElementById("slideheroAutoToggleBtn");
 
       const autoplayIntervalMs = 4500;
-      const fallDurationMs = 1750;
+      const fallDurationMs = 680;
 
       let slidesData = [];
       let cards = [];
@@ -5842,11 +6236,12 @@
           : (fallbackUrl ? [{
               label: item.downloadOptionPrefix || "Link tải",
               note: item.fileFormat || "",
-              size: item.fileSize || "",
+              size: item.fileSize || item.size || "",
               url: fallbackUrl
             }] : []);
 
         if (downloads.length === 0) {
+          searchController.recordDownloadedItem(item, "Đã yêu cầu tải");
           alert(`${item.appName || item.name || item.title || "Nội dung"} hiện chưa có link tải.`);
           return;
         }
@@ -5865,10 +6260,19 @@
                 <div class="popup-detail-download-label">${escapeAttr(labelText)}</div>
                 <div class="popup-detail-download-sub">${escapeAttr(subInfo || dl.url || "")}</div>
               </div>
-              <a class="popup-detail-pill-btn" href="${escapeAttr(dl.url || "#")}" target="_blank" rel="noopener noreferrer">${getCloudDownloadSvg()}<span>Tải</span></a>
+              <a class="popup-detail-pill-btn" data-dl-idx="${idx}" href="${escapeAttr(dl.url || "#")}" target="_blank" rel="noopener noreferrer">${getCloudDownloadSvg()}<span>Tải</span></a>
             </div>
           `;
         }).join("");
+
+        Array.from(listEl.querySelectorAll("a.popup-detail-pill-btn")).forEach((linkEl) => {
+          linkEl.addEventListener("click", () => {
+            const idx = Number(linkEl.getAttribute("data-dl-idx"));
+            const chosenDl = downloads[idx];
+            const labelText = chosenDl?.label || `${item.downloadOptionPrefix || "Link tải"} ${idx + 1}`;
+            searchController.recordDownloadedItem(item, labelText);
+          });
+        });
 
         backdrop.classList.add("is-open");
         backdrop.setAttribute("aria-hidden", "false");
@@ -5976,6 +6380,24 @@
         return collected;
       }
 
+      function handleOpenItemDetail(chosen, onSelectItem = null, allItems = []) {
+        if (!chosen) return;
+        close();
+        if (typeof onSelectItem === "function") {
+          onSelectItem(chosen);
+        } else {
+          popupDetailController.open(chosen, {
+            onStateChange: (open) => {
+              appiosController.setPopupOpen(open);
+              tweakController.setPopupOpen(open);
+            },
+            allCards: allItems,
+            featuredCards: allItems,
+            relatedCards: allItems.filter((x) => x !== chosen)
+          });
+        }
+      }
+
       function renderItemsIntoList(items, onSelectItem = null) {
         if (!items || items.length === 0) {
           listEl.innerHTML = `<div class="popup-detail-collection-sub" style="padding: 14px 0;">Không có nội dung nào trong danh sách này.</div>`;
@@ -5985,13 +6407,21 @@
         listEl.innerHTML = items.map((item, idx) => {
           const name = item.appName || item.name || item.title || `Mục ${idx + 1}`;
           const metaSub = [item.genre || item.category, item.version, item.fileFormat, item._sourceFile].filter(Boolean).join(" • ");
-          const isDl = item.isApp !== false;
-          const btnText = isDl ? "Nhận" : "Xem";
-          const verBadge = isDl ? formatVersionBadgeText(item.version) : "";
-          const btnInner = `${isDl ? getCloudDownloadSvg() : ""}<span>${btnText}</span>`;
+          const isAppItem = item.isApp === true;
+          const btnText = item.actionLabel || item.buttonText || "Nhận";
+          const verBadge = isAppItem ? formatVersionBadgeText(item.version) : "";
+          const btnInner = `${getCloudDownloadSvg()}<span>${escapeAttr(btnText)}</span>`;
+          const actionHtml = isAppItem
+            ? `
+              <div class="author-work-action-col">
+                <button class="popup-detail-pill-btn author-work-open-btn" type="button" data-work-idx="${idx}">${btnInner}</button>
+                ${verBadge ? `<span class="btn-version-sub">${escapeAttr(verBadge)}</span>` : ""}
+              </div>
+            `
+            : "";
 
           return `
-            <div class="popup-detail-collection-row">
+            <div class="popup-detail-collection-row author-work-item-row" data-work-idx="${idx}" style="cursor:pointer;">
               <div class="popup-detail-collection-left">
                 <img class="popup-detail-related-icon" src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
                 <div class="popup-detail-collection-info">
@@ -5999,25 +6429,27 @@
                   <div class="popup-detail-collection-sub">${escapeAttr(metaSub)}</div>
                 </div>
               </div>
-              <div class="author-work-action-col">
-                <button class="popup-detail-pill-btn author-work-open-btn" type="button" data-work-idx="${idx}">${btnInner}</button>
-                ${verBadge ? `<span class="btn-version-sub">${escapeAttr(verBadge)}</span>` : ""}
-              </div>
+              ${actionHtml}
             </div>
           `;
         }).join("");
 
+        Array.from(listEl.querySelectorAll(".author-work-item-row")).forEach((row) => {
+          row.addEventListener("click", () => {
+            const idx = Number(row.getAttribute("data-work-idx"));
+            const chosen = items[idx];
+            if (!chosen) return;
+            handleOpenItemDetail(chosen, onSelectItem, items);
+          });
+        });
+
         Array.from(listEl.querySelectorAll(".author-work-open-btn")).forEach((btn) => {
-          btn.addEventListener("click", () => {
+          btn.addEventListener("click", (event) => {
+            event.stopPropagation();
             const idx = Number(btn.getAttribute("data-work-idx"));
             const chosen = items[idx];
             if (!chosen) return;
-            close();
-            if (typeof onSelectItem === "function") {
-              onSelectItem(chosen);
-            } else {
-              popupDetailController.open(chosen);
-            }
+            downloadPickerController.open(chosen);
           });
         });
       }
@@ -6096,6 +6528,7 @@
       const topSubEl = document.getElementById("popupDetailTopSub");
       const topActionBtnEl = document.getElementById("popupDetailTopActionBtn");
       const topVersionSubEl = document.getElementById("popupDetailTopVersionSub");
+      const stickyRightEl = document.getElementById("popupDetailStickyRight");
 
       const heroBannerWrapEl = document.getElementById("popupDetailHeroBannerWrap");
       const heroBannerImgEl = document.getElementById("popupDetailHeroBannerImg");
@@ -6104,19 +6537,19 @@
       const iconImgEl = document.getElementById("popupDetailIconImg");
       const appNameEl = document.getElementById("popupDetailAppName");
       const subtitleEl = document.getElementById("popupDetailSubtitle");
+      const primaryWrapEl = document.getElementById("popupDetailPrimaryWrap");
       const primaryBtnEl = document.getElementById("popupDetailPrimaryBtn");
       const primaryVersionSubEl = document.getElementById("popupDetailPrimaryVersionSub");
       const versionBadgeEl = document.getElementById("popupDetailVersionBadge");
 
-      const metaRatingLabelEl = document.getElementById("popupDetailMetaRatingLabel");
-      const metaRatingValEl = document.getElementById("popupDetailMetaRatingVal");
-      const metaRatingSubEl = document.getElementById("popupDetailMetaRatingSub");
-      const metaAgeValEl = document.getElementById("popupDetailMetaAgeVal");
-      const metaAgeSubEl = document.getElementById("popupDetailMetaAgeSub");
       const metaRankValEl = document.getElementById("popupDetailMetaRankVal");
       const metaRankSubEl = document.getElementById("popupDetailMetaRankSub");
-      const metaAuthorValEl = document.getElementById("popupDetailMetaAuthorVal");
-      const metaAuthorSubEl = document.getElementById("popupDetailMetaAuthorSub");
+      const metaDateValEl = document.getElementById("popupDetailMetaDateVal");
+      const metaDateSubEl = document.getElementById("popupDetailMetaDateSub");
+      const metaTypeValEl = document.getElementById("popupDetailMetaTypeVal");
+      const metaTypeSubEl = document.getElementById("popupDetailMetaTypeSub");
+      const metaSizeValEl = document.getElementById("popupDetailMetaSizeVal");
+      const metaSizeSubEl = document.getElementById("popupDetailMetaSizeSub");
 
       const collectionsBlockEl = document.getElementById("popupDetailCollectionsBlock");
       const collectionsListEl = document.getElementById("popupDetailCollectionsList");
@@ -6136,6 +6569,7 @@
       const fullDescEl = document.getElementById("popupDetailFullDesc");
       const devCardEl = document.getElementById("popupDetailDevCard");
       const devNameEl = document.getElementById("popupDetailDevName");
+      const devSubEl = document.getElementById("popupDetailDevSub");
 
       const ratingsBlockEl = document.getElementById("popupDetailRatingsBlock");
       const ratingScoreEl = document.getElementById("popupDetailRatingScore");
@@ -6144,7 +6578,7 @@
       const reviewTitleEl = document.getElementById("popupDetailReviewTitle");
       const reviewMetaEl = document.getElementById("popupDetailReviewMeta");
       const reviewBodyEl = document.getElementById("popupDetailReviewBody");
-      const starButtons = Array.from(document.querySelectorAll("#popupDetailInteractiveStars .popup-detail-star-btn"));
+      const starBtns = Array.from(document.querySelectorAll(".popup-detail-star-btn"));
       const writeReviewBtn = document.getElementById("popupDetailWriteReviewBtn");
       const supportBtn = document.getElementById("popupDetailSupportBtn");
 
@@ -6158,23 +6592,16 @@
       const relatedTitleEl = document.getElementById("popupDetailRelatedTitle");
       const relatedListEl = document.getElementById("popupDetailRelatedList");
 
-      let onStateChangeCallback = null;
       let currentItem = null;
-      let userRating = 0;
-
-      let galleryTimer = null;
-      let galleryMarqueeRafId = null;
-      let galleryLastMarqueeTime = null;
-      let galleryCurrentIdx = 0;
-      let galleryIsPaused = false;
-      let galleryConfig = {
-        autoplay: true,
-        autoplayInterval: 4000,
-        slideType: "smooth",
-        slideSpeed: 3000,
-        marqueeSpeed: 38,
-        loop: true
-      };
+      let onStateChangeCallback = null;
+      let galleryAutoTimer = null;
+      let relatedAutoTimer = null;
+      let galleryIsAutoSliding = false;
+      let relatedIsAutoSliding = false;
+      let galleryManualCooldown = null;
+      let relatedManualCooldown = null;
+      let galleryScrollDir = 1;
+      let relatedScrollDir = 1;
 
       function escapeAttr(val = "") {
         return String(val)
@@ -6184,527 +6611,545 @@
           .replace(/>/g, "&gt;");
       }
 
-      function formatRichText(raw = "") {
-        const parts = String(raw).split(/(\{\{img:[^}]+\}\}|https?:\/\/[^\s]+)/g);
+      function sanitizeRichHtml(raw = "") {
+        const html = String(raw || "");
+        const template = document.createElement("template");
+        template.innerHTML = html;
+
+        const blockedTags = new Set(["SCRIPT", "STYLE", "IFRAME", "OBJECT", "EMBED", "LINK", "META"]);
+        const walk = (node) => {
+          const children = Array.from(node.childNodes);
+          for (const child of children) {
+            if (child.nodeType === Node.ELEMENT_NODE) {
+              const tag = child.tagName.toUpperCase();
+              if (blockedTags.has(tag)) {
+                child.remove();
+                continue;
+              }
+              for (const attr of Array.from(child.attributes)) {
+                const name = attr.name.toLowerCase();
+                const value = attr.value.trim();
+                if (name.startsWith("on")) {
+                  child.removeAttribute(attr.name);
+                } else if ((name === "href" || name === "src") && /^javascript:/i.test(value)) {
+                  child.removeAttribute(attr.name);
+                }
+              }
+              if (tag === "A") {
+                child.setAttribute("target", "_blank");
+                child.setAttribute("rel", "noopener noreferrer");
+              }
+              walk(child);
+            }
+          }
+        };
+
+        walk(template.content);
+        return template.innerHTML;
+      }
+
+      function formatRichTextContent(raw = "") {
+        const text = String(raw || "").trim();
+        if (!text) return "";
+
+        const hasHtmlTags = /<\s*[a-z][\s\S]*>/i.test(text);
+        if (hasHtmlTags) {
+          return sanitizeRichHtml(text);
+        }
+
+        const tokenRegex = /(https?:\/\/[^\s<>"']+|!\[[^\]]*\]\([^\s)]+\)|\[[^\]]+\]\([^\s)]+\))/g;
+        const parts = text.split(tokenRegex);
+
         return parts.map((part) => {
-          const imgMatch = part.match(/^\{\{img:([^}]+)\}\}$/);
-          if (imgMatch) {
-            const url = escapeAttr(imgMatch[1].trim());
-            return `<img src="${url}" alt="Hình minh họa" loading="lazy" />`;
+          if (!part) return "";
+
+          const mdImgMatch = part.match(/^!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)$/);
+          if (mdImgMatch) {
+            return `<img src="${escapeAttr(mdImgMatch[2])}" alt="${escapeAttr(mdImgMatch[1] || "Hình minh họa")}" loading="lazy" />`;
           }
-          if (/^https?:\/\/[^\s]+$/.test(part)) {
-            const safeUrl = escapeAttr(part);
-            return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${escapeAttr(part)}</a>`;
+
+          const mdLinkMatch = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+          if (mdLinkMatch) {
+            return `<a href="${escapeAttr(mdLinkMatch[2])}" target="_blank" rel="noopener noreferrer">${escapeAttr(mdLinkMatch[1])}</a>`;
           }
+
+          if (/^https?:\/\/[^\s<>"']+$/i.test(part)) {
+            const isImageUrl = /\.(png|jpe?g|gif|webp|avif)(\?.*)?$/i.test(part);
+            if (isImageUrl) {
+              return `<img src="${escapeAttr(part)}" alt="Hình minh họa" loading="lazy" />`;
+            }
+            return `<a href="${escapeAttr(part)}" target="_blank" rel="noopener noreferrer">${escapeAttr(part)}</a>`;
+          }
+
           return escapeAttr(part);
         }).join("");
       }
 
-      function renderVideo(videoUrl) {
+      function stopGalleryAutoSlide() {
+        if (galleryAutoTimer) {
+          clearInterval(galleryAutoTimer);
+          galleryAutoTimer = null;
+        }
+        galleryIsAutoSliding = false;
+        if (galleryEl) {
+          galleryEl.querySelectorAll(".popup-detail-shot").forEach((img) => {
+            img.classList.remove("is-fading", "is-zooming");
+          });
+        }
+      }
+
+      function pauseGalleryAutoTemporarily(ms = 4000) {
+        stopGalleryAutoSlide();
+        if (galleryManualCooldown) clearTimeout(galleryManualCooldown);
+        galleryManualCooldown = setTimeout(() => {
+          startGalleryAutoSlide();
+        }, ms);
+      }
+
+      function startGalleryAutoSlide() {
+        stopGalleryAutoSlide();
+        if (!galleryViewportEl || !galleryEl) return;
+        const maxScroll = galleryViewportEl.scrollWidth - galleryViewportEl.clientWidth;
+        if (maxScroll <= 4) return;
+
+        galleryIsAutoSliding = true;
+        galleryAutoTimer = setInterval(() => {
+          if (!backdrop.classList.contains("is-open") || !galleryViewportEl) return;
+          const currentMax = galleryViewportEl.scrollWidth - galleryViewportEl.clientWidth;
+          if (currentMax <= 4) return;
+
+          const step = Math.min(257, currentMax);
+          let nextLeft = galleryViewportEl.scrollLeft + step * galleryScrollDir;
+
+          if (nextLeft >= currentMax - 2) {
+            nextLeft = currentMax;
+            galleryScrollDir = -1;
+          } else if (nextLeft <= 2) {
+            nextLeft = 0;
+            galleryScrollDir = 1;
+          }
+
+          const shotEls = Array.from(galleryEl.querySelectorAll(".popup-detail-shot"));
+          shotEls.forEach((img) => img.classList.add("is-fading", "is-zooming"));
+
+          setTimeout(() => {
+            if (!galleryViewportEl) return;
+            galleryViewportEl.scrollTo({ left: nextLeft, behavior: "smooth" });
+            shotEls.forEach((img) => img.classList.remove("is-fading", "is-zooming"));
+          }, 180);
+        }, 3800);
+      }
+
+      function stopRelatedAutoSlide() {
+        if (relatedAutoTimer) {
+          clearInterval(relatedAutoTimer);
+          relatedAutoTimer = null;
+        }
+        relatedIsAutoSliding = false;
+        if (relatedListEl) {
+          relatedListEl.querySelectorAll(".popup-detail-related-row").forEach((row) => {
+            row.classList.remove("is-fading", "is-zooming");
+          });
+        }
+      }
+
+      function pauseRelatedAutoTemporarily(ms = 4000) {
+        stopRelatedAutoSlide();
+        if (relatedManualCooldown) clearTimeout(relatedManualCooldown);
+        relatedManualCooldown = setTimeout(() => {
+          startRelatedAutoSlide();
+        }, ms);
+      }
+
+      function startRelatedAutoSlide() {
+        stopRelatedAutoSlide();
+        if (!relatedListEl) return;
+        const maxScroll = relatedListEl.scrollWidth - relatedListEl.clientWidth;
+        if (maxScroll <= 4) return;
+
+        relatedIsAutoSliding = true;
+        relatedAutoTimer = setInterval(() => {
+          if (!backdrop.classList.contains("is-open") || !relatedListEl) return;
+          const currentMax = relatedListEl.scrollWidth - relatedListEl.clientWidth;
+          if (currentMax <= 4) return;
+
+          const firstCol = relatedListEl.querySelector(".popup-detail-related-col");
+          const colStep = firstCol ? firstCol.getBoundingClientRect().width + 14 : 340;
+          let nextLeft = relatedListEl.scrollLeft + colStep * relatedScrollDir;
+
+          if (nextLeft >= currentMax - 2) {
+            nextLeft = currentMax;
+            relatedScrollDir = -1;
+          } else if (nextLeft <= 2) {
+            nextLeft = 0;
+            relatedScrollDir = 1;
+          }
+
+          const rowEls = Array.from(relatedListEl.querySelectorAll(".popup-detail-related-row"));
+          rowEls.forEach((row) => row.classList.add("is-fading", "is-zooming"));
+
+          setTimeout(() => {
+            if (!relatedListEl) return;
+            relatedListEl.scrollTo({ left: nextLeft, behavior: "smooth" });
+            rowEls.forEach((row) => row.classList.remove("is-fading", "is-zooming"));
+          }, 180);
+        }, 4200);
+      }
+
+      function syncTopBarScrollState() {
+        if (!topBarEl || !detailEl) return;
+        const scrolled = detailEl.scrollTop > 76;
+        topBarEl.classList.toggle("is-scrolled", scrolled);
+        if (shareBtn) {
+          shareBtn.classList.toggle("is-hidden-on-scroll", scrolled);
+        }
+      }
+
+      function extractYoutubeEmbedUrl(rawUrl = "") {
+        const url = String(rawUrl || "").trim();
+        if (!url) return "";
+        const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]{6,})/);
+        if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+        const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]{6,})/);
+        if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+        const embedMatch = url.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{6,})/);
+        if (embedMatch) return `https://www.youtube.com/embed/${embedMatch[1]}`;
+        return "";
+      }
+
+      function renderVideoBlock(item) {
+        const videoUrl = String(item.videoUrl || item.video || item.previewVideo || "").trim();
         if (!videoUrl) {
           videoBlockEl.style.display = "none";
           videoBoxEl.innerHTML = "";
           return;
         }
 
+        const ytEmbed = extractYoutubeEmbedUrl(videoUrl);
+        if (ytEmbed) {
+          videoBoxEl.innerHTML = `<iframe src="${escapeAttr(ytEmbed)}" title="Video giới thiệu" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+          videoBlockEl.style.display = "block";
+          return;
+        }
+
+        const poster = item.banner || item.icon || item.img || "";
+        videoBoxEl.innerHTML = `<video src="${escapeAttr(videoUrl)}" poster="${escapeAttr(poster)}" controls playsinline preload="metadata"></video>`;
         videoBlockEl.style.display = "block";
-        const ytMatch = String(videoUrl).match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
-        if (ytMatch) {
-          videoBoxEl.innerHTML = `<iframe src="https://www.youtube.com/embed/${escapeAttr(ytMatch[1])}?autoplay=1&mute=1&playsinline=1&rel=0" allow="autoplay; encrypted-media"></iframe>`;
-        } else {
-          videoBoxEl.innerHTML = `<video src="${escapeAttr(videoUrl)}" autoplay muted loop playsinline webkit-playsinline controls disablePictureInPicture controlsList="nofullscreen" style="width:100%;height:210px;object-fit:cover;"></video>`;
-          const vid = videoBoxEl.querySelector("video");
-          if (vid) {
-            vid.muted = true;
-            vid.play().catch(() => {});
-          }
-        }
       }
 
-      function renderStars(score) {
-        const safe = Math.max(0, Math.min(5, Math.round(score || 5)));
-        return "★".repeat(safe) + "☆".repeat(5 - safe);
-      }
-
-      function updateInteractiveStars() {
-        starButtons.forEach((btn) => {
-          const starNum = Number(btn.getAttribute("data-star"));
-          btn.textContent = starNum <= userRating ? "★" : "☆";
-        });
-      }
-
-      function syncTopBarWithPrimaryBtn() {
-        if (!backdrop.classList.contains("is-open")) {
-          topBarEl.classList.remove("is-scrolled");
-          shareBtn.classList.remove("is-hidden-on-scroll");
+      function renderCollectionsBlock(item) {
+        const collections = Array.isArray(item.collections) ? item.collections : [];
+        if (!collections.length) {
+          collectionsBlockEl.style.display = "none";
+          collectionsListEl.innerHTML = "";
           return;
         }
 
-        const primaryRect = primaryBtnEl.getBoundingClientRect();
-        const topBarRect = topBarEl.getBoundingClientRect();
-        const passedPrimaryBtn = primaryRect.bottom < topBarRect.bottom - 2;
-        topBarEl.classList.toggle("is-scrolled", passedPrimaryBtn);
-        shareBtn.classList.toggle("is-hidden-on-scroll", passedPrimaryBtn);
+        collectionsListEl.innerHTML = collections.map((col, cIdx) => {
+          const thumbs = Array.isArray(col.icons) && col.icons.length > 0
+            ? col.icons.slice(0, 4)
+            : [item.icon || item.img || ""];
+          const gridHtml = thumbs.map((src) => `<img src="${escapeAttr(src)}" alt="" loading="lazy" />`).join("");
+          const btnLabel = col.actionLabel || "Xem";
+          const btnHref = col.url || "#";
+
+          return `
+            <div class="popup-detail-collection-row">
+              <div class="popup-detail-collection-left">
+                <div class="popup-detail-collection-grid">${gridHtml}</div>
+                <div class="popup-detail-collection-info">
+                  <div class="popup-detail-collection-title">${escapeAttr(col.title || `Bộ sưu tập ${cIdx + 1}`)}</div>
+                  <div class="popup-detail-collection-sub">${escapeAttr(col.subtitle || "")}</div>
+                </div>
+              </div>
+              <a class="popup-detail-pill-btn" href="${escapeAttr(btnHref)}" target="_blank" rel="noopener noreferrer">${escapeAttr(btnLabel)}</a>
+            </div>
+          `;
+        }).join("");
+
+        collectionsBlockEl.style.display = "block";
       }
 
-      function stopGalleryAuto() {
-        if (galleryTimer) {
-          clearInterval(galleryTimer);
-          galleryTimer = null;
-        }
-        if (galleryMarqueeRafId) {
-          cancelAnimationFrame(galleryMarqueeRafId);
-          galleryMarqueeRafId = null;
-        }
-      }
+      function renderFeaturedBlock(item, featuredCards = []) {
+        const customFeatured = Array.isArray(item.featuredIn) ? item.featuredIn : [];
+        const list = customFeatured.length > 0
+          ? customFeatured
+          : featuredCards.filter((c) => c !== item).slice(0, 4).map((c) => ({
+              kicker: "NỔI BẬT",
+              title: (c.title || c.appName || c.name || "").replace(/\n/g, " "),
+              image: c.banner || c.icon || c.img || ""
+            }));
 
-      function getGalleryStepWidth() {
-        const shots = Array.from(galleryEl.querySelectorAll(".popup-detail-shot"));
-        if (!shots.length) return 0;
-        const shotRect = shots[0].getBoundingClientRect();
-        const style = window.getComputedStyle(galleryEl);
-        const gap = parseFloat(style.gap || style.columnGap || "12") || 12;
-        return shotRect.width + gap;
-      }
-
-      function scrollGalleryToPosition(targetLeft, slideType, slideSpeed, targetShot) {
-        const type = String(slideType || "smooth").toLowerCase();
-        const speed = typeof slideSpeed === "number" ? slideSpeed : 850;
-
-        if (type === "instant" || speed <= 0) {
-          galleryViewportEl.scrollLeft = targetLeft;
+        if (!list.length) {
+          featuredBlockEl.style.display = "none";
+          featuredStripEl.innerHTML = "";
           return;
         }
 
-        if (type === "fade" && targetShot) {
-          targetShot.classList.add("is-fading");
-          setTimeout(() => {
-            galleryViewportEl.scrollLeft = targetLeft;
-            targetShot.classList.remove("is-fading");
-          }, Math.min(250, speed / 3));
+        featuredStripEl.innerHTML = list.map((f) => `
+          <article class="popup-detail-featured-card">
+            <img src="${escapeAttr(f.image || "")}" alt="${escapeAttr(f.title || "")}" loading="lazy" />
+            <div class="popup-detail-featured-body">
+              <div class="popup-detail-featured-kicker">${escapeAttr(f.kicker || "NỔI BẬT")}</div>
+              <div class="popup-detail-featured-title">${escapeAttr(f.title || "")}</div>
+            </div>
+          </article>
+        `).join("");
+
+        featuredBlockEl.style.display = "block";
+      }
+
+      function renderRelatedBlock(item, relatedCards = [], allCards = []) {
+        const pool = (relatedCards.length > 0 ? relatedCards : allCards).filter((c) => c !== item);
+        if (!pool.length) {
+          relatedBlockEl.style.display = "none";
+          relatedListEl.innerHTML = "";
           return;
         }
 
-        if (type === "zoom" && targetShot) {
-          targetShot.classList.add("is-zooming");
-          setTimeout(() => {
-            targetShot.classList.remove("is-zooming");
-          }, Math.min(450, speed / 2));
+        const isAppItem = item.isApp === true;
+        const rowsPerCol = 3;
+        const cols = [];
+        for (let i = 0; i < pool.length; i += rowsPerCol) {
+          cols.push(pool.slice(i, i + rowsPerCol));
         }
 
-        const startLeft = galleryViewportEl.scrollLeft;
-        const distance = targetLeft - startLeft;
-        const duration = type === "scroll" ? Math.max(speed, 1600) : Math.min(speed, 1200);
-        const startTime = performance.now();
+        relatedListEl.innerHTML = cols.map((colItems) => `
+          <div class="popup-detail-related-col">
+            ${colItems.map((rel) => {
+              const relIdx = pool.indexOf(rel);
+              const name = (rel.appName || rel.name || rel.title || "Mục liên quan").replace(/\n/g, " ");
+              const sub = rel.genre || rel.category || rel.description || "";
+              const badgeText = rel.tag || rel.fileFormat || "";
+              const btnLabel = rel.actionLabel || rel.buttonText || "Nhận";
+              const verSub = isAppItem ? formatVersionBadgeText(rel.version) : "";
+              const rightActionHtml = isAppItem
+                ? `
+                  <div class="popup-detail-related-right">
+                    <button class="popup-detail-pill-btn popup-detail-related-get" type="button" data-rel-idx="${relIdx}">${getCloudDownloadSvg()}<span>${escapeAttr(btnLabel)}</span></button>
+                    ${verSub ? `<span class="btn-version-sub">${escapeAttr(verSub)}</span>` : ""}
+                    ${rel.subNote ? `<span class="popup-detail-related-subnote">${escapeAttr(rel.subNote)}</span>` : ""}
+                  </div>
+                `
+                : "";
 
-        function easeInOut(t) {
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        }
+              return `
+                <div class="popup-detail-related-row" data-rel-idx="${relIdx}" style="cursor:pointer;">
+                  <div class="popup-detail-related-left">
+                    <img class="popup-detail-related-icon" src="${escapeAttr(rel.icon || rel.img || rel.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
+                    <div class="popup-detail-related-info">
+                      <div class="popup-detail-related-name">${escapeAttr(name)}</div>
+                      <div class="popup-detail-related-sub">${escapeAttr(sub)}</div>
+                      ${badgeText ? `<span class="popup-detail-related-badge">${escapeAttr(badgeText)}</span>` : ""}
+                    </div>
+                  </div>
+                  ${rightActionHtml}
+                </div>
+              `;
+            }).join("")}
+          </div>
+        `).join("");
 
-        function step(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(1, elapsed / duration);
-          const eased = type === "slide" || type === "snap" ? progress : easeInOut(progress);
-          galleryViewportEl.scrollLeft = startLeft + distance * eased;
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          }
-        }
-
-        requestAnimationFrame(step);
-      }
-
-      function slideGalleryNext() {
-        if (galleryIsPaused || !galleryConfig.autoplay) return;
-        const shots = Array.from(galleryEl.querySelectorAll(".popup-detail-shot"));
-        if (!shots.length) return;
-
-        const step = getGalleryStepWidth();
-        const maxScroll = Math.max(0, galleryEl.scrollWidth - galleryViewportEl.clientWidth);
-        if (maxScroll <= 2) return;
-
-        galleryCurrentIdx += 1;
-        let nextLeft = galleryCurrentIdx * step;
-
-        if (nextLeft > maxScroll + 4) {
-          if (galleryConfig.loop === false) {
-            stopGalleryAuto();
-            return;
-          }
-          galleryCurrentIdx = 0;
-          nextLeft = 0;
-        } else {
-          nextLeft = Math.min(nextLeft, maxScroll);
-        }
-
-        const targetShot = shots[Math.min(galleryCurrentIdx, shots.length - 1)];
-        scrollGalleryToPosition(nextLeft, galleryConfig.slideType, galleryConfig.slideSpeed, targetShot);
-      }
-
-      function startGalleryMarquee() {
-        stopGalleryAuto();
-        const speedPxPerSec = Number(galleryConfig.marqueeSpeed) > 0 ? Number(galleryConfig.marqueeSpeed) : 38;
-        galleryLastMarqueeTime = performance.now();
-
-        function tick(now) {
-          const dt = (now - galleryLastMarqueeTime) / 1000;
-          galleryLastMarqueeTime = now;
-
-          if (!galleryIsPaused && galleryConfig.autoplay) {
-            const maxScroll = Math.max(0, galleryEl.scrollWidth - galleryViewportEl.clientWidth);
-            if (maxScroll > 2) {
-              const nextLeft = galleryViewportEl.scrollLeft + speedPxPerSec * dt;
-              if (nextLeft >= maxScroll - 1) {
-                if (galleryConfig.loop === false) {
-                  stopGalleryAuto();
-                  return;
-                }
-                galleryViewportEl.scrollLeft = 0;
-              } else {
-                galleryViewportEl.scrollLeft = nextLeft;
-              }
+        Array.from(relatedListEl.querySelectorAll(".popup-detail-related-row")).forEach((row) => {
+          row.addEventListener("click", () => {
+            const idx = Number(row.getAttribute("data-rel-idx"));
+            const chosen = pool[idx];
+            if (chosen) {
+              open(chosen, {
+                onStateChange: onStateChangeCallback,
+                allCards,
+                featuredCards: pool,
+                relatedCards: pool.filter((x) => x !== chosen)
+              });
             }
+          });
+        });
+
+        Array.from(relatedListEl.querySelectorAll(".popup-detail-related-get")).forEach((btn) => {
+          btn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const idx = Number(btn.getAttribute("data-rel-idx"));
+            const chosen = pool[idx];
+            if (chosen) {
+              downloadPickerController.open(chosen);
+            }
+          });
+        });
+
+        relatedBlockEl.style.display = "block";
+        relatedScrollDir = 1;
+        setTimeout(() => {
+          if (backdrop.classList.contains("is-open")) {
+            startRelatedAutoSlide();
           }
-
-          galleryMarqueeRafId = requestAnimationFrame(tick);
-        }
-
-        galleryMarqueeRafId = requestAnimationFrame(tick);
+        }, 420);
       }
 
-      function startGalleryAuto() {
-        stopGalleryAuto();
-        if (!galleryConfig.autoplay) return;
+      function renderRatingsAndInfo(item) {
+        const ratingVal = item.rating || "4,8";
+        const ratingCount = item.ratingCount || "764 N xếp hạng";
+        const stars = item.stars || "★★★★★";
+        ratingScoreEl.textContent = String(ratingVal);
+        starsDisplayEl.textContent = String(stars);
+        ratingCountEl.textContent = String(ratingCount);
 
-        const type = String(galleryConfig.slideType || "smooth").toLowerCase();
-        if (type === "marquee") {
-          startGalleryMarquee();
-          return;
-        }
+        const topReview = item.topReview || {};
+        reviewTitleEl.textContent = topReview.title || "Great app";
+        reviewMetaEl.textContent = topReview.meta || `${stars} • Cộng đồng Kpazz`;
+        reviewBodyEl.textContent = topReview.body || "Trải nghiệm mượt mà, dễ sử dụng và cập nhật nhanh.";
 
-        const intervalMs = Number(galleryConfig.autoplayInterval) > 0 ? Number(galleryConfig.autoplayInterval) : 4000;
-        galleryTimer = setInterval(slideGalleryNext, intervalMs);
+        starBtns.forEach((b) => { b.textContent = "☆"; });
+
+        const infoRows = [
+          { label: "Nhà phát triển", value: item.author || item.dev || item.developer || "Kpazz Team" },
+          { label: "Thể loại", value: item.genre || item.category || "Ứng dụng" },
+          { label: "Phiên bản", value: item.version || "Mới nhất" },
+          { label: "Ngày đăng", value: item.releaseDate || item.publishDate || "Cập nhật gần đây" },
+          { label: "Định dạng", value: item.fileFormat || (item.isApp ? "IPA" : "Bài viết") },
+          { label: "Dung lượng", value: item.fileSize || item.size || "-" },
+          { label: "Yêu cầu hệ thống", value: item.compatibility || item.requirements || "iOS 15.0 trở lên" }
+        ];
+
+        infoRowsEl.innerHTML = infoRows.map((r) => `
+          <div class="popup-detail-info-row">
+            <span class="popup-detail-info-label">${escapeAttr(r.label)}</span>
+            <span class="popup-detail-info-val">${escapeAttr(String(r.value))}</span>
+          </div>
+        `).join("");
       }
 
       function open(item, options = {}) {
         if (!item) return;
-
         currentItem = item;
-        userRating = 0;
-        updateInteractiveStars();
-        onStateChangeCallback = typeof options.onStateChange === "function" ? options.onStateChange : null;
+        onStateChangeCallback = options.onStateChange || null;
+        searchController.recordViewedItem(item);
 
-        const displayName = item.appName || item.name || item.title || "";
-        const displayGenre = item.genre || item.category || "";
-        const displayAuthor = item.author || item.dev || "-";
-        const displayDate = item.releaseDate || item.publishDate || "";
-        const displayIcon = item.icon || item.img || "";
-        const displayGallery = Array.isArray(item.gallery) && item.gallery.length > 0
-          ? item.gallery.filter(Boolean)
-          : (Array.isArray(item.screenshots) ? item.screenshots.filter(Boolean) : []);
+        const allCards = Array.isArray(options.allCards) ? options.allCards : [];
+        const featuredCards = Array.isArray(options.featuredCards) ? options.featuredCards : allCards;
+        const relatedCards = Array.isArray(options.relatedCards) ? options.relatedCards : allCards;
 
-        const isApp = item.isApp !== false;
-        const primaryLabel = isApp ? "Nhận" : "Mở";
+        const displayName = (item.appName || item.name || item.title || "Chi tiết").replace(/\n/g, " ");
+        const displayTag = item.tag || item.genre || item.category || "Kpazz";
+        const displaySub = item.description || "";
+        const heroBannerSrc = item.banner || item.icon || item.img || "";
+        const iconSrc = item.icon || item.img || item.banner || "";
+        const isAppItem = item.isApp === true;
+        const actionLabel = item.actionLabel || item.buttonText || "Nhận";
+        const authorText = String(item.author || item.dev || item.developer || "").trim();
+        const versionText = String(item.version || "").trim();
 
-        topIconEl.src = displayIcon;
+        topIconEl.src = iconSrc;
         topIconEl.alt = displayName;
-        topTagEl.textContent = displayName.replace(/\n/g, " ");
-        topSubEl.textContent = item.description || displayGenre;
-        setButtonLabelWithCloud(topActionBtnEl, primaryLabel, isApp, topVersionSubEl, item.version);
-        setButtonLabelWithCloud(primaryBtnEl, primaryLabel, isApp, primaryVersionSubEl, item.version);
+        topTagEl.textContent = displayName;
+        topSubEl.textContent = displaySub || displayTag;
 
-        const topHeroSrc = item.heroBanner || item.banner || displayIcon;
-        if (topHeroSrc) {
-          heroBannerWrapEl.style.display = "block";
-          heroBannerImgEl.src = topHeroSrc;
-          heroBannerImgEl.alt = displayName;
-          heroBlurBottomImgEl.src = topHeroSrc;
+        if (isAppItem) {
+          stickyRightEl.style.display = "flex";
+          setButtonLabelWithCloud(topActionBtnEl, actionLabel, true, topVersionSubEl, versionText);
+          primaryWrapEl.style.display = "flex";
+          setButtonLabelWithCloud(primaryBtnEl, actionLabel, true, primaryVersionSubEl, versionText);
         } else {
-          heroBannerWrapEl.style.display = "none";
-          heroBannerImgEl.src = "";
-          heroBlurBottomImgEl.src = "";
+          stickyRightEl.style.display = "none";
+          primaryWrapEl.style.display = "none";
         }
 
-        iconImgEl.src = displayIcon;
-        iconImgEl.alt = item.iconAlt || displayName;
+        heroBannerImgEl.src = heroBannerSrc;
+        heroBannerImgEl.alt = displayName;
+        if (heroBlurBottomImgEl) {
+          heroBlurBottomImgEl.src = heroBannerSrc;
+          heroBlurBottomImgEl.alt = "";
+        }
+
+        iconImgEl.src = iconSrc;
+        iconImgEl.alt = displayName;
         appNameEl.textContent = displayName;
-        subtitleEl.textContent = item.description || displayGenre;
-        versionBadgeEl.textContent = item.version ? (String(item.version).startsWith("Phiên bản") ? item.version : `Phiên bản ${item.version}`) : "";
+        subtitleEl.textContent = displaySub;
 
-        const handleOpenDownloadPicker = (event) => {
-          event.stopPropagation();
-          downloadPickerController.open(item);
-        };
-        primaryBtnEl.onclick = handleOpenDownloadPicker;
-        topActionBtnEl.onclick = handleOpenDownloadPicker;
-
-        const ratingCountText = item.ratingCount || "764 N xếp hạng";
-        const ratingScoreText = item.ratingScore || "4,8";
-        const ratingNumeric = parseFloat(String(ratingScoreText).replace(",", ".")) || 4.8;
-
-        metaRatingLabelEl.textContent = ratingCountText;
-        metaRatingValEl.textContent = ratingScoreText;
-        metaRatingSubEl.textContent = renderStars(ratingNumeric);
-
-        metaAgeValEl.textContent = item.ageRating || "16+";
-        metaAgeSubEl.textContent = "Tuổi";
+        const badgeLines = [];
+        if (authorText) {
+          badgeLines.push(`<div class="popup-detail-author-line">Tác giả: ${escapeAttr(authorText)}</div>`);
+        }
+        if (versionText) {
+          badgeLines.push(`<div class="popup-detail-version-line">Phiên bản: ${escapeAttr(versionText)}</div>`);
+        }
+        versionBadgeEl.innerHTML = badgeLines.join("");
+        versionBadgeEl.style.display = badgeLines.length > 0 ? "flex" : "none";
 
         metaRankValEl.textContent = item.rank || "#1";
-        metaRankSubEl.textContent = displayGenre || "Hành Động";
+        metaRankSubEl.textContent = item.genre || item.category || displayTag;
+        metaDateValEl.textContent = item.releaseDate || item.publishDate || "Mới";
+        metaTypeValEl.textContent = item.fileFormat || (isAppItem ? "IPA" : "INFO");
+        metaSizeValEl.textContent = item.fileSize || item.size || "-";
 
-        metaAuthorValEl.textContent = displayAuthor;
-        metaAuthorSubEl.textContent = "Tác giả";
-
-        const collections = Array.isArray(item.collections) && item.collections.length > 0
-          ? item.collections
-          : (Array.isArray(options.featuredCards) && options.featuredCards.length > 0
-              ? options.featuredCards.slice(0, 2).map((fc, idx) => ({
-                  title: idx === 0 ? `Tuyển tập ${displayGenre || "nổi bật"}` : `Gợi ý cùng danh mục`,
-                  subtitle: displayGenre || fc.genre || fc.category || "Kpazz",
-                  icons: [fc.icon || fc.img, displayIcon, ...displayGallery].filter(Boolean)
-                }))
-              : []);
-
-        const miniIcons = displayGallery.length > 0
-          ? displayGallery.slice(0, 4)
-          : [displayIcon || item.banner || ""];
-
-        if (collections.length > 0) {
-          collectionsBlockEl.style.display = "block";
-          collectionsListEl.innerHTML = collections.map((col) => {
-            const colIcons = Array.isArray(col.icons) && col.icons.length > 0 ? col.icons : miniIcons;
-            const gridImgs = [0, 1, 2, 3].map((i) => {
-              const src = colIcons[i % colIcons.length] || "";
-              return `<img src="${escapeAttr(src)}" alt="" loading="lazy" />`;
-            }).join("");
-
-            return `
-              <div class="popup-detail-collection-row">
-                <div class="popup-detail-collection-left">
-                  <div class="popup-detail-collection-grid">${gridImgs}</div>
-                  <div class="popup-detail-collection-info">
-                    <div class="popup-detail-collection-title">${escapeAttr(col.title || "")}</div>
-                    <div class="popup-detail-collection-sub">${escapeAttr(col.subtitle || "")}</div>
-                  </div>
-                </div>
-                <button class="popup-detail-pill-btn popup-detail-collection-view-btn" type="button">Xem</button>
-              </div>
-            `;
-          }).join("");
-
-          Array.from(collectionsListEl.querySelectorAll(".popup-detail-collection-view-btn")).forEach((btn) => {
-            btn.addEventListener("click", () => {
-              if (displayAuthor && displayAuthor !== "-") {
-                authorWorksController.open(displayAuthor, options.allCards || options.featuredCards || [], (chosen) => {
-                  open(chosen, options);
-                });
-              }
-            });
-          });
-        } else {
-          collectionsBlockEl.style.display = "none";
-          collectionsListEl.innerHTML = "";
-        }
-
-        renderVideo(item.videoUrl || item.video);
+        renderCollectionsBlock(item);
+        renderVideoBlock(item);
 
         if (item.changelog) {
+          changelogMetaEl.textContent = versionText ? `Phiên bản ${versionText}` : "";
+          changelogEl.innerHTML = formatRichTextContent(item.changelog);
           changelogBlockEl.style.display = "block";
-          changelogMetaEl.textContent = [item.version, displayDate].filter(Boolean).join(" • ");
-          changelogEl.textContent = item.changelog;
         } else {
           changelogBlockEl.style.display = "none";
-          changelogEl.textContent = "";
         }
 
-        stopGalleryAuto();
-        galleryCurrentIdx = 0;
-        galleryIsPaused = false;
-        galleryViewportEl.scrollLeft = 0;
+        const shots = Array.isArray(item.screenshots) && item.screenshots.length > 0
+          ? item.screenshots
+          : (heroBannerSrc ? [heroBannerSrc] : []);
 
-        if (displayGallery.length > 0) {
-          galleryBlockEl.style.display = "block";
-          galleryEl.innerHTML = displayGallery.map((src, i) => (
-            `<img class="popup-detail-shot" src="${escapeAttr(src)}" alt="${escapeAttr(displayName || "Ảnh")} ${i + 1}" loading="lazy" />`
+        if (shots.length > 0) {
+          galleryEl.innerHTML = shots.map((src, idx) => (
+            `<img class="popup-detail-shot" src="${escapeAttr(src)}" alt="${escapeAttr(displayName)} ảnh ${idx + 1}" loading="lazy" />`
           )).join("");
-
-          galleryConfig = {
-            autoplay: true,
-            autoplayInterval: 4000,
-            slideType: "smooth",
-            slideSpeed: 3000,
-            marqueeSpeed: 38,
-            loop: true,
-            ...(options.sliderConfig || {}),
-            ...(item.sliderConfig || {})
-          };
-
-          startGalleryAuto();
+          galleryBlockEl.style.display = "block";
+          if (galleryViewportEl) galleryViewportEl.scrollLeft = 0;
+          galleryScrollDir = 1;
+          setTimeout(() => {
+            if (backdrop.classList.contains("is-open")) {
+              startGalleryAutoSlide();
+            }
+          }, 350);
         } else {
+          stopGalleryAutoSlide();
           galleryBlockEl.style.display = "none";
-          galleryEl.innerHTML = "";
         }
 
-        if (item.fullDescription || item.description) {
+        const fullDesc = item.fullDescription || item.description || "";
+        const resolvedDevName = authorText || "Kpazz Team";
+        devNameEl.textContent = resolvedDevName;
+        devSubEl.textContent = "Nhà phát triển • Nhấn để xem các nội dung khác";
+        devCardEl.style.display = "flex";
+
+        if (fullDesc) {
+          fullDescEl.innerHTML = formatRichTextContent(fullDesc);
           descBlockEl.style.display = "block";
-          fullDescEl.innerHTML = formatRichText(item.fullDescription || item.description);
         } else {
-          descBlockEl.style.display = "none";
           fullDescEl.innerHTML = "";
+          descBlockEl.style.display = "block";
         }
 
-        devNameEl.textContent = displayAuthor;
-        devCardEl.onclick = () => {
-          authorWorksController.open(
-            displayAuthor,
-            options.allCards || options.featuredCards || [],
-            (chosen) => open(chosen, options)
-          );
-        };
-        devCardEl.onkeydown = (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            devCardEl.click();
-          }
-        };
-
-        ratingsBlockEl.style.display = "block";
-        ratingScoreEl.textContent = ratingScoreText;
-        starsDisplayEl.textContent = renderStars(ratingNumeric);
-        ratingCountEl.textContent = ratingCountText;
-        reviewTitleEl.textContent = item.reviewTitle || "Great app";
-        reviewMetaEl.textContent = item.reviewMeta || `${renderStars(ratingNumeric)} • ${displayAuthor}`;
-        reviewBodyEl.textContent = item.reviewBody || "Ứng dụng chạy mượt mà, giao diện trực quan và nhiều tính năng hữu ích.";
-
-        writeReviewBtn.onclick = () => {
-          alert(`Cảm ơn bạn đã chọn viết nhận xét cho ${displayName}.`);
-        };
-        supportBtn.onclick = () => {
-          if (displayAuthor && displayAuthor !== "-") {
-            authorWorksController.open(
-              displayAuthor,
-              options.allCards || options.featuredCards || [],
-              (chosen) => open(chosen, options)
-            );
-          } else {
-            alert("Đang mở hỗ trợ ứng dụng.");
-          }
-        };
-
-        const infoEntries = [
-          ["Nhà phát triển", displayAuthor],
-          ["Danh mục", displayGenre || "Ứng dụng"],
-          ["Phiên bản", item.version || "1.0"],
-          ["Ngày cập nhật", displayDate],
-          ["Dung lượng", item.fileSize],
-          ["Định dạng", item.fileFormat],
-          ["Tương thích", item.compatibility || "iOS / iPadOS"],
-          ["Ngôn ngữ", item.languages || "Tiếng Việt, English"]
-        ].filter(([, v]) => Boolean(v));
-
-        infoBlockEl.style.display = infoEntries.length > 0 ? "block" : "none";
-        infoRowsEl.innerHTML = infoEntries.map(([label, val]) => (
-          `<div class="popup-detail-info-row"><span class="popup-detail-info-label">${escapeAttr(label)}</span><span class="popup-detail-info-val">${escapeAttr(val)}</span></div>`
-        )).join("");
-
-        const featuredCards = Array.isArray(options.featuredCards) ? options.featuredCards.slice(0, 5) : [];
-        if (featuredCards.length > 0) {
-          featuredBlockEl.style.display = "block";
-          featuredStripEl.innerHTML = featuredCards.map((fc) => {
-            const fcName = (fc.appName || fc.name || fc.title || "").replace(/\n/g, " ");
-            return `
-              <div class="popup-detail-featured-card">
-                <img src="${escapeAttr(fc.banner || fc.icon || fc.img || "")}" alt="${escapeAttr(fcName)}" loading="lazy" />
-                <div class="popup-detail-featured-body">
-                  <div class="popup-detail-featured-kicker">${escapeAttr(fc.tag || fc.genre || "NỔI BẬT")}</div>
-                  <div class="popup-detail-featured-title">${escapeAttr(fcName)}</div>
-                </div>
-              </div>
-            `;
-          }).join("");
-        } else {
-          featuredBlockEl.style.display = "none";
-          featuredStripEl.innerHTML = "";
-        }
-
-        const relatedRaw = Array.isArray(options.relatedCards) && options.relatedCards.length > 0
-          ? options.relatedCards
-          : (Array.isArray(options.featuredCards) ? options.featuredCards : []);
-        const relatedCards = relatedRaw.filter((rc) => rc !== item).slice(0, 9);
-
-        if (relatedCards.length > 0) {
-          relatedBlockEl.style.display = "block";
-          relatedTitleEl.textContent = `Có Thể Bạn Cũng Thích ${displayGenre ? `• ${displayGenre}` : ""} >`;
-
-          const cols = [];
-          for (let i = 0; i < relatedCards.length; i += 3) {
-            cols.push(relatedCards.slice(i, i + 3));
-          }
-
-          relatedListEl.innerHTML = cols.map((group) => {
-            const rowsHtml = group.map((rc) => {
-              const rcName = (rc.appName || rc.name || rc.title || "").replace(/\n/g, " ");
-              const rcSub = rc.description || rc.genre || rc.category || "";
-              const rcIsApp = rc.isApp !== false;
-              const rcBtnText = rcIsApp ? "Nhận" : "Mở";
-              const rcVerBadge = rcIsApp ? formatVersionBadgeText(rc.version) : "";
-              return `
-                <div class="popup-detail-related-row">
-                  <div class="popup-detail-related-left">
-                    <img class="popup-detail-related-icon" src="${escapeAttr(rc.icon || rc.img || rc.banner || "")}" alt="${escapeAttr(rcName)}" loading="lazy" />
-                    <div class="popup-detail-related-info">
-                      <div class="popup-detail-related-name">${escapeAttr(rcName)}</div>
-                      <div class="popup-detail-related-sub">${escapeAttr(rcSub)}</div>
-                      <span class="popup-detail-related-badge">Tương thích iOS</span>
-                    </div>
-                  </div>
-                  <div class="popup-detail-related-right">
-                    <button class="popup-detail-pill-btn popup-detail-related-open-btn" type="button" data-related-title="${escapeAttr(rcName)}">${getCloudDownloadSvg()}<span>${rcBtnText}</span></button>
-                    ${rcVerBadge ? `<span class="btn-version-sub">${escapeAttr(rcVerBadge)}</span>` : ""}
-                    <span class="popup-detail-related-subnote">Hỗ trợ tiếng Việt</span>
-                  </div>
-                </div>
-              `;
-            }).join("");
-
-            return `<div class="popup-detail-related-col">${rowsHtml}</div>`;
-          }).join("");
-
-          Array.from(relatedListEl.querySelectorAll(".popup-detail-related-open-btn")).forEach((btn) => {
-            btn.addEventListener("click", () => {
-              const targetTitle = btn.getAttribute("data-related-title");
-              const found = relatedCards.find((x) => (x.appName || x.name || x.title || "").replace(/\n/g, " ") === targetTitle);
-              if (found) {
-                open(found, options);
-              }
-            });
-          });
-        } else {
-          relatedBlockEl.style.display = "none";
-          relatedListEl.innerHTML = "";
-        }
+        renderRatingsAndInfo(item);
+        renderFeaturedBlock(item, featuredCards);
+        renderRelatedBlock(item, relatedCards, allCards);
 
         detailEl.scrollTop = 0;
-        topBarEl.classList.remove("is-scrolled");
-        shareBtn.classList.remove("is-hidden-on-scroll");
+        syncTopBarScrollState();
+
         backdrop.classList.add("is-open");
         backdrop.setAttribute("aria-hidden", "false");
-        requestAnimationFrame(syncTopBarWithPrimaryBtn);
-
-        if (onStateChangeCallback) {
+        if (typeof onStateChangeCallback === "function") {
           onStateChangeCallback(true);
         }
       }
 
       function close() {
+        stopGalleryAutoSlide();
+        stopRelatedAutoSlide();
+        if (galleryManualCooldown) clearTimeout(galleryManualCooldown);
+        if (relatedManualCooldown) clearTimeout(relatedManualCooldown);
         if (!backdrop.classList.contains("is-open")) return;
-        stopGalleryAuto();
-        videoBoxEl.innerHTML = "";
         backdrop.classList.remove("is-open");
         backdrop.setAttribute("aria-hidden", "true");
-        topBarEl.classList.remove("is-scrolled");
-        shareBtn.classList.remove("is-hidden-on-scroll");
-        if (onStateChangeCallback) {
+        if (typeof onStateChangeCallback === "function") {
           onStateChangeCallback(false);
         }
       }
@@ -6712,126 +7157,187 @@
       function init() {
         closeBtn.addEventListener("click", close);
 
-        shareBtn.addEventListener("click", () => {
-          if (!currentItem) return;
-          const shareTitle = (currentItem.appName || currentItem.name || currentItem.title || "Kpazz").replace(/\n/g, " ");
-          if (navigator.share) {
-            navigator.share({
-              title: shareTitle,
-              text: currentItem.description || shareTitle,
-              url: window.location.href
-            }).catch(() => {});
-          } else {
-            alert(`Chia sẻ: ${shareTitle}`);
-          }
-        });
-
-        starButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            userRating = Number(btn.getAttribute("data-star")) || 0;
-            updateInteractiveStars();
-          });
-        });
-
-        galleryViewportEl.addEventListener("mouseenter", () => {
-          galleryIsPaused = true;
-        });
-
-        galleryViewportEl.addEventListener("mouseleave", () => {
-          galleryIsPaused = false;
-        });
-
-        galleryViewportEl.addEventListener("touchstart", () => {
-          galleryIsPaused = true;
-        }, { passive: true });
-
-        galleryViewportEl.addEventListener("touchend", () => {
-          galleryIsPaused = false;
-        }, { passive: true });
-
-        detailEl.addEventListener("scroll", syncTopBarWithPrimaryBtn, { passive: true });
-
         backdrop.addEventListener("click", (event) => {
           if (event.target === backdrop) {
             close();
           }
+        });
+
+        detailEl.addEventListener("scroll", syncTopBarScrollState, { passive: true });
+
+        if (galleryViewportEl) {
+          galleryViewportEl.addEventListener("scroll", () => {
+            if (!galleryIsAutoSliding) {
+              pauseGalleryAutoTemporarily(4000);
+            }
+          }, { passive: true });
+          galleryViewportEl.addEventListener("touchstart", () => pauseGalleryAutoTemporarily(4000), { passive: true });
+          galleryViewportEl.addEventListener("pointerdown", () => pauseGalleryAutoTemporarily(4000), { passive: true });
+        }
+
+        if (relatedListEl) {
+          relatedListEl.addEventListener("scroll", () => {
+            if (!relatedIsAutoSliding) {
+              pauseRelatedAutoTemporarily(4000);
+            }
+          }, { passive: true });
+          relatedListEl.addEventListener("touchstart", () => pauseRelatedAutoTemporarily(4000), { passive: true });
+          relatedListEl.addEventListener("pointerdown", () => pauseRelatedAutoTemporarily(4000), { passive: true });
+        }
+
+        const handleGetClick = () => {
+          if (!currentItem) return;
+          downloadPickerController.open(currentItem);
+        };
+
+        primaryBtnEl.addEventListener("click", handleGetClick);
+        topActionBtnEl.addEventListener("click", handleGetClick);
+
+        devCardEl.addEventListener("click", () => {
+          if (!currentItem) return;
+          const authorName = String(currentItem.author || currentItem.dev || currentItem.developer || "Kpazz Team").trim();
+          const fallbackPool = Array.isArray(window.__kpazzAppiosFallback) ? window.__kpazzAppiosFallback : [];
+          authorWorksController.open(authorName, fallbackPool, (chosenWork) => {
+            open(chosenWork, {
+              onStateChange: onStateChangeCallback,
+              allCards: fallbackPool,
+              featuredCards: fallbackPool,
+              relatedCards: fallbackPool.filter((x) => x !== chosenWork)
+            });
+          });
+        });
+
+        shareBtn.addEventListener("click", () => {
+          if (!currentItem) return;
+          const title = (currentItem.appName || currentItem.name || currentItem.title || "Kpazz").replace(/\n/g, " ");
+          const shareText = `${title} - ${currentItem.description || "Xem trên Kpazz"}`;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareText).catch(() => {});
+          }
+          alert(`Đã sao chép thông tin chia sẻ cho "${title}".`);
+        });
+
+        starBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const picked = Number(btn.getAttribute("data-star")) || 5;
+            starBtns.forEach((b) => {
+              const s = Number(b.getAttribute("data-star"));
+              b.textContent = s <= picked ? "★" : "☆";
+            });
+            alert(`Bạn đã đánh giá ${picked} sao cho nội dung này.`);
+          });
+        });
+
+        writeReviewBtn.addEventListener("click", () => {
+          if (!currentItem) return;
+          const title = (currentItem.appName || currentItem.name || currentItem.title || "mục này").replace(/\n/g, " ");
+          alert(`Tính năng viết nhận xét cho "${title}" đang mở.`);
+        });
+
+        supportBtn.addEventListener("click", () => {
+          if (!currentItem) return;
+          const title = (currentItem.appName || currentItem.name || currentItem.title || "mục này").replace(/\n/g, " ");
+          alert(`Hỗ trợ ứng dụng / nội dung: "${title}".`);
         });
       }
 
       return { init, open, close };
     })();
 
-    /* ==================== JS RIÊNG: APPIOS (APP DÀNH CHO IOS) ==================== */
+    /* ==================== JS RIÊNG: APPIOS (NẠP TỪ Tabs/Appios.json) ==================== */
     const appiosController = (() => {
       const JSON_URL = "Tabs/Appios.json";
-      const FALLBACK_DATA = [
-        {
-          isApp: true,
-          tag: "ĐỀ XUẤT MỚI",
-          kicker: "PHỔ BIẾN NHẤT",
-          title: "Deep Rock\nGalactic: Survivor",
-          description: "Sẵn sàng đào mỏ giữa hiểm nguy.",
-          releaseDate: "24/11/2026",
-          version: "1.2.4",
-          fileSize: "485 MB",
-          fileFormat: "IPA",
-          ratingScore: "4,8",
-          ratingCount: "764 N xếp hạng",
-          ageRating: "16+",
-          rank: "#1",
-          banner: "https://picsum.photos/seed/drg-banner/800/870",
-          icon: "https://picsum.photos/seed/drg-icon/240/240",
-          appName: "Deep Rock Galactic: Survivor",
-          genre: "Hành Động",
-          author: "Funday Games",
-          buttonText: "Nhận",
-          hasInAppPurchases: true,
-          gallery: [
-            "https://picsum.photos/seed/drg-shot1/640/360",
-            "https://picsum.photos/seed/drg-shot2/640/360",
-            "https://picsum.photos/seed/drg-shot3/640/360"
-          ],
-          changelog: "- Tối ưu hiệu năng trên thiết bị iOS mới.\n- Bổ sung chế độ đào mỏ sâu và vũ khí mới.",
-          fullDescription: "Deep Rock Galactic: Survivor đưa bạn vào cuộc chiến sinh tồn căng thẳng dưới lòng đất.",
-          downloads: [
-            { label: "Link tải trực tiếp", note: "Tốc độ cao", size: "485 MB", url: "#" },
-            { label: "Link dự phòng", note: "Dự phòng", size: "485 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          tag: "MỚI CẬP NHẬT",
-          kicker: "CHIẾN THUẬT",
-          title: "Nebula Strike:\nOrbit Ops",
-          description: "Chiến đấu liên ngân hà giữa mưa thiên thạch.",
-          releaseDate: "20/11/2026",
-          version: "2.0.1",
-          fileSize: "612 MB",
-          fileFormat: "IPA",
-          ratingScore: "4,7",
-          ratingCount: "320 N xếp hạng",
-          ageRating: "12+",
-          rank: "#2",
-          banner: "https://picsum.photos/seed/nb-banner/800/870",
-          icon: "https://picsum.photos/seed/nb-icon/240/240",
-          appName: "Nebula Strike: Orbit Ops",
-          genre: "Hành Động",
-          author: "Nova Core Interactive",
-          buttonText: "Nhận",
-          hasInAppPurchases: false,
-          gallery: [
-            "https://picsum.photos/seed/nb-shot1/640/360",
-            "https://picsum.photos/seed/nb-shot2/640/360"
-          ],
-          changelog: "- Thêm hạm đội mới và cân bằng chỉ số chiến đấu.",
-          fullDescription: "Chỉ huy phi đội ngoài không gian và bảo vệ căn cứ quỹ đạo.",
-          downloads: [
-            { label: "Link tải trực tiếp", note: "Tốc độ cao", size: "612 MB", url: "#" }
-          ]
-        }
-      ];
+      const MAX_CARDS = 12;
 
-      window.__kpazzAppiosFallback = FALLBACK_DATA;
+      const FALLBACK_DATA = {
+        sectionTitle: "APP Dành Cho ios",
+        sectionSubtitle: "Sẵn sàng đào mỏ giữa hiểm nguy.",
+        cards: [
+          {
+            isApp: true,
+            topPill: "PHỔ BIẾN NHẤT",
+            kicker: "HÀNH ĐỘNG SINH TỒN",
+            title: "Deep Rock\nGalactic: Survivor",
+            description: "Sẵn sàng đào mỏ giữa hiểm nguy trên iPhone & iPad.",
+            banner: "https://picsum.photos/seed/drg-banner/800/870",
+            icon: "https://picsum.photos/seed/drg-icon/240/240",
+            appName: "Deep Rock Galactic: Survivor",
+            genre: "Hành Động",
+            iapText: "Mua hàng trong ứng dụng",
+            actionLabel: "Nhận",
+            version: "1.0.4",
+            releaseDate: "24/11/2026",
+            fileFormat: "IPA",
+            fileSize: "1.4 GB",
+            author: "Funday Games",
+            changelog: "- Tối ưu hiệu năng trên thiết bị iOS đời mới.\n- Bổ sung chế độ sinh tồn độ khó cao.",
+            fullDescription: "Deep Rock Galactic: Survivor mang lối chơi hành động sinh tồn góc nhìn từ trên xuống kết hợp khai thác tài nguyên đầy kịch tính.",
+            screenshots: [
+              "https://picsum.photos/seed/drg-shot1/800/520",
+              "https://picsum.photos/seed/drg-shot2/800/520",
+              "https://picsum.photos/seed/drg-shot3/800/520"
+            ],
+            downloads: [
+              { label: "Link tải 1", note: "Tốc độ cao", size: "1.4 GB", url: "https://example.com/drg-1" },
+              { label: "Link tải 2", note: "Dự phòng", size: "1.4 GB", url: "https://example.com/drg-2" }
+            ]
+          },
+          {
+            isApp: true,
+            topPill: "CẬP NHẬT MỚI",
+            kicker: "CHIẾN ĐẤU KHÔNG GIAN",
+            title: "Nebula Strike:\nOrbit Ops",
+            description: "Điều khiển phi đội chiến đấu qua vành đai thiên thạch.",
+            banner: "https://picsum.photos/seed/nb-banner/800/870",
+            icon: "https://picsum.photos/seed/nb-icon/240/240",
+            appName: "Nebula Strike: Orbit Ops",
+            genre: "Hành Động",
+            iapText: "",
+            actionLabel: "Nhận",
+            version: "2.3.1",
+            releaseDate: "20/11/2026",
+            fileFormat: "IPA",
+            fileSize: "980 MB",
+            author: "Nova Core Interactive",
+            changelog: "- Thêm 4 màn chơi quỹ đạo mới.\n- Sửa lỗi rung khi va chạm.",
+            fullDescription: "Nebula Strike: Orbit Ops đưa bạn vào các trận không chiến nhịp độ nhanh với hiệu ứng ánh sáng và âm thanh sống động.",
+            screenshots: [
+              "https://picsum.photos/seed/nb-shot1/800/520",
+              "https://picsum.photos/seed/nb-shot2/800/520"
+            ],
+            downloads: [
+              { label: "Link tải 1", note: "Máy chủ chính", size: "980 MB", url: "https://example.com/nb-1" }
+            ]
+          },
+          {
+            isApp: true,
+            topPill: "ĐỀ XUẤT",
+            kicker: "KHÁM PHÁ HÀNH TINH",
+            title: "Starfield:\nOutpost Zero",
+            description: "Xây dựng căn cứ và khám phá các hành tinh xa lạ.",
+            banner: "https://picsum.photos/seed/sf-banner/800/870",
+            icon: "https://picsum.photos/seed/sf-icon/240/240",
+            appName: "Starfield: Outpost Zero",
+            genre: "Phiêu Lưu",
+            iapText: "Mua hàng trong ứng dụng",
+            actionLabel: "Nhận",
+            version: "1.8.0",
+            releaseDate: "18/11/2026",
+            fileFormat: "IPA",
+            fileSize: "2.1 GB",
+            author: "Bethesda Studio Mobile",
+            changelog: "- Mở rộng hệ thống nâng cấp căn cứ.\n- Cải thiện tốc độ tải cảnh.",
+            fullDescription: "Khám phá các vùng đất mới, thu thập tài nguyên và nâng cấp tiền đồn của bạn trong Starfield: Outpost Zero.",
+            screenshots: [
+              "https://picsum.photos/seed/sf-shot1/800/520",
+              "https://picsum.photos/seed/sf-shot2/800/520"
+            ],
+            downloads: [
+              { label: "Link tải 1", note: "Bản đầy đủ", size: "2.1 GB", url: "https://example.com/sf-1" }
+            ]
+          }
+        ]
+      };
 
       const sectionEl = document.getElementById("appiosSection");
       const headerEl = document.getElementById("appiosHeader");
@@ -6841,23 +7347,11 @@
       const trackEl = document.getElementById("appiosTrack");
 
       let cardsData = [];
-      let currentIndex = 0;
-      let isPaused = false;
       let isPopupOpen = false;
       let autoSlideTimer = null;
-      let isPointerDown = false;
-      let startX = 0;
-      let scrollStart = 0;
-
-      const config = {
-        sectionTitle: "APP Dành Cho ios",
-        sectionSubtitle: "Kho ứng dụng iOS chọn lọc",
-        autoplay: true,
-        autoplayInterval: 4500,
-        slideType: "smooth",
-        slideSpeed: 900,
-        loop: true
-      };
+      let manualResumeTimer = null;
+      let isAutoSliding = false;
+      let slideDir = 1;
 
       function escapeAttr(val = "") {
         return String(val)
@@ -6867,183 +7361,64 @@
           .replace(/>/g, "&gt;");
       }
 
+      function normalizeData(raw) {
+        const list = Array.isArray(raw)
+          ? raw
+          : (Array.isArray(raw?.cards) ? raw.cards : (Array.isArray(raw?.items) ? raw.items : []));
+
+        const rawTitle = (!Array.isArray(raw) && raw?.sectionTitle) || FALLBACK_DATA.sectionTitle;
+        const rawSubtitle = (!Array.isArray(raw) && raw?.sectionSubtitle) || FALLBACK_DATA.sectionSubtitle;
+
+        const normalizedCards = list.slice(0, MAX_CARDS).map((item, idx) => ({
+          ...item,
+          isApp: true,
+          topPill: item.topPill || item.badge || `APP iOS #${idx + 1}`,
+          kicker: item.kicker || item.genre || "ỨNG DỤNG iOS",
+          title: item.title || item.appName || item.name || `Ứng dụng ${idx + 1}`,
+          description: item.description || "",
+          banner: item.banner || item.icon || item.img || "",
+          icon: item.icon || item.banner || item.img || "",
+          appName: item.appName || item.name || (item.title ? item.title.replace(/\n/g, " ") : `Ứng dụng ${idx + 1}`),
+          genre: item.genre || "Ứng dụng",
+          iapText: item.iapText || "",
+          actionLabel: item.actionLabel || item.buttonText || "Nhận",
+          version: item.version || ""
+        }));
+
+        return {
+          sectionTitle: rawTitle,
+          sectionSubtitle: rawSubtitle,
+          cards: normalizedCards
+        };
+      }
+
       async function loadData() {
         try {
           const res = await fetch(JSON_URL, { cache: "no-store" });
-          if (!res.ok) throw new Error("Không tải được Appios.json");
+          if (!res.ok) throw new Error("HTTP " + res.status);
           const json = await res.json();
-          if (Array.isArray(json)) {
-            return json;
-          }
-          if (json && Array.isArray(json.items)) {
-            if (json.sectionTitle) config.sectionTitle = json.sectionTitle;
-            if (json.sectionSubtitle) config.sectionSubtitle = json.sectionSubtitle;
-            if (typeof json.autoplay === "boolean") config.autoplay = json.autoplay;
-            if (typeof json.autoplayInterval === "number") config.autoplayInterval = json.autoplayInterval;
-            if (json.slideType) config.slideType = json.slideType;
-            if (typeof json.slideSpeed === "number") config.slideSpeed = json.slideSpeed;
-            if (typeof json.loop === "boolean") config.loop = json.loop;
-            return json.items;
-          }
-          return FALLBACK_DATA;
+          const parsed = normalizeData(json);
+          return parsed.cards.length > 0 ? parsed : normalizeData(FALLBACK_DATA);
         } catch (_) {
-          return FALLBACK_DATA;
+          return normalizeData(FALLBACK_DATA);
         }
       }
 
-      function renderCards() {
-        titleEl.textContent = config.sectionTitle;
-        subtitleEl.textContent = config.sectionSubtitle;
-
-        trackEl.innerHTML = cardsData.map((item, idx) => {
-          const title = item.title || item.appName || item.name || `Mục ${idx + 1}`;
-          const desc = item.description || item.genre || item.category || "";
-          const appName = (item.appName || item.name || item.title || "").replace(/\n/g, " ");
-          const genre = item.genre || item.category || "";
-          const topPill = item.tag || item.kicker || "ỨNG DỤNG iOS";
-          const kicker = item.kicker || (item.version ? `PHIÊN BẢN ${item.version}` : "NỔI BẬT");
-          const btnText = item.buttonText || (item.isApp === false ? "Mở" : "Nhận");
-          const verSub = item.isApp === false ? "" : formatVersionBadgeText(item.version);
-
-          return `
-            <article class="appios-card" data-idx="${idx}">
-              <div class="appios-hero">
-                <img class="appios-banner-img" src="${escapeAttr(item.banner || item.icon || item.img || "")}" alt="${escapeAttr(title.replace(/\n/g, " "))}" loading="lazy" />
-                <span class="appios-top-pill">${escapeAttr(topPill)}</span>
-                <div class="appios-hero-content">
-                  <div class="appios-kicker">${escapeAttr(kicker)}</div>
-                  <h3 class="appios-card-title">${escapeAttr(title)}</h3>
-                  <p class="appios-card-desc">${escapeAttr(desc)}</p>
-                </div>
-              </div>
-              <div class="appios-dock">
-                <div class="appios-dock-left">
-                  <div class="appios-app-icon">
-                    <img src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(appName)}" loading="lazy" />
-                  </div>
-                  <div class="appios-meta">
-                    <div class="appios-app-name">${escapeAttr(appName)}</div>
-                    <div class="appios-app-genre">${escapeAttr(genre)}</div>
-                  </div>
-                </div>
-                <div class="appios-dock-right">
-                  <button class="appios-get-btn" type="button" data-idx="${idx}">${getCloudDownloadSvg()}<span class="appios-get-btn-main">${escapeAttr(btnText)}</span></button>
-                  ${verSub ? `<span class="btn-version-sub">${escapeAttr(verSub)}</span>` : ""}
-                </div>
-              </div>
-            </article>
-          `;
-        }).join("");
-
-        Array.from(trackEl.querySelectorAll(".appios-card")).forEach((cardEl) => {
-          cardEl.addEventListener("click", (event) => {
-            if (event.target.closest(".appios-get-btn")) return;
-            const idx = Number(cardEl.getAttribute("data-idx"));
-            const chosen = cardsData[idx];
-            if (!chosen) return;
-            popupDetailController.open(chosen, {
-              onStateChange: setPopupOpen,
-              allCards: cardsData,
-              featuredCards: cardsData,
-              relatedCards: cardsData.filter((x) => x !== chosen),
-              sliderConfig: config
-            });
-          });
-        });
-
-        Array.from(trackEl.querySelectorAll(".appios-get-btn")).forEach((btn) => {
-          btn.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const idx = Number(btn.getAttribute("data-idx"));
-            const chosen = cardsData[idx];
-            if (!chosen) return;
-            downloadPickerController.open(chosen);
-          });
-        });
-      }
-
-      function getStepWidth() {
+      function getCardStep() {
         const firstCard = trackEl.querySelector(".appios-card");
         if (!firstCard) return 0;
-        const cardRect = firstCard.getBoundingClientRect();
-        const style = window.getComputedStyle(trackEl);
-        const gap = parseFloat(style.gap || style.columnGap || "14") || 14;
-        return cardRect.width + gap;
+        const cardWidth = firstCard.getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(trackEl).gap) || 14;
+        return cardWidth + gap;
       }
 
-      function animateScrollTo(targetLeft) {
-        const type = String(config.slideType || "smooth").toLowerCase();
-        const speed = typeof config.slideSpeed === "number" ? config.slideSpeed : 900;
+      function animateCardsFadeZoom(onMidpoint) {
         const cardEls = Array.from(trackEl.querySelectorAll(".appios-card"));
-        const targetCard = cardEls[currentIndex];
-
-        if (type === "instant" || speed <= 0) {
-          viewportEl.scrollLeft = targetLeft;
-          return;
-        }
-
-        if (type === "fade" && targetCard) {
-          targetCard.classList.add("is-fading");
-          setTimeout(() => {
-            viewportEl.scrollLeft = targetLeft;
-            targetCard.classList.remove("is-fading");
-          }, Math.min(250, speed / 3));
-          return;
-        }
-
-        if (type === "zoom" && targetCard) {
-          targetCard.classList.add("is-zooming");
-          setTimeout(() => {
-            targetCard.classList.remove("is-zooming");
-          }, Math.min(450, speed / 2));
-        }
-
-        const startLeft = viewportEl.scrollLeft;
-        const distance = targetLeft - startLeft;
-        const duration = type === "scroll" ? Math.max(speed, 1600) : Math.min(speed, 1200);
-        const startTime = performance.now();
-
-        function easeInOut(t) {
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        }
-
-        function step(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(1, elapsed / duration);
-          const eased = type === "slide" || type === "snap" ? progress : easeInOut(progress);
-          viewportEl.scrollLeft = startLeft + distance * eased;
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          }
-        }
-
-        requestAnimationFrame(step);
-      }
-
-      function goToSlide(idx) {
-        if (!cardsData.length) return;
-        const maxScroll = Math.max(0, trackEl.scrollWidth - viewportEl.clientWidth);
-        const step = getStepWidth();
-        if (step <= 0) return;
-
-        if (idx >= cardsData.length || idx * step > maxScroll + 4) {
-          if (config.loop === false) {
-            stopAutoSlide();
-            return;
-          }
-          currentIndex = 0;
-          animateScrollTo(0);
-          return;
-        }
-
-        currentIndex = Math.max(0, idx);
-        const targetLeft = Math.min(currentIndex * step, maxScroll);
-        animateScrollTo(targetLeft);
-      }
-
-      function nextSlide() {
-        if (isPaused || isPopupOpen || cardsData.length <= 1) return;
-        goToSlide(currentIndex + 1);
+        cardEls.forEach((c) => c.classList.add("is-fading", "is-zooming"));
+        setTimeout(() => {
+          if (typeof onMidpoint === "function") onMidpoint();
+          cardEls.forEach((c) => c.classList.remove("is-fading", "is-zooming"));
+        }, 180);
       }
 
       function stopAutoSlide() {
@@ -7051,13 +7426,124 @@
           clearInterval(autoSlideTimer);
           autoSlideTimer = null;
         }
+        isAutoSliding = false;
+      }
+
+      function pauseAutoSlideTemporarily(ms = 4000) {
+        stopAutoSlide();
+        if (manualResumeTimer) clearTimeout(manualResumeTimer);
+        manualResumeTimer = setTimeout(() => {
+          startAutoSlide();
+        }, ms);
       }
 
       function startAutoSlide() {
         stopAutoSlide();
-        if (!config.autoplay || cardsData.length <= 1) return;
-        const interval = Number(config.autoplayInterval) > 0 ? Number(config.autoplayInterval) : 4500;
-        autoSlideTimer = setInterval(nextSlide, interval);
+        if (isPopupOpen || cardsData.length <= 1) return;
+
+        autoSlideTimer = setInterval(() => {
+          if (isPopupOpen) return;
+          const maxScroll = viewportEl.scrollWidth - viewportEl.clientWidth;
+          if (maxScroll <= 2) return;
+
+          const step = getCardStep();
+          if (step <= 0) return;
+
+          let targetLeft = viewportEl.scrollLeft + step * slideDir;
+          if (targetLeft >= maxScroll - 2) {
+            targetLeft = maxScroll;
+            slideDir = -1;
+          } else if (targetLeft <= 2) {
+            targetLeft = 0;
+            slideDir = 1;
+          }
+
+          isAutoSliding = true;
+          animateCardsFadeZoom(() => {
+            viewportEl.scrollTo({ left: targetLeft, behavior: "smooth" });
+            setTimeout(() => {
+              isAutoSliding = false;
+            }, 420);
+          });
+        }, 4200);
+      }
+
+      function render(data) {
+        titleEl.textContent = data.sectionTitle;
+        subtitleEl.textContent = data.sectionSubtitle;
+        cardsData = data.cards;
+        window.__kpazzAppiosFallback = cardsData;
+
+        menubarController.registerHomeSection("appios", {
+          key: "appios",
+          title: data.sectionTitle,
+          description: data.sectionSubtitle,
+          jsonFile: JSON_URL,
+          cards: cardsData
+        });
+
+        trackEl.innerHTML = cardsData.map((card, idx) => {
+          const verBadge = formatVersionBadgeText(card.version);
+          return `
+            <article class="appios-card" data-card-idx="${idx}">
+              <div class="appios-hero">
+                ${card.banner ? `<img class="appios-banner-img" src="${escapeAttr(card.banner)}" alt="${escapeAttr(card.appName)}" loading="lazy" />` : ""}
+                <span class="appios-top-pill">${escapeAttr(card.topPill)}</span>
+                <div class="appios-hero-content">
+                  <div class="appios-kicker">${escapeAttr(card.kicker)}</div>
+                  <h3 class="appios-card-title">${escapeAttr(card.title)}</h3>
+                  ${card.description ? `<p class="appios-card-desc">${escapeAttr(card.description)}</p>` : ""}
+                </div>
+              </div>
+
+              <div class="appios-dock">
+                <div class="appios-dock-left">
+                  <div class="appios-app-icon">
+                    ${card.icon ? `<img src="${escapeAttr(card.icon)}" alt="${escapeAttr(card.appName)}" loading="lazy" />` : ""}
+                  </div>
+                  <div class="appios-meta">
+                    <div class="appios-app-name">${escapeAttr(card.appName)}</div>
+                    <div class="appios-app-genre">${escapeAttr(card.genre)}</div>
+                  </div>
+                </div>
+
+                <div class="appios-dock-right">
+                  <button class="appios-get-btn" type="button" data-get-idx="${idx}"><span class="appios-get-btn-main">${getCloudDownloadSvg()}<span>${escapeAttr(card.actionLabel)}</span></span></button>
+                  ${verBadge ? `<span class="btn-version-sub">${escapeAttr(verBadge)}</span>` : ""}
+                  ${card.iapText ? `<span class="appios-iap-label">${escapeAttr(card.iapText)}</span>` : ""}
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+
+        Array.from(trackEl.querySelectorAll(".appios-card")).forEach((cardEl) => {
+          cardEl.addEventListener("click", () => {
+            const idx = Number(cardEl.getAttribute("data-card-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            popupDetailController.open(chosen, {
+              onStateChange: setPopupOpen,
+              allCards: cardsData,
+              featuredCards: cardsData,
+              relatedCards: cardsData.filter((_, i) => i !== idx)
+            });
+          });
+        });
+
+        Array.from(trackEl.querySelectorAll(".appios-get-btn")).forEach((btnEl) => {
+          btnEl.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const idx = Number(btnEl.getAttribute("data-get-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            downloadPickerController.open(chosen);
+          });
+        });
+
+        slideDir = 1;
+        viewportEl.scrollLeft = 0;
+        startAutoSlide();
       }
 
       function setPopupOpen(open) {
@@ -7070,215 +7556,125 @@
       }
 
       async function init() {
-        cardsData = await loadData();
-        renderCards();
-        menubarController.registerHomeSection("appios", {
-          key: "appios",
-          title: config.sectionTitle,
-          description: config.sectionSubtitle,
-          jsonFile: JSON_URL,
-          cards: cardsData
-        });
-        startAutoSlide();
-
-        headerEl.addEventListener("click", () => {
-          authorWorksController.openSectionList(
-            config.sectionTitle,
-            config.sectionSubtitle,
-            JSON_URL,
-            cardsData,
-            (chosen) => {
-              popupDetailController.open(chosen, {
-                onStateChange: setPopupOpen,
-                allCards: cardsData,
-                featuredCards: cardsData,
-                relatedCards: cardsData.filter((x) => x !== chosen),
-                sliderConfig: config
-              });
+        if (headerEl) {
+          const openAllSection = () => {
+            authorWorksController.openSectionList(
+              titleEl.textContent || "APP Dành Cho ios",
+              subtitleEl.textContent || "",
+              JSON_URL,
+              cardsData,
+              (chosen) => {
+                popupDetailController.open(chosen, {
+                  onStateChange: setPopupOpen,
+                  allCards: cardsData,
+                  featuredCards: cardsData,
+                  relatedCards: cardsData.filter((x) => x !== chosen)
+                });
+              }
+            );
+          };
+          headerEl.addEventListener("click", openAllSection);
+          headerEl.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openAllSection();
             }
-          );
-        });
+          });
+        }
 
-        headerEl.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            headerEl.click();
+        viewportEl.addEventListener("scroll", () => {
+          if (!isAutoSliding) {
+            pauseAutoSlideTemporarily(4000);
           }
-        });
+        }, { passive: true });
 
-        sectionEl.addEventListener("mouseenter", () => {
-          isPaused = true;
-        });
+        viewportEl.addEventListener("touchstart", () => pauseAutoSlideTemporarily(4000), { passive: true });
+        viewportEl.addEventListener("pointerdown", () => pauseAutoSlideTemporarily(4000), { passive: true });
 
+        sectionEl.addEventListener("mouseenter", stopAutoSlide);
         sectionEl.addEventListener("mouseleave", () => {
-          isPaused = false;
+          if (!isPopupOpen) startAutoSlide();
         });
 
-        viewportEl.addEventListener("pointerdown", (e) => {
-          if (e.target.closest(".appios-get-btn")) return;
-          isPointerDown = true;
-          isPaused = true;
-          startX = e.pageX;
-          scrollStart = viewportEl.scrollLeft;
-        });
-
-        window.addEventListener("pointerup", () => {
-          if (!isPointerDown) return;
-          isPointerDown = false;
-          isPaused = false;
-          const step = getStepWidth();
-          if (step > 0) {
-            currentIndex = Math.round(viewportEl.scrollLeft / step);
-          }
-        });
-
-        viewportEl.addEventListener("pointermove", (e) => {
-          if (!isPointerDown) return;
-          const dx = e.pageX - startX;
-          viewportEl.scrollLeft = scrollStart - dx;
-        });
+        const data = await loadData();
+        render(data);
       }
 
-      return { init, setPopupOpen, goToSlide };
+      return { init, setPopupOpen };
     })();
 
-    /* ==================== JS RIÊNG: TWEAK (TWEAK JAILBREAK IOS) ==================== */
+    /* ==================== JS RIÊNG: TWEAK (NẠP TỪ Tabs/Tweak.json - 5 HÀNG MỖI CỘT, TỐI ĐA 15 APP) ==================== */
     const tweakController = (() => {
       const JSON_URL = "Tabs/Tweak.json";
-      const FALLBACK_DATA = [
-        {
-          isApp: true,
-          appName: "AI Chat VIP",
-          description: "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "1.4.2",
-          fileSize: "4.8 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-ai-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-ai-1/640/360",
-            "https://picsum.photos/seed/tweak-ai-2/640/360"
-          ],
-          changelog: "- Mở khóa toàn bộ tính năng VIP.\n- Tắt cửa sổ thông báo khởi động đầu tiên.",
-          fullDescription: "Tweak hỗ trợ mở khóa tính năng VIP và tối ưu trải nghiệm sử dụng trên thiết bị iOS đã jailbreak.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "4.8 MB", url: "#" },
-            { label: "Link dự phòng", note: "Dự phòng", size: "4.8 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          appName: "Audio Mix",
-          description: "Dễ dàng điều chỉnh âm lượng độc lập cho các ứng dụng",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "2.1.0",
-          fileSize: "3.2 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-audio-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-audio-1/640/360",
-            "https://picsum.photos/seed/tweak-audio-2/640/360"
-          ],
-          changelog: "- Thêm thanh trượt âm lượng riêng cho từng app trong Trung tâm điều khiển.",
-          fullDescription: "Tùy chỉnh mức âm lượng riêng biệt cho game, nhạc, video và trình duyệt trên iOS.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "3.2 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          appName: "Auto Touch",
-          description: "Tự động hóa tác vụ chạm và thao tác trên iOS",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "3.0.5",
-          fileSize: "7.5 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-auto-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-auto-1/640/360",
-            "https://picsum.photos/seed/tweak-auto-2/640/360"
-          ],
-          changelog: "- Ghi và phát lại kịch bản thao tác mượt mà hơn.",
-          fullDescription: "Hỗ trợ tạo kịch bản chạm, vuốt và lặp lại tự động cho nhiều tác vụ trên thiết bị iOS.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "7.5 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          appName: "Battery Plus",
-          description: "Hiển thị chi tiết sức khỏe pin, nhiệt độ và dòng sạc",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "1.8.0",
-          fileSize: "2.4 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-bat-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-bat-1/640/360"
-          ],
-          changelog: "- Cập nhật thông số chu kỳ pin và nhiệt độ theo thời gian thực.",
-          fullDescription: "Theo dõi chi tiết trạng thái pin, điện áp, nhiệt độ và tốc độ sạc trực tiếp trên máy.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "2.4 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          appName: "Screen Recorder Pro",
-          description: "Ghi màn hình chất lượng cao kèm âm thanh hệ thống",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "2.5.1",
-          fileSize: "5.1 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-rec-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-rec-1/640/360"
-          ],
-          changelog: "- Hỗ trợ khung hình cao và tùy chỉnh bitrate video.",
-          fullDescription: "Quay màn hình nét cao với nhiều tùy chọn độ phân giải và tốc độ khung hình.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "5.1 MB", url: "#" }
-          ]
-        },
-        {
-          isApp: true,
-          appName: "File Manager Root",
-          description: "Quản lý thư mục và tệp hệ thống nhanh chóng",
-          genre: "Tweak jailbreak ios",
-          author: "Cộng đồng Tweak",
-          version: "4.1.2",
-          fileSize: "8.9 MB",
-          fileFormat: "DEB",
-          buttonText: "Nhận",
-          icon: "./Art/imgicon.png",
-          banner: "https://picsum.photos/seed/tweak-file-banner/800/450",
-          gallery: [
-            "https://picsum.photos/seed/tweak-file-1/640/360"
-          ],
-          changelog: "- Cải thiện tốc độ tìm kiếm file và nén/giải nén tệp.",
-          fullDescription: "Công cụ duyệt tệp mạnh mẽ hỗ trợ thao tác sao chép, phân quyền và quản lý gói.",
-          downloads: [
-            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "8.9 MB", url: "#" }
-          ]
-        }
-      ];
+      const MAX_CARDS = 15;
+      const ITEMS_PER_COL = 5;
 
-      window.__kpazzTweakFallback = FALLBACK_DATA;
+      const FALLBACK_TWEAK = {
+        sectionTitle: "Tweak jailbreak ios",
+        sectionSubtitle: "Tweak nổi bật dành cho thiết bị iOS đã jailbreak.",
+        cards: [
+          {
+            isApp: true,
+            name: "AI Chat VIP",
+            genre: "Tiện ích",
+            description: "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+            icon: "./Art/imgicon.png",
+            banner: "./Art/imgicon.png",
+            actionLabel: "Nhận",
+            version: "1.4.2",
+            releaseDate: "22/11/2026",
+            fileFormat: "DEB",
+            fileSize: "18 MB",
+            author: "Kpazz Repo",
+            changelog: "- Cập nhật tương thích iOS 16 - 17.\n- Tối ưu phản hồi giao diện.",
+            fullDescription: "AI Chat VIP mở khóa toàn bộ tính năng cao cấp và loại bỏ thông báo phiền phức khi khởi động.",
+            screenshots: ["./Art/imgicon.png"],
+            downloads: [
+              { label: "Link tải 1", note: "Repo chính", size: "18 MB", url: "https://example.com/tweak-1" }
+            ]
+          },
+          {
+            isApp: true,
+            name: "SnowBoard Extension",
+            genre: "Tùy biến giao diện",
+            description: "Áp dụng gói biểu tượng, mặt nạ và hiệu ứng giao diện mượt mà trên SpringBoard.",
+            icon: "https://picsum.photos/seed/tweak-sb/240/240",
+            banner: "https://picsum.photos/seed/tweak-sb-banner/800/520",
+            actionLabel: "Nhận",
+            version: "1.5.22",
+            releaseDate: "19/11/2026",
+            fileFormat: "DEB",
+            fileSize: "12 MB",
+            author: "SparkDev",
+            changelog: "- Hỗ trợ thêm tùy chọn bo góc icon.\n- Giảm mức tiêu thụ RAM khi đổi theme.",
+            fullDescription: "Tiện ích mở rộng cho SnowBoard giúp quản lý giao diện iOS linh hoạt và ổn định hơn.",
+            screenshots: ["https://picsum.photos/seed/tweak-sb-banner/800/520"],
+            downloads: [
+              { label: "Link tải 1", note: "Tải trực tiếp", size: "12 MB", url: "https://example.com/tweak-2" }
+            ]
+          },
+          {
+            isApp: true,
+            name: "Crane Multi-Profile",
+            genre: "Quản lý tài khoản",
+            description: "Tạo nhiều hồ sơ độc lập cho từng ứng dụng với dữ liệu tách biệt hoàn toàn.",
+            icon: "https://picsum.photos/seed/tweak-crane/240/240",
+            banner: "https://picsum.photos/seed/tweak-crane-banner/800/520",
+            actionLabel: "Nhận",
+            version: "1.3.9",
+            releaseDate: "15/11/2026",
+            fileFormat: "DEB",
+            fileSize: "24 MB",
+            author: "Opa334 & Team",
+            changelog: "- Cải thiện chuyển đổi hồ sơ nhanh hơn.\n- Sửa lỗi đồng bộ dữ liệu nền.",
+            fullDescription: "Crane cho phép chạy nhiều tài khoản riêng biệt trên cùng một ứng dụng iOS mà không xung đột dữ liệu.",
+            screenshots: ["https://picsum.photos/seed/tweak-crane-banner/800/520"],
+            downloads: [
+              { label: "Link tải 1", note: "Bản ổn định", size: "24 MB", url: "https://example.com/tweak-3" }
+            ]
+          }
+        ]
+      };
 
       const sectionEl = document.getElementById("Tweak");
       const headerEl = document.getElementById("tweakHeader");
@@ -7287,24 +7683,12 @@
       const viewportEl = document.getElementById("tweakViewport");
       const trackEl = document.getElementById("tweakTrack");
 
-      let itemsData = [];
-      let currentPageIdx = 0;
-      let isPaused = false;
+      let cardsData = [];
       let isPopupOpen = false;
       let autoSlideTimer = null;
-      let isPointerDown = false;
-      let startX = 0;
-      let scrollStart = 0;
-
-      const config = {
-        sectionTitle: "Tweak jailbreak ios",
-        sectionSubtitle: "Danh sách tweak dành cho thiết bị iOS",
-        autoplay: true,
-        autoplayInterval: 4500,
-        slideType: "smooth",
-        slideSpeed: 900,
-        loop: true
-      };
+      let manualResumeTimer = null;
+      let isAutoSliding = false;
+      let slideDir = 1;
 
       function escapeAttr(val = "") {
         return String(val)
@@ -7314,181 +7698,65 @@
           .replace(/>/g, "&gt;");
       }
 
+      function normalizeTweakData(raw) {
+        const list = Array.isArray(raw)
+          ? raw
+          : (Array.isArray(raw?.cards) ? raw.cards : (Array.isArray(raw?.items) ? raw.items : []));
+
+        const rawTitle = (!Array.isArray(raw) && raw?.sectionTitle) || FALLBACK_TWEAK.sectionTitle;
+        const rawSubtitle = (!Array.isArray(raw) && raw?.sectionSubtitle) || FALLBACK_TWEAK.sectionSubtitle;
+
+        const normalizedCards = list.slice(0, MAX_CARDS).map((item, idx) => {
+          const cleanName = (item.appName || item.name || item.title || `Tweak ${idx + 1}`).replace(/\n/g, " ");
+          return {
+            ...item,
+            isApp: true,
+            name: cleanName,
+            appName: cleanName,
+            title: item.title || cleanName,
+            genre: item.genre || item.category || "Tweak iOS",
+            description: item.description || "",
+            icon: item.icon || item.img || item.banner || "./Art/imgicon.png",
+            banner: item.banner || item.icon || item.img || "./Art/imgicon.png",
+            actionLabel: item.actionLabel || item.buttonText || "Nhận",
+            version: item.version || ""
+          };
+        });
+
+        return {
+          sectionTitle: rawTitle,
+          sectionSubtitle: rawSubtitle,
+          cards: normalizedCards
+        };
+      }
+
       async function loadData() {
         try {
           const res = await fetch(JSON_URL, { cache: "no-store" });
-          if (!res.ok) throw new Error("Không tải được Tweak.json");
+          if (!res.ok) throw new Error("HTTP " + res.status);
           const json = await res.json();
-          if (Array.isArray(json)) {
-            return json;
-          }
-          if (json && Array.isArray(json.items)) {
-            if (json.sectionTitle) config.sectionTitle = json.sectionTitle;
-            if (json.sectionSubtitle) config.sectionSubtitle = json.sectionSubtitle;
-            if (typeof json.autoplay === "boolean") config.autoplay = json.autoplay;
-            if (typeof json.autoplayInterval === "number") config.autoplayInterval = json.autoplayInterval;
-            if (json.slideType) config.slideType = json.slideType;
-            if (typeof json.slideSpeed === "number") config.slideSpeed = json.slideSpeed;
-            if (typeof json.loop === "boolean") config.loop = json.loop;
-            return json.items;
-          }
-          return FALLBACK_DATA;
+          const parsed = normalizeTweakData(json);
+          return parsed.cards.length > 0 ? parsed : normalizeTweakData(FALLBACK_TWEAK);
         } catch (_) {
-          return FALLBACK_DATA;
+          return normalizeTweakData(FALLBACK_TWEAK);
         }
       }
 
-      function renderPages() {
-        titleEl.textContent = config.sectionTitle;
-        subtitleEl.textContent = config.sectionSubtitle;
-
-        const pages = [];
-        for (let i = 0; i < itemsData.length; i += 3) {
-          pages.push(itemsData.slice(i, i + 3));
-        }
-
-        trackEl.innerHTML = pages.map((pageItems) => {
-          const rowsHtml = pageItems.map((item) => {
-            const globalIdx = itemsData.indexOf(item);
-            const name = (item.appName || item.name || item.title || `Tweak ${globalIdx + 1}`).replace(/\n/g, " ");
-            const desc = item.description || item.genre || item.category || "";
-            const btnText = item.buttonText || (item.isApp === false ? "Mở" : "Nhận");
-            const verSub = item.isApp === false ? "" : formatVersionBadgeText(item.version);
-
-            return `
-              <article class="tweak-row-card" data-idx="${globalIdx}">
-                <div class="tweak-row-left">
-                  <div class="tweak-row-icon">
-                    <img src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
-                  </div>
-                  <div class="tweak-row-meta">
-                    <h3 class="tweak-row-name">${escapeAttr(name)}</h3>
-                    <p class="tweak-row-desc">${escapeAttr(desc)}</p>
-                  </div>
-                </div>
-                <div class="tweak-row-right">
-                  <button class="tweak-get-btn" type="button" data-idx="${globalIdx}">${getCloudDownloadSvg()}<span class="tweak-get-btn-main">${escapeAttr(btnText)}</span></button>
-                  ${verSub ? `<span class="btn-version-sub">${escapeAttr(verSub)}</span>` : ""}
-                </div>
-              </article>
-            `;
-          }).join("");
-
-          return `<div class="tweak-page-col">${rowsHtml}</div>`;
-        }).join("");
-
-        Array.from(trackEl.querySelectorAll(".tweak-row-card")).forEach((rowEl) => {
-          rowEl.addEventListener("click", (event) => {
-            if (event.target.closest(".tweak-get-btn")) return;
-            const idx = Number(rowEl.getAttribute("data-idx"));
-            const chosen = itemsData[idx];
-            if (!chosen) return;
-            popupDetailController.open(chosen, {
-              onStateChange: setPopupOpen,
-              allCards: itemsData,
-              featuredCards: itemsData,
-              relatedCards: itemsData.filter((x) => x !== chosen),
-              sliderConfig: config
-            });
-          });
-        });
-
-        Array.from(trackEl.querySelectorAll(".tweak-get-btn")).forEach((btn) => {
-          btn.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const idx = Number(btn.getAttribute("data-idx"));
-            const chosen = itemsData[idx];
-            if (!chosen) return;
-            downloadPickerController.open(chosen);
-          });
-        });
+      function getColStep() {
+        const firstCol = trackEl.querySelector(".tweak-page-col");
+        if (!firstCol) return 0;
+        const colWidth = firstCol.getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(trackEl).gap) || 16;
+        return colWidth + gap;
       }
 
-      function getPageStepWidth() {
-        const firstPage = trackEl.querySelector(".tweak-page-col");
-        if (!firstPage) return 0;
-        const pageRect = firstPage.getBoundingClientRect();
-        const style = window.getComputedStyle(trackEl);
-        const gap = parseFloat(style.gap || style.columnGap || "16") || 16;
-        return pageRect.width + gap;
-      }
-
-      function animateScrollTo(targetLeft) {
-        const type = String(config.slideType || "smooth").toLowerCase();
-        const speed = typeof config.slideSpeed === "number" ? config.slideSpeed : 900;
-        const pageEls = Array.from(trackEl.querySelectorAll(".tweak-page-col"));
-        const targetPage = pageEls[currentPageIdx];
-
-        if (type === "instant" || speed <= 0) {
-          viewportEl.scrollLeft = targetLeft;
-          return;
-        }
-
-        if (type === "fade" && targetPage) {
-          targetPage.classList.add("is-fading");
-          setTimeout(() => {
-            viewportEl.scrollLeft = targetLeft;
-            targetPage.classList.remove("is-fading");
-          }, Math.min(250, speed / 3));
-          return;
-        }
-
-        if (type === "zoom" && targetPage) {
-          targetPage.classList.add("is-zooming");
-          setTimeout(() => {
-            targetPage.classList.remove("is-zooming");
-          }, Math.min(450, speed / 2));
-        }
-
-        const startLeft = viewportEl.scrollLeft;
-        const distance = targetLeft - startLeft;
-        const duration = type === "scroll" ? Math.max(speed, 1600) : Math.min(speed, 1200);
-        const startTime = performance.now();
-
-        function easeInOut(t) {
-          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-        }
-
-        function step(now) {
-          const elapsed = now - startTime;
-          const progress = Math.min(1, elapsed / duration);
-          const eased = type === "slide" || type === "snap" ? progress : easeInOut(progress);
-          viewportEl.scrollLeft = startLeft + distance * eased;
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          }
-        }
-
-        requestAnimationFrame(step);
-      }
-
-      function goToPage(pageIdx) {
-        const totalPages = Math.ceil(itemsData.length / 3);
-        if (totalPages <= 0) return;
-
-        const maxScroll = Math.max(0, trackEl.scrollWidth - viewportEl.clientWidth);
-        const step = getPageStepWidth();
-        if (step <= 0) return;
-
-        if (pageIdx >= totalPages || pageIdx * step > maxScroll + 4) {
-          if (config.loop === false) {
-            stopAutoSlide();
-            return;
-          }
-          currentPageIdx = 0;
-          animateScrollTo(0);
-          return;
-        }
-
-        currentPageIdx = Math.max(0, pageIdx);
-        const targetLeft = Math.min(currentPageIdx * step, maxScroll);
-        animateScrollTo(targetLeft);
-      }
-
-      function nextPage() {
-        const totalPages = Math.ceil(itemsData.length / 3);
-        if (isPaused || isPopupOpen || totalPages <= 1) return;
-        goToPage(currentPageIdx + 1);
+      function animateRowsFadeZoom(onMidpoint) {
+        const rowEls = Array.from(trackEl.querySelectorAll(".tweak-row-card"));
+        rowEls.forEach((r) => r.classList.add("is-fading", "is-zooming"));
+        setTimeout(() => {
+          if (typeof onMidpoint === "function") onMidpoint();
+          rowEls.forEach((r) => r.classList.remove("is-fading", "is-zooming"));
+        }, 180);
       }
 
       function stopAutoSlide() {
@@ -7496,14 +7764,123 @@
           clearInterval(autoSlideTimer);
           autoSlideTimer = null;
         }
+        isAutoSliding = false;
+      }
+
+      function pauseAutoSlideTemporarily(ms = 4000) {
+        stopAutoSlide();
+        if (manualResumeTimer) clearTimeout(manualResumeTimer);
+        manualResumeTimer = setTimeout(() => {
+          startAutoSlide();
+        }, ms);
       }
 
       function startAutoSlide() {
         stopAutoSlide();
-        const totalPages = Math.ceil(itemsData.length / 3);
-        if (!config.autoplay || totalPages <= 1) return;
-        const interval = Number(config.autoplayInterval) > 0 ? Number(config.autoplayInterval) : 4500;
-        autoSlideTimer = setInterval(nextPage, interval);
+        if (isPopupOpen) return;
+        const maxScroll = viewportEl.scrollWidth - viewportEl.clientWidth;
+        if (maxScroll <= 2) return;
+
+        autoSlideTimer = setInterval(() => {
+          if (isPopupOpen) return;
+          const currentMax = viewportEl.scrollWidth - viewportEl.clientWidth;
+          if (currentMax <= 2) return;
+
+          const step = getColStep();
+          if (step <= 0) return;
+
+          let targetLeft = viewportEl.scrollLeft + step * slideDir;
+          if (targetLeft >= currentMax - 2) {
+            targetLeft = currentMax;
+            slideDir = -1;
+          } else if (targetLeft <= 2) {
+            targetLeft = 0;
+            slideDir = 1;
+          }
+
+          isAutoSliding = true;
+          animateRowsFadeZoom(() => {
+            viewportEl.scrollTo({ left: targetLeft, behavior: "smooth" });
+            setTimeout(() => {
+              isAutoSliding = false;
+            }, 420);
+          });
+        }, 4200);
+      }
+
+      function render(data) {
+        titleEl.textContent = data.sectionTitle;
+        subtitleEl.textContent = data.sectionSubtitle;
+        cardsData = data.cards;
+        window.__kpazzTweakFallback = cardsData;
+
+        menubarController.registerHomeSection("tweak", {
+          key: "tweak",
+          title: data.sectionTitle,
+          description: data.sectionSubtitle,
+          jsonFile: JSON_URL,
+          cards: cardsData
+        });
+
+        const cols = [];
+        for (let i = 0; i < cardsData.length; i += ITEMS_PER_COL) {
+          cols.push(cardsData.slice(i, i + ITEMS_PER_COL));
+        }
+
+        trackEl.innerHTML = cols.map((colItems) => `
+          <div class="tweak-page-col">
+            ${colItems.map((item) => {
+              const globalIdx = cardsData.indexOf(item);
+              const verBadge = formatVersionBadgeText(item.version);
+              return `
+                <article class="tweak-row-card" data-tweak-idx="${globalIdx}">
+                  <div class="tweak-row-left">
+                    <div class="tweak-row-icon">
+                      ${item.icon ? `<img src="${escapeAttr(item.icon)}" alt="${escapeAttr(item.name)}" loading="lazy" />` : ""}
+                    </div>
+                    <div class="tweak-row-meta">
+                      <div class="tweak-row-name">${escapeAttr(item.name)}</div>
+                      ${item.description ? `<p class="tweak-row-desc">${escapeAttr(item.description)}</p>` : ""}
+                    </div>
+                  </div>
+                  <div class="tweak-row-right">
+                    <button class="tweak-get-btn" type="button" data-tweak-get-idx="${globalIdx}"><span class="tweak-get-btn-main">${getCloudDownloadSvg()}<span>${escapeAttr(item.actionLabel)}</span></span></button>
+                    ${verBadge ? `<span class="btn-version-sub">${escapeAttr(verBadge)}</span>` : ""}
+                    ${item.subNote ? `<span class="tweak-sub-caption">${escapeAttr(item.subNote)}</span>` : ""}
+                  </div>
+                </article>
+              `;
+            }).join("")}
+          </div>
+        `).join("");
+
+        Array.from(trackEl.querySelectorAll(".tweak-row-card")).forEach((rowEl) => {
+          rowEl.addEventListener("click", () => {
+            const idx = Number(rowEl.getAttribute("data-tweak-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            popupDetailController.open(chosen, {
+              onStateChange: setPopupOpen,
+              allCards: cardsData,
+              featuredCards: cardsData,
+              relatedCards: cardsData.filter((_, i) => i !== idx)
+            });
+          });
+        });
+
+        Array.from(trackEl.querySelectorAll(".tweak-get-btn")).forEach((btnEl) => {
+          btnEl.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const idx = Number(btnEl.getAttribute("data-tweak-get-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            downloadPickerController.open(chosen);
+          });
+        });
+
+        slideDir = 1;
+        viewportEl.scrollLeft = 0;
+        startAutoSlide();
       }
 
       function setPopupOpen(open) {
@@ -7516,94 +7893,66 @@
       }
 
       async function init() {
-        itemsData = await loadData();
-        renderPages();
-        menubarController.registerHomeSection("tweak", {
-          key: "tweak",
-          title: config.sectionTitle,
-          description: config.sectionSubtitle,
-          jsonFile: JSON_URL,
-          cards: itemsData
-        });
-        startAutoSlide();
-
-        headerEl.addEventListener("click", () => {
-          authorWorksController.openSectionList(
-            config.sectionTitle,
-            config.sectionSubtitle,
-            JSON_URL,
-            itemsData,
-            (chosen) => {
-              popupDetailController.open(chosen, {
-                onStateChange: setPopupOpen,
-                allCards: itemsData,
-                featuredCards: itemsData,
-                relatedCards: itemsData.filter((x) => x !== chosen),
-                sliderConfig: config
-              });
+        if (headerEl) {
+          const openAllTweak = () => {
+            authorWorksController.openSectionList(
+              titleEl.textContent || "Tweak jailbreak ios",
+              subtitleEl.textContent || "",
+              JSON_URL,
+              cardsData,
+              (chosen) => {
+                popupDetailController.open(chosen, {
+                  onStateChange: setPopupOpen,
+                  allCards: cardsData,
+                  featuredCards: cardsData,
+                  relatedCards: cardsData.filter((x) => x !== chosen)
+                });
+              }
+            );
+          };
+          headerEl.addEventListener("click", openAllTweak);
+          headerEl.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              openAllTweak();
             }
-          );
-        });
+          });
+        }
 
-        headerEl.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            headerEl.click();
+        viewportEl.addEventListener("scroll", () => {
+          if (!isAutoSliding) {
+            pauseAutoSlideTemporarily(4000);
           }
-        });
+        }, { passive: true });
 
-        sectionEl.addEventListener("mouseenter", () => {
-          isPaused = true;
-        });
+        viewportEl.addEventListener("touchstart", () => pauseAutoSlideTemporarily(4000), { passive: true });
+        viewportEl.addEventListener("pointerdown", () => pauseAutoSlideTemporarily(4000), { passive: true });
 
+        sectionEl.addEventListener("mouseenter", stopAutoSlide);
         sectionEl.addEventListener("mouseleave", () => {
-          isPaused = false;
+          if (!isPopupOpen) startAutoSlide();
         });
 
-        viewportEl.addEventListener("pointerdown", (e) => {
-          if (e.target.closest(".tweak-get-btn")) return;
-          isPointerDown = true;
-          isPaused = true;
-          startX = e.pageX;
-          scrollStart = viewportEl.scrollLeft;
-        });
-
-        window.addEventListener("pointerup", () => {
-          if (!isPointerDown) return;
-          isPointerDown = false;
-          isPaused = false;
-          const step = getPageStepWidth();
-          if (step > 0) {
-            currentPageIdx = Math.round(viewportEl.scrollLeft / step);
-          }
-        });
-
-        viewportEl.addEventListener("pointermove", (e) => {
-          if (!isPointerDown) return;
-          const dx = e.pageX - startX;
-          viewportEl.scrollLeft = scrollStart - dx;
-        });
+        const data = await loadData();
+        render(data);
       }
 
-      return { init, setPopupOpen, goToPage };
+      return { init, setPopupOpen };
     })();
 
-    /* ==================== KHỞI TẠO TOÀN BỘ ỨNG DỤNG ==================== */
-    (async () => {
-      themeController.init();
-      menubarController.init();
-      searchController.init();
-      accountController.init();
-      bellController.init();
-      navbarController.init();
-      downloadPickerController.init();
-      authorWorksController.init();
-      popupDetailController.init();
-      await slideheroController.init();
-      await appiosController.init();
-      await tweakController.init();
-      navbarController.syncNavbarScrollState();
-    })();
+    /* ==================== KHỞI TẠO TẤT CẢ MODULE ==================== */
+    themeController.init();
+    bellController.init();
+    searchController.init();
+    accountController.init();
+    menubarController.init();
+    navbarController.init();
+    downloadPickerController.init();
+    authorWorksController.init();
+    popupDetailController.init();
+    slideheroController.init();
+    appiosController.init();
+    tweakController.init();
   </script>
 </body>
 </html>
