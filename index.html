@@ -23,6 +23,7 @@
       --badge-bg: #ef4444;
     }
 
+
     body.dark-theme {
       --bg-body: #0f172a;
       --bg-surface: #1e293b;
@@ -81,12 +82,28 @@
       vertical-align: middle;
     }
 
+    .btn-version-sub {
+      font-size: 0.62rem;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-top: 3px;
+      line-height: 1.1;
+      white-space: nowrap;
+      color: var(--text-muted);
+    }
+
+    .appios-dock-right .btn-version-sub {
+      color: rgba(255, 255, 255, 0.62);
+    }
+
     /* ==================== CSS RIÊNG: NAVBAR ==================== */
     #navbarRoot {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
+      width: 100%;
+      max-width: 100vw;
       height: 60px;
       background-color: var(--bg-surface);
       border-bottom: 1px solid var(--border-color);
@@ -94,15 +111,70 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 6px;
       padding: 0 12px;
       z-index: 900;
-      transition: background-color 0.45s ease, border-color 0.45s ease;
+      overflow: hidden;
+      transition:
+        top 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        left 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        right 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        width 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+        border-radius 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        gap 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.45s ease,
+        border-color 0.45s ease,
+        box-shadow 0.45s ease,
+        backdrop-filter 0.45s ease;
+    }
+
+    #navbarRoot.is-floating-glass {
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      width: calc(100vw - 8px);
+      border-radius: 16px;
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--bg-surface) 74%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 54%, transparent) 100%
+      );
+      backdrop-filter: blur(22px) saturate(185%);
+      -webkit-backdrop-filter: blur(22px) saturate(185%);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 8px 24px rgba(15, 23, 42, 0.16);
+    }
+
+    body.dark-theme #navbarRoot.is-floating-glass {
+      background: linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--bg-surface) 72%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 52%, transparent) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 10px 28px rgba(2, 6, 23, 0.42);
+    }
+
+    #navbarRoot.is-compact-left {
+      right: auto;
+      width: 212px;
+      max-width: calc(100vw - 8px);
+      justify-content: flex-start;
+      gap: 4px;
+      padding: 0 8px;
     }
 
     #navbarLeftGroup {
       display: flex;
       align-items: center;
+      flex: 1 1 auto;
       min-width: 0;
+      overflow: hidden;
     }
 
     #navbarMenuOpenBtn {
@@ -126,22 +198,41 @@
 
     #navbarThemeTrigger {
       position: relative;
-      margin-left: 8px;
-      min-width: 124px;
+      margin-left: 6px;
+      flex: 0 1 auto;
       width: auto;
-      max-width: 245px;
-      height: 38px;
+      min-width: 0;
+      max-width: 100%;
+      height: 40px;
       display: inline-flex;
       align-items: center;
       justify-content: flex-start;
       background: transparent;
       border: none;
-      padding: 5px 10px;
+      padding: 4px 9px;
       border-radius: 12px;
       cursor: pointer;
       perspective: 600px;
       overflow: hidden;
-      transition: background-color 0.25s ease, max-width 0.32s ease;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      transition:
+        background-color 0.25s ease,
+        margin-left 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.02s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #navbarRoot.is-compact-left #navbarThemeTrigger {
+      flex: 0 0 0px;
+      min-width: 0;
+      max-width: 0;
+      margin-left: 0;
+      padding: 4px 0;
+      opacity: 0;
+      transform: translateX(18px) scale(0.92);
+      pointer-events: none;
     }
 
     #navbarThemeTrigger:hover {
@@ -149,8 +240,19 @@
     }
 
     #navbarThemeTrigger.is-switching {
+      flex: 0 1 auto;
+      width: auto;
       background-color: var(--bg-elevated);
-      max-width: 252px;
+    }
+
+    #navbarThemeTrigger.is-tooltip-mode {
+      flex: 1 1 auto;
+      background-color: var(--bg-elevated);
+    }
+
+    #navbarRoot.is-compact-left #navbarThemeTrigger.is-switching,
+    #navbarRoot.is-compact-left #navbarThemeTrigger.is-tooltip-mode {
+      flex: 0 0 0px;
     }
 
     #navbarBrandContent {
@@ -162,15 +264,19 @@
       filter: blur(0px);
       transform: translateY(0) rotateX(0deg) scale(1);
       transition:
-        opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: auto;
+    }
+
+    #navbarBrandContent.is-instant {
+      transition: none !important;
     }
 
     #navbarBrandContent.is-hidden {
       position: absolute;
-      left: 10px;
+      left: 9px;
       opacity: 0;
       filter: blur(3px);
       transform: translateY(-7px) rotateX(45deg) scale(0.94);
@@ -189,6 +295,14 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    #navbarLogoImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     #navbarBrandTitle {
@@ -202,21 +316,29 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.8rem;
+      width: auto;
+      max-width: 100%;
+      min-width: 0;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--accent);
-      white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
       opacity: 0;
       filter: blur(3px);
       transform: translateY(7px) rotateX(-45deg) scale(0.94);
       transition:
-        opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
       pointer-events: none;
-      max-width: 0;
+    }
+
+    #navbarThemeFeedback.is-instant {
+      transition: none !important;
+    }
+
+    #navbarThemeFeedback.is-dark-theme-label {
+      color: #ffffff;
     }
 
     #navbarThemeFeedback.is-date-mode {
@@ -227,19 +349,73 @@
       color: #ffffff;
     }
 
+    #navbarThemeFeedback.is-notif-tooltip {
+      width: 100%;
+      color: var(--text-primary);
+      gap: 6px;
+    }
+
     #navbarThemeFeedback.is-active {
-      max-width: 230px;
       opacity: 1;
       filter: blur(0px);
       transform: translateY(0) rotateX(0deg) scale(1);
       pointer-events: auto;
     }
 
+    .navbar-tooltip-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    .navbar-tooltip-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-width: 0;
+      flex: 1;
+      line-height: 1.15;
+    }
+
+    .navbar-tooltip-title {
+      width: 100%;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #10b981;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .navbar-tooltip-desc {
+      width: 100%;
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+      margin-top: 1px;
+    }
+
     #navbarRightGroup {
       display: flex;
       align-items: center;
       gap: 4px;
+      flex: 0 0 auto;
       flex-shrink: 0;
+      transition: gap 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #navbarRoot.is-compact-left #navbarRightGroup {
+      gap: 2px;
     }
 
     .navbar-action-btn {
@@ -254,13 +430,58 @@
       justify-content: center;
       cursor: pointer;
       color: var(--text-primary);
-      transition: background-color 0.2s ease, color 0.2s ease;
+      overflow: hidden;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      transition:
+        width 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.02s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.2s ease,
+        color 0.2s ease;
     }
 
     .navbar-action-btn:hover,
     .navbar-action-btn.is-selected {
       background-color: var(--bg-hover);
       color: var(--accent);
+    }
+
+    #navbarHistoryBtn {
+      width: 0;
+      opacity: 0;
+      transform: translateX(16px) scale(0.88);
+      pointer-events: none;
+    }
+
+    #navbarRoot.is-compact-left #navbarHistoryBtn {
+      width: 40px;
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+    }
+
+    #navbarRoot.is-compact-left #navbarAccountBtn {
+      width: 0;
+      opacity: 0;
+      transform: translateX(18px) scale(0.88);
+      pointer-events: none;
+    }
+
+    #navbarAccountAvatarImg {
+      width: 26px;
+      height: 26px;
+      border-radius: 9px;
+      object-fit: cover;
+      display: none;
+    }
+
+    body.is-logged-in #navbarAccountDefaultIcon {
+      display: none;
+    }
+
+    body.is-logged-in #navbarAccountAvatarImg {
+      display: block;
     }
 
     /* ==================== CSS RIÊNG: BELL RING & ZOOM + FILL VÀNG + BADGE SỐ ĐẾM ==================== */
@@ -332,7 +553,6 @@
       right: 12px;
       width: calc(100vw - 24px);
       max-width: 356px;
-      max-height: 74vh;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: 16px;
@@ -417,6 +637,7 @@
     }
 
     #notifList {
+      max-height: 326px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -425,13 +646,14 @@
     }
 
     .notif-item {
-      padding: 10px 12px;
+      padding: 9px 11px;
       border-radius: 12px;
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
+      flex-shrink: 0;
       max-height: 180px;
       overflow: hidden;
       cursor: pointer;
@@ -498,7 +720,7 @@
     .notif-item-body {
       font-size: 0.78rem;
       color: var(--text-secondary);
-      line-height: 1.4;
+      line-height: 1.35;
     }
 
     .notif-empty-state {
@@ -508,30 +730,31 @@
       color: var(--text-muted);
     }
 
-    /* ==================== CSS RIÊNG: TOAST TOOLTIP CHỈ HIỆN 1 NỘI DUNG ==================== */
+    /* ==================== CSS RIÊNG: TOAST TOOLTIP (DƯỚI NAVBAR / DƯỚI LIST THÔNG BÁO) ==================== */
     #tabTooltipToast {
       position: fixed;
-      top: 70px;
+      top: 68px;
       right: 12px;
-      width: min(320px, calc(100vw - 24px));
+      width: calc(100vw - 24px);
+      max-width: 340px;
       padding: 10px 12px;
       border-radius: 14px;
       background-color: var(--bg-surface);
       border: 1px solid var(--border-color);
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
-      z-index: 892;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+      z-index: 896;
       display: flex;
-      flex-direction: column;
-      gap: 3px;
-      cursor: pointer;
+      align-items: center;
+      gap: 10px;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-8px) scale(0.95);
+      transform: translateY(-8px) scale(0.97);
       pointer-events: none;
       transition:
-        opacity 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+        top 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     #tabTooltipToast.is-visible {
@@ -541,25 +764,50 @@
       pointer-events: auto;
     }
 
-    .tooltip-card-tag {
-      font-size: 0.64rem;
+    #tabTooltipToast.is-hidden-by-panel {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    .tab-tooltip-toast-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-tooltip-toast-content {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .tab-tooltip-toast-badge {
+      font-size: 0.65rem;
       font-weight: 800;
-      text-transform: uppercase;
       color: #10b981;
+      text-transform: uppercase;
       letter-spacing: 0.3px;
     }
 
-    .tooltip-card-title {
-      font-size: 0.85rem;
+    .tab-tooltip-toast-title {
+      font-size: 0.86rem;
       font-weight: 700;
       color: var(--text-primary);
-      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
     }
 
-    .tooltip-card-desc {
-      font-size: 0.76rem;
+    .tab-tooltip-toast-body {
+      font-size: 0.78rem;
       color: var(--text-secondary);
-      line-height: 1.35;
+      line-height: 1.3;
+      margin-top: 2px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -643,6 +891,11 @@
       border-radius: 12px;
       background-color: var(--bg-elevated);
       border: 1px solid var(--border-color);
+    }
+
+    #searchHistoryBox.is-highlighted {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 22%, transparent);
     }
 
     #searchHistoryHead {
@@ -800,6 +1053,22 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
+      overflow: hidden;
+    }
+
+    #accountAvatarImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    body.is-logged-in #accountAvatarText {
+      display: none;
+    }
+
+    body.is-logged-in #accountAvatarImg {
+      display: block;
     }
 
     #accountName { font-size: 0.92rem; font-weight: 700; }
@@ -846,13 +1115,13 @@
 
     .account-item-btn:hover { background-color: var(--bg-hover); }
 
-    /* ==================== CSS RIÊNG: MENUBAR ==================== */
+    /* ==================== CSS RIÊNG: MENUBAR (LIQUID GLASS) ==================== */
     #menubarBackdrop {
       position: fixed;
       inset: 0;
       background-color: var(--overlay-bg);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.25s ease, visibility 0.25s ease;
@@ -871,14 +1140,35 @@
       bottom: 0;
       width: 80vw;
       max-width: 380px;
-      background-color: var(--bg-surface);
+      background: linear-gradient(
+        165deg,
+        color-mix(in srgb, var(--bg-surface) 76%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 58%, transparent) 100%
+      );
+      backdrop-filter: blur(24px) saturate(185%);
+      -webkit-backdrop-filter: blur(24px) saturate(185%);
+      border-right: 1px solid rgba(255, 255, 255, 0.34);
       transform: translateX(-100%);
-      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
       z-index: 1000;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18);
+      box-shadow:
+        inset 1px 0 0 rgba(255, 255, 255, 0.42),
+        8px 0 28px rgba(15, 23, 42, 0.22);
+    }
+
+    body.dark-theme #menubarPanel {
+      background: linear-gradient(
+        165deg,
+        color-mix(in srgb, var(--bg-surface) 74%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 54%, transparent) 100%
+      );
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        inset 1px 0 0 rgba(255, 255, 255, 0.2),
+        10px 0 32px rgba(2, 6, 23, 0.48);
     }
 
     #menubarPanel.is-open { transform: translateX(0); }
@@ -888,9 +1178,17 @@
       top: 0;
       height: 60px;
       min-height: 60px;
-      background-color: var(--bg-surface);
-      border-bottom: 1px solid var(--border-color);
-      box-shadow: var(--shadow);
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg-surface) 84%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 66%, transparent) 100%
+      );
+      backdrop-filter: blur(26px) saturate(195%);
+      -webkit-backdrop-filter: blur(26px) saturate(195%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        0 4px 16px rgba(15, 23, 42, 0.12);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -899,28 +1197,53 @@
       z-index: 10;
     }
 
+    body.dark-theme #menubarFixedHeader {
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg-surface) 82%, transparent) 0%,
+        color-mix(in srgb, var(--bg-surface) 64%, transparent) 100%
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 6px 20px rgba(2, 6, 23, 0.38);
+    }
+
     #menubarBrandBox {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
+      padding: 0 4px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
       flex-shrink: 0;
     }
 
     #menubarLogoBadge {
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 9px;
       background: linear-gradient(135deg, #2563eb, #06b6d4);
       color: #ffffff;
       font-weight: 800;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    #menubarLogoImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     #menubarBrandText {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--text-primary);
     }
@@ -931,13 +1254,17 @@
       min-width: 0;
       display: flex;
       align-items: center;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      background-color: color-mix(in srgb, var(--bg-elevated) 72%, transparent);
     }
 
     #menubarSearchIcon {
       position: absolute;
-      left: 9px;
+      left: 10px;
       color: var(--text-muted);
       pointer-events: none;
+      z-index: 2;
     }
 
     #menubarSearchField {
@@ -945,15 +1272,15 @@
       height: 34px;
       padding: 0 10px 0 30px;
       border-radius: 12px;
-      border: 1px solid var(--border-color);
-      background-color: var(--bg-elevated);
+      border: none;
+      background: transparent;
       font-size: 16px;
       outline: none;
     }
 
-    #menubarSearchField:focus {
+    #menubarSearchContainer:focus-within {
       border-color: var(--accent);
-      background-color: var(--bg-surface);
+      background-color: color-mix(in srgb, var(--bg-surface) 82%, transparent);
     }
 
     #menubarCloseBtn {
@@ -972,10 +1299,16 @@
 
     #menubarAuthGroup {
       padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    #menubarAuthRow {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      border-bottom: 1px solid var(--border-color);
     }
 
     .menubar-auth-btn {
@@ -992,7 +1325,7 @@
     }
 
     #menubarRegisterBtn {
-      background-color: var(--bg-elevated);
+      background-color: color-mix(in srgb, var(--bg-elevated) 84%, transparent);
       color: var(--text-primary);
       border: 1px solid var(--border-color);
     }
@@ -1007,7 +1340,7 @@
 
     #menubarLoginBtn:hover { background-color: var(--accent-hover); }
 
-    /* ==================== CSS RIÊNG: DANH SÁCH TIÊU ĐỀ JSON TRONG MENU ==================== */
+    /* ==================== CSS RIÊNG: DANH SÁCH TIÊU ĐỀ JSON TRONG MENU + HIỆU ỨNG SỔ XUỐNG / THU LÊN ==================== */
     #menubarJsonSections {
       padding: 12px 14px 20px;
       display: flex;
@@ -1015,9 +1348,15 @@
       gap: 10px;
     }
 
+    #menubarJsonList {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .menubar-json-card {
       border-radius: 14px;
-      background-color: var(--bg-elevated);
+      background-color: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
       border: 1px solid var(--border-color);
       overflow: hidden;
     }
@@ -1052,10 +1391,39 @@
       line-height: 1.25;
     }
 
+    .menubar-bottom-contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .menubar-contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      background-color: color-mix(in srgb, var(--bg-surface) 78%, transparent);
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-decoration: none;
+      line-height: 1.3;
+    }
+
+    .menubar-contact-link:hover {
+      background-color: var(--bg-hover);
+    }
+
     .menubar-json-desc {
       font-size: 0.78rem;
       color: var(--text-secondary);
-      margin-top: 3px;
+      margin-top: 5px;
       line-height: 1.35;
     }
 
@@ -1071,7 +1439,7 @@
       font-size: 0.85rem;
       font-weight: 700;
       color: var(--text-muted);
-      transition: transform 0.24s ease;
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
       flex-shrink: 0;
       padding-top: 2px;
     }
@@ -1081,17 +1449,35 @@
     }
 
     .menubar-json-drawer {
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      padding: 0 10px 12px;
-      border-top: 1px solid var(--border-color);
-      background-color: var(--bg-surface);
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      border-top: 0px solid var(--border-color);
+      background-color: color-mix(in srgb, var(--bg-surface) 78%, transparent);
+      transition:
+        grid-template-rows 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.26s ease,
+        border-top-width 0.26s ease;
     }
 
     .menubar-json-card.is-expanded .menubar-json-drawer {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .menubar-json-drawer-inner {
+      overflow: hidden;
+      min-height: 0;
       display: flex;
-      padding-top: 10px;
+      flex-direction: column;
+      gap: 8px;
+      padding: 0 10px;
+      transition: padding 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .menubar-json-card.is-expanded .menubar-json-drawer-inner {
+      padding: 10px 10px 12px;
     }
 
     .menubar-drawer-search {
@@ -1368,7 +1754,7 @@
 
     .slidehero-ctrl-btn:hover { background-color: var(--bg-hover); }
 
-    /* ==================== CSS RIÊNG: APPIOS ==================== */
+    /* ==================== CSS RIÊNG: APPIOS (BỐ CỤC CARD KIỂU SỰ KIỆN / ỨNG DỤNG) ==================== */
     #appiosSection {
       max-width: 680px;
       margin: 0 auto;
@@ -1377,6 +1763,7 @@
 
     #appiosHeader {
       padding: 0 16px 12px;
+      cursor: pointer;
     }
 
     #appiosTitle {
@@ -1419,10 +1806,10 @@
       width: calc(100vw - 32px);
       max-width: 420px;
       flex-shrink: 0;
-      border-radius: 18px;
+      border-radius: 22px;
       overflow: hidden;
-      background-color: #0b110d;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+      background-color: #1c1d21;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
       display: flex;
       flex-direction: column;
       user-select: none;
@@ -1440,13 +1827,13 @@
 
     .appios-hero {
       position: relative;
-      height: 390px;
-      padding: 20px;
+      height: 202px;
+      padding: 15px 18px 16px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: space-between;
       overflow: hidden;
-      background-color: #0b110d;
+      background-color: #181a1f;
     }
 
     .appios-banner-img {
@@ -1465,12 +1852,30 @@
       inset: 0;
       background:
         linear-gradient(180deg,
-          rgba(7, 15, 10, 0.08) 0%,
-          rgba(7, 15, 10, 0.25) 48%,
-          rgba(5, 11, 7, 0.86) 84%,
-          rgba(4, 9, 6, 0.97) 100%
+          rgba(12, 14, 18, 0.06) 0%,
+          rgba(12, 14, 18, 0.22) 45%,
+          rgba(16, 17, 20, 0.84) 78%,
+          rgba(24, 25, 29, 0.99) 100%
         );
       z-index: 1;
+    }
+
+    .appios-top-pill {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(34, 35, 39, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .appios-hero-content {
@@ -1482,42 +1887,41 @@
     .appios-kicker {
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.76);
-      margin-bottom: 6px;
+      color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 4px;
     }
 
     .appios-card-title {
-      font-size: 1.55rem;
+      font-size: 1.48rem;
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.4px;
+      line-height: 1.18;
+      letter-spacing: -0.35px;
       color: #ffffff;
       white-space: pre-line;
     }
 
     .appios-card-desc {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       line-height: 1.35;
-      color: rgba(255, 255, 255, 0.88);
-      margin-top: 6px;
+      color: rgba(255, 255, 255, 0.78);
+      margin-top: 5px;
     }
 
     .appios-dock {
-      background: linear-gradient(180deg, rgba(24, 34, 27, 0.96) 0%, rgba(18, 25, 20, 0.99) 100%);
-      padding: 12px 16px 14px;
+      background-color: #18191d;
+      padding: 13px 18px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .appios-dock-left {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 12px;
       min-width: 0;
       flex: 1;
     }
@@ -1525,11 +1929,11 @@
     .appios-app-icon {
       width: 48px;
       height: 48px;
-      border-radius: 11px;
+      border-radius: 12px;
       flex-shrink: 0;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
-      background-color: #1f2937;
+      background-color: #26282f;
     }
 
     .appios-app-icon img {
@@ -1544,7 +1948,7 @@
     }
 
     .appios-app-name {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-weight: 700;
       line-height: 1.25;
       color: #ffffff;
@@ -1554,9 +1958,12 @@
     }
 
     .appios-app-genre {
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.65);
       margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .appios-dock-right {
@@ -1567,24 +1974,29 @@
     }
 
     .appios-get-btn {
-      height: 30px;
-      padding: 0 15px;
+      height: 32px;
+      padding: 0 16px;
       border-radius: 999px;
       border: none;
-      background-color: #007aff;
+      background-color: rgba(255, 255, 255, 0.16);
       color: #ffffff;
-      font-size: 0.84rem;
-      font-weight: 800;
+      font-size: 0.86rem;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0, 122, 255, 0.35);
       transition: background-color 0.2s ease, transform 0.15s ease;
     }
 
+    .appios-get-btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .appios-get-btn:hover {
-      background-color: #0066d6;
+      background-color: rgba(255, 255, 255, 0.24);
     }
 
     .appios-get-btn:active {
@@ -1596,6 +2008,204 @@
       color: rgba(255, 255, 255, 0.58);
       margin-top: 3px;
       line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    /* ==================== CSS RIÊNG: TWEAK (CARD BO 4 GÓC BAO CẢ TIÊU ĐỀ CHÍNH & PHỤ) ==================== */
+    #Tweak {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 18px 16px 12px;
+    }
+
+    #tweakCardShell {
+      border-radius: 22px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    #tweakHeader {
+      padding: 0 0 12px;
+      cursor: pointer;
+    }
+
+    #tweakTitleRow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #tweakTitle {
+      font-size: 1.32rem;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.35px;
+      color: var(--text-primary);
+    }
+
+    #tweakTitleChevron {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      line-height: 1;
+    }
+
+    #tweakSubtitle {
+      font-size: 0.95rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    #tweakViewport {
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0;
+    }
+
+    #tweakViewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    #tweakTrack {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .tweak-page-col {
+      width: calc(100vw - 64px);
+      max-width: 408px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 0;
+      user-select: none;
+    }
+
+    .tweak-row-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 2px 0;
+      border-bottom: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .tweak-row-card.is-fading {
+      opacity: 0.35;
+    }
+
+    .tweak-row-card.is-zooming {
+      transform: scale(0.98);
+    }
+
+    .tweak-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .tweak-row-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    .tweak-row-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tweak-row-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .tweak-row-name {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tweak-row-desc {
+      font-size: 0.84rem;
+      line-height: 1.32;
+      color: var(--text-secondary);
+      margin-top: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tweak-row-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .tweak-get-btn {
+      height: 30px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: none;
+      background-color: var(--bg-elevated);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .tweak-get-btn-main {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tweak-get-btn:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .tweak-get-btn:active {
+      transform: scale(0.96);
+    }
+
+    .tweak-sub-caption {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.1;
+      white-space: nowrap;
     }
 
     /* ==================== CSS RIÊNG: POPUP DETAIL ==================== */
@@ -1811,9 +2421,16 @@
       margin-top: 1px;
     }
 
+    #popupDetailStickyRight {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
     #popupDetailTopActionBtn {
       height: 30px;
-      padding: 0 15px;
+      padding: 0 14px;
       margin-right: 4px;
       border-radius: 999px;
       border: none;
@@ -1940,7 +2557,6 @@
       line-height: 1.35;
     }
 
-    /* Nút Nhận trong popup di chuyển sang bên cạnh mép card nhưng vẫn trong hàng hiện tại */
     #popupDetailActionRow {
       display: flex;
       align-items: center;
@@ -1959,10 +2575,17 @@
       text-overflow: ellipsis;
     }
 
+    #popupDetailPrimaryWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
     #popupDetailPrimaryBtn {
       height: 32px;
       padding: 0 16px;
-      margin-left: auto;
       border-radius: 999px;
       border: none;
       background-color: #007aff;
@@ -1979,6 +2602,12 @@
 
     #popupDetailPrimaryBtn:hover {
       background-color: #0066d6;
+    }
+
+    .popup-btn-top-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     #popupDetailMetaStrip {
@@ -2468,7 +3097,6 @@
       line-height: 1.3;
     }
 
-    /* ==================== CÓ THỂ BẠN CŨNG THÍCH: TỐI ĐA 4 DÒNG / CỘT, CUỘN NGANG SANG CỘT MỚI ==================== */
     .popup-detail-related-list {
       display: flex;
       flex-direction: row;
@@ -2692,7 +3320,7 @@
       text-overflow: ellipsis;
     }
 
-    /* ==================== CSS RIÊNG: POPUP NỘI DUNG CỦA TÁC GIẢ ==================== */
+    /* ==================== CSS RIÊNG: POPUP NỘI DUNG CỦA TÁC GIẢ / SECTION ==================== */
     #authorWorksBackdrop {
       position: fixed;
       inset: 0;
@@ -2777,7 +3405,14 @@
       border-top: 1px solid var(--border-color);
     }
 
-    /* ==================== NỘI DUNG DƯỚI APPIOS ==================== */
+    .author-work-action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    /* ==================== NỘI DUNG DƯỚI TWEAK ==================== */
     .page-content {
       max-width: 680px;
       margin: 0 auto;
@@ -2821,6 +3456,15 @@
       cursor: pointer;
       color: var(--text-secondary);
     }
+
+    #copyrightFooter {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
   </style>
 </head>
 <body>
@@ -2837,7 +3481,9 @@
 
       <button id="navbarThemeTrigger" type="button" aria-label="Chuyển đổi sáng tối Kpazz" title="Bấm để chuyển sáng/tối">
         <span id="navbarBrandContent">
-          <span id="navbarLogoBadge">K</span>
+          <span id="navbarLogoBadge">
+            <img id="navbarLogoImg" src="CydiaIcon.png" alt="Logo Kpazz" onerror="this.style.display='none'; this.parentElement.textContent='K';" />
+          </span>
           <span id="navbarBrandTitle">Kpazz</span>
         </span>
         <span id="navbarThemeFeedback" aria-live="polite"></span>
@@ -2852,6 +3498,14 @@
         </svg>
       </button>
 
+      <button id="navbarHistoryBtn" class="navbar-action-btn" type="button" aria-label="Lịch sử tìm kiếm" title="Lịch sử tìm kiếm">
+        <svg class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/>
+          <polyline points="3 3 3 8 8 8"/>
+          <polyline points="12 7 12 12 15.5 14"/>
+        </svg>
+      </button>
+
       <button id="navbarNotifBtn" class="navbar-action-btn" type="button" aria-label="Thông báo" title="Thông báo">
         <span id="navbarBellIconWrap">
           <svg id="navbarBellIcon" class="ui-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2863,11 +3517,13 @@
       </button>
 
       <button id="navbarAccountBtn" class="navbar-action-btn" type="button" aria-label="Tài khoản" title="Tài khoản">
-        <svg class="ui-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="3" width="18" height="18" rx="6"/>
-          <circle cx="12" cy="9.5" r="3"/>
-          <path d="M6.8 18.5c1.1-2.4 3-3.6 5.2-3.6s4.1 1.2 5.2 3.6"/>
+        <svg id="navbarAccountDefaultIcon" class="ui-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="10" cy="8" r="3.5"/>
+          <path d="M4 19c1.2-2.6 3.3-4 6-4s4.8 1.4 6 4"/>
+          <line x1="18.5" y1="8" x2="18.5" y2="14"/>
+          <line x1="15.5" y1="11" x2="21.5" y2="11"/>
         </svg>
+        <img id="navbarAccountAvatarImg" src="https://picsum.photos/seed/kpazz-user-avatar/120/120" alt="Avatar người dùng" />
       </button>
     </div>
   </header>
@@ -2889,8 +3545,8 @@
     <div id="notifList"></div>
   </aside>
 
-  <!-- ==================== TOAST TOOLTIP CHỈ HIỆN 1 NỘI DUNG ==================== -->
-  <div id="tabTooltipToast" role="status" aria-live="polite"></div>
+  <!-- ==================== TOAST TOOLTIP (DƯỚI NAVBAR / DƯỚI LIST THÔNG BÁO) ==================== -->
+  <div id="tabTooltipToast" role="status" aria-live="polite" aria-hidden="true"></div>
 
   <!-- ==================== HTML RIÊNG: SEARCH ==================== -->
   <section id="searchPanel" aria-label="Tìm kiếm riêng Kpazz">
@@ -2918,10 +3574,13 @@
   <aside id="accountPanel" aria-label="Bảng tài khoản riêng">
     <div id="accountHeader">
       <div id="accountProfileInfo">
-        <span id="accountAvatar">KP</span>
+        <span id="accountAvatar">
+          <span id="accountAvatarText">KP</span>
+          <img id="accountAvatarImg" src="https://picsum.photos/seed/kpazz-user-avatar/120/120" alt="Avatar" />
+        </span>
         <div>
           <div id="accountName">Tài khoản khách</div>
-          <div id="accountSub">Khu vực account riêng biệt</div>
+          <div id="accountSub">Chưa đăng nhập</div>
         </div>
       </div>
       <button id="accountCloseBtn" type="button" aria-label="Đóng bảng tài khoản">
@@ -2933,6 +3592,14 @@
     </div>
 
     <div id="accountActionList">
+      <button id="accountToggleAuthBtn" class="account-item-btn" type="button">
+        <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/>
+          <line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        <span id="accountToggleAuthLabel">Đăng nhập tài khoản</span>
+      </button>
       <button id="accountProfileBtn" class="account-item-btn" type="button">
         <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="8" r="4"/>
@@ -2953,6 +3620,14 @@
         </svg>
         <span>Cài đặt tài khoản</span>
       </button>
+      <button id="accountClearCacheBtn" class="account-item-btn" type="button">
+        <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 6h18"/>
+          <path d="M8 6V4h8v2"/>
+          <path d="M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/>
+        </svg>
+        <span>Dọn cache</span>
+      </button>
     </div>
   </aside>
 
@@ -2962,7 +3637,9 @@
   <aside id="menubarPanel" aria-label="Menu KPazz" aria-hidden="true">
     <div id="menubarFixedHeader">
       <div id="menubarBrandBox">
-        <span id="menubarLogoBadge">K</span>
+        <span id="menubarLogoBadge">
+          <img id="menubarLogoImg" src="CydiaIcon.png" alt="Logo Kpazz" onerror="this.style.display='none'; this.parentElement.textContent='K';" />
+        </span>
         <span id="menubarBrandText">KPazz</span>
       </div>
 
@@ -2983,27 +3660,49 @@
     </div>
 
     <div id="menubarAuthGroup">
-      <button id="menubarRegisterBtn" class="menubar-auth-btn" type="button">
-        <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="10" cy="8" r="3.5"/>
-          <path d="M4 19c1.2-2.6 3.3-4 6-4s4.8 1.4 6 4"/>
-          <line x1="18.5" y1="8" x2="18.5" y2="14"/>
-          <line x1="15.5" y1="11" x2="21.5" y2="11"/>
-        </svg>
-        <span>Đăng ký</span>
-      </button>
+      <div id="menubarAuthRow">
+        <button id="menubarRegisterBtn" class="menubar-auth-btn" type="button">
+          <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="10" cy="8" r="3.5"/>
+            <path d="M4 19c1.2-2.6 3.3-4 6-4s4.8 1.4 6 4"/>
+            <line x1="18.5" y1="8" x2="18.5" y2="14"/>
+            <line x1="15.5" y1="11" x2="21.5" y2="11"/>
+          </svg>
+          <span>Đăng ký</span>
+        </button>
 
-      <button id="menubarLoginBtn" class="menubar-auth-btn" type="button">
-        <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-          <polyline points="10 17 15 12 10 7"/>
-          <line x1="15" y1="12" x2="3" y2="12"/>
-        </svg>
-        <span>Đăng nhập</span>
-      </button>
+        <button id="menubarLoginBtn" class="menubar-auth-btn" type="button">
+          <svg class="ui-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/>
+            <line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          <span id="menubarLoginLabel">Đăng nhập</span>
+        </button>
+      </div>
     </div>
 
-    <div id="menubarJsonSections" aria-label="Danh sách section JSON trên trang chủ"></div>
+    <div id="menubarJsonSections" aria-label="Danh sách section JSON trên trang chủ">
+      <div id="menubarJsonList"></div>
+      <div id="menubarBottomContactRow" class="menubar-bottom-contact-row" aria-label="Thông tin liên hệ">
+        <a class="menubar-contact-link" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <span>Facebook</span>
+          <span>&gt;</span>
+        </a>
+        <a class="menubar-contact-link" href="https://m.me" target="_blank" rel="noopener noreferrer">
+          <span>Mess</span>
+          <span>&gt;</span>
+        </a>
+        <a class="menubar-contact-link" href="https://zalo.me" target="_blank" rel="noopener noreferrer">
+          <span>Zalo</span>
+          <span>&gt;</span>
+        </a>
+        <a class="menubar-contact-link" href="mailto:support@kpazz.vn" target="_blank" rel="noopener noreferrer">
+          <span>Mail</span>
+          <span>&gt;</span>
+        </a>
+      </div>
+    </div>
   </aside>
 
   <!-- ==================== HTML RIÊNG: SLIDEHERO ==================== -->
@@ -3035,13 +3734,30 @@
 
   <!-- ==================== HTML RIÊNG: APPIOS ==================== -->
   <section id="appiosSection" aria-label="APP Dành Cho ios">
-    <div id="appiosHeader">
+    <div id="appiosHeader" role="button" tabindex="0" title="Xem toàn bộ nội dung APP Dành Cho ios">
       <h2 id="appiosTitle"></h2>
       <p id="appiosSubtitle"></p>
     </div>
 
     <div id="appiosViewport">
       <div id="appiosTrack"></div>
+    </div>
+  </section>
+
+  <!-- ==================== HTML RIÊNG: TWEAK ==================== -->
+  <section id="Tweak" aria-label="Tweak jailbreak ios">
+    <div id="tweakCardShell">
+      <div id="tweakHeader" role="button" tabindex="0" title="Xem toàn bộ nội dung Tweak jailbreak ios">
+        <div id="tweakTitleRow">
+          <h2 id="tweakTitle"></h2>
+          <span id="tweakTitleChevron" aria-hidden="true">&gt;</span>
+        </div>
+        <p id="tweakSubtitle"></p>
+      </div>
+
+      <div id="tweakViewport">
+        <div id="tweakTrack"></div>
+      </div>
     </div>
   </section>
 
@@ -3063,14 +3779,19 @@
               <div id="popupDetailTopSub"></div>
             </div>
           </div>
-          <button id="popupDetailTopActionBtn" type="button">
-            <svg class="cloud-dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M17.5 19H7a4.5 4.5 0 0 1-.4-8.98A6 6 0 0 1 18.2 8.2 4 4 0 0 1 17.5 19z"/>
-              <line x1="12" y1="11" x2="12" y2="17"/>
-              <polyline points="9.5 14.5 12 17 14.5 14.5"/>
-            </svg>
-            <span class="btn-label-text">Nhận</span>
-          </button>
+          <div id="popupDetailStickyRight">
+            <button id="popupDetailTopActionBtn" type="button">
+              <span class="popup-btn-top-row">
+                <svg class="cloud-dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17.5 19H7a4.5 4.5 0 0 1-.4-8.98A6 6 0 0 1 18.2 8.2 4 4 0 0 1 17.5 19z"/>
+                  <line x1="12" y1="11" x2="12" y2="17"/>
+                  <polyline points="9.5 14.5 12 17 14.5 14.5"/>
+                </svg>
+                <span class="btn-label-text">Nhận</span>
+              </span>
+            </button>
+            <span id="popupDetailTopVersionSub" class="btn-version-sub"></span>
+          </div>
         </div>
 
         <button id="popupDetailShareBtn" class="popup-detail-glass-btn" type="button" aria-label="Chia sẻ" title="Chia sẻ">
@@ -3098,14 +3819,19 @@
           <p id="popupDetailSubtitle"></p>
           <div id="popupDetailActionRow">
             <span id="popupDetailVersionBadge"></span>
-            <button id="popupDetailPrimaryBtn" type="button">
-              <svg class="cloud-dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M17.5 19H7a4.5 4.5 0 0 1-.4-8.98A6 6 0 0 1 18.2 8.2 4 4 0 0 1 17.5 19z"/>
-                <line x1="12" y1="11" x2="12" y2="17"/>
-                <polyline points="9.5 14.5 12 17 14.5 14.5"/>
-              </svg>
-              <span class="btn-label-text">Nhận</span>
-            </button>
+            <div id="popupDetailPrimaryWrap">
+              <button id="popupDetailPrimaryBtn" type="button">
+                <span class="popup-btn-top-row">
+                  <svg class="cloud-dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M17.5 19H7a4.5 4.5 0 0 1-.4-8.98A6 6 0 0 1 18.2 8.2 4 4 0 0 1 17.5 19z"/>
+                    <line x1="12" y1="11" x2="12" y2="17"/>
+                    <polyline points="9.5 14.5 12 17 14.5 14.5"/>
+                  </svg>
+                  <span class="btn-label-text">Nhận</span>
+                </span>
+              </button>
+              <span id="popupDetailPrimaryVersionSub" class="btn-version-sub"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -3243,7 +3969,7 @@
     </div>
   </div>
 
-  <!-- ==================== POPUP NỘI DUNG CỦA TÁC GIẢ ==================== -->
+  <!-- ==================== POPUP NỘI DUNG CỦA TÁC GIẢ / SECTION ==================== -->
   <div id="authorWorksBackdrop" aria-hidden="true">
     <div id="authorWorksBox" role="dialog" aria-modal="true" aria-labelledby="authorWorksTitle">
       <div id="authorWorksHeader">
@@ -3257,7 +3983,7 @@
     </div>
   </div>
 
-  <!-- ==================== NỘI DUNG DƯỚI APPIOS ==================== -->
+  <!-- ==================== NỘI DUNG DƯỚI TWEAK ==================== -->
   <main class="page-content">
     <section class="demo-card">
       <p>
@@ -3267,6 +3993,7 @@
         <span id="themeStatusBadge">Đang tải trạng thái...</span>
         <button id="themeResetAutoBtn" type="button">Tự động theo giờ</button>
       </div>
+      <footer id="copyrightFooter"></footer>
     </section>
   </main>
 
@@ -3287,7 +4014,16 @@
       }, { passive: false });
     })();
 
-    /* ==================== HỖ TRỢ ICON ĐÁM MÂY TẢI VỀ ==================== */
+    /* ==================== BẢN QUYỀN THEO NĂM HIỆN TẠI ==================== */
+    (() => {
+      const footerEl = document.getElementById("copyrightFooter");
+      if (footerEl) {
+        const currentYear = new Date().getFullYear();
+        footerEl.textContent = `© ${currentYear} Kpazz. Bản quyền thuộc về Kpazz.`;
+      }
+    })();
+
+    /* ==================== HỖ TRỢ ICON ĐÁM MÂY TẢI VỀ + SỐ PHIÊN BẢN ==================== */
     function getCloudDownloadSvg() {
       return `
         <svg class="cloud-dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -3298,34 +4034,47 @@
       `;
     }
 
-    function setButtonLabelWithCloud(btnEl, text, isDownload = true) {
+    function formatVersionBadgeText(version) {
+      const raw = String(version || "").trim();
+      if (!raw) return "";
+      if (/^v/i.test(raw)) return raw;
+      return `v${raw}`;
+    }
+
+    function setButtonLabelWithCloud(btnEl, text, isDownload = true, versionSubEl = null, version = "") {
       if (!btnEl) return;
-      const labelSpan = btnEl.querySelector(".btn-label-text");
-      const existingIcon = btnEl.querySelector(".cloud-dl-icon");
-      if (labelSpan) {
-        labelSpan.textContent = text;
-        if (isDownload && !existingIcon) {
-          btnEl.insertAdjacentHTML("afterbegin", getCloudDownloadSvg());
-        } else if (!isDownload && existingIcon) {
-          existingIcon.remove();
-        }
-      } else {
-        btnEl.innerHTML = `${isDownload ? getCloudDownloadSvg() : ""}<span class="btn-label-text">${text}</span>`;
+      btnEl.innerHTML = `<span class="popup-btn-top-row">${isDownload ? getCloudDownloadSvg() : ""}<span class="btn-label-text">${text}</span></span>`;
+      if (versionSubEl) {
+        versionSubEl.textContent = isDownload ? formatVersionBadgeText(version) : "";
       }
     }
 
-    /* ==================== JS RIÊNG: THEME + (HÔM NAY! THỨ NGÀY THÁNG) GIỮ YÊN 4S ==================== */
+    /* ==================== JS RIÊNG: THEME + (HÔM NAY! THỨ NGÀY THÁNG) + TOOLTIP HÀNG ĐỢI TUẦN TỰ ==================== */
     const themeController = (() => {
       const STORAGE_KEY = "kpazz_theme_override";
-      const HOLD_DURATION_MS = 4000;
+      const THEME_DURATION_MS = 5000;
+      const DATE_DURATION_MS = 5000;
+      const BRAND_HOLD_MS = 5000;
+      const NAVBAR_TOOLTIP_DURATION_MS = 6000;
+
       const triggerBtn = document.getElementById("navbarThemeTrigger");
       const brandContent = document.getElementById("navbarBrandContent");
       const feedbackBox = document.getElementById("navbarThemeFeedback");
       const statusBadge = document.getElementById("themeStatusBadge");
       const resetAutoBtn = document.getElementById("themeResetAutoBtn");
 
-      let revertTimer = null;
+      let activeDisplayTimer = null;
       let randomHintTimer = null;
+      let activeEntry = null;
+      let displayQueue = [];
+
+      function escapeHtml(val = "") {
+        return String(val)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
 
       function getDefaultThemeByHour(date = new Date()) {
         const hour = date.getHours();
@@ -3383,70 +4132,203 @@
         `;
       }
 
-      function renderNavbarHintContent(isDark, modeType) {
-        feedbackBox.classList.toggle("is-date-mode", modeType === "date");
-        if (modeType === "date") {
-          feedbackBox.innerHTML = `
-            ${getCalendarIconSvg(16)}
-            <span>${getTodayVietnameseLabel(new Date())}</span>
-          `;
+      function hideBannerToBrand() {
+        activeEntry = { kind: "brand", durationMs: BRAND_HOLD_MS };
+        feedbackBox.classList.remove("is-active", "is-notif-tooltip", "is-date-mode", "is-dark-theme-label", "is-instant");
+        triggerBtn.classList.remove("is-tooltip-mode", "is-switching");
+        brandContent.classList.remove("is-hidden", "is-instant");
+
+        if (activeDisplayTimer) {
+          clearTimeout(activeDisplayTimer);
+          activeDisplayTimer = null;
+        }
+        activeDisplayTimer = setTimeout(() => {
+          finishCurrentEntryAndAdvance();
+        }, BRAND_HOLD_MS);
+      }
+
+      function finishCurrentEntryAndAdvance() {
+        if (activeDisplayTimer) {
+          clearTimeout(activeDisplayTimer);
+          activeDisplayTimer = null;
+        }
+        activeEntry = null;
+
+        while (displayQueue.length > 0) {
+          const next = displayQueue.shift();
+          if (next.kind === "tooltip") {
+            const now = Date.now();
+            if (next.expiresAt <= now) {
+              continue;
+            }
+            const remaining = Math.max(next.expiresAt - now, 400);
+            presentEntryNow({ ...next, durationMs: remaining }, false);
+            return;
+          }
+          presentEntryNow(next, false);
           return;
         }
-        const label = isDark ? "Tối" : "Sáng";
-        feedbackBox.innerHTML = `
-          ${getThemeIconSvg(isDark, 19)}
-          <span>${label}</span>
-        `;
+
+        hideBannerToBrand();
       }
 
-      function showNavbarHint(isDark, modeType = "theme", durationMs = HOLD_DURATION_MS) {
-        if (revertTimer) {
-          clearTimeout(revertTimer);
-          revertTimer = null;
+      function presentEntryNow(entry, instant = false) {
+        if (!entry) return;
+        if (activeDisplayTimer) {
+          clearTimeout(activeDisplayTimer);
+          activeDisplayTimer = null;
         }
 
-        renderNavbarHintContent(isDark, modeType);
+        activeEntry = entry;
 
-        requestAnimationFrame(() => {
+        if (instant) {
+          brandContent.classList.add("is-instant");
+          feedbackBox.classList.add("is-instant");
+        } else {
+          brandContent.classList.remove("is-instant");
+          feedbackBox.classList.remove("is-instant");
+        }
+
+        if (entry.kind === "tooltip") {
+          const title = String(entry.tooltipObj?.title || "").trim();
+          const desc = String(entry.tooltipObj?.body || "").trim();
+          const iconUrl = String(entry.tooltipObj?.icon || "").trim();
+
+          triggerBtn.classList.add("is-tooltip-mode", "is-switching");
+          feedbackBox.classList.remove("is-date-mode", "is-dark-theme-label");
+          feedbackBox.classList.add("is-notif-tooltip");
+
+          const iconHtml = iconUrl
+            ? `<img class="navbar-tooltip-icon" src="${escapeHtml(iconUrl)}" alt="${escapeHtml(title)}" onerror="this.style.display='none';" />`
+            : "";
+
+          feedbackBox.innerHTML = `
+            ${iconHtml}
+            <span class="navbar-tooltip-text-col">
+              <span class="navbar-tooltip-title">${escapeHtml(title)}</span>
+              ${desc ? `<span class="navbar-tooltip-desc">${escapeHtml(desc)}</span>` : ""}
+            </span>
+          `;
+        } else if (entry.kind === "date") {
+          triggerBtn.classList.remove("is-tooltip-mode");
           triggerBtn.classList.add("is-switching");
+          feedbackBox.classList.remove("is-notif-tooltip", "is-dark-theme-label");
+          feedbackBox.classList.add("is-date-mode");
+          feedbackBox.innerHTML = `
+            ${getCalendarIconSvg(16)}
+            <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(getTodayVietnameseLabel(new Date()))}</span>
+          `;
+        } else {
+          const isDark = Boolean(entry.isDark);
+          const label = entry.switchingText || (isDark ? "Chế độ tối" : "Chế độ sáng");
+          triggerBtn.classList.remove("is-tooltip-mode");
+          triggerBtn.classList.add("is-switching");
+          feedbackBox.classList.remove("is-notif-tooltip", "is-date-mode");
+          feedbackBox.classList.toggle("is-dark-theme-label", isDark);
+          feedbackBox.innerHTML = `
+            ${getThemeIconSvg(isDark, 19)}
+            <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${escapeHtml(label)}</span>
+          `;
+        }
+
+        if (instant) {
           brandContent.classList.add("is-hidden");
           feedbackBox.classList.add("is-active");
-        });
+          void feedbackBox.offsetWidth;
+          requestAnimationFrame(() => {
+            brandContent.classList.remove("is-instant");
+            feedbackBox.classList.remove("is-instant");
+          });
+        } else {
+          requestAnimationFrame(() => {
+            brandContent.classList.add("is-hidden");
+            feedbackBox.classList.add("is-active");
+          });
+        }
 
-        revertTimer = setTimeout(() => {
-          feedbackBox.classList.remove("is-active");
-          brandContent.classList.remove("is-hidden");
-          triggerBtn.classList.remove("is-switching");
-        }, durationMs);
+        activeDisplayTimer = setTimeout(() => {
+          finishCurrentEntryAndAdvance();
+        }, Math.max(Number(entry.durationMs) || THEME_DURATION_MS, 400));
       }
 
-      function applyTheme(mode, isManual = false, withHint = false, modeType = "theme") {
+      function enqueueDisplayEntry(entry, instant = false) {
+        if (!entry) return;
+        if (instant) {
+          presentEntryNow(entry, true);
+          return;
+        }
+        if (!activeEntry) {
+          presentEntryNow(entry, false);
+          return;
+        }
+        const existingIdx = displayQueue.findIndex((item) => item.kind === entry.kind);
+        if (existingIdx !== -1) {
+          displayQueue[existingIdx] = entry;
+        } else {
+          displayQueue.push(entry);
+        }
+      }
+
+      function showNavbarHint(isDark, modeType = "theme", durationMs = null, instant = false, switchingText = "") {
+        const resolvedDuration = durationMs ?? (modeType === "date" ? DATE_DURATION_MS : THEME_DURATION_MS);
+        enqueueDisplayEntry({
+          kind: modeType === "date" ? "date" : "theme",
+          isDark: Boolean(isDark),
+          switchingText,
+          durationMs: resolvedDuration
+        }, instant);
+      }
+
+      function showNotificationNavbarTooltip(tooltipData = null, durationMs = NAVBAR_TOOLTIP_DURATION_MS) {
+        if (!tooltipData) return;
+        const normalized = typeof tooltipData === "string"
+          ? { title: tooltipData, body: "", icon: "" }
+          : {
+              title: String(tooltipData.title || "").trim(),
+              body: String(tooltipData.body || "").trim(),
+              icon: String(tooltipData.icon || "").trim()
+            };
+
+        if (!normalized.title && !normalized.body) return;
+
+        presentEntryNow({
+          kind: "tooltip",
+          tooltipObj: normalized,
+          durationMs,
+          expiresAt: Date.now() + durationMs
+        }, true);
+      }
+
+      function applyTheme(mode, isManual = false, withHint = false, modeType = "theme", instant = false, switchingText = "") {
         const isDark = mode === "dark";
         document.body.classList.toggle("dark-theme", isDark);
 
         if (statusBadge) {
-          const modeLabel = isDark ? "Chế độ Tối" : "Chế độ Sáng";
+          const modeLabel = isDark ? "Chế độ tối" : "Chế độ sáng";
           const sourceLabel = isManual ? "Thủ công" : "Theo thời gian trong ngày";
           statusBadge.textContent = `${modeLabel} • ${sourceLabel}`;
         }
 
         if (withHint) {
-          showNavbarHint(isDark, modeType, HOLD_DURATION_MS);
+          const ms = modeType === "date" ? DATE_DURATION_MS : THEME_DURATION_MS;
+          showNavbarHint(isDark, modeType, ms, instant, switchingText);
         }
       }
 
       function toggleTheme() {
         const isCurrentlyDark = document.body.classList.contains("dark-theme");
         const nextMode = isCurrentlyDark ? "light" : "dark";
+        const nextLabel = nextMode === "dark" ? "Chế độ tối" : "Chế độ sáng";
         localStorage.setItem(STORAGE_KEY, nextMode);
-        applyTheme(nextMode, true, true, "theme");
+        applyTheme(nextMode, true, true, "theme", true, `${nextLabel}`);
         scheduleRandomHint();
       }
 
       function resetToAuto() {
         const autoMode = getDefaultThemeByHour();
+        const autoLabel = autoMode === "dark" ? "Chế độ tối" : "Chế độ sáng";
         localStorage.removeItem(STORAGE_KEY);
-        applyTheme(autoMode, false, true, "theme");
+        applyTheme(autoMode, false, true, "theme", true, `Chế độ đang chuyển đổi sang ${autoLabel}`);
       }
 
       function scheduleRandomHint() {
@@ -3459,9 +4341,9 @@
           const isCurrentlyDark = document.body.classList.contains("dark-theme");
           const pickDate = Math.random() < 0.5;
           if (pickDate) {
-            showNavbarHint(isCurrentlyDark, "date", HOLD_DURATION_MS);
+            showNavbarHint(isCurrentlyDark, "date", DATE_DURATION_MS, false);
           } else {
-            showNavbarHint(!isCurrentlyDark, "theme", HOLD_DURATION_MS);
+            showNavbarHint(!isCurrentlyDark, "theme", THEME_DURATION_MS, false);
           }
           scheduleRandomHint();
         }, randomDelayMs);
@@ -3474,7 +4356,7 @@
           : getDefaultThemeByHour();
         const isManualInit = savedTheme === "light" || savedTheme === "dark";
 
-        applyTheme(initialMode, isManualInit, true, "theme");
+        applyTheme(initialMode, isManualInit, true, "theme", false);
 
         triggerBtn.addEventListener("click", toggleTheme);
         resetAutoBtn.addEventListener("click", resetToAuto);
@@ -3483,19 +4365,24 @@
 
         setInterval(() => {
           if (!localStorage.getItem(STORAGE_KEY)) {
-            applyTheme(getDefaultThemeByHour(), false, false, "theme");
+            applyTheme(getDefaultThemeByHour(), false, false, "theme", false);
           }
         }, 60000);
       }
 
-      return { init, toggleTheme };
+      return {
+        init,
+        toggleTheme,
+        showNotificationNavbarTooltip
+      };
     })();
 
-    /* ==================== JS RIÊNG: BELL + SỐ ĐẾM + XOÁ LẦN LƯỢT + TOOLTIP 1 NỘI DUNG ==================== */
+    /* ==================== JS RIÊNG: BELL + SỐ ĐẾM + XOÁ LẦN LƯỢT + TOOLTIP TABS ==================== */
     const bellController = (() => {
       const TABS_FOLDER = "Tabs";
       const KNOWN_TAB_FILES = [
         "Appios.json",
+        "Tweak.json",
         "Appandroid.json",
         "Gameios.json",
         "Gameandroid.json",
@@ -3512,18 +4399,16 @@
       const notifList = document.getElementById("notifList");
       const notifClearBtn = document.getElementById("notifClearBtn");
       const notifCloseBtn = document.getElementById("notifCloseBtn");
-
       const toastEl = document.getElementById("tabTooltipToast");
 
       let ringResetTimer = null;
       let tooltipLoopTimer = null;
-      let toastShowTimer = null;
       let toastHideTimer = null;
+      let currentToastData = null;
       let tooltipPool = [];
       let notifications = [];
       let unreadCount = 0;
       let isClearing = false;
-      let activeTooltipItem = null;
 
       function escapeHtml(val = "") {
         return String(val)
@@ -3538,6 +4423,88 @@
         const hh = String(d.getHours()).padStart(2, "0");
         const mm = String(d.getMinutes()).padStart(2, "0");
         return `${hh}:${mm}`;
+      }
+
+      function isSearchOrAccountOpen() {
+        return Boolean(
+          (typeof searchController !== "undefined" && searchController.isOpen && searchController.isOpen()) ||
+          (typeof accountController !== "undefined" && accountController.isOpen && accountController.isOpen())
+        );
+      }
+
+      function updateToastPosition() {
+        if (!toastEl) return;
+        if (isOpen()) {
+          const rect = notifPanel.getBoundingClientRect();
+          const topPx = Math.max(68, Math.round(rect.bottom + 8));
+          toastEl.style.top = `${topPx}px`;
+        } else {
+          toastEl.style.top = "68px";
+        }
+      }
+
+      function renderToastContent(data) {
+        if (!toastEl || !data) return;
+        const iconHtml = data.icon
+          ? `<img class="tab-tooltip-toast-icon" src="${escapeHtml(data.icon)}" alt="${escapeHtml(data.title)}" onerror="this.style.display='none';" />`
+          : "";
+        toastEl.innerHTML = `
+          ${iconHtml}
+          <div class="tab-tooltip-toast-content">
+            <div class="tab-tooltip-toast-badge">${escapeHtml(data.tag || "Tooltip Tabs")}</div>
+            <div class="tab-tooltip-toast-title">${escapeHtml(data.title || "")}</div>
+            ${data.body ? `<div class="tab-tooltip-toast-body">${escapeHtml(data.body)}</div>` : ""}
+          </div>
+        `;
+      }
+
+      function hideToastNow() {
+        if (!toastEl) return;
+        toastEl.classList.remove("is-visible");
+        toastEl.setAttribute("aria-hidden", "true");
+        currentToastData = null;
+      }
+
+      function showBelowNavbarToast(data, durationMs = 6000) {
+        if (!toastEl || !data) return;
+        currentToastData = data;
+        renderToastContent(data);
+        updateToastPosition();
+        toastEl.classList.remove("is-hidden-by-panel");
+        toastEl.classList.add("is-visible");
+        toastEl.setAttribute("aria-hidden", "false");
+
+        if (toastHideTimer) clearTimeout(toastHideTimer);
+        toastHideTimer = setTimeout(() => {
+          hideToastNow();
+        }, durationMs);
+      }
+
+      function syncTooltipDestination() {
+        if (!toastEl) return;
+        if (!currentToastData || !toastEl.classList.contains("is-visible")) {
+          toastEl.classList.remove("is-visible");
+          toastEl.setAttribute("aria-hidden", "true");
+          return;
+        }
+
+        if (isSearchOrAccountOpen()) {
+          toastEl.classList.remove("is-visible");
+          toastEl.setAttribute("aria-hidden", "true");
+          themeController.showNotificationNavbarTooltip(
+            {
+              title: currentToastData.title,
+              body: currentToastData.body,
+              icon: currentToastData.icon || ""
+            },
+            6000
+          );
+        } else {
+          renderToastContent(currentToastData);
+          updateToastPosition();
+          toastEl.classList.add("is-visible");
+          toastEl.setAttribute("aria-hidden", "false");
+        }
       }
 
       function syncBadge() {
@@ -3555,6 +4522,7 @@
         if (!notifList) return;
         if (!notifications.length) {
           notifList.innerHTML = `<div class="notif-empty-state">Chưa có thông báo mới.</div>`;
+          requestAnimationFrame(updateToastPosition);
           return;
         }
 
@@ -3580,11 +4548,16 @@
             if (chosen && chosen.payload) {
               closePanel();
               popupDetailController.open(chosen.payload, {
-                onStateChange: (open) => appiosController.setPopupOpen(open)
+                onStateChange: (open) => {
+                  appiosController.setPopupOpen(open);
+                  tweakController.setPopupOpen(open);
+                }
               });
             }
           });
         });
+
+        requestAnimationFrame(updateToastPosition);
       }
 
       function pushNotification({ kind = "update", title = "", body = "", payload = null, countIncrement = 1 }) {
@@ -3651,6 +4624,10 @@
         notifBtn.classList.add("is-selected");
         unreadCount = 0;
         syncBadge();
+        requestAnimationFrame(() => {
+          updateToastPosition();
+          syncTooltipDestination();
+        });
       }
 
       function closePanel() {
@@ -3658,6 +4635,10 @@
         notifPanel.classList.remove("is-open");
         notifPanel.setAttribute("aria-hidden", "true");
         notifBtn.classList.remove("is-selected");
+        requestAnimationFrame(() => {
+          updateToastPosition();
+          syncTooltipDestination();
+        });
       }
 
       function togglePanel() {
@@ -3703,18 +4684,20 @@
             const json = await res.json();
             const list = Array.isArray(json)
               ? json
-              : (Array.isArray(json?.cards) ? json.cards : (Array.isArray(json?.items) ? json.items : []));
+              : (Array.isArray(json?.items) ? json.items : (Array.isArray(json?.cards) ? json.cards : []));
 
             list.forEach((item) => {
               if (!item || typeof item !== "object") return;
               const tooltipText = item.tooltip || item.tip || item.description || item.changelog || item.genre || "";
-              const titleText = (item.appName || item.title || fileName.replace(/\.json$/i, "")).replace(/\n/g, " ");
+              const titleText = (item.appName || item.name || item.title || fileName.replace(/\.json$/i, "")).replace(/\n/g, " ");
+              const iconUrl = item.icon || item.img || item.banner || "";
               if (tooltipText || titleText) {
                 entries.push({
                   sourceFile: fileName,
                   tag: item.tag || item.genre || fileName.replace(/\.json$/i, ""),
                   title: titleText,
                   body: String(tooltipText || `Mục mới từ ${fileName}`).replace(/\n/g, " "),
+                  icon: iconUrl,
                   payload: item
                 });
               }
@@ -3729,34 +4712,15 @@
               tag: "Appios.json",
               title: "Deep Rock Galactic: Survivor",
               body: "Sẵn sàng đào mỏ giữa hiểm nguy trên iPhone & iPad.",
+              icon: "https://picsum.photos/seed/drg-icon/120/120",
               payload: null
             },
             {
-              sourceFile: "Appios.json",
-              tag: "Appios.json",
-              title: "Starfield: Outpost Zero",
-              body: "Khám phá hành tinh xa lạ và xây căn cứ mới.",
-              payload: null
-            },
-            {
-              sourceFile: "Appios.json",
-              tag: "Appios.json",
-              title: "Nebula Strike: Orbit Ops",
-              body: "Chiến đấu liên ngân hà giữa mưa thiên thạch.",
-              payload: null
-            },
-            {
-              sourceFile: "Appios.json",
-              tag: "Appios.json",
-              title: "Aether File Vault",
-              body: "Quản lý tệp IPA & tài liệu nhanh gọn trên iOS.",
-              payload: null
-            },
-            {
-              sourceFile: "Appios.json",
-              tag: "Appios.json",
-              title: "Mẹo Tối Ưu iOS 2026",
-              body: "Tổng hợp thủ thuật tiết kiệm pin và dung lượng.",
+              sourceFile: "Tweak.json",
+              tag: "Tweak.json",
+              title: "AI Chat VIP",
+              body: "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+              icon: "./Art/imgicon.png",
               payload: null
             }
           );
@@ -3765,7 +4729,6 @@
         tooltipPool = entries;
       }
 
-      // Rung chuông vàng trước, sau khi rung xong mới hiện 1 nội dung tooltip
       function showRandomTooltip() {
         if (!tooltipPool.length) return;
         const picked = tooltipPool[Math.floor(Math.random() * tooltipPool.length)];
@@ -3773,32 +4736,27 @@
 
         triggerRingZoom();
 
-        if (toastShowTimer) clearTimeout(toastShowTimer);
-        toastShowTimer = setTimeout(() => {
-          activeTooltipItem = picked;
+        if (isSearchOrAccountOpen()) {
+          hideToastNow();
+          themeController.showNotificationNavbarTooltip(
+            {
+              title: picked.title,
+              body: picked.body,
+              icon: picked.icon || ""
+            },
+            6000
+          );
+        } else {
+          showBelowNavbarToast(picked, 6000);
+        }
 
-          if (toastEl) {
-            toastEl.innerHTML = `
-              <span class="tooltip-card-tag">TOOLTIP • ${escapeHtml(picked.sourceFile)}</span>
-              <div class="tooltip-card-title">${escapeHtml(picked.title)}</div>
-              <div class="tooltip-card-desc">${escapeHtml(picked.body)}</div>
-            `;
-            toastEl.classList.add("is-visible");
-
-            if (toastHideTimer) clearTimeout(toastHideTimer);
-            toastHideTimer = setTimeout(() => {
-              toastEl.classList.remove("is-visible");
-            }, 4200);
-          }
-
-          pushNotification({
-            kind: "tooltip",
-            title: picked.title,
-            body: picked.body,
-            payload: picked.payload,
-            countIncrement: 1
-          });
-        }, 950);
+        pushNotification({
+          kind: "tooltip",
+          title: picked.title,
+          body: picked.body,
+          payload: picked.payload,
+          countIncrement: 1
+        });
       }
 
       function scheduleRandomTooltip() {
@@ -3816,7 +4774,7 @@
         pushNotification({
           kind: "update",
           title: "Cập nhật mới trên Kpazz",
-          body: "Bổ sung hiệu ứng SlideHero lên rồi nghiêng trái rơi tự do, tooltip 1 nội dung và cuộn ngang cột Có Thể Bạn Cũng Thích.",
+          body: "Bổ sung section Tweak jailbreak ios từ Tweak.json, đưa nút Dọn cache vào list Tài khoản.",
           payload: null,
           countIncrement: 1
         });
@@ -3824,12 +4782,16 @@
         renderNotifList();
 
         if (toastEl) {
-          toastEl.addEventListener("click", (ev) => {
-            ev.stopPropagation();
-            toastEl.classList.remove("is-visible");
-            if (activeTooltipItem && activeTooltipItem.payload) {
-              popupDetailController.open(activeTooltipItem.payload, {
-                onStateChange: (open) => appiosController.setPopupOpen(open)
+          toastEl.addEventListener("click", () => {
+            if (currentToastData && currentToastData.payload) {
+              const payload = currentToastData.payload;
+              hideToastNow();
+              closePanel();
+              popupDetailController.open(payload, {
+                onStateChange: (open) => {
+                  appiosController.setPopupOpen(open);
+                  tweakController.setPopupOpen(open);
+                }
               });
             }
           });
@@ -3850,11 +4812,14 @@
           clearHistorySequential();
         });
 
+        window.addEventListener("resize", updateToastPosition, { passive: true });
+
         document.addEventListener("click", (event) => {
           if (
             isOpen() &&
             !notifPanel.contains(event.target) &&
-            !notifBtn.contains(event.target)
+            !notifBtn.contains(event.target) &&
+            (!toastEl || !toastEl.contains(event.target))
           ) {
             closePanel();
           }
@@ -3865,7 +4830,16 @@
         });
       }
 
-      return { init, triggerRingZoom, openPanel, closePanel, isOpen, pushNotification };
+      return {
+        init,
+        triggerRingZoom,
+        openPanel,
+        closePanel,
+        isOpen,
+        pushNotification,
+        syncTooltipDestination,
+        updateToastPosition
+      };
     })();
 
     /* ==================== JS RIÊNG: SEARCH TOÀN BỘ JSON + LỊCH SỬ TÌM ==================== */
@@ -3874,6 +4848,7 @@
       const TABS_FOLDER = "Tabs";
       const KNOWN_TAB_FILES = [
         "Appios.json",
+        "Tweak.json",
         "Appandroid.json",
         "Gameios.json",
         "Gameandroid.json",
@@ -3886,10 +4861,12 @@
       const panel = document.getElementById("searchPanel");
       const input = document.getElementById("searchField");
       const closeBtn = document.getElementById("searchCloseBtn");
+      const historyBox = document.getElementById("searchHistoryBox");
       const historyChipsEl = document.getElementById("searchHistoryChips");
       const clearHistoryBtn = document.getElementById("searchClearHistoryBtn");
       const resultBox = document.getElementById("searchResultBox");
       const navbarSearchBtn = document.getElementById("navbarSearchBtn");
+      const navbarHistoryBtn = document.getElementById("navbarHistoryBtn");
 
       let allJsonItems = [];
       let searchHistory = [];
@@ -3975,7 +4952,7 @@
             const json = await res.json();
             const list = Array.isArray(json)
               ? json
-              : (Array.isArray(json?.cards) ? json.cards : (Array.isArray(json?.items) ? json.items : []));
+              : (Array.isArray(json?.items) ? json.items : (Array.isArray(json?.cards) ? json.cards : []));
 
             list.forEach((entry) => {
               if (entry && typeof entry === "object") {
@@ -3988,10 +4965,17 @@
           } catch (_) {}
         }
 
-        if (items.length === 0 && Array.isArray(window.__kpazzAppiosFallback)) {
-          window.__kpazzAppiosFallback.forEach((entry) => {
-            items.push({ ...entry, _sourceFile: "Appios.json" });
-          });
+        if (items.length === 0) {
+          if (Array.isArray(window.__kpazzAppiosFallback)) {
+            window.__kpazzAppiosFallback.forEach((entry) => {
+              items.push({ ...entry, _sourceFile: "Appios.json" });
+            });
+          }
+          if (Array.isArray(window.__kpazzTweakFallback)) {
+            window.__kpazzTweakFallback.forEach((entry) => {
+              items.push({ ...entry, _sourceFile: "Tweak.json" });
+            });
+          }
         }
 
         allJsonItems = items;
@@ -4015,10 +4999,13 @@
         const matches = allJsonItems.filter((item) => {
           const hay = [
             item.appName,
+            item.name,
             item.title,
             item.tag,
             item.genre,
+            item.category,
             item.author,
+            item.dev,
             item.description,
             item.fullDescription,
             item.changelog,
@@ -4035,12 +5022,12 @@
         resultBox.innerHTML = `
           <div style="font-size:0.78rem;font-weight:700;color:var(--text-muted);">Tìm thấy ${matches.length} kết quả cho "${escapeHtml(clean)}"</div>
           ${matches.map((item, idx) => {
-            const name = (item.appName || item.title || `Mục ${idx + 1}`).replace(/\n/g, " ");
-            const sub = [item.genre, item.author, item._sourceFile].filter(Boolean).join(" • ");
+            const name = (item.appName || item.name || item.title || `Mục ${idx + 1}`).replace(/\n/g, " ");
+            const sub = [item.genre || item.category, item.author || item.dev, item._sourceFile].filter(Boolean).join(" • ");
             return `
               <div class="search-result-row" data-search-idx="${idx}">
                 <div class="search-result-left">
-                  <img class="search-result-icon" src="${escapeHtml(item.icon || item.banner || "")}" alt="${escapeHtml(name)}" loading="lazy" />
+                  <img class="search-result-icon" src="${escapeHtml(item.icon || item.img || item.banner || "")}" alt="${escapeHtml(name)}" loading="lazy" />
                   <div class="search-result-meta">
                     <div class="search-result-title">${escapeHtml(name)}</div>
                     <div class="search-result-sub">${escapeHtml(sub)}</div>
@@ -4060,7 +5047,10 @@
             addToHistory(clean);
             close();
             popupDetailController.open(chosen, {
-              onStateChange: (open) => appiosController.setPopupOpen(open),
+              onStateChange: (open) => {
+                appiosController.setPopupOpen(open);
+                tweakController.setPopupOpen(open);
+              },
               allCards: allJsonItems,
               featuredCards: allJsonItems,
               relatedCards: allJsonItems.filter((x) => x !== chosen)
@@ -4073,30 +5063,54 @@
         return panel.classList.contains("is-open");
       }
 
-      function open() {
+      function open(focusHistory = false) {
         accountController.close();
         bellController.closePanel();
         menubarController.close();
         panel.classList.add("is-open");
-        navbarSearchBtn.classList.add("is-selected");
+        navbarSearchBtn.classList.toggle("is-selected", !focusHistory);
+        if (navbarHistoryBtn) {
+          navbarHistoryBtn.classList.toggle("is-selected", focusHistory);
+        }
+        if (historyBox) {
+          historyBox.classList.toggle("is-highlighted", focusHistory);
+        }
+        bellController.syncTooltipDestination();
         ensureAllJsonLoaded().then(() => {
           if (input.value.trim()) {
             runSearch(input.value.trim(), false);
           }
         });
-        setTimeout(() => input.focus(), 60);
+        if (!focusHistory) {
+          setTimeout(() => input.focus(), 60);
+        }
       }
 
       function close() {
+        if (!isOpen()) return;
         panel.classList.remove("is-open");
         navbarSearchBtn.classList.remove("is-selected");
+        if (navbarHistoryBtn) {
+          navbarHistoryBtn.classList.remove("is-selected");
+        }
+        if (historyBox) {
+          historyBox.classList.remove("is-highlighted");
+        }
+        bellController.syncTooltipDestination();
       }
 
-      function toggle() {
+      function toggle(focusHistory = false) {
         if (isOpen()) {
-          close();
+          const isSameMode = focusHistory
+            ? navbarHistoryBtn?.classList.contains("is-selected")
+            : navbarSearchBtn.classList.contains("is-selected");
+          if (isSameMode) {
+            close();
+          } else {
+            open(focusHistory);
+          }
         } else {
-          open();
+          open(focusHistory);
         }
       }
 
@@ -4130,9 +5144,52 @@
       const panel = document.getElementById("accountPanel");
       const closeBtn = document.getElementById("accountCloseBtn");
       const navbarAccountBtn = document.getElementById("navbarAccountBtn");
+      const accountNameEl = document.getElementById("accountName");
+      const accountSubEl = document.getElementById("accountSub");
+      const toggleAuthBtn = document.getElementById("accountToggleAuthBtn");
+      const toggleAuthLabel = document.getElementById("accountToggleAuthLabel");
+      const menubarLoginLabel = document.getElementById("menubarLoginLabel");
       const profileBtn = document.getElementById("accountProfileBtn");
       const savedBtn = document.getElementById("accountSavedBtn");
       const settingsBtn = document.getElementById("accountSettingsBtn");
+      const clearCacheBtn = document.getElementById("accountClearCacheBtn");
+
+      let loggedIn = false;
+
+      function syncAuthUI() {
+        document.body.classList.toggle("is-logged-in", loggedIn);
+        if (accountNameEl) {
+          accountNameEl.textContent = loggedIn ? "Thành viên Kpazz" : "Tài khoản khách";
+        }
+        if (accountSubEl) {
+          accountSubEl.textContent = loggedIn ? "Đã đăng nhập" : "Chưa đăng nhập";
+        }
+        if (toggleAuthLabel) {
+          toggleAuthLabel.textContent = loggedIn ? "Đăng xuất tài khoản" : "Đăng nhập tài khoản";
+        }
+        if (menubarLoginLabel) {
+          menubarLoginLabel.textContent = loggedIn ? "Đăng xuất" : "Đăng nhập";
+        }
+      }
+
+      function setLoggedIn(state) {
+        loggedIn = Boolean(state);
+        syncAuthUI();
+      }
+
+      function toggleLoggedIn() {
+        setLoggedIn(!loggedIn);
+      }
+
+      async function handleClearCacheAndReload() {
+        try {
+          if ("caches" in window && typeof caches.keys === "function") {
+            const keys = await caches.keys();
+            await Promise.all(keys.map((key) => caches.delete(key)));
+          }
+        } catch (_) {}
+        window.location.reload();
+      }
 
       function isOpen() {
         return panel.classList.contains("is-open");
@@ -4144,11 +5201,14 @@
         menubarController.close();
         panel.classList.add("is-open");
         navbarAccountBtn.classList.add("is-selected");
+        bellController.syncTooltipDestination();
       }
 
       function close() {
+        if (!isOpen()) return;
         panel.classList.remove("is-open");
         navbarAccountBtn.classList.remove("is-selected");
+        bellController.syncTooltipDestination();
       }
 
       function toggle() {
@@ -4160,16 +5220,21 @@
       }
 
       function init() {
+        syncAuthUI();
         closeBtn.addEventListener("click", close);
+        toggleAuthBtn.addEventListener("click", toggleLoggedIn);
         profileBtn.addEventListener("click", () => alert("Nội dung riêng: Hồ sơ cá nhân."));
         savedBtn.addEventListener("click", () => alert("Nội dung riêng: Mục đã lưu."));
         settingsBtn.addEventListener("click", () => alert("Nội dung riêng: Cài đặt tài khoản."));
+        if (clearCacheBtn) {
+          clearCacheBtn.addEventListener("click", handleClearCacheAndReload);
+        }
       }
 
-      return { init, open, close, toggle, isOpen };
+      return { init, open, close, toggle, isOpen, setLoggedIn, toggleLoggedIn };
     })();
 
-    /* ==================== JS RIÊNG: MENUBAR + LIST TIÊU ĐỀ JSON THEO THỨ TỰ TRANG CHỦ ==================== */
+    /* ==================== JS RIÊNG: MENUBAR + LIST TIÊU ĐỀ JSON + LIÊN HỆ DƯỚI CÙNG ==================== */
     const menubarController = (() => {
       const panel = document.getElementById("menubarPanel");
       const backdrop = document.getElementById("menubarBackdrop");
@@ -4177,9 +5242,10 @@
       const registerBtn = document.getElementById("menubarRegisterBtn");
       const loginBtn = document.getElementById("menubarLoginBtn");
       const menubarSearchInput = document.getElementById("menubarSearchField");
-      const jsonSectionsContainer = document.getElementById("menubarJsonSections");
+      const jsonListContainer = document.getElementById("menubarJsonList");
 
-      let homeSectionsData = [];
+      let homeSectionsMap = new Map();
+      let homeSectionsOrder = [];
 
       function escapeHtml(val = "") {
         return String(val)
@@ -4189,9 +5255,21 @@
           .replace(/"/g, "&quot;");
       }
 
-      function setHomeSections(sections) {
-        homeSectionsData = Array.isArray(sections) ? sections : [];
+      function registerHomeSection(key, sectionObj) {
+        if (!key || !sectionObj) return;
+        if (!homeSectionsOrder.includes(key)) {
+          homeSectionsOrder.push(key);
+        }
+        homeSectionsMap.set(key, sectionObj);
         renderJsonSections();
+      }
+
+      function setHomeSections(sections) {
+        if (!Array.isArray(sections)) return;
+        sections.forEach((sec, idx) => {
+          const key = sec.key || `section_${idx}`;
+          registerHomeSection(key, sec);
+        });
       }
 
       function renderDrawerItems(listContainer, cards, filterText = "") {
@@ -4202,9 +5280,12 @@
           : cards.filter((item) => {
               const txt = [
                 item.appName,
+                item.name,
                 item.title,
                 item.genre,
+                item.category,
                 item.author,
+                item.dev,
                 item.description
               ].filter(Boolean).join(" ").toLowerCase();
               return txt.includes(clean);
@@ -4216,11 +5297,11 @@
         }
 
         listContainer.innerHTML = filtered.map((item, i) => {
-          const name = (item.appName || item.title || `Mục ${i + 1}`).replace(/\n/g, " ");
-          const sub = [item.genre, item.author].filter(Boolean).join(" • ");
+          const name = (item.appName || item.name || item.title || `Mục ${i + 1}`).replace(/\n/g, " ");
+          const sub = [item.genre || item.category, item.author || item.dev].filter(Boolean).join(" • ");
           return `
             <div class="menubar-drawer-item" data-item-idx="${i}">
-              <img src="${escapeHtml(item.icon || item.banner || "")}" alt="${escapeHtml(name)}" loading="lazy" />
+              <img src="${escapeHtml(item.icon || item.img || item.banner || "")}" alt="${escapeHtml(name)}" loading="lazy" />
               <div style="min-width:0;flex:1;">
                 <div class="menubar-drawer-item-title">${escapeHtml(name)}</div>
                 <div class="menubar-drawer-item-sub">${escapeHtml(sub)}</div>
@@ -4236,7 +5317,10 @@
             if (!chosen) return;
             close();
             popupDetailController.open(chosen, {
-              onStateChange: (open) => appiosController.setPopupOpen(open),
+              onStateChange: (open) => {
+                appiosController.setPopupOpen(open);
+                tweakController.setPopupOpen(open);
+              },
               allCards: cards,
               featuredCards: cards,
               relatedCards: cards.filter((x) => x !== chosen)
@@ -4246,14 +5330,19 @@
       }
 
       function renderJsonSections() {
-        if (!jsonSectionsContainer) return;
-        if (!homeSectionsData.length) {
-          jsonSectionsContainer.innerHTML = "";
+        if (!jsonListContainer) return;
+        const sections = homeSectionsOrder
+          .map((k) => homeSectionsMap.get(k))
+          .filter(Boolean);
+
+        if (!sections.length) {
+          jsonListContainer.innerHTML = "";
           return;
         }
 
-        jsonSectionsContainer.innerHTML = homeSectionsData.map((sec, sIdx) => {
+        jsonListContainer.innerHTML = sections.map((sec, sIdx) => {
           const count = Array.isArray(sec.cards) ? sec.cards.length : 0;
+
           return `
             <div class="menubar-json-card" data-sec-idx="${sIdx}">
               <button class="menubar-json-trigger" type="button" aria-expanded="false">
@@ -4265,16 +5354,19 @@
                 <span class="menubar-json-arrow">&gt;</span>
               </button>
               <div class="menubar-json-drawer">
-                <input class="menubar-drawer-search" type="search" placeholder="Tìm trong ${escapeHtml(sec.title || "mục này")}..." aria-label="Tìm kiếm trong ${escapeHtml(sec.title || "mục này")}" />
-                <div class="menubar-drawer-list"></div>
+                <div class="menubar-json-drawer-inner">
+                  <input class="menubar-drawer-search" type="search" placeholder="Tìm trong ${escapeHtml(sec.title || "mục này")}..." aria-label="Tìm kiếm trong ${escapeHtml(sec.title || "mục này")}" />
+                  <div class="menubar-drawer-list"></div>
+                </div>
               </div>
             </div>
           `;
         }).join("");
 
-        Array.from(jsonSectionsContainer.querySelectorAll(".menubar-json-card")).forEach((cardEl) => {
-          const sIdx = Number(cardEl.getAttribute("data-sec-idx"));
-          const sec = homeSectionsData[sIdx];
+        const allCardEls = Array.from(jsonListContainer.querySelectorAll(".menubar-json-card"));
+
+        allCardEls.forEach((cardEl, sIdx) => {
+          const sec = sections[sIdx];
           const triggerBtn = cardEl.querySelector(".menubar-json-trigger");
           const drawerSearch = cardEl.querySelector(".menubar-drawer-search");
           const drawerList = cardEl.querySelector(".menubar-drawer-list");
@@ -4282,10 +5374,20 @@
           renderDrawerItems(drawerList, sec.cards || [], "");
 
           triggerBtn.addEventListener("click", () => {
-            const expanded = cardEl.classList.toggle("is-expanded");
-            triggerBtn.setAttribute("aria-expanded", String(expanded));
-            if (expanded) {
-              setTimeout(() => drawerSearch.focus(), 40);
+            const willExpand = !cardEl.classList.contains("is-expanded");
+
+            allCardEls.forEach((otherCard) => {
+              if (otherCard !== cardEl) {
+                otherCard.classList.remove("is-expanded");
+                const otherTrigger = otherCard.querySelector(".menubar-json-trigger");
+                if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+              }
+            });
+
+            cardEl.classList.toggle("is-expanded", willExpand);
+            triggerBtn.setAttribute("aria-expanded", String(willExpand));
+            if (willExpand) {
+              setTimeout(() => drawerSearch.focus(), 80);
             }
           });
 
@@ -4327,30 +5429,59 @@
         });
 
         registerBtn.addEventListener("click", () => alert("Mở trang Đăng ký KPazz."));
-        loginBtn.addEventListener("click", () => alert("Mở trang Đăng nhập KPazz."));
+        loginBtn.addEventListener("click", () => {
+          accountController.toggleLoggedIn();
+        });
       }
 
-      return { init, open, close, setHomeSections };
+      return { init, open, close, setHomeSections, registerHomeSection };
     })();
 
-    /* ==================== JS RIÊNG: NAVBAR ==================== */
+    /* ==================== JS RIÊNG: NAVBAR (SCROLL GLASS + COMPACT 55% + HISTORY) ==================== */
     const navbarController = (() => {
+      const navbarRoot = document.getElementById("navbarRoot");
       const menuBtn = document.getElementById("navbarMenuOpenBtn");
       const searchBtn = document.getElementById("navbarSearchBtn");
+      const historyBtn = document.getElementById("navbarHistoryBtn");
       const accountBtn = document.getElementById("navbarAccountBtn");
+
+      function syncNavbarScrollState() {
+        if (!navbarRoot) return;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const docHeight = Math.max(
+          document.documentElement.scrollHeight - window.innerHeight,
+          1
+        );
+        const isFloating = scrollY > 4;
+        const isCompact55 = scrollY >= docHeight * 0.55;
+
+        navbarRoot.classList.toggle("is-floating-glass", isFloating);
+        navbarRoot.classList.toggle("is-compact-left", isCompact55);
+      }
 
       function init() {
         menuBtn.addEventListener("click", () => menubarController.open());
 
         searchBtn.addEventListener("click", (event) => {
           event.stopPropagation();
-          searchController.toggle();
+          searchController.toggle(false);
         });
+
+        if (historyBtn) {
+          historyBtn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            searchController.toggle(true);
+          });
+        }
 
         accountBtn.addEventListener("click", (event) => {
           event.stopPropagation();
           accountController.toggle();
         });
+
+        window.addEventListener("scroll", syncNavbarScrollState, { passive: true });
+        window.addEventListener("resize", syncNavbarScrollState, { passive: true });
+        syncNavbarScrollState();
 
         document.addEventListener("click", (event) => {
           const searchPanel = document.getElementById("searchPanel");
@@ -4359,7 +5490,8 @@
           if (
             searchController.isOpen() &&
             !searchPanel.contains(event.target) &&
-            !searchBtn.contains(event.target)
+            !searchBtn.contains(event.target) &&
+            (!historyBtn || !historyBtn.contains(event.target))
           ) {
             searchController.close();
           }
@@ -4386,7 +5518,7 @@
         });
       }
 
-      return { init };
+      return { init, syncNavbarScrollState };
     })();
 
     /* ==================== JS RIÊNG: SLIDEHERO ==================== */
@@ -4394,6 +5526,7 @@
       const TABS_FOLDER = "Tabs";
       const KNOWN_TAB_FILES = [
         "Appios.json",
+        "Tweak.json",
         "Appandroid.json",
         "Gameios.json",
         "Gameandroid.json",
@@ -4477,13 +5610,14 @@
           const t = Date.parse(item.createdAt);
           if (!Number.isNaN(t)) return t;
         }
-        if (typeof item.releaseDate === "string") {
-          const vnMatch = item.releaseDate.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+        const dateStr = item.releaseDate || item.publishDate;
+        if (typeof dateStr === "string") {
+          const vnMatch = dateStr.trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
           if (vnMatch) {
             const d = new Date(Number(vnMatch[3]), Number(vnMatch[2]) - 1, Number(vnMatch[1]));
             if (!Number.isNaN(d.getTime())) return d.getTime();
           }
-          const iso = Date.parse(item.releaseDate);
+          const iso = Date.parse(dateStr);
           if (!Number.isNaN(iso)) return iso;
         }
         return fallbackOrder * 100000;
@@ -4511,7 +5645,7 @@
             const json = await res.json();
             const list = Array.isArray(json)
               ? json
-              : (Array.isArray(json?.cards) ? json.cards : (Array.isArray(json?.items) ? json.items : []));
+              : (Array.isArray(json?.items) ? json.items : (Array.isArray(json?.cards) ? json.cards : []));
 
             list.forEach((entry, i) => {
               if (entry && typeof entry === "object") {
@@ -4535,10 +5669,10 @@
 
       function renderSlides() {
         viewport.innerHTML = slidesData.map((item, idx) => {
-          const title = item.title || item.appName || `Mục ${idx + 1}`;
-          const desc = item.description || item.genre || "";
-          const badge = item.tag || item.genre || `Mới #${idx + 1}`;
-          const imgSrc = item.banner || item.icon || "";
+          const title = item.title || item.appName || item.name || `Mục ${idx + 1}`;
+          const desc = item.description || item.genre || item.category || "";
+          const badge = item.tag || item.genre || item.category || `Mới #${idx + 1}`;
+          const imgSrc = item.banner || item.icon || item.img || "";
 
           return `
             <article id="slideheroCard${idx + 1}" class="slidehero-card" data-index="${idx}" data-stack-pos="${idx}">
@@ -4702,22 +5836,23 @@
       function open(item) {
         if (!item) return;
 
+        const fallbackUrl = item.buttonUrl || item.downloadLink || "";
         const downloads = Array.isArray(item.downloads) && item.downloads.length > 0
           ? item.downloads
-          : (item.buttonUrl ? [{
+          : (fallbackUrl ? [{
               label: item.downloadOptionPrefix || "Link tải",
               note: item.fileFormat || "",
               size: item.fileSize || "",
-              url: item.buttonUrl
+              url: fallbackUrl
             }] : []);
 
         if (downloads.length === 0) {
-          alert(`${item.appName || item.title || "Nội dung"} hiện chưa có link tải.`);
+          alert(`${item.appName || item.name || item.title || "Nội dung"} hiện chưa có link tải.`);
           return;
         }
 
         titleEl.textContent = item.downloadPickerTitle || "Chọn link tải";
-        subtitleEl.textContent = item.downloadPickerSubtitle || (item.appName || item.title || "Chọn 1 trong các link tải bên dưới");
+        subtitleEl.textContent = item.downloadPickerSubtitle || (item.appName || item.name || item.title || "Chọn 1 trong các link tải bên dưới");
 
         listEl.innerHTML = downloads.map((dl, idx) => {
           const labelText = dl.label || `${item.downloadOptionPrefix || "Link tải"} ${idx + 1}`;
@@ -4757,11 +5892,12 @@
       return { init, open, close };
     })();
 
-    /* ==================== JS RIÊNG: POPUP NỘI DUNG TÁC GIẢ TRONG TABS ==================== */
+    /* ==================== JS RIÊNG: POPUP NỘI DUNG TÁC GIẢ / SECTION ==================== */
     const authorWorksController = (() => {
       const TABS_FOLDER = "Tabs";
       const KNOWN_TAB_FILES = [
         "Appios.json",
+        "Tweak.json",
         "Appandroid.json",
         "Gameios.json",
         "Gameandroid.json",
@@ -4814,7 +5950,7 @@
             const json = await res.json();
             const cards = Array.isArray(json)
               ? json
-              : (Array.isArray(json?.cards) ? json.cards : (Array.isArray(json?.items) ? json.items : []));
+              : (Array.isArray(json?.items) ? json.items : (Array.isArray(json?.cards) ? json.cards : []));
 
             cards.forEach((entry) => {
               if (entry && typeof entry === "object") {
@@ -4840,6 +5976,64 @@
         return collected;
       }
 
+      function renderItemsIntoList(items, onSelectItem = null) {
+        if (!items || items.length === 0) {
+          listEl.innerHTML = `<div class="popup-detail-collection-sub" style="padding: 14px 0;">Không có nội dung nào trong danh sách này.</div>`;
+          return;
+        }
+
+        listEl.innerHTML = items.map((item, idx) => {
+          const name = item.appName || item.name || item.title || `Mục ${idx + 1}`;
+          const metaSub = [item.genre || item.category, item.version, item.fileFormat, item._sourceFile].filter(Boolean).join(" • ");
+          const isDl = item.isApp !== false;
+          const btnText = isDl ? "Nhận" : "Xem";
+          const verBadge = isDl ? formatVersionBadgeText(item.version) : "";
+          const btnInner = `${isDl ? getCloudDownloadSvg() : ""}<span>${btnText}</span>`;
+
+          return `
+            <div class="popup-detail-collection-row">
+              <div class="popup-detail-collection-left">
+                <img class="popup-detail-related-icon" src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
+                <div class="popup-detail-collection-info">
+                  <div class="popup-detail-collection-title">${escapeAttr(String(name).replace(/\n/g, " "))}</div>
+                  <div class="popup-detail-collection-sub">${escapeAttr(metaSub)}</div>
+                </div>
+              </div>
+              <div class="author-work-action-col">
+                <button class="popup-detail-pill-btn author-work-open-btn" type="button" data-work-idx="${idx}">${btnInner}</button>
+                ${verBadge ? `<span class="btn-version-sub">${escapeAttr(verBadge)}</span>` : ""}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+        Array.from(listEl.querySelectorAll(".author-work-open-btn")).forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const idx = Number(btn.getAttribute("data-work-idx"));
+            const chosen = items[idx];
+            if (!chosen) return;
+            close();
+            if (typeof onSelectItem === "function") {
+              onSelectItem(chosen);
+            } else {
+              popupDetailController.open(chosen);
+            }
+          });
+        });
+      }
+
+      function openSectionList(sectionTitle, sectionSubtitle, jsonFile, items = [], onSelectItem = null) {
+        const cleanTitle = String(sectionTitle || "Danh sách nội dung").trim();
+        titleEl.textContent = cleanTitle;
+        subtitleEl.textContent = sectionSubtitle || `${items.length} nội dung từ ${jsonFile || "JSON"}`;
+        listEl.innerHTML = "";
+
+        backdrop.classList.add("is-open");
+        backdrop.setAttribute("aria-hidden", "false");
+
+        renderItemsIntoList(items, onSelectItem);
+      }
+
       async function open(authorName, fallbackItems = [], onSelectItem = null) {
         const cleanAuthor = String(authorName || "").trim();
         if (!cleanAuthor) return;
@@ -4855,7 +6049,7 @@
         const normalizedTarget = cleanAuthor.toLowerCase();
 
         const matched = allItems.filter((item) => {
-          const itemAuthor = String(item.author || item.developer || "").trim().toLowerCase();
+          const itemAuthor = String(item.author || item.dev || item.developer || "").trim().toLowerCase();
           return itemAuthor && itemAuthor === normalizedTarget;
         });
 
@@ -4868,40 +6062,7 @@
           return;
         }
 
-        listEl.innerHTML = matched.map((item, idx) => {
-          const name = item.appName || item.title || `Mục ${idx + 1}`;
-          const metaSub = [item.genre, item.fileFormat, item._sourceFile].filter(Boolean).join(" • ");
-          const isDl = item.isApp !== false;
-          const btnText = isDl ? "Nhận" : "Xem";
-          const btnInner = `${isDl ? getCloudDownloadSvg() : ""}<span>${btnText}</span>`;
-
-          return `
-            <div class="popup-detail-collection-row">
-              <div class="popup-detail-collection-left">
-                <img class="popup-detail-related-icon" src="${escapeAttr(item.icon || item.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
-                <div class="popup-detail-collection-info">
-                  <div class="popup-detail-collection-title">${escapeAttr(String(name).replace(/\n/g, " "))}</div>
-                  <div class="popup-detail-collection-sub">${escapeAttr(metaSub)}</div>
-                </div>
-              </div>
-              <button class="popup-detail-pill-btn author-work-open-btn" type="button" data-work-idx="${idx}">${btnInner}</button>
-            </div>
-          `;
-        }).join("");
-
-        Array.from(listEl.querySelectorAll(".author-work-open-btn")).forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const idx = Number(btn.getAttribute("data-work-idx"));
-            const chosen = matched[idx];
-            if (!chosen) return;
-            close();
-            if (typeof onSelectItem === "function") {
-              onSelectItem(chosen);
-            } else {
-              popupDetailController.open(chosen);
-            }
-          });
-        });
+        renderItemsIntoList(matched, onSelectItem);
       }
 
       function close() {
@@ -4919,7 +6080,7 @@
         });
       }
 
-      return { init, open, close };
+      return { init, open, openSectionList, close };
     })();
 
     /* ==================== JS RIÊNG: POPUP DETAIL ==================== */
@@ -4934,6 +6095,7 @@
       const topTagEl = document.getElementById("popupDetailTopTag");
       const topSubEl = document.getElementById("popupDetailTopSub");
       const topActionBtnEl = document.getElementById("popupDetailTopActionBtn");
+      const topVersionSubEl = document.getElementById("popupDetailTopVersionSub");
 
       const heroBannerWrapEl = document.getElementById("popupDetailHeroBannerWrap");
       const heroBannerImgEl = document.getElementById("popupDetailHeroBannerImg");
@@ -4943,6 +6105,7 @@
       const appNameEl = document.getElementById("popupDetailAppName");
       const subtitleEl = document.getElementById("popupDetailSubtitle");
       const primaryBtnEl = document.getElementById("popupDetailPrimaryBtn");
+      const primaryVersionSubEl = document.getElementById("popupDetailPrimaryVersionSub");
       const versionBadgeEl = document.getElementById("popupDetailVersionBadge");
 
       const metaRatingLabelEl = document.getElementById("popupDetailMetaRatingLabel");
@@ -5231,21 +6394,30 @@
         updateInteractiveStars();
         onStateChangeCallback = typeof options.onStateChange === "function" ? options.onStateChange : null;
 
+        const displayName = item.appName || item.name || item.title || "";
+        const displayGenre = item.genre || item.category || "";
+        const displayAuthor = item.author || item.dev || "-";
+        const displayDate = item.releaseDate || item.publishDate || "";
+        const displayIcon = item.icon || item.img || "";
+        const displayGallery = Array.isArray(item.gallery) && item.gallery.length > 0
+          ? item.gallery.filter(Boolean)
+          : (Array.isArray(item.screenshots) ? item.screenshots.filter(Boolean) : []);
+
         const isApp = item.isApp !== false;
         const primaryLabel = isApp ? "Nhận" : "Mở";
 
-        topIconEl.src = item.icon || "";
-        topIconEl.alt = item.appName || item.title || "";
-        topTagEl.textContent = (item.appName || item.title || "").replace(/\n/g, " ");
-        topSubEl.textContent = item.description || item.genre || "";
-        setButtonLabelWithCloud(topActionBtnEl, primaryLabel, isApp);
-        setButtonLabelWithCloud(primaryBtnEl, primaryLabel, isApp);
+        topIconEl.src = displayIcon;
+        topIconEl.alt = displayName;
+        topTagEl.textContent = displayName.replace(/\n/g, " ");
+        topSubEl.textContent = item.description || displayGenre;
+        setButtonLabelWithCloud(topActionBtnEl, primaryLabel, isApp, topVersionSubEl, item.version);
+        setButtonLabelWithCloud(primaryBtnEl, primaryLabel, isApp, primaryVersionSubEl, item.version);
 
-        const topHeroSrc = item.heroBanner || item.banner || item.icon || "";
+        const topHeroSrc = item.heroBanner || item.banner || displayIcon;
         if (topHeroSrc) {
           heroBannerWrapEl.style.display = "block";
           heroBannerImgEl.src = topHeroSrc;
-          heroBannerImgEl.alt = item.appName || item.title || "";
+          heroBannerImgEl.alt = displayName;
           heroBlurBottomImgEl.src = topHeroSrc;
         } else {
           heroBannerWrapEl.style.display = "none";
@@ -5253,11 +6425,11 @@
           heroBlurBottomImgEl.src = "";
         }
 
-        iconImgEl.src = item.icon || "";
-        iconImgEl.alt = item.iconAlt || item.appName || item.title || "";
-        appNameEl.textContent = item.appName || item.title || "";
-        subtitleEl.textContent = item.description || item.genre || "";
-        versionBadgeEl.textContent = item.version || "";
+        iconImgEl.src = displayIcon;
+        iconImgEl.alt = item.iconAlt || displayName;
+        appNameEl.textContent = displayName;
+        subtitleEl.textContent = item.description || displayGenre;
+        versionBadgeEl.textContent = item.version ? (String(item.version).startsWith("Phiên bản") ? item.version : `Phiên bản ${item.version}`) : "";
 
         const handleOpenDownloadPicker = (event) => {
           event.stopPropagation();
@@ -5278,24 +6450,24 @@
         metaAgeSubEl.textContent = "Tuổi";
 
         metaRankValEl.textContent = item.rank || "#1";
-        metaRankSubEl.textContent = item.genre || "Hành Động";
+        metaRankSubEl.textContent = displayGenre || "Hành Động";
 
-        metaAuthorValEl.textContent = item.author || "-";
+        metaAuthorValEl.textContent = displayAuthor;
         metaAuthorSubEl.textContent = "Tác giả";
 
         const collections = Array.isArray(item.collections) && item.collections.length > 0
           ? item.collections
           : (Array.isArray(options.featuredCards) && options.featuredCards.length > 0
               ? options.featuredCards.slice(0, 2).map((fc, idx) => ({
-                  title: idx === 0 ? `Tuyển tập ${item.genre || "nổi bật"}` : `Gợi ý cùng danh mục`,
-                  subtitle: item.genre || fc.genre || "Kpazz",
-                  icons: [fc.icon, item.icon, ...(item.gallery || [])].filter(Boolean)
+                  title: idx === 0 ? `Tuyển tập ${displayGenre || "nổi bật"}` : `Gợi ý cùng danh mục`,
+                  subtitle: displayGenre || fc.genre || fc.category || "Kpazz",
+                  icons: [fc.icon || fc.img, displayIcon, ...displayGallery].filter(Boolean)
                 }))
               : []);
 
-        const miniIcons = Array.isArray(item.gallery) && item.gallery.length > 0
-          ? item.gallery.slice(0, 4)
-          : [item.icon || item.banner || ""];
+        const miniIcons = displayGallery.length > 0
+          ? displayGallery.slice(0, 4)
+          : [displayIcon || item.banner || ""];
 
         if (collections.length > 0) {
           collectionsBlockEl.style.display = "block";
@@ -5322,8 +6494,8 @@
 
           Array.from(collectionsListEl.querySelectorAll(".popup-detail-collection-view-btn")).forEach((btn) => {
             btn.addEventListener("click", () => {
-              if (item.author) {
-                authorWorksController.open(item.author, options.allCards || options.featuredCards || [], (chosen) => {
+              if (displayAuthor && displayAuthor !== "-") {
+                authorWorksController.open(displayAuthor, options.allCards || options.featuredCards || [], (chosen) => {
                   open(chosen, options);
                 });
               }
@@ -5334,11 +6506,11 @@
           collectionsListEl.innerHTML = "";
         }
 
-        renderVideo(item.videoUrl);
+        renderVideo(item.videoUrl || item.video);
 
         if (item.changelog) {
           changelogBlockEl.style.display = "block";
-          changelogMetaEl.textContent = [item.version, item.releaseDate].filter(Boolean).join(" • ");
+          changelogMetaEl.textContent = [item.version, displayDate].filter(Boolean).join(" • ");
           changelogEl.textContent = item.changelog;
         } else {
           changelogBlockEl.style.display = "none";
@@ -5350,11 +6522,10 @@
         galleryIsPaused = false;
         galleryViewportEl.scrollLeft = 0;
 
-        const gallery = Array.isArray(item.gallery) ? item.gallery.filter(Boolean) : [];
-        if (gallery.length > 0) {
+        if (displayGallery.length > 0) {
           galleryBlockEl.style.display = "block";
-          galleryEl.innerHTML = gallery.map((src, i) => (
-            `<img class="popup-detail-shot" src="${escapeAttr(src)}" alt="${escapeAttr(item.appName || item.title || "Ảnh")} ${i + 1}" loading="lazy" />`
+          galleryEl.innerHTML = displayGallery.map((src, i) => (
+            `<img class="popup-detail-shot" src="${escapeAttr(src)}" alt="${escapeAttr(displayName || "Ảnh")} ${i + 1}" loading="lazy" />`
           )).join("");
 
           galleryConfig = {
@@ -5382,11 +6553,10 @@
           fullDescEl.innerHTML = "";
         }
 
-        const authorLabel = item.author || "Nhà phát triển";
-        devNameEl.textContent = authorLabel;
+        devNameEl.textContent = displayAuthor;
         devCardEl.onclick = () => {
           authorWorksController.open(
-            authorLabel,
+            displayAuthor,
             options.allCards || options.featuredCards || [],
             (chosen) => open(chosen, options)
           );
@@ -5402,93 +6572,110 @@
         ratingScoreEl.textContent = ratingScoreText;
         starsDisplayEl.textContent = renderStars(ratingNumeric);
         ratingCountEl.textContent = ratingCountText;
-        reviewTitleEl.textContent = item.reviewTitle || "Trải nghiệm rất tốt";
-        reviewMetaEl.textContent = `★★★★★ • ${item.releaseDate || "Kpazz"}`;
-        reviewBodyEl.textContent = item.reviewBody || "Ứng dụng hoạt động ổn định, giao diện trực quan và nhiều tính năng hữu ích.";
+        reviewTitleEl.textContent = item.reviewTitle || "Great app";
+        reviewMetaEl.textContent = item.reviewMeta || `${renderStars(ratingNumeric)} • ${displayAuthor}`;
+        reviewBodyEl.textContent = item.reviewBody || "Ứng dụng chạy mượt mà, giao diện trực quan và nhiều tính năng hữu ích.";
+
+        writeReviewBtn.onclick = () => {
+          alert(`Cảm ơn bạn đã chọn viết nhận xét cho ${displayName}.`);
+        };
+        supportBtn.onclick = () => {
+          if (displayAuthor && displayAuthor !== "-") {
+            authorWorksController.open(
+              displayAuthor,
+              options.allCards || options.featuredCards || [],
+              (chosen) => open(chosen, options)
+            );
+          } else {
+            alert("Đang mở hỗ trợ ứng dụng.");
+          }
+        };
 
         const infoEntries = [
-          { label: "Nhà cung cấp", value: item.author },
-          { label: "Kích cỡ", value: item.fileSize },
-          { label: "Danh mục", value: item.genre },
-          { label: "Định dạng", value: item.fileFormat },
-          { label: "Ngày phát hành", value: item.releaseDate },
-          { label: "Phiên bản", value: item.version }
-        ].filter((row) => row.value);
+          ["Nhà phát triển", displayAuthor],
+          ["Danh mục", displayGenre || "Ứng dụng"],
+          ["Phiên bản", item.version || "1.0"],
+          ["Ngày cập nhật", displayDate],
+          ["Dung lượng", item.fileSize],
+          ["Định dạng", item.fileFormat],
+          ["Tương thích", item.compatibility || "iOS / iPadOS"],
+          ["Ngôn ngữ", item.languages || "Tiếng Việt, English"]
+        ].filter(([, v]) => Boolean(v));
 
-        if (infoEntries.length > 0) {
-          infoBlockEl.style.display = "block";
-          infoRowsEl.innerHTML = infoEntries.map((row) => `
-            <div class="popup-detail-info-row">
-              <span class="popup-detail-info-label">${escapeAttr(row.label)}</span>
-              <span class="popup-detail-info-val">${escapeAttr(row.value)}</span>
-            </div>
-          `).join("");
-        } else {
-          infoBlockEl.style.display = "none";
-          infoRowsEl.innerHTML = "";
-        }
+        infoBlockEl.style.display = infoEntries.length > 0 ? "block" : "none";
+        infoRowsEl.innerHTML = infoEntries.map(([label, val]) => (
+          `<div class="popup-detail-info-row"><span class="popup-detail-info-label">${escapeAttr(label)}</span><span class="popup-detail-info-val">${escapeAttr(val)}</span></div>`
+        )).join("");
 
-        const featuredCards = Array.isArray(options.featuredCards) ? options.featuredCards : [];
+        const featuredCards = Array.isArray(options.featuredCards) ? options.featuredCards.slice(0, 5) : [];
         if (featuredCards.length > 0) {
           featuredBlockEl.style.display = "block";
-          featuredStripEl.innerHTML = featuredCards.map((fc) => `
-            <article class="popup-detail-featured-card">
-              <img src="${escapeAttr(fc.banner || fc.icon || "")}" alt="${escapeAttr(fc.appName || fc.title || "")}" loading="lazy" />
-              <div class="popup-detail-featured-body">
-                <div class="popup-detail-featured-kicker">${escapeAttr(fc.tag || "TUYỂN TẬP")}</div>
-                <div class="popup-detail-featured-title">${escapeAttr((fc.appName || fc.title || "").replace(/\n/g, " "))}</div>
+          featuredStripEl.innerHTML = featuredCards.map((fc) => {
+            const fcName = (fc.appName || fc.name || fc.title || "").replace(/\n/g, " ");
+            return `
+              <div class="popup-detail-featured-card">
+                <img src="${escapeAttr(fc.banner || fc.icon || fc.img || "")}" alt="${escapeAttr(fcName)}" loading="lazy" />
+                <div class="popup-detail-featured-body">
+                  <div class="popup-detail-featured-kicker">${escapeAttr(fc.tag || fc.genre || "NỔI BẬT")}</div>
+                  <div class="popup-detail-featured-title">${escapeAttr(fcName)}</div>
+                </div>
               </div>
-            </article>
-          `).join("");
+            `;
+          }).join("");
         } else {
           featuredBlockEl.style.display = "none";
           featuredStripEl.innerHTML = "";
         }
 
-        const relatedCards = Array.isArray(options.relatedCards) ? options.relatedCards : [];
+        const relatedRaw = Array.isArray(options.relatedCards) && options.relatedCards.length > 0
+          ? options.relatedCards
+          : (Array.isArray(options.featuredCards) ? options.featuredCards : []);
+        const relatedCards = relatedRaw.filter((rc) => rc !== item).slice(0, 9);
+
         if (relatedCards.length > 0) {
           relatedBlockEl.style.display = "block";
-          relatedTitleEl.textContent = "Có Thể Bạn Cũng Thích >";
+          relatedTitleEl.textContent = `Có Thể Bạn Cũng Thích ${displayGenre ? `• ${displayGenre}` : ""} >`;
 
-          // Mỗi cột tối đa 4 dòng; nếu hơn thì tự tạo thêm cột bên phải để cuộn ngang
-          const columns = [];
-          for (let i = 0; i < relatedCards.length; i += 4) {
-            columns.push(relatedCards.slice(i, i + 4));
+          const cols = [];
+          for (let i = 0; i < relatedCards.length; i += 3) {
+            cols.push(relatedCards.slice(i, i + 3));
           }
 
-          relatedListEl.scrollLeft = 0;
-          relatedListEl.innerHTML = columns.map((group) => `
-            <div class="popup-detail-related-col">
-              ${group.map((rc) => {
-                const rcIsApp = rc.isApp !== false;
-                const btnLabel = rcIsApp ? "Nhận" : "Xem";
-                const subNote = rcIsApp ? (rc.version || "") : (rc.fileFormat || "");
-                return `
-                  <div class="popup-detail-related-row">
-                    <div class="popup-detail-related-left">
-                      <img class="popup-detail-related-icon" src="${escapeAttr(rc.icon || "")}" alt="${escapeAttr(rc.appName || rc.title || "")}" loading="lazy" />
-                      <div class="popup-detail-related-info">
-                        <div class="popup-detail-related-name">${escapeAttr((rc.appName || rc.title || "").replace(/\n/g, " "))}</div>
-                        <div class="popup-detail-related-sub">${escapeAttr(rc.genre || "")}</div>
-                        ${rc.tag ? `<span class="popup-detail-related-badge">${escapeAttr(rc.tag)}</span>` : ""}
-                      </div>
-                    </div>
-                    <div class="popup-detail-related-right">
-                      <button class="popup-detail-pill-btn popup-detail-related-open" type="button" data-related-id="${escapeAttr(rc._id)}">${rcIsApp ? getCloudDownloadSvg() : ""}<span>${btnLabel}</span></button>
-                      ${subNote ? `<span class="popup-detail-related-subnote">${escapeAttr(subNote)}</span>` : ""}
+          relatedListEl.innerHTML = cols.map((group) => {
+            const rowsHtml = group.map((rc) => {
+              const rcName = (rc.appName || rc.name || rc.title || "").replace(/\n/g, " ");
+              const rcSub = rc.description || rc.genre || rc.category || "";
+              const rcIsApp = rc.isApp !== false;
+              const rcBtnText = rcIsApp ? "Nhận" : "Mở";
+              const rcVerBadge = rcIsApp ? formatVersionBadgeText(rc.version) : "";
+              return `
+                <div class="popup-detail-related-row">
+                  <div class="popup-detail-related-left">
+                    <img class="popup-detail-related-icon" src="${escapeAttr(rc.icon || rc.img || rc.banner || "")}" alt="${escapeAttr(rcName)}" loading="lazy" />
+                    <div class="popup-detail-related-info">
+                      <div class="popup-detail-related-name">${escapeAttr(rcName)}</div>
+                      <div class="popup-detail-related-sub">${escapeAttr(rcSub)}</div>
+                      <span class="popup-detail-related-badge">Tương thích iOS</span>
                     </div>
                   </div>
-                `;
-              }).join("")}
-            </div>
-          `).join("");
+                  <div class="popup-detail-related-right">
+                    <button class="popup-detail-pill-btn popup-detail-related-open-btn" type="button" data-related-title="${escapeAttr(rcName)}">${getCloudDownloadSvg()}<span>${rcBtnText}</span></button>
+                    ${rcVerBadge ? `<span class="btn-version-sub">${escapeAttr(rcVerBadge)}</span>` : ""}
+                    <span class="popup-detail-related-subnote">Hỗ trợ tiếng Việt</span>
+                  </div>
+                </div>
+              `;
+            }).join("");
 
-          Array.from(relatedListEl.querySelectorAll(".popup-detail-related-open")).forEach((btn) => {
+            return `<div class="popup-detail-related-col">${rowsHtml}</div>`;
+          }).join("");
+
+          Array.from(relatedListEl.querySelectorAll(".popup-detail-related-open-btn")).forEach((btn) => {
             btn.addEventListener("click", () => {
-              const targetId = btn.getAttribute("data-related-id");
-              const nextItem = relatedCards.find((x) => String(x._id) === String(targetId));
-              if (nextItem) {
-                open(nextItem, options);
+              const targetTitle = btn.getAttribute("data-related-title");
+              const found = relatedCards.find((x) => (x.appName || x.name || x.title || "").replace(/\n/g, " ") === targetTitle);
+              if (found) {
+                open(found, options);
               }
             });
           });
@@ -5497,10 +6684,12 @@
           relatedListEl.innerHTML = "";
         }
 
+        detailEl.scrollTop = 0;
+        topBarEl.classList.remove("is-scrolled");
+        shareBtn.classList.remove("is-hidden-on-scroll");
         backdrop.classList.add("is-open");
         backdrop.setAttribute("aria-hidden", "false");
-        detailEl.scrollTop = 0;
-        syncTopBarWithPrimaryBtn();
+        requestAnimationFrame(syncTopBarWithPrimaryBtn);
 
         if (onStateChangeCallback) {
           onStateChangeCallback(true);
@@ -5510,17 +6699,13 @@
       function close() {
         if (!backdrop.classList.contains("is-open")) return;
         stopGalleryAuto();
+        videoBoxEl.innerHTML = "";
         backdrop.classList.remove("is-open");
         backdrop.setAttribute("aria-hidden", "true");
         topBarEl.classList.remove("is-scrolled");
         shareBtn.classList.remove("is-hidden-on-scroll");
-        videoBoxEl.innerHTML = "";
-        currentItem = null;
-
-        const cb = onStateChangeCallback;
-        onStateChangeCallback = null;
-        if (cb) {
-          cb(false);
+        if (onStateChangeCallback) {
+          onStateChangeCallback(false);
         }
       }
 
@@ -5529,28 +6714,31 @@
 
         shareBtn.addEventListener("click", () => {
           if (!currentItem) return;
-          const shareUrl = currentItem.buttonUrl || window.location.href;
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(shareUrl).catch(() => {});
+          const shareTitle = (currentItem.appName || currentItem.name || currentItem.title || "Kpazz").replace(/\n/g, " ");
+          if (navigator.share) {
+            navigator.share({
+              title: shareTitle,
+              text: currentItem.description || shareTitle,
+              url: window.location.href
+            }).catch(() => {});
+          } else {
+            alert(`Chia sẻ: ${shareTitle}`);
           }
-          alert(`Đã sao chép liên kết chia sẻ của "${currentItem.appName || currentItem.title}".`);
         });
 
-        backdrop.addEventListener("click", (event) => {
-          if (event.target === backdrop) {
-            close();
-          }
+        starButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            userRating = Number(btn.getAttribute("data-star")) || 0;
+            updateInteractiveStars();
+          });
         });
 
-        detailEl.addEventListener("scroll", syncTopBarWithPrimaryBtn, { passive: true });
-
-        galleryBlockEl.addEventListener("mouseenter", () => {
+        galleryViewportEl.addEventListener("mouseenter", () => {
           galleryIsPaused = true;
         });
 
-        galleryBlockEl.addEventListener("mouseleave", () => {
+        galleryViewportEl.addEventListener("mouseleave", () => {
           galleryIsPaused = false;
-          galleryLastMarqueeTime = performance.now();
         });
 
         galleryViewportEl.addEventListener("touchstart", () => {
@@ -5559,404 +6747,245 @@
 
         galleryViewportEl.addEventListener("touchend", () => {
           galleryIsPaused = false;
-          galleryLastMarqueeTime = performance.now();
         }, { passive: true });
 
-        starButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            userRating = Number(btn.getAttribute("data-star")) || 0;
-            updateInteractiveStars();
-            if (currentItem) {
-              alert(`Bạn đã đánh giá ${userRating}/5 sao cho "${currentItem.appName || currentItem.title}".`);
-            }
-          });
-        });
+        detailEl.addEventListener("scroll", syncTopBarWithPrimaryBtn, { passive: true });
 
-        writeReviewBtn.addEventListener("click", () => {
-          if (!currentItem) return;
-          alert(`Viết nhận xét cho "${currentItem.appName || currentItem.title}".`);
-        });
-
-        supportBtn.addEventListener("click", () => {
-          if (!currentItem) return;
-          alert(`Hỗ trợ ứng dụng "${currentItem.appName || currentItem.title}".`);
+        backdrop.addEventListener("click", (event) => {
+          if (event.target === backdrop) {
+            close();
+          }
         });
       }
 
       return { init, open, close };
     })();
 
-    /* ==================== JS RIÊNG: APPIOS ==================== */
+    /* ==================== JS RIÊNG: APPIOS (APP DÀNH CHO IOS) ==================== */
     const appiosController = (() => {
-      const JSON_PATH = "Tabs/Appios.json";
-      const FALLBACK_DATA = {
-        sectionTitle: "APP Dành Cho ios",
-        sectionSubtitle: "Những APP hỗ trợ nền tảng ios (iphone & ipad)",
-        sliderConfig: {
-          slotsection: 3,
-          autoplay: true,
-          autoplayInterval: 4000,
-          slideType: "smooth",
-          slideSpeed: 3000,
-          marqueeSpeed: 38,
-          loop: true
+      const JSON_URL = "Tabs/Appios.json";
+      const FALLBACK_DATA = [
+        {
+          isApp: true,
+          tag: "ĐỀ XUẤT MỚI",
+          kicker: "PHỔ BIẾN NHẤT",
+          title: "Deep Rock\nGalactic: Survivor",
+          description: "Sẵn sàng đào mỏ giữa hiểm nguy.",
+          releaseDate: "24/11/2026",
+          version: "1.2.4",
+          fileSize: "485 MB",
+          fileFormat: "IPA",
+          ratingScore: "4,8",
+          ratingCount: "764 N xếp hạng",
+          ageRating: "16+",
+          rank: "#1",
+          banner: "https://picsum.photos/seed/drg-banner/800/870",
+          icon: "https://picsum.photos/seed/drg-icon/240/240",
+          appName: "Deep Rock Galactic: Survivor",
+          genre: "Hành Động",
+          author: "Funday Games",
+          buttonText: "Nhận",
+          hasInAppPurchases: true,
+          gallery: [
+            "https://picsum.photos/seed/drg-shot1/640/360",
+            "https://picsum.photos/seed/drg-shot2/640/360",
+            "https://picsum.photos/seed/drg-shot3/640/360"
+          ],
+          changelog: "- Tối ưu hiệu năng trên thiết bị iOS mới.\n- Bổ sung chế độ đào mỏ sâu và vũ khí mới.",
+          fullDescription: "Deep Rock Galactic: Survivor đưa bạn vào cuộc chiến sinh tồn căng thẳng dưới lòng đất.",
+          downloads: [
+            { label: "Link tải trực tiếp", note: "Tốc độ cao", size: "485 MB", url: "#" },
+            { label: "Link dự phòng", note: "Dự phòng", size: "485 MB", url: "#" }
+          ]
         },
-        cards: [
-          {
-            isApp: true,
-            tag: "GAME CHÚNG TÔI YÊU THÍCH",
-            title: "Deep Rock\nGalactic: Survivor",
-            description: "Sẵn sàng đào mỏ giữa hiểm nguy.",
-            fullDescription: "Tựa game sinh tồn góc nhìn từ trên xuống lấy bối cảnh vũ trụ Deep Rock Galactic. Khai thác khoáng sản quý hiếm, nâng cấp hỏa lực và sống sót trước bầy quái vật hung hãn trên các hành tinh khắc nghiệt.",
-            changelog: "• Thêm bản đồ mới Hollow Bough\n• Cân bằng lại vũ khí hạng nặng và kỹ năng đặc biệt\n• Tối ưu hiệu năng và sửa lỗi văng game trên iOS 18",
-            author: "Funday Games",
-            releaseDate: "15/11/2026",
-            fileFormat: "IPA",
-            fileSize: "1.45 GB",
-            videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            gallery: [
-              "https://picsum.photos/seed/drg-gal1/800/500",
-              "https://picsum.photos/seed/drg-gal2/800/500",
-              "https://picsum.photos/seed/drg-gal3/800/500"
-            ],
-            banner: "https://picsum.photos/seed/drg-banner/800/870",
-            bannerAlt: "Deep Rock Galactic: Survivor",
-            icon: "https://picsum.photos/seed/drg-icon/240/240",
-            iconAlt: "Icon Deep Rock Galactic: Survivor",
-            appName: "Deep Rock Galactic: Survivor",
-            genre: "Hành Động",
-            version: "Phiên bản 1.0",
-            downloadPickerTitle: "Chọn link tải",
-            downloadPickerSubtitle: "Chọn 1 trong các link tải bên dưới",
-            downloadOptionPrefix: "Link tải",
-            useVersionInPicker: false,
-            buttonUrl: "https://example.com/download/deep-rock-galactic-survivor.ipa",
-            downloads: [
-              {
-                label: "Link tải 1",
-                note: "Server chính",
-                size: "1.45 GB",
-                url: "https://example.com/download/deep-rock-galactic-survivor-v1.0-link1.ipa"
-              },
-              {
-                label: "Link tải 2",
-                note: "Server dự phòng",
-                size: "1.45 GB",
-                url: "https://example.com/download/deep-rock-galactic-survivor-v1.0-link2.ipa"
-              },
-              {
-                label: "Link tải 3",
-                note: "Bản cũ ổn định",
-                size: "1.38 GB",
-                url: "https://example.com/download/deep-rock-galactic-survivor-v0.9-link3.ipa"
-              }
-            ]
-          },
-          {
-            isApp: true,
-            tag: "ĐỀ XUẤT MỚI",
-            title: "Starfield:\nOutpost Zero",
-            description: "Khám phá hành tinh xa lạ và xây căn cứ.",
-            fullDescription: "Khám phá các hệ sao chưa từng được biết đến, thu thập tài nguyên, thiết lập tiền đồn tự động và quản lý phi hành đoàn giữa không gian sâu thẳm.",
-            changelog: "• Bổ sung hệ thống xây dựng mô-đun căn cứ mới\n• Cập nhật hiệu ứng ánh sáng và đổ bóng HDR\n• Hỗ trợ tay cầm không dây mượt mà hơn",
-            author: "Bethesda Studio Mobile",
-            releaseDate: "18/11/2026",
-            fileFormat: "IPA",
-            fileSize: "2.10 GB",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            gallery: [
-              "https://picsum.photos/seed/sf-gal1/800/500",
-              "https://picsum.photos/seed/sf-gal2/800/500",
-              "https://picsum.photos/seed/sf-gal3/800/500"
-            ],
-            banner: "https://picsum.photos/seed/sf-banner/800/870",
-            bannerAlt: "Starfield: Outpost Zero",
-            icon: "https://picsum.photos/seed/sf-icon/240/240",
-            iconAlt: "Icon Starfield: Outpost Zero",
-            appName: "Starfield: Outpost Zero",
-            genre: "Phiêu Lưu",
-            version: "Phiên bản 1.2",
-            downloadPickerTitle: "Chọn link tải",
-            downloadPickerSubtitle: "Chọn link tải phù hợp",
-            downloadOptionPrefix: "Link tải",
-            useVersionInPicker: false,
-            buttonUrl: "https://example.com/download/starfield-outpost-zero.ipa",
-            downloads: [
-              {
-                label: "Link tải 1",
-                note: "Tốc độ cao",
-                size: "2.10 GB",
-                url: "https://example.com/download/starfield-outpost-zero-link1.ipa"
-              },
-              {
-                label: "Link tải 2",
-                note: "Dự phòng",
-                size: "2.10 GB",
-                url: "https://example.com/download/starfield-outpost-zero-link2.ipa"
-              }
-            ]
-          },
-          {
-            isApp: true,
-            tag: "CẬP NHẬT NỔI BẬT",
-            title: "Nebula Strike:\nOrbit Ops",
-            description: "Chiến đấu liên ngân hà giữa mưa thiên thạch.",
-            fullDescription: "Điều khiển chiến hạm cơ động cao vượt qua vành đai thiên thạch, né tránh hỏa lực dày đặc và đối đầu các chiến hạm boss khổng lồ trong không gian.",
-            changelog: "• Mở khóa chiến dịch Orbit Ops mùa mới\n• Thêm 4 loại tên lửa và khiên năng lượng\n• Giảm thời gian tải màn chơi",
-            author: "Nova Core Interactive",
-            releaseDate: "20/11/2026",
-            fileFormat: "IPA",
-            fileSize: "890 MB",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-            gallery: [
-              "https://picsum.photos/seed/nb-gal1/800/500",
-              "https://picsum.photos/seed/nb-gal2/800/500",
-              "https://picsum.photos/seed/nb-gal3/800/500"
-            ],
-            banner: "https://picsum.photos/seed/nb-banner/800/870",
-            bannerAlt: "Nebula Strike: Orbit Ops",
-            icon: "https://picsum.photos/seed/nb-icon/240/240",
-            iconAlt: "Icon Nebula Strike: Orbit Ops",
-            appName: "Nebula Strike: Orbit Ops",
-            genre: "Hành Động",
-            version: "Phiên bản 2.0",
-            downloadPickerTitle: "Chọn link tải",
-            downloadPickerSubtitle: "Chọn 1 trong 3 link tải",
-            downloadOptionPrefix: "Link tải",
-            useVersionInPicker: false,
-            buttonUrl: "https://example.com/download/nebula-strike-orbit-ops.ipa",
-            downloads: [
-              {
-                label: "Link tải 1",
-                note: "Server 1",
-                url: "https://example.com/download/nebula-strike-link1.ipa"
-              },
-              {
-                label: "Link tải 2",
-                note: "Server 2",
-                url: "https://example.com/download/nebula-strike-link2.ipa"
-              },
-              {
-                label: "Link tải 3",
-                note: "Server 3",
-                url: "https://example.com/download/nebula-strike-link3.ipa"
-              }
-            ]
-          },
-          {
-            isApp: true,
-            tag: "TIỆN ÍCH iOS",
-            title: "Aether\nFile Vault",
-            description: "Quản lý tệp IPA & tài liệu nhanh gọn.",
-            fullDescription: "Công cụ quản lý tệp, giải nén, xem trước tài liệu và lưu trữ ngoại tuyến tối ưu cho iPhone và iPad.",
-            changelog: "• Hỗ trợ xem nhanh gói tệp lớn\n• Cải thiện tốc độ tìm kiếm và sắp xếp",
-            author: "Funday Games",
-            releaseDate: "21/11/2026",
-            fileFormat: "IPA",
-            fileSize: "125 MB",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-            gallery: [
-              "https://picsum.photos/seed/af-gal1/800/500",
-              "https://picsum.photos/seed/af-gal2/800/500",
-              "https://picsum.photos/seed/af-gal3/800/500"
-            ],
-            banner: "https://picsum.photos/seed/af-banner/800/870",
-            bannerAlt: "Aether File Vault",
-            icon: "https://picsum.photos/seed/af-icon/240/240",
-            iconAlt: "Icon Aether File Vault",
-            appName: "Aether File Vault",
-            genre: "Tiện Ích",
-            version: "Phiên bản 1.5",
-            downloadPickerTitle: "Chọn link tải",
-            downloadPickerSubtitle: "Chọn link tải",
-            downloadOptionPrefix: "Link tải",
-            useVersionInPicker: false,
-            buttonUrl: "https://example.com/download/aether-file-vault.ipa"
-          },
-          {
-            isApp: false,
-            tag: "BÀI VIẾT HƯỚNG DẪN",
-            title: "Mẹo Tối Ưu\niOS 2026",
-            description: "Tổng hợp thủ thuật tiết kiệm pin và dung lượng.",
-            fullDescription: "Hướng dẫn thiết lập thông báo, quản lý bộ nhớ đệm và tối ưu trải nghiệm sử dụng hằng ngày trên iPhone và iPad.\n\n{{img:https://picsum.photos/seed/ios-guide-1/800/480}}\n\nSau khi bật chế độ tối ưu, hãy kiểm tra thêm tại https://demo.com/huong-dan/ios để cập nhật thủ thuật mới.",
-            author: "Biên Tập Viên",
-            releaseDate: "19/11/2026",
-            fileFormat: "HTML",
-            fileSize: "2 MB",
-            videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoy.mp4",
-            gallery: [
-              "https://picsum.photos/seed/ios-gal1/800/500",
-              "https://picsum.photos/seed/ios-gal2/800/500",
-              "https://picsum.photos/seed/ios-gal3/800/500"
-            ],
-            banner: "https://picsum.photos/seed/ios-banner/800/870",
-            bannerAlt: "Mẹo Tối Ưu iOS 2026",
-            icon: "https://picsum.photos/seed/ios-icon/240/240",
-            iconAlt: "Icon Mẹo Tối Ưu iOS 2026",
-            appName: "Mẹo Tối Ưu iOS 2026",
-            genre: "Hướng Dẫn",
-            version: "v2026.1",
-            buttonUrl: "https://example.com/huong-dan/meo-toi-uu-ios-2026"
-          }
-        ]
-      };
+        {
+          isApp: true,
+          tag: "MỚI CẬP NHẬT",
+          kicker: "CHIẾN THUẬT",
+          title: "Nebula Strike:\nOrbit Ops",
+          description: "Chiến đấu liên ngân hà giữa mưa thiên thạch.",
+          releaseDate: "20/11/2026",
+          version: "2.0.1",
+          fileSize: "612 MB",
+          fileFormat: "IPA",
+          ratingScore: "4,7",
+          ratingCount: "320 N xếp hạng",
+          ageRating: "12+",
+          rank: "#2",
+          banner: "https://picsum.photos/seed/nb-banner/800/870",
+          icon: "https://picsum.photos/seed/nb-icon/240/240",
+          appName: "Nebula Strike: Orbit Ops",
+          genre: "Hành Động",
+          author: "Nova Core Interactive",
+          buttonText: "Nhận",
+          hasInAppPurchases: false,
+          gallery: [
+            "https://picsum.photos/seed/nb-shot1/640/360",
+            "https://picsum.photos/seed/nb-shot2/640/360"
+          ],
+          changelog: "- Thêm hạm đội mới và cân bằng chỉ số chiến đấu.",
+          fullDescription: "Chỉ huy phi đội ngoài không gian và bảo vệ căn cứ quỹ đạo.",
+          downloads: [
+            { label: "Link tải trực tiếp", note: "Tốc độ cao", size: "612 MB", url: "#" }
+          ]
+        }
+      ];
 
-      window.__kpazzAppiosFallback = FALLBACK_DATA.cards;
+      window.__kpazzAppiosFallback = FALLBACK_DATA;
 
-      const section = document.getElementById("appiosSection");
+      const sectionEl = document.getElementById("appiosSection");
+      const headerEl = document.getElementById("appiosHeader");
       const titleEl = document.getElementById("appiosTitle");
       const subtitleEl = document.getElementById("appiosSubtitle");
-      const viewport = document.getElementById("appiosViewport");
-      const track = document.getElementById("appiosTrack");
+      const viewportEl = document.getElementById("appiosViewport");
+      const trackEl = document.getElementById("appiosTrack");
 
-      let config = { ...FALLBACK_DATA.sliderConfig };
-      let cardsData = [...FALLBACK_DATA.cards];
-      let currentIdx = 0;
-      let autoTimer = null;
-      let marqueeRafId = null;
-      let lastMarqueeTime = null;
+      let cardsData = [];
+      let currentIndex = 0;
       let isPaused = false;
       let isPopupOpen = false;
+      let autoSlideTimer = null;
+      let isPointerDown = false;
+      let startX = 0;
+      let scrollStart = 0;
 
-      function escapeHtml(value = "") {
-        return String(value)
+      const config = {
+        sectionTitle: "APP Dành Cho ios",
+        sectionSubtitle: "Kho ứng dụng iOS chọn lọc",
+        autoplay: true,
+        autoplayInterval: 4500,
+        slideType: "smooth",
+        slideSpeed: 900,
+        loop: true
+      };
+
+      function escapeAttr(val = "") {
+        return String(val)
           .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
           .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;");
+          .replace(/>/g, "&gt;");
       }
 
-      async function loadJsonData() {
+      async function loadData() {
         try {
-          const res = await fetch(JSON_PATH, { cache: "no-store" });
-          if (!res.ok) return FALLBACK_DATA;
-          const parsed = await res.json();
-          return parsed && typeof parsed === "object" ? parsed : FALLBACK_DATA;
-        } catch (err) {
+          const res = await fetch(JSON_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error("Không tải được Appios.json");
+          const json = await res.json();
+          if (Array.isArray(json)) {
+            return json;
+          }
+          if (json && Array.isArray(json.items)) {
+            if (json.sectionTitle) config.sectionTitle = json.sectionTitle;
+            if (json.sectionSubtitle) config.sectionSubtitle = json.sectionSubtitle;
+            if (typeof json.autoplay === "boolean") config.autoplay = json.autoplay;
+            if (typeof json.autoplayInterval === "number") config.autoplayInterval = json.autoplayInterval;
+            if (json.slideType) config.slideType = json.slideType;
+            if (typeof json.slideSpeed === "number") config.slideSpeed = json.slideSpeed;
+            if (typeof json.loop === "boolean") config.loop = json.loop;
+            return json.items;
+          }
+          return FALLBACK_DATA;
+        } catch (_) {
           return FALLBACK_DATA;
         }
       }
 
-      function renderSection(data) {
-        config = {
-          ...FALLBACK_DATA.sliderConfig,
-          ...(data.sliderConfig || {})
-        };
-        cardsData = Array.isArray(data.cards) ? data.cards.map((c, i) => ({ ...c, _id: i })) : [];
+      function renderCards() {
+        titleEl.textContent = config.sectionTitle;
+        subtitleEl.textContent = config.sectionSubtitle;
 
-        const resolvedTitle = data.sectionTitle || FALLBACK_DATA.sectionTitle;
-        const resolvedSubtitle = data.sectionSubtitle || FALLBACK_DATA.sectionSubtitle;
-
-        titleEl.textContent = resolvedTitle;
-        subtitleEl.textContent = resolvedSubtitle;
-
-        menubarController.setHomeSections([
-          {
-            title: resolvedTitle,
-            description: resolvedSubtitle,
-            cards: cardsData
-          }
-        ]);
-
-        track.innerHTML = cardsData.map((card, idx) => {
-          const isApp = card.isApp !== false;
-          const actionText = isApp ? "Nhận" : "Xem";
-          const versionSubText = card.version || card.fileFormat || "";
-          const iapHtml = versionSubText
-            ? `<span class="appios-iap-label">${escapeHtml(versionSubText)}</span>`
-            : "";
+        trackEl.innerHTML = cardsData.map((item, idx) => {
+          const title = item.title || item.appName || item.name || `Mục ${idx + 1}`;
+          const desc = item.description || item.genre || item.category || "";
+          const appName = (item.appName || item.name || item.title || "").replace(/\n/g, " ");
+          const genre = item.genre || item.category || "";
+          const topPill = item.tag || item.kicker || "ỨNG DỤNG iOS";
+          const kicker = item.kicker || (item.version ? `PHIÊN BẢN ${item.version}` : "NỔI BẬT");
+          const btnText = item.buttonText || (item.isApp === false ? "Mở" : "Nhận");
+          const verSub = item.isApp === false ? "" : formatVersionBadgeText(item.version);
 
           return `
-            <article id="appiosCard${idx + 1}" class="appios-card" data-index="${idx}">
+            <article class="appios-card" data-idx="${idx}">
               <div class="appios-hero">
-                <img
-                  class="appios-banner-img"
-                  src="${escapeHtml(card.banner || "")}"
-                  alt="${escapeHtml(card.bannerAlt || card.appName || card.title || "")}"
-                  loading="lazy"
-                />
+                <img class="appios-banner-img" src="${escapeAttr(item.banner || item.icon || item.img || "")}" alt="${escapeAttr(title.replace(/\n/g, " "))}" loading="lazy" />
+                <span class="appios-top-pill">${escapeAttr(topPill)}</span>
                 <div class="appios-hero-content">
-                  ${card.tag ? `<div class="appios-kicker">${escapeHtml(card.tag)}</div>` : ""}
-                  <h3 class="appios-card-title">${escapeHtml(card.title || "")}</h3>
-                  ${card.description ? `<p class="appios-card-desc">${escapeHtml(card.description)}</p>` : ""}
+                  <div class="appios-kicker">${escapeAttr(kicker)}</div>
+                  <h3 class="appios-card-title">${escapeAttr(title)}</h3>
+                  <p class="appios-card-desc">${escapeAttr(desc)}</p>
                 </div>
               </div>
-
               <div class="appios-dock">
                 <div class="appios-dock-left">
                   <div class="appios-app-icon">
-                    <img
-                      src="${escapeHtml(card.icon || "")}"
-                      alt="${escapeHtml(card.iconAlt || card.appName || "")}"
-                      loading="lazy"
-                    />
+                    <img src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(appName)}" loading="lazy" />
                   </div>
                   <div class="appios-meta">
-                    <div class="appios-app-name">${escapeHtml(card.appName || card.title || "")}</div>
-                    <div class="appios-app-genre">${escapeHtml(card.genre || "")}</div>
+                    <div class="appios-app-name">${escapeAttr(appName)}</div>
+                    <div class="appios-app-genre">${escapeAttr(genre)}</div>
                   </div>
                 </div>
-
                 <div class="appios-dock-right">
-                  <button class="appios-get-btn" type="button" data-card-index="${idx}">${isApp ? getCloudDownloadSvg() : ""}<span>${actionText}</span></button>
-                  ${iapHtml}
+                  <button class="appios-get-btn" type="button" data-idx="${idx}">${getCloudDownloadSvg()}<span class="appios-get-btn-main">${escapeAttr(btnText)}</span></button>
+                  ${verSub ? `<span class="btn-version-sub">${escapeAttr(verSub)}</span>` : ""}
                 </div>
               </div>
             </article>
           `;
         }).join("");
 
-        const cardEls = Array.from(track.querySelectorAll(".appios-card"));
-        cardEls.forEach((cardEl) => {
-          cardEl.addEventListener("click", () => {
-            const cardIdx = Number(cardEl.getAttribute("data-index"));
-            if (cardsData[cardIdx]) {
-              const relatedCards = cardsData.filter((_, i) => i !== cardIdx);
-              popupDetailController.open(cardsData[cardIdx], {
-                onStateChange: setPopupOpen,
-                sliderConfig: config,
-                allCards: cardsData,
-                featuredCards: cardsData,
-                relatedCards
-              });
-            }
+        Array.from(trackEl.querySelectorAll(".appios-card")).forEach((cardEl) => {
+          cardEl.addEventListener("click", (event) => {
+            if (event.target.closest(".appios-get-btn")) return;
+            const idx = Number(cardEl.getAttribute("data-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            popupDetailController.open(chosen, {
+              onStateChange: setPopupOpen,
+              allCards: cardsData,
+              featuredCards: cardsData,
+              relatedCards: cardsData.filter((x) => x !== chosen),
+              sliderConfig: config
+            });
           });
         });
 
-        const getButtons = Array.from(track.querySelectorAll(".appios-get-btn"));
-        getButtons.forEach((btn) => {
+        Array.from(trackEl.querySelectorAll(".appios-get-btn")).forEach((btn) => {
           btn.addEventListener("click", (event) => {
             event.stopPropagation();
-            const cardIdx = Number(btn.getAttribute("data-card-index"));
-            const item = cardsData[cardIdx];
-            if (!item) return;
-            downloadPickerController.open(item);
+            const idx = Number(btn.getAttribute("data-idx"));
+            const chosen = cardsData[idx];
+            if (!chosen) return;
+            downloadPickerController.open(chosen);
           });
         });
       }
 
       function getStepWidth() {
-        const cards = Array.from(track.querySelectorAll(".appios-card"));
-        if (!cards.length) return 0;
-        const cardRect = cards[0].getBoundingClientRect();
-        const style = window.getComputedStyle(track);
+        const firstCard = trackEl.querySelector(".appios-card");
+        if (!firstCard) return 0;
+        const cardRect = firstCard.getBoundingClientRect();
+        const style = window.getComputedStyle(trackEl);
         const gap = parseFloat(style.gap || style.columnGap || "14") || 14;
         return cardRect.width + gap;
       }
 
-      function scrollToPosition(targetLeft, slideType, slideSpeed, targetCard) {
-        const type = String(slideType || "smooth").toLowerCase();
-        const speed = typeof slideSpeed === "number" ? slideSpeed : 850;
+      function animateScrollTo(targetLeft) {
+        const type = String(config.slideType || "smooth").toLowerCase();
+        const speed = typeof config.slideSpeed === "number" ? config.slideSpeed : 900;
+        const cardEls = Array.from(trackEl.querySelectorAll(".appios-card"));
+        const targetCard = cardEls[currentIndex];
 
         if (type === "instant" || speed <= 0) {
-          viewport.scrollLeft = targetLeft;
+          viewportEl.scrollLeft = targetLeft;
           return;
         }
 
         if (type === "fade" && targetCard) {
           targetCard.classList.add("is-fading");
           setTimeout(() => {
-            viewport.scrollLeft = targetLeft;
+            viewportEl.scrollLeft = targetLeft;
             targetCard.classList.remove("is-fading");
           }, Math.min(250, speed / 3));
           return;
@@ -5969,7 +6998,7 @@
           }, Math.min(450, speed / 2));
         }
 
-        const startLeft = viewport.scrollLeft;
+        const startLeft = viewportEl.scrollLeft;
         const distance = targetLeft - startLeft;
         const duration = type === "scroll" ? Math.max(speed, 1600) : Math.min(speed, 1200);
         const startTime = performance.now();
@@ -5982,7 +7011,7 @@
           const elapsed = now - startTime;
           const progress = Math.min(1, elapsed / duration);
           const eased = type === "slide" || type === "snap" ? progress : easeInOut(progress);
-          viewport.scrollLeft = startLeft + distance * eased;
+          viewportEl.scrollLeft = startLeft + distance * eased;
           if (progress < 1) {
             requestAnimationFrame(step);
           }
@@ -5991,136 +7020,590 @@
         requestAnimationFrame(step);
       }
 
-      function slideNext() {
-        if (isPaused || isPopupOpen || !config.autoplay) return;
-        const cards = Array.from(track.querySelectorAll(".appios-card"));
-        if (!cards.length) return;
-
+      function goToSlide(idx) {
+        if (!cardsData.length) return;
+        const maxScroll = Math.max(0, trackEl.scrollWidth - viewportEl.clientWidth);
         const step = getStepWidth();
-        const maxScroll = Math.max(0, track.scrollWidth - viewport.clientWidth);
-        if (maxScroll <= 2) return;
+        if (step <= 0) return;
 
-        currentIdx += 1;
-        let nextLeft = currentIdx * step;
-
-        if (nextLeft > maxScroll + 4) {
+        if (idx >= cardsData.length || idx * step > maxScroll + 4) {
           if (config.loop === false) {
-            stopAuto();
+            stopAutoSlide();
             return;
           }
-          currentIdx = 0;
-          nextLeft = 0;
-        } else {
-          nextLeft = Math.min(nextLeft, maxScroll);
-        }
-
-        const targetCard = cards[Math.min(currentIdx, cards.length - 1)];
-        scrollToPosition(nextLeft, config.slideType, config.slideSpeed, targetCard);
-      }
-
-      function startMarquee() {
-        stopAuto();
-        const speedPxPerSec = Number(config.marqueeSpeed) > 0 ? Number(config.marqueeSpeed) : 38;
-        lastMarqueeTime = performance.now();
-
-        function tick(now) {
-          const dt = (now - lastMarqueeTime) / 1000;
-          lastMarqueeTime = now;
-
-          if (!isPaused && !isPopupOpen && config.autoplay) {
-            const maxScroll = Math.max(0, track.scrollWidth - viewport.clientWidth);
-            if (maxScroll > 2) {
-              const nextLeft = viewport.scrollLeft + speedPxPerSec * dt;
-              if (nextLeft >= maxScroll - 1) {
-                if (config.loop === false) {
-                  stopAuto();
-                  return;
-                }
-                viewport.scrollLeft = 0;
-              } else {
-                viewport.scrollLeft = nextLeft;
-              }
-            }
-          }
-
-          marqueeRafId = requestAnimationFrame(tick);
-        }
-
-        marqueeRafId = requestAnimationFrame(tick);
-      }
-
-      function startAuto() {
-        stopAuto();
-        if (!config.autoplay) return;
-
-        const type = String(config.slideType || "smooth").toLowerCase();
-        if (type === "marquee") {
-          startMarquee();
+          currentIndex = 0;
+          animateScrollTo(0);
           return;
         }
 
-        const intervalMs = Number(config.autoplayInterval) > 0 ? Number(config.autoplayInterval) : 4000;
-        autoTimer = setInterval(slideNext, intervalMs);
+        currentIndex = Math.max(0, idx);
+        const targetLeft = Math.min(currentIndex * step, maxScroll);
+        animateScrollTo(targetLeft);
       }
 
-      function stopAuto() {
-        if (autoTimer) {
-          clearInterval(autoTimer);
-          autoTimer = null;
-        }
-        if (marqueeRafId) {
-          cancelAnimationFrame(marqueeRafId);
-          marqueeRafId = null;
+      function nextSlide() {
+        if (isPaused || isPopupOpen || cardsData.length <= 1) return;
+        goToSlide(currentIndex + 1);
+      }
+
+      function stopAutoSlide() {
+        if (autoSlideTimer) {
+          clearInterval(autoSlideTimer);
+          autoSlideTimer = null;
         }
       }
 
-      function setPopupOpen(openState) {
-        isPopupOpen = Boolean(openState);
-        if (!isPopupOpen) {
-          lastMarqueeTime = performance.now();
+      function startAutoSlide() {
+        stopAutoSlide();
+        if (!config.autoplay || cardsData.length <= 1) return;
+        const interval = Number(config.autoplayInterval) > 0 ? Number(config.autoplayInterval) : 4500;
+        autoSlideTimer = setInterval(nextSlide, interval);
+      }
+
+      function setPopupOpen(open) {
+        isPopupOpen = Boolean(open);
+        if (isPopupOpen) {
+          stopAutoSlide();
+        } else {
+          startAutoSlide();
         }
       }
 
       async function init() {
-        downloadPickerController.init();
-        authorWorksController.init();
-        popupDetailController.init();
-        const data = await loadJsonData();
-        renderSection(data);
-        startAuto();
+        cardsData = await loadData();
+        renderCards();
+        menubarController.registerHomeSection("appios", {
+          key: "appios",
+          title: config.sectionTitle,
+          description: config.sectionSubtitle,
+          jsonFile: JSON_URL,
+          cards: cardsData
+        });
+        startAutoSlide();
 
-        section.addEventListener("mouseenter", () => {
+        headerEl.addEventListener("click", () => {
+          authorWorksController.openSectionList(
+            config.sectionTitle,
+            config.sectionSubtitle,
+            JSON_URL,
+            cardsData,
+            (chosen) => {
+              popupDetailController.open(chosen, {
+                onStateChange: setPopupOpen,
+                allCards: cardsData,
+                featuredCards: cardsData,
+                relatedCards: cardsData.filter((x) => x !== chosen),
+                sliderConfig: config
+              });
+            }
+          );
+        });
+
+        headerEl.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            headerEl.click();
+          }
+        });
+
+        sectionEl.addEventListener("mouseenter", () => {
           isPaused = true;
         });
 
-        section.addEventListener("mouseleave", () => {
+        sectionEl.addEventListener("mouseleave", () => {
           isPaused = false;
-          lastMarqueeTime = performance.now();
         });
 
-        viewport.addEventListener("touchstart", () => {
+        viewportEl.addEventListener("pointerdown", (e) => {
+          if (e.target.closest(".appios-get-btn")) return;
+          isPointerDown = true;
           isPaused = true;
-        }, { passive: true });
+          startX = e.pageX;
+          scrollStart = viewportEl.scrollLeft;
+        });
 
-        viewport.addEventListener("touchend", () => {
+        window.addEventListener("pointerup", () => {
+          if (!isPointerDown) return;
+          isPointerDown = false;
           isPaused = false;
-          lastMarqueeTime = performance.now();
-        }, { passive: true });
+          const step = getStepWidth();
+          if (step > 0) {
+            currentIndex = Math.round(viewportEl.scrollLeft / step);
+          }
+        });
+
+        viewportEl.addEventListener("pointermove", (e) => {
+          if (!isPointerDown) return;
+          const dx = e.pageX - startX;
+          viewportEl.scrollLeft = scrollStart - dx;
+        });
       }
 
-      return { init, slideNext, startAuto, stopAuto, setPopupOpen };
+      return { init, setPopupOpen, goToSlide };
     })();
 
-    document.addEventListener("DOMContentLoaded", () => {
+    /* ==================== JS RIÊNG: TWEAK (TWEAK JAILBREAK IOS) ==================== */
+    const tweakController = (() => {
+      const JSON_URL = "Tabs/Tweak.json";
+      const FALLBACK_DATA = [
+        {
+          isApp: true,
+          appName: "AI Chat VIP",
+          description: "Tư cách thành viên VIP đã được mở khóa (Bỏ qua cửa sổ bật lên đầu tiên!)",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "1.4.2",
+          fileSize: "4.8 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-ai-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-ai-1/640/360",
+            "https://picsum.photos/seed/tweak-ai-2/640/360"
+          ],
+          changelog: "- Mở khóa toàn bộ tính năng VIP.\n- Tắt cửa sổ thông báo khởi động đầu tiên.",
+          fullDescription: "Tweak hỗ trợ mở khóa tính năng VIP và tối ưu trải nghiệm sử dụng trên thiết bị iOS đã jailbreak.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "4.8 MB", url: "#" },
+            { label: "Link dự phòng", note: "Dự phòng", size: "4.8 MB", url: "#" }
+          ]
+        },
+        {
+          isApp: true,
+          appName: "Audio Mix",
+          description: "Dễ dàng điều chỉnh âm lượng độc lập cho các ứng dụng",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "2.1.0",
+          fileSize: "3.2 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-audio-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-audio-1/640/360",
+            "https://picsum.photos/seed/tweak-audio-2/640/360"
+          ],
+          changelog: "- Thêm thanh trượt âm lượng riêng cho từng app trong Trung tâm điều khiển.",
+          fullDescription: "Tùy chỉnh mức âm lượng riêng biệt cho game, nhạc, video và trình duyệt trên iOS.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "3.2 MB", url: "#" }
+          ]
+        },
+        {
+          isApp: true,
+          appName: "Auto Touch",
+          description: "Tự động hóa tác vụ chạm và thao tác trên iOS",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "3.0.5",
+          fileSize: "7.5 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-auto-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-auto-1/640/360",
+            "https://picsum.photos/seed/tweak-auto-2/640/360"
+          ],
+          changelog: "- Ghi và phát lại kịch bản thao tác mượt mà hơn.",
+          fullDescription: "Hỗ trợ tạo kịch bản chạm, vuốt và lặp lại tự động cho nhiều tác vụ trên thiết bị iOS.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "7.5 MB", url: "#" }
+          ]
+        },
+        {
+          isApp: true,
+          appName: "Battery Plus",
+          description: "Hiển thị chi tiết sức khỏe pin, nhiệt độ và dòng sạc",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "1.8.0",
+          fileSize: "2.4 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-bat-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-bat-1/640/360"
+          ],
+          changelog: "- Cập nhật thông số chu kỳ pin và nhiệt độ theo thời gian thực.",
+          fullDescription: "Theo dõi chi tiết trạng thái pin, điện áp, nhiệt độ và tốc độ sạc trực tiếp trên máy.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "2.4 MB", url: "#" }
+          ]
+        },
+        {
+          isApp: true,
+          appName: "Screen Recorder Pro",
+          description: "Ghi màn hình chất lượng cao kèm âm thanh hệ thống",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "2.5.1",
+          fileSize: "5.1 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-rec-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-rec-1/640/360"
+          ],
+          changelog: "- Hỗ trợ khung hình cao và tùy chỉnh bitrate video.",
+          fullDescription: "Quay màn hình nét cao với nhiều tùy chọn độ phân giải và tốc độ khung hình.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "5.1 MB", url: "#" }
+          ]
+        },
+        {
+          isApp: true,
+          appName: "File Manager Root",
+          description: "Quản lý thư mục và tệp hệ thống nhanh chóng",
+          genre: "Tweak jailbreak ios",
+          author: "Cộng đồng Tweak",
+          version: "4.1.2",
+          fileSize: "8.9 MB",
+          fileFormat: "DEB",
+          buttonText: "Nhận",
+          icon: "./Art/imgicon.png",
+          banner: "https://picsum.photos/seed/tweak-file-banner/800/450",
+          gallery: [
+            "https://picsum.photos/seed/tweak-file-1/640/360"
+          ],
+          changelog: "- Cải thiện tốc độ tìm kiếm file và nén/giải nén tệp.",
+          fullDescription: "Công cụ duyệt tệp mạnh mẽ hỗ trợ thao tác sao chép, phân quyền và quản lý gói.",
+          downloads: [
+            { label: "Link tải DEB trực tiếp", note: "Tốc độ cao", size: "8.9 MB", url: "#" }
+          ]
+        }
+      ];
+
+      window.__kpazzTweakFallback = FALLBACK_DATA;
+
+      const sectionEl = document.getElementById("Tweak");
+      const headerEl = document.getElementById("tweakHeader");
+      const titleEl = document.getElementById("tweakTitle");
+      const subtitleEl = document.getElementById("tweakSubtitle");
+      const viewportEl = document.getElementById("tweakViewport");
+      const trackEl = document.getElementById("tweakTrack");
+
+      let itemsData = [];
+      let currentPageIdx = 0;
+      let isPaused = false;
+      let isPopupOpen = false;
+      let autoSlideTimer = null;
+      let isPointerDown = false;
+      let startX = 0;
+      let scrollStart = 0;
+
+      const config = {
+        sectionTitle: "Tweak jailbreak ios",
+        sectionSubtitle: "Danh sách tweak dành cho thiết bị iOS",
+        autoplay: true,
+        autoplayInterval: 4500,
+        slideType: "smooth",
+        slideSpeed: 900,
+        loop: true
+      };
+
+      function escapeAttr(val = "") {
+        return String(val)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      async function loadData() {
+        try {
+          const res = await fetch(JSON_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error("Không tải được Tweak.json");
+          const json = await res.json();
+          if (Array.isArray(json)) {
+            return json;
+          }
+          if (json && Array.isArray(json.items)) {
+            if (json.sectionTitle) config.sectionTitle = json.sectionTitle;
+            if (json.sectionSubtitle) config.sectionSubtitle = json.sectionSubtitle;
+            if (typeof json.autoplay === "boolean") config.autoplay = json.autoplay;
+            if (typeof json.autoplayInterval === "number") config.autoplayInterval = json.autoplayInterval;
+            if (json.slideType) config.slideType = json.slideType;
+            if (typeof json.slideSpeed === "number") config.slideSpeed = json.slideSpeed;
+            if (typeof json.loop === "boolean") config.loop = json.loop;
+            return json.items;
+          }
+          return FALLBACK_DATA;
+        } catch (_) {
+          return FALLBACK_DATA;
+        }
+      }
+
+      function renderPages() {
+        titleEl.textContent = config.sectionTitle;
+        subtitleEl.textContent = config.sectionSubtitle;
+
+        const pages = [];
+        for (let i = 0; i < itemsData.length; i += 3) {
+          pages.push(itemsData.slice(i, i + 3));
+        }
+
+        trackEl.innerHTML = pages.map((pageItems) => {
+          const rowsHtml = pageItems.map((item) => {
+            const globalIdx = itemsData.indexOf(item);
+            const name = (item.appName || item.name || item.title || `Tweak ${globalIdx + 1}`).replace(/\n/g, " ");
+            const desc = item.description || item.genre || item.category || "";
+            const btnText = item.buttonText || (item.isApp === false ? "Mở" : "Nhận");
+            const verSub = item.isApp === false ? "" : formatVersionBadgeText(item.version);
+
+            return `
+              <article class="tweak-row-card" data-idx="${globalIdx}">
+                <div class="tweak-row-left">
+                  <div class="tweak-row-icon">
+                    <img src="${escapeAttr(item.icon || item.img || item.banner || "")}" alt="${escapeAttr(name)}" loading="lazy" />
+                  </div>
+                  <div class="tweak-row-meta">
+                    <h3 class="tweak-row-name">${escapeAttr(name)}</h3>
+                    <p class="tweak-row-desc">${escapeAttr(desc)}</p>
+                  </div>
+                </div>
+                <div class="tweak-row-right">
+                  <button class="tweak-get-btn" type="button" data-idx="${globalIdx}">${getCloudDownloadSvg()}<span class="tweak-get-btn-main">${escapeAttr(btnText)}</span></button>
+                  ${verSub ? `<span class="btn-version-sub">${escapeAttr(verSub)}</span>` : ""}
+                </div>
+              </article>
+            `;
+          }).join("");
+
+          return `<div class="tweak-page-col">${rowsHtml}</div>`;
+        }).join("");
+
+        Array.from(trackEl.querySelectorAll(".tweak-row-card")).forEach((rowEl) => {
+          rowEl.addEventListener("click", (event) => {
+            if (event.target.closest(".tweak-get-btn")) return;
+            const idx = Number(rowEl.getAttribute("data-idx"));
+            const chosen = itemsData[idx];
+            if (!chosen) return;
+            popupDetailController.open(chosen, {
+              onStateChange: setPopupOpen,
+              allCards: itemsData,
+              featuredCards: itemsData,
+              relatedCards: itemsData.filter((x) => x !== chosen),
+              sliderConfig: config
+            });
+          });
+        });
+
+        Array.from(trackEl.querySelectorAll(".tweak-get-btn")).forEach((btn) => {
+          btn.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const idx = Number(btn.getAttribute("data-idx"));
+            const chosen = itemsData[idx];
+            if (!chosen) return;
+            downloadPickerController.open(chosen);
+          });
+        });
+      }
+
+      function getPageStepWidth() {
+        const firstPage = trackEl.querySelector(".tweak-page-col");
+        if (!firstPage) return 0;
+        const pageRect = firstPage.getBoundingClientRect();
+        const style = window.getComputedStyle(trackEl);
+        const gap = parseFloat(style.gap || style.columnGap || "16") || 16;
+        return pageRect.width + gap;
+      }
+
+      function animateScrollTo(targetLeft) {
+        const type = String(config.slideType || "smooth").toLowerCase();
+        const speed = typeof config.slideSpeed === "number" ? config.slideSpeed : 900;
+        const pageEls = Array.from(trackEl.querySelectorAll(".tweak-page-col"));
+        const targetPage = pageEls[currentPageIdx];
+
+        if (type === "instant" || speed <= 0) {
+          viewportEl.scrollLeft = targetLeft;
+          return;
+        }
+
+        if (type === "fade" && targetPage) {
+          targetPage.classList.add("is-fading");
+          setTimeout(() => {
+            viewportEl.scrollLeft = targetLeft;
+            targetPage.classList.remove("is-fading");
+          }, Math.min(250, speed / 3));
+          return;
+        }
+
+        if (type === "zoom" && targetPage) {
+          targetPage.classList.add("is-zooming");
+          setTimeout(() => {
+            targetPage.classList.remove("is-zooming");
+          }, Math.min(450, speed / 2));
+        }
+
+        const startLeft = viewportEl.scrollLeft;
+        const distance = targetLeft - startLeft;
+        const duration = type === "scroll" ? Math.max(speed, 1600) : Math.min(speed, 1200);
+        const startTime = performance.now();
+
+        function easeInOut(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / duration);
+          const eased = type === "slide" || type === "snap" ? progress : easeInOut(progress);
+          viewportEl.scrollLeft = startLeft + distance * eased;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      function goToPage(pageIdx) {
+        const totalPages = Math.ceil(itemsData.length / 3);
+        if (totalPages <= 0) return;
+
+        const maxScroll = Math.max(0, trackEl.scrollWidth - viewportEl.clientWidth);
+        const step = getPageStepWidth();
+        if (step <= 0) return;
+
+        if (pageIdx >= totalPages || pageIdx * step > maxScroll + 4) {
+          if (config.loop === false) {
+            stopAutoSlide();
+            return;
+          }
+          currentPageIdx = 0;
+          animateScrollTo(0);
+          return;
+        }
+
+        currentPageIdx = Math.max(0, pageIdx);
+        const targetLeft = Math.min(currentPageIdx * step, maxScroll);
+        animateScrollTo(targetLeft);
+      }
+
+      function nextPage() {
+        const totalPages = Math.ceil(itemsData.length / 3);
+        if (isPaused || isPopupOpen || totalPages <= 1) return;
+        goToPage(currentPageIdx + 1);
+      }
+
+      function stopAutoSlide() {
+        if (autoSlideTimer) {
+          clearInterval(autoSlideTimer);
+          autoSlideTimer = null;
+        }
+      }
+
+      function startAutoSlide() {
+        stopAutoSlide();
+        const totalPages = Math.ceil(itemsData.length / 3);
+        if (!config.autoplay || totalPages <= 1) return;
+        const interval = Number(config.autoplayInterval) > 0 ? Number(config.autoplayInterval) : 4500;
+        autoSlideTimer = setInterval(nextPage, interval);
+      }
+
+      function setPopupOpen(open) {
+        isPopupOpen = Boolean(open);
+        if (isPopupOpen) {
+          stopAutoSlide();
+        } else {
+          startAutoSlide();
+        }
+      }
+
+      async function init() {
+        itemsData = await loadData();
+        renderPages();
+        menubarController.registerHomeSection("tweak", {
+          key: "tweak",
+          title: config.sectionTitle,
+          description: config.sectionSubtitle,
+          jsonFile: JSON_URL,
+          cards: itemsData
+        });
+        startAutoSlide();
+
+        headerEl.addEventListener("click", () => {
+          authorWorksController.openSectionList(
+            config.sectionTitle,
+            config.sectionSubtitle,
+            JSON_URL,
+            itemsData,
+            (chosen) => {
+              popupDetailController.open(chosen, {
+                onStateChange: setPopupOpen,
+                allCards: itemsData,
+                featuredCards: itemsData,
+                relatedCards: itemsData.filter((x) => x !== chosen),
+                sliderConfig: config
+              });
+            }
+          );
+        });
+
+        headerEl.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            headerEl.click();
+          }
+        });
+
+        sectionEl.addEventListener("mouseenter", () => {
+          isPaused = true;
+        });
+
+        sectionEl.addEventListener("mouseleave", () => {
+          isPaused = false;
+        });
+
+        viewportEl.addEventListener("pointerdown", (e) => {
+          if (e.target.closest(".tweak-get-btn")) return;
+          isPointerDown = true;
+          isPaused = true;
+          startX = e.pageX;
+          scrollStart = viewportEl.scrollLeft;
+        });
+
+        window.addEventListener("pointerup", () => {
+          if (!isPointerDown) return;
+          isPointerDown = false;
+          isPaused = false;
+          const step = getPageStepWidth();
+          if (step > 0) {
+            currentPageIdx = Math.round(viewportEl.scrollLeft / step);
+          }
+        });
+
+        viewportEl.addEventListener("pointermove", (e) => {
+          if (!isPointerDown) return;
+          const dx = e.pageX - startX;
+          viewportEl.scrollLeft = scrollStart - dx;
+        });
+      }
+
+      return { init, setPopupOpen, goToPage };
+    })();
+
+    /* ==================== KHỞI TẠO TOÀN BỘ ỨNG DỤNG ==================== */
+    (async () => {
       themeController.init();
-      bellController.init();
+      menubarController.init();
       searchController.init();
       accountController.init();
-      menubarController.init();
+      bellController.init();
       navbarController.init();
-      slideheroController.init();
-      appiosController.init();
-    });
+      downloadPickerController.init();
+      authorWorksController.init();
+      popupDetailController.init();
+      await slideheroController.init();
+      await appiosController.init();
+      await tweakController.init();
+      navbarController.syncNavbarScrollState();
+    })();
   </script>
 </body>
 </html>
