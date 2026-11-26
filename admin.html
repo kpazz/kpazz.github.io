@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPazz Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at 20% 20%, #dbeafe 0%, transparent 45%), #eef2f7;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --glass-bg: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --accent: #2563eb;
+      --danger: #ef4444;
+    }
+    html.dark {
+      --bg-gradient: radial-gradient(circle at 20% 20%, rgba(30, 58, 138, 0.35) 0%, transparent 45%), #070b14;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --accent: #38bdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      padding-top: 76px;
+    }
+    .liquid-glass {
+      background: var(--glass-bg);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+    header {
+      position: fixed;
+      top: 5px;
+      left: 5px;
+      width: calc(100% - 10px);
+      height: 60px;
+      border-radius: 18px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .stat-card { padding: 16px; border-radius: 20px; }
+    .stat-card h3 { font-size: 1.6rem; margin-top: 6px; color: var(--accent); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--text-primary);
+      font-size: 0.85rem;
+    }
+    .btn {
+      padding: 9px 15px;
+      border-radius: 12px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn.danger { background: var(--danger); }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { padding: 10px; text-align: left; border-bottom: 1px solid var(--glass-border); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <header class="liquid-glass">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="document.documentElement.classList.toggle('dark')">
+      <img src="CydiaIcon.png" onerror="this.src='https://placehold.co/48x48/2563eb/ffffff?text=KP'" style="width:32px;height:32px;border-radius:8px;" />
+      <strong>KPazz Admin Panel</strong>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="index.html" class="btn" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Trang chủ</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Thống kê file & dữ liệu -->
+    <div class="stats-grid">
+      <div class="stat-card liquid-glass">
+        <span style="color:var(--text-secondary);font-size:0.82rem;"><i class="fa-solid fa-file-code"></i> File JSON đang quản lý</span>
+        <h3 id="stat-filename">sec_APPios.json</h3>
+      </div>
+      <div class="stat-card liquid-glass">
+        <span style="color:var(--text-secondary);font-size:0.82rem;"><i class="fa-solid fa-layer-group"></i> Tổng số mục</span>
+        <h3 id="stat-total-items">0</h3>
+      </div>
+      <div class="stat-card liquid-glass">
+        <span style="color:var(--text-secondary);font-size:0.82rem;"><i class="fa-solid fa-mobile-screen"></i> Số lượng App có link tải</span>
+        <h3 id="stat-total-apps">0</h3>
+      </div>
+      <div class="stat-card liquid-glass">
+        <span style="color:var(--text-secondary);font-size:0.82rem;"><i class="fa-solid fa-hard-drive"></i> Kích thước JSON ước tính</span>
+        <h3 id="stat-json-size">0 KB</h3>
+      </div>
+    </div>
+
+    <!-- Chọn file JSON & Xuất file -->
+    <div class="liquid-glass" style="padding:18px;border-radius:22px;margin-bottom:20px;">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="display:flex;gap:10px;align-items:center;">
+          <select id="json-file-selector" style="width:230px;" onchange="loadSelectedJson(this.value)">
+            <option value="Tabs/sec_APPios.json">Tabs/sec_APPios.json</option>
+            <option value="Tabs/sec_Jailbreak.json">Tabs/sec_Jailbreak.json</option>
+            <option value="Tabs/sec_Media.json">Tabs/sec_Media.json</option>
+            <option value="Tabs/sec_TechTips.json">Tabs/sec_TechTips.json</option>
+            <option value="Tabs/Slidehero.json">Tabs/Slidehero.json</option>
+          </select>
+          <input type="file" id="upload-local-json" accept=".json" style="width:220px;" />
+        </div>
+        <button class="btn" onclick="exportUpdatedJson()"><i class="fa-solid fa-file-export"></i> Xuất / Tải JSON đã sửa</button>
+      </div>
+
+      <!-- Form Thêm / Sửa Item -->
+      <h4 style="margin-bottom:10px;"><i class="fa-solid fa-pen-to-square"></i> Thêm / Cập nhật nội dung</h4>
+      <input type="hidden" id="edit-index" value="-1" />
+      <div class="form-grid">
+        <input id="f-title" placeholder="Tiêu đề *" />
+        <input id="f-author" placeholder="Tác giả" />
+        <input id="f-version" placeholder="Phiên bản (vd: 2.1.0)" />
+        <input id="f-date" type="date" />
+        <input id="f-icon" placeholder="Link Icon (URL)" />
+        <input id="f-banner" placeholder="Link Banner (URL)" />
+        <input id="f-category" placeholder="Thể loại" />
+        <input id="f-filesize" placeholder="Dung lượng (vd: 54 MB)" />
+        <input id="f-format" placeholder="Định dạng file (IPA/APK/PDF)" />
+        <select id="f-isapp">
+          <option value="true">Là Ứng dụng (Có nút tải)</option>
+          <option value="false">Bài viết / Tin tức (Không nút tải)</option>
+        </select>
+        <input id="f-video" placeholder="Link Video review (tuỳ chọn)" />
+        <input id="f-screens" placeholder="Link list screenshot (cách nhau dấu phẩy)" />
+      </div>
+      <div class="form-grid">
+        <textarea id="f-desc" rows="2" placeholder="Mô tả chi tiết..."></textarea>
+        <textarea id="f-links" rows="2" placeholder="Link tải (Định dạng: Tên Server|URL, cách nhau dấu phẩy)"></textarea>
+      </div>
+      <button class="btn" onclick="saveItemForm()"><i class="fa-solid fa-floppy-disk"></i> Lưu mục này</button>
+    </div>
+
+    <!-- Bảng danh sách mục trong JSON -->
+    <div class="liquid-glass" style="padding:18px;border-radius:22px;overflow-x:auto;">
+      <h4><i class="fa-solid fa-list-check"></i> Danh sách nội dung trong JSON</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Icon</th>
+            <th>Tiêu đề</th>
+            <th>Tác giả</th>
+            <th>Phiên bản</th>
+            <th>Loại</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="admin-items-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let currentJsonData = { sectionTitle: "", items: [] };
+
+    if (localStorage.getItem("kp_theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+
+    async function loadSelectedJson(path) {
+      document.getElementById("stat-filename").textContent = path.split("/").pop();
+      try {
+        const res = await fetch(path + "?t=" + Date.now());
+        currentJsonData = await res.json();
+        renderAdminTable();
+      } catch (e) {
+        alert("Không tải được file trực tiếp (hãy dùng nút Chọn tệp JSON từ máy hoặc chạy qua Local Server).");
+      }
+    }
+
+    document.getElementById("upload-local-json").addEventListener("change", function (e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      document.getElementById("stat-filename").textContent = file.name;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        currentJsonData = JSON.parse(ev.target.result);
+        renderAdminTable();
+      };
+      reader.readAsText(file);
+    });
+
+    function renderAdminTable() {
+      const items = currentJsonData.items || [];
+      document.getElementById("stat-total-items").textContent = items.length;
+      document.getElementById("stat-total-apps").textContent = items.filter(i => i.isApp).length;
+      const bytes = new Blob([JSON.stringify(currentJsonData)]).size;
+      document.getElementById("stat-json-size").textContent = (bytes / 1024).toFixed(2) + " KB";
+
+      document.getElementById("admin-items-tbody").innerHTML = items.map((it, idx) => `
+        <tr>
+          <td><img src="${it.icon}" style="width:36px;height:36px;border-radius:8px;object-fit:cover;" /></td>
+          <td><strong>${it.title}</strong></td>
+          <td>${it.author || ""}</td>
+          <td>v${it.version || "1.0"}</td>
+          <td>${it.isApp ? "Ứng dụng" : "Nội dung"}</td>
+          <td style="display:flex;gap:6px;">
+            <button class="btn" style="padding:5px 10px;" onclick="editItem(${idx})"><i class="fa-solid fa-pen"></i></button>
+            <button class="btn danger" style="padding:5px 10px;" onclick="deleteItem(${idx})"><i class="fa-solid fa-trash"></i></button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function saveItemForm() {
+      const idx = parseInt(document.getElementById("edit-index").value, 10);
+      const rawLinks = document.getElementById("f-links").value.trim();
+      const parsedLinks = rawLinks ? rawLinks.split(",").map(pair => {
+        const [server, url] = pair.split("|");
+        return { server: (server || "Link tải").trim(), url: (url || "#").trim() };
+      }) : [];
+
+      const newObj = {
+        title: document.getElementById("f-title").value.trim(),
+        author: document.getElementById("f-author").value.trim() || "KPazz",
+        version: document.getElementById("f-version").value.trim() || "1.0",
+        publishDate: document.getElementById("f-date").value || new Date().toISOString().slice(0, 10),
+        icon: document.getElementById("f-icon").value.trim() || "CydiaIcon.png",
+        banner: document.getElementById("f-banner").value.trim(),
+        category: document.getElementById("f-category").value.trim() || "Tiện ích",
+        filesize: document.getElementById("f-filesize").value.trim(),
+        fileFormat: document.getElementById("f-format").value.trim(),
+        isApp: document.getElementById("f-isapp").value === "true",
+        videoUrl: document.getElementById("f-video").value.trim(),
+        screenshots: document.getElementById("f-screens").value.split(",").map(s => s.trim()).filter(Boolean),
+        description: document.getElementById("f-desc").value.trim(),
+        downloadLinks: parsedLinks
+      };
+
+      if (!newObj.title) return alert("Vui lòng nhập tiêu đề!");
+      if (!currentJsonData.items) currentJsonData.items = [];
+
+      if (idx >= 0) {
+        currentJsonData.items[idx] = newObj;
+        document.getElementById("edit-index").value = "-1";
+      } else {
+        currentJsonData.items.unshift(newObj);
+      }
+      renderAdminTable();
+      alert("Đã lưu thành công!");
+    }
+
+    function editItem(idx) {
+      const it = currentJsonData.items[idx];
+      document.getElementById("edit-index").value = idx;
+      document.getElementById("f-title").value = it.title || "";
+      document.getElementById("f-author").value = it.author || "";
+      document.getElementById("f-version").value = it.version || "";
+      document.getElementById("f-date").value = it.publishDate || "";
+      document.getElementById("f-icon").value = it.icon || "";
+      document.getElementById("f-banner").value = it.banner || "";
+      document.getElementById("f-category").value = it.category || "";
+      document.getElementById("f-filesize").value = it.filesize || "";
+      document.getElementById("f-format").value = it.fileFormat || "";
+      document.getElementById("f-isapp").value = String(Boolean(it.isApp));
+      document.getElementById("f-video").value = it.videoUrl || "";
+      document.getElementById("f-screens").value = (it.screenshots || []).join(", ");
+      document.getElementById("f-desc").value = it.description || "";
+      document.getElementById("f-links").value = (it.downloadLinks || []).map(l => `${l.server}|${l.url}`).join(", ");
+    }
+
+    function deleteItem(idx) {
+      if (!confirm("Xoá mục này khỏi JSON?")) return;
+      currentJsonData.items.splice(idx, 1);
+      renderAdminTable();
+    }
+
+    function exportUpdatedJson() {
+      const blob = new Blob([JSON.stringify(currentJsonData, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = document.getElementById("stat-filename").textContent || "section.json";
+      a.click();
+    }
+
+    loadSelectedJson("Tabs/sec_APPios.json");
+  </script>
+</body>
+</html>

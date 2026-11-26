@@ -1,0 +1,300 @@
+<section id="sec-tick-root" class="kp-sec-tick-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-tick-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-tick-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-tick-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-tick-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card Liquid Glass */
+    .tick-dyn-card {
+      min-width: 320px;
+      max-width: 320px;
+      border-radius: 22px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.35s ease;
+    }
+    .tick-dyn-card:hover { transform: translateY(-4px); }
+
+    .tick-dl-btn {
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: none;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    /* 1. ticker-stream-card (mặc định) */
+    .tick-dyn-card.card-style-ticker-stream-card {
+      min-width: 320px;
+      max-width: 320px;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    /* 2. appstore-card */
+    .tick-dyn-card.card-style-appstore-card {
+      min-width: 285px;
+      max-width: 285px;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* 3. container-query-product */
+    .tick-dyn-card.card-style-container-query-product {
+      min-width: 310px;
+      max-width: 310px;
+      flex-direction: row;
+      align-items: center;
+      border-left: 4px solid var(--accent);
+    }
+
+    /* 4. glassmorphism-profile-info */
+    .tick-dyn-card.card-style-glassmorphism-profile-info {
+      min-width: 260px;
+      max-width: 260px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .tick-dyn-card.card-style-glassmorphism-profile-info .tick-card-icon {
+      width: 62px !important;
+      height: 62px !important;
+      border-radius: 50% !important;
+      border: 2px solid var(--accent);
+    }
+
+    /* 5. movie-pulp-fiction / magazine-overlay-card */
+    .tick-dyn-card.card-style-movie-pulp-fiction,
+    .tick-dyn-card.card-style-magazine-overlay-card {
+      min-width: 255px;
+      max-width: 255px;
+      height: 280px;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: stretch;
+      color: #fff;
+    }
+
+    /* 6. minimal-bento-tile */
+    .tick-dyn-card.card-style-minimal-bento-tile {
+      min-width: 230px;
+      max-width: 230px;
+      min-height: 205px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    /* 7. floating-3d-badge */
+    .tick-dyn-card.card-style-floating-3d-badge {
+      min-width: 250px;
+      max-width: 250px;
+      flex-direction: column;
+      align-items: flex-start;
+      border-top: 3px solid #f97316;
+    }
+
+    /* 8. split-banner-card / spotlight-hero-card / parallax-horizon-card */
+    .tick-dyn-card.card-style-split-banner-card,
+    .tick-dyn-card.card-style-spotlight-hero-card,
+    .tick-dyn-card.card-style-parallax-horizon-card {
+      min-width: 345px;
+      max-width: 345px;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .tick-dyn-card.slide-mode-vertical-ticker.tick-up { transform: translateY(-4px); }
+    .tick-dyn-card.slide-mode-vertical-ticker.tick-down { transform: translateY(2px); }
+
+    .tick-dyn-card.slide-mode-coverflow-3d {
+      transform: rotateY(-8deg) scale(0.96);
+      opacity: 0.88;
+    }
+    .tick-dyn-card.slide-mode-coverflow-3d.is-active-slide {
+      transform: rotateY(0deg) scale(1.03);
+      opacity: 1;
+    }
+
+    .tick-dyn-card.slide-mode-fade-cross.is-fade-dim { opacity: 0.55; }
+
+    .tick-dyn-card.slide-mode-cards-stack.is-active-slide {
+      transform: translateY(-5px) scale(1.02);
+      z-index: 3;
+    }
+
+    .tick-dyn-card.slide-mode-cube-rotate .tick-card-icon {
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .tick-dyn-card.slide-mode-cube-rotate.is-active-slide .tick-card-icon {
+      transform: rotateY(360deg);
+    }
+
+    .tick-dyn-card.slide-mode-flip-card.is-active-slide {
+      transform: rotateY(8deg);
+    }
+
+    .tick-dyn-card.slide-mode-parallax-banner .tick-card-icon {
+      transition: transform 0.65s ease;
+    }
+    .tick-dyn-card.slide-mode-parallax-banner.is-active-slide .tick-card-icon {
+      transform: translateX(4px) scale(1.06);
+    }
+
+    .tick-dyn-card.slide-mode-center-zoom.is-active-slide {
+      transform: scale(1.05);
+    }
+  </style>
+
+  <div class="kp-sec-tick-head" id="tick-header-trigger">
+    <div>
+      <h2 id="tick-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="tick-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-tick-track" id="tick-cards-track"></div>
+
+  <script>
+    (async function renderTickerFeedSection() {
+      const res = await fetch("Tabs/sec_TickerFeedCards.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("tick-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("tick-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("tick-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      // Hỗ trợ cả stylesection / stylecard và slideType / styleslide trong JSON
+      const validCardStyles = [
+        "ticker-stream-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "floating-3d-badge",
+        "split-banner-card",
+        "spotlight-hero-card",
+        "parallax-horizon-card"
+      ];
+      const rawCardStyle = (secData.stylesection || secData.stylecard || "ticker-stream-card").trim();
+      const cardStyle = validCardStyles.includes(rawCardStyle) ? rawCardStyle : "ticker-stream-card";
+
+      const validSlideTypes = [
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlideType = (secData.slideType || secData.styleslide || "vertical-ticker").trim();
+      const slideType = validSlideTypes.includes(rawSlideType) ? rawSlideType : "vertical-ticker";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("tick-cards-track");
+      const isPosterStyle = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      track.innerHTML = items.map((item) => {
+        const posterBg = isPosterStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2,6,23,0.88), rgba(2,6,23,0.25)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="tick-dyn-card liquid-glass card-style-${cardStyle} slide-mode-${slideType}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <img class="tick-card-icon" src="${item.icon}" alt="${item.title}"
+                 style="width:46px;height:46px;border-radius:14px;object-fit:cover;flex-shrink:0;" />
+            <div style="flex:1;overflow:hidden;position:relative;z-index:2;">
+              <span style="font-size:0.7rem;color:${isPosterStyle ? "#f472b6" : "#3b82f6"};font-weight:700;">
+                <i class="fa-regular fa-calendar"></i> ${item.publishDate} • <i class="fa-solid fa-code-branch"></i> v${item.version}
+              </span>
+              <h3 style="font-size:0.92rem;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+              <div style="font-size:0.71rem;color:${isPosterStyle ? "rgba(255,255,255,0.82)" : "var(--text-secondary)"};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                <i class="fa-solid fa-user-pen"></i> ${item.author} • <i class="fa-solid fa-tag"></i> ${item.category}
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="ticker-dl-btn" style="position:relative;z-index:2;"
+                      onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".tick-dyn-card"));
+      if (slideType === "coverflow-3d" && cards[0]) {
+        cards[0].classList.add("is-active-slide");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 3900);
+        let stepIdx = 0;
+        let tickerDir = false;
+
+        setInterval(() => {
+          stepIdx = (stepIdx + 1) % cards.length;
+          tickerDir = !tickerDir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active-slide", "is-fade-dim", "tick-up", "tick-down");
+            if (slideType === "vertical-ticker") {
+              const state = i % 2 === 0 ? tickerDir : !tickerDir;
+              el.classList.add(state ? "tick-up" : "tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== stepIdx) el.classList.add("is-fade-dim");
+            } else if (i === stepIdx) {
+              el.classList.add("is-active-slide");
+            }
+          });
+
+          const stepWidth = (cards[0].offsetWidth || 320) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? stepWidth * 0.65 : stepWidth, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

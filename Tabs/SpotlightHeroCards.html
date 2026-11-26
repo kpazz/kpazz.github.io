@@ -1,0 +1,287 @@
+<section id="sec-spot-root" class="kp-sec-spot-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-spot-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-spot-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-spot-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-spot-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .spot-dyn-card {
+      min-width: 325px;
+      max-width: 325px;
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .spot-dyn-card:hover { transform: translateY(-4px); }
+
+    .spot-banner-box {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+    }
+    .spot-banner-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .spot-body-box {
+      padding: 14px;
+    }
+    .spot-badge-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-top: -28px;
+      border: 2px solid var(--glass-border);
+      position: relative;
+      z-index: 2;
+      background: #0f172a;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .spot-dl-btn {
+      margin-top: 10px;
+      padding: 7px 14px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #eab308, #f97316);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .spot-dyn-card.spot-card-spotlight-hero-card {
+      min-width: 325px;
+      max-width: 325px;
+    }
+
+    .spot-dyn-card.spot-card-appstore-card,
+    .spot-dyn-card.spot-card-container-query-product {
+      min-width: 285px;
+      max-width: 285px;
+    }
+    .spot-dyn-card.spot-card-appstore-card .spot-banner-box,
+    .spot-dyn-card.spot-card-container-query-product .spot-banner-box {
+      height: 105px;
+    }
+
+    .spot-dyn-card.spot-card-glassmorphism-profile-info {
+      min-width: 275px;
+      max-width: 275px;
+      text-align: center;
+    }
+    .spot-dyn-card.spot-card-glassmorphism-profile-info .spot-badge-icon {
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      margin: -34px auto 6px;
+      display: block;
+    }
+
+    .spot-dyn-card.spot-card-movie-pulp-fiction,
+    .spot-dyn-card.spot-card-magazine-overlay-card {
+      min-width: 265px;
+      max-width: 265px;
+      height: 275px;
+      color: #fff;
+    }
+    .spot-dyn-card.spot-card-movie-pulp-fiction .spot-banner-box,
+    .spot-dyn-card.spot-card-magazine-overlay-card .spot-banner-box {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+    }
+    .spot-dyn-card.spot-card-movie-pulp-fiction .spot-body-box,
+    .spot-dyn-card.spot-card-magazine-overlay-card .spot-body-box {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.25));
+    }
+    .spot-dyn-card.spot-card-movie-pulp-fiction .spot-badge-icon,
+    .spot-dyn-card.spot-card-magazine-overlay-card .spot-badge-icon {
+      margin-top: 0;
+    }
+
+    .spot-dyn-card.spot-card-minimal-bento-tile {
+      min-width: 245px;
+      max-width: 245px;
+      border-radius: 26px;
+    }
+    .spot-dyn-card.spot-card-minimal-bento-tile .spot-banner-box {
+      height: 92px;
+    }
+
+    .spot-dyn-card.spot-card-floating-3d-badge,
+    .spot-dyn-card.spot-card-coverflow-shelf-card {
+      min-width: 295px;
+      max-width: 295px;
+      border-bottom: 3px solid #f59e0b;
+    }
+
+    .spot-dyn-card.spot-card-split-banner-card,
+    .spot-dyn-card.spot-card-parallax-horizon-card {
+      min-width: 350px;
+      max-width: 350px;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .spot-dyn-card.spot-slide-center-zoom.is-active { transform: scale(1.05); }
+    .spot-dyn-card.spot-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .spot-dyn-card.spot-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .spot-dyn-card.spot-slide-fade-cross.is-dim { opacity: 0.55; }
+    .spot-dyn-card.spot-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .spot-dyn-card.spot-slide-cube-rotate.is-active .spot-badge-icon { transform: rotateY(360deg); }
+    .spot-dyn-card.spot-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .spot-dyn-card.spot-slide-parallax-banner.is-active .spot-banner-box img { transform: scale(1.08) translateX(6px); }
+    .spot-dyn-card.spot-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .spot-dyn-card.spot-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-spot-head" id="spot-header-trigger">
+    <div>
+      <h2 id="spot-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="spot-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-spot-track" id="spot-cards-track"></div>
+
+  <script>
+    (async function renderSpotlightHeroSection() {
+      const res = await fetch("Tabs/sec_SpotlightHeroCards.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("spot-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("spot-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("spot-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "spotlight-hero-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "floating-3d-badge",
+        "coverflow-shelf-card",
+        "split-banner-card",
+        "parallax-horizon-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "spotlight-hero-card").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "spotlight-hero-card";
+
+      const validSlides = [
+        "center-zoom",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "center-zoom").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "center-zoom";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("spot-cards-track");
+      const isOverlayCard = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      track.innerHTML = items.map((item) => `
+        <article class="spot-dyn-card liquid-glass spot-card-${cardStyle} spot-slide-${slideType}"
+                 onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+          <div class="spot-banner-box">
+            <img src="${item.banner || item.icon}" alt="${item.title}" />
+          </div>
+          <div class="spot-body-box">
+            <div style="display:flex;align-items:center;gap:10px;${cardStyle === "glassmorphism-profile-info" ? "flex-direction:column;" : ""}">
+              <img class="spot-badge-icon" src="${item.icon}" alt="${item.title}" />
+              <div style="overflow:hidden;flex:1;width:100%;">
+                <h3 style="font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+                <span style="font-size:0.72rem;color:${isOverlayCard ? "rgba(255,255,255,0.82)" : "var(--text-secondary)"};">
+                  <i class="fa-solid fa-tag"></i> ${item.category} • v${item.version}
+                </span>
+              </div>
+            </div>
+            <div style="font-size:0.73rem;color:${isOverlayCard ? "rgba(255,255,255,0.85)" : "var(--text-secondary)"};margin-top:8px;display:flex;gap:12px;${cardStyle === "glassmorphism-profile-info" ? "justify-content:center;" : ""}">
+              <span><i class="fa-solid fa-user-pen"></i> ${item.author}</span>
+              <span><i class="fa-regular fa-calendar"></i> ${item.publishDate}</span>
+            </div>
+            ${item.isApp ? `
+              <button class="spot-dl-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải xuống (${item.filesize || "IPA"})
+              </button>` : ""}
+          </div>
+        </article>
+      `).join("");
+
+      const cards = Array.from(track.querySelectorAll(".spot-dyn-card"));
+      if (cards[0] && (slideType === "center-zoom" || slideType === "coverflow-3d")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4300);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 325) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

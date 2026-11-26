@@ -1,0 +1,201 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection): 'ticker-stream-card' (ngang 3 khu vực: icon trái, thông tin giữa, nút tải phải) | 'appstore-card' (dọc kiểu cửa hàng app) | 'container-query-product' (ngang viền nhấn trái) | 'glassmorphism-profile-info' (dọc căn giữa, icon tròn) | 'movie-pulp-fiction' (poster nền banner tối dần phía dưới) | 'magazine-overlay-card' (ảnh bìa zoom nhẹ, thông tin đáy) | 'minimal-bento-tile' (ô bento tối giản) | 'floating-3d-badge' (thẻ dọc viền trên) | 'split-banner-card' / 'spotlight-hero-card' / 'parallax-horizon-card' (thẻ ngang rộng có viền nhấn).",
+  "_comment_slideType": "10 kiểu slide (slideType) & animation: 1.'horizontal-scroll' (cuộn ngang mượt từng bước thẻ) | 2.'coverflow-3d' (nghiêng 3D hai bên, thẻ kích hoạt thẳng và nổi 1.03x) | 3.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 4.'cards-stack' (nâng nhẹ thẻ hiện tại tạo lớp chiều sâu) | 5.'cube-rotate' (icon xoay 360deg trục Y mỗi lượt) | 6.'flip-card' (nghiêng lật nhẹ rotateY 8deg) | 7.'parallax-banner' (ảnh/icon dịch chuyển và zoom nhẹ tạo thị sai) | 8.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt) | 9.'vertical-ticker' (nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp cuộn ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục dễ quét nhanh).",
+
+  "sectionTitle": "Dòng Cập Nhật Nhịp Nhàng",
+  "sectionDescription": "Các bản cập nhật mới nhất, hướng dẫn ngắn và công cụ dễ tiếp cận.",
+  "orderId": 17,
+  "autoplay": true,
+  "slideType": "vertical-ticker",
+  "loop": true,
+  "slideSpeed": 3900,
+  "stylesection": "ticker-stream-card",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/3b82f6/ffffff?text=Tick+1",
+      "banner": "https://placehold.co/800x400/1e3a8a/93c5fd?text=QuickPulse+Timer",
+      "title": "QuickPulse Interval Timer",
+      "description": "Hẹn giờ lặp lại linh hoạt cho bài tập, nấu ăn và các phiên làm việc ngắn.",
+      "author": "PulseLab",
+      "version": "1.7.0",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "12.8 MB",
+      "fileFormat": "IPA",
+      "category": "Đồng hồ",
+      "isApp": true,
+      "downloadLinks": [
+        {
+          "server": "Server 1",
+          "url": "https://example.com/files/quickpulse.ipa"
+        }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/2563eb/ffffff?text=Note",
+      "banner": "https://placehold.co/800x400/1e3a8a/bfdbfe?text=Cap+Nhat+Nhanh",
+      "title": "Cách theo dõi nhanh các mục mới thêm trong ngày",
+      "description": "Sử dụng thanh thông báo và mục mới cập nhật để không bỏ lỡ nội dung quan trọng.",
+      "author": "Admin KPazz",
+      "version": "1.0",
+      "publishDate": "2026-11-25",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Hướng dẫn",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/1d4ed8/ffffff?text=Unit",
+      "banner": "https://placehold.co/800x400/172554/93c5fd?text=SizeCalc+Storage",
+      "title": "SizeCalc Storage Estimator",
+      "description": "Ước tính nhanh dung lượng lưu trữ cho ảnh, video và tài liệu theo thời gian.",
+      "author": "StorageLab",
+      "version": "1.3.4",
+      "publishDate": "2026-11-24",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "14.1 MB",
+      "fileFormat": "IPA",
+      "category": "Dung lượng",
+      "isApp": true,
+      "downloadLinks": [
+        {
+          "server": "Server 1",
+          "url": "https://example.com/files/sizecalc.ipa"
+        }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/60a5fa/ffffff?text=Tip",
+      "banner": "https://placehold.co/800x400/1e3a8a/dbeafe?text=Meo+Quan+Ly+Tab",
+      "title": "Sắp xếp thứ tự section theo nhu cầu hiển thị ưu tiên",
+      "description": "Chỉnh sửa giá trị orderId trong JSON để đưa chuyên mục quan trọng lên trên.",
+      "author": "Minh Khoa",
+      "version": "1.0",
+      "publishDate": "2026-11-23",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Guide",
+      "category": "Cấu hình",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/3b82f6/ffffff?text=RSS",
+      "banner": "https://placehold.co/800x400/1e3a8a/93c5fd?text=FeedReader+Clean",
+      "title": "FeedReader Clean Stream",
+      "description": "Đọc nguồn tin gọn gàng, lưu bài viết hay và lọc nội dung theo chủ đề.",
+      "author": "StreamCraft",
+      "version": "2.0.8",
+      "publishDate": "2026-11-22",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "21.6 MB",
+      "fileFormat": "IPA",
+      "category": "Đọc tin",
+      "isApp": true,
+      "downloadLinks": [
+        {
+          "server": "Server 1",
+          "url": "https://example.com/files/feedreader.ipa"
+        }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/1e40af/ffffff?text=News",
+      "banner": "https://placehold.co/800x400/172554/93c5fd?text=Thong+Bao+Moi",
+      "title": "Cập nhật thêm biểu tượng phân loại cho các chuyên mục",
+      "description": "Giúp nhận diện nhanh từng nhóm nội dung khi mở menu điều hướng.",
+      "author": "KPazz System",
+      "version": "1.0",
+      "publishDate": "2026-11-21",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Notice",
+      "category": "Thông báo",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/3b82f6/ffffff?text=Memo",
+      "banner": "https://placehold.co/800x400/1e3a8a/93c5fd?text=QuickMemo+Pad",
+      "title": "QuickMemo Scratchpad",
+      "description": "Ghi chú nháp tức thì khi mở ứng dụng, tự lưu và sao chép nhanh gọn.",
+      "author": "NoteCraft",
+      "version": "1.5.0",
+      "publishDate": "2026-11-20",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "11.9 MB",
+      "fileFormat": "IPA",
+      "category": "Ghi chú",
+      "isApp": true,
+      "downloadLinks": [
+        {
+          "server": "Server 1",
+          "url": "https://example.com/files/quickmemo.ipa"
+        }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/2563eb/ffffff?text=Note",
+      "banner": "https://placehold.co/800x400/1e3a8a/bfdbfe?text=Luu+Y+Phien+Ban",
+      "title": "Cách kiểm tra số phiên bản trước khi cập nhật gói mới",
+      "description": "Đối chiếu số phiên bản hiện tại để tránh cài trùng bản không cần thiết.",
+      "author": "KPazz Tips",
+      "version": "1.0",
+      "publishDate": "2026-11-19",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Mẹo nhỏ",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/60a5fa/ffffff?text=Ping",
+      "banner": "https://placehold.co/800x400/1e3a8a/dbeafe?text=NetPing+Lite",
+      "title": "NetPing Latency Check",
+      "description": "Kiểm tra nhanh độ trễ kết nối tới các điểm mạng phổ biến.",
+      "author": "NetTools",
+      "version": "1.2.1",
+      "publishDate": "2026-11-18",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "10.4 MB",
+      "fileFormat": "IPA",
+      "category": "Mạng",
+      "isApp": true,
+      "downloadLinks": [
+        {
+          "server": "Server 1",
+          "url": "https://example.com/files/netping.ipa"
+        }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/1d4ed8/ffffff?text=Info",
+      "banner": "https://placehold.co/800x400/172554/93c5fd?text=Tong+Hop+Cuoi+Tuan",
+      "title": "Tổng hợp các mục nổi bật nhất trong tuần tại KPazz",
+      "description": "Điểm lại các tiện ích và bài chia sẻ được quan tâm nhiều nhất tuần qua.",
+      "author": "KPazz System",
+      "version": "1.0",
+      "publishDate": "2026-11-17",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Notice",
+      "category": "Tổng hợp",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}

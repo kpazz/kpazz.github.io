@@ -1,0 +1,282 @@
+<section id="sec-cyber-root" class="kp-sec-cyber-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-cyber-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-cyber-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-cyber-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-cyber-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .cyber-dyn-card {
+      min-width: 280px;
+      max-width: 280px;
+      border-radius: 24px;
+      padding: 15px;
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(6, 182, 212, 0.45);
+      box-shadow: 0 10px 28px rgba(6, 182, 212, 0.14), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease, box-shadow 0.35s ease;
+    }
+    .cyber-dyn-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 34px rgba(6, 182, 212, 0.28);
+    }
+    .cyber-card-top {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .cyber-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      flex-shrink: 0;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cyber-card-body {
+      position: relative;
+      z-index: 2;
+    }
+    .cyber-dl-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #06b6d4, #3b82f6);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .cyber-dyn-card.cyber-card-neon-cyber-card {
+      min-width: 280px;
+      max-width: 280px;
+    }
+
+    .cyber-dyn-card.cyber-card-appstore-card,
+    .cyber-dyn-card.cyber-card-container-query-product {
+      min-width: 285px;
+      max-width: 285px;
+      border-left: 4px solid #06b6d4;
+    }
+
+    .cyber-dyn-card.cyber-card-glassmorphism-profile-info {
+      min-width: 265px;
+      max-width: 265px;
+      text-align: center;
+    }
+    .cyber-dyn-card.cyber-card-glassmorphism-profile-info .cyber-card-top {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cyber-dyn-card.cyber-card-glassmorphism-profile-info .cyber-card-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .cyber-dyn-card.cyber-card-movie-pulp-fiction,
+    .cyber-dyn-card.cyber-card-magazine-overlay-card {
+      min-width: 260px;
+      max-width: 260px;
+      height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+    }
+
+    .cyber-dyn-card.cyber-card-minimal-bento-tile {
+      min-width: 240px;
+      max-width: 240px;
+      border-radius: 26px;
+    }
+
+    .cyber-dyn-card.cyber-card-split-banner-card,
+    .cyber-dyn-card.cyber-card-parallax-horizon-card,
+    .cyber-dyn-card.cyber-card-spotlight-hero-card {
+      min-width: 340px;
+      max-width: 340px;
+      border-bottom: 3px solid #06b6d4;
+    }
+
+    .cyber-dyn-card.cyber-card-floating-3d-badge,
+    .cyber-dyn-card.cyber-card-coverflow-shelf-card {
+      min-width: 285px;
+      max-width: 285px;
+      border-top: 3px solid #38bdf8;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .cyber-dyn-card.cyber-slide-center-zoom.is-active { transform: scale(1.04); }
+    .cyber-dyn-card.cyber-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .cyber-dyn-card.cyber-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .cyber-dyn-card.cyber-slide-fade-cross.is-dim { opacity: 0.55; }
+    .cyber-dyn-card.cyber-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .cyber-dyn-card.cyber-slide-cube-rotate.is-active .cyber-card-icon { transform: rotateY(360deg); }
+    .cyber-dyn-card.cyber-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .cyber-dyn-card.cyber-slide-parallax-banner.is-active .cyber-card-icon { transform: translateX(4px) scale(1.06); }
+    .cyber-dyn-card.cyber-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .cyber-dyn-card.cyber-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-cyber-head" id="cyber-header-trigger">
+    <div>
+      <h2 id="cyber-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="cyber-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-cyber-track" id="cyber-cards-track"></div>
+
+  <script>
+    (async function renderNeonCyberSection() {
+      const res = await fetch("Tabs/sec_NeonCyberCards.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("cyber-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("cyber-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("cyber-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "neon-cyber-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "parallax-horizon-card",
+        "spotlight-hero-card",
+        "floating-3d-badge",
+        "coverflow-shelf-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "neon-cyber-card").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "neon-cyber-card";
+
+      const validSlides = [
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "horizontal-scroll").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "horizontal-scroll";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("cyber-cards-track");
+      const isPosterStyle = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      track.innerHTML = items.map((item) => {
+        const posterBg = isPosterStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(8, 51, 68, 0.35)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="cyber-dyn-card liquid-glass cyber-card-${cardStyle} cyber-slide-${slideType}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <div class="cyber-card-top">
+              <img class="cyber-card-icon" src="${item.icon}" alt="${item.title}" />
+              <div style="overflow:hidden;width:100%;">
+                <h3 style="font-size:0.94rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+                <span style="font-size:0.72rem;color:${isPosterStyle ? "#67e8f9" : "#06b6d4"};font-weight:700;">
+                  <i class="fa-solid fa-tag"></i> ${item.category}
+                </span>
+              </div>
+            </div>
+            <div class="cyber-card-body">
+              <p style="font-size:0.78rem;color:${isPosterStyle ? "rgba(255,255,255,0.84)" : "var(--text-secondary)"};line-height:1.4;min-height:42px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                ${item.description}
+              </p>
+              <div style="font-size:0.72rem;color:${isPosterStyle ? "rgba(255,255,255,0.85)" : "var(--text-secondary)"};margin-top:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+                <span><i class="fa-solid fa-user-pen"></i> ${item.author}</span>
+                <span><i class="fa-solid fa-code-branch"></i> v${item.version}</span>
+              </div>
+              <div style="font-size:0.7rem;color:${isPosterStyle ? "rgba(255,255,255,0.8)" : "var(--text-secondary)"};margin-top:3px;">
+                <i class="fa-regular fa-calendar"></i> ${item.publishDate}
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="cyber-dl-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải ${item.fileFormat || "IPA"}
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".cyber-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 3800);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 280) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

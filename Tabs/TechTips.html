@@ -1,0 +1,253 @@
+<section id="sec-tips-root" class="kp-sec-tips-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-tips-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-tips-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-tips-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-tips-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .tips-dyn-card {
+      min-width: 270px;
+      max-width: 270px;
+      border-radius: 24px;
+      padding: 18px 16px;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .tips-dyn-card:hover { transform: translateY(-4px); }
+
+    .tips-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      margin: 0 auto 10px;
+      display: block;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .tips-dyn-card.tips-card-glassmorphism-profile-info {
+      min-width: 270px;
+      max-width: 270px;
+      text-align: center;
+    }
+
+    .tips-dyn-card.tips-card-appstore-card,
+    .tips-dyn-card.tips-card-appstore-featured {
+      min-width: 285px;
+      max-width: 285px;
+      text-align: left;
+    }
+    .tips-dyn-card.tips-card-appstore-card .tips-avatar,
+    .tips-dyn-card.tips-card-appstore-featured .tips-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      margin: 0 0 10px;
+    }
+
+    .tips-dyn-card.tips-card-container-query-product,
+    .tips-dyn-card.tips-card-split-banner-card {
+      min-width: 320px;
+      max-width: 320px;
+      text-align: left;
+      border-left: 4px solid var(--accent);
+    }
+
+    .tips-dyn-card.tips-card-movie-pulp-fiction {
+      min-width: 255px;
+      max-width: 255px;
+      height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: left;
+      color: #fff;
+    }
+
+    .tips-dyn-card.tips-card-neon-cyber-card {
+      min-width: 275px;
+      max-width: 275px;
+      text-align: left;
+      border: 1px solid rgba(6, 182, 212, 0.5);
+    }
+
+    .tips-dyn-card.tips-card-minimal-bento-tile {
+      min-width: 235px;
+      max-width: 235px;
+      text-align: left;
+      border-radius: 26px;
+    }
+
+    .tips-dyn-card.tips-card-compact-pill-row {
+      min-width: 310px;
+      max-width: 310px;
+      border-radius: 999px;
+      padding: 10px 16px;
+      text-align: left;
+    }
+    .tips-dyn-card.tips-card-compact-pill-row .tips-avatar {
+      width: 44px;
+      height: 44px;
+      margin: 0 0 6px;
+    }
+
+    .tips-dyn-card.tips-card-floating-3d-badge,
+    .tips-dyn-card.tips-card-spotlight-hero-card {
+      min-width: 275px;
+      max-width: 275px;
+      text-align: left;
+      border-top: 3px solid #f59e0b;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .tips-dyn-card.tips-slide-center-zoom.is-active { transform: scale(1.05); }
+    .tips-dyn-card.tips-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .tips-dyn-card.tips-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .tips-dyn-card.tips-slide-fade-cross.is-dim { opacity: 0.55; }
+    .tips-dyn-card.tips-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .tips-dyn-card.tips-slide-cube-rotate.is-active .tips-avatar { transform: rotateY(360deg); }
+    .tips-dyn-card.tips-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .tips-dyn-card.tips-slide-parallax-banner.is-active .tips-avatar { transform: translateX(4px) scale(1.06); }
+    .tips-dyn-card.tips-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .tips-dyn-card.tips-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-tips-head" id="tips-header-trigger">
+    <div>
+      <h2 id="tips-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="tips-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-tips-track" id="tips-cards-track"></div>
+
+  <script>
+    (async function renderTechTipsSection() {
+      const res = await fetch("Tabs/sec_TechTips.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("tips-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("tips-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("tips-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "glassmorphism-profile-info",
+        "appstore-card",
+        "appstore-featured",
+        "container-query-product",
+        "movie-pulp-fiction",
+        "neon-cyber-card",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "compact-pill-row",
+        "floating-3d-badge",
+        "spotlight-hero-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "glassmorphism-profile-info").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "glassmorphism-profile-info";
+
+      const validSlides = [
+        "center-zoom",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "center-zoom").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "center-zoom";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("tips-cards-track");
+      const isMovieStyle = cardStyle === "movie-pulp-fiction";
+
+      track.innerHTML = items.map((item) => {
+        const posterStyle = isMovieStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2,6,23,0.88), rgba(2,6,23,0.25)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="tips-dyn-card liquid-glass tips-card-${cardStyle} tips-slide-${slideType}" ${posterStyle}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <img class="tips-avatar" src="${item.icon}" alt="${item.title}" />
+            <h3 style="font-size:0.95rem;margin-bottom:6px;">${item.title}</h3>
+            <p style="font-size:0.78rem;color:${isMovieStyle ? "rgba(255,255,255,0.82)" : "var(--text-secondary)"};line-height:1.4;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+              ${item.description}
+            </p>
+            <div style="font-size:0.74rem;color:${isMovieStyle ? "rgba(255,255,255,0.85)" : "var(--text-secondary)"};display:flex;justify-content:center;gap:10px;flex-wrap:wrap;">
+              <span><i class="fa-solid fa-user-pen"></i> ${item.author}</span>
+              <span><i class="fa-regular fa-calendar"></i> ${item.publishDate}</span>
+            </div>
+            ${item.isApp ? `
+              <button class="btn-pill" style="margin-top:10px;width:100%;"
+                      onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải xuống
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".tips-dyn-card"));
+      if (cards[0] && (slideType === "center-zoom" || slideType === "coverflow-3d")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4800);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 270) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

@@ -1,0 +1,267 @@
+<section id="sec-flip-root" class="kp-sec-flip-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-flip-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-flip-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-flip-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-flip-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .flip-dyn-card {
+      min-width: 275px;
+      max-width: 275px;
+      border-radius: 24px;
+      padding: 16px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .flip-dyn-card:hover { transform: translateY(-4px); }
+
+    .flip-card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .flip-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .flip-card-body {
+      position: relative;
+      z-index: 2;
+    }
+    .flip-mini-btn {
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: none;
+      background: #14b8a6;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .flip-dyn-card.flip-card-flip-info-card {
+      min-width: 275px;
+      max-width: 275px;
+    }
+
+    .flip-dyn-card.flip-card-appstore-card,
+    .flip-dyn-card.flip-card-container-query-product {
+      min-width: 290px;
+      max-width: 290px;
+      border-left: 4px solid #14b8a6;
+    }
+
+    .flip-dyn-card.flip-card-glassmorphism-profile-info {
+      min-width: 255px;
+      max-width: 255px;
+      text-align: center;
+    }
+    .flip-dyn-card.flip-card-glassmorphism-profile-info .flip-card-top {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .flip-dyn-card.flip-card-glassmorphism-profile-info .flip-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid #14b8a6;
+    }
+
+    .flip-dyn-card.flip-card-movie-pulp-fiction,
+    .flip-dyn-card.flip-card-magazine-overlay-card {
+      min-width: 255px;
+      max-width: 255px;
+      height: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+    }
+
+    .flip-dyn-card.flip-card-minimal-bento-tile {
+      min-width: 230px;
+      max-width: 230px;
+      border-radius: 26px;
+    }
+
+    .flip-dyn-card.flip-card-split-banner-card,
+    .flip-dyn-card.flip-card-parallax-horizon-card,
+    .flip-dyn-card.flip-card-spotlight-hero-card,
+    .flip-dyn-card.flip-card-coverflow-shelf-card {
+      min-width: 340px;
+      max-width: 340px;
+      border-bottom: 3px solid #14b8a6;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .flip-dyn-card.flip-slide-flip-card.flip-pulse { transform: rotateY(8deg); }
+    .flip-dyn-card.flip-slide-center-zoom.is-active { transform: scale(1.05); }
+    .flip-dyn-card.flip-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .flip-dyn-card.flip-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .flip-dyn-card.flip-slide-fade-cross.is-dim { opacity: 0.55; }
+    .flip-dyn-card.flip-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .flip-dyn-card.flip-slide-cube-rotate.is-active .flip-card-icon { transform: rotateY(360deg); }
+    .flip-dyn-card.flip-slide-parallax-banner.is-active .flip-card-icon { transform: translateX(4px) scale(1.06); }
+    .flip-dyn-card.flip-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .flip-dyn-card.flip-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-flip-head" id="flip-header-trigger">
+    <div>
+      <h2 id="flip-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="flip-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-flip-track" id="flip-cards-track"></div>
+
+  <script>
+    (async function renderFlipInfoSection() {
+      const res = await fetch("Tabs/sec_FlipInfoCards.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("flip-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("flip-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("flip-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "flip-info-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "parallax-horizon-card",
+        "spotlight-hero-card",
+        "coverflow-shelf-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "flip-info-card").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "flip-info-card";
+
+      const validSlides = [
+        "flip-card",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "flip-card").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "flip-card";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("flip-cards-track");
+      const isPosterStyle = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      track.innerHTML = items.map((item) => {
+        const posterBg = isPosterStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(19, 78, 74, 0.35)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="flip-dyn-card liquid-glass flip-card-${cardStyle} flip-slide-${slideType}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <div class="flip-card-top">
+              <img class="flip-card-icon" src="${item.icon}" alt="${item.title}" />
+              <div style="overflow:hidden;width:100%;">
+                <h3 style="font-size:0.93rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+                <span style="font-size:0.71rem;color:${isPosterStyle ? "#5eead4" : "#14b8a6"};font-weight:700;">
+                  <i class="fa-solid fa-tag"></i> ${item.category}
+                </span>
+              </div>
+            </div>
+            <div class="flip-card-body">
+              <p style="font-size:0.76rem;color:${isPosterStyle ? "rgba(255,255,255,0.84)" : "var(--text-secondary)"};line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                ${item.description}
+              </p>
+              <div style="font-size:0.71rem;color:${isPosterStyle ? "rgba(255,255,255,0.82)" : "var(--text-secondary)"};margin-top:8px;">
+                <i class="fa-solid fa-user-pen"></i> ${item.author} • v${item.version} • <i class="fa-regular fa-calendar"></i> ${item.publishDate}
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="flip-mini-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải xuống
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".flip-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4400);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((c, i) => {
+            c.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "flip-card") {
+              c.classList.toggle("flip-pulse", i % 2 === 0);
+            } else if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              c.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) c.classList.add("is-dim");
+            } else if (i === idx) {
+              c.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 275) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

@@ -1,0 +1,52 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 'minimal-bento-tile' (ô bento gọn gàng: góc trên có icon bo góc + huy hiệu phiên bản, giữa là tiêu đề + tác giả + ngày đăng, cuối là nút tải xuống nếu isApp=true) | 'appstore-card' / 'appstore-featured' (thẻ có viền nhấn bên trái) | 'container-query-product' (ô chữ nhật ngang gọn nhẹ) | 'glassmorphism-profile-info' (căn giữa, icon bo tròn có viền) | 'movie-pulp-fiction' (poster nền banner tối dần ở đáy để làm nổi chữ).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang giúp danh sách nhiều ô nhỏ gọn dễ quét nhanh) | 2.'horizontal-scroll' (trượt ngang mượt mà theo từng bước thẻ) | 3.'coverflow-3d' (các thẻ nghiêng 3D hai bên, thẻ ở lượt thẳng và nổi 1.03x) | 4.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 5.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 6.'cube-rotate' (icon xoay 360deg quanh trục Y mỗi lượt) | 7.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 8.'parallax-banner' (icon dịch chuyển và phóng nhẹ tạo hiệu ứng thị sai) | 9.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại) | 10.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp trượt ngang).",
+
+  "sectionTitle": "Kho Tiện Ích Nhanh",
+  "sectionDescription": "Các công cụ gọn nhẹ, cập nhật nhanh và bài ghi chú ngắn.",
+  "orderId": 7,
+  "autoplay": true,
+  "slideType": "smooth-marquee",
+  "loop": true,
+  "slideSpeed": 4600,
+  "stylesection": "minimal-bento-tile",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/6366f1/ffffff?text=QR",
+      "banner": "https://placehold.co/800x400/3730a3/c7d2fe?text=Smart+QR+Scanner",
+      "title": "Smart QR & WiFi Scan",
+      "description": "Quét mã QR, tạo mã WiFi nhanh và lưu lịch sử quét cục bộ.",
+      "author": "KPazz Tools",
+      "version": "1.6.0",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/3730a3/ffffff?text=QR+Scan"
+      ],
+      "filesize": "15.2 MB",
+      "fileFormat": "IPA",
+      "category": "Tiện ích",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Nhanh", "url": "https://example.com/files/smart-qr.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/ec4899/ffffff?text=Note",
+      "banner": "https://placehold.co/800x400/831843/fbcfe8?text=Ghi+Chu+Phien+Ban",
+      "title": "Lịch trình cập nhật bản vá bảo mật định kỳ",
+      "description": "Thông báo khung giờ rà soát link tải và kiểm tra tương thích hệ điều hành.",
+      "author": "KPazz System",
+      "version": "1.0",
+      "publishDate": "2026-11-22",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Notice",
+      "category": "Thông báo",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}

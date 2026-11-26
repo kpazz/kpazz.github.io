@@ -1,0 +1,54 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 'appstore-featured' (thẻ nổi bật dạng editorial: dòng nhãn thể loại/phiên bản trên cùng, tiếp theo là tiêu đề, ảnh banner ngang bo góc ở giữa và chân thẻ gồm icon nhỏ + tác giả + ngày đăng + nút Nhận nếu isApp=true) | 'appstore-card' (chiều rộng gọn hơn, có viền nhấn bên trái và banner thấp hơn) | 'container-query-product' (khung thẻ ngang rộng hơn cho nội dung nhiều chữ) | 'glassmorphism-profile-info' (căn giữa toàn bộ nội dung, icon tròn có viền) | 'movie-pulp-fiction' (banner phủ toàn thẻ, chữ và chân thẻ nổi lên trên lớp chuyển sắc tối ở đáy).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'horizontal-scroll' (trượt ngang mượt mà theo từng bước thẻ) | 2.'coverflow-3d' (các thẻ nghiêng 3D -8deg hai bên, thẻ ở lượt thẳng 0deg và nổi 1.03x) | 3.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp để tạo cảm giác hòa quyện) | 4.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 5.'cube-rotate' (icon nhỏ xoay 360deg quanh trục Y ở thẻ đang kích hoạt) | 6.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 7.'parallax-banner' (ảnh banner phóng nhẹ 1.07x và dịch chuyển ngang tạo hiệu ứng thị sai) | 8.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại) | 9.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp trượt ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang để dễ quét nhanh).",
+
+  "sectionTitle": "Lựa Chọn Biên Tập Viên",
+  "sectionDescription": "Các bản phát hành đáng chú ý được tuyển chọn kỹ lưỡng mỗi tuần.",
+  "orderId": 5,
+  "autoplay": true,
+  "slideType": "coverflow-3d",
+  "loop": true,
+  "slideSpeed": 4100,
+  "stylesection": "appstore-featured",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/2563eb/ffffff?text=Alt+Store",
+      "banner": "https://placehold.co/800x400/1d4ed8/bfdbfe?text=AltStore+Custom+Build",
+      "title": "AltStore Custom Companion",
+      "description": "Quản lý và gia hạn chứng chỉ ứng dụng nhanh gọn với giao diện trực quan.",
+      "author": "Riley Lab",
+      "version": "2.1.4",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/1d4ed8/ffffff?text=Alt+1"
+      ],
+      "filesize": "34.0 MB",
+      "fileFormat": "IPA",
+      "category": "Quản lý chứng chỉ",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Chính", "url": "https://example.com/files/alt-companion.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/9333ea/ffffff?text=Digest",
+      "banner": "https://placehold.co/800x400/581c87/e9d5ff?text=Tuan+Le+Cong+Nghe+KPazz",
+      "title": "Điểm tin công nghệ & cộng đồng iOS tháng 11",
+      "description": "Tổng hợp các thay đổi quan trọng về hệ sinh thái ứng dụng và công cụ hỗ trợ.",
+      "author": "KPazz News",
+      "version": "1.0",
+      "publishDate": "2026-11-24",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/581c87/ffffff?text=News+1"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Tin tức",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}

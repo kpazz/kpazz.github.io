@@ -1,0 +1,30 @@
+{
+  "sectionTitle": "Nổi bật hôm nay",
+  "autoplay": true,
+  "slideSpeed": 4500,
+  "loop": true,
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/0ea5e9/ffffff?text=KP+OS",
+      "banner": "https://placehold.co/1200x500/0f172a/38bdf8?text=KPazz+Liquid+Glass+2026",
+      "title": "KPazz Cloud Signer Pro 2026",
+      "description": "Ký chứng chỉ ứng dụng iOS trực tiếp không cần máy tính, hỗ trợ thông báo đẩy.",
+      "author": "KPazz Team",
+      "version": "4.2.0",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x600/1e293b/ffffff?text=Screen+1",
+        "https://placehold.co/320x600/1e293b/ffffff?text=Screen+2"
+      ],
+      "filesize": "48.5 MB",
+      "fileFormat": "IPA",
+      "category": "Ứng dụng iOS",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Tốc Độ Cao (VN)", "url": "https://example.com/download/kpsigner.ipa" },
+        { "server": "Server Dự Phòng Global", "url": "https://example.com/mirror/kpsigner.ipa" }
+      ]
+    }
+  ]
+}

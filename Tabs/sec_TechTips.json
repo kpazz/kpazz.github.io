@@ -1,0 +1,92 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 1.'glassmorphism-profile-info' (thẻ dọc căn giữa, ảnh đại diện tròn có viền, phù hợp mẹo/hồ sơ) | 2.'appstore-card' (thẻ dọc căn trái kiểu cửa hàng ứng dụng) | 3.'appstore-featured' (thẻ nổi bật căn trái) | 4.'container-query-product' (thẻ ngang căn trái có viền nhấn bên trái) | 5.'movie-pulp-fiction' (thẻ poster dọc nền banner phủ tối phía dưới) | 6.'neon-cyber-card' (thẻ kính mờ có viền cyan) | 7.'minimal-bento-tile' (ô bento gọn gàng) | 8.'split-banner-card' (thẻ ngang viền nhấn trái) | 9.'compact-pill-row' (thẻ viên thuốc bo tròn gọn) | 10.'floating-3d-badge' (thẻ có viền nhấn trên) | 11.'spotlight-hero-card' (thẻ tiêu điểm viền trên).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại để nổi bật) | 2.'horizontal-scroll' (cuộn ngang mượt từng bước thẻ) | 3.'coverflow-3d' (thẻ nghiêng 3D hai bên, thẻ ở lượt thẳng và nổi 1.03x) | 4.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 5.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 6.'cube-rotate' (ảnh đại diện xoay 360deg quanh trục Y mỗi lượt) | 7.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 8.'parallax-banner' (ảnh đại diện dịch chuyển và phóng nhẹ tạo hiệu ứng thị sai) | 9.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp cuộn ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang để quét nhanh).",
+
+  "sectionTitle": "Mẹo & Thủ Thuật iOS",
+  "sectionDescription": "Hướng dẫn tối ưu pin, cấu hình mạng, công cụ hỗ trợ và thủ thuật ẩn trên iOS.",
+  "orderId": 4,
+  "autoplay": true,
+  "slideType": "center-zoom",
+  "loop": true,
+  "slideSpeed": 4800,
+  "stylesection": "glassmorphism-profile-info",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/f59e0b/ffffff?text=DNS",
+      "banner": "https://placehold.co/800x400/78350f/fde68a?text=Huong+Dan+Chong+Thu+Hoi+Chung+Chi",
+      "title": "Cách chống thu hồi chứng chỉ doanh nghiệp bằng DNS",
+      "description": "Cấu hình hồ sơ DNS chặn kết nối tới máy chủ kiểm tra chứng chỉ của Apple giúp dùng app ổn định.",
+      "author": "Admin KPazz",
+      "version": "1.0",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/78350f/ffffff?text=Buoc+1+Cai+Dat"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Thủ thuật",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/0d9488/ffffff?text=Pin",
+      "banner": "https://placehold.co/800x400/134e4a/99f6e4?text=Toi+Uu+Pin+iOS+Hieu+Qua",
+      "title": "10 thiết lập giúp giảm hao pin ngầm trên iPhone",
+      "description": "Tắt làm mới ứng dụng trong nền không cần thiết, tối ưu định vị và hiệu ứng chuyển động Liquid Glass.",
+      "author": "Minh Khoa",
+      "version": "1.2",
+      "publishDate": "2026-11-23",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/134e4a/ffffff?text=Battery+Tips"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Tối ưu hệ thống",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/e11d48/ffffff?text=AdGuard",
+      "banner": "https://placehold.co/800x400/881337/fecdd3?text=AdGuard+DNS+Profiler",
+      "title": "KPazz DNS Guard Profile",
+      "description": "Tiện ích cấu hình chặn quảng cáo in-app và tên miền theo dõi trực tiếp trên iOS/iPadOS.",
+      "author": "KPazz Security",
+      "version": "3.0.1",
+      "publishDate": "2026-11-21",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/881337/ffffff?text=DNS+Profile"
+      ],
+      "filesize": "4.2 MB",
+      "fileFormat": "MOBILECONFIG",
+      "category": "Bảo mật mạng",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Tải file cấu hình trực tiếp", "url": "https://example.com/files/kpazz-dns.mobileconfig" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/4f46e5/ffffff?text=IPA+Tool",
+      "banner": "https://placehold.co/800x400/312e81/c7d2fe?text=IPA+Metadata+Inspector",
+      "title": "IPA Metadata Inspector",
+      "description": "Công cụ kiểm tra Bundle ID, phiên bản iOS tối thiểu và chữ ký số bên trong tệp IPA.",
+      "author": "DevTools VN",
+      "version": "2.4.0",
+      "publishDate": "2026-11-19",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/312e81/ffffff?text=Inspector+UI"
+      ],
+      "filesize": "19.8 MB",
+      "fileFormat": "IPA",
+      "category": "Công cụ",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Công Cụ", "url": "https://example.com/files/ipa-inspector.ipa" }
+      ]
+    }
+  ]
+}

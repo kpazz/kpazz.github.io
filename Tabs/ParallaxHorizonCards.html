@@ -1,0 +1,293 @@
+<section id="sec-para-root" class="kp-sec-para-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-para-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-para-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-para-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-para-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .para-dyn-card {
+      min-width: 350px;
+      max-width: 350px;
+      height: 190px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .para-dyn-card:hover { transform: translateY(-4px); }
+
+    .para-horizon-bg {
+      position: absolute;
+      inset: -12px;
+      width: calc(100% + 24px);
+      height: calc(100% + 24px);
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .para-horizon-glass {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.56);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .para-item-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 13px;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .para-dl-btn {
+      padding: 7px 13px;
+      border-radius: 12px;
+      border: none;
+      background: #f43f5e;
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .para-dyn-card.para-card-parallax-horizon-card {
+      min-width: 350px;
+      max-width: 350px;
+      height: 190px;
+      padding: 16px;
+      align-items: center;
+    }
+
+    .para-dyn-card.para-card-appstore-card,
+    .para-dyn-card.para-card-container-query-product {
+      min-width: 285px;
+      max-width: 285px;
+      height: 225px;
+      padding: 12px;
+      align-items: flex-end;
+    }
+    .para-dyn-card.para-card-appstore-card .para-horizon-glass,
+    .para-dyn-card.para-card-container-query-product .para-horizon-glass {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .para-dyn-card.para-card-glassmorphism-profile-info {
+      min-width: 270px;
+      max-width: 270px;
+      height: 230px;
+      justify-content: center;
+    }
+    .para-dyn-card.para-card-glassmorphism-profile-info .para-horizon-glass {
+      flex-direction: column;
+      text-align: center;
+      gap: 8px;
+    }
+    .para-dyn-card.para-card-glassmorphism-profile-info .para-item-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid #fb7185;
+    }
+
+    .para-dyn-card.para-card-movie-pulp-fiction,
+    .para-dyn-card.para-card-magazine-overlay-card {
+      min-width: 260px;
+      max-width: 260px;
+      height: 295px;
+      padding: 14px;
+      align-items: flex-end;
+    }
+    .para-dyn-card.para-card-movie-pulp-fiction .para-horizon-glass,
+    .para-dyn-card.para-card-magazine-overlay-card .para-horizon-glass {
+      background: linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.45));
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .para-dyn-card.para-card-minimal-bento-tile {
+      min-width: 240px;
+      max-width: 240px;
+      height: 185px;
+      padding: 12px;
+      align-items: flex-end;
+    }
+    .para-dyn-card.para-card-minimal-bento-tile .para-horizon-glass {
+      padding: 10px 12px;
+      gap: 8px;
+    }
+
+    .para-dyn-card.para-card-split-banner-card,
+    .para-dyn-card.para-card-spotlight-hero-card,
+    .para-dyn-card.para-card-coverflow-shelf-card {
+      min-width: 340px;
+      max-width: 340px;
+      height: 196px;
+      border-bottom: 3px solid #f43f5e;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .para-dyn-card.para-slide-parallax-banner.is-active .para-horizon-bg,
+    .para-dyn-card.para-slide-parallax-banner.para-shift .para-horizon-bg {
+      transform: translateX(-10px) scale(1.05);
+    }
+    .para-dyn-card.para-slide-center-zoom.is-active { transform: scale(1.05); }
+    .para-dyn-card.para-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .para-dyn-card.para-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .para-dyn-card.para-slide-fade-cross.is-dim { opacity: 0.55; }
+    .para-dyn-card.para-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .para-dyn-card.para-slide-cube-rotate.is-active .para-item-icon { transform: rotateY(360deg); }
+    .para-dyn-card.para-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .para-dyn-card.para-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .para-dyn-card.para-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-para-head" id="para-header-trigger">
+    <div>
+      <h2 id="para-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="para-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-para-track" id="para-cards-track"></div>
+
+  <script>
+    (async function renderParallaxHorizonSection() {
+      const res = await fetch("Tabs/sec_ParallaxHorizonCards.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("para-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("para-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("para-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "parallax-horizon-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "spotlight-hero-card",
+        "coverflow-shelf-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "parallax-horizon-card").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "parallax-horizon-card";
+
+      const validSlides = [
+        "parallax-banner",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "parallax-banner").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "parallax-banner";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("para-cards-track");
+
+      track.innerHTML = items.map((item) => `
+        <article class="para-dyn-card liquid-glass para-card-${cardStyle} para-slide-${slideType}"
+                 onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+          <img class="para-horizon-bg" src="${item.banner || item.icon}" alt="${item.title}" />
+          <div class="para-horizon-glass">
+            <img class="para-item-icon" src="${item.icon}" alt="${item.title}" />
+            <div style="overflow:hidden;flex:1;width:100%;">
+              <h3 style="font-size:0.93rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+              <div style="font-size:0.71rem;opacity:0.86;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                <i class="fa-solid fa-user-pen"></i> ${item.author} • v${item.version} • <i class="fa-regular fa-calendar"></i> ${item.publishDate}
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="para-dl-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải
+              </button>` : ""}
+          </div>
+        </article>
+      `).join("");
+
+      const cards = Array.from(track.querySelectorAll(".para-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom" || slideType === "parallax-banner")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4300);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "parallax-banner") {
+              el.classList.toggle("para-shift");
+              if (i === idx) el.classList.add("is-active");
+            } else if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 350) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

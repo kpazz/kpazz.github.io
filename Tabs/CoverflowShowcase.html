@@ -1,0 +1,267 @@
+<section id="sec-cover-root" class="kp-sec-cover-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-cover-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-cover-stage {
+      perspective: 1100px;
+      overflow-x: auto;
+      display: flex;
+      gap: 18px;
+      padding: 14px 8px 16px;
+      scroll-behavior: smooth;
+    }
+    .kp-sec-cover-stage::-webkit-scrollbar { height: 5px; }
+    .kp-sec-cover-stage::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .cover-dyn-card {
+      min-width: 265px;
+      max-width: 265px;
+      border-radius: 26px;
+      padding: 16px;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+      border-bottom: 3px solid rgba(99, 102, 241, 0.65);
+    }
+    .cover-dyn-card:hover { transform: translateY(-4px); }
+
+    .cover-shelf-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+    .cover-shelf-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .cover-shelf-body {
+      position: relative;
+      z-index: 2;
+    }
+    .cover-shelf-btn {
+      margin-top: 12px;
+      width: 100%;
+      padding: 7px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(99, 102, 241, 0.5);
+      background: rgba(99, 102, 241, 0.22);
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 0.77rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .cover-dyn-card.cover-card-coverflow-shelf-card {
+      min-width: 265px;
+      max-width: 265px;
+    }
+
+    .cover-dyn-card.cover-card-appstore-card,
+    .cover-dyn-card.cover-card-container-query-product {
+      min-width: 295px;
+      max-width: 295px;
+      border-bottom: none;
+      border-left: 4px solid #6366f1;
+    }
+
+    .cover-dyn-card.cover-card-glassmorphism-profile-info {
+      min-width: 255px;
+      max-width: 255px;
+      text-align: center;
+    }
+    .cover-dyn-card.cover-card-glassmorphism-profile-info .cover-shelf-top {
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .cover-dyn-card.cover-card-glassmorphism-profile-info .cover-shelf-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #6366f1;
+    }
+    .cover-dyn-card.cover-card-glassmorphism-profile-info .cover-shelf-body > div {
+      justify-items: center;
+    }
+
+    .cover-dyn-card.cover-card-movie-pulp-fiction,
+    .cover-dyn-card.cover-card-magazine-overlay-card {
+      min-width: 255px;
+      max-width: 255px;
+      height: 295px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+    }
+
+    .cover-dyn-card.cover-card-minimal-bento-tile {
+      min-width: 225px;
+      max-width: 225px;
+      border-radius: 24px;
+    }
+
+    .cover-dyn-card.cover-card-split-banner-card,
+    .cover-dyn-card.cover-card-parallax-horizon-card,
+    .cover-dyn-card.cover-card-spotlight-hero-card {
+      min-width: 345px;
+      max-width: 345px;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .cover-dyn-card.cover-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .cover-dyn-card.cover-slide-coverflow-3d:hover,
+    .cover-dyn-card.cover-slide-coverflow-3d.is-focused { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .cover-dyn-card.cover-slide-horizontal-scroll.is-focused { transform: translateY(-3px); }
+    .cover-dyn-card.cover-slide-fade-cross.is-dim { opacity: 0.55; }
+    .cover-dyn-card.cover-slide-cards-stack.is-focused { transform: translateY(-5px) scale(1.02); }
+    .cover-dyn-card.cover-slide-cube-rotate.is-focused .cover-shelf-icon { transform: rotateY(360deg); }
+    .cover-dyn-card.cover-slide-flip-card.is-focused { transform: rotateY(8deg); }
+    .cover-dyn-card.cover-slide-parallax-banner.is-focused .cover-shelf-icon { transform: translateX(4px) scale(1.06); }
+    .cover-dyn-card.cover-slide-center-zoom.is-focused { transform: scale(1.05); }
+    .cover-dyn-card.cover-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .cover-dyn-card.cover-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-cover-head" id="cover-header-trigger">
+    <div>
+      <h2 id="cover-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="cover-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-cover-stage" id="cover-cards-stage"></div>
+
+  <script>
+    (async function renderCoverflowSection() {
+      const res = await fetch("Tabs/sec_CoverflowShowcase.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("cover-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("cover-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("cover-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "coverflow-shelf-card",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "parallax-horizon-card",
+        "spotlight-hero-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "coverflow-shelf-card").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "coverflow-shelf-card";
+
+      const validSlides = [
+        "coverflow-3d",
+        "horizontal-scroll",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "coverflow-3d").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "coverflow-3d";
+
+      const items = (secData.items || []).slice(0, 20);
+      const stage = document.getElementById("cover-cards-stage");
+      const isPosterStyle = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      stage.innerHTML = items.map((item, i) => {
+        const posterBg = isPosterStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(49, 46, 129, 0.35)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="cover-dyn-card liquid-glass cover-card-${cardStyle} cover-slide-${slideType} ${i === 0 ? "is-focused" : ""}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <div class="cover-shelf-top">
+              <img class="cover-shelf-icon" src="${item.icon}" alt="${item.title}" />
+              <span style="font-size:0.72rem;font-weight:700;color:${isPosterStyle ? "#a5b4fc" : "#6366f1"};">
+                <i class="fa-solid fa-code-branch"></i> v${item.version}
+              </span>
+            </div>
+            <div class="cover-shelf-body">
+              <h3 style="font-size:0.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+              <div style="font-size:0.73rem;color:${isPosterStyle ? "rgba(255,255,255,0.84)" : "var(--text-secondary)"};margin-top:6px;display:grid;gap:3px;">
+                <span><i class="fa-solid fa-user-pen"></i> ${item.author}</span>
+                <span><i class="fa-solid fa-tag"></i> ${item.category} • <i class="fa-regular fa-calendar"></i> ${item.publishDate}</span>
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="cover-shelf-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải ${item.fileFormat || "IPA"}
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(stage.querySelectorAll(".cover-dyn-card"));
+      let focusIdx = 0;
+      let dir = false;
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4000);
+
+        setInterval(() => {
+          focusIdx = (focusIdx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((c, i) => {
+            c.classList.remove("is-focused", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              c.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== focusIdx) c.classList.add("is-dim");
+            } else if (i === focusIdx) {
+              c.classList.add("is-focused");
+            }
+          });
+
+          if (slideType === "smooth-marquee") {
+            const step = (cards[0].offsetWidth || 265) + 18;
+            if (stage.scrollLeft + stage.clientWidth >= stage.scrollWidth - 10) {
+              if (secData.loop !== false) stage.scrollTo({ left: 0, behavior: "smooth" });
+            } else {
+              stage.scrollBy({ left: step * 0.65, behavior: "smooth" });
+            }
+          } else if (cards[focusIdx]) {
+            cards[focusIdx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

@@ -1,0 +1,72 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 'container-query-product' (khung chứa container-type: inline-size, chia 2 cột: icon 72px bên trái, bên phải có tiêu đề, thẻ thể loại + ngày đăng và nút tải tím-indigo nếu isApp=true) | 'appstore-card' / 'appstore-featured' (xếp dọc căn trái, viền nhấn trái) | 'glassmorphism-profile-info' (xếp dọc căn giữa, icon tròn có viền) | 'movie-pulp-fiction' / 'magazine-overlay-card' (poster nền tối dần phía dưới để làm nổi chữ) | 'minimal-bento-tile' (ô bento gọn gàng) | 'split-banner-card' / 'parallax-horizon-card' / 'spotlight-hero-card' (thẻ ngang rộng có viền nhấn đáy).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'horizontal-scroll' (trượt ngang mượt mà theo từng bước thẻ) | 2.'coverflow-3d' (các thẻ nghiêng 3D hai bên, thẻ ở lượt thẳng và nổi 1.03x) | 3.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 4.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 5.'cube-rotate' (icon xoay 360deg quanh trục Y mỗi lượt) | 6.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 7.'parallax-banner' (icon dịch chuyển và phóng nhẹ tạo hiệu ứng thị sai) | 8.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại) | 9.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp trượt ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang để dễ quét nhanh).",
+
+  "sectionTitle": "Jailbreak & Công Cụ Hệ Thống",
+  "sectionDescription": "Các công cụ hỗ trợ, trình quản lý gói và tài liệu kỹ thuật cập nhật.",
+  "orderId": 3,
+  "autoplay": true,
+  "slideType": "horizontal-scroll",
+  "loop": true,
+  "slideSpeed": 4000,
+  "stylesection": "container-query-product",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/6366f1/ffffff?text=JB+1",
+      "banner": "https://placehold.co/800x400/312e81/c7d2fe?text=System+Package+Manager",
+      "title": "SysPkg Package Manager",
+      "description": "Quản lý danh sách gói mở rộng, kiểm tra phiên bản và nhật ký cài đặt trực quan.",
+      "author": "KPazz Core",
+      "version": "2.8.0",
+      "publishDate": "2026-11-26",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/312e81/ffffff?text=Pkg+Manager+UI"
+      ],
+      "filesize": "31.4 MB",
+      "fileFormat": "IPA",
+      "category": "Quản lý gói",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server 1", "url": "https://example.com/files/syspkg-manager.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/8b5cf6/ffffff?text=Diag",
+      "banner": "https://placehold.co/800x400/4c1d95/ddd6fe?text=Kernel+Log+Viewer",
+      "title": "LogView System Console",
+      "description": "Đọc nhật ký hệ thống, lọc thông báo lỗi và xuất tệp chẩn đoán nhanh chóng.",
+      "author": "DevLab VN",
+      "version": "1.9.3",
+      "publishDate": "2026-11-24",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/4c1d95/ffffff?text=Console+Log"
+      ],
+      "filesize": "18.6 MB",
+      "fileFormat": "IPA",
+      "category": "Chẩn đoán",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Công Cụ", "url": "https://example.com/files/logview-console.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/4f46e5/ffffff?text=Guide",
+      "banner": "https://placehold.co/800x400/1e1b4b/a5b4fc?text=Huong+Dan+Sao+Luu",
+      "title": "Cách sao lưu dữ liệu cấu hình trước khi cập nhật hệ thống",
+      "description": "Lưu trữ bản sao lưu an toàn giúp khôi phục nhanh khi cần thiết.",
+      "author": "Admin KPazz",
+      "version": "1.0",
+      "publishDate": "2026-11-21",
+      "videoUrl": "",
+      "screenshots": [],
+      "filesize": "0 KB",
+      "fileFormat": "Guide",
+      "category": "Hướng dẫn",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}

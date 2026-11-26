@@ -1,0 +1,46 @@
+{
+  "tieu_de_section": "Ứng Dụng Nổi Bật",
+  "mo_ta_ngan": "Kho ứng dụng IPA & công cụ ký trực tiếp cập nhật hàng ngày",
+  "slot_hien_thi": 10,
+  "loai_section_hien_thi": "grid",
+  "kieu_slide": "horizontal_fade",
+  "toc_do_slide": 4000,
+  "co_autoplay": true,
+  "vong_lap_slide": true,
+  "_guide": {
+    "horizontal_fade": "Trượt ngang mượt kết hợp hiệu ứng mờ dần giữa các slide",
+    "coverflow_3d": "Hiệu ứng lật thẻ 3D nổi bật thẻ trung tâm",
+    "vertical_ticker": "Cuộn dọc tự động phù hợp cho tin tức nhanh và thông báo",
+    "grid_carousel": "Lướt nhiều thẻ cùng lúc theo cụm 3-4 cột"
+  },
+  "items": [
+    {
+      "id": "char_001",
+      "ten_noi_dung": "Kpazz Signer Pro",
+      "mo_ta_ngan": "Công cụ ký file IPA trực tiếp trên iOS không cần máy tính, hỗ trợ chứng chỉ doanh nghiệp.",
+      "phien_ban": "4.2.1",
+      "the_loai": "Tiện ích",
+      "loai_popup": "app",
+      "tac_gia": "Kpazz Team",
+      "dung_luong_file": "38.5 MB",
+      "dinh_dang_file": ".IPA",
+      "ngay_dang": "26/11/2026",
+      "la_app_hay_khong": true,
+      "anh_banner": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=900",
+      "anh_icon": "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=200",
+      "link_anh_screenshot": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500",
+        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500",
+        "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=500"
+      ],
+      "link_video": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "noi_dung_cap_nhat": "Hỗ trợ iOS 18.2, sửa lỗi crash khi nhập chứng chỉ P12, tăng tốc độ giải nén IPA gấp 2 lần.",
+      "noi_dung_bai_viet": "Kpazz Signer Pro cho phép bạn cài đặt mọi tệp IPA bên ngoài App Store một cách an toàn. Tích hợp sẵn kho Repo mở rộng và tự động tiêm Dylib.",
+      "link_tai_download": [
+        { "server": "Server VN Tốc Độ Cao (Direct IPA)", "url": "https://example.com/kpazz-signer.ipa" },
+        { "server": "Cài Đặt Trực Tiếp (OTA Install)", "url": "itms-services://?action=download-manifest&url=https://example.com/manifest.plist" },
+        { "server": "Link Dự Phòng Google Drive", "url": "https://drive.google.com" }
+      ]
+    }
+  ]
+}

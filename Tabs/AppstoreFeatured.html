@@ -1,0 +1,290 @@
+<section id="sec-feat-root" class="kp-sec-feat-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-feat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-feat-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-feat-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-feat-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .feat-dyn-card {
+      min-width: 310px;
+      max-width: 310px;
+      border-radius: 24px;
+      padding: 14px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .feat-dyn-card:hover { transform: translateY(-4px); }
+
+    .feat-store-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 2;
+    }
+    .feat-store-title {
+      font-size: 1.02rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: relative;
+      z-index: 2;
+    }
+    .feat-store-hero {
+      width: 100%;
+      height: 155px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin: 8px 0 12px;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .feat-store-mini-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .feat-store-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .feat-store-btn {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--glass-border);
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .feat-dyn-card.feat-card-appstore-featured {
+      min-width: 310px;
+      max-width: 310px;
+    }
+
+    .feat-dyn-card.feat-card-appstore-card {
+      min-width: 285px;
+      max-width: 285px;
+      border-left: 4px solid var(--accent);
+    }
+    .feat-dyn-card.feat-card-appstore-card .feat-store-hero {
+      height: 132px;
+    }
+
+    .feat-dyn-card.feat-card-container-query-product {
+      min-width: 340px;
+      max-width: 340px;
+    }
+    .feat-dyn-card.feat-card-container-query-product .feat-store-hero {
+      height: 145px;
+    }
+
+    .feat-dyn-card.feat-card-glassmorphism-profile-info {
+      min-width: 270px;
+      max-width: 270px;
+      text-align: center;
+    }
+    .feat-dyn-card.feat-card-glassmorphism-profile-info .feat-store-mini-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      margin: 0 auto 6px;
+    }
+    .feat-dyn-card.feat-card-glassmorphism-profile-info .feat-store-footer {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .feat-dyn-card.feat-card-glassmorphism-profile-info .feat-store-footer > div {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feat-dyn-card.feat-card-movie-pulp-fiction {
+      min-width: 255px;
+      max-width: 255px;
+      height: 315px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #fff;
+    }
+    .feat-dyn-card.feat-card-movie-pulp-fiction .feat-store-hero {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border-radius: 24px;
+      z-index: 0;
+    }
+    .feat-dyn-card.feat-card-movie-pulp-fiction::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(2, 6, 23, 0.92), rgba(15, 23, 42, 0.35));
+      z-index: 1;
+      pointer-events: none;
+    }
+    .feat-dyn-card.feat-card-movie-pulp-fiction .feat-store-kicker {
+      color: #93c5fd;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .feat-dyn-card.feat-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .feat-dyn-card.feat-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .feat-dyn-card.feat-slide-horizontal-scroll.is-active { transform: translateY(-3px); }
+    .feat-dyn-card.feat-slide-fade-cross.is-dim { opacity: 0.55; }
+    .feat-dyn-card.feat-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .feat-dyn-card.feat-slide-cube-rotate.is-active .feat-store-mini-icon { transform: rotateY(360deg); }
+    .feat-dyn-card.feat-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .feat-dyn-card.feat-slide-parallax-banner.is-active .feat-store-hero { transform: scale(1.07) translateX(5px); }
+    .feat-dyn-card.feat-slide-center-zoom.is-active { transform: scale(1.05); }
+    .feat-dyn-card.feat-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .feat-dyn-card.feat-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-feat-head" id="feat-header-trigger">
+    <div>
+      <h2 id="feat-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="feat-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-feat-track" id="feat-cards-track"></div>
+
+  <script>
+    (async function renderAppstoreFeaturedSection() {
+      const res = await fetch("Tabs/sec_AppstoreFeatured.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("feat-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("feat-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("feat-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "appstore-featured",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "appstore-featured").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "appstore-featured";
+
+      const validSlides = [
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "coverflow-3d").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "coverflow-3d";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("feat-cards-track");
+      const isMovieStyle = cardStyle === "movie-pulp-fiction";
+
+      track.innerHTML = items.map((item) => `
+        <article class="feat-dyn-card liquid-glass feat-card-${cardStyle} feat-slide-${slideType}"
+                 onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+          <div class="feat-store-kicker"><i class="fa-solid fa-crown"></i> ${item.category} • v${item.version}</div>
+          <h3 class="feat-store-title">${item.title}</h3>
+          <img class="feat-store-hero" src="${item.banner || item.icon}" alt="${item.title}" />
+          <div class="feat-store-footer">
+            <div style="display:flex;align-items:center;gap:8px;overflow:hidden;">
+              <img class="feat-store-mini-icon" src="${item.icon}" alt="${item.title}" />
+              <div style="font-size:0.75rem;color:${isMovieStyle ? "rgba(255,255,255,0.85)" : "var(--text-secondary)"};overflow:hidden;">
+                <div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><i class="fa-solid fa-user-pen"></i> ${item.author}</div>
+                <div><i class="fa-regular fa-calendar"></i> ${item.publishDate}</div>
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="feat-store-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Nhận
+              </button>` : ""}
+          </div>
+        </article>
+      `).join("");
+
+      const cards = Array.from(track.querySelectorAll(".feat-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom" || slideType === "parallax-banner")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4100);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 310) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

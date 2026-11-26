@@ -1,0 +1,283 @@
+<section id="sec-pill-root" class="kp-sec-pill-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-pill-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-pill-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-pill-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-pill-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .pill-dyn-card {
+      min-width: 300px;
+      max-width: 300px;
+      border-radius: 999px;
+      padding: 8px 14px 8px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .pill-dyn-card:hover { transform: translateY(-3px); }
+
+    .pill-row-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .pill-row-body {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+    .pill-dl-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      background: #10b981;
+      color: #fff;
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .pill-dyn-card.pill-card-compact-pill-row {
+      min-width: 300px;
+      max-width: 300px;
+      border-radius: 999px;
+    }
+
+    .pill-dyn-card.pill-card-appstore-card,
+    .pill-dyn-card.pill-card-container-query-product {
+      min-width: 310px;
+      max-width: 310px;
+      border-radius: 20px;
+      padding: 12px 14px;
+      border-left: 4px solid #10b981;
+    }
+    .pill-dyn-card.pill-card-appstore-card .pill-row-icon,
+    .pill-dyn-card.pill-card-container-query-product .pill-row-icon {
+      border-radius: 13px;
+    }
+
+    .pill-dyn-card.pill-card-glassmorphism-profile-info {
+      min-width: 240px;
+      max-width: 240px;
+      border-radius: 24px;
+      padding: 16px 14px;
+      flex-direction: column;
+      text-align: center;
+    }
+    .pill-dyn-card.pill-card-glassmorphism-profile-info .pill-row-icon {
+      width: 56px;
+      height: 56px;
+      border: 2px solid #10b981;
+    }
+
+    .pill-dyn-card.pill-card-minimal-bento-tile {
+      min-width: 225px;
+      max-width: 225px;
+      min-height: 155px;
+      border-radius: 24px;
+      padding: 14px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .pill-dyn-card.pill-card-minimal-bento-tile .pill-row-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+    .pill-dyn-card.pill-card-minimal-bento-tile .pill-row-body,
+    .pill-dyn-card.pill-card-minimal-bento-tile .pill-dl-btn {
+      width: 100%;
+    }
+    .pill-dyn-card.pill-card-minimal-bento-tile .pill-dl-btn {
+      justify-content: center;
+      border-radius: 12px;
+    }
+
+    .pill-dyn-card.pill-card-movie-pulp-fiction,
+    .pill-dyn-card.pill-card-magazine-overlay-card {
+      min-width: 260px;
+      max-width: 260px;
+      height: 240px;
+      border-radius: 24px;
+      padding: 14px;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-end;
+      color: #fff;
+    }
+
+    .pill-dyn-card.pill-card-split-banner-card,
+    .pill-dyn-card.pill-card-parallax-horizon-card,
+    .pill-dyn-card.pill-card-spotlight-hero-card,
+    .pill-dyn-card.pill-card-coverflow-shelf-card {
+      min-width: 345px;
+      max-width: 345px;
+      border-radius: 22px;
+      padding: 12px 16px;
+      border-bottom: 3px solid #10b981;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .pill-dyn-card.pill-slide-smooth-marquee.is-active { transform: translateY(-2px); }
+    .pill-dyn-card.pill-slide-horizontal-scroll.is-active { transform: translateY(-3px); }
+    .pill-dyn-card.pill-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .pill-dyn-card.pill-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .pill-dyn-card.pill-slide-fade-cross.is-dim { opacity: 0.55; }
+    .pill-dyn-card.pill-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .pill-dyn-card.pill-slide-cube-rotate.is-active .pill-row-icon { transform: rotateY(360deg); }
+    .pill-dyn-card.pill-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .pill-dyn-card.pill-slide-parallax-banner.is-active .pill-row-icon { transform: translateX(4px) scale(1.06); }
+    .pill-dyn-card.pill-slide-center-zoom.is-active { transform: scale(1.05); }
+    .pill-dyn-card.pill-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .pill-dyn-card.pill-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-pill-head" id="pill-header-trigger">
+    <div>
+      <h2 id="pill-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="pill-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-pill-track" id="pill-cards-track"></div>
+
+  <script>
+    (async function renderCompactPillSection() {
+      const res = await fetch("Tabs/sec_CompactPillRows.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("pill-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("pill-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("pill-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "compact-pill-row",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "minimal-bento-tile",
+        "movie-pulp-fiction",
+        "magazine-overlay-card",
+        "split-banner-card",
+        "parallax-horizon-card",
+        "spotlight-hero-card",
+        "coverflow-shelf-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "compact-pill-row").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "compact-pill-row";
+
+      const validSlides = [
+        "smooth-marquee",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "smooth-marquee").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "smooth-marquee";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("pill-cards-track");
+      const isPosterStyle = cardStyle === "movie-pulp-fiction" || cardStyle === "magazine-overlay-card";
+
+      track.innerHTML = items.map((item) => {
+        const posterBg = isPosterStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2, 6, 23, 0.92), rgba(6, 78, 59, 0.35)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="pill-dyn-card liquid-glass pill-card-${cardStyle} pill-slide-${slideType}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <img class="pill-row-icon" src="${item.icon}" alt="${item.title}" />
+            <div class="pill-row-body">
+              <strong style="display:block;font-size:0.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</strong>
+              <span style="font-size:0.71rem;color:${isPosterStyle ? "rgba(255,255,255,0.84)" : "var(--text-secondary)"};display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                <i class="fa-solid fa-user-pen"></i> ${item.author} • v${item.version} • ${item.publishDate}
+              </span>
+            </div>
+            ${item.isApp ? `
+              <button class="pill-dl-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".pill-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 3600);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 300) + 14;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

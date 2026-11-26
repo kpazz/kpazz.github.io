@@ -1,0 +1,258 @@
+<section id="sec-bento-root" class="kp-sec-bento-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-bento-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-bento-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-bento-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-bento-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .bento-dyn-card {
+      min-width: 220px;
+      max-width: 220px;
+      border-radius: 24px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 215px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .bento-dyn-card:hover { transform: translateY(-4px); }
+
+    .bento-tile-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+    .bento-tile-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      object-fit: cover;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bento-ver-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.15);
+      color: var(--accent);
+    }
+    .bento-card-body {
+      position: relative;
+      z-index: 2;
+    }
+    .bento-dl-btn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 7px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .bento-dyn-card.bento-card-minimal-bento-tile {
+      min-width: 220px;
+      max-width: 220px;
+      min-height: 215px;
+    }
+
+    .bento-dyn-card.bento-card-appstore-card,
+    .bento-dyn-card.bento-card-appstore-featured {
+      min-width: 270px;
+      max-width: 270px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .bento-dyn-card.bento-card-container-query-product {
+      min-width: 295px;
+      max-width: 295px;
+      min-height: 170px;
+    }
+
+    .bento-dyn-card.bento-card-glassmorphism-profile-info {
+      min-width: 245px;
+      max-width: 245px;
+      text-align: center;
+    }
+    .bento-dyn-card.bento-card-glassmorphism-profile-info .bento-tile-top {
+      justify-content: center;
+    }
+    .bento-dyn-card.bento-card-glassmorphism-profile-info .bento-tile-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+    }
+
+    .bento-dyn-card.bento-card-movie-pulp-fiction {
+      min-width: 240px;
+      max-width: 240px;
+      height: 275px;
+      justify-content: flex-end;
+      color: #fff;
+    }
+    .bento-dyn-card.bento-card-movie-pulp-fiction .bento-ver-pill {
+      background: rgba(15, 23, 42, 0.72);
+      color: #93c5fd;
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .bento-dyn-card.bento-slide-center-zoom.is-active { transform: scale(1.05); }
+    .bento-dyn-card.bento-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .bento-dyn-card.bento-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .bento-dyn-card.bento-slide-fade-cross.is-dim { opacity: 0.55; }
+    .bento-dyn-card.bento-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .bento-dyn-card.bento-slide-cube-rotate.is-active .bento-tile-icon { transform: rotateY(360deg); }
+    .bento-dyn-card.bento-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .bento-dyn-card.bento-slide-parallax-banner.is-active .bento-tile-icon { transform: translateX(4px) scale(1.06); }
+    .bento-dyn-card.bento-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .bento-dyn-card.bento-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-bento-head" id="bento-header-trigger">
+    <div>
+      <h2 id="bento-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="bento-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-bento-track" id="bento-cards-track"></div>
+
+  <script>
+    (async function renderMinimalBentoSection() {
+      const res = await fetch("Tabs/sec_MinimalBentoTiles.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("bento-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("bento-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("bento-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "minimal-bento-tile",
+        "appstore-card",
+        "appstore-featured",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "movie-pulp-fiction"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "minimal-bento-tile").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "minimal-bento-tile";
+
+      const validSlides = [
+        "smooth-marquee",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "fade-cross",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "smooth-marquee").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "smooth-marquee";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("bento-cards-track");
+      const isMovieStyle = cardStyle === "movie-pulp-fiction";
+      const isProfileStyle = cardStyle === "glassmorphism-profile-info";
+
+      track.innerHTML = items.map((item) => {
+        const posterBg = isMovieStyle && (item.banner || item.icon)
+          ? `style="background:linear-gradient(to top, rgba(2, 6, 23, 0.9), rgba(15, 23, 42, 0.3)), url('${item.banner || item.icon}') center/cover no-repeat;"`
+          : "";
+
+        return `
+          <article class="bento-dyn-card liquid-glass bento-card-${cardStyle} bento-slide-${slideType}" ${posterBg}
+                   onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+            <div class="bento-card-body">
+              <div class="bento-tile-top">
+                <img class="bento-tile-icon" src="${item.icon}" alt="${item.title}" />
+                ${!isProfileStyle ? `<span class="bento-ver-pill"><i class="fa-solid fa-code-branch"></i> v${item.version}</span>` : ""}
+              </div>
+              <h3 style="font-size:0.95rem;margin-top:12px;">${item.title}</h3>
+              <div style="font-size:0.74rem;color:${isMovieStyle ? "rgba(255,255,255,0.84)" : "var(--text-secondary)"};margin-top:4px;">
+                <i class="fa-solid fa-user-pen"></i> ${item.author} • <i class="fa-regular fa-calendar"></i> ${item.publishDate}
+              </div>
+            </div>
+            ${item.isApp ? `
+              <button class="bento-dl-btn" onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải xuống
+              </button>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      const cards = Array.from(track.querySelectorAll(".bento-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4600);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 220) + 14;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

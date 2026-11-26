@@ -1,0 +1,237 @@
+<section id="sec-media-root" class="kp-sec-media-wrap" style="padding:18px 16px;">
+  <style>
+    .kp-sec-media-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
+    .kp-sec-media-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 10px 8px 14px;
+      perspective: 1100px;
+    }
+    .kp-sec-media-track::-webkit-scrollbar { height: 5px; }
+    .kp-sec-media-track::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.35); border-radius: 99px; }
+
+    /* Base Card */
+    .media-dyn-card {
+      min-width: 240px;
+      max-width: 240px;
+      height: 330px;
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    }
+    .media-dyn-card:hover { transform: translateY(-4px); }
+
+    .media-pulp-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .media-dyn-card:hover .media-pulp-poster { transform: scale(1.06); }
+
+    .media-pulp-overlay {
+      position: relative;
+      z-index: 2;
+      margin: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.58);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #fff;
+      width: calc(100% - 20px);
+    }
+
+    /* ==================== CÁC KIỂU CARD (stylesection / stylecard) ==================== */
+    .media-dyn-card.media-card-movie-pulp-fiction {
+      min-width: 240px;
+      max-width: 240px;
+      height: 330px;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .media-dyn-card.media-card-appstore-card,
+    .media-dyn-card.media-card-container-query-product {
+      min-width: 280px;
+      max-width: 280px;
+      height: 270px;
+    }
+
+    .media-dyn-card.media-card-glassmorphism-profile-info {
+      min-width: 260px;
+      max-width: 260px;
+      height: 285px;
+      justify-content: center;
+      align-items: center;
+    }
+    .media-dyn-card.media-card-glassmorphism-profile-info .media-pulp-overlay {
+      text-align: center;
+      margin: 14px;
+      width: calc(100% - 28px);
+    }
+
+    .media-dyn-card.media-card-minimal-bento-tile {
+      min-width: 230px;
+      max-width: 230px;
+      height: 230px;
+      border-radius: 26px;
+    }
+    .media-dyn-card.media-card-minimal-bento-tile .media-pulp-overlay {
+      margin: 8px;
+      padding: 10px;
+      width: calc(100% - 16px);
+    }
+
+    .media-dyn-card.media-card-split-banner-card,
+    .media-dyn-card.media-card-parallax-horizon-card,
+    .media-dyn-card.media-card-spotlight-hero-card {
+      min-width: 345px;
+      max-width: 345px;
+      height: 215px;
+    }
+    .media-dyn-card.media-card-split-banner-card .media-pulp-overlay,
+    .media-dyn-card.media-card-parallax-horizon-card .media-pulp-overlay,
+    .media-dyn-card.media-card-spotlight-hero-card .media-pulp-overlay {
+      margin: 12px;
+      background: rgba(15, 23, 42, 0.68);
+    }
+
+    /* ==================== 10 KIỂU SLIDE (slideType / styleslide) ==================== */
+    .media-dyn-card.media-slide-fade-cross.is-dim { opacity: 0.55; }
+    .media-dyn-card.media-slide-center-zoom.is-active { transform: scale(1.05); }
+    .media-dyn-card.media-slide-coverflow-3d { transform: rotateY(-8deg) scale(0.96); opacity: 0.88; }
+    .media-dyn-card.media-slide-coverflow-3d.is-active { transform: rotateY(0deg) scale(1.03); opacity: 1; }
+    .media-dyn-card.media-slide-cards-stack.is-active { transform: translateY(-5px) scale(1.02); }
+    .media-dyn-card.media-slide-cube-rotate.is-active .media-pulp-poster { transform: scale(1.04) rotate(1.5deg); }
+    .media-dyn-card.media-slide-flip-card.is-active { transform: rotateY(8deg); }
+    .media-dyn-card.media-slide-parallax-banner.is-active .media-pulp-poster { transform: scale(1.09) translateX(6px); }
+    .media-dyn-card.media-slide-vertical-ticker.is-tick-up { transform: translateY(-4px); }
+    .media-dyn-card.media-slide-vertical-ticker.is-tick-down { transform: translateY(2px); }
+  </style>
+
+  <div class="kp-sec-media-head" id="media-header-trigger">
+    <div>
+      <h2 id="media-sec-title" style="font-size:1.25rem;"></h2>
+      <p id="media-sec-desc" style="font-size:0.84rem;color:var(--text-secondary);"></p>
+    </div>
+    <span style="font-size:0.8rem;color:var(--accent);font-weight:600;">Xem tất cả <i class="fa-solid fa-chevron-right"></i></span>
+  </div>
+
+  <div class="kp-sec-media-track" id="media-cards-track"></div>
+
+  <script>
+    (async function renderMediaSection() {
+      const res = await fetch("Tabs/sec_Media.json?t=" + Date.now());
+      const secData = await res.json();
+
+      document.getElementById("media-sec-title").textContent = secData.sectionTitle || "";
+      document.getElementById("media-sec-desc").textContent = secData.sectionDescription || "";
+      document.getElementById("media-header-trigger").onclick = () => KPazzApp.openSectionAllModal(secData);
+
+      const validCards = [
+        "movie-pulp-fiction",
+        "appstore-card",
+        "container-query-product",
+        "glassmorphism-profile-info",
+        "minimal-bento-tile",
+        "split-banner-card",
+        "parallax-horizon-card",
+        "spotlight-hero-card"
+      ];
+      const rawCard = (secData.stylesection || secData.stylecard || "movie-pulp-fiction").trim();
+      const cardStyle = validCards.includes(rawCard) ? rawCard : "movie-pulp-fiction";
+
+      const validSlides = [
+        "fade-cross",
+        "horizontal-scroll",
+        "coverflow-3d",
+        "cards-stack",
+        "cube-rotate",
+        "flip-card",
+        "parallax-banner",
+        "center-zoom",
+        "vertical-ticker",
+        "smooth-marquee"
+      ];
+      const rawSlide = (secData.slideType || secData.styleslide || "fade-cross").trim();
+      const slideType = validSlides.includes(rawSlide) ? rawSlide : "fade-cross";
+
+      const items = (secData.items || []).slice(0, 20);
+      const track = document.getElementById("media-cards-track");
+
+      track.innerHTML = items.map((item) => `
+        <article class="media-dyn-card liquid-glass media-card-${cardStyle} media-slide-${slideType}"
+                 onclick='KPazzApp.openItemDetail(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+          <img class="media-pulp-poster" src="${item.banner || item.icon}" alt="${item.title}" />
+          <div class="media-pulp-overlay">
+            <span style="font-size:0.7rem;color:#facc15;font-weight:700;"><i class="fa-solid fa-film"></i> ${item.category}</span>
+            <h3 style="font-size:0.95rem;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.title}</h3>
+            <div style="font-size:0.72rem;opacity:0.85;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              <i class="fa-solid fa-user-pen"></i> ${item.author} • <i class="fa-solid fa-code-branch"></i> v${item.version}
+            </div>
+            ${item.isApp ? `
+              <button class="btn-pill" style="width:100%;padding:6px 10px;font-size:0.76rem;"
+                      onclick='event.stopPropagation();KPazzApp.openDownloadLinks(${JSON.stringify(item).replace(/'/g, "&apos;")})'>
+                <i class="fa-solid fa-download"></i> Tải ứng dụng
+              </button>` : ""}
+          </div>
+        </article>
+      `).join("");
+
+      const cards = Array.from(track.querySelectorAll(".media-dyn-card"));
+      if (cards[0] && (slideType === "coverflow-3d" || slideType === "center-zoom" || slideType === "parallax-banner")) {
+        cards[0].classList.add("is-active");
+      }
+
+      if (secData.autoplay && cards.length > 0) {
+        const speed = secData.slideSpeed || (slideType === "smooth-marquee" ? 1800 : 4200);
+        let idx = 0;
+        let dir = false;
+
+        setInterval(() => {
+          idx = (idx + 1) % cards.length;
+          dir = !dir;
+
+          cards.forEach((el, i) => {
+            el.classList.remove("is-active", "is-dim", "is-tick-up", "is-tick-down");
+            if (slideType === "vertical-ticker") {
+              const up = i % 2 === 0 ? dir : !dir;
+              el.classList.add(up ? "is-tick-up" : "is-tick-down");
+            } else if (slideType === "fade-cross") {
+              if (i !== idx) el.classList.add("is-dim");
+            } else if (i === idx) {
+              el.classList.add("is-active");
+            }
+          });
+
+          const step = (cards[0].offsetWidth || 240) + 16;
+          if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+            if (secData.loop !== false) {
+              track.scrollTo({ left: 0, behavior: "smooth" });
+            }
+          } else {
+            track.scrollBy({ left: slideType === "smooth-marquee" ? step * 0.65 : step, behavior: "smooth" });
+          }
+        }, speed);
+      }
+    })();
+  </script>
+</section>

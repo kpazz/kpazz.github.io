@@ -1,0 +1,114 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 1.'appstore-card' (thẻ kính lỏng có banner 125px phía trên, hàng dưới gồm icon 48px + tiêu đề + tác giả/phiên bản + nút Tải nếu isApp=true) | 2.'appstore-featured' (thẻ rộng 315px, viền nhấn trái, banner cao hơn) | 3.'container-query-product' (thẻ ngang rộng 340px cho không gian hiển thị rộng rãi) | 4.'glassmorphism-profile-info' (căn giữa nội dung, icon tròn có viền) | 5.'movie-pulp-fiction' (banner phủ nền thẻ với lớp chuyển sắc tối ở đáy để làm nổi chữ) | 6.'neon-cyber-card' (viền sáng xanh cyan và bóng đổ nổi bật) | 7.'minimal-bento-tile' (ô gọn bo góc 26px) | 8.'split-banner-card' (thẻ ngang rộng có viền nhấn đáy) | 9.'compact-pill-row' (dạng viên thuốc bo tròn 999px ẩn banner để chạy gọn) | 10.'floating-3d-badge' (thẻ bo góc 26px có viền nhấn trên).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'horizontal-scroll' (trượt ngang mượt mà theo từng bước thẻ) | 2.'coverflow-3d' (các thẻ nghiêng 3D -8deg hai bên, thẻ ở lượt thẳng 0deg và nổi 1.03x) | 3.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 4.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 5.'cube-rotate' (icon xoay 360deg quanh trục Y ở thẻ đang kích hoạt) | 6.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 7.'parallax-banner' (banner phóng nhẹ 1.07x và dịch chuyển ngang tạo hiệu ứng thị sai) | 8.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại) | 9.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp trượt ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang để dễ quét nhanh).",
+
+  "sectionTitle": "Ứng dụng iOS Nổi Bật",
+  "sectionDescription": "Kho ứng dụng IPA đã tinh chỉnh, bài đánh giá và tiện ích mới nhất 2026.",
+  "orderId": 1,
+  "autoplay": true,
+  "slideType": "horizontal-scroll",
+  "loop": true,
+  "slideSpeed": 3500,
+  "stylesection": "appstore-card",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/2563eb/ffffff?text=YT+Pro",
+      "banner": "https://placehold.co/800x400/1e3a8a/93c5fd?text=YouTube+OLED+Plus+2026",
+      "title": "YouTube OLED Plus",
+      "description": "Chặn quảng cáo hoàn toàn, phát nền PiP, tải video 4K HDR trực tiếp về thư viện ảnh.",
+      "author": "KPazz Modder",
+      "version": "21.08.4",
+      "publishDate": "2026-11-25",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "screenshots": [
+        "https://placehold.co/320x620/0f172a/38bdf8?text=Screenshot+1",
+        "https://placehold.co/320x620/0f172a/38bdf8?text=Screenshot+2"
+      ],
+      "filesize": "118.4 MB",
+      "fileFormat": "IPA",
+      "category": "Đa phương tiện",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Tốc Độ Cao (VN)", "url": "https://example.com/files/yt-oled.ipa" },
+        { "server": "Server Dự Phòng Mirror", "url": "https://example.com/mirror/yt-oled.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/10b981/ffffff?text=CapCut",
+      "banner": "https://placehold.co/800x400/064e3b/6ee7b7?text=CapCut+Pro+Unlocked",
+      "title": "CapCut Pro Studio",
+      "description": "Mở khoá toàn bộ hiệu ứng AI, xoá phông tự động, xuất video 4K 60fps không logo.",
+      "author": "VN Dev Team",
+      "version": "14.5.0",
+      "publishDate": "2026-11-22",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/064e3b/ffffff?text=Editor+UI"
+      ],
+      "filesize": "245.0 MB",
+      "fileFormat": "IPA",
+      "category": "Chỉnh sửa Video",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server VIP 1", "url": "https://example.com/files/capcut-pro.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/7c3aed/ffffff?text=SpotX",
+      "banner": "https://placehold.co/800x400/4c1d95/ddd6fe?text=SpotX+Lossless+Audio",
+      "title": "SpotX HiFi Music",
+      "description": "Nghe nhạc không quảng cáo, chọn bài tự do, tua nhanh chậm và tải nhạc offline.",
+      "author": "AudioLab",
+      "version": "9.1.12",
+      "publishDate": "2026-11-20",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/4c1d95/ffffff?text=Now+Playing"
+      ],
+      "filesize": "86.2 MB",
+      "fileFormat": "IPA",
+      "category": "Âm nhạc",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Nhạc Số", "url": "https://example.com/files/spotx-hifi.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/0284c7/ffffff?text=Review",
+      "banner": "https://placehold.co/800x400/0c4a6e/7dd3fc?text=Danh+Gia+iOS+Moi+Nhat",
+      "title": "Tổng hợp các bản IPA ổn định nhất tuần qua",
+      "description": "Bài phân tích chi tiết khả năng tương thích, mức tiêu thụ pin và độ mượt của các bản mod mới.",
+      "author": "KPazz Editorial",
+      "version": "1.0",
+      "publishDate": "2026-11-24",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/0c4a6e/ffffff?text=Benchmark+Chart"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Đánh giá",
+      "isApp": false,
+      "downloadLinks": []
+    },
+    {
+      "icon": "https://placehold.co/120x120/db2777/ffffff?text=Note",
+      "banner": "https://placehold.co/800x400/831843/fbcfe8?text=Luu+Y+Khi+Cai+Chung+Chi",
+      "title": "Những lỗi thường gặp khi cài file IPA và cách xử lý nhanh",
+      "description": "Hướng dẫn khắc phục lỗi không thể xác minh nhà phát triển hoặc ứng dụng bị văng ngay khi mở.",
+      "author": "Kỹ Thuật KPazz",
+      "version": "1.0",
+      "publishDate": "2026-11-18",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/831843/ffffff?text=Fix+Guide"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Guide",
+      "category": "Hướng dẫn",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}

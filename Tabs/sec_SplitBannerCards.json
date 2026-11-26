@@ -1,0 +1,54 @@
+{
+  "_comment_stylesection": "Các kiểu card (stylesection) & bố cục: 'split-banner-card' (chia 2 cột ngang: ảnh banner bên trái, thông tin thể loại/tiêu đề/tác giả/phiên bản/ngày đăng/nút tải bên phải) | 'appstore-card' (xếp dọc: ảnh lớn ở trên, khối thông tin ở dưới) | 'container-query-product' (chia 2 cột gọn có viền nhấn bên trái) | 'glassmorphism-profile-info' (xếp dọc căn giữa, ảnh tròn có viền) | 'movie-pulp-fiction' (ảnh nền phủ toàn thẻ với lớp gradient tối ở đáy để làm nổi chữ).",
+  "_comment_slideType": "10 kiểu slide (slideType) & hoạt động/animation: 1.'parallax-banner' (ảnh trên thẻ đang kích hoạt phóng nhẹ 1.08x và dịch chuyển ngang tạo thị sai) | 2.'horizontal-scroll' (trượt ngang mượt mà theo từng bước thẻ) | 3.'coverflow-3d' (các thẻ nghiêng 3D hai bên, thẻ ở lượt thẳng và nổi 1.03x) | 4.'fade-cross' (làm mờ nhẹ các thẻ ngoài lượt chuyển tiếp) | 5.'cards-stack' (nâng nhẹ thẻ ở lượt tạo cảm giác xếp lớp chiều sâu) | 6.'cube-rotate' (ảnh trên thẻ xoay 360deg quanh trục Y mỗi lượt) | 7.'flip-card' (thẻ nghiêng lật nhẹ rotateY 8deg ở lượt) | 8.'center-zoom' (phóng nhẹ 1.05x thẻ ở lượt hiện tại) | 9.'vertical-ticker' (các thẻ nhấp nhô lên xuống luân phiên chẵn/lẻ kết hợp trượt ngang) | 10.'smooth-marquee' (chạy nhịp ngắn liên tục theo chiều ngang để dễ quét nhanh).",
+
+  "sectionTitle": "Tiện Ích & Năng Suất",
+  "sectionDescription": "Bộ công cụ hỗ trợ học tập, ghi chú và làm việc hiệu quả.",
+  "orderId": 6,
+  "autoplay": true,
+  "slideType": "parallax-banner",
+  "loop": true,
+  "slideSpeed": 4400,
+  "stylesection": "split-banner-card",
+
+  "items": [
+    {
+      "icon": "https://placehold.co/120x120/059669/ffffff?text=PDF",
+      "banner": "https://placehold.co/600x700/065f46/a7f3d0?text=PDF+Expert+Pro",
+      "title": "PDF Reader Pro Studio",
+      "description": "Đọc, chú thích, ký tài liệu PDF và chuyển đổi định dạng nhanh chóng.",
+      "author": "Office Suite",
+      "version": "5.0.2",
+      "publishDate": "2026-11-25",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/065f46/ffffff?text=PDF+View"
+      ],
+      "filesize": "67.8 MB",
+      "fileFormat": "IPA",
+      "category": "Năng suất",
+      "isApp": true,
+      "downloadLinks": [
+        { "server": "Server Tải Nhanh", "url": "https://example.com/files/pdf-pro.ipa" }
+      ]
+    },
+    {
+      "icon": "https://placehold.co/120x120/d97706/ffffff?text=Flow",
+      "banner": "https://placehold.co/600x700/78350f/fde68a?text=Quy+Trinh+Lam+Viec",
+      "title": "Checklist thiết lập không gian làm việc gọn gàng",
+      "description": "Gợi ý sắp xếp thư mục, đồng bộ dữ liệu và hạn chế xao nhãng khi làm việc.",
+      "author": "KPazz Productivity",
+      "version": "1.0",
+      "publishDate": "2026-11-20",
+      "videoUrl": "",
+      "screenshots": [
+        "https://placehold.co/320x620/78350f/ffffff?text=Workspace"
+      ],
+      "filesize": "0 KB",
+      "fileFormat": "Article",
+      "category": "Kỹ năng",
+      "isApp": false,
+      "downloadLinks": []
+    }
+  ]
+}
